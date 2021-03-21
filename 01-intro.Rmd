@@ -131,7 +131,7 @@ with rows and columns, where rows might be *observations* and columns might be *
 We'll read this type of data in from spreadsheets or even more commonly from comma-separated-variable (CSV)
 text files that spreadsheet programs like Excel commonly read in just like their native format.
 ```{r include=FALSE}
-sierraFeb <- read_csv("sierraFeb.csv")
+sierraFeb <- read_csv("data/sierraFeb.csv")
 ```
 ```{r}
 sierraFeb
@@ -309,12 +309,12 @@ plot(data=mydata, x = elev, y = temp)
 
 **Read a data frame from a CSV**
 ```{r}
-TRI87 <- read.csv("TRI_1987_BaySites.csv")
+TRI87 <- read.csv("data/TRI_1987_BaySites.csv")
 TRI87
 ```
 **Sort, Index, & Max/Min**
 ```{r}
-TRI87 <- read.csv("TRI_1987_BaySites.csv")
+TRI87 <- read.csv("data/TRI_1987_BaySites.csv")
 sort(TRI87$air_releases)
 index <- order(TRI87$air_releases)
 TRI87$FACILITY_NAME[index]   # displays facilities in order of their air releases
