@@ -1,0 +1,26 @@
+--- 
+title: "Environmental Data Science"
+author: "Jerry Davis"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "Background, concepts and exercises for environmental data science methods applying the R language and various libraries for data manipulation, data analysis, spatial data/mapping, and time series. The output format for this example is bookdown::gitbook."
+---
+
+# Prerequisites
+
+This book is designed to work in concert with a series of lectures and discussions among the participants in Geog 604/704 Environmental Data Science at San Francisco State University.  At some point, data packages will be created on GitHub, but for now we'll depend on data provided in the course iLearn page.
+
+Participants need to have R and RStudio installed, and at least the following packages to get us started:
+
+- tidyverse (to include ggplot2, dplyr, tidyr, stringr, etc.)
+    - ggplot2
+    - dplyr
+    - stringr
+    - tidyr
+- lubridate
+
+
