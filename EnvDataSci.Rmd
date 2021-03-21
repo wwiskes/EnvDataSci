@@ -1,0 +1,402 @@
+--- 
+title: "Environmental Data Science"
+author: "Jerry Davis"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "Background, concepts and exercises for environmental data science methods applying the R language and various libraries for data manipulation, data analysis, spatial data/mapping, and time series. The output format for this example is bookdown::gitbook."
+---
+
+# Prerequisites
+
+This book is designed to work in concert with a series of lectures and discussions among the participants in Geog 604/704 Environmental Data Science at San Francisco State University.  At some point, data packages will be created on GitHub, but for now we'll depend on data provided in the course iLearn page.
+
+Participants need to have R and RStudio installed, and at least the following packages to get us started:
+
+- tidyverse (to include ggplot2, dplyr, tidyr, stringr, etc.)
+    - ggplot2
+    - dplyr
+    - stringr
+    - tidyr
+- lubridate
+
+
+
+<!--chapter:end:index.Rmd-->
+
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+```{r include=FALSE}
+library(tidyverse)
+```
+
+# Introduction to R
+
+We're assuming you're either new to R or need a refresher.
+
+We'll start with some basic R operations entered directly in the console in RStudio.
+
+## Variables
+Variables are objects that store values. Every computer language, like in math, stores
+values by assigning them constants or results of expressions.
+`x <- 5` uses the R standard assignment operator `<-` though you can also use `=`. 
+We'll use `<-` because it is more common and avoids some confusion with other syntax.
+```
+
+```
+Variable names must start with a letter, have no spaces, and not use any names 
+that are built into the R language or used in package libraries, such as
+reserved words like `for` or function names like `log()`
+```{r}
+x <- 5
+y <- 8
+longitude <- -122.4
+latitude <- 37.8
+my_name <- "Inigo Montoya"
+```
+To check the value of a variable or other object, you can just enter the name in 
+the console, or even in the code in a code chunk. 
+```{r}
+x
+y
+longitude
+latitude
+my_name
+
+
+```
+This is counter to the way printing out values work in programming, and you will
+need to know how this method works as well because you will want to use your code
+to develop tools that accomplish things, and there are also limitations to what you
+can see by just naming variables.
+
+To see the values of variables in programming mode, use the `print()` function, 
+or to concatenate character string output, use `paste()`: 
+```{r}
+print(x)
+print(y)
+print(latitude)
+paste("The location is latitude", latitude, "longitude", longitude)
+paste("My name is", my_name, "-- Prepare to die.")
+
+```
+## Functions
+Once you have variables or other objects to work with, most of your work 
+involves *functions* such as the well-known math functions
+```
+log10(100)
+log(exp(5))
+cos(pi)
+sin(90 * pi/180)
+```
+... and similarly, you can output these to the console by entering the function
+in the console or in a code chunk in RMarkdown, or use the print function:
+```{r}
+cos(pi)
+print(cos(pi))
+```
+Most of your work will involve functions and there are too many to name, 
+even in the base functions, not to mention all the packages we will want to use. 
+You will likely have already used the `install.packages()` and `library()` functions 
+that add in an array of other functions.
+Later we'll also learn how to write our own functions, a capability that is easy to
+accomplish and also gives you a sense of what developing your own package might be like.
+```{r}
+
+```
+## Data Types
+Variables, constants and other data elements in R have data types.
+Common types are numeric and character.
+```{r}
+x <- 5
+class(x)
+class(4.5)
+class("Fred")
+```
+### Integers
+By default, R creates double-precision floating-point numeric variables 
+To create integer variables:
+- append an L to a constant, e.g. `5L` is an integer 5
+- convert with `as.integer`
+We're going to be looking at various `as.` functions in R, more on that later, 
+but we should look at `as.integer()` now.  Most other languages use `int()` for this,
+and what it does is converts *any number* into an integer, *truncating* it to an
+integer, not rounding it. 
+
+```{r}
+as.integer(5)
+as.integer(4.5)
+```
+To round a number, there's a `round()` function or you can easily use `as.integer` adding 0.5:
+```{r}
+x <- 4.8
+y <- 4.2
+as.integer(x + 0.5)
+round(x)
+as.integer(y + 0.5)
+round(y)
+```
+
+
+Integer divison:
+```{r}
+5 %/% 2
+```
+Integer remainder from division (the modulus, using a `%%` to represent the modulo):
+```{r}
+5 %% 2
+```
+Surprisingly, the values returned by integer division or the remainder are not stored as integers.  R seems to prefer floating point...
+
+## Rectangular data
+A common data format used in most types of research is *rectangular* data such as in a spreadsheet,
+with rows and columns, where rows might be *observations* and columns might be *variables*.
+We'll read this type of data in from spreadsheets or even more commonly from comma-separated-variable (CSV)
+text files that spreadsheet programs like Excel commonly read in just like their native format.
+```{r include=FALSE}
+sierraFeb <- read_csv("data/sierraFeb.csv")
+```
+```{r}
+sierraFeb
+```
+## Data Structures in R
+We looked briefly at numeric and character string (we'll abbreviate simply as "string" from here on).
+We'll also look at factors and dates/times later on.
+
+### Vectors
+A vector is an ordered collection of numbers, strings, vectors, data frames, etc.
+What we mostly refer to as vectors are formally called *atomic vectors* which requires
+that they be *homogeneous* sets of whatever type we're referring to, such as a vector of numbers, 
+or a vector of strings, or a vector of dates/times.
+
+You can create a simple vector with the `c()` function:
+```{r}
+lats <- c(37.5,47.4,29.4,33.4)
+lats
+states = c("VA", "WA", "TX", "AZ")
+states
+zips = c(23173, 98801, 78006, 85001)
+zips
+```
+The class of a vector is the type of data it holds
+
+```{r}
+temp <- c(10.7, 9.7, 7.7, 9.2, 7.3, 6.7)
+class(temp)
+```
+Vectors can only have one data class, and if mixed with character types, numeric elements will become character:
+```{r}
+mixed <- c(1, "fred", 7)
+class(mixed)
+mixed[3]   # gets a subset, example of coercion
+```
+
+#### NA
+Data science requires dealing with missing data by storing some sort of null value, called various things:
+- null
+- nodata
+- NA "not available" or "not applicable"
+```{r}
+as.numeric(c("1","Fred","5")) # note NA introduced by coercion
+```
+Ignoring NA in statistical summaries is commonly used. Where normally the summary statistic can only return NA...
+```{r}
+mean(as.numeric(c("1", "Fred", "5")))
+```
+... with `na.rm=T` you can still get the result for all actual data:
+```{r}
+mean(as.numeric(c("1", "Fred", "5")), na.rm=T)
+```
+Don't confuse with `nan` ("not a number") which is used for things like imaginary numbers (explore the help for more on this)
+
+```{r}
+is.na(NA)
+is.nan(NA)
+is.na(as.numeric(''))
+is.nan(as.numeric(''))
+i <- sqrt(-1)
+is.na(i) # interestingly nan is also na
+is.nan(i)
+```
+#### Sequences
+An easy way to make a vector from a sequence of values.  The following 3 examples are equivalent:
+```
+seq(1,10)
+c(1:10)
+c(1,2,3,4,5,6,7,8,9,10)
+```
+The seq() function has special uses like using a step parameter:
+```{r}
+seq(2,10,2)
+```
+#### Vectorization and vector arithmetic
+Arithmetic on vectors operates element-wise
+```{r}
+elev <- c(52,394,510,564,725,848,1042,1225,1486,1775,1899,2551)
+elevft <- elev / 0.3048
+elevft
+
+```
+Another example, with 2 vectors:
+```{r}
+temp03 <- c(13.1,11.4,9.4,10.9,8.9,8.4,6.7,7.6,2.8,1.6,1.2,-2.1)
+temp02 <- c(10.7,9.7,7.7,9.2,7.3,6.7,4.0,5.0,0.9,-1.1,-0.8,-4.4)
+tempdiff <- temp03 - temp02
+tempdiff
+
+```
+#### Plotting vectors
+Vectors of Feb temperature, elevation and latitude at stations in the Sierra:
+```{r}
+temp <- c(10.7, 9.7, 7.7, 9.2, 7.3, 6.7, 4.0, 5.0, 0.9, -1.1, -0.8, -4.4)
+elev <- c(52, 394, 510, 564, 725, 848, 1042, 1225, 1486, 1775, 1899, 2551)
+lat <- c(39.52, 38.91, 37.97, 38.70, 39.09, 39.25, 39.94, 37.75, 40.35, 39.33, 39.17, 38.21)
+
+```
+
+**Plot individually**
+```{r fig.cap="Temperature"}
+plot(temp)
+```
+```{r fig.cap="Elevation"}
+plot(elev)
+```
+```{r fig.cap="Latitude"}
+plot(lat)
+```
+
+**Then plot as a scatterplot**
+```{r fig.cap="Temperature~Elevation"}
+plot(elev,temp)
+```
+#### Named indices
+Vectors can be given named indices.
+```{r}
+codes <- c(380, 124, 818)
+codes
+codes <- c(italy = 380, canada = 124, egypt = 818)
+codes
+str(codes)
+```
+Why?  I guess so you can refer to members by name instead of index. 
+The following are equivalent:
+```{r}
+codes[1]
+codes["italy"]
+```
+
+### Lists
+Lists can be heterogeneous, with multiple class types. Lists are actually used a lot in R, but we won't see them for a while.
+
+### Matrices
+Vectors are commonly used as a column in a matrix (or as we'll see, a data frame), like a variable
+```{r}
+temp <- c(10.7, 9.7, 7.7, 9.2, 7.3, 6.7, 4.0, 5.0, 0.9, -1.1, -0.8, -4.4)
+elev <- c(52, 394, 510, 564, 725, 848, 1042, 1225, 1486, 1775, 1899, 2551)
+lat <- c(39.52, 38.91, 37.97, 38.70, 39.09, 39.25, 39.94, 37.75, 40.35, 39.33, 39.17, 38.21)
+```
+**Building a matrix from vectors as columns**
+```{r}
+sierradata <- cbind(temp, elev, lat)
+class(sierradata)
+```
+
+#### Dimensions for arrays and matrices
+Note:  a matrix is just a 2D array.  Arrays have 1, 3, or more dimensions.
+```{r}
+dim(sierradata)
+```
+
+```{r}
+a <- 1:12
+dim(a) <- c(3, 4)   # matrix
+class(a)
+dim(a) <- c(2,3,2)  # 3D array
+class(a)
+dim(a) <- 12        # 1D array
+class(a)
+b <- matrix(1:12, ncol=1)  # 1 column matrix is allowed
+
+```
+### Data frames
+A data frame is a database with fields (as vectors) with records (rows), so is very important for data analysis and GIS.  They're kind of like a spreadsheet with rules (first row is field names, fields all one type). So even though they're more complex than a list, we use them so frequently they become quite familiar [whereas I continue to find lists confusing, especially when discovering them as what a particular function returns.]
+
+```{r}
+head(iris)
+```
+**Creating a data frame out of a matrix**
+```{r fig.cap="Temperature~Elevation"}
+mydata <- as.data.frame(sierradata)
+plot(data=mydata, x = elev, y = temp)
+```
+
+**Read a data frame from a CSV**
+```{r}
+TRI87 <- read.csv("data/TRI_1987_BaySites.csv")
+TRI87
+```
+**Sort, Index, & Max/Min**
+```{r}
+TRI87 <- read.csv("data/TRI_1987_BaySites.csv")
+sort(TRI87$air_releases)
+index <- order(TRI87$air_releases)
+TRI87$FACILITY_NAME[index]   # displays facilities in order of their air releases
+i_max <- which.max(TRI87$air_releases)
+TRI87$FACILITY_NAME[i_max]   # was NUMMI at the time
+```
+
+
+
+
+```{r label=simplePlot, fig.cap='simple plot example'}
+my_name
+x50 <- rnorm(50)
+y50 <- rnorm(50)
+plot(x50,y50)
+```
+
+
+<!--chapter:end:01-intro.Rmd-->
+
+# The tidyverse
+
+
+
+
+
+<!--chapter:end:02-tidyverse.Rmd-->
+
+# Methods
+
+We describe our methods in this chapter.
+
+<!--chapter:end:03-visualization.Rmd-->
+
+# Applications
+
+Some _significant_ applications are demonstrated in this chapter.
+
+## Example one
+
+## Example two
+
+<!--chapter:end:04-spatial.Rmd-->
+
+# Final Words
+
+We have finished a nice book.
+
+<!--chapter:end:05-summary.Rmd-->
+
+`r if (knitr::is_html_output()) '
+# References {-}
+'`
+
+<!--chapter:end:06-references.Rmd-->
+
