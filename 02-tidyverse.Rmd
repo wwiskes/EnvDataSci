@@ -1,4 +1,9 @@
-# The tidyverse
+# Introduction to the tidyverse
+
+We'll look at some of the most common parts of the tidyverse for data manipulation:
+
+- dplyr
+- readr
 
 
 

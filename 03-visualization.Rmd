@@ -1,3 +1,3 @@
-# Methods
+# Visualization
 
-We describe our methods in this chapter.
+We explore visualization methods in gpplot2.
