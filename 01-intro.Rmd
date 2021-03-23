@@ -78,16 +78,17 @@ There are of course all the normal arithmetic operators (that are actually funct
 like + - * /.  You're probably familiar with these from using equations in Excel if not 
 in some other programming language you may have learned. These operators look a bit different
 from how they'd look when creating a nicely formatted equation.$\frac{NIR - R}{NIR + R}$
-instead looks like `(NIR-R)/(NIR+R)`.  Similarly `*` must be used to multiply; there's no assumed multiplication 
+instead has to look like `(NIR-R)/(NIR+R)`.  Similarly `*` *must* be used to multiply; there's no implied multiplication 
 that we expect in a math equation like $x(2+y)$ which would need to be written `x*(2+y)`.
 
 In contrast to those four well-known operators, the symbol used to exponentiate -- raise to a power -- 
 varies among programming languages. R uses ** so the the Pythagorean theorem $c^2=a^2+b^2$ would be written `c**2 = a**2 + b**2` 
-except for the fact that it wouldn't make sense to R. We'll need to talk about expressions and statements.
+except for the fact that it wouldn't make sense as a statement to R. 
+We'll need to talk about expressions and statements.
 
 ## Expressions and Statements
 
-The concepts of expressions and statements are very important to understand when using any programming environment.
+The concepts of expressions and statements are very important to understand in any programming language.
 
 An *expression* in R (or any programming language) has a *value* just like a variable has a value.
 An expression will commonly combine variables and functions to be *evaluated* to derive the value
@@ -130,7 +131,14 @@ x <- 5
 ```
 doesn't display anything, but it does assign the value 5 to the variable x, so it *does something*. It's an *assignment statement* and uses that special assignment operator `<-` .  Most languages just use `=` which the designers of R didn't want to use, to avoid confusing it with the equal sign meaning "is equal to". 
 
-*An assignment statement assigns an expression to a variable.*
+*An assignment statement assigns an expression to a variable.* If that variable already exists, it is reused with the new value. For instance it's completely legit (and commonly done in coding) to update the variable in an assignment statement.  This is very common when using a counter variable:
+```
+i = i + 1
+```
+You're simply updating the index variable with the next value. This also illustrates why it's *not* an equation:  $i=i+1$ doesn't work as an equation (unless i is actually $\infty$ but that's just really weird.)
+
+And `c**2 = a**2 + b**2` doesn't make sense as an R statement because `c**2` isn't a variable to be created. 
+The `**` part is interpreted as *raise to a power*.  What is to the left of the assignment operator `=` *must* be a variable to be assigned the value of the expression.
 
 ## Data Types
 Variables, constants and other data elements in R have data types.
@@ -207,6 +215,11 @@ zips = c(23173, 98801, 78006, 85001)
 zips
 ```
 The class of a vector is the type of data it holds
+
+```{r}
+
+```
+
 
 ```{r}
 temp <- c(10.7, 9.7, 7.7, 9.2, 7.3, 6.7)

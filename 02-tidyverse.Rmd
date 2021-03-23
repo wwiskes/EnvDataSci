@@ -1,9 +1,225 @@
 # Introduction to the tidyverse
 
-We'll look at some of the most common parts of the tidyverse for data manipulation:
+At this point, we've learned the basics of working with the R language. From here we'll want to explore how to analyze data, both statistically and spatially. We're going to use an exploratory approach with significant application of visualization both in terms of graphs as well as maps. So let's start by exploring this exploratory approach...
 
-- dplyr
-- readr
+## Background: Exploratory Data Analysis
+
+In 1961, John Tukey proposed a new approach to data analysis, defining it as "Procedures for analyzing data, techniques for interpreting the results of such procedures, ways of planning the gathering of data to make its analysis easier, more precise or more accurate, and all the machinery and results of (mathematical) statistics which apply to analyzing data."  
+<img src="img/Tukey1961.png" width="161" height="230" style="horizontal-align:right">He followed this up in 1977 with *Exploratory Data Analysis*. 
+
+
+Exploratory data analysis (EDA) in part as an approach to analyzing data via summaries and graphics.  The key word is *exploratory*, in contrast with *confirmatory* statistics. Both are important, but ignoring exploration is ignoring enlightenment.
+
+Some purposes of EDA are:
+
+- to suggest hypotheses
+- to assess assumptions on which inference will be based
+- to select appropriate inferential statistical tools
+- to guide further data collection
+
+These concepts led to the development of S at Bell Labs (John Chambers, 1976), then R, built on clear design and extensive, clear graphics.
+
+## The Tidyverse and what we'll explore in this chapter
+
+The Tidyverse refers to a suite of R packages developed at RStudio (see <a href="https://rstudio.com">R Studio</a> and <a href="https://r4ds.had.co.nz">R for Data Science</a>) <img src="img/R4DataSciProcess.png" alt="R for Data Science Process" width="280" height="110"> (figure from Grolemund & Wickham 2017) for facilitating data processing and analysis. While R itself is designed around EDA, the Tidyverse takes it further. Some of the packages in the Tidyverse that are widely used are:
+
+- dplyr : data manipulation like a database
+- readr : better methods for reading and writing rectangular data
+- tidyr : reorganization methods that extend dplyr's database capabilities
+- purrr : expanded programming toolkit including enhanced "apply" methods
+- tibble : improved data frame
+- stringr : string manipulation library
+- ggplot2 : graphing system based on "the grammar of graphics"
+
+In this chapter, we'll be mostly exploring **dplyr**, with a few other things thrown in like reading data frames with **readr**. For simplicity, we can just include `library(tidyverse)` to get everything.
+
+## Tibbles
+
+Tibbles are an improved type of data frame
+
+- part of the Tidyverse
+- serve the same as a data frame, all data frame operations work
+
+Advantages
+
+- display better
+- can be composed of more complex objects like lists, etc.
+- can be grouped
+
+How created
+
+- Variety of Tidyverse functions similarly named to base functions:
+    - `read_csv` creates a tibble
+    - `read.csv` creates a regular data frame
+- In general, underscores are used instead of dots in the Tidyverse...
+
+```{r}
+library(tidyverse) # includes readr, ggplot2, and dplyr which we'll use in this chapter
+runoff20062007 <- read_csv("data/eucoakrainfallrunoffTDR.csv")
+runoff20062007
+```
+### `read_csv` vs. `read.csv`
+
+You might be tempted to use read.csv from base R
+
+- They look a lot alike, so you might confuse them
+- You don't need to load library(readr)
+- read.csv "fixes" some things and that might be desired:
+problematic field names like   `MLY-TAVG-NORMAL` become `MLY.TAVG.NORMAL`
+- numbers stored as characters are converted to numbers
+"01" becomes 1, "02" becomes 2, etc.
+
+However, there are potential problems
+
+- You may not want some of those changes, and want to specify those changes separately
+- There are known problems that read_csv avoids
+
+Recommendation:  Use `read_csv` and `write_csv`.
+
+## Statistical summary of variables
+
+A simple statistical summary is very easy to do:
+
+```{r}
+summary(runoff20062007)
+```
+
+## Visualizing data with a Tukey box plot
+
+```{r}
+ggplot(data = runoff20062007) + geom_boxplot(mapping = aes(x=site, y=runoffL_euc))
+```
+
+## Database operations with `dplyr`
+
+As part of exploring our data, we'll typically simplify or reduce it for our purposes. 
+The following methods are quickly discovered to be essential as part of exploring and analyzing data. 
+
+- **select rows** using logic, such as population > 10000, with `filter`
+- **select variable columns** you want to retain with `select`
+- **add** new variables and assign their values with `mutate`
+- **sort** rows based on a a field with `arrange` 
+- **summarize** by group
+
+### Select, mutate, and the pipe
+
+**The pipe `%>%`**:  Read `%>%` as "and then..."  This is bigger than it sounds and opens up a lot of possibilities.  See example below, and observe how the expression becomes several lines long. In the process, we'll see examples of new variables with mutate and selecting (and in the process *ordering*) variables:
+
+```{r}
+runoff <- runoff20062007 %>%
+  mutate(Date = as.Date(date,"%m/%d/%Y"),
+         rain_subcanopy = (rain_oak + rain_euc)/2) %>%
+  select(site, Date, rain_mm, rain_subcanopy, 
+         runoffL_oak, runoffL_euc, slope_oak, slope_euc)
+runoff
+```
+ *Note: to just rename a variable, use `rename` instead of `mutate`. It will stay in position.*
+ 
+### filter
+ 
+ `filter` lets you select observations that meet criteria, similar to an SQL WHERE clause.
+ 
+```{r}
+runoff2007 <- runoff %>%
+  filter(Date >= as.Date("01/01/2007", "%m/%d/%Y"))
+runoff2007
+```
+ **Filtering out NA with `!is.na`**
+ 
+ Here's an important one. There are many times you need to avoid NAs.  
+ We commonly see summary statistics using `na.rm = TRUE` in order to *ignore* NAs when calculating a statistic like `mean`.
+ 
+ To simply filter out NAs from a vector or a variable use a filter:
+ `feb_filt <- feb_s %>% filter(!is.na(TEMP))`
+ 
+### Writing a data frame to a csv
+
+Let's say you have created a data frame, maybe with read_csv
+
+`runoff20062007 <- read_csv("data/eucoakrainfallrunoffTDR.csv")`
+
+Then you do some processing to change it, maybe adding variables, reorganizing, etc., and you want to write out your new `eucoak`, so you just need to use `write_csv`
+
+`write_csv(eucoak, "data/tidy_eucoak.csv")`
+
+### Summarize by group
+
+You'll find that you need to use this all the time with real data. You have a bunch of data where some categorical variable is defining a grouping, like our site field in the eucoak data. We'd like to just create average slope, rainfall, and runoff for each site. Note that it involves two steps, first defining which field defines the group, then the various summary statistics we'd like to store.  In this case all of the slopes under oak remain the same for a given site -- it's a *site* characteristic -- and the same applies to the euc site, so we can just grab the first value (mean would have also worked of course).
+
+```{r}
+eucoakSiteAvg <- runoff %>%
+  group_by(site) %>%
+  summarize(
+    rain = mean(rain_mm, na.rm = TRUE),
+    rain_subcanopy = mean(rain_subcanopy, na.rm = TRUE),
+    runoffL_oak = mean(runoffL_oak, na.rm = TRUE),
+    runoffL_euc = mean(runoffL_euc, na.rm = TRUE),
+    slope_oak = first(slope_oak),
+    slope_euc = first(slope_euc)
+  )
+eucoakSiteAvg
+```
+
+### Count
+
+Count is a simple variant on summarize by group, since the only statistic is the count of events.
+(The following data is from Claudia Engel (2021) *Data Wrangling with R*.)
+
+```{r}
+library(lubridate)
+trafficStops <- read_csv("data/MS_trafficstops_bw_age.csv") %>%
+  mutate(year = year(stop_date))
+trafficCounts <- trafficStops %>%
+  count(year,violation_raw)
+trafficCounts
+```
+
+**Another way to do the trafficCounts calculation is to use n():**
+```
+trafficCounts <- trafficStops %>%
+  group_by(year,violation_raw) %>%
+  summarize(n = n())
+```
+
+### Sorting after summarizing
+
+Using the marine debris data from NOAA Marine Debris Program's *Marine Debris Monitoring and Assessment Project*
+```{r}
+shorelineLatLong <- read_csv("data/ConcentrationReport.csv") %>%
+  group_by(`Shoreline Name`) %>%
+  summarize(
+    latitude = mean((`Latitude Start`+`Latitude End`)/2),
+    longitude = mean((`Longitude Start`+`Longitude End`)/2)
+  ) %>%
+  arrange(latitude)
+shorelineLatLong
+
+```
+
+## The dot operator
+
+The dot "." operator derives from UNIX syntax, and refers to "here".
+
+- For accessing files in the current folder, the path is "./filename"
+
+A similar specification is used in piped sequences
+
+- The advantage of the pipe is you don't have to keep referencing the data frame.
+- The dot is then used to connect to items inside the data frame:
+
+```{r}
+TRI87 <- read_csv("data/TRI_1987_BaySites.csv")
+stackrate <- TRI87 %>%
+  mutate(stackrate = stack_air/air_releases) %>%
+  .$stackrate
+head(stackrate)
+```
+
+## Exercises
+
+
+
+
 
 
 

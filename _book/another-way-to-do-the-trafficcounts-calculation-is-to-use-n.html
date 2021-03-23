@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Another way to do the trafficCounts calculation is to use n(): | Environmental Data Science</title>
+  <meta name="description" content="Background, concepts and exercises for environmental data science methods applying the R language and various libraries for data manipulation, data analysis, spatial data/mapping, and time series. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Another way to do the trafficCounts calculation is to use n(): | Environmental Data Science" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Background, concepts and exercises for environmental data science methods applying the R language and various libraries for data manipulation, data analysis, spatial data/mapping, and time series. The output format for this example is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Another way to do the trafficCounts calculation is to use n(): | Environmental Data Science" />
+  
+  <meta name="twitter:description" content="Background, concepts and exercises for environmental data science methods applying the R language and various libraries for data manipulation, data analysis, spatial data/mapping, and time series. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Jerry Davis" />
+
+
+<meta name="date" content="2021-03-22" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction-to-the-tidyverse.html"/>
+<link rel="next" href="visualization.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Environmental Data Science</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
+<li class="chapter" data-level="2" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>2</b> Introduction to R</a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#variables"><i class="fa fa-check"></i><b>2.1</b> Variables</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#functions"><i class="fa fa-check"></i><b>2.2</b> Functions</a></li>
+<li class="chapter" data-level="2.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#expressions-and-statements"><i class="fa fa-check"></i><b>2.3</b> Expressions and Statements</a></li>
+<li class="chapter" data-level="2.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-types"><i class="fa fa-check"></i><b>2.4</b> Data Types</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#integers"><i class="fa fa-check"></i><b>2.4.1</b> Integers</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#rectangular-data"><i class="fa fa-check"></i><b>2.5</b> Rectangular data</a></li>
+<li class="chapter" data-level="2.6" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-structures-in-r"><i class="fa fa-check"></i><b>2.6</b> Data Structures in R</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#vectors"><i class="fa fa-check"></i><b>2.6.1</b> Vectors</a></li>
+<li class="chapter" data-level="2.6.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#lists"><i class="fa fa-check"></i><b>2.6.2</b> Lists</a></li>
+<li class="chapter" data-level="2.6.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#matrices"><i class="fa fa-check"></i><b>2.6.3</b> Matrices</a></li>
+<li class="chapter" data-level="2.6.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-frames"><i class="fa fa-check"></i><b>2.6.4</b> Data frames</a></li>
+<li class="chapter" data-level="2.6.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#factors"><i class="fa fa-check"></i><b>2.6.5</b> Factors</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="introduction-to-r.html"><a href="introduction-to-r.html#programming-and-logic"><i class="fa fa-check"></i><b>2.7</b> Programming and Logic</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#subsetting-with-logic"><i class="fa fa-check"></i><b>2.7.1</b> Subsetting with logic</a></li>
+<li class="chapter" data-level="2.7.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#apply-functions"><i class="fa fa-check"></i><b>2.7.2</b> Apply functions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="introduction-to-r.html"><a href="introduction-to-r.html#exercises"><i class="fa fa-check"></i><b>2.8</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html"><i class="fa fa-check"></i><b>3</b> Introduction to the tidyverse</a><ul>
+<li class="chapter" data-level="3.1" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html#background-exploratory-data-analysis"><i class="fa fa-check"></i><b>3.1</b> Background: Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="3.2" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html#the-tidyverse-and-what-well-explore-in-this-chapter"><i class="fa fa-check"></i><b>3.2</b> The Tidyverse and what we’ll explore in this chapter</a></li>
+<li class="chapter" data-level="3.3" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html#tibbles"><i class="fa fa-check"></i><b>3.3</b> Tibbles</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html#read_csv-vs.-read.csv"><i class="fa fa-check"></i><b>3.3.1</b> <code>read_csv</code> vs. <code>read.csv</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html#statistical-summary-of-variables"><i class="fa fa-check"></i><b>3.4</b> Statistical summary of variables</a></li>
+<li class="chapter" data-level="3.5" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html#visualizing-data-with-a-tukey-box-plot"><i class="fa fa-check"></i><b>3.5</b> Visualizing data with a Tukey box plot</a></li>
+<li class="chapter" data-level="3.6" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html#database-operations-with-dplyr"><i class="fa fa-check"></i><b>3.6</b> Database operations with <code>dplyr</code></a><ul>
+<li class="chapter" data-level="3.6.1" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html#select-mutate-and-the-pipe"><i class="fa fa-check"></i><b>3.6.1</b> Select, mutate, and the pipe</a></li>
+<li class="chapter" data-level="3.6.2" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html#filter"><i class="fa fa-check"></i><b>3.6.2</b> filter</a></li>
+<li class="chapter" data-level="3.6.3" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html#writing-a-data-frame-to-a-csv"><i class="fa fa-check"></i><b>3.6.3</b> Writing a data frame to a csv</a></li>
+<li class="chapter" data-level="3.6.4" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html#summarize-by-group"><i class="fa fa-check"></i><b>3.6.4</b> Summarize by group</a></li>
+<li class="chapter" data-level="3.6.5" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html#count"><i class="fa fa-check"></i><b>3.6.5</b> Count</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="another-way-to-do-the-trafficcounts-calculation-is-to-use-n.html"><a href="another-way-to-do-the-trafficcounts-calculation-is-to-use-n.html"><i class="fa fa-check"></i><b>4</b> Another way to do the trafficCounts calculation is to use n():</a><ul>
+<li class="chapter" data-level="4.0.1" data-path="another-way-to-do-the-trafficcounts-calculation-is-to-use-n.html"><a href="another-way-to-do-the-trafficcounts-calculation-is-to-use-n.html#sorting-after-summarizing"><i class="fa fa-check"></i><b>4.0.1</b> Sorting after summarizing</a></li>
+<li class="chapter" data-level="4.1" data-path="another-way-to-do-the-trafficcounts-calculation-is-to-use-n.html"><a href="another-way-to-do-the-trafficcounts-calculation-is-to-use-n.html#the-dot-operator"><i class="fa fa-check"></i><b>4.1</b> The dot operator</a></li>
+<li class="chapter" data-level="4.2" data-path="another-way-to-do-the-trafficcounts-calculation-is-to-use-n.html"><a href="another-way-to-do-the-trafficcounts-calculation-is-to-use-n.html#exercises-1"><i class="fa fa-check"></i><b>4.2</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>5</b> Visualization</a></li>
+<li class="chapter" data-level="6" data-path="spatial-r.html"><a href="spatial-r.html"><i class="fa fa-check"></i><b>6</b> Spatial R</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Environmental Data Science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="another-way-to-do-the-trafficcounts-calculation-is-to-use-n" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Another way to do the trafficCounts calculation is to use n():</h1>
+<pre><code>trafficCounts &lt;- trafficStops %&gt;%
+  group_by(year,violation_raw) %&gt;%
+  summarize(n = n())</code></pre>
+<div id="sorting-after-summarizing" class="section level3">
+<h3><span class="header-section-number">4.0.1</span> Sorting after summarizing</h3>
+<p>Using the marine debris data from NOAA Marine Debris Program’s <em>Marine Debris Monitoring and Assessment Project</em></p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="another-way-to-do-the-trafficcounts-calculation-is-to-use-n.html#cb29-1"></a>shorelineLatLong &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/ConcentrationReport.csv&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb29-2"><a href="another-way-to-do-the-trafficcounts-calculation-is-to-use-n.html#cb29-2"></a><span class="st">  </span><span class="kw">group_by</span>(<span class="st">`</span><span class="dt">Shoreline Name</span><span class="st">`</span>) <span class="op">%&gt;%</span></span>
+<span id="cb29-3"><a href="another-way-to-do-the-trafficcounts-calculation-is-to-use-n.html#cb29-3"></a><span class="st">  </span><span class="kw">summarize</span>(</span>
+<span id="cb29-4"><a href="another-way-to-do-the-trafficcounts-calculation-is-to-use-n.html#cb29-4"></a>    <span class="dt">latitude =</span> <span class="kw">mean</span>((<span class="st">`</span><span class="dt">Latitude Start</span><span class="st">`</span><span class="op">+</span><span class="st">`</span><span class="dt">Latitude End</span><span class="st">`</span>)<span class="op">/</span><span class="dv">2</span>),</span>
+<span id="cb29-5"><a href="another-way-to-do-the-trafficcounts-calculation-is-to-use-n.html#cb29-5"></a>    <span class="dt">longitude =</span> <span class="kw">mean</span>((<span class="st">`</span><span class="dt">Longitude Start</span><span class="st">`</span><span class="op">+</span><span class="st">`</span><span class="dt">Longitude End</span><span class="st">`</span>)<span class="op">/</span><span class="dv">2</span>)</span>
+<span id="cb29-6"><a href="another-way-to-do-the-trafficcounts-calculation-is-to-use-n.html#cb29-6"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb29-7"><a href="another-way-to-do-the-trafficcounts-calculation-is-to-use-n.html#cb29-7"></a><span class="st">  </span><span class="kw">arrange</span>(latitude)</span></code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   .default = col_double(),
+##   `Survey Type` = col_character(),
+##   Organization = col_character(),
+##   Date = col_character(),
+##   `Survey Year` = col_character(),
+##   Country = col_character(),
+##   State = col_character(),
+##   County = col_character(),
+##   `Shoreline Name` = col_character(),
+##   `Start Time` = col_time(format = &quot;&quot;),
+##   `End Time` = col_time(format = &quot;&quot;),
+##   `Time of Low Tide` = col_character(),
+##   `Database Season` = col_character(),
+##   Season = col_character(),
+##   `Date of Previous Survey` = col_character(),
+##   `Storm Activity` = col_character(),
+##   `Current Weather` = col_character(),
+##   `Large Items?` = col_character(),
+##   `Debris Behind Back Barrier?` = col_character(),
+##   Notes = col_character(),
+##   `Photos?` = col_character()
+##   # ... with 54 more columns
+## )</code></pre>
+<pre><code>## See spec(...) for full column specifications.</code></pre>
+<pre><code>## Warning: 1 parsing failure.
+## row col    expected      actual                           file
+## 390  -- 194 columns 195 columns &#39;data/ConcentrationReport.csv&#39;</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+</div>
+<div id="the-dot-operator" class="section level2">
+<h2><span class="header-section-number">4.1</span> The dot operator</h2>
+<p>The dot “.” operator derives from UNIX syntax, and refers to “here”.</p>
+<ul>
+<li>For accessing files in the current folder, the path is “./filename”</li>
+</ul>
+<p>A similar specification is used in piped sequences</p>
+<ul>
+<li>The advantage of the pipe is you don’t have to keep referencing the data frame.</li>
+<li>The dot is then used to connect to items inside the data frame:</li>
+</ul>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="another-way-to-do-the-trafficcounts-calculation-is-to-use-n.html#cb34-1"></a>TRI87 &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/TRI_1987_BaySites.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   TRI_FACILITY_ID = col_character(),
+##   count = col_double(),
+##   FACILITY_NAME = col_character(),
+##   COUNTY = col_character(),
+##   air_releases = col_double(),
+##   fugitive_air = col_double(),
+##   stack_air = col_double(),
+##   LATITUDE = col_double(),
+##   LONGITUDE = col_double()
+## )</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="another-way-to-do-the-trafficcounts-calculation-is-to-use-n.html#cb36-1"></a>stackrate &lt;-<span class="st"> </span>TRI87 <span class="op">%&gt;%</span></span>
+<span id="cb36-2"><a href="another-way-to-do-the-trafficcounts-calculation-is-to-use-n.html#cb36-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">stackrate =</span> stack_air<span class="op">/</span>air_releases) <span class="op">%&gt;%</span></span>
+<span id="cb36-3"><a href="another-way-to-do-the-trafficcounts-calculation-is-to-use-n.html#cb36-3"></a><span class="st">  </span>.<span class="op">$</span>stackrate</span>
+<span id="cb36-4"><a href="another-way-to-do-the-trafficcounts-calculation-is-to-use-n.html#cb36-4"></a>stackrate</span></code></pre></div>
+<pre><code>##   [1] 0.000000e+00 0.000000e+00 0.000000e+00 0.000000e+00 6.666667e-01
+##   [6] 1.000000e+00 6.716941e-01 0.000000e+00 6.000000e-01 1.000000e+00
+##  [11] 0.000000e+00 1.865032e-01 4.090296e-01 0.000000e+00 3.333333e-01
+##  [16] 1.000000e+00 9.819028e-01 5.000000e-01 7.473760e-01 1.000000e+00
+##  [21] 1.245020e-01 1.000000e+00 1.000000e+00 0.000000e+00 5.384615e-01
+##  [26] 3.842277e-01 9.454979e-01 5.555556e-01 0.000000e+00 5.833333e-01
+##  [31] 8.354002e-02 3.098533e-01 1.000000e+00 7.517730e-01 9.803660e-01
+##  [36] 1.000000e+00 0.000000e+00 1.384689e-01 0.000000e+00 8.965517e-01
+##  [41] 8.880569e-01 0.000000e+00 2.945637e-01 1.000000e+00 2.762092e-03
+##  [46] 0.000000e+00 5.000000e-01 5.000000e-01 0.000000e+00 5.520000e-01
+##  [51] 1.315453e-01 3.333333e-01 7.512778e-01 5.572917e-01 1.000000e+00
+##  [56] 4.210526e-01 0.000000e+00 0.000000e+00 1.111111e-01 0.000000e+00
+##  [61] 0.000000e+00 0.000000e+00 0.000000e+00 6.844920e-01 9.738220e-01
+##  [66] 0.000000e+00 8.760331e-01 5.617978e-01 0.000000e+00 6.374203e-03
+##  [71] 8.888889e-01 8.542274e-01 1.000000e+00 1.417722e-01 2.153846e-01
+##  [76] 0.000000e+00 1.000000e+00 9.646724e-01 1.000000e+00 1.000000e+00
+##  [81] 1.000000e+00 5.701990e-02 1.000000e+00 0.000000e+00 7.775803e-01
+##  [86] 1.000000e+00 1.000000e+00 0.000000e+00 2.047705e-02 3.561959e-01
+##  [91] 4.997501e-04 0.000000e+00 0.000000e+00 3.065944e-01 8.333333e-01
+##  [96] 9.954678e-01 6.575919e-02 2.268603e-01 4.423357e-02 9.493976e-01
+## [101] 3.495066e-01 1.807815e-01 1.428571e-01 0.000000e+00 1.000000e+00
+## [106] 1.000000e+00 7.029703e-01 5.000000e-01 3.333333e-01 5.489457e-01
+## [111] 0.000000e+00 0.000000e+00 0.000000e+00 1.000000e+00 1.000000e+00
+## [116] 5.024876e-01 2.782682e-01 0.000000e+00 2.744003e-02 6.038035e-01
+## [121] 8.048485e-01 1.000000e+00 9.909091e-01 3.333333e-01 6.803181e-01
+## [126] 4.065986e-01 6.373579e-01 3.763819e-01 4.347222e-01 0.000000e+00
+## [131] 7.940709e-02 1.000000e+00 8.040201e-01 0.000000e+00 2.500000e-01
+## [136] 1.000000e+00 2.849977e-01 1.000000e+00 1.844461e-01 9.567224e-01
+## [141] 8.879399e-01 6.156770e-01 1.000000e+00 0.000000e+00 0.000000e+00
+## [146] 4.754358e-02 2.524168e-02 5.000000e-01 5.000000e-01 1.000000e+00
+## [151] 5.392631e-01 1.000000e+00 0.000000e+00 0.000000e+00 3.580741e-01
+## [156] 9.988034e-01 0.000000e+00 9.983095e-01 1.000000e+00 4.736850e-01
+## [161] 1.063830e-02 3.333333e-01 4.880952e-01 1.000000e+00 5.000000e-01
+## [166] 4.000000e-01 0.000000e+00 8.471850e-01 0.000000e+00 9.214502e-01
+## [171] 2.500000e-01 9.919485e-01 5.086120e-01 1.000000e+00 2.759902e-01
+## [176] 2.935719e-01 0.000000e+00 0.000000e+00 0.000000e+00 0.000000e+00
+## [181] 2.658271e-01 4.354576e-01 0.000000e+00 0.000000e+00 0.000000e+00
+## [186] 1.000000e+00 5.000000e-01 1.000000e+00 0.000000e+00 0.000000e+00
+## [191] 0.000000e+00 0.000000e+00 0.000000e+00 0.000000e+00 0.000000e+00
+## [196] 0.000000e+00 1.000000e+00 5.000000e-01 9.770992e-01 2.056738e-01
+## [201] 5.000000e-01 6.116505e-01 6.250000e-01 8.996740e-01 5.000000e-01
+## [206] 7.619048e-01 0.000000e+00 1.538462e-02 8.945982e-01 8.136646e-01
+## [211] 2.992874e-01 1.000000e+00 7.580645e-01 9.813665e-01 2.950995e-02
+## [216] 6.666667e-01 5.383725e-05 5.000000e-01 1.428571e-01 5.887681e-01
+## [221] 0.000000e+00 8.000000e-01 0.000000e+00 0.000000e+00 2.149527e-01
+## [226] 4.460967e-02 1.000000e+00 2.423208e-01 9.498956e-01 6.407964e-01
+## [231] 1.000000e+00 1.000000e+00 6.000000e-01 1.000000e+00 9.794977e-01
+## [236] 4.000000e-01 6.455351e-01 1.558026e-01 0.000000e+00 4.004796e-01
+## [241] 0.000000e+00 1.000000e+00 5.000000e-01 0.000000e+00 0.000000e+00
+## [246] 0.000000e+00 0.000000e+00 1.000000e+00 0.000000e+00 5.000000e-01
+## [251] 1.000000e+00 0.000000e+00 5.147723e-01 1.000000e+00 0.000000e+00
+## [256] 0.000000e+00 9.997562e-01 9.056604e-01 9.901894e-01 7.410359e-01
+## [261] 1.000000e+00 4.444444e-01 1.071429e-01 0.000000e+00 1.000000e+00
+## [266] 1.000000e+00 9.795082e-01 7.947061e-01 3.606557e-02 5.670524e-01
+## [271] 1.000000e+00 1.000000e+00 8.435843e-01 0.000000e+00 7.692308e-01
+## [276] 7.000000e-01 0.000000e+00 1.000000e+00 1.000000e+00 1.000000e+00
+## [281] 9.867233e-01 0.000000e+00 9.932886e-01 7.500000e-01 0.000000e+00
+## [286] 4.868871e-01 3.297337e-01 0.000000e+00 1.439969e-01 0.000000e+00
+## [291] 0.000000e+00 5.917772e-01 0.000000e+00 1.000000e+00 0.000000e+00
+## [296] 3.107796e-01 6.000000e-01 0.000000e+00 0.000000e+00 1.000000e+00
+## [301] 1.000000e+00 2.507493e-01 0.000000e+00 0.000000e+00 0.000000e+00
+## [306] 5.000000e-01 5.536585e-01 8.589618e-01 5.999763e-01 1.000000e+00
+## [311] 9.445428e-01 4.545455e-01 1.000000e+00 7.803492e-01 0.000000e+00
+## [316] 3.175833e-02 8.396306e-02 0.000000e+00 7.500000e-01 0.000000e+00
+## [321] 0.000000e+00 0.000000e+00 5.833333e-01 2.666667e-01 6.666667e-01
+## [326] 6.290311e-01 9.199471e-01 1.178790e-01 0.000000e+00 0.000000e+00
+## [331] 3.674015e-01 1.037736e-01 0.000000e+00 9.894501e-01 1.000000e+00</code></pre>
+</div>
+<div id="exercises-1" class="section level2">
+<h2><span class="header-section-number">4.2</span> Exercises</h2>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction-to-the-tidyverse.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="visualization.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["EnvDataSci.pdf", "EnvDataSci.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
