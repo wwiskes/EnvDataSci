@@ -287,12 +287,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>You can also use the <code>tibble()</code> function</li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="introduction-to-the-tidyverse.html#cb1-1"></a><span class="kw">library</span>(tidyverse) <span class="co"># includes readr, ggplot2, and dplyr which we&#39;ll use in this chapter</span></span></code></pre></div>
-<pre><code>## -- Attaching packages ----------------------------------- tidyverse 1.3.0 --</code></pre>
+<pre><code>## -- Attaching packages ------------------------------------------------------------------------------------- tidyverse 1.3.0 --</code></pre>
 <pre><code>## v ggplot2 3.3.2     v purrr   0.3.4
 ## v tibble  3.0.3     v dplyr   1.0.2
 ## v tidyr   1.1.2     v stringr 1.4.0
 ## v readr   1.3.1     v forcats 0.5.0</code></pre>
-<pre><code>## -- Conflicts -------------------------------------- tidyverse_conflicts() --
+<pre><code>## -- Conflicts ---------------------------------------------------------------------------------------- tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="introduction-to-the-tidyverse.html#cb5-1"></a>runoff20062007 &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/eucoakrainfallrunoffTDR.csv&quot;</span>)</span></code></pre></div>
@@ -339,18 +339,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb9-3"><a href="introduction-to-the-tidyverse.html#cb9-3"></a>ab &lt;-<span class="st"> </span><span class="kw">tibble</span>(a,b)</span>
 <span id="cb9-4"><a href="introduction-to-the-tidyverse.html#cb9-4"></a>ab</span></code></pre></div>
 <pre><code>## # A tibble: 10 x 2
-##          a     b
-##      &lt;dbl&gt; &lt;dbl&gt;
-##  1  0.346  0.394
-##  2 -1.78   0.474
-##  3 -0.442  0.900
-##  4 -1.20   0.670
-##  5 -0.485  0.659
-##  6  1.41   0.156
-##  7  0.0162 0.862
-##  8 -0.0564 0.296
-##  9 -1.35   0.455
-## 10  0.0435 0.808</code></pre>
+##          a       b
+##      &lt;dbl&gt;   &lt;dbl&gt;
+##  1  0.304  0.732  
+##  2  0.582  0.856  
+##  3 -0.993  0.119  
+##  4 -0.515  0.494  
+##  5 -0.513  0.974  
+##  6  1.52   0.514  
+##  7 -0.762  0.798  
+##  8  1.14   0.116  
+##  9  0.169  0.236  
+## 10 -0.0373 0.00809</code></pre>
 <div id="read_csv-vs.-read.csv" class="section level3">
 <h3><span class="header-section-number">3.3.1</span> <code>read_csv</code> vs. <code>read.csv</code></h3>
 <p>You might be tempted to use read.csv from base R</p>
@@ -680,6 +680,11 @@ We commonly see summary statistics using <code>na.rm = TRUE</code> in order to <
 <li><p>Create a tibble with 20 rows of two variables <code>norm</code> and <code>unif</code> with <code>norm</code> created with <code>rnorm()</code> and <code>unif</code> created with <code>runif()</code>.</p></li>
 <li><p>Read in “data/TRI_2017_CA.csv” in two ways, as a normal data frame assigned to df and as a tibble assigned to tb. What field names result for what’s listed in the CSV as <code>5.1_FUGITIVE_AIR</code>?</p></li>
 <li><p>Use the summary function to investigate the variables in either the data.frame or tibble you just created. What type of field and what values are assigned to BIA_CODE?</p></li>
+<li><p>Create a boxplot of <code>Sepal.Length</code> by <code>Species</code> from the <code>iris</code> data frame using ggplot. Remember <code>library(ggplot2)</code> or <code>library(tidyverse)</code>.</p></li>
+<li><p>Use select, mutate, and the pipe to create a irisSepal tibble where the only variable retained are Petal.Length and Species, but with Petal.Length.cm created as <span class="math inline">\(\frac{1}{10}\)</span> the Petal.Length which is in mm. The statement should start with <code>irisSepal &lt;- iris</code> and use a pipe plus the other functions after that.</p></li>
+<li><p>Now, also with iris, create BigIris to include only those with Petal.Length &gt;= 6.</p></li>
+<li><p>Now, summarize by <code>Species</code> groups to create mean and standard deviation variables from <code>Sepal.Length</code>, <code>Sepal.Width</code>, <code>Petal.Length</code>, and <code>Petal.Width</code>. Preface the variable names with either <code>avg.</code> or <code>sd.</code></p></li>
+<li><p>Create an irisSort tibble, sorted by <code>Petal.Length</code>.</p></li>
 </ol>
 
 </div>
@@ -740,6 +745,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

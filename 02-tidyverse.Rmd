@@ -246,6 +246,27 @@ head(stackrate)
 
 3. Use the summary function to investigate the variables in either the data.frame or tibble you just created. What type of field and what values are assigned to BIA_CODE?
 
+4. Create a boxplot of `Sepal.Length` by `Species` from the `iris` data frame using ggplot. Remember `library(ggplot2)` or `library(tidyverse)`.
+
+5. Use select, mutate, and the pipe to create a irisSepal tibble where the only variable retained are Petal.Length and Species, but with Petal.Length.cm created as $\frac{1}{10}$ the Petal.Length which is in mm. The statement should start with `irisSepal <- iris` and use a pipe plus the other functions after that.
+
+6. Now, also with iris, create BigIris to include only those with Petal.Length >= 6.
+
+7. Now, summarize by `Species` groups to create mean and standard deviation variables from `Sepal.Length`, `Sepal.Width`, `Petal.Length`, and `Petal.Width`. Preface the variable names with either `avg.` or `sd.` 
+
+```{r include=FALSE}
+library(dplyr)
+iris %>%
+  group_by(Species) %>%
+  summarize(Avg.Sepal.Length = mean(Sepal.Length),
+            Avg.Sepal.Width = mean(Sepal.Width),
+            Avg.Petal.Length = mean(Petal.Length),
+            Avg.Petal.Width = mean(Petal.Width))
+
+```
+
+8. Create an irisSort tibble, sorted by `Petal.Length`.
+
 
 
 
