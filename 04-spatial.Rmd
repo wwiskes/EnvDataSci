@@ -1,7 +1,394 @@
 # Spatial R
 
-We'll explore the basics of simple features (sf) for building spatial datasets, then some common mapping methds, probably:
+We'll explore the basics of simple features (sf) for building spatial datasets, then some common mapping methods, probably:
 
 - ggplot2
 - tmap
+
+## Spatial Data 
+
+To work with spatial data requires extending R to deal with it using packages.  Many have been developed, but the field is starting to mature using international open GIS standards.
+
+*`sp`*  (until recently, the dominant library of spatial tools)
+
+- Includes functions for working with spatial data
+- Includes `spplot` to create maps
+- Also needs `rgdal` package for `readOGR` – reads spatial data frames.  
+
+*`sf`* (Simple Features)
+
+- ISO 19125 standard for GIS geometries
+- Also has functions for working with spatial data, but clearer to use.
+- Doesn't need many additional packages, though you may still need `rgdal` installed for some tools you want to use.
+- Replacing `sp` and `spplot` though you'll still find them in code. We'll give it a try...
+- Works with ggplot2 and tmap for nice looking maps.
+
+Cheat sheet: https://github.com/rstudio/cheatsheets/raw/master/sf.pdf
+
+#### simple feature geometry sfg and simple feature column sfc
+
+
+
+### Examples of simple geometry building in sf 
+
+sf functions have the pattern st_* 
+
+st means "space and time"
+
+See Geocomputation with R at https://geocompr.robinlovelace.net/ or  https://r-spatial.github.io/sf/
+	for more details, but here's an example of manual feature creation of sf geometries (sfg):
+
+```{r message=FALSE}
+library(tidyverse)
+library(sf)
+```
+
+
+```{r}
+library(sf)
+eyes <- st_multipoint(rbind(c(1,5), c(3,5)))
+nose <- st_point(c(2,4))
+mouth <- st_linestring(rbind(c(1,3),c(3, 3)))
+border <- st_polygon(list(rbind(c(0,5), c(1,2), c(2,1), c(3,2), 
+                              c(4,5), c(3,7), c(1,7), c(0,5))))
+face <- st_sfc(eyes, nose, mouth, border)  # sfc = sf column 
+plot(face)
+```
+
+The face was a simple feature column (sfc) can be built from the list of sfgs. 
+An sfc just has the one column, so not quite like a shapefile.
+
+- But it can have a coordinate referencing system CRS, and so can be mapped.
+- Kind of like a shapefile with no other attributes than shape
+
+### Building a mappable sfc from scratch
+
+```{r}
+CA_matrix <- rbind(c(-124,42),c(-120,42),c(-120,39),c(-114.5,35),
+  c(-114.1,34.3),c(-114.6,32.7),c(-117,32.5),c(-118.5,34),c(-120.5,34.5),
+  c(-122,36.5),c(-121.8,36.8),c(-122,37),c(-122.4,37.3),c(-122.5,37.8),
+  c(-123,38),c(-123.7,39),c(-124,40),c(-124.4,40.5),c(-124,41),c(-124,42))
+NV_matrix <- rbind(c(-120,42),c(-114,42),c(-114,36),c(-114.5,36),
+  c(-114.5,35),c(-120,39),c(-120,42))
+CA_list <- list(CA_matrix);       NV_list <- list(NV_matrix)
+CA_poly <- st_polygon(CA_list);   NV_poly <- st_polygon(NV_list)
+sfc_2states <- st_sfc(CA_poly,NV_poly,crs=4326)  # crs=4326 specifies GCS
+st_geometry_type(sfc_2states)
+library(tidyverse)
+ggplot() + geom_sf(data = sfc_2states)
+
+```
+
+**sf class**
+
+Is like a shapefile:  has attributes to which geometry is added, and can be used like a data frame.
+
+```{r}
+attributes <- bind_rows(c(abb="CA", area=423970, pop=39.56e6),
+                        c(abb="NV", area=286382, pop=3.03e6))
+twostates <- st_sf(attributes, geometry = sfc_2states)
+ggplot(twostates) + geom_sf() + geom_sf_text(aes(label = abb))
+```
+
+### Creating features from shapefiles or tables
+
+sf's st_read reads shapefiles
+
+- shapefile is an open GIS format for points, polylines, polygons
+
+st_as_sf converts data frames
+
+- using coordinates in data
+
+```{r, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(sf)
+co <- st_read("data/BayAreaCounties.shp")
+freeways <- st_read("data/CAfreeways.shp")
+censusBayArea <- st_read("data/BayAreaTracts.shp")
+censusCentroids <- st_centroid(censusBayArea)
+TRIdata <- read_csv("data/TRI_2017_CA.csv")
+TRI_sp <- st_as_sf(TRIdata, coords = c("LONGITUDE", "LATITUDE"), 
+        crs=4326) # simple way to specify coordinate reference
+bnd <- st_bbox(censusCentroids)
+ggplot() +
+  geom_sf(data = co, aes(fill = NAME)) +
+  geom_sf(data = censusCentroids) +
+  geom_sf(data = freeways, color = "grey") +
+  geom_sf(data = TRI_sp, color = "yellow") +
+  coord_sf(xlim = c(bnd[1], bnd[3]), ylim = c(bnd[2], bnd[4])) +
+  labs(title="Bay Area Counties, Freeways and Census Tract Centroids")
+```
+
+### Coordinate Referencing System
+
+Say you have data you need to make spatial with a spatial reference
+
+`sierra <- read_csv("sierraClimate.csv")`
+
+EPSG or CRS codes are an easy way to provide coordinate referencing.  
+
+Two ways of doing the same thing. 
+
+1. Spell it out:
+```
+GCS <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+wsta = st_as_sf(sierra, coords = c("LONGITUDE","LATITUDE"), crs=GCS)
+```
+
+2. Google to find the code you need and assign it to the crs parameter:
+
+`wsta <- st_as_sf(sierra, coords = c("LONGITUDE","LATITUDE"), crs=4326)`
+
+#### *Removing* Geometry
+
+There are many instances where you want to remove geometry from a sf data frame
+
+- Some R functions run into problems with geometry and produce confusing error messages, like "non-numeric argument"
+
+- You're wanting to work with an sf data frame in a non-spatial way
+
+What I've found as the best way to remove geometry:
+
+`myNonSFdf <- mySFdf %>% st_set_geometry(NULL)`
+
+### Spatial join `st_join`
+
+A spatial join with st_join
+joins data from census where TRI points occur
+
+```{r, message=FALSE}
+TRIdata <- read_csv("data/TRI_2017_CA.csv")
+TRI_sp <- st_as_sf(TRIdata, coords = c("LONGITUDE", "LATITUDE"), 
+        crs=4326) %>%
+  st_join(censusBayArea) %>%
+  filter(CNTY_FIPS %in% c("013", "095"))
+```
+
+
+### Plotting maps in the base plot system
+
+There are various programs for creating maps from spatial data, and we'll look at a few after we've looked at rasters. As usual, the base plot system often does something useful when you give it data.
+
+```{r}
+co <- st_read("data/BayAreaCounties.shp")
+plot(co)
+```
+
+And with just one variable:
+
+```{r}
+plot(co["POP_SQMI"])
+```
+
+There's a lot more we could do with the base plot system, but we'll mostly focus on
+some better options in ggplot2 and tmap.
+
+
+## Raster GIS in R
+
+Simple Features are feature-based, so based on the name I guess it's not surprising that sf doesn't have support for rasters. But we can use the raster package for that. 
+
+**A bit of raster reading and map algebra with Marble Mountains elevation data**
+
+```{r message=FALSE}
+library(raster)
+elev <- raster("data/elev.tif")
+slope <- terrain(elev, opt="slope")
+aspect <- terrain(elev, opt="aspect")
+slopeclasses <-matrix(c(0,0.2,1, 0.2,0.4,2, 0.4,0.6,3,
+                        0.6,0.8,4, 0.8,1,5), ncol=3, byrow=TRUE)
+slopeclass <- reclassify(slope, rcl = slopeclasses)
+
+plot(elev)
+plot(slope)
+plot(slopeclass)
+plot(aspect)
+```
+
+### Raster from scratch
+
+```{r}
+new_raster2 <- raster(nrows = 6, ncols = 6, res = 0.5,
+                      xmn = -1.5, xmx = 1.5, ymn = -1.5, ymx = 1.5,
+                      vals = 1:36)
+plot(new_raster2)
+
+```
+
+
+## ggplot2 for maps
+
+The Grammar of Graphics is the gg of ggplot.
+
+- Key concept is separating aesthetics from data
+- Aesthetics can come from variables (using aes()setting) or be constant for the graph
+
+Mapping tools that follow this lead
+
+- ggplot, as we have seen, and it continues to be enhanced
+- tmap (Thematic Maps) https://github.com/mtennekes/tmap
+Tennekes, M., 2018, tmap: Thematic Maps in R, *Journal of Statistical Software* 84(6), 1-39
+
+```{r}
+CA <- st_read("data/CA_counties.shp")
+ggplot(CA) + geom_sf()
+
+```
+
+
+Try `?geom_sf` and you'll find that its first parameters is mapping with `aes()` by default. The data property is inherited from the ggplot call, but commonly you'll want to specify data=something in your geom_sf call.
+
+**Another simple ggplot, with labels**
+
+```{r}
+CA <- st_read("data/CA_counties.shp")
+ggplot(CA) + geom_sf() +
+  geom_sf_text(aes(label = NAME), size = 1.5)
+
+```
+
+**and now with fill color**
+
+```{r}
+ggplot(CA) + geom_sf(aes(fill = MED_AGE)) +
+  geom_sf_text(aes(label = NAME), col="white", size=1.5)
+```
+
+**Repositioned legend, no "x" or "y" labels**
+
+```{r warning=FALSE}
+ggplot(CA) + geom_sf(aes(fill=MED_AGE)) +
+  geom_sf_text(aes(label = NAME), col="white", size=1.5) +
+  theme(legend.position = c(0.8, 0.8)) +
+  labs(x="",y="")
+
+```
+
+
+**Map in ggplot2, zoomed into two counties:**
+
+```{r warning=FALSE}
+library(tidyverse); library(sf)
+co <- st_read("data/BayAreaCounties.shp")
+census <- st_read("data/BayAreaTracts.shp") %>%
+  filter(CNTY_FIPS %in% c("013", "095"))
+TRI <- read_csv("data/TRI_2017_CA.csv") %>%
+  st_as_sf(coords = c("LONGITUDE", "LATITUDE"), crs=4326) %>%
+  st_join(census) %>%
+  filter(CNTY_FIPS %in% c("013", "095"),
+         (`5.1_FUGITIVE_AIR` + `5.2_STACK_AIR`) > 0)
+bnd = st_bbox(census)
+ggplot() +
+  geom_sf(data = co, aes(fill = NAME)) +
+  geom_sf(data = census, color="grey40", fill = NA) +
+  geom_sf(data = TRI) +
+  coord_sf(xlim = c(bnd[1], bnd[3]), ylim = c(bnd[2], bnd[4])) +
+  labs(title="Census Tracts and TRI air-release sites") +
+  theme(legend.position = "none")
+
+```
+
+
+
+
+### Rasters in ggplot2
+
+Raster display in ggplot2 is currently a little awkward, as are rasters in general in the feature-dominated GIS world.
+
+We can use a trick: converting rasters to a grid of points:
+
+```{r}
+library(tidyverse)
+library(sf)
+library(raster)
+elevras <- raster("data/elev.tif") # note: the filename becomes a variable we'll use for fill
+trails <- st_read("data/trails.shp")
+elevpts = as.data.frame(rasterToPoints(elevras))
+ggplot() +
+  geom_raster(data = elevpts, aes(x = x, y = y, fill = elev)) +
+  geom_sf(data = trails)
+```
+
+## tmap
+
+Basic building block is tm_shape(data) followed by various layer elements such as tm_fill()
+shape can be features or raster
+See Geocomputation with R Chapter 8 "Making Maps with R" for more information.
+https://geocompr.robinlovelace.net/adv-map.html
+
+```{r}
+library(spData)
+library(tmap)
+tm_shape(world) + tm_fill() + tm_borders()
+```
+
+**Color by variable**
+
+```{r}
+library(sf)
+library(tmap)
+census <- st_read("data/BayAreaTracts.shp")
+tm_shape(census) + tm_fill(col = "MED_AGE")
+
+```
+
+**tmap of sierraFeb with hillshade and point symbols**
+
+```{r warning=FALSE}
+library(tmap)
+library(sf)
+library(raster)
+tmap_mode("plot")
+tmap_options(max.categories = 8)
+sierraFeb <- st_read("data/sierraFeb.csv")
+sierra <- st_as_sf(sierraFeb, coords = c("LONGITUDE", "LATITUDE"), crs = 4326)
+hillsh <- raster("data/ca_hillsh_WGS84.tif")
+bounds <- st_bbox(sierra)
+tm_shape(hillsh,bbox=bounds)+
+  tm_raster(palette="-Greys",legend.show=FALSE,n=10) + tm_shape(sierra) + tm_symbols(col="TEMPERATURE",
+     palette=c("blue","red"), style="cont",n=8) +
+  tm_legend() + 
+  tm_layout(legend.position=c("RIGHT","TOP"))
+
+```
+
+*Note: "-Greys" needed to avoid negative image, since "Greys" go from light to dark, and to match reflectance as with b&w photography, they need to go from dark to light.*
+
+
+
+### Interactive Maps
+
+The word "static" in "static maps" isn't something you would have heard in a cartography class 30 years ago, since essentially *all* maps then were static. Very important in designing maps is considering your audience, and one characteristic of the audience of those maps of yore were that they were printed and thus fixed on paper.  A lot of cartographic design relates to that property:  
+
+- Figure-to-ground relationships assume "ground" is a white piece of paper (or possibly a standard white background in a pdf), so good cartographic color schemes tend to range from light for low values to dark for high values.
+- Scale is fixed and there are no "tools" for changing scale, so a lot of attention must be paid to providing scale information.
+- Similarly, without the ability to see the map at different scales, inset maps are often needed to provide context.
+
+Interactive maps change the game in having tools for changing scale, and *always* being "printed" on a computer or device where the color of the background isn't necessarily white. We are increasingly used to using interactive maps on our phones or other devices, and often get frustrated not being able to zoom into a static map.
+
+A widely used interactive mapping system is Leaflet, but we're going to use tmap to access Leaflet behind the scenes and allow us to create maps with one set of commands.  The key parameter needed is tmap_mode which must be set to "view" to create an interactive map.
+
+```{r}
+tmap_mode("view")
+tm_shape(census) + tm_fill(col = "MED_AGE", alpha = 0.5)
+```
+
+#### Leaflet
+
+"An open-source JavaScript library for mobile-friendly interactive maps"   https://leafletjs.com
+"The **R** package **leaflet** is an interface to the JavaScript library **Leaflet** to create interactive web maps. It was developed on top of the htmlwidgets framework, which means the maps can be rendered in **RMarkdown** (v2) documents (which is why you can see it below), Shiny apps, and RStudio IDE / the R console." 
+
+https://blog.rstudio.com/2015/06/24/leaflet-interactive-web-maps-with-r/
+
+https://github.com/rstudio/cheatsheets/blob/master/leaflet.pdf
+
+```{r}
+library(leaflet)
+m <- leaflet() %>%
+  addTiles() %>%  # default OpenStreetMap tiles
+  addMarkers(lng=174.768, lat=-36.852,
+             popup="The birthplace of R")
+m 
+```
 

@@ -1,0 +1,491 @@
+# Spatial R
+
+We'll explore the basics of simple features (sf) for building spatial datasets, then some common mapping methods, probably:
+
+- ggplot2
+- tmap
+
+## Spatial Data 
+
+To work with spatial data requires extending R to deal with it using packages.  Many have been developed, but the field is starting to mature using international open GIS standards.
+
+*`sp`*  (until recently, the dominant library of spatial tools)
+
+- Includes functions for working with spatial data
+- Includes `spplot` to create maps
+- Also needs `rgdal` package for `readOGR` – reads spatial data frames.  
+
+*`sf`* (Simple Features)
+
+- ISO 19125 standard for GIS geometries
+- Also has functions for working with spatial data, but clearer to use.
+- Doesn't need many additional packages, though you may still need `rgdal` installed for some tools you want to use.
+- Replacing `sp` and `spplot` though you'll still find them in code. We'll give it a try...
+- Works with ggplot2 and tmap for nice looking maps.
+
+Cheat sheet: https://github.com/rstudio/cheatsheets/raw/master/sf.pdf
+
+#### simple feature geometry sfg and simple feature column sfc
+
+
+
+### Examples of simple geometry building in sf 
+
+sf functions have the pattern st_* 
+
+st means "space and time"
+
+See Geocomputation with R at https://geocompr.robinlovelace.net/ or  https://r-spatial.github.io/sf/
+	for more details, but here's an example of manual feature creation of sf geometries (sfg):
+
+```{r message=FALSE}
+library(tidyverse)
+library(sf)
+```
+
+
+```{r}
+library(sf)
+eyes <- st_multipoint(rbind(c(1,5), c(3,5)))
+nose <- st_point(c(2,4))
+mouth <- st_linestring(rbind(c(1,3),c(3, 3)))
+border <- st_polygon(list(rbind(c(0,5), c(1,2), c(2,1), c(3,2), 
+                              c(4,5), c(3,7), c(1,7), c(0,5))))
+face <- st_sfc(eyes, nose, mouth, border)  # sfc = sf column 
+plot(face)
+```
+
+The face was a simple feature column (sfc) can be built from the list of sfgs. 
+An sfc just has the one column, so not quite like a shapefile.
+
+- But it can have a coordinate referencing system CRS, and so can be mapped.
+- Kind of like a shapefile with no other attributes than shape
+
+### Building a mappable sfc from scratch
+
+```{r}
+CA_matrix <- rbind(c(-124,42),c(-120,42),c(-120,39),c(-114.5,35),
+  c(-114.1,34.3),c(-114.6,32.7),c(-117,32.5),c(-118.5,34),c(-120.5,34.5),
+  c(-122,36.5),c(-121.8,36.8),c(-122,37),c(-122.4,37.3),c(-122.5,37.8),
+  c(-123,38),c(-123.7,39),c(-124,40),c(-124.4,40.5),c(-124,41),c(-124,42))
+NV_matrix <- rbind(c(-120,42),c(-114,42),c(-114,36),c(-114.5,36),
+  c(-114.5,35),c(-120,39),c(-120,42))
+CA_list <- list(CA_matrix);       NV_list <- list(NV_matrix)
+CA_poly <- st_polygon(CA_list);   NV_poly <- st_polygon(NV_list)
+sfc_2states <- st_sfc(CA_poly,NV_poly,crs=4326)  # crs=4326 specifies GCS
+st_geometry_type(sfc_2states)
+library(tidyverse)
+ggplot() + geom_sf(data = sfc_2states)
+
+```
+
+sf class
+
+Is like a shapefile:  has attributes to which geometry is added, and can be used like a data frame.
+
+```{r}
+attributes <- bind_rows(c(abb="CA", area=423970, pop=39.56e6),
+                        c(abb="NV", area=286382, pop=3.03e6))
+twostates <- st_sf(attributes, geometry = sfc_2states)
+ggplot(twostates) + geom_sf() + geom_sf_text(aes(label = abb))
+```
+
+### Creating features from shapefiles or tables
+
+sf's st_read reads shapefiles
+
+- shapefile is an open GIS format for points, polylines, polygons
+
+st_as_sf converts data frames
+
+- using coordinates in data
+
+```{r}
+library(tidyverse)
+library(sf)
+co <- st_read("data/BayAreaCounties.shp")
+freeways <- st_read("data/CAfreeways.shp")
+censusBayArea <- st_read("data/BayAreaTracts.shp")
+censusCentroids <- st_centroid(censusBayArea)
+TRIdata <- read_csv("data/TRI_2017_CA.csv")
+TRI_sp <- st_as_sf(TRIdata, coords = c("LONGITUDE", "LATITUDE"), 
+        crs=4326) # simple way to specify coordinate reference
+bnd <- st_bbox(censusCentroids)
+ggplot() +
+  geom_sf(data = co, aes(fill = NAME)) +
+  geom_sf(data = censusCentroids) +
+  geom_sf(data = freeways, color = "grey") +
+  geom_sf(data = TRI_sp, color = "yellow") +
+  coord_sf(xlim = c(bnd[1], bnd[3]), ylim = c(bnd[2], bnd[4])) +
+  labs(title="Bay Area Counties, Freeways and Census Tract Centroids")
+```
+
+### Coordinate Referencing System
+
+Say you have data you need to make spatial with a spatial reference
+
+`sierra <- read_csv("sierraClimate.csv")`
+
+EPSG or CRS codes are an easy way to provide coordinate referencing.  
+
+Two ways of doing the same thing. 
+
+1. Spell it out:
+```
+GCS <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+wsta = st_as_sf(sierra, coords = c("LONGITUDE","LATITUDE"), crs=GCS)
+```
+
+2. Google to find the code you need and assign it to the crs parameter:
+
+`wsta <- st_as_sf(sierra, coords = c("LONGITUDE","LATITUDE"), crs=4326)`
+
+#### *Removing* Geometry
+
+There are many instances where you want to remove geometry from a sf data frame
+
+- Some R functions run into problems with geometry and produce confusing error messages, like "non-numeric argument"
+
+- You're wanting to work with an sf data frame in a non-spatial way
+
+What I've found as the best way to remove geometry:
+
+`myNonSFdf <- mySFdf %>% st_set_geometry(NULL)`
+
+### Spatial join `st_join`
+
+A spatial join with st_join
+joins data from census where TRI points occur
+
+```{r}
+TRIdata <- read_csv("data/TRI_2017_CA.csv")
+TRI_sp <- st_as_sf(TRIdata, coords = c("LONGITUDE", "LATITUDE"), 
+        crs=4326) %>%
+  st_join(censusBayArea) %>%
+  filter(CNTY_FIPS %in% c("013", "095"))
+```
+
+### Summarizing by group (from dplyr)
+
+```{r}
+TRI_BySite <- read_csv("data/TRI_2017_CA.csv") %>%
+  mutate(all_air = `5.1_FUGITIVE_AIR` + `5.2_STACK_AIR`) %>%
+  filter(all_air > 0) %>%
+  group_by(FACILITY_NAME) %>%
+  summarize(
+    FACILITY_NAME = first(FACILITY_NAME),
+    air_releases = sum(all_air, na.rm = TRUE),
+    mean_fugitive = mean(`5.1_FUGITIVE_AIR`, na.rm = TRUE), 
+    LATITUDE = first(LATITUDE), LONGITUDE = first(LONGITUDE))
+
+```
+
+### Distance Analysis
+
+```{r include=FALSE}
+# source for EJ analysis, including distance analysis
+library(jsonlite)
+library(raster)
+library(sf)
+library(tidyverse)
+library(rgdal)
+library(stringr)
+
+# Map Layers:  Counties, Census Tracts
+# Data from ArcGIS Pro using Living Atlas online data, selected and saved as shapefiles
+co <- st_read("data/BayAreaCounties.shp")          # Living Atlas:  USA Counties         
+freeways <- st_read("data/CAfreeways.shp")         # Living Atlas:  USA Freeway System          
+censusBayArea <- st_read("data/BayAreaTracts.shp")                           # Living Atlas:  USA Tracts
+incomeByTract <- read_csv("data/CA_MdInc.csv") %>%     # Living Atlas: household income by tract
+  select(trID, HHinc2016) %>%
+  mutate(HHinc2016 = as.numeric(str_c(HHinc2016)),
+         joinid = str_c("0", trID))
+censusBayArea <- censusBayArea %>%
+  mutate(whitepct = WHITE / POP2010 * 100) %>%
+  mutate(People_of_Color_pct = 100 - whitepct) %>%
+  left_join(incomeByTract, by = c("FIPS" = "joinid"))
+censusCentroids <- st_centroid(censusBayArea)
+census <- censusBayArea # compatible with both all counties and subset
+         
+# Get map extent for entire bay area
+# bnd <- st_bbox(co)
+
+# Build a tibble of county names and FIPS codes.  We'll use for a couple of purposes
+BA_counties <- co %>% select(NAME, CNTY_FIPS) %>% st_set_geometry(NULL)
+# %>% 
+#  mutate(countyname = NAME)
+  
+
+get_counties <- function(county_choices = "ALL") {
+  if (county_choices[1] == "ALL"){
+    county_choices = c("Alameda", "Contra Costa", "Marin", "Napa", "San Francisco", "San Mateo", 
+                       "Santa Clara", "Santa Cruz", "Solano", "Sonoma")
+  }
+  countyvec <- co %>%
+    filter(NAME %in% county_choices)
+  #countyfips <- countyvec$CNTY_FIPS
+  return(countyvec)
+}
+
+co <- get_counties("ALL")
+bnd <- st_bbox(co)
+
+# Now we'll start with building a basic basemap with no hillshades
+# Build basic basemap with hillshades and counties
+hillsh <- raster("data/BayArea_hillsh.tif")
+hillshpts <- as.data.frame(rasterToPoints(hillsh))
+BayAreaBasemapHillsh <- ggplot() + 
+  geom_raster(aes(x=x, y=y, fill=BayArea_hillsh), data=hillshpts) + guides(fill = F) +
+  scale_fill_gradient(low = "#000000", high = "#FFFFFF") +
+  geom_sf(data = co, fill = NA) +
+  labs(x='',y='') +
+  coord_sf(xlim = c(bnd[1], bnd[3]), ylim = c(bnd[2], bnd[4]))
+
+# And a basic basemap with no hillshade
+BayAreaBasemapNohill <- ggplot() +
+  geom_sf(data = co, fill = NA) +
+  coord_sf(xlim = c(bnd[1], bnd[3]), ylim = c(bnd[2], bnd[4])) +
+  labs(x='',y='')
+
+make_map <- function(pointdf, pointfld, polydf = censusBayArea, polyfld, titles) {
+  BayAreaBasemapNohill +
+    geom_sf(data = polydf, aes(fill = polyfld), colour = NA) +
+    scale_fill_gradient(titles[2], low = "#FFFFFF", high = "#0000A0") +
+    geom_sf(data = co, fill = NA) +
+    geom_sf(data = freeways, colour = "grey", size = 1) +
+    geom_sf(mapping = aes(color = pointfld), data=pointdf, size=1.5) +
+    coord_sf(xlim = c(bnd[1], bnd[3]), ylim = c(bnd[2], bnd[4]))  +
+    scale_color_gradient2(titles[1], low = "ivory2", high = "red") +
+    labs(title=titles[1], subtitle=str_c("Over ",titles[2]))
+}
+make_mapHsh <- function(pointdf, pointfld, titles) {
+  BayAreaBasemapHillsh +
+  geom_sf(mapping = aes(color = pointfld),data=pointdf, size=1.5, alpha=0.3) +
+  coord_sf(xlim = c(bnd[1], bnd[3]), ylim = c(bnd[2], bnd[4]))  +
+  scale_color_gradient2(titles[1], low="green", mid="red", high="purple", midpoint=mean(as.numeric(pointfld))) +
+  #scale_color_gradient2(low = lowcolor, high = highcolor) +
+  labs(title=titles[1], subtitle=titles[2])
+}
+
+
+```
+
+```{r}
+TRI_filename <- "data/TRI_2017_CA.csv"   # filename format is important to maintain; year is parsed for a map title
+CDC_filename <- "data/CDC_health_data_by_Tract_CA_2018_release.csv"
+TRI_CA <- read_csv(TRI_filename)
+TRI_BySite <- TRI_CA %>%
+  mutate(all_air = `5.1_FUGITIVE_AIR` + `5.2_STACK_AIR`) %>%
+  mutate(carcin_release = all_air * (CARCINOGEN == "YES")) %>%
+  group_by(TRI_FACILITY_ID) %>%
+  summarise(
+    count = n(),
+    air_releases = sum(all_air, na.rm = TRUE),
+    fugitive_air = sum(`5.1_FUGITIVE_AIR`, na.rm = TRUE),
+    stack_air = sum(`5.2_STACK_AIR`, na.rm = TRUE),
+    FACILITY_NAME = first(FACILITY_NAME),
+    COUNTY = first(COUNTY),
+    LATITUDE = first(LATITUDE),
+    LONGITUDE = first(LONGITUDE))
+TRIdata <- TRI_BySite %>%
+  filter(air_releases > 0) %>%
+  filter((LONGITUDE < bnd[3]) & (LONGITUDE > bnd[1]) & (LATITUDE < bnd[4]) & (LATITUDE > bnd[2]))
+TRI_sp <- st_as_sf(TRIdata, coords = c("LONGITUDE", "LATITUDE"), crs=4326) %>%
+  st_join(censusBayArea) %>%
+  filter(CNTY_FIPS %in% BA_counties$CNTY_FIPS)
+TRI2join <- TRI_sp %>% 
+  st_set_geometry(NULL) %>%
+  rowid_to_column("TRI_ID")
+TRI <- TRI_sp # also works with county selection
+
+# CDC data
+CDCdata <- read_csv(CDC_filename) %>%
+  mutate(
+    lon = as.numeric(str_sub(Geolocation, 17, 30)),
+    lat = as.numeric(str_sub(Geolocation, 2, 14)),
+    CDC_CNTY_FIPS = str_sub(TractFIPS, 2, 4)) %>%
+  filter(CDC_CNTY_FIPS %in% BA_counties$CNTY_FIPS)
+CDCbay <- st_as_sf(CDCdata, coords = c('lon', 'lat'), crs=4326)
+
+# D to TRI:  create vector of index of nearest TRI facility to each CDC (tract centroid) point
+nearest_TRI_ids <- st_nearest_feature(CDCbay, TRI_sp)
+# get locations of each NEAREST TRI facility only
+near_TRI_loc <- TRI_sp$geometry[nearest_TRI_ids]
+
+library(units)
+CDCbay <- CDCbay %>%
+  mutate(d2TRI = st_distance(CDCbay, near_TRI_loc, by_element=TRUE),
+         d2TRI = units::drop_units(d2TRI),
+         nearest_TRI = nearest_TRI_ids) %>%
+  left_join(BA_counties, by = c("CDC_CNTY_FIPS" = "CNTY_FIPS"))
+
+CDCTRIbay <- left_join(CDCbay, TRI2join, by = c("nearest_TRI" = "TRI_ID")) %>%  
+  filter(d2TRI > 0) # %>%
+
+# CASTHMA_CrudePrev = Model-based estimate for crude prevalence of current asthma
+#   among adults aged >=18, 2016
+CDCTRIbay %>%
+  ggplot(aes(d2TRI, CASTHMA_CrudePrev)) +
+  geom_point(aes(colour = NAME)) + geom_smooth(method="lm", se=FALSE, color="black") +
+  labs(x = "Distance to nearest TRI facility", y = "Asthma Prevalence CDC Model, Adults >= 18, 2016")
+AsthmaModeld2TRI <- lm(CASTHMA_CrudePrev ~ d2TRI, data = CDCTRIbay)
+summary(AsthmaModeld2TRI)
+
+# How about air releases of closest facility?
+CDCTRIbay %>%
+  ggplot(aes(air_releases, CASTHMA_CrudePrev)) +
+  geom_point(aes(color = NAME)) + geom_smooth(method="lm", se=FALSE, color = "black") +
+  labs(x = "Air releases at nearest TRI facility", 
+       y = "Asthma Prevalence CDC Model, Adults >= 18, 2016")
+summary(lm(CASTHMA_CrudePrev ~ air_releases, data = CDCTRIbay))
+# No relationship there, almost a negative one. To remove the effect of larger stack releases
+# that might carry toxic air away, use just the fugitive air:
+CDCTRIbay %>%
+  ggplot(aes(fugitive_air, CASTHMA_CrudePrev)) +
+  geom_point(aes(color=NAME)) + geom_smooth(method="lm", se=FALSE, color = "black") +
+  labs(x = "Fugitive Releases at nearest TRI facility", 
+       y = "Asthma Prevalence CDC Model, Adults >= 18, 2016")
+summary(lm(CASTHMA_CrudePrev ~ fugitive_air, data = CDCTRIbay))
+```
+
+
+## Plotting maps
+
+There are various programs for creating maps from spatial data. We'll look at a few. 
+
+### Using the base plot system for maps
+
+As usual, the base plot system often does something useful when you give it data.
+
+```{r}
+co <- st_read("data/BayAreaCounties.shp")
+plot(co)
+```
+
+And with just one variable:
+
+```{r}
+plot(co["POP_SQMI"])
+```
+
+## ggplot2 for maps
+
+The Grammar of Graphics is the gg of ggplot.
+
+- Key concept is separating aesthetics from data
+- Aesthetics can come from variables (using aes()setting) or be constant for the graph
+
+Mapping tools that follow this lead
+
+- ggplot, as we have seen, and it continues to be enhanced
+- tmap (Thematic Maps) https://github.com/mtennekes/tmap
+Tennekes, M., 2018, tmap: Thematic Maps in R, *Journal of Statistical Software* 84(6), 1-39
+
+```{r}
+CA <- st_read("data/CA_counties.shp")
+ggplot(CA) + geom_sf()
+
+```
+
+
+Try `?geom_sf` and you'll find that its first parameters is mapping with `aes()` by default. The data property is inherited from the ggplot call, but commonly you'll want to specify data=something in your geom_sf call.
+
+**Another simple ggplot, with labels**
+
+```{r}
+CA <- st_read("data/CA_counties.shp")
+ggplot(CA) + geom_sf() +
+  geom_sf_text(aes(label = NAME), size = 1.5)
+
+```
+
+**and now with fill color**
+
+```{r}
+ggplot(CA) + geom_sf(aes(fill = MED_AGE)) +
+  geom_sf_text(aes(label = NAME), col="white", size=1.5)
+```
+
+**Repositioned legend, no "x" or "y" labels**
+
+```{r}
+ggplot(CA) + geom_sf(aes(fill=MED_AGE)) +
+  geom_sf_text(aes(label = NAME), col="white", size=1.5) +
+  theme(legend.position = c(0.8, 0.8)) +
+  labs(x="",y="")
+
+```
+
+## Raster GIS in R
+
+Simple Features are feature-based, not raster. So we'll use the raster package, 
+first with Marble Mountains elevation:
+
+```{r message=FALSE}
+library(raster)
+elev <- raster("data/elev.tif")
+plot(elev)
+
+```
+
+### Raster from scratch
+
+```{r}
+new_raster2 <- raster(nrows = 6, ncols = 6, res = 0.5,
+                      xmn = -1.5, xmx = 1.5, ymn = -1.5, ymx = 1.5,
+                      vals = 1:36)
+plot(new_raster2)
+
+```
+
+### Rasters in ggplot2
+
+... currently a little awkward
+
+But has potential for taking advantage of ggplot2.
+
+For now at least something like this works which gets points (for x and y) from a raster:
+
+```{r}
+library(tidyverse)
+library(sf)
+library(raster)
+elevras <- raster("data/elev.tif") # note: the filename becomes a variable we'll use for fill
+trails <- st_read("data/trails.shp")
+elevpts = as.data.frame(rasterToPoints(elevras))
+ggplot() +
+  geom_raster(data = elevpts, aes(x = x, y = y, fill = elev)) +
+  geom_sf(data = trails)
+```
+
+### More ggplot2 maps
+
+**Map in ggplot2, zoomed into two counties:**
+
+```{r}
+library(tidyverse); library(sf)
+co <- st_read("data/BayAreaCounties.shp")
+census <- st_read("data/BayAreaTracts.shp") %>%
+  filter(CNTY_FIPS %in% c("013", "095"))
+TRI <- read_csv("data/TRI_2017_CA.csv") %>%
+  st_as_sf(coords = c("LONGITUDE", "LATITUDE"), crs=4326) %>%
+  st_join(census) %>%
+  filter(CNTY_FIPS %in% c("013", "095"),
+         (`5.1_FUGITIVE_AIR` + `5.2_STACK_AIR`) > 0)
+bnd = st_bbox(census)
+ggplot() +
+  geom_sf(data = co, aes(fill = NAME)) +
+  geom_sf(data = census, color="grey40", fill = NA) +
+  geom_sf(data = TRI) +
+  coord_sf(xlim = c(bnd[1], bnd[3]), ylim = c(bnd[2], bnd[4])) +
+  labs(title="Census Tracts and TRI air-release sites") +
+  theme(legend.position = "none")
+
+```
+
+
+
+
+
+
+

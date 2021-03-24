@@ -1,3 +1,364 @@
 # Visualization
 
-We explore visualization methods in gpplot2.
+In this section we'll explore visualization methods in R. Visualization has been a key element of R since its inception, since visualization is central to the exploratory philosophy of the language. The base *plot* system generally does a good job in coming up with the most likely graphical output based on the data you provide. 
+
+```{r}
+plot(iris$Petal.Length, iris$Sepal.Length)
+plot(iris$Species, iris$Petal.Length)
+```
+
+## Introducing ggplot2
+
+We'll mostly focus however on gpplot2, based on the *Grammar of Graphics* because it provides considerable control over your graphics while remaining fairly easily readable, as long as you buy into its grammar.
+
+ggplot2 looks at three aspects of a graph:
+
+- data : where are the data coming from?
+- geometry : what type of graph are we creating?
+- aesthetics : what choices can we make about symbology and how do we connect symbology to data?
+
+See https://rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf
+
+The ggplot2 system provides plots of single and multiple variables, using various coordinate systems (including geographic).
+
+```{r include=FALSE}
+library(tidyverse)
+XSptsNoTrees <- read_csv("data/XSptsNDVI.csv") %>%
+  filter(vegetation != "pine")
+XSptsPheno <- XSptsNoTrees %>%
+  pivot_longer(cols = starts_with("NDVI"), names_to = "phenology", values_to = "NDVI") %>%
+  mutate(phenology = str_sub(phenology, 5, str_length(phenology)))
+write_csv(XSptsPheno, "data/XSptsPheno.csv")
+
+```
+
+## Plotting one variable
+
+- continuous
+    - histograms
+    - density plots
+    - dot plots
+- discrete
+    - bar
+    
+```{r}
+ggplot(XSptsPheno, aes(vegetation)) + 
+   geom_bar()
+
+```
+
+### Histogram
+
+```{r warning=FALSE}
+XSptsPheno <- read_csv("data/XSptsPheno.csv")
+XSptsPheno %>%
+  ggplot(aes(NDVI)) + 
+  geom_histogram(binwidth=0.05)
+```
+
+**Normal histogram**: easier to visualize the distribution, see modes
+```{r warning=FALSE}
+sierraData <- read_csv("data/sierraData.csv")
+sierraData %>%
+    ggplot(aes(TEMPERATURE)) +
+  geom_histogram(fill="dark green")
+```
+
+**Cumulative histogram with proportions**: easier to see percentiles, median
+```{r warning=FALSE}
+n <- length(sierraData$TEMPERATURE)
+sierraData %>%
+  ggplot(aes(TEMPERATURE)) +
+  geom_histogram(aes(y=cumsum(..count..)/n), fill="dark goldenrod")
+
+```
+
+### Density Plot
+
+Density represents how much out of the total. The total area (sum of widths of bins times densities of that bin) adds up to 1.
+
+```{r}
+XSptsPheno %>% 
+  ggplot(aes(NDVI)) + 
+  geom_density()
+
+```
+
+Note that NDVI values are <1 so bins are very small numbers, so in this case densities can be >1.
+
+**Using alpha and mapping phenology as fill color**.  This illustrates two useful ggplot methods:
+
+- "mapping" a variable (phenology) to an aesthetic property (fill color of the density polygon)
+- setting a a property (alpha = 0.2) to all polygons of the density plot.  The alpha channel of colors defines its opacity, from invisible (0) to opaque (1) so is commonly used to set as its reverse, transparency.
+
+```{r}
+XSptsPheno %>%
+  ggplot(aes(NDVI, fill=phenology)) +
+  geom_density(alpha=0.2)
+```
+
+```{r include=FALSE}
+library(tidyverse)
+runoffPivot <- read_csv("data/eucoakrainfallrunoffTDR.csv") %>%
+  pivot_longer(cols = starts_with("runoffL_"), 
+               names_to = "tree", values_to = "runoff_L") %>%
+  mutate(
+    tree = str_sub(tree, str_length(tree)-2, str_length(tree)),
+    Date = as.Date(date, "%m/%d/%Y"))  # variable date is just a string, needs converting to date format
+
+euc <- runoffPivot %>%
+  filter(tree == "euc") %>%
+  mutate(
+    rain_subcanopy = rain_euc,
+    slope = slope_euc,
+    aspect = aspect_euc,
+    surface_tension = surface_tension_euc,
+    runoff_rainfall_ratio = runoff_rainfall_ratio_euc) %>%
+  select(site, `site #`, tree, Date, month, rain_mm, rain_subcanopy, slope, aspect, runoff_L, surface_tension, runoff_rainfall_ratio)
+
+oak <- runoffPivot %>%
+  filter(tree == "oak") %>%
+  mutate(
+    rain_subcanopy = rain_oak,
+    slope = slope_oak,
+    aspect = aspect_oak,
+    surface_tension = surface_tension_oak,
+    runoff_rainfall_ratio = runoff_rainfall_ratio_oak) %>%
+  select(site, `site #`, tree, Date, month, rain_mm, rain_subcanopy, slope, aspect, runoff_L, surface_tension, runoff_rainfall_ratio)
+
+eucoak <- rbind(euc, oak)
+write_csv(eucoak, "data/tidy_eucoak.csv")
+
+```
+
+```{r warning=FALSE}
+runoffEucOak <- read_csv("data/tidy_eucoak.csv")
+runoffEucOak %>%
+  ggplot(aes(log(runoff_L),fill=tree)) +
+  geom_density(alpha=0.2)
+```
+
+
+### boxplot
+
+```{r warning=FALSE}
+ggplot(data = runoffEucOak) +
+  geom_boxplot(aes(x = site, y = runoff_L))
+
+```
+**Get color from tree within `aes()`**
+```{r warning=FALSE}
+ggplot(data = runoffEucOak) +
+  geom_boxplot(aes(x=site, y=runoff_L, color=tree))
+
+```
+
+**Visualizing soil CO_2_ data with a Tukey box plot**
+
+```{r warning=FALSE}
+co2 <- read_csv("data/soilCO2_97.csv")
+co2$SITE <- factor(co2$SITE)  # in order to make the numeric field a factor
+ggplot(data = co2, mapping = aes(x = SITE, y = `CO2%`)) +
+  geom_boxplot()
+
+```
+
+## Plotting two variables
+### Two continuous variables
+
+We've looked at this before -- the scatterplot
+
+```{r warning=FALSE}
+sierra <- read_csv("data/sierraFeb.csv")
+ggplot(data=sierra) + 
+  geom_point(mapping = aes(TEMPERATURE, ELEVATION))
+
+```
+
+- The aes ("aesthetics") function specifies the variables to use as x and y coordinates 
+- geom_point creates a scatter plot of those coordinate points
+
+**Set color for all (*not* in aes())**
+
+```{r warning=FALSE}
+ggplot(data=sierra) + 
+  geom_point(aes(TEMPERATURE, ELEVATION), color="blue")
+```
+
+- color is defined outside of aes, so is applies to all points.
+- mapping is first argument of  geom_point, so `mapping = ` is not needed.
+
+### Two variables, one discrete
+
+```{r warning=FALSE}
+ggplot(runoffEucOak) +
+  geom_bar(aes(site, runoff_L), stat="identity")
+
+```
+
+## Color systems
+
+You can find a lot about color systems. See these sources:
+
+<a href="http://sape.inf.usi.ch/quick-reference/ggplot2/colour">http://sape.inf.usi.ch/quick-reference/ggplot2/colour</a>
+<a href="http://applied-r.com/rcolorbrewer-palettes/">http://applied-r.com/rcolorbrewer-palettes/</a>
+
+### Color from variable, in aesthetics
+
+In this graph, color is defined inside aes, so is based on COUNTY
+
+```{r warning=FALSE}
+sierra <- read_csv("data/sierraFeb.csv")
+ggplot(data=sierra) + 
+  geom_point(aes(TEMPERATURE, ELEVATION, color=COUNTY))
+
+```
+
+**Plotting lines using the same x,y in aesthetics**
+```{r warning=FALSE}
+sierra %>%
+  ggplot(aes(TEMPERATURE,ELEVATION)) +
+  geom_point(color="blue") +
+  geom_line(color="red")
+```
+
+Note the use of pipe to start with the data then apply ggplot.
+
+**River map & profile**
+
+```{r}
+x <- c(1000, 1100, 1300, 1500, 1600, 1800, 1900)
+y <- c(500, 700, 800, 1000, 1200, 1300, 1500)
+z <- c(0, 1, 2, 5, 25, 75, 150)
+d <- rep(NA, length(x))
+longd <- rep(NA, length(x))
+s <- rep(NA, length(x))
+for(i in 1:length(x)){
+  if(i==1){longd[i] <- 0; d[i] <-0}
+  else{
+    d[i] <- sqrt((x[i]-x[i-1])^2 + (y[i]-y[i-1])^2)
+    longd[i] <- longd[i-1] + d[i]
+    s[i-1] <- (z[i]-z[i-1])/d[i]}}
+longprofile <- bind_cols(x=x,y=y,z=z,d=d,longd=longd,s=s)
+ggplot(longprofile, aes(x,y)) +
+  geom_line(mapping=aes(col=s), size=1.2) + 
+  geom_point(mapping=aes(col=s, size=z)) +
+  coord_fixed(ratio=1) + scale_color_gradient(low="green", high="red") +
+  ggtitle("Simulated river path, elevations and slopes")
+ggplot(longprofile, aes(longd,z)) + geom_line(aes(col=s), size=1.5) + geom_point()  +
+  scale_color_gradient(low="green", high="red") +
+  ggtitle("Elevation over longitudinal distance upstream")
+ggplot(longprofile, aes(longd,s)) + geom_point(aes(col=s), size=3) +
+  scale_color_gradient(low="green", high="red") +
+  ggtitle("Slope over longitudinal distance upstream")
+#summary(lm(s~longd, data=longprofile))
+
+```
+
+### Trend line
+
+```{r}
+sierra %>%
+  ggplot(aes(TEMPERATURE,ELEVATION)) +
+  geom_point(color="blue") +
+  geom_smooth(color="red", method="lm")
+
+```
+
+### General symbology
+A useful vignette lets you see aesthetic specifications for symbols, including:
+
+- Color & fill
+- Lines
+   - line type, size, ends
+- Polygon
+   - border color, linetype, size
+   - fill
+- Points
+   - shape
+   - size
+   - color & fill
+   - stroke
+- Text
+   - font face & size
+   - justification
+
+```{r}
+vignette("ggplot2-specs")
+```
+
+#### Categorical symbology
+
+
+EPA Toxic Release Inventory.  A big data set needing symbology to try to make sense of it.
+
+```{r message=FALSE}
+TRI <- read_csv("data/TRI_2017_CA.csv") %>%
+  filter(`5.1_FUGITIVE_AIR` > 100 & `5.2_STACK_AIR` > 100)
+ggplot(data = TRI, aes(log(`5.2_STACK_AIR`), log(`5.1_FUGITIVE_AIR`), 
+                       color = INDUSTRY_SECTOR)) +
+       geom_point()
+```
+
+#### Graphs from grouped data
+
+```{r warning=FALSE}
+XSptsPheno %>%
+  ggplot() +
+  geom_point(aes(elevation, NDVI, shape=vegetation, 
+                 color = phenology), size = 3) +
+  geom_smooth(aes(elevation, NDVI, 
+                 color = phenology), method="lm") 
+```
+
+```{r warning=FALSE}
+ggplot(data = eucoak) +
+  geom_point(mapping = aes(x = rain_mm, y = runoff_L, color = tree)) +
+  geom_smooth(mapping = aes(x = rain_mm, y= runoff_L, color = tree), 
+              method = "lm") +
+  scale_color_manual(values = c("seagreen4", "orange3"))
+
+```
+
+#### Faceted graphs
+
+This is another option to displaying groups of data, with parallel graphs
+
+```{r warning=FALSE}
+ggplot(data = runoffEucOak) +
+  geom_point(aes(x=rain_mm,y=runoff_L)) +
+  geom_smooth(aes(x=rain_mm,y=runoff_L), method="lm") +
+  facet_grid(tree ~ .)
+
+```
+
+## Titles and subtitles
+
+```{r warning=FALSE}
+ggplot(data = runoffEucOak) +
+  geom_point(aes(x=rain_mm,y=runoff_L, color=tree)) +
+  geom_smooth(aes(x=rain_mm,y=runoff_L, color=tree), method="lm") +
+  scale_color_manual(values=c("seagreen4","orange3")) +
+  labs(title="rainfall ~ runoff", 
+       subtitle="eucalyptus & oak sites, 2016")
+
+```
+
+## Pairs Plot
+
+```{r warning=FALSE}
+sierra %>%
+  select(LATITUDE, ELEVATION, TEMPERATURE, PRECIPITATION) %>%
+  pairs()
+```
+There are many versions of pairs plots. Here's one from GGally (need to `install.packages("GGally")` first):
+
+```{r warning=FALSE}
+library(GGally)
+sierra %>%
+   select(LATITUDE, ELEVATION, TEMPERATURE, PRECIPITATION) %>%
+   ggpairs()
+
+```
+
+

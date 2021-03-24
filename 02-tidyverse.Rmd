@@ -38,7 +38,7 @@ In this chapter, we'll be mostly exploring **dplyr**, with a few other things th
 Tibbles are an improved type of data frame
 
 - part of the Tidyverse
-- serve the same as a data frame, all data frame operations work
+- serve the same purpose as a data frame, and all data frame operations work
 
 Advantages
 
@@ -48,15 +48,19 @@ Advantages
 
 How created
 
-- Variety of Tidyverse functions similarly named to base functions:
-    - `read_csv` creates a tibble
+- Reading from a CSV, using one of a variety of Tidyverse functions similarly named to base functions:
+    - `read_csv` creates a tibble (in general, underscores are used in the Tidyverse)
     - `read.csv` creates a regular data frame
-- In general, underscores are used instead of dots in the Tidyverse...
+- You can also use the `tibble()` function
 
 ```{r}
 library(tidyverse) # includes readr, ggplot2, and dplyr which we'll use in this chapter
 runoff20062007 <- read_csv("data/eucoakrainfallrunoffTDR.csv")
 runoff20062007
+a <- rnorm(10)
+b <- runif(10)
+ab <- tibble(a,b)
+ab
 ```
 ### `read_csv` vs. `read.csv`
 
@@ -160,6 +164,25 @@ eucoakSiteAvg <- runoff %>%
 eucoakSiteAvg
 ```
 
+
+**Summarizing by group with TRI data**
+
+```{r, message=FALSE}
+TRI_BySite <- read_csv("data/TRI_2017_CA.csv") %>%
+  mutate(all_air = `5.1_FUGITIVE_AIR` + `5.2_STACK_AIR`) %>%
+  filter(all_air > 0) %>%
+  group_by(FACILITY_NAME) %>%
+  summarize(
+    FACILITY_NAME = first(FACILITY_NAME),
+    air_releases = sum(all_air, na.rm = TRUE),
+    mean_fugitive = mean(`5.1_FUGITIVE_AIR`, na.rm = TRUE), 
+    LATITUDE = first(LATITUDE), LONGITUDE = first(LONGITUDE))
+
+```
+
+
+
+
 ### Count
 
 Count is a simple variant on summarize by group, since the only statistic is the count of events.
@@ -216,6 +239,14 @@ head(stackrate)
 ```
 
 ## Exercises
+
+1. Create a tibble with 20 rows of two variables `norm` and `unif` with `norm` created with `rnorm()` and `unif` created with `runif()`.
+
+2. Read in "data/TRI_2017_CA.csv" in two ways, as a normal data frame assigned to df and as a tibble assigned to tb. What field names result for what's listed in the CSV as `5.1_FUGITIVE_AIR`?
+
+3. Use the summary function to investigate the variables in either the data.frame or tibble you just created. What type of field and what values are assigned to BIA_CODE?
+
+
 
 
 
