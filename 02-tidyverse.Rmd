@@ -246,26 +246,60 @@ head(stackrate)
 
 3. Use the summary function to investigate the variables in either the data.frame or tibble you just created. What type of field and what values are assigned to BIA_CODE?
 
-4. Create a boxplot of `Sepal.Length` by `Species` from the `iris` data frame using ggplot. Remember `library(ggplot2)` or `library(tidyverse)`.
-
-5. Use select, mutate, and the pipe to create a irisSepal tibble where the only variable retained are Petal.Length and Species, but with Petal.Length.cm created as $\frac{1}{10}$ the Petal.Length which is in mm. The statement should start with `irisSepal <- iris` and use a pipe plus the other functions after that.
-
-6. Now, also with iris, create BigIris to include only those with Petal.Length >= 6.
-
-7. Now, summarize by `Species` groups to create mean and standard deviation variables from `Sepal.Length`, `Sepal.Width`, `Petal.Length`, and `Petal.Width`. Preface the variable names with either `avg.` or `sd.` 
+4. Create a boxplot of `body_mass_g` by `species` from the `penguins` data frame in the palmerpenguins package. Access the data with data(package = 'palmerpenguins'), and also remember `library(ggplot2)` or `library(tidyverse)`.
 
 ```{r include=FALSE}
-library(dplyr)
-iris %>%
-  group_by(Species) %>%
-  summarize(Avg.Sepal.Length = mean(Sepal.Length),
-            Avg.Sepal.Width = mean(Sepal.Width),
-            Avg.Petal.Length = mean(Petal.Length),
-            Avg.Petal.Width = mean(Petal.Width))
+library(tidyverse)
+library(palmerpenguins)
+data(package = 'palmerpenguins')
+```
+
+```{r include=FALSE}
+ggplot(penguins, aes(x=species, y=body_mass_g)) + geom_boxplot()
+```
+
+
+5. Use select, mutate, and the pipe to create a penguinMass tibble where the only original variable retained is species, but with body_mass_kg created as $\frac{1}{1000}$ the body_mass_g. The statement should start with `penguinMass <- penguins` and use a pipe plus the other functions after that.
+
+```{r include=FALSE}
+penguinMass <- penguins %>%
+  mutate(body_mass_kg = body_mass_g / 1000) %>%
+  select(species, body_mass_kg)
+penguinMass
+```
+
+6. Now, also with penguins, create FemaleChinstaps to include only the female Chinstrap penguins. Start with `FemaleChinstraps <- penguins %>%`
+
+```{r include=FALSE}
+FemaleChinstraps <- penguins %>%
+  filter(sex == "female") %>%
+  filter(species == "Chinstrap")
+FemaleChinstraps
+```
+
+7. Now, summarize by `species` groups to create mean and standard deviation variables from `bill_length_mm`, `bill_depth_mm`, `flipper_length_mm`, and `body_mass_g`. Preface the variable names with either `avg.` or `sd.` Include `na.rm=T` with all statistics function calls.
+
+```{r include=FALSE}
+penguins %>%
+  group_by(species, sex) %>%
+  summarize(avg.bill_length_mm = mean(bill_length_mm, na.rm=T),
+            avg.bill_depth_mm = mean(bill_depth_mm, na.rm=T),
+            avg.flipper_length_mm = mean(flipper_length_mm, na.rm=T),
+            avg.body_mass_g = mean(body_mass_g, na.rm=T),
+            sd.bill_length_mm = sd(bill_length_mm, na.rm=T),
+            sd.bill_depth_mm = sd(bill_depth_mm, na.rm=T),
+            sd.flipper_length_mm = sd(flipper_length_mm, na.rm=T),
+            sd.body_mass_g = sd(body_mass_g, na.rm=T))
 
 ```
 
-8. Create an irisSort tibble, sorted by `Petal.Length`.
+8. Create an penguinSort tibble, sorted by `body_mass_g`.
+
+```{r include=FALSE}
+penguins %>%
+  arrange(body_mass_g)
+```
+
 
 
 
