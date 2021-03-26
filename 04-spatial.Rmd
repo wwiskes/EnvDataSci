@@ -148,7 +148,7 @@ There are many instances where you want to remove geometry from a sf data frame
 
 - You're wanting to work with an sf data frame in a non-spatial way
 
-What I've found as the best way to remove geometry:
+One way to remove geometry:
 
 `myNonSFdf <- mySFdf %>% st_set_geometry(NULL)`
 
