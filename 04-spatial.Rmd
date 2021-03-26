@@ -55,8 +55,8 @@ face <- st_sfc(eyes, nose, mouth, border)  # sfc = sf column
 plot(face)
 ```
 
-The face was a simple feature column (sfc) can be built from the list of sfgs. 
-An sfc just has the one column, so not quite like a shapefile.
+The face was a simple feature column (sfc) built from the list of sfgs. 
+An sfc just has the one column, so is not quite like a shapefile.
 
 - But it can have a coordinate referencing system CRS, and so can be mapped.
 - Kind of like a shapefile with no other attributes than shape
@@ -397,8 +397,10 @@ tm_basemap(leaflet::providers$Esri.NatGeoWorldMap) +
 
 #### Leaflet
 
-"An open-source JavaScript library for mobile-friendly interactive maps"   https://leafletjs.com
-"The **R** package **leaflet** is an interface to the JavaScript library **Leaflet** to create interactive web maps. It was developed on top of the htmlwidgets framework, which means the maps can be rendered in **RMarkdown** (v2) documents (which is why you can see it below), Shiny apps, and RStudio IDE / the R console." 
+Now that we've seen an app that used it, let's look briefly at Leaflet itself, and we'll see that even the Leaflet package in R actually uses JavaScript...
+
+Leaflet is designed as "An open-source JavaScript library for mobile-friendly interactive maps"   https://leafletjs.com
+"The **R** package **leaflet** is an interface to the JavaScript library **Leaflet** to create interactive web maps. It was developed on top of the htmlwidgets framework, which means the maps can be rendered in **RMarkdown** (v2) documents (which is why you can see it in this document), Shiny apps, and RStudio IDE / the R console." 
 
 https://blog.rstudio.com/2015/06/24/leaflet-interactive-web-maps-with-r/
 

@@ -271,7 +271,7 @@ sierra %>%
 ```
 
 ### General symbology
-A useful vignette lets you see aesthetic specifications for symbols, including:
+A useful vignette accessed by `vignette("ggplot2-specs")` lets you see aesthetic specifications for symbols, including:
 
 - Color & fill
 - Lines
@@ -288,14 +288,9 @@ A useful vignette lets you see aesthetic specifications for symbols, including:
    - font face & size
    - justification
 
-```{r}
-vignette("ggplot2-specs")
-```
-
 #### Categorical symbology
 
-
-EPA Toxic Release Inventory.  A big data set needing symbology to try to make sense of it.
+One example of a "Big Data" resource is EPA's Toxic Release Inventory that tracks releases from a wide array of sources, from oil refineries on down.  One way of dealing with big data in terms of exploring meaning is to use symbology to try to make sense of it.
 
 ```{r message=FALSE, fig.cap="EPA Toxic Release Inventory, as a big data set needing symbology clarification"}
 TRI <- read_csv("data/TRI_2017_CA.csv") %>%
