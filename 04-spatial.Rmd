@@ -44,7 +44,7 @@ library(sf)
 ```
 
 
-```{r}
+```{r fig.cap="Building simple geometries in sf"}
 library(sf)
 eyes <- st_multipoint(rbind(c(1,5), c(3,5)))
 nose <- st_point(c(2,4))
@@ -63,7 +63,7 @@ An sfc just has the one column, so not quite like a shapefile.
 
 ### Building a mappable sfc from scratch
 
-```{r}
+```{r fig.cap="A simple map built from scratch with hard-coded data as simple feature columns"}
 CA_matrix <- rbind(c(-124,42),c(-120,42),c(-120,39),c(-114.5,35),
   c(-114.1,34.3),c(-114.6,32.7),c(-117,32.5),c(-118.5,34),c(-120.5,34.5),
   c(-122,36.5),c(-121.8,36.8),c(-122,37),c(-122.4,37.3),c(-122.5,37.8),
@@ -83,7 +83,7 @@ ggplot() + geom_sf(data = sfc_2states)
 
 Is like a shapefile:  has attributes to which geometry is added, and can be used like a data frame.
 
-```{r}
+```{r fig.cap="Using an sf class to build a map, displaying an attribute"}
 attributes <- bind_rows(c(abb="CA", area=423970, pop=39.56e6),
                         c(abb="NV", area=286382, pop=3.03e6))
 twostates <- st_sf(attributes, geometry = sfc_2states)
@@ -100,7 +100,7 @@ st_as_sf converts data frames
 
 - using coordinates in data
 
-```{r, message=FALSE, warning=FALSE}
+```{r, message=FALSE, warning=FALSE, fig.cap="ggplot map of Bay Area TRI sites, census centroids, freeways"}
 library(tidyverse)
 library(sf)
 co <- st_read("data/BayAreaCounties.shp")
@@ -374,6 +374,27 @@ tmap_mode("view")
 tm_shape(census) + tm_fill(col = "MED_AGE", alpha = 0.5)
 ```
 
+
+```{r}
+library(tmap)
+library(sf)
+tmap_mode("view")
+tmap_options(max.categories = 8)
+sierraFeb <- st_read("data/sierraFeb.csv")
+sierra <- st_as_sf(sierraFeb, coords = c("LONGITUDE", "LATITUDE"), crs = 4326)
+hillsh <- raster("data/ca_hillsh_WGS84.tif")
+bounds <- st_bbox(sierra)
+tm_basemap(leaflet::providers$Esri.NatGeoWorldMap) +
+  tm_shape(sierra) + tm_symbols(col="TEMPERATURE",
+  palette=c("blue","red"), style="cont",n=8,size=0.2) +
+  tm_legend() + 
+  tm_layout(legend.position=c("RIGHT","TOP"))
+
+```
+
+
+
+
 #### Leaflet
 
 "An open-source JavaScript library for mobile-friendly interactive maps"   https://leafletjs.com
@@ -391,4 +412,165 @@ m <- leaflet() %>%
              popup="The birthplace of R")
 m 
 ```
+
+## Exercises
+
+1. Using the method of building simple sf geometries, build a simple 1x1 square object and plot it. Remember that you have to close the polygon, so the first vertex is the same as the last (of 5) vertices.
+
+```{r include=F}
+library(sf)
+library(tidyverse)
+square <- st_sfc(st_polygon(list(rbind(c(0,0),c(0,1),c(1,1),c(1,0),c(0,0)))))
+plot(square)
+```
+
+2. Build a map in ggplot of Colorado, Wyoming, and Utah with these boundary vertices in GCS. As with the square, remember to close each figure, and assign the crs to what is needed for GCS: 4326.  
+
+- Colorado: $(-109,41),(-102,41),(-102,37),(-109,37)$
+- Wyoming: $(-111,45),(-104,45),(-104,41),(-111,41)$
+- Utah: $(-114,42),(-111,42),(-111,41),(-109,41),(-109,37),(-114,37)$
+- Arizona: $(-114,37),(-109,37),(-109,31.3),(-111,31.3),(-114.8,32.5),(-114.6,32.7),(-114.1,34.3),(-114.5,35),(-114.5,36),(-114,36)$
+- New Mexico: $(-109,37),(-103,37),(-103,32),(-106.6,32),(-106.5,31.8),(-108.2,31.8),(-108.2,31.3),(-109,31.3)$
+
+```{r include=F}
+CO <- st_polygon(list(rbind(c(-109,41),c(-102,41),c(-102,37),c(-109,37),c(-109,41))))
+WY <- st_polygon(list(rbind(c(-111,45),c(-104,45),c(-104,41),c(-111,41),c(-111,45))))
+UT <- st_polygon(list(rbind(c(-114,42),c(-111,42),c(-111,41),c(-109,41),c(-109,37),c(-114,37),c(-114,42))))
+AZ <- st_polygon(list(rbind(c(-114,37),c(-109,37),c(-109,31.3),c(-111,31.3),c(-114.8,32.5),c(-114.6,32.7),c(-114.1,34.3),c(-114.5,35),c(-114.5,36),c(-114,36),c(-114,37))))
+NM <- st_polygon(list(rbind(c(-109,37),c(-103,37),c(-103,32),c(-106.6,32),c(-106.5,31.8),c(-108.2,31.8),c(-108.2,31.3),c(-109,31.3),c(-109,37))))
+sfc5states <- st_sfc(CO,WY,UT,AZ,NM, crs=4326)
+ggplot() + geom_sf(data=sfc5states)
+
+```
+
+3. Add in the code for CA and NV and create kind of a western US map...
+```{r include=F}
+CO <- st_polygon(list(rbind(c(-109,41),c(-102,41),c(-102,37),c(-109,37),c(-109,41))))
+WY <- st_polygon(list(rbind(c(-111,45),c(-104,45),c(-104,41),c(-111,41),c(-111,45))))
+UT <- st_polygon(list(rbind(c(-114,42),c(-111,42),c(-111,41),c(-109,41),c(-109,37),c(-114,37),c(-114,42))))
+AZ <- st_polygon(list(rbind(c(-114,37),c(-109,37),c(-109,31.3),c(-111,31.3),c(-114.8,32.5),c(-114.6,32.7),c(-114.1,34.3),c(-114.5,35),c(-114.5,36),c(-114,36),c(-114,37))))
+NM <- st_polygon(list(rbind(c(-109,37),c(-103,37),c(-103,32),c(-106.6,32),c(-106.5,31.8),c(-108.2,31.8),c(-108.2,31.3),c(-109,31.3),c(-109,37))))
+
+CA <- st_polygon(list(rbind(c(-124,42),c(-120,42),c(-120,39),c(-114.5,35),
+  c(-114.1,34.3),c(-114.6,32.7),c(-117,32.5),c(-118.5,34),c(-120.5,34.5),
+  c(-122,36.5),c(-121.8,36.8),c(-122,37),c(-122.4,37.3),c(-122.5,37.8),
+  c(-123,38),c(-123.7,39),c(-124,40),c(-124.4,40.5),c(-124,41),c(-124,42))))
+NV <- st_polygon(list(rbind(c(-120,42),c(-114,42),c(-114,36),c(-114.5,36),
+  c(-114.5,35),c(-120,39),c(-120,42))))
+
+sfc7states <- st_sfc(CO,WY,UT,AZ,NM,CA,NV, crs=4326)
+ggplot() + geom_sf(data=sfc7states)
+
+```
+
+3. Create an sf class from the five states adding the fields `name`, `abb`, `area_sqkm`, and `population`, and create a map labeling with the name.
+
+- Colorado, CO, 269837, 5758736
+- Wyoming, WY, 253600, 578759
+- Utah, UT, 84899, 3205958
+- Arizona, AZ, 295234, 7278717
+- New Mexico, NM, 314917, 2096829
+- California, CA, 423970, 39368078
+- Nevada, NV, 286382, 3080156
+
+```{r include=F}
+attributes <- bind_rows(c(name="Colorado", abb="CO", area=269837, pop=5758736),
+                        c(name="Wyoming", abb="WY", area=253600, pop=578759),
+                        c(name="Utah", abb="UT", area=84899, pop=3205958),
+                        c(name="Arizona", abb="AZ", area=295234, pop=7278717),
+                        c(name="New Mexico", abb="NM", area=314917, pop=2096829),
+                        c(name="California", abb="CA", area=423970, pop=39368078),
+                        c(name="Nevada", abb="NV", area=286382, pop=3080156))
+SW_States <- st_sf(attributes, geometry = sfc7states)
+ggplot(SW_States) + geom_sf(aes(fill=pop)) + geom_sf_text(aes(label = name))
+```
+
+4. Create a tibble for the highest peaks in the 7 states, with the following names, elevations in m, longitude and latitude, and add them to that map:
+
+- Wheeler Peak, 4011, -105.4, 36.5
+- Mt. Whitney, 4421, -118.2, 36.5
+- Boundary Peak, 4007, -118.35, 37.9
+- Kings Peak, 4120, -110.3, 40.8
+- Gannett Peak, 4209, -109, 43.2
+- Mt. Elbert, 4401, -106.4, 39.1
+- Humphreys Peak, 3852, -111.7, 35.4
+
+Note: the easiest way to do this is with the tribble function, starting with:
+```
+peaks <- tribble(
+  ~peak, ~elev, ~longitude, ~latitude,
+  "Wheeler Peak", 4011, -105.4, 36.5,
+```
+
+```{r include=F}
+peaks <- tribble(
+  ~peak, ~elev, ~longitude, ~latitude,
+  "Wheeler Peak", 4011, -105.4, 36.5,
+  "Mt. Whitney", 4421, -118.2, 36.5,
+  "Boundary Peak", 4007, -118.35, 37.9,
+  "Kings Peak", 4120, -110.3, 40.8,
+  "Gannett Peak", 4209, -109, 43.2,
+  "Mt. Elbert", 4401, -106.4, 39.1,
+  "Humphreys Peak", 3852, -111.7, 35.4)
+peaksp <- st_as_sf(peaks, coords=c("longitude", "latitude"), crs=4326)
+
+ggplot(SW_States) + geom_sf(aes(fill=pop)) + geom_sf(data=peaksp) + geom_sf_label(data=peaksp, aes(label=peak))
+
+  
+```
+
+
+5. Use a spatial join to add the points to the states to provide a new attribute maximum elevation, and display that using geom_sf_text() with the state polygons.
+
+```{r include=F}
+SW_States %>%
+  st_join(peaksp) %>%
+  ggplot() + geom_sf() + geom_sf_text(aes(label=elev))
+
+```
+
+
+6. Even though the result isn't terribly useful, send that spatially joined data to the base plot system to see what you get.
+
+```{r include=F}
+SW_States %>%
+  st_join(peaksp) %>%
+  plot()
+
+```
+
+7. Read in CA_counties.shp and CAfreeways.shp from the data folder and make a simple map in ggplot, with freeways colored red.
+
+```{r include=F}
+CAco <- st_read("data/CA_counties.shp")
+CAfw <- st_read("data/CAfreeways.shp")
+ggplot(CAco) + geom_sf() + geom_sf(data=CAfw, col="red")
+```
+
+8. After adding the raster library, create a raster from the built-in `volcano` matrix of elevations from Auckland's Maunga Whau Volcano, and use plot() to display it.  We'd do more with that dataset but we don't know what the cell size is.
+
+```{r include=F}
+library(raster)
+v <- raster(volcano)
+plot(v)
+```
+
+9. Use tmap to create a simple map from the SW_States (polygons) and peaksp (points) data we created earlier.  Hints: you'll want to use tm_text with text set to "peak" to label the points, along with the parameter `auto.placement=TRUE`.
+
+```{r include=F}
+library(tmap)
+tmap_mode("plot")
+tm_shape(SW_States) + tm_borders() +
+  tm_shape(peaksp) + tm_symbols(col = "red") + tm_text(text="peak", auto.placement=T)
+```
+
+10. Change the map to the view mode, but don't use the state borders since the basemap will have them. Just before adding shapes, set the basemap to leaflet::providers$Esri.NatGeoWorldMap, then continue to the peaks after the + to see the peaks on a National Geographic basemap.
+
+```{r include=F}
+tmap_mode("view")
+tm_basemap(leaflet::providers$Esri.NatGeoWorldMap) +
+tm_shape(peaksp) + tm_symbols(col = "red") + tm_text(text="peak", auto.placement=T)
+
+```
+
 

@@ -139,3 +139,7 @@ fig:unnamed-chunk-20-3
 fig:unnamed-chunk-21
 fig:unnamed-chunk-23
 fig:unnamed-chunk-24
+fig:unnamed-chunk-2
+fig:unnamed-chunk-3
+fig:unnamed-chunk-4
+exercises-3
