@@ -55,8 +55,9 @@ How created
 
 ```{r}
 library(tidyverse) # includes readr, ggplot2, and dplyr which we'll use in this chapter
-runoff20062007 <- read_csv("data/eucoakrainfallrunoffTDR.csv")
-runoff20062007
+library(iGIScData)
+csvPath <- system.file("extdata","TRI_1987_BaySites.csv", package="iGIScData")
+TRI87 <- read_csv(csvPath)
 a <- rnorm(10)
 b <- runif(10)
 ab <- tibble(a,b)
@@ -85,13 +86,13 @@ Recommendation:  Use `read_csv` and `write_csv`.
 A simple statistical summary is very easy to do:
 
 ```{r}
-summary(runoff20062007)
+summary(eucoakrainfallrunoffTDR)
 ```
 
 ## Visualizing data with a Tukey box plot
 
 ```{r}
-ggplot(data = runoff20062007) + geom_boxplot(mapping = aes(x=site, y=runoffL_euc))
+ggplot(data = eucoakrainfallrunoffTDR) + geom_boxplot(mapping = aes(x=site, y=runoffL_euc))
 ```
 
 ## Database operations with `dplyr`
@@ -110,13 +111,15 @@ The following methods are quickly discovered to be essential as part of explorin
 **The pipe `%>%`**:  Read `%>%` as "and then..."  This is bigger than it sounds and opens up a lot of possibilities.  See example below, and observe how the expression becomes several lines long. In the process, we'll see examples of new variables with mutate and selecting (and in the process *ordering*) variables:
 
 ```{r}
-runoff <- runoff20062007 %>%
+runoff <- eucoakrainfallrunoffTDR %>%
   mutate(Date = as.Date(date,"%m/%d/%Y"),
          rain_subcanopy = (rain_oak + rain_euc)/2) %>%
   select(site, Date, rain_mm, rain_subcanopy, 
          runoffL_oak, runoffL_euc, slope_oak, slope_euc)
 runoff
 ```
+
+
  *Note: to just rename a variable, use `rename` instead of `mutate`. It will stay in position.*
  
 ### filter
@@ -140,7 +143,7 @@ runoff2007
 
 Let's say you have created a data frame, maybe with read_csv
 
-`runoff20062007 <- read_csv("data/eucoakrainfallrunoffTDR.csv")`
+`runoff20062007 <- read_csv(csvPath)`
 
 Then you do some processing to change it, maybe adding variables, reorganizing, etc., and you want to write out your new `eucoak`, so you just need to use `write_csv`
 
@@ -168,7 +171,8 @@ eucoakSiteAvg
 **Summarizing by group with TRI data**
 
 ```{r, message=FALSE}
-TRI_BySite <- read_csv("data/TRI_2017_CA.csv") %>%
+csvPath <- system.file("extdata","TRI_2017_CA.csv", package="iGIScData")
+TRI_BySite <- read_csv(csvPath) %>%
   mutate(all_air = `5.1_FUGITIVE_AIR` + `5.2_STACK_AIR`) %>%
   filter(all_air > 0) %>%
   group_by(FACILITY_NAME) %>%
@@ -180,27 +184,20 @@ TRI_BySite <- read_csv("data/TRI_2017_CA.csv") %>%
 
 ```
 
-
-
-
 ### Count
 
 Count is a simple variant on summarize by group, since the only statistic is the count of events.
-(The following data is from Claudia Engel (2021) *Data Wrangling with R*.)
 
 ```{r}
-library(lubridate)
-trafficStops <- read_csv("data/MS_trafficstops_bw_age.csv") %>%
-  mutate(year = year(stop_date))
-trafficCounts <- trafficStops %>%
-  count(year,violation_raw)
-trafficCounts
+tidy_eucoak %>% count(tree)
+
 ```
 
-**Another way to do the trafficCounts calculation is to use n():**
-```
-trafficCounts <- trafficStops %>%
-  group_by(year,violation_raw) %>%
+**Another way is to use n():**
+
+```{r}
+tidy_eucoak %>%
+  group_by(tree) %>%
   summarize(n = n())
 ```
 
@@ -208,7 +205,7 @@ trafficCounts <- trafficStops %>%
 
 Using the marine debris data from NOAA Marine Debris Program's *Marine Debris Monitoring and Assessment Project*
 ```{r}
-shorelineLatLong <- read_csv("data/ConcentrationReport.csv") %>%
+shorelineLatLong <- ConcentrationReport %>%
   group_by(`Shoreline Name`) %>%
   summarize(
     latitude = mean((`Latitude Start`+`Latitude End`)/2),
@@ -231,7 +228,8 @@ A similar specification is used in piped sequences
 - The dot is then used to connect to items inside the data frame:
 
 ```{r}
-TRI87 <- read_csv("data/TRI_1987_BaySites.csv")
+csvPath <- system.file("extdata","TRI_1987_BaySites.csv", package="iGIScData")
+TRI87 <- read_csv(csvPath)
 stackrate <- TRI87 %>%
   mutate(stackrate = stack_air/air_releases) %>%
   .$stackrate

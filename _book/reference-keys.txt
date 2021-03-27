@@ -144,3 +144,4 @@ fig:unnamed-chunk-3
 fig:unnamed-chunk-4
 exercises-3
 fig:unnamed-chunk-22
+data

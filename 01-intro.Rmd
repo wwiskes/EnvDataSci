@@ -190,9 +190,11 @@ with rows and columns, where rows might be *observations* and columns might be *
 We'll read this type of data in from spreadsheets or even more commonly from comma-separated-variable (CSV)
 text files that spreadsheet programs like Excel commonly read in just like their native format.
 ```{r include=FALSE}
-sierraFeb <- read_csv("data/sierraFeb.csv")
+## sierraFeb <- read_csv("data/sierraFeb.csv")
+## Don't need this anymore, as long as the iGIScData is installed from GitHub
 ```
 ```{r}
+library(iGIScData)
 sierraFeb
 ```
 ## Data Structures in R
@@ -374,13 +376,21 @@ plot(data = mydata, x = elev, y = temp)
 ```
 
 **Read a data frame from a CSV**
+
+We'll be looking at this more in the next chapter, but a common need is to read data from a spreadsheet stored in the CSV format.  Normally, you'd have that stored with your project and can just specify the file name, but we'll access CSVs from the iGIScData package. Since you have this installed, it will already be on your computer, but not in your project folder. The path to it can be derived using the `system.file()` function.  
+
+Reading a csv in `readr` (part of the tidyverse that we'll be looking at in the next chapter) is done with `read_csv()`:
+
 ```{r}
-TRI87 <- read_csv("data/TRI_1987_BaySites.csv")
+library(readr)
+csvPath <- system.file("extdata","TRI_1987_BaySites.csv", package="iGIScData")
+TRI87 <- read_csv(csvPath)
 TRI87
 ```
+
 **Sort, Index, & Max/Min**
+
 ```{r}
-TRI87 <- read_csv("data/TRI_1987_BaySites.csv")
 head(sort(TRI87$air_releases))
 index <- order(TRI87$air_releases)
 head(TRI87$FACILITY_NAME[index])   # displays facilities in order of their air releases
@@ -503,6 +513,9 @@ TRI87$FACILITY_NAME[i]
 
 **%in%**
 ```{r}
+library(readr)
+csvPath = system.file("extdata","TRI_1987_BaySites.csv", package="iGIScData")
+TRI87 <- read_csv(csvPath)
 i <- TRI87$COUNTY %in% c("NAPA","SONOMA")
 TRI87$FACILITY_NAME[i]
 

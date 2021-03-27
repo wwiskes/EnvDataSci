@@ -3,6 +3,7 @@
 In this section we'll explore visualization methods in R. Visualization has been a key element of R since its inception, since visualization is central to the exploratory philosophy of the language. The base *plot* system generally does a good job in coming up with the most likely graphical output based on the data you provide. 
 
 ```{r include=FALSE}
+library(tidyverse)
 library(palmerpenguins)
 data(package = "palmerpenguins")
 ```
@@ -26,16 +27,6 @@ See https://rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf
 
 The ggplot2 system provides plots of single and multiple variables, using various coordinate systems (including geographic).
 
-```{r include=FALSE}
-library(tidyverse)
-XSptsNoTrees <- read_csv("data/XSptsNDVI.csv") %>%
-  filter(vegetation != "pine")
-XSptsPheno <- XSptsNoTrees %>%
-  pivot_longer(cols = starts_with("NDVI"), names_to = "phenology", values_to = "NDVI") %>%
-  mutate(phenology = str_sub(phenology, 5, str_length(phenology)))
-write_csv(XSptsPheno, "data/XSptsPheno.csv")
-
-```
 
 ## Plotting one variable
 
@@ -47,12 +38,23 @@ write_csv(XSptsPheno, "data/XSptsPheno.csv")
     - bar
     
 ```{r}
-ggplot(XSptsPheno, aes(vegetation)) + 
-   geom_bar()
-
+library(iGIScData)
+library(tidyverse)
+summary(XSptsNDVI)
+ggplot(XSptsNDVI, aes(vegetation)) + 
+  geom_bar()
 ```
 
 ### Histogram
+
+**First, to prepare the data, we need to use a pivot_longer on XSptsNDVI:**
+
+```{r}
+XSptsPheno <- XSptsNDVI %>%
+  filter(vegetation != "pine") %>%
+  pivot_longer(cols = starts_with("NDVI"), names_to = "phenology", values_to = "NDVI") %>%
+  mutate(phenology = str_sub(phenology, 5, str_length(phenology)))
+```
 
 ```{r warning=FALSE, fig.cap="Distribution of NDVI, Knuthson Meadow"} 
 XSptsPheno <- read_csv("data/XSptsPheno.csv")
@@ -64,7 +66,6 @@ XSptsPheno %>%
 
 **Normal histogram**: easier to visualize the distribution, see modes
 ```{r warning=FALSE, fig.cap="Distribution of Average Monthly Temperatures, Sierra Nevada"}
-sierraData <- read_csv("data/sierraData.csv")
 sierraData %>%
     ggplot(aes(TEMPERATURE)) +
   geom_histogram(fill="dark green")
@@ -104,8 +105,9 @@ XSptsPheno %>%
 ```
 
 ```{r include=FALSE}
+## DON'T REALLY NEED THIS -- STORED AS tidy_eucoak
 library(tidyverse)
-runoffPivot <- read_csv("data/eucoakrainfallrunoffTDR.csv") %>%
+runoffPivot <- eucoakrainfallrunoffTDR %>%
   pivot_longer(cols = starts_with("runoffL_"), 
                names_to = "tree", values_to = "runoff_L") %>%
   mutate(
@@ -138,8 +140,7 @@ write_csv(eucoak, "data/tidy_eucoak.csv")
 ```
 
 ```{r warning=FALSE, fig.cap="Runoff under Eucalyptus and Oak in Bay Area sites"}
-runoffEucOak <- read_csv("data/tidy_eucoak.csv")
-runoffEucOak %>%
+tidy_eucoak %>%
   ggplot(aes(log(runoff_L),fill=tree)) +
   geom_density(alpha=0.2)
 ```
@@ -148,13 +149,13 @@ runoffEucOak %>%
 ### boxplot
 
 ```{r warning=FALSE, fig.cap="Runoff under Eucalyptus and Oak, Bay Area Sites"}
-ggplot(data = runoffEucOak) +
+ggplot(data = tidy_eucoak) +
   geom_boxplot(aes(x = site, y = runoff_L))
 
 ```
 **Get color from tree within `aes()`**
 ```{r warning=FALSE, fig.cap="Runoff at Bay Area Sites, colored as Eucalyptus and Oak"}
-ggplot(data = runoffEucOak) +
+ggplot(data = tidy_eucoak) +
   geom_boxplot(aes(x=site, y=runoff_L, color=tree))
 
 ```
@@ -162,7 +163,7 @@ ggplot(data = runoffEucOak) +
 **Visualizing soil CO_2_ data with a Tukey box plot**
 
 ```{r warning=FALSE, fig.cap = "Visualizing soil CO_2_ data with a Tukey box plot"}
-co2 <- read_csv("data/soilCO2_97.csv")
+co2 <- soilCO2_97
 co2$SITE <- factor(co2$SITE)  # in order to make the numeric field a factor
 ggplot(data = co2, mapping = aes(x = SITE, y = `CO2%`)) +
   geom_boxplot()
@@ -175,8 +176,7 @@ ggplot(data = co2, mapping = aes(x = SITE, y = `CO2%`)) +
 We've looked at this before -- the scatterplot
 
 ```{r warning=FALSE, fig.cap="Scatter plot of February temperature vs elevation"}
-sierra <- read_csv("data/sierraFeb.csv")
-ggplot(data=sierra) + 
+ggplot(data=sierraFeb) + 
   geom_point(mapping = aes(TEMPERATURE, ELEVATION))
 
 ```
@@ -187,7 +187,7 @@ ggplot(data=sierra) +
 **Set color for all (*not* in aes())**
 
 ```{r warning=FALSE}
-ggplot(data=sierra) + 
+ggplot(data=sierraFeb) + 
   geom_point(aes(TEMPERATURE, ELEVATION), color="blue")
 ```
 
@@ -197,7 +197,7 @@ ggplot(data=sierra) +
 ### Two variables, one discrete
 
 ```{r warning=FALSE, fig.cap="Two variables, one discrete"}
-ggplot(runoffEucOak) +
+ggplot(tidy_eucoak) +
   geom_bar(aes(site, runoff_L), stat="identity")
 ```
 
@@ -213,15 +213,14 @@ You can find a lot about color systems. See these sources:
 In this graph, color is defined inside aes, so is based on COUNTY
 
 ```{r warning=FALSE, fig.cap="Color set within aes()"}
-sierra <- read_csv("data/sierraFeb.csv")
-ggplot(data=sierra) + 
+ggplot(data=sierraFeb) + 
   geom_point(aes(TEMPERATURE, ELEVATION, color=COUNTY))
 
 ```
 
 **Plotting lines using the same x,y in aesthetics**
 ```{r warning=FALSE, fig.cap="Using aesthetics settings for both points and lines"}
-sierra %>%
+sierraFeb %>%
   ggplot(aes(TEMPERATURE,ELEVATION)) +
   geom_point(color="blue") +
   geom_line(color="red")
@@ -263,7 +262,7 @@ ggplot(longprofile, aes(longd,s)) + geom_point(aes(col=s), size=3) +
 ### Trend line
 
 ```{r fig.cap="Trend line using geom_smooth with a linear model"}
-sierra %>%
+sierraFeb %>%
   ggplot(aes(TEMPERATURE,ELEVATION)) +
   geom_point(color="blue") +
   geom_smooth(color="red", method="lm")
@@ -293,7 +292,8 @@ A useful vignette accessed by `vignette("ggplot2-specs")` lets you see aesthetic
 One example of a "Big Data" resource is EPA's Toxic Release Inventory that tracks releases from a wide array of sources, from oil refineries on down.  One way of dealing with big data in terms of exploring meaning is to use symbology to try to make sense of it.
 
 ```{r message=FALSE, fig.cap="EPA Toxic Release Inventory, as a big data set needing symbology clarification"}
-TRI <- read_csv("data/TRI_2017_CA.csv") %>%
+csvPath <- system.file("extdata","TRI_2017_CA.csv", package="iGIScData")
+TRI <- read_csv(csvPath) %>%
   filter(`5.1_FUGITIVE_AIR` > 100 & `5.2_STACK_AIR` > 100)
 ggplot(data = TRI, aes(log(`5.2_STACK_AIR`), log(`5.1_FUGITIVE_AIR`), 
                        color = INDUSTRY_SECTOR)) +
@@ -312,7 +312,7 @@ XSptsPheno %>%
 ```
 
 ```{r warning=FALSE, fig.cap="Eucalyptus and Oak: rainfall and runoff"}
-ggplot(data = eucoak) +
+ggplot(data = tidy_eucoak) +
   geom_point(mapping = aes(x = rain_mm, y = runoff_L, color = tree)) +
   geom_smooth(mapping = aes(x = rain_mm, y= runoff_L, color = tree), 
               method = "lm") +
@@ -325,7 +325,7 @@ ggplot(data = eucoak) +
 This is another option to displaying groups of data, with parallel graphs
 
 ```{r warning=FALSE, fig.cap="Faceted graph alternative"}
-ggplot(data = runoffEucOak) +
+ggplot(data = tidy_eucoak) +
   geom_point(aes(x=rain_mm,y=runoff_L)) +
   geom_smooth(aes(x=rain_mm,y=runoff_L), method="lm") +
   facet_grid(tree ~ .)
@@ -335,7 +335,7 @@ ggplot(data = runoffEucOak) +
 ## Titles and subtitles
 
 ```{r warning=FALSE, fig.cap="Titles added"}
-ggplot(data = runoffEucOak) +
+ggplot(data = tidy_eucoak) +
   geom_point(aes(x=rain_mm,y=runoff_L, color=tree)) +
   geom_smooth(aes(x=rain_mm,y=runoff_L, color=tree), method="lm") +
   scale_color_manual(values=c("seagreen4","orange3")) +
@@ -347,7 +347,7 @@ ggplot(data = runoffEucOak) +
 ## Pairs Plot
 
 ```{r warning=FALSE, fig.cap="Pairs plot for Sierra Nevada stations variables"}
-sierra %>%
+sierraFeb %>%
   select(LATITUDE, ELEVATION, TEMPERATURE, PRECIPITATION) %>%
   pairs()
 ```
@@ -355,7 +355,7 @@ There are many versions of pairs plots. Here's one from GGally (need to `install
 
 ```{r warning=FALSE, fig.cap="Pairs plot in GGally package"}
 library(GGally)
-sierra %>%
+sierraFeb %>%
    select(LATITUDE, ELEVATION, TEMPERATURE, PRECIPITATION) %>%
    ggpairs()
 

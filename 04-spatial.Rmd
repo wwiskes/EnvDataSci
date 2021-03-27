@@ -92,29 +92,45 @@ ggplot(twostates) + geom_sf() + geom_sf_text(aes(label = abb))
 
 ### Creating features from shapefiles or tables
 
-sf's st_read reads shapefiles
+**sf's `st_read` reads shapefiles**
 
 - shapefile is an open GIS format for points, polylines, polygons
 
-st_as_sf converts data frames
+You would normally have shapefiles (and all the files that go with them -- .shx, etc.)
+stored on your computer, but we'll access one from the iGIScData external data folder:
 
-- using coordinates in data
+```{r}
+library(iGIScData)
+library(sf)
+shpPath <- system.file("extdata","CA_counties.shp", package="iGIScData")
+CA_counties <- st_read(shpPath)
+plot(CA_counties)
+```
+
+**`st_as_sf` converts data frames**
+
+- using coordinates read from x and y variables, with crs set to coordinate system (4326 for GCS)
+
+```{r}
+sierraFebpts <- st_as_sf(sierraFeb, coords = c("LONGITUDE", "LATITUDE"), crs=4326)
+plot(sierraFebpts)
+```
+
+
+
 
 ```{r, message=FALSE, warning=FALSE, fig.cap="ggplot map of Bay Area TRI sites, census centroids, freeways"}
 library(tidyverse)
 library(sf)
-co <- st_read("data/BayAreaCounties.shp")
-freeways <- st_read("data/CAfreeways.shp")
-censusBayArea <- st_read("data/BayAreaTracts.shp")
-censusCentroids <- st_centroid(censusBayArea)
-TRIdata <- read_csv("data/TRI_2017_CA.csv")
-TRI_sp <- st_as_sf(TRIdata, coords = c("LONGITUDE", "LATITUDE"), 
+library(iGIScData)
+censusCentroids <- st_centroid(BayAreaTracts)
+TRI_sp <- st_as_sf(TRI_2017_CA, coords = c("LONGITUDE", "LATITUDE"), 
         crs=4326) # simple way to specify coordinate reference
 bnd <- st_bbox(censusCentroids)
 ggplot() +
-  geom_sf(data = co, aes(fill = NAME)) +
+  geom_sf(data = BayAreaCounties, aes(fill = NAME)) +
   geom_sf(data = censusCentroids) +
-  geom_sf(data = freeways, color = "grey") +
+  geom_sf(data = CAfreeways, color = "grey") +
   geom_sf(data = TRI_sp, color = "yellow") +
   coord_sf(xlim = c(bnd[1], bnd[3]), ylim = c(bnd[2], bnd[4])) +
   labs(title="Bay Area Counties, Freeways and Census Tract Centroids")
@@ -158,10 +174,8 @@ A spatial join with st_join
 joins data from census where TRI points occur
 
 ```{r, message=FALSE}
-TRIdata <- read_csv("data/TRI_2017_CA.csv")
-TRI_sp <- st_as_sf(TRIdata, coords = c("LONGITUDE", "LATITUDE"), 
-        crs=4326) %>%
-  st_join(censusBayArea) %>%
+TRI_sp <- st_as_sf(TRI_2017_CA, coords = c("LONGITUDE", "LATITUDE"), crs=4326) %>%
+  st_join(BayAreaTracts) %>%
   filter(CNTY_FIPS %in% c("013", "095"))
 ```
 
@@ -171,14 +185,13 @@ TRI_sp <- st_as_sf(TRIdata, coords = c("LONGITUDE", "LATITUDE"),
 There are various programs for creating maps from spatial data, and we'll look at a few after we've looked at rasters. As usual, the base plot system often does something useful when you give it data.
 
 ```{r}
-co <- st_read("data/BayAreaCounties.shp")
-plot(co)
+plot(BayAreaCounties)
 ```
 
 And with just one variable:
 
 ```{r}
-plot(co["POP_SQMI"])
+plot(BayAreaCounties["POP_SQMI"])
 ```
 
 There's a lot more we could do with the base plot system, but we'll mostly focus on
@@ -193,7 +206,8 @@ Simple Features are feature-based, so based on the name I guess it's not surpris
 
 ```{r message=FALSE}
 library(raster)
-elev <- raster("data/elev.tif")
+rasPath <- system.file("extdata","elev.tif", package="iGIScData")
+elev <- raster(rasPath)
 slope <- terrain(elev, opt="slope")
 aspect <- terrain(elev, opt="aspect")
 slopeclasses <-matrix(c(0,0.2,1, 0.2,0.4,2, 0.4,0.6,3,
@@ -231,8 +245,7 @@ Mapping tools that follow this lead
 Tennekes, M., 2018, tmap: Thematic Maps in R, *Journal of Statistical Software* 84(6), 1-39
 
 ```{r}
-CA <- st_read("data/CA_counties.shp")
-ggplot(CA) + geom_sf()
+ggplot(CA_counties) + geom_sf()
 
 ```
 
@@ -242,8 +255,7 @@ Try `?geom_sf` and you'll find that its first parameters is mapping with `aes()`
 **Another simple ggplot, with labels**
 
 ```{r}
-CA <- st_read("data/CA_counties.shp")
-ggplot(CA) + geom_sf() +
+ggplot(CA_counties) + geom_sf() +
   geom_sf_text(aes(label = NAME), size = 1.5)
 
 ```
@@ -251,14 +263,14 @@ ggplot(CA) + geom_sf() +
 **and now with fill color**
 
 ```{r}
-ggplot(CA) + geom_sf(aes(fill = MED_AGE)) +
+ggplot(CA_counties) + geom_sf(aes(fill = MED_AGE)) +
   geom_sf_text(aes(label = NAME), col="white", size=1.5)
 ```
 
 **Repositioned legend, no "x" or "y" labels**
 
 ```{r warning=FALSE}
-ggplot(CA) + geom_sf(aes(fill=MED_AGE)) +
+ggplot(CA_counties) + geom_sf(aes(fill=MED_AGE)) +
   geom_sf_text(aes(label = NAME), col="white", size=1.5) +
   theme(legend.position = c(0.8, 0.8)) +
   labs(x="",y="")
@@ -269,18 +281,17 @@ ggplot(CA) + geom_sf(aes(fill=MED_AGE)) +
 **Map in ggplot2, zoomed into two counties:**
 
 ```{r warning=FALSE}
-library(tidyverse); library(sf)
-co <- st_read("data/BayAreaCounties.shp")
-census <- st_read("data/BayAreaTracts.shp") %>%
-  filter(CNTY_FIPS %in% c("013", "095"))
-TRI <- read_csv("data/TRI_2017_CA.csv") %>%
+library(tidyverse); library(sf); library(iGIScData)
+census <- BayAreaTracts %>%
+   filter(CNTY_FIPS %in% c("013", "095"))
+TRI <- TRI_2017_CA %>%
   st_as_sf(coords = c("LONGITUDE", "LATITUDE"), crs=4326) %>%
   st_join(census) %>%
   filter(CNTY_FIPS %in% c("013", "095"),
          (`5.1_FUGITIVE_AIR` + `5.2_STACK_AIR`) > 0)
 bnd = st_bbox(census)
 ggplot() +
-  geom_sf(data = co, aes(fill = NAME)) +
+  geom_sf(data = BayAreaCounties, aes(fill = NAME)) +
   geom_sf(data = census, color="grey40", fill = NA) +
   geom_sf(data = TRI) +
   coord_sf(xlim = c(bnd[1], bnd[3]), ylim = c(bnd[2], bnd[4])) +
@@ -288,9 +299,6 @@ ggplot() +
   theme(legend.position = "none")
 
 ```
-
-
-
 
 ### Rasters in ggplot2
 
@@ -302,9 +310,11 @@ We can use a trick: converting rasters to a grid of points:
 library(tidyverse)
 library(sf)
 library(raster)
-elevras <- raster("data/elev.tif") # note: the filename becomes a variable we'll use for fill
-trails <- st_read("data/trails.shp")
-elevpts = as.data.frame(rasterToPoints(elevras))
+rasPath <- system.file("extdata","elev.tif", package="iGIScData")
+elev <- raster(rasPath)
+shpPath <- system.file("extdata","trails.shp", package="iGIScData")
+trails <- st_read(shpPath)
+elevpts = as.data.frame(rasterToPoints(elev))
 ggplot() +
   geom_raster(data = elevpts, aes(x = x, y = y, fill = elev)) +
   geom_sf(data = trails)
@@ -328,8 +338,7 @@ tm_shape(world) + tm_fill() + tm_borders()
 ```{r}
 library(sf)
 library(tmap)
-census <- st_read("data/BayAreaTracts.shp")
-tm_shape(census) + tm_fill(col = "MED_AGE")
+tm_shape(BayAreaTracts) + tm_fill(col = "MED_AGE")
 
 ```
 
@@ -341,11 +350,11 @@ library(sf)
 library(raster)
 tmap_mode("plot")
 tmap_options(max.categories = 8)
-sierraFeb <- st_read("data/sierraFeb.csv")
+#sierraFeb <- st_read("data/sierraFeb.csv")
 sierra <- st_as_sf(sierraFeb, coords = c("LONGITUDE", "LATITUDE"), crs = 4326)
-hillsh <- raster("data/ca_hillsh_WGS84.tif")
+#hillsh <- raster("data/ca_hillsh_WGS84.tif")
 bounds <- st_bbox(sierra)
-tm_shape(hillsh,bbox=bounds)+
+tm_shape(CAhillsh,bbox=bounds)+
   tm_raster(palette="-Greys",legend.show=FALSE,n=10) + tm_shape(sierra) + tm_symbols(col="TEMPERATURE",
      palette=c("blue","red"), style="cont",n=8) +
   tm_legend() + 
@@ -354,8 +363,6 @@ tm_shape(hillsh,bbox=bounds)+
 ```
 
 *Note: "-Greys" needed to avoid negative image, since "Greys" go from light to dark, and to match reflectance as with b&w photography, they need to go from dark to light.*
-
-
 
 ### Interactive Maps
 
@@ -371,7 +378,7 @@ A widely used interactive mapping system is Leaflet, but we're going to use tmap
 
 ```{r}
 tmap_mode("view")
-tm_shape(census) + tm_fill(col = "MED_AGE", alpha = 0.5)
+tm_shape(BayAreaTracts) + tm_fill(col = "MED_AGE", alpha = 0.5)
 ```
 
 
@@ -380,9 +387,7 @@ library(tmap)
 library(sf)
 tmap_mode("view")
 tmap_options(max.categories = 8)
-sierraFeb <- st_read("data/sierraFeb.csv")
 sierra <- st_as_sf(sierraFeb, coords = c("LONGITUDE", "LATITUDE"), crs = 4326)
-hillsh <- raster("data/ca_hillsh_WGS84.tif")
 bounds <- st_bbox(sierra)
 tm_basemap(leaflet::providers$Esri.NatGeoWorldMap) +
   tm_shape(sierra) + tm_symbols(col="TEMPERATURE",
@@ -541,12 +546,10 @@ SW_States %>%
 
 ```
 
-7. Read in CA_counties.shp and CAfreeways.shp from the data folder and make a simple map in ggplot, with freeways colored red.
+7. From the CA_counties and CAfreeways feature data in iGIScData, make a simple map in ggplot, with freeways colored red.
 
 ```{r include=F}
-CAco <- st_read("data/CA_counties.shp")
-CAfw <- st_read("data/CAfreeways.shp")
-ggplot(CAco) + geom_sf() + geom_sf(data=CAfw, col="red")
+ggplot(CA_counties) + geom_sf() + geom_sf(data=CAfreeways, col="red")
 ```
 
 8. After adding the raster library, create a raster from the built-in `volcano` matrix of elevations from Auckland's Maunga Whau Volcano, and use plot() to display it.  We'd do more with that dataset but we don't know what the cell size is.
