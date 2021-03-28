@@ -351,15 +351,6 @@ sierraFeb %>%
   select(LATITUDE, ELEVATION, TEMPERATURE, PRECIPITATION) %>%
   pairs()
 ```
-There are many versions of pairs plots. Here's one from GGally (need to `install.packages("GGally")` first):
-
-```{r warning=FALSE, fig.cap="Pairs plot in GGally package"}
-library(GGally)
-sierraFeb %>%
-   select(LATITUDE, ELEVATION, TEMPERATURE, PRECIPITATION) %>%
-   ggpairs()
-
-```
 
 ## Exercises
 
