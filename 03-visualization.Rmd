@@ -358,7 +358,7 @@ sierraFeb %>%
 
 2. Use bind_cols in dplyr to create a tibble from built-in vectors state.abb and state.region, then use ggplot with geom_bar to create a bar graph of the four regions.
 
-3. Convert the built-in time series `treering` into a tibble `tr`using the `tibble()` functions with the single variable assigned as `treering = treering`, then create a histogram, using that tibble and variable for the `data` and `x` settings needed.
+3. Convert the built-in time series `treering` into a tibble `tr`using the `tibble()` functions with the single variable assigned as `treering = treering`, then create a histogram, using that tibble and variable for the `data` and `x` settings needed. Attach a screen capture of the histogram.
 
 ```{r include=FALSE}
 library(tidyverse)
@@ -367,7 +367,7 @@ str(tr)
 ggplot(data=tr, aes(x=treering)) + geom_histogram()
 ```
 
-4. Create and display a new tibble `st` using `bind_cols` with `Name=state.name`, `Abb=state.abb`, `Region=state.region`, and a tibble created from `state.x77` with `as_tibble`.  
+4. Start by clearing your environment with the broom icon in the Environment tab, then we'll create two tibbles: Create a new tibble `st` using `bind_cols` with `Name=state.name`, `Abb=state.abb`, `Region=state.region`, then a tibble created from `state.x77` with `as_tibble`. Then use the save button in the Environment tab to save these two tibbles as "Q4.RData", and attach that for your answer.
 
 ```{r include=FALSE}
 #st <- as_tibble(state.x77)
@@ -376,7 +376,7 @@ st
 ```
 
 
-5. From `st`, create a density plot from the variable `Frost` (number of days with frost for that state).  Approximately what is the modal value?
+5. From `st`, create a density plot from the variable `Frost` (number of days with frost for that state).  Attach that plot, and answer: approximately what is the modal value?
 
 ```{r include=FALSE}
 #st <- as_tibble(state.x77)

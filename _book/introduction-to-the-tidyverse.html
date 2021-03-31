@@ -4,27 +4,27 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 3 Introduction to the tidyverse | Introduction to Environmental Data Science</title>
-  <meta name="description" content="Background, concepts and exercises for environmental data science methods applying the R language and various libraries for data manipulation, data analysis, spatial data/mapping, and time series. The output format for this example is bookdown::gitbook. Book is under development, and currently just has five chapters, including this prerequisite chapter." />
+  <title>Chapter 3 Introduction to the tidyverse | Introduction to R for GIS</title>
+  <meta name="description" content="Background, concepts and exercises for using R for data analysis and building maps. The focus is on applying the R language and various libraries for data manipulation, data analysis, and spatial data/mapping. The output format for this example is bookdown::gitbook. Book is under development, and currently just has five chapters, including this prerequisite chapter." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 3 Introduction to the tidyverse | Introduction to Environmental Data Science" />
+  <meta property="og:title" content="Chapter 3 Introduction to the tidyverse | Introduction to R for GIS" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="Background, concepts and exercises for environmental data science methods applying the R language and various libraries for data manipulation, data analysis, spatial data/mapping, and time series. The output format for this example is bookdown::gitbook. Book is under development, and currently just has five chapters, including this prerequisite chapter." />
+  <meta property="og:description" content="Background, concepts and exercises for using R for data analysis and building maps. The focus is on applying the R language and various libraries for data manipulation, data analysis, and spatial data/mapping. The output format for this example is bookdown::gitbook. Book is under development, and currently just has five chapters, including this prerequisite chapter." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 3 Introduction to the tidyverse | Introduction to Environmental Data Science" />
+  <meta name="twitter:title" content="Chapter 3 Introduction to the tidyverse | Introduction to R for GIS" />
   
-  <meta name="twitter:description" content="Background, concepts and exercises for environmental data science methods applying the R language and various libraries for data manipulation, data analysis, spatial data/mapping, and time series. The output format for this example is bookdown::gitbook. Book is under development, and currently just has five chapters, including this prerequisite chapter." />
+  <meta name="twitter:description" content="Background, concepts and exercises for using R for data analysis and building maps. The focus is on applying the R language and various libraries for data manipulation, data analysis, and spatial data/mapping. The output format for this example is bookdown::gitbook. Book is under development, and currently just has five chapters, including this prerequisite chapter." />
   
 
 <meta name="author" content="Jerry Davis" />
 
 
-<meta name="date" content="2021-03-28" />
+<meta name="date" content="2021-03-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="introduction-to-r.html"/>
 <link rel="next" href="visualization.html"/>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,32 +51,23 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
-<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-1.3.1/leaflet.js"></script>
-<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
-<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
-<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.0.3/leaflet.js"></script>
-<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
-<script src="libs/leaflet-providers-plugin-2.0.3/leaflet-providers-plugin.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -95,7 +87,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -144,39 +136,47 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Environmental Data Science</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a><ul>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#data"><i class="fa fa-check"></i><b>1.1</b> Data</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>2</b> Introduction to R</a><ul>
+<li class="chapter" data-level="2" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>2</b> Introduction to R</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#variables"><i class="fa fa-check"></i><b>2.1</b> Variables</a></li>
 <li class="chapter" data-level="2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#functions"><i class="fa fa-check"></i><b>2.2</b> Functions</a></li>
 <li class="chapter" data-level="2.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#expressions-and-statements"><i class="fa fa-check"></i><b>2.3</b> Expressions and Statements</a></li>
-<li class="chapter" data-level="2.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-types"><i class="fa fa-check"></i><b>2.4</b> Data Types</a><ul>
+<li class="chapter" data-level="2.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-types"><i class="fa fa-check"></i><b>2.4</b> Data Types</a>
+<ul>
 <li class="chapter" data-level="2.4.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#integers"><i class="fa fa-check"></i><b>2.4.1</b> Integers</a></li>
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#rectangular-data"><i class="fa fa-check"></i><b>2.5</b> Rectangular data</a></li>
-<li class="chapter" data-level="2.6" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-structures-in-r"><i class="fa fa-check"></i><b>2.6</b> Data Structures in R</a><ul>
+<li class="chapter" data-level="2.6" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-structures-in-r"><i class="fa fa-check"></i><b>2.6</b> Data Structures in R</a>
+<ul>
 <li class="chapter" data-level="2.6.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#vectors"><i class="fa fa-check"></i><b>2.6.1</b> Vectors</a></li>
 <li class="chapter" data-level="2.6.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#lists"><i class="fa fa-check"></i><b>2.6.2</b> Lists</a></li>
 <li class="chapter" data-level="2.6.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#matrices"><i class="fa fa-check"></i><b>2.6.3</b> Matrices</a></li>
 <li class="chapter" data-level="2.6.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-frames"><i class="fa fa-check"></i><b>2.6.4</b> Data frames</a></li>
 <li class="chapter" data-level="2.6.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#factors"><i class="fa fa-check"></i><b>2.6.5</b> Factors</a></li>
 </ul></li>
-<li class="chapter" data-level="2.7" data-path="introduction-to-r.html"><a href="introduction-to-r.html#programming-and-logic"><i class="fa fa-check"></i><b>2.7</b> Programming and Logic</a><ul>
+<li class="chapter" data-level="2.7" data-path="introduction-to-r.html"><a href="introduction-to-r.html#programming-and-logic"><i class="fa fa-check"></i><b>2.7</b> Programming and Logic</a>
+<ul>
 <li class="chapter" data-level="2.7.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#subsetting-with-logic"><i class="fa fa-check"></i><b>2.7.1</b> Subsetting with logic</a></li>
 <li class="chapter" data-level="2.7.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#apply-functions"><i class="fa fa-check"></i><b>2.7.2</b> Apply functions</a></li>
 </ul></li>
 <li class="chapter" data-level="2.8" data-path="introduction-to-r.html"><a href="introduction-to-r.html#exercises"><i class="fa fa-check"></i><b>2.8</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html"><i class="fa fa-check"></i><b>3</b> Introduction to the tidyverse</a><ul>
+<li class="chapter" data-level="3" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html"><i class="fa fa-check"></i><b>3</b> Introduction to the tidyverse</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html#background-exploratory-data-analysis"><i class="fa fa-check"></i><b>3.1</b> Background: Exploratory Data Analysis</a></li>
 <li class="chapter" data-level="3.2" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html#the-tidyverse-and-what-well-explore-in-this-chapter"><i class="fa fa-check"></i><b>3.2</b> The Tidyverse and what we’ll explore in this chapter</a></li>
-<li class="chapter" data-level="3.3" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html#tibbles"><i class="fa fa-check"></i><b>3.3</b> Tibbles</a><ul>
+<li class="chapter" data-level="3.3" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html#tibbles"><i class="fa fa-check"></i><b>3.3</b> Tibbles</a>
+<ul>
 <li class="chapter" data-level="3.3.1" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html#read_csv-vs.-read.csv"><i class="fa fa-check"></i><b>3.3.1</b> <code>read_csv</code> vs. <code>read.csv</code></a></li>
 </ul></li>
 <li class="chapter" data-level="3.4" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html#statistical-summary-of-variables"><i class="fa fa-check"></i><b>3.4</b> Statistical summary of variables</a></li>
 <li class="chapter" data-level="3.5" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html#visualizing-data-with-a-tukey-box-plot"><i class="fa fa-check"></i><b>3.5</b> Visualizing data with a Tukey box plot</a></li>
-<li class="chapter" data-level="3.6" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html#database-operations-with-dplyr"><i class="fa fa-check"></i><b>3.6</b> Database operations with <code>dplyr</code></a><ul>
+<li class="chapter" data-level="3.6" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html#database-operations-with-dplyr"><i class="fa fa-check"></i><b>3.6</b> Database operations with <code>dplyr</code></a>
+<ul>
 <li class="chapter" data-level="3.6.1" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html#select-mutate-and-the-pipe"><i class="fa fa-check"></i><b>3.6.1</b> Select, mutate, and the pipe</a></li>
 <li class="chapter" data-level="3.6.2" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html#filter"><i class="fa fa-check"></i><b>3.6.2</b> filter</a></li>
 <li class="chapter" data-level="3.6.3" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html#writing-a-data-frame-to-a-csv"><i class="fa fa-check"></i><b>3.6.3</b> Writing a data frame to a csv</a></li>
@@ -187,18 +187,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.7" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html#the-dot-operator"><i class="fa fa-check"></i><b>3.7</b> The dot operator</a></li>
 <li class="chapter" data-level="3.8" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html#exercises-1"><i class="fa fa-check"></i><b>3.8</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>4</b> Visualization</a><ul>
+<li class="chapter" data-level="4" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>4</b> Visualization</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="visualization.html"><a href="visualization.html#ggplot2"><i class="fa fa-check"></i><b>4.1</b> ggplot2</a></li>
-<li class="chapter" data-level="4.2" data-path="visualization.html"><a href="visualization.html#plotting-one-variable"><i class="fa fa-check"></i><b>4.2</b> Plotting one variable</a><ul>
+<li class="chapter" data-level="4.2" data-path="visualization.html"><a href="visualization.html#plotting-one-variable"><i class="fa fa-check"></i><b>4.2</b> Plotting one variable</a>
+<ul>
 <li class="chapter" data-level="4.2.1" data-path="visualization.html"><a href="visualization.html#histogram"><i class="fa fa-check"></i><b>4.2.1</b> Histogram</a></li>
 <li class="chapter" data-level="4.2.2" data-path="visualization.html"><a href="visualization.html#density-plot"><i class="fa fa-check"></i><b>4.2.2</b> Density Plot</a></li>
 <li class="chapter" data-level="4.2.3" data-path="visualization.html"><a href="visualization.html#boxplot"><i class="fa fa-check"></i><b>4.2.3</b> boxplot</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="visualization.html"><a href="visualization.html#plotting-two-variables"><i class="fa fa-check"></i><b>4.3</b> Plotting two variables</a><ul>
+<li class="chapter" data-level="4.3" data-path="visualization.html"><a href="visualization.html#plotting-two-variables"><i class="fa fa-check"></i><b>4.3</b> Plotting two variables</a>
+<ul>
 <li class="chapter" data-level="4.3.1" data-path="visualization.html"><a href="visualization.html#two-continuous-variables"><i class="fa fa-check"></i><b>4.3.1</b> Two continuous variables</a></li>
 <li class="chapter" data-level="4.3.2" data-path="visualization.html"><a href="visualization.html#two-variables-one-discrete"><i class="fa fa-check"></i><b>4.3.2</b> Two variables, one discrete</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="visualization.html"><a href="visualization.html#color-systems"><i class="fa fa-check"></i><b>4.4</b> Color systems</a><ul>
+<li class="chapter" data-level="4.4" data-path="visualization.html"><a href="visualization.html#color-systems"><i class="fa fa-check"></i><b>4.4</b> Color systems</a>
+<ul>
 <li class="chapter" data-level="4.4.1" data-path="visualization.html"><a href="visualization.html#color-from-variable-in-aesthetics"><i class="fa fa-check"></i><b>4.4.1</b> Color from variable, in aesthetics</a></li>
 <li class="chapter" data-level="4.4.2" data-path="visualization.html"><a href="visualization.html#trend-line"><i class="fa fa-check"></i><b>4.4.2</b> Trend line</a></li>
 <li class="chapter" data-level="4.4.3" data-path="visualization.html"><a href="visualization.html#general-symbology"><i class="fa fa-check"></i><b>4.4.3</b> General symbology</a></li>
@@ -207,8 +211,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.6" data-path="visualization.html"><a href="visualization.html#pairs-plot"><i class="fa fa-check"></i><b>4.6</b> Pairs Plot</a></li>
 <li class="chapter" data-level="4.7" data-path="visualization.html"><a href="visualization.html#exercises-2"><i class="fa fa-check"></i><b>4.7</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="spatial-r.html"><a href="spatial-r.html"><i class="fa fa-check"></i><b>5</b> Spatial R</a><ul>
-<li class="chapter" data-level="5.1" data-path="spatial-r.html"><a href="spatial-r.html#spatial-data"><i class="fa fa-check"></i><b>5.1</b> Spatial Data</a><ul>
+<li class="chapter" data-level="5" data-path="spatial-r.html"><a href="spatial-r.html"><i class="fa fa-check"></i><b>5</b> Spatial R</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="spatial-r.html"><a href="spatial-r.html#spatial-data"><i class="fa fa-check"></i><b>5.1</b> Spatial Data</a>
+<ul>
 <li class="chapter" data-level="5.1.1" data-path="spatial-r.html"><a href="spatial-r.html#examples-of-simple-geometry-building-in-sf"><i class="fa fa-check"></i><b>5.1.1</b> Examples of simple geometry building in sf</a></li>
 <li class="chapter" data-level="5.1.2" data-path="spatial-r.html"><a href="spatial-r.html#building-a-mappable-sfc-from-scratch"><i class="fa fa-check"></i><b>5.1.2</b> Building a mappable sfc from scratch</a></li>
 <li class="chapter" data-level="5.1.3" data-path="spatial-r.html"><a href="spatial-r.html#creating-features-from-shapefiles-or-tables"><i class="fa fa-check"></i><b>5.1.3</b> Creating features from shapefiles or tables</a></li>
@@ -216,16 +222,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.1.5" data-path="spatial-r.html"><a href="spatial-r.html#spatial-join-st_join"><i class="fa fa-check"></i><b>5.1.5</b> Spatial join <code>st_join</code></a></li>
 <li class="chapter" data-level="5.1.6" data-path="spatial-r.html"><a href="spatial-r.html#plotting-maps-in-the-base-plot-system"><i class="fa fa-check"></i><b>5.1.6</b> Plotting maps in the base plot system</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="spatial-r.html"><a href="spatial-r.html#raster-gis-in-r"><i class="fa fa-check"></i><b>5.2</b> Raster GIS in R</a><ul>
+<li class="chapter" data-level="5.2" data-path="spatial-r.html"><a href="spatial-r.html#raster-gis-in-r"><i class="fa fa-check"></i><b>5.2</b> Raster GIS in R</a>
+<ul>
 <li class="chapter" data-level="5.2.1" data-path="spatial-r.html"><a href="spatial-r.html#raster-from-scratch"><i class="fa fa-check"></i><b>5.2.1</b> Raster from scratch</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="spatial-r.html"><a href="spatial-r.html#ggplot2-for-maps"><i class="fa fa-check"></i><b>5.3</b> ggplot2 for maps</a><ul>
+<li class="chapter" data-level="5.3" data-path="spatial-r.html"><a href="spatial-r.html#ggplot2-for-maps"><i class="fa fa-check"></i><b>5.3</b> ggplot2 for maps</a>
+<ul>
 <li class="chapter" data-level="5.3.1" data-path="spatial-r.html"><a href="spatial-r.html#rasters-in-ggplot2"><i class="fa fa-check"></i><b>5.3.1</b> Rasters in ggplot2</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="spatial-r.html"><a href="spatial-r.html#tmap"><i class="fa fa-check"></i><b>5.4</b> tmap</a><ul>
+<li class="chapter" data-level="5.4" data-path="spatial-r.html"><a href="spatial-r.html#tmap"><i class="fa fa-check"></i><b>5.4</b> tmap</a>
+<ul>
 <li class="chapter" data-level="5.4.1" data-path="spatial-r.html"><a href="spatial-r.html#interactive-maps"><i class="fa fa-check"></i><b>5.4.1</b> Interactive Maps</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="spatial-r.html"><a href="spatial-r.html#exercises-3"><i class="fa fa-check"></i><b>5.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html"><i class="fa fa-check"></i><b>6</b> Building a Data Package for GitHub</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html#rda-files"><i class="fa fa-check"></i><b>6.1</b> <code>rda</code> files</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html#usethisuse_data"><i class="fa fa-check"></i><b>6.1.1</b> <code>usethis::use_data()</code></a></li>
+<li class="chapter" data-level="6.1.2" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html#usethiscreate_package"><i class="fa fa-check"></i><b>6.1.2</b> <code>usethis::create_package()</code></a></li>
+<li class="chapter" data-level="6.1.3" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html#devtoolsdocument"><i class="fa fa-check"></i><b>6.1.3</b> <code>devtools::document()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html#raw-data"><i class="fa fa-check"></i><b>6.2</b> Raw data</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -239,7 +258,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Environmental Data Science</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to R for GIS</a>
           </h1>
         </div>
 
@@ -247,10 +266,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="introduction-to-the-tidyverse" class="section level1">
+<div id="introduction-to-the-tidyverse" class="section level1" number="3">
 <h1><span class="header-section-number">Chapter 3</span> Introduction to the tidyverse</h1>
 <p>At this point, we’ve learned the basics of working with the R language. From here we’ll want to explore how to analyze data, both statistically and spatially. We’re going to use an exploratory approach with significant application of visualization both in terms of graphs as well as maps. So let’s start by exploring this exploratory approach…</p>
-<div id="background-exploratory-data-analysis" class="section level2">
+<div id="background-exploratory-data-analysis" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Background: Exploratory Data Analysis</h2>
 <p>In 1961, John Tukey proposed a new approach to data analysis, defining it as “Procedures for analyzing data, techniques for interpreting the results of such procedures, ways of planning the gathering of data to make its analysis easier, more precise or more accurate, and all the machinery and results of (mathematical) statistics which apply to analyzing data.”<br />
 <img src="img/Tukey1961.png" width="161" height="230" style="horizontal-align:right">He followed this up in 1977 with <em>Exploratory Data Analysis</em>.</p>
@@ -264,7 +283,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>These concepts led to the development of S at Bell Labs (John Chambers, 1976), then R, built on clear design and extensive, clear graphics.</p>
 </div>
-<div id="the-tidyverse-and-what-well-explore-in-this-chapter" class="section level2">
+<div id="the-tidyverse-and-what-well-explore-in-this-chapter" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> The Tidyverse and what we’ll explore in this chapter</h2>
 <p>The Tidyverse refers to a suite of R packages developed at RStudio (see <a href="https://rstudio.com">R Studio</a> and <a href="https://r4ds.had.co.nz">R for Data Science</a>) <img src="img/R4DataSciProcess.png" alt="R for Data Science Process" width="280" height="110"> (figure from Grolemund &amp; Wickham 2017) for facilitating data processing and analysis. While R itself is designed around EDA, the Tidyverse takes it further. Some of the packages in the Tidyverse that are widely used are:</p>
 <ul>
@@ -278,7 +297,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>In this chapter, we’ll be mostly exploring <strong>dplyr</strong>, with a few other things thrown in like reading data frames with <strong>readr</strong>. For simplicity, we can just include <code>library(tidyverse)</code> to get everything.</p>
 </div>
-<div id="tibbles" class="section level2">
+<div id="tibbles" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> Tibbles</h2>
 <p>Tibbles are an improved type of data frame</p>
 <ul>
@@ -300,11 +319,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li>You can also use the <code>tibble()</code> function</li>
 </ul>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="introduction-to-the-tidyverse.html#cb193-1"></a><span class="kw">library</span>(tidyverse) <span class="co"># includes readr, ggplot2, and dplyr which we&#39;ll use in this chapter</span></span>
-<span id="cb193-2"><a href="introduction-to-the-tidyverse.html#cb193-2"></a><span class="kw">library</span>(iGIScData)</span>
-<span id="cb193-3"><a href="introduction-to-the-tidyverse.html#cb193-3"></a>csvPath &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;TRI_1987_BaySites.csv&quot;</span>, <span class="dt">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>
-<span id="cb193-4"><a href="introduction-to-the-tidyverse.html#cb193-4"></a>TRI87 &lt;-<span class="st"> </span><span class="kw">read_csv</span>(csvPath)</span></code></pre></div>
-<pre><code>## Parsed with column specification:
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="introduction-to-the-tidyverse.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># includes readr, ggplot2, and dplyr which we&#39;ll use in this chapter</span></span></code></pre></div>
+<pre><code>## -- Attaching packages --------------------------------------- tidyverse 1.3.0 --</code></pre>
+<pre><code>## v ggplot2 3.3.2     v purrr   0.3.4
+## v tibble  3.0.4     v dplyr   1.0.2
+## v tidyr   1.1.2     v stringr 1.4.0
+## v readr   1.4.0     v forcats 0.5.0</code></pre>
+<pre><code>## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="introduction-to-the-tidyverse.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(iGIScData)</span>
+<span id="cb5-2"><a href="introduction-to-the-tidyverse.html#cb5-2" aria-hidden="true" tabindex="-1"></a>csvPath <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;TRI_1987_BaySites.csv&quot;</span>, <span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>
+<span id="cb5-3"><a href="introduction-to-the-tidyverse.html#cb5-3" aria-hidden="true" tabindex="-1"></a>TRI87 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(csvPath)</span></code></pre></div>
+<pre><code>## 
+## -- Column specification --------------------------------------------------------
 ## cols(
 ##   TRI_FACILITY_ID = col_character(),
 ##   count = col_double(),
@@ -316,24 +344,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   LATITUDE = col_double(),
 ##   LONGITUDE = col_double()
 ## )</code></pre>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="introduction-to-the-tidyverse.html#cb195-1"></a>a &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">10</span>)</span>
-<span id="cb195-2"><a href="introduction-to-the-tidyverse.html#cb195-2"></a>b &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">10</span>)</span>
-<span id="cb195-3"><a href="introduction-to-the-tidyverse.html#cb195-3"></a>ab &lt;-<span class="st"> </span><span class="kw">tibble</span>(a,b)</span>
-<span id="cb195-4"><a href="introduction-to-the-tidyverse.html#cb195-4"></a>ab</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="introduction-to-the-tidyverse.html#cb7-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)</span>
+<span id="cb7-2"><a href="introduction-to-the-tidyverse.html#cb7-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">10</span>)</span>
+<span id="cb7-3"><a href="introduction-to-the-tidyverse.html#cb7-3" aria-hidden="true" tabindex="-1"></a>ab <span class="ot">&lt;-</span> <span class="fu">tibble</span>(a,b)</span>
+<span id="cb7-4"><a href="introduction-to-the-tidyverse.html#cb7-4" aria-hidden="true" tabindex="-1"></a>ab</span></code></pre></div>
 <pre><code>## # A tibble: 10 x 2
-##         a      b
-##     &lt;dbl&gt;  &lt;dbl&gt;
-##  1 -0.646 0.953 
-##  2  0.628 0.641 
-##  3 -1.23  0.0965
-##  4  0.371 0.637 
-##  5 -1.65  0.556 
-##  6  1.52  0.456 
-##  7 -0.215 0.241 
-##  8 -0.207 0.233 
-##  9  0.779 0.813 
-## 10  1.97  0.315</code></pre>
-<div id="read_csv-vs.-read.csv" class="section level3">
+##         a     b
+##     &lt;dbl&gt; &lt;dbl&gt;
+##  1  0.492 0.783
+##  2 -0.361 0.251
+##  3 -1.72  0.729
+##  4  2.35  0.339
+##  5 -1.42  0.735
+##  6  0.458 0.345
+##  7 -0.167 0.818
+##  8  0.393 0.273
+##  9 -0.490 0.388
+## 10 -0.315 0.893</code></pre>
+<div id="read_csv-vs.-read.csv" class="section level3" number="3.3.1">
 <h3><span class="header-section-number">3.3.1</span> <code>read_csv</code> vs. <code>read.csv</code></h3>
 <p>You might be tempted to use read.csv from base R</p>
 <ul>
@@ -352,42 +380,58 @@ problematic field names like <code>MLY-TAVG-NORMAL</code> become <code>MLY.TAVG
 <p>Recommendation: Use <code>read_csv</code> and <code>write_csv</code>.</p>
 </div>
 </div>
-<div id="statistical-summary-of-variables" class="section level2">
+<div id="statistical-summary-of-variables" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span> Statistical summary of variables</h2>
 <p>A simple statistical summary is very easy to do:</p>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="introduction-to-the-tidyverse.html#cb197-1"></a><span class="kw">summary</span>(eucoakrainfallrunoffTDR)</span></code></pre></div>
-<pre><code>##      site               site #          date              month              rain_mm         rain_oak        rain_euc    
-##  Length:90          Min.   :1.000   Length:90          Length:90          Min.   : 1.00   Min.   : 1.00   Min.   : 1.00  
-##  Class :character   1st Qu.:2.000   Class :character   Class :character   1st Qu.:16.00   1st Qu.:16.00   1st Qu.:14.75  
-##  Mode  :character   Median :4.000   Mode  :character   Mode  :character   Median :28.50   Median :30.50   Median :30.00  
-##                     Mean   :4.422                                         Mean   :37.99   Mean   :35.08   Mean   :34.60  
-##                     3rd Qu.:6.000                                         3rd Qu.:63.25   3rd Qu.:50.50   3rd Qu.:50.00  
-##                     Max.   :8.000                                         Max.   :99.00   Max.   :98.00   Max.   :96.00  
-##                                                                           NA&#39;s   :18      NA&#39;s   :2       NA&#39;s   :2      
-##   runoffL_oak      runoffL_euc      slope_oak       slope_euc       aspect_oak      aspect_euc    surface_tension_oak
-##  Min.   : 0.000   Min.   : 0.00   Min.   : 9.00   Min.   : 9.00   Min.   :100.0   Min.   :106.0   Min.   :37.40      
-##  1st Qu.: 0.000   1st Qu.: 0.07   1st Qu.:12.00   1st Qu.:12.00   1st Qu.:143.0   1st Qu.:175.0   1st Qu.:72.75      
-##  Median : 0.450   Median : 1.20   Median :24.50   Median :23.00   Median :189.0   Median :196.5   Median :72.75      
-##  Mean   : 2.032   Mean   : 2.45   Mean   :21.62   Mean   :19.34   Mean   :181.9   Mean   :191.2   Mean   :68.35      
-##  3rd Qu.: 2.800   3rd Qu.: 3.30   3rd Qu.:30.50   3rd Qu.:25.00   3rd Qu.:220.0   3rd Qu.:224.0   3rd Qu.:72.75      
-##  Max.   :14.000   Max.   :16.00   Max.   :32.00   Max.   :31.00   Max.   :264.0   Max.   :296.0   Max.   :72.75      
-##  NA&#39;s   :5        NA&#39;s   :3                                                                       NA&#39;s   :22         
-##  surface_tension_euc runoff_rainfall_ratio_oak runoff_rainfall_ratio_euc
-##  Min.   :28.51       Min.   :0.00000           Min.   :0.000000         
-##  1st Qu.:32.79       1st Qu.:0.00000           1st Qu.:0.003027         
-##  Median :37.40       Median :0.02046           Median :0.047619         
-##  Mean   :43.11       Mean   :0.05357           Mean   :0.065902         
-##  3rd Qu.:56.41       3rd Qu.:0.08485           3rd Qu.:0.083603         
-##  Max.   :72.75       Max.   :0.42000           Max.   :0.335652         
-##  NA&#39;s   :22          NA&#39;s   :5                 NA&#39;s   :3</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="introduction-to-the-tidyverse.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(eucoakrainfallrunoffTDR)</span></code></pre></div>
+<pre><code>##      site               site #          date              month          
+##  Length:90          Min.   :1.000   Length:90          Length:90         
+##  Class :character   1st Qu.:2.000   Class :character   Class :character  
+##  Mode  :character   Median :4.000   Mode  :character   Mode  :character  
+##                     Mean   :4.422                                        
+##                     3rd Qu.:6.000                                        
+##                     Max.   :8.000                                        
+##                                                                          
+##     rain_mm         rain_oak        rain_euc      runoffL_oak    
+##  Min.   : 1.00   Min.   : 1.00   Min.   : 1.00   Min.   : 0.000  
+##  1st Qu.:16.00   1st Qu.:16.00   1st Qu.:14.75   1st Qu.: 0.000  
+##  Median :28.50   Median :30.50   Median :30.00   Median : 0.450  
+##  Mean   :37.99   Mean   :35.08   Mean   :34.60   Mean   : 2.032  
+##  3rd Qu.:63.25   3rd Qu.:50.50   3rd Qu.:50.00   3rd Qu.: 2.800  
+##  Max.   :99.00   Max.   :98.00   Max.   :96.00   Max.   :14.000  
+##  NA&#39;s   :18      NA&#39;s   :2       NA&#39;s   :2       NA&#39;s   :5       
+##   runoffL_euc      slope_oak       slope_euc       aspect_oak   
+##  Min.   : 0.00   Min.   : 9.00   Min.   : 9.00   Min.   :100.0  
+##  1st Qu.: 0.07   1st Qu.:12.00   1st Qu.:12.00   1st Qu.:143.0  
+##  Median : 1.20   Median :24.50   Median :23.00   Median :189.0  
+##  Mean   : 2.45   Mean   :21.62   Mean   :19.34   Mean   :181.9  
+##  3rd Qu.: 3.30   3rd Qu.:30.50   3rd Qu.:25.00   3rd Qu.:220.0  
+##  Max.   :16.00   Max.   :32.00   Max.   :31.00   Max.   :264.0  
+##  NA&#39;s   :3                                                      
+##    aspect_euc    surface_tension_oak surface_tension_euc
+##  Min.   :106.0   Min.   :37.40       Min.   :28.51      
+##  1st Qu.:175.0   1st Qu.:72.75       1st Qu.:32.79      
+##  Median :196.5   Median :72.75       Median :37.40      
+##  Mean   :191.2   Mean   :68.35       Mean   :43.11      
+##  3rd Qu.:224.0   3rd Qu.:72.75       3rd Qu.:56.41      
+##  Max.   :296.0   Max.   :72.75       Max.   :72.75      
+##                  NA&#39;s   :22          NA&#39;s   :22         
+##  runoff_rainfall_ratio_oak runoff_rainfall_ratio_euc
+##  Min.   :0.00000           Min.   :0.000000         
+##  1st Qu.:0.00000           1st Qu.:0.003027         
+##  Median :0.02046           Median :0.047619         
+##  Mean   :0.05357           Mean   :0.065902         
+##  3rd Qu.:0.08485           3rd Qu.:0.083603         
+##  Max.   :0.42000           Max.   :0.335652         
+##  NA&#39;s   :5                 NA&#39;s   :3</code></pre>
 </div>
-<div id="visualizing-data-with-a-tukey-box-plot" class="section level2">
+<div id="visualizing-data-with-a-tukey-box-plot" class="section level2" number="3.5">
 <h2><span class="header-section-number">3.5</span> Visualizing data with a Tukey box plot</h2>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="introduction-to-the-tidyverse.html#cb199-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> eucoakrainfallrunoffTDR) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x=</span>site, <span class="dt">y=</span>runoffL_euc))</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="introduction-to-the-tidyverse.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> eucoakrainfallrunoffTDR) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>site, <span class="at">y=</span>runoffL_euc))</span></code></pre></div>
 <pre><code>## Warning: Removed 3 rows containing non-finite values (stat_boxplot).</code></pre>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 </div>
-<div id="database-operations-with-dplyr" class="section level2">
+<div id="database-operations-with-dplyr" class="section level2" number="3.6">
 <h2><span class="header-section-number">3.6</span> Database operations with <code>dplyr</code></h2>
 <p>As part of exploring our data, we’ll typically simplify or reduce it for our purposes.
 The following methods are quickly discovered to be essential as part of exploring and analyzing data.</p>
@@ -398,79 +442,79 @@ The following methods are quickly discovered to be essential as part of explorin
 <li><strong>sort</strong> rows based on a a field with <code>arrange</code></li>
 <li><strong>summarize</strong> by group</li>
 </ul>
-<div id="select-mutate-and-the-pipe" class="section level3">
+<div id="select-mutate-and-the-pipe" class="section level3" number="3.6.1">
 <h3><span class="header-section-number">3.6.1</span> Select, mutate, and the pipe</h3>
 <p><strong>The pipe <code>%&gt;%</code></strong>: Read <code>%&gt;%</code> as “and then…” This is bigger than it sounds and opens up a lot of possibilities. See example below, and observe how the expression becomes several lines long. In the process, we’ll see examples of new variables with mutate and selecting (and in the process <em>ordering</em>) variables:</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="introduction-to-the-tidyverse.html#cb201-1"></a>runoff &lt;-<span class="st"> </span>eucoakrainfallrunoffTDR <span class="op">%&gt;%</span></span>
-<span id="cb201-2"><a href="introduction-to-the-tidyverse.html#cb201-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Date =</span> <span class="kw">as.Date</span>(date,<span class="st">&quot;%m/%d/%Y&quot;</span>),</span>
-<span id="cb201-3"><a href="introduction-to-the-tidyverse.html#cb201-3"></a>         <span class="dt">rain_subcanopy =</span> (rain_oak <span class="op">+</span><span class="st"> </span>rain_euc)<span class="op">/</span><span class="dv">2</span>) <span class="op">%&gt;%</span></span>
-<span id="cb201-4"><a href="introduction-to-the-tidyverse.html#cb201-4"></a><span class="st">  </span><span class="kw">select</span>(site, Date, rain_mm, rain_subcanopy, </span>
-<span id="cb201-5"><a href="introduction-to-the-tidyverse.html#cb201-5"></a>         runoffL_oak, runoffL_euc, slope_oak, slope_euc)</span>
-<span id="cb201-6"><a href="introduction-to-the-tidyverse.html#cb201-6"></a>runoff</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="introduction-to-the-tidyverse.html#cb13-1" aria-hidden="true" tabindex="-1"></a>runoff <span class="ot">&lt;-</span> eucoakrainfallrunoffTDR <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="introduction-to-the-tidyverse.html#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Date =</span> <span class="fu">as.Date</span>(date,<span class="st">&quot;%m/%d/%Y&quot;</span>),</span>
+<span id="cb13-3"><a href="introduction-to-the-tidyverse.html#cb13-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">rain_subcanopy =</span> (rain_oak <span class="sc">+</span> rain_euc)<span class="sc">/</span><span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-4"><a href="introduction-to-the-tidyverse.html#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(site, Date, rain_mm, rain_subcanopy, </span>
+<span id="cb13-5"><a href="introduction-to-the-tidyverse.html#cb13-5" aria-hidden="true" tabindex="-1"></a>         runoffL_oak, runoffL_euc, slope_oak, slope_euc)</span>
+<span id="cb13-6"><a href="introduction-to-the-tidyverse.html#cb13-6" aria-hidden="true" tabindex="-1"></a>runoff</span></code></pre></div>
 <pre><code>## # A tibble: 90 x 8
-##    site  Date       rain_mm rain_subcanopy runoffL_oak runoffL_euc slope_oak slope_euc
-##    &lt;chr&gt; &lt;date&gt;       &lt;dbl&gt;          &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-##  1 AB1   2006-11-08      29           29          4.79        6.7         32        31
-##  2 AB1   2006-11-12      22           18.5        3.2         4.3         32        31
-##  3 AB1   2006-11-29      85           65          9.7        16           32        31
-##  4 AB1   2006-12-12      82           87.5       14          14.2         32        31
-##  5 AB1   2006-12-28      43           54          9.75        4.33        32        31
-##  6 AB1   2007-01-29       7           54          1.4         0           32        31
-##  7 AB1   2007-02-09      56           44         10.1         0           32        31
-##  8 AB1   2007-02-13      63           42.5        3.90        1.40        32        31
-##  9 AB1   2007-02-28      NA           56          4.75        8.65        32        31
-## 10 AB1   2007-03-22      NA            2         NA           0.11        32        31
-## # ... with 80 more rows</code></pre>
+##    site  Date       rain_mm rain_subcanopy runoffL_oak runoffL_euc slope_oak
+##    &lt;chr&gt; &lt;date&gt;       &lt;dbl&gt;          &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;
+##  1 AB1   2006-11-08      29           29          4.79        6.7         32
+##  2 AB1   2006-11-12      22           18.5        3.2         4.3         32
+##  3 AB1   2006-11-29      85           65          9.7        16           32
+##  4 AB1   2006-12-12      82           87.5       14          14.2         32
+##  5 AB1   2006-12-28      43           54          9.75        4.33        32
+##  6 AB1   2007-01-29       7           54          1.4         0           32
+##  7 AB1   2007-02-09      56           44         10.1         0           32
+##  8 AB1   2007-02-13      63           42.5        3.90        1.40        32
+##  9 AB1   2007-02-28      NA           56          4.75        8.65        32
+## 10 AB1   2007-03-22      NA            2         NA           0.11        32
+## # ... with 80 more rows, and 1 more variable: slope_euc &lt;dbl&gt;</code></pre>
 <p><em>Note: to just rename a variable, use <code>rename</code> instead of <code>mutate</code>. It will stay in position.</em></p>
 </div>
-<div id="filter" class="section level3">
+<div id="filter" class="section level3" number="3.6.2">
 <h3><span class="header-section-number">3.6.2</span> filter</h3>
 <p><code>filter</code> lets you select observations that meet criteria, similar to an SQL WHERE clause.</p>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="introduction-to-the-tidyverse.html#cb203-1"></a>runoff2007 &lt;-<span class="st"> </span>runoff <span class="op">%&gt;%</span></span>
-<span id="cb203-2"><a href="introduction-to-the-tidyverse.html#cb203-2"></a><span class="st">  </span><span class="kw">filter</span>(Date <span class="op">&gt;=</span><span class="st"> </span><span class="kw">as.Date</span>(<span class="st">&quot;01/01/2007&quot;</span>, <span class="st">&quot;%m/%d/%Y&quot;</span>))</span>
-<span id="cb203-3"><a href="introduction-to-the-tidyverse.html#cb203-3"></a>runoff2007</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="introduction-to-the-tidyverse.html#cb15-1" aria-hidden="true" tabindex="-1"></a>runoff2007 <span class="ot">&lt;-</span> runoff <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="introduction-to-the-tidyverse.html#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Date <span class="sc">&gt;=</span> <span class="fu">as.Date</span>(<span class="st">&quot;01/01/2007&quot;</span>, <span class="st">&quot;%m/%d/%Y&quot;</span>))</span>
+<span id="cb15-3"><a href="introduction-to-the-tidyverse.html#cb15-3" aria-hidden="true" tabindex="-1"></a>runoff2007</span></code></pre></div>
 <pre><code>## # A tibble: 51 x 8
-##    site  Date       rain_mm rain_subcanopy runoffL_oak runoffL_euc slope_oak slope_euc
-##    &lt;chr&gt; &lt;date&gt;       &lt;dbl&gt;          &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-##  1 AB1   2007-01-29       7           54          1.4         0           32        31
-##  2 AB1   2007-02-09      56           44         10.1         0           32        31
-##  3 AB1   2007-02-13      63           42.5        3.90        1.40        32        31
-##  4 AB1   2007-02-28      NA           56          4.75        8.65        32        31
-##  5 AB1   2007-03-22      NA            2         NA           0.11        32        31
-##  6 AB1   2007-04-23      NA           33.5        6.94        9.20        32        31
-##  7 AB1   2007-05-05      NA           31          6.34        7.43        32        31
-##  8 AB2   2007-01-29       4            3.5        1.26        0.05        24        25
-##  9 AB2   2007-02-09      37           41.5        6.3         3.3         24        25
-## 10 AB2   2007-02-13      43           49.5        6.78        1.14        24        25
-## # ... with 41 more rows</code></pre>
+##    site  Date       rain_mm rain_subcanopy runoffL_oak runoffL_euc slope_oak
+##    &lt;chr&gt; &lt;date&gt;       &lt;dbl&gt;          &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;
+##  1 AB1   2007-01-29       7           54          1.4         0           32
+##  2 AB1   2007-02-09      56           44         10.1         0           32
+##  3 AB1   2007-02-13      63           42.5        3.90        1.40        32
+##  4 AB1   2007-02-28      NA           56          4.75        8.65        32
+##  5 AB1   2007-03-22      NA            2         NA           0.11        32
+##  6 AB1   2007-04-23      NA           33.5        6.94        9.20        32
+##  7 AB1   2007-05-05      NA           31          6.34        7.43        32
+##  8 AB2   2007-01-29       4            3.5        1.26        0.05        24
+##  9 AB2   2007-02-09      37           41.5        6.3         3.3         24
+## 10 AB2   2007-02-13      43           49.5        6.78        1.14        24
+## # ... with 41 more rows, and 1 more variable: slope_euc &lt;dbl&gt;</code></pre>
 <p><strong>Filtering out NA with <code>!is.na</code></strong></p>
 <p>Here’s an important one. There are many times you need to avoid NAs.<br />
 We commonly see summary statistics using <code>na.rm = TRUE</code> in order to <em>ignore</em> NAs when calculating a statistic like <code>mean</code>.</p>
 <p>To simply filter out NAs from a vector or a variable use a filter:
 <code>feb_filt &lt;- feb_s %&gt;% filter(!is.na(TEMP))</code></p>
 </div>
-<div id="writing-a-data-frame-to-a-csv" class="section level3">
+<div id="writing-a-data-frame-to-a-csv" class="section level3" number="3.6.3">
 <h3><span class="header-section-number">3.6.3</span> Writing a data frame to a csv</h3>
 <p>Let’s say you have created a data frame, maybe with read_csv</p>
 <p><code>runoff20062007 &lt;- read_csv(csvPath)</code></p>
 <p>Then you do some processing to change it, maybe adding variables, reorganizing, etc., and you want to write out your new <code>eucoak</code>, so you just need to use <code>write_csv</code></p>
 <p><code>write_csv(eucoak, "data/tidy_eucoak.csv")</code></p>
 </div>
-<div id="summarize-by-group" class="section level3">
+<div id="summarize-by-group" class="section level3" number="3.6.4">
 <h3><span class="header-section-number">3.6.4</span> Summarize by group</h3>
 <p>You’ll find that you need to use this all the time with real data. You have a bunch of data where some categorical variable is defining a grouping, like our site field in the eucoak data. We’d like to just create average slope, rainfall, and runoff for each site. Note that it involves two steps, first defining which field defines the group, then the various summary statistics we’d like to store. In this case all of the slopes under oak remain the same for a given site – it’s a <em>site</em> characteristic – and the same applies to the euc site, so we can just grab the first value (mean would have also worked of course).</p>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="introduction-to-the-tidyverse.html#cb205-1"></a>eucoakSiteAvg &lt;-<span class="st"> </span>runoff <span class="op">%&gt;%</span></span>
-<span id="cb205-2"><a href="introduction-to-the-tidyverse.html#cb205-2"></a><span class="st">  </span><span class="kw">group_by</span>(site) <span class="op">%&gt;%</span></span>
-<span id="cb205-3"><a href="introduction-to-the-tidyverse.html#cb205-3"></a><span class="st">  </span><span class="kw">summarize</span>(</span>
-<span id="cb205-4"><a href="introduction-to-the-tidyverse.html#cb205-4"></a>    <span class="dt">rain =</span> <span class="kw">mean</span>(rain_mm, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</span>
-<span id="cb205-5"><a href="introduction-to-the-tidyverse.html#cb205-5"></a>    <span class="dt">rain_subcanopy =</span> <span class="kw">mean</span>(rain_subcanopy, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</span>
-<span id="cb205-6"><a href="introduction-to-the-tidyverse.html#cb205-6"></a>    <span class="dt">runoffL_oak =</span> <span class="kw">mean</span>(runoffL_oak, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</span>
-<span id="cb205-7"><a href="introduction-to-the-tidyverse.html#cb205-7"></a>    <span class="dt">runoffL_euc =</span> <span class="kw">mean</span>(runoffL_euc, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</span>
-<span id="cb205-8"><a href="introduction-to-the-tidyverse.html#cb205-8"></a>    <span class="dt">slope_oak =</span> <span class="kw">first</span>(slope_oak),</span>
-<span id="cb205-9"><a href="introduction-to-the-tidyverse.html#cb205-9"></a>    <span class="dt">slope_euc =</span> <span class="kw">first</span>(slope_euc)</span>
-<span id="cb205-10"><a href="introduction-to-the-tidyverse.html#cb205-10"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="introduction-to-the-tidyverse.html#cb17-1" aria-hidden="true" tabindex="-1"></a>eucoakSiteAvg <span class="ot">&lt;-</span> runoff <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="introduction-to-the-tidyverse.html#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(site) <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="introduction-to-the-tidyverse.html#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb17-4"><a href="introduction-to-the-tidyverse.html#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">rain =</span> <span class="fu">mean</span>(rain_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb17-5"><a href="introduction-to-the-tidyverse.html#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">rain_subcanopy =</span> <span class="fu">mean</span>(rain_subcanopy, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb17-6"><a href="introduction-to-the-tidyverse.html#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">runoffL_oak =</span> <span class="fu">mean</span>(runoffL_oak, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb17-7"><a href="introduction-to-the-tidyverse.html#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">runoffL_euc =</span> <span class="fu">mean</span>(runoffL_euc, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb17-8"><a href="introduction-to-the-tidyverse.html#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">slope_oak =</span> <span class="fu">first</span>(slope_oak),</span>
+<span id="cb17-9"><a href="introduction-to-the-tidyverse.html#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">slope_euc =</span> <span class="fu">first</span>(slope_euc)</span>
+<span id="cb17-10"><a href="introduction-to-the-tidyverse.html#cb17-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="introduction-to-the-tidyverse.html#cb207-1"></a>eucoakSiteAvg</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="introduction-to-the-tidyverse.html#cb19-1" aria-hidden="true" tabindex="-1"></a>eucoakSiteAvg</span></code></pre></div>
 <pre><code>## # A tibble: 8 x 7
 ##   site   rain rain_subcanopy runoffL_oak runoffL_euc slope_oak slope_euc
 ##   &lt;chr&gt; &lt;dbl&gt;          &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
@@ -483,16 +527,16 @@ We commonly see summary statistics using <code>na.rm = TRUE</code> in order to <
 ## 7 TP3    32.1           27.8      0.381        0.815      25          18
 ## 8 TP4    32.5           35.7      0.231        2.83       12          12</code></pre>
 <p><strong>Summarizing by group with TRI data</strong></p>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="introduction-to-the-tidyverse.html#cb209-1"></a>csvPath &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;TRI_2017_CA.csv&quot;</span>, <span class="dt">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>
-<span id="cb209-2"><a href="introduction-to-the-tidyverse.html#cb209-2"></a>TRI_BySite &lt;-<span class="st"> </span><span class="kw">read_csv</span>(csvPath) <span class="op">%&gt;%</span></span>
-<span id="cb209-3"><a href="introduction-to-the-tidyverse.html#cb209-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">all_air =</span> <span class="st">`</span><span class="dt">5.1_FUGITIVE_AIR</span><span class="st">`</span> <span class="op">+</span><span class="st"> `</span><span class="dt">5.2_STACK_AIR</span><span class="st">`</span>) <span class="op">%&gt;%</span></span>
-<span id="cb209-4"><a href="introduction-to-the-tidyverse.html#cb209-4"></a><span class="st">  </span><span class="kw">filter</span>(all_air <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span></span>
-<span id="cb209-5"><a href="introduction-to-the-tidyverse.html#cb209-5"></a><span class="st">  </span><span class="kw">group_by</span>(FACILITY_NAME) <span class="op">%&gt;%</span></span>
-<span id="cb209-6"><a href="introduction-to-the-tidyverse.html#cb209-6"></a><span class="st">  </span><span class="kw">summarize</span>(</span>
-<span id="cb209-7"><a href="introduction-to-the-tidyverse.html#cb209-7"></a>    <span class="dt">FACILITY_NAME =</span> <span class="kw">first</span>(FACILITY_NAME),</span>
-<span id="cb209-8"><a href="introduction-to-the-tidyverse.html#cb209-8"></a>    <span class="dt">air_releases =</span> <span class="kw">sum</span>(all_air, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</span>
-<span id="cb209-9"><a href="introduction-to-the-tidyverse.html#cb209-9"></a>    <span class="dt">mean_fugitive =</span> <span class="kw">mean</span>(<span class="st">`</span><span class="dt">5.1_FUGITIVE_AIR</span><span class="st">`</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), </span>
-<span id="cb209-10"><a href="introduction-to-the-tidyverse.html#cb209-10"></a>    <span class="dt">LATITUDE =</span> <span class="kw">first</span>(LATITUDE), <span class="dt">LONGITUDE =</span> <span class="kw">first</span>(LONGITUDE))</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="introduction-to-the-tidyverse.html#cb21-1" aria-hidden="true" tabindex="-1"></a>csvPath <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;TRI_2017_CA.csv&quot;</span>, <span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>
+<span id="cb21-2"><a href="introduction-to-the-tidyverse.html#cb21-2" aria-hidden="true" tabindex="-1"></a>TRI_BySite <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(csvPath) <span class="sc">%&gt;%</span></span>
+<span id="cb21-3"><a href="introduction-to-the-tidyverse.html#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">all_air =</span> <span class="st">`</span><span class="at">5.1_FUGITIVE_AIR</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">5.2_STACK_AIR</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-4"><a href="introduction-to-the-tidyverse.html#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(all_air <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-5"><a href="introduction-to-the-tidyverse.html#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(FACILITY_NAME) <span class="sc">%&gt;%</span></span>
+<span id="cb21-6"><a href="introduction-to-the-tidyverse.html#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb21-7"><a href="introduction-to-the-tidyverse.html#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">FACILITY_NAME =</span> <span class="fu">first</span>(FACILITY_NAME),</span>
+<span id="cb21-8"><a href="introduction-to-the-tidyverse.html#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">air_releases =</span> <span class="fu">sum</span>(all_air, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb21-9"><a href="introduction-to-the-tidyverse.html#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_fugitive =</span> <span class="fu">mean</span>(<span class="st">`</span><span class="at">5.1_FUGITIVE_AIR</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb21-10"><a href="introduction-to-the-tidyverse.html#cb21-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">LATITUDE =</span> <span class="fu">first</span>(LATITUDE), <span class="at">LONGITUDE =</span> <span class="fu">first</span>(LONGITUDE))</span></code></pre></div>
 <pre><code>## Warning: Missing column names filled in: &#39;X110&#39; [110]</code></pre>
 <pre><code>## Warning: 3807 parsing failures.
 ## row col    expected      actual                                                                               file
@@ -504,19 +548,19 @@ We commonly see summary statistics using <code>na.rm = TRUE</code> in order to <
 ## ... ... ........... ........... ..................................................................................
 ## See problems(...) for more details.</code></pre>
 </div>
-<div id="count" class="section level3">
+<div id="count" class="section level3" number="3.6.5">
 <h3><span class="header-section-number">3.6.5</span> Count</h3>
 <p>Count is a simple variant on summarize by group, since the only statistic is the count of events.</p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="introduction-to-the-tidyverse.html#cb212-1"></a>tidy_eucoak <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(tree)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="introduction-to-the-tidyverse.html#cb24-1" aria-hidden="true" tabindex="-1"></a>tidy_eucoak <span class="sc">%&gt;%</span> <span class="fu">count</span>(tree)</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 2
 ##   tree      n
 ##   &lt;chr&gt; &lt;int&gt;
 ## 1 euc      90
 ## 2 oak      90</code></pre>
 <p><strong>Another way is to use n():</strong></p>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="introduction-to-the-tidyverse.html#cb214-1"></a>tidy_eucoak <span class="op">%&gt;%</span></span>
-<span id="cb214-2"><a href="introduction-to-the-tidyverse.html#cb214-2"></a><span class="st">  </span><span class="kw">group_by</span>(tree) <span class="op">%&gt;%</span></span>
-<span id="cb214-3"><a href="introduction-to-the-tidyverse.html#cb214-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n =</span> <span class="kw">n</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="introduction-to-the-tidyverse.html#cb26-1" aria-hidden="true" tabindex="-1"></a>tidy_eucoak <span class="sc">%&gt;%</span></span>
+<span id="cb26-2"><a href="introduction-to-the-tidyverse.html#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(tree) <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="introduction-to-the-tidyverse.html#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>())</span></code></pre></div>
 <pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## # A tibble: 2 x 2
 ##   tree      n
@@ -524,18 +568,18 @@ We commonly see summary statistics using <code>na.rm = TRUE</code> in order to <
 ## 1 euc      90
 ## 2 oak      90</code></pre>
 </div>
-<div id="sorting-after-summarizing" class="section level3">
+<div id="sorting-after-summarizing" class="section level3" number="3.6.6">
 <h3><span class="header-section-number">3.6.6</span> Sorting after summarizing</h3>
 <p>Using the marine debris data from NOAA Marine Debris Program’s <em>Marine Debris Monitoring and Assessment Project</em></p>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="introduction-to-the-tidyverse.html#cb217-1"></a>shorelineLatLong &lt;-<span class="st"> </span>ConcentrationReport <span class="op">%&gt;%</span></span>
-<span id="cb217-2"><a href="introduction-to-the-tidyverse.html#cb217-2"></a><span class="st">  </span><span class="kw">group_by</span>(<span class="st">`</span><span class="dt">Shoreline Name</span><span class="st">`</span>) <span class="op">%&gt;%</span></span>
-<span id="cb217-3"><a href="introduction-to-the-tidyverse.html#cb217-3"></a><span class="st">  </span><span class="kw">summarize</span>(</span>
-<span id="cb217-4"><a href="introduction-to-the-tidyverse.html#cb217-4"></a>    <span class="dt">latitude =</span> <span class="kw">mean</span>((<span class="st">`</span><span class="dt">Latitude Start</span><span class="st">`</span><span class="op">+</span><span class="st">`</span><span class="dt">Latitude End</span><span class="st">`</span>)<span class="op">/</span><span class="dv">2</span>),</span>
-<span id="cb217-5"><a href="introduction-to-the-tidyverse.html#cb217-5"></a>    <span class="dt">longitude =</span> <span class="kw">mean</span>((<span class="st">`</span><span class="dt">Longitude Start</span><span class="st">`</span><span class="op">+</span><span class="st">`</span><span class="dt">Longitude End</span><span class="st">`</span>)<span class="op">/</span><span class="dv">2</span>)</span>
-<span id="cb217-6"><a href="introduction-to-the-tidyverse.html#cb217-6"></a>  ) <span class="op">%&gt;%</span></span>
-<span id="cb217-7"><a href="introduction-to-the-tidyverse.html#cb217-7"></a><span class="st">  </span><span class="kw">arrange</span>(latitude)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="introduction-to-the-tidyverse.html#cb29-1" aria-hidden="true" tabindex="-1"></a>shorelineLatLong <span class="ot">&lt;-</span> ConcentrationReport <span class="sc">%&gt;%</span></span>
+<span id="cb29-2"><a href="introduction-to-the-tidyverse.html#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="st">`</span><span class="at">Shoreline Name</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb29-3"><a href="introduction-to-the-tidyverse.html#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb29-4"><a href="introduction-to-the-tidyverse.html#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">latitude =</span> <span class="fu">mean</span>((<span class="st">`</span><span class="at">Latitude Start</span><span class="st">`</span><span class="sc">+</span><span class="st">`</span><span class="at">Latitude End</span><span class="st">`</span>)<span class="sc">/</span><span class="dv">2</span>),</span>
+<span id="cb29-5"><a href="introduction-to-the-tidyverse.html#cb29-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">longitude =</span> <span class="fu">mean</span>((<span class="st">`</span><span class="at">Longitude Start</span><span class="st">`</span><span class="sc">+</span><span class="st">`</span><span class="at">Longitude End</span><span class="st">`</span>)<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb29-6"><a href="introduction-to-the-tidyverse.html#cb29-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb29-7"><a href="introduction-to-the-tidyverse.html#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(latitude)</span></code></pre></div>
 <pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="introduction-to-the-tidyverse.html#cb219-1"></a>shorelineLatLong</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="introduction-to-the-tidyverse.html#cb31-1" aria-hidden="true" tabindex="-1"></a>shorelineLatLong</span></code></pre></div>
 <pre><code>## # A tibble: 38 x 3
 ##    `Shoreline Name`   latitude longitude
 ##    &lt;chr&gt;                 &lt;dbl&gt;     &lt;dbl&gt;
@@ -552,9 +596,9 @@ We commonly see summary statistics using <code>na.rm = TRUE</code> in order to <
 ## # ... with 28 more rows</code></pre>
 </div>
 </div>
-<div id="the-dot-operator" class="section level2">
+<div id="the-dot-operator" class="section level2" number="3.7">
 <h2><span class="header-section-number">3.7</span> The dot operator</h2>
-<p>The dot “.” operator derives from UNIX syntax, and refers to “here”.</p>
+<p>The dot “.” operator derives from UNIX syntax, and refers to “here.”</p>
 <ul>
 <li>For accessing files in the current folder, the path is “./filename”</li>
 </ul>
@@ -563,9 +607,10 @@ We commonly see summary statistics using <code>na.rm = TRUE</code> in order to <
 <li>The advantage of the pipe is you don’t have to keep referencing the data frame.</li>
 <li>The dot is then used to connect to items inside the data frame:</li>
 </ul>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="introduction-to-the-tidyverse.html#cb221-1"></a>csvPath &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;TRI_1987_BaySites.csv&quot;</span>, <span class="dt">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>
-<span id="cb221-2"><a href="introduction-to-the-tidyverse.html#cb221-2"></a>TRI87 &lt;-<span class="st"> </span><span class="kw">read_csv</span>(csvPath)</span></code></pre></div>
-<pre><code>## Parsed with column specification:
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="introduction-to-the-tidyverse.html#cb33-1" aria-hidden="true" tabindex="-1"></a>csvPath <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;TRI_1987_BaySites.csv&quot;</span>, <span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>
+<span id="cb33-2"><a href="introduction-to-the-tidyverse.html#cb33-2" aria-hidden="true" tabindex="-1"></a>TRI87 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(csvPath)</span></code></pre></div>
+<pre><code>## 
+## -- Column specification --------------------------------------------------------
 ## cols(
 ##   TRI_FACILITY_ID = col_character(),
 ##   count = col_double(),
@@ -577,17 +622,17 @@ We commonly see summary statistics using <code>na.rm = TRUE</code> in order to <
 ##   LATITUDE = col_double(),
 ##   LONGITUDE = col_double()
 ## )</code></pre>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="introduction-to-the-tidyverse.html#cb223-1"></a>stackrate &lt;-<span class="st"> </span>TRI87 <span class="op">%&gt;%</span></span>
-<span id="cb223-2"><a href="introduction-to-the-tidyverse.html#cb223-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">stackrate =</span> stack_air<span class="op">/</span>air_releases) <span class="op">%&gt;%</span></span>
-<span id="cb223-3"><a href="introduction-to-the-tidyverse.html#cb223-3"></a><span class="st">  </span>.<span class="op">$</span>stackrate</span>
-<span id="cb223-4"><a href="introduction-to-the-tidyverse.html#cb223-4"></a><span class="kw">head</span>(stackrate)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="introduction-to-the-tidyverse.html#cb35-1" aria-hidden="true" tabindex="-1"></a>stackrate <span class="ot">&lt;-</span> TRI87 <span class="sc">%&gt;%</span></span>
+<span id="cb35-2"><a href="introduction-to-the-tidyverse.html#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">stackrate =</span> stack_air<span class="sc">/</span>air_releases) <span class="sc">%&gt;%</span></span>
+<span id="cb35-3"><a href="introduction-to-the-tidyverse.html#cb35-3" aria-hidden="true" tabindex="-1"></a>  .<span class="sc">$</span>stackrate</span>
+<span id="cb35-4"><a href="introduction-to-the-tidyverse.html#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(stackrate)</span></code></pre></div>
 <pre><code>## [1] 0.0000000 0.0000000 0.0000000 0.0000000 0.6666667 1.0000000</code></pre>
 </div>
-<div id="exercises-1" class="section level2">
+<div id="exercises-1" class="section level2" number="3.8">
 <h2><span class="header-section-number">3.8</span> Exercises</h2>
 <ol style="list-style-type: decimal">
 <li><p>Create a tibble with 20 rows of two variables <code>norm</code> and <code>unif</code> with <code>norm</code> created with <code>rnorm()</code> and <code>unif</code> created with <code>runif()</code>.</p></li>
-<li><p>Read in “data/TRI_2017_CA.csv” in two ways, as a normal data frame assigned to df and as a tibble assigned to tb. What field names result for what’s listed in the CSV as <code>5.1_FUGITIVE_AIR</code>?</p></li>
+<li><p>Read in “TRI_2017_CA.csv” in two ways, as a normal data frame assigned to df and as a tibble assigned to tb. What field names result for what’s listed in the CSV as <code>5.1_FUGITIVE_AIR</code>?</p></li>
 <li><p>Use the summary function to investigate the variables in either the data.frame or tibble you just created. What type of field and what values are assigned to BIA_CODE?</p></li>
 <li><p>Create a boxplot of <code>body_mass_g</code> by <code>species</code> from the <code>penguins</code> data frame in the palmerpenguins package. Access the data with data(package = ‘palmerpenguins’), and also remember <code>library(ggplot2)</code> or <code>library(tidyverse)</code>.</p></li>
 <li><p>Use select, mutate, and the pipe to create a penguinMass tibble where the only original variable retained is species, but with body_mass_kg created as <span class="math inline">\(\frac{1}{1000}\)</span> the body_mass_g. The statement should start with <code>penguinMass &lt;- penguins</code> and use a pipe plus the other functions after that.</p></li>

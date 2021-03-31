@@ -41,6 +41,7 @@ See Geocomputation with R at https://geocompr.robinlovelace.net/ or  https://r-s
 ```{r message=FALSE}
 library(tidyverse)
 library(sf)
+library(iGIScData)
 ```
 
 
@@ -348,11 +349,12 @@ tm_shape(BayAreaTracts) + tm_fill(col = "MED_AGE")
 library(tmap)
 library(sf)
 library(raster)
+library(iGIScData)
 tmap_mode("plot")
 tmap_options(max.categories = 8)
-#sierraFeb <- st_read("data/sierraFeb.csv")
 sierra <- st_as_sf(sierraFeb, coords = c("LONGITUDE", "LATITUDE"), crs = 4326)
-#hillsh <- raster("data/ca_hillsh_WGS84.tif")
+rasPath <- system.file("extdata","ca_hillsh_WGS84.tif", package="iGIScData")
+hillsh <- raster(rasPath)
 bounds <- st_bbox(sierra)
 tm_shape(CAhillsh,bbox=bounds)+
   tm_raster(palette="-Greys",legend.show=FALSE,n=10) + tm_shape(sierra) + tm_symbols(col="TEMPERATURE",
@@ -422,7 +424,7 @@ m
 
 ## Exercises
 
-1. Using the method of building simple sf geometries, build a simple 1x1 square object and plot it. Remember that you have to close the polygon, so the first vertex is the same as the last (of 5) vertices.
+1. Using the method of building simple sf geometries, build a simple 1x1 square object and plot it. Remember that you have to close the polygon, so the first vertex is the same as the last (of 5) vertices. Provide your code only.
 
 ```{r include=F}
 library(sf)
@@ -436,13 +438,16 @@ plot(square)
 - Colorado: $(-109,41),(-102,41),(-102,37),(-109,37)$
 - Wyoming: $(-111,45),(-104,45),(-104,41),(-111,41)$
 - Utah: $(-114,42),(-111,42),(-111,41),(-109,41),(-109,37),(-114,37)$
-- Arizona: $(-114,37),(-109,37),(-109,31.3),(-111,31.3),(-114.8,32.5),(-114.6,32.7),(-114.1,34.3),(-114.5,35),(-114.5,36),(-114,36)$
-- New Mexico: $(-109,37),(-103,37),(-103,32),(-106.6,32),(-106.5,31.8),(-108.2,31.8),(-108.2,31.3),(-109,31.3)$
+- Arizona: $(-114,37),(-109,37),(-109,31.3),(-111,31.3),(-114.8,32.5),$
+           $(-114.6,32.7),(-114.1,34.3),(-114.5,35),(-114.5,36),(-114,36)$
+- New Mexico: $(-109,37),(-103,37),(-103,32),(-106.6,32),(-106.5,31.8),$
+           $(-108.2,31.8),(-108.2,31.3),(-109,31.3)$
 
 ```{r include=F}
 CO <- st_polygon(list(rbind(c(-109,41),c(-102,41),c(-102,37),c(-109,37),c(-109,41))))
 WY <- st_polygon(list(rbind(c(-111,45),c(-104,45),c(-104,41),c(-111,41),c(-111,45))))
-UT <- st_polygon(list(rbind(c(-114,42),c(-111,42),c(-111,41),c(-109,41),c(-109,37),c(-114,37),c(-114,42))))
+UT <- st_polygon(list(rbind(c(-114,42),c(-111,42),c(-111,41),c(-109,41),c(-109,37),
+                            c(-114,37),c(-114,42))))
 AZ <- st_polygon(list(rbind(c(-114,37),c(-109,37),c(-109,31.3),c(-111,31.3),c(-114.8,32.5),c(-114.6,32.7),c(-114.1,34.3),c(-114.5,35),c(-114.5,36),c(-114,36),c(-114,37))))
 NM <- st_polygon(list(rbind(c(-109,37),c(-103,37),c(-103,32),c(-106.6,32),c(-106.5,31.8),c(-108.2,31.8),c(-108.2,31.3),c(-109,31.3),c(-109,37))))
 sfc5states <- st_sfc(CO,WY,UT,AZ,NM, crs=4326)
