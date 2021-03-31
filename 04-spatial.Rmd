@@ -356,7 +356,7 @@ sierra <- st_as_sf(sierraFeb, coords = c("LONGITUDE", "LATITUDE"), crs = 4326)
 rasPath <- system.file("extdata","ca_hillsh_WGS84.tif", package="iGIScData")
 hillsh <- raster(rasPath)
 bounds <- st_bbox(sierra)
-tm_shape(CAhillsh,bbox=bounds)+
+tm_shape(hillsh,bbox=bounds)+
   tm_raster(palette="-Greys",legend.show=FALSE,n=10) + tm_shape(sierra) + tm_symbols(col="TEMPERATURE",
      palette=c("blue","red"), style="cont",n=8) +
   tm_legend() + 
@@ -433,15 +433,15 @@ square <- st_sfc(st_polygon(list(rbind(c(0,0),c(0,1),c(1,1),c(1,0),c(0,0)))))
 plot(square)
 ```
 
-2. Build a map in ggplot of Colorado, Wyoming, and Utah with these boundary vertices in GCS. As with the square, remember to close each figure, and assign the crs to what is needed for GCS: 4326.  
+2. Build a map in ggplot of Colorado, Wyoming, and Utah with these boundary vertices in GCS. As with the square, remember to close each figure, and assign the crs to what is needed for GCS: 4326. Submit map as exported plot, and code in the submittal text block.
 
-- Colorado: $(-109,41),(-102,41),(-102,37),(-109,37)$
-- Wyoming: $(-111,45),(-104,45),(-104,41),(-111,41)$
-- Utah: $(-114,42),(-111,42),(-111,41),(-109,41),(-109,37),(-114,37)$
-- Arizona: $(-114,37),(-109,37),(-109,31.3),(-111,31.3),(-114.8,32.5),$
-           $(-114.6,32.7),(-114.1,34.3),(-114.5,35),(-114.5,36),(-114,36)$
-- New Mexico: $(-109,37),(-103,37),(-103,32),(-106.6,32),(-106.5,31.8),$
-           $(-108.2,31.8),(-108.2,31.3),(-109,31.3)$
+- Colorado: (-109,41),(-102,41),(-102,37),(-109,37)
+- Wyoming: (-111,45),(-104,45),(-104,41),(-111,41)
+- Utah: (-114,42),(-111,42),(-111,41),(-109,41),(-109,37),(-114,37)
+- Arizona: (-114,37),(-109,37),(-109,31.3),(-111,31.3),(-114.8,32.5),
+           (-114.6,32.7),(-114.1,34.3),(-114.5,35),(-114.5,36),(-114,36)
+- New Mexico: (-109,37),(-103,37),(-103,32),(-106.6,32),(-106.5,31.8),
+           (-108.2,31.8),(-108.2,31.3),(-109,31.3)
 
 ```{r include=F}
 CO <- st_polygon(list(rbind(c(-109,41),c(-102,41),c(-102,37),c(-109,37),c(-109,41))))
@@ -475,7 +475,7 @@ ggplot() + geom_sf(data=sfc7states)
 
 ```
 
-3. Create an sf class from the five states adding the fields `name`, `abb`, `area_sqkm`, and `population`, and create a map labeling with the name.
+4. Create an sf class from the seven states adding the fields `name`, `abb`, `area_sqkm`, and `population`, and create a map labeling with the name.
 
 - Colorado, CO, 269837, 5758736
 - Wyoming, WY, 253600, 578759
@@ -497,7 +497,7 @@ SW_States <- st_sf(attributes, geometry = sfc7states)
 ggplot(SW_States) + geom_sf(aes(fill=pop)) + geom_sf_text(aes(label = name))
 ```
 
-4. Create a tibble for the highest peaks in the 7 states, with the following names, elevations in m, longitude and latitude, and add them to that map:
+5. Create a tibble for the highest peaks in the 7 states, with the following names, elevations in m, longitude and latitude, and add them to that map:
 
 - Wheeler Peak, 4011, -105.4, 36.5
 - Mt. Whitney, 4421, -118.2, 36.5
@@ -531,23 +531,12 @@ ggplot(SW_States) + geom_sf(aes(fill=pop)) + geom_sf(data=peaksp) + geom_sf_labe
   
 ```
 
-
-5. Use a spatial join to add the points to the states to provide a new attribute maximum elevation, and display that using geom_sf_text() with the state polygons.
+6. Use a spatial join to add the points to the states to provide a new attribute maximum elevation, and display that using geom_sf_text() with the state polygons.
 
 ```{r include=F}
 SW_States %>%
   st_join(peaksp) %>%
   ggplot() + geom_sf() + geom_sf_text(aes(label=elev))
-
-```
-
-
-6. Even though the result isn't terribly useful, send that spatially joined data to the base plot system to see what you get.
-
-```{r include=F}
-SW_States %>%
-  st_join(peaksp) %>%
-  plot()
 
 ```
 
