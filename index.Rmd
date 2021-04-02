@@ -1,5 +1,5 @@
 --- 
-title: "Introduction to R for GIS"
+title: "Introduction to Environmental Data Science"
 author: "Jerry Davis"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -7,12 +7,12 @@ documentclass: book
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
-description: "Background, concepts and exercises for using R for data analysis and building maps.  The focus is on applying the R language and various libraries for data manipulation, data analysis, and spatial data/mapping. The output format for this example is bookdown::gitbook.  Book is under development, and currently just has five chapters, including this prerequisite chapter."
+description: "Background, concepts and exercises for using R for environmental data science.  The focus is on applying the R language and various libraries for data manipulation, data analysis, time series, modeling, and spatial data/mapping. The output format for this example is bookdown::gitbook.  Book is under development, and currently just has five chapters, including this prerequisite chapter."
 ---
 
 # Prerequisites
 
-This book is intended to work in concert with a series of lectures and discussions among the participants in Geog 9031 Introduction to R in the GIS Certificate Program at San Francisco State University.  Data packages will be created on GitHub.
+This book is intended to work in concert with a series of lectures and discussions among the participants in Geog 604/704 Environmental Data Science at San Francisco State University.  Data packages will be created on GitHub.
 
 
 Participants need to have R and RStudio installed, and at least the following packages:
@@ -52,5 +52,14 @@ To see what's in it, you'll see the various datasets listed in:
 data(package="iGIScData")
 ```
 
+Those package datasets can be used directly as sf data (if the sf library is installed) or data frames (all tibbles).  Raw data can also be read from the `extdata` folder
+that is installed on your computer when you install the package, using code such as:
+
+```
+csvPath <- system.file("extdata","TRI_1987_BaySites.csv", package="iGIScData")
+TRI87 <- read_csv(csvPath)
+```
+
+or something similar for shapefiles.
 
 <img src="logoIGIScSFSU150.png">
