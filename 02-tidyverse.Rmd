@@ -21,7 +21,7 @@ These concepts led to the development of S at Bell Labs (John Chambers, 1976), t
 
 ## The Tidyverse and what we'll explore in this chapter
 
-The Tidyverse refers to a suite of R packages developed at RStudio (see <a href="https://rstudio.com">R Studio</a> and <a href="https://r4ds.had.co.nz">R for Data Science</a>) <img src="img/R4DataSciProcess.png" alt="R for Data Science Process" width="280" height="110"> (figure from Grolemund & Wickham 2017) for facilitating data processing and analysis. While R itself is designed around EDA, the Tidyverse takes it further. Some of the packages in the Tidyverse that are widely used are:
+The Tidyverse refers to a suite of R packages developed at RStudio (see <a href="https://rstudio.com">R Studio</a> and <a href="https://r4ds.had.co.nz">R for Data Science</a>) for facilitating data processing and analysis. While R itself is designed around EDA, the Tidyverse takes it further. Some of the packages in the Tidyverse that are widely used are:
 
 - dplyr : data manipulation like a database
 - readr : better methods for reading and writing rectangular data
