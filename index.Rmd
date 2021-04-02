@@ -30,14 +30,14 @@ Participants need to have R and RStudio installed, and at least the following pa
 
 ## Data
 We'll be using data from various sources, but one repository that includes data we've developed in the iGISc at SFSU is stored on GitHub and you'll need to install that package. GitHub packages require a bit more work on 
-the user's part since we need to first install `devtools` then use that to install the GitHub data package:
+the user's part since we need to first install `remotes` then use that to install the GitHub data package:
 
 ```
-install.packages("devtools")
-devtools::install_github("iGISc/iGIScData")
+install.packages("remotes")
+remotes::install_github("iGISc/iGIScData")
 ```
-You may also need the rlang package installed. If you see a message about Rtools, you can ignore
-it since that is only needed for building tools from C++ and things like that.
+
+Note: you can also use `devtools` instead of `remotes` if you have that installed. They do the same thing; `remotes` is a subset of `devtools`. If you see a message about Rtools, you can ignore it since that is only needed for building tools from C++ and things like that.
 
 Then you can access it just like other built-in data by including:
 

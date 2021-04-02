@@ -24,7 +24,7 @@
 <meta name="author" content="Jerry Davis" />
 
 
-<meta name="date" content="2021-04-01" />
+<meta name="date" content="2021-04-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -269,7 +269,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Introduction to Environmental Data Science</h1>
 <p class="author"><em>Jerry Davis</em></p>
-<p class="date"><em>2021-04-01</em></p>
+<p class="date"><em>2021-04-02</em></p>
 </div>
 <div id="prerequisites" class="section level1" number="1">
 <h1><span class="header-section-number">Chapter 1</span> Prerequisites</h1>
@@ -292,11 +292,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="data" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Data</h2>
 <p>We’ll be using data from various sources, but one repository that includes data we’ve developed in the iGISc at SFSU is stored on GitHub and you’ll need to install that package. GitHub packages require a bit more work on
-the user’s part since we need to first install <code>devtools</code> then use that to install the GitHub data package:</p>
-<pre><code>install.packages(&quot;devtools&quot;)
-devtools::install_github(&quot;iGISc/iGIScData&quot;)</code></pre>
-<p>You may also need the rlang package installed. If you see a message about Rtools, you can ignore
-it since that is only needed for building tools from C++ and things like that.</p>
+the user’s part since we need to first install <code>remotes</code> then use that to install the GitHub data package:</p>
+<pre><code>install.packages(&quot;remotes&quot;)
+remotes::install_github(&quot;iGISc/iGIScData&quot;)</code></pre>
+<p>Note: you can also use <code>devtools</code> instead of <code>remotes</code> if you have that installed. They do the same thing; <code>remotes</code> is a subset of <code>devtools</code>. If you see a message about Rtools, you can ignore it since that is only needed for building tools from C++ and things like that.</p>
 <p>Then you can access it just like other built-in data by including:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="index.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(iGIScData)</span></code></pre></div>
 <p>To see what’s in it, you’ll see the various datasets listed in:</p>
