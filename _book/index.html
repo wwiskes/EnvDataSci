@@ -300,8 +300,7 @@ remotes::install_github(&quot;iGISc/iGIScData&quot;)</code></pre>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="index.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(iGIScData)</span></code></pre></div>
 <p>To see what’s in it, you’ll see the various datasets listed in:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="index.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span></code></pre></div>
-<p>Those package datasets can be used directly as sf data (if the sf library is installed) or data frames (all tibbles). Raw data can also be read from the <code>extdata</code> folder
-that is installed on your computer when you install the package, using code such as:</p>
+<p>Those package datasets can be used directly as sf data (if the sf library is installed) or data frames (all tibbles). Raw data can also be read from the <code>extdata</code> folder that is installed on your computer when you install the package, using code such as:</p>
 <pre><code>csvPath &lt;- system.file(&quot;extdata&quot;,&quot;TRI_1987_BaySites.csv&quot;, package=&quot;iGIScData&quot;)
 TRI87 &lt;- read_csv(csvPath)</code></pre>
 <p>or something similar for shapefiles.</p>

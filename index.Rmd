@@ -52,8 +52,7 @@ To see what's in it, you'll see the various datasets listed in:
 data(package="iGIScData")
 ```
 
-Those package datasets can be used directly as sf data (if the sf library is installed) or data frames (all tibbles).  Raw data can also be read from the `extdata` folder
-that is installed on your computer when you install the package, using code such as:
+Those package datasets can be used directly as sf data (if the sf library is installed) or data frames (all tibbles).  Raw data can also be read from the `extdata` folder that is installed on your computer when you install the package, using code such as:
 
 ```
 csvPath <- system.file("extdata","TRI_1987_BaySites.csv", package="iGIScData")
