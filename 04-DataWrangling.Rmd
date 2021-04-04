@@ -1,0 +1,15 @@
+---
+title: "04-DataWrangling"
+author: "Jerry Davis"
+date: "4/3/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Data Wrangling in the tidyverse
+
+The goals of this section are to continue where we started in the earlier chapter on data manipulation with **`dplyr`**, taking it further to let us restructure our data with **`tidyr`**, including the use of pivot tables, as well as string methods in **`stringr`**, dates & times processing with **`lubridate`**, and **`dplyr`** methods for joining data, doing set operations and binding data frame sections together.  
+

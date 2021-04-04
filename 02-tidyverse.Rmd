@@ -1,14 +1,13 @@
-# Introduction to the tidyverse
+# Introduction to data manipulation in the tidyverse
 
-At this point, we've learned the basics of working with the R language. From here we'll want to explore how to analyze data, both statistically and spatially. We're going to use an exploratory approach with significant application of visualization both in terms of graphs as well as maps. So let's start by exploring this exploratory approach...
+At this point, we've learned the basics of working with the R language. From here we'll want to explore how to analyze data, both statistically and spatially. We'll start using packages that are part of the tidyverse from RStudio, especially **`dplyr`**.  We're going to use these tools allow us to explore and visualize our data. The next chapter will get more into graphical visualization; we'll focus on tabular views of data frames in this chapter. 
 
 ## Background: Exploratory Data Analysis
 
 In 1961, John Tukey proposed a new approach to data analysis, defining it as "Procedures for analyzing data, techniques for interpreting the results of such procedures, ways of planning the gathering of data to make its analysis easier, more precise or more accurate, and all the machinery and results of (mathematical) statistics which apply to analyzing data."  
 <img src="img/Tukey1961.png" width="161" height="230" style="horizontal-align:right">He followed this up in 1977 with *Exploratory Data Analysis*. 
 
-
-Exploratory data analysis (EDA) in part as an approach to analyzing data via summaries and graphics.  The key word is *exploratory*, in contrast with *confirmatory* statistics. Both are important, but ignoring exploration is ignoring enlightenment.
+Exploratory data analysis (EDA) in part as an approach to analyzing data via summaries, tables and graphics.  The key word is *exploratory*, in contrast with *confirmatory* statistics. Both are important, but ignoring exploration is ignoring enlightenment.
 
 Some purposes of EDA are:
 
@@ -23,8 +22,8 @@ These concepts led to the development of S at Bell Labs (John Chambers, 1976), t
 
 The Tidyverse refers to a suite of R packages developed at RStudio (see <a href="https://rstudio.com">R Studio</a> and <a href="https://r4ds.had.co.nz">R for Data Science</a>) for facilitating data processing and analysis. While R itself is designed around EDA, the Tidyverse takes it further. Some of the packages in the Tidyverse that are widely used are:
 
-- dplyr : data manipulation like a database
-- readr : better methods for reading and writing rectangular data
+- **`dplyr`** : data manipulation like a database
+- **`readr`** : better methods for reading and writing rectangular data
 - tidyr : reorganization methods that extend dplyr's database capabilities
 - purrr : expanded programming toolkit including enhanced "apply" methods
 - tibble : improved data frame

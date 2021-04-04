@@ -116,3 +116,5 @@ usethisuse_data
 usethiscreate_package
 devtoolsdocument
 raw-data
+introduction-to-data-manipulation-in-the-tidyverse
+data-wrangling-in-the-tidyverse
