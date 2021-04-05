@@ -1,0 +1,69 @@
+# Data Transformation
+
+The goal of this section is to continue where we started in the earlier chapter on data abstraction with **`dplyr`** to look at more transformational functions, and **`tidyr`** adds other tools like pivot tables.
+
+- **`dplyr`** tools: 
+   - joins: `left_join`, `right_join`, `inner_join`, `full_join`, `semi_join`, `anti_join`
+   - set operations: `intersect`, `union`, `setdiff`
+   - binding rows and columns: `bind_cols`, `bind_rows`
+- **`tidyr`** tools:
+   - pivot tables: `pivot_longer`, `pivot_wider`
+   
+
+The term "data wrangling" has been used for what we're doing with these tools, and the
+relevant cheat sheet is actually called "Data Wrangling"
+<a href="https://rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">https://rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf</a>
+
+## Data joins
+
+To bring in variables from another data frame based on a common join field.
+There are multiple types of joins. Probably the most common is **`left_join`** since it starts
+from the data frame (or sf) you want to continue working with and bring in data
+from an additional source. You'll retain all records of the first data set. 
+For any non-matches, NA is assigned.
+
+```{r}
+library(tidyverse)
+library(iGIScData)
+library(sf)
+csvPath <- system.file("extdata", "CA_MdInc.csv", package = "iGIScData")
+income <- read_csv(csvPath) %>%
+   select(trID, HHinc2016) %>%
+   mutate(HHinc2016 = as.numeric(HHinc2016),
+          joinid = str_c("0", trID)) %>%
+   select(joinid, HHinc2016)
+census <- BayAreaTracts %>%
+   left_join(income, by = c("FIPS" = "joinid")) %>%
+   select(FIPS, POP12_SQMI, POP2012, HHinc2016)
+head(census %>% st_set_geometry(NULL))
+```
+
+Other joins are:
+
+- **`right_join`** where you end up retaining all the rows of the second data set
+and NA is assigned to non-matches
+- **`inner_join`** where you only retain records for matches
+- **`full_join`** where records are retained for both sides, and NAs assigned to non-matches
+
+**Right join example**
+We need to join NCDC monthly climate data for all California weather stations to a selection of 82 stations that are in the Sierra. 
+
+- The monthly data has 12 rows (1/month) for each station
+- The right_join gets all months for all stations, so we weed out the non-Sierra stations by removing NAs from a field only with Sierra station data
+
+```{r}
+sierra <- right_join(sierraStations, CA_ClimateNormals, by="STATION") %>%
+   filter(!is.na(STATION_NA)) %>% select(-STATION_NA)
+head(sierra %>% filter(DATE == "01") %>% select(NAME, ELEVATION, `MLY-TAVG-NORMAL`), n=10)
+```
+
+The exact same thing however could be accomplished with an inner_join and
+it doesn't required removing the NAs:
+
+```{r}
+sierraAlso <- inner_join(sierraStations, CA_ClimateNormals, by="STATION") %>%
+   select(-STATION_NA)
+```
+
+## Set Operation
+
