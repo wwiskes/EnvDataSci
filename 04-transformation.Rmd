@@ -22,7 +22,7 @@ from the data frame (or sf) you want to continue working with and bring in data
 from an additional source. You'll retain all records of the first data set. 
 For any non-matches, NA is assigned.
 
-```{r}
+```{r message=F, warning=F}
 library(tidyverse)
 library(iGIScData)
 library(sf)
@@ -51,7 +51,7 @@ We need to join NCDC monthly climate data for all California weather stations to
 - The monthly data has 12 rows (1/month) for each station
 - The right_join gets all months for all stations, so we weed out the non-Sierra stations by removing NAs from a field only with Sierra station data
 
-```{r}
+```{r message=F}
 sierra <- right_join(sierraStations, CA_ClimateNormals, by="STATION") %>%
    filter(!is.na(STATION_NA)) %>% select(-STATION_NA)
 head(sierra %>% filter(DATE == "01") %>% select(NAME, ELEVATION, `MLY-TAVG-NORMAL`), n=10)
@@ -60,10 +60,103 @@ head(sierra %>% filter(DATE == "01") %>% select(NAME, ELEVATION, `MLY-TAVG-NORMA
 The exact same thing however could be accomplished with an inner_join and
 it doesn't required removing the NAs:
 
-```{r}
+```{r message=F}
 sierraAlso <- inner_join(sierraStations, CA_ClimateNormals, by="STATION") %>%
    select(-STATION_NA)
 ```
 
-## Set Operation
+## Set Operations
+
+Set operations compare two data frames (or vectors) to handle observations or rows that 
+are the same for each, or not the same. The three set methods are:
+
+- `dplyr::`**`intersect(x,y)`** retains rows that appear in *both* x and y
+- `dplyr::`**`union(x,y)`** retains rows that appear in either or both of x and y
+- `dplyr::`**`setdiff(x,y)`** retains rows that appear in x but not in y
+
+```{r message=F}
+squares <- (1:10)^2
+evens <- seq(0,100,2)
+squares
+evens
+intersect(squares,evens)
+sort(union(squares,evens))
+sort(setdiff(squares,evens))
+```
+
+## Binding Rows and Columns
+
+These `dplyr` functions are similar to `cbind` and `rbind` in base R, but always 
+creates data frames. For instance, `cbind` usually creates matrices, and make all vectors
+the same class. Note that in `bind_cols`, the order of data in rows must be the same.
+
+```{r message=F}
+states <- bind_cols(abb=state.abb,
+                    name=state.name,
+                    region=state.region,
+                    state.x77)
+head(states)
+```
+
+To compare, note that `cbind` converts numeric fields to character when any other 
+field is character, and character fields are converted to character integers where there are any repeats, 
+which would require manipulating them into factors:
+
+```{r message=F}
+states <- as_tibble(cbind(abb=state.abb, 
+                          name=state.name, 
+                          region=state.region,
+                          division=state.division,
+                          state.x77))
+head(states)
+```
+
+## Pivotting data frames
+
+Pivot tables are a popular tool in Excel, allowing you to transform your data to be more
+useful in a particular analysis. A common need to pivot is 2+ variables with the same data where the variable name should be a factor. `Tidyr` has **`pivot_wider`** and **`pivot_longer`**.  
+
+- **`pivot_wider`** pivots rows into variables.
+- **`pivot_longer`** pivots variables into rows, creating factors.
+
+In our meadows study cross-section created by intersecting normalized difference vegetation
+index (NDVI) values from multispectral drone imagery with surveyed elevation and vegetation
+types (xeric, mesic, and hydric), we have fields `NDVIgrowing` from a July 2019 growing season and `NDVIsenescent` from a September 2020 dry season, but would like 'growing' and 'senescent' to be factors with a single `NDVI` variable. This is how we used `pivot_longer` to accomplish this, using data
+from the `iGIScData` data package:
+
+```{r message=F}
+XSptsPheno <- XSptsNDVI %>%
+      pivot_longer(cols = starts_with("NDVI"), 
+                   names_to = "phenology", values_to = "NDVI") %>%
+      mutate(phenology = str_sub(phenology, 5, str_length(phenology)))
+```
+
+Then to do the opposite use `pivot_wider`:
+
+```{r message=F}
+XSptsPheno %>%
+  pivot_wider(names_from = phenology, names_prefix = "NDVI", 
+              values_from = NDVI)
+XSptsPheno
+XSptsPheno %>%
+  ggplot() +
+  geom_point(aes(elevation, NDVI, shape=vegetation, 
+                 color = phenology), size = 5) +
+  geom_smooth(aes(elevation, NDVI, 
+                 color = phenology), method="lm")
+```
+
+Pivots turn out to be commonly useful. Runoff graphing from the Eucalyptus/Oak study also benefitted
+from a pivot_longer:
+
+```{r message=F, warning=F}
+eucoakrainfallrunoffTDR %>%
+  pivot_longer(cols = starts_with("runoffL"),
+               names_to = "tree", values_to = "runoffL") %>%
+  mutate(tree = str_sub(tree, str_length(tree)-2, str_length(tree))) %>%
+  ggplot() + geom_boxplot(aes(site, runoffL)) +
+    facet_grid(tree ~ .)
+```
+
+
 

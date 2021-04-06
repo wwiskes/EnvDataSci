@@ -127,3 +127,6 @@ usethisuse_data
 usethiscreate_package
 devtoolsdocument
 raw-data
+binding-rows-and-columns
+set-operations
+pivotting-data-frames
