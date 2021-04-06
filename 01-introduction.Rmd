@@ -365,7 +365,7 @@ data(package = 'palmerpenguins')
 head(penguins)
 ```
 **Creating a data frame out of a matrix**
-```{r fig.cap="Temperature~Elevation"}
+```{r fig.cap="Temperature~Elevation", warning=F}
 mydata <- as.data.frame(sierradata)
 plot(data = mydata, x = elev, y = temp)
 ```
@@ -376,7 +376,7 @@ We'll be looking at this more in the next chapter, but a common need is to read 
 
 Reading a csv in `readr` (part of the tidyverse that we'll be looking at in the next chapter) is done with `read_csv()`:
 
-```{r}
+```{r message=F}
 library(readr)
 csvPath <- system.file("extdata","TRI_1987_BaySites.csv", package="iGIScData")
 TRI87 <- read_csv(csvPath)
@@ -490,7 +490,7 @@ Irizarry, Rafael (2020) *Introduction to Data Science* section 2.13.1.
 Identify all states with murder rates ≤ that of Italy.
 
 
-```{r}
+```{r message=F, warning=F}
 library(dslabs)
 data(murders)
 murder_rate <- murders$total / murders$population * 100000
@@ -499,7 +499,7 @@ murders$abb[i]
 ```
 **which**
 
-```{r}
+```{r message=F}
 library(readr)
 TRI87 <- read_csv("data/TRI_1987_BaySites.csv")
 i <- which(TRI87$air_releases > 1e6)
@@ -507,7 +507,8 @@ TRI87$FACILITY_NAME[i]
 ```
 
 **%in%**
-```{r}
+
+```{r message=F}
 library(readr)
 csvPath = system.file("extdata","TRI_1987_BaySites.csv", package="iGIScData")
 TRI87 <- read_csv(csvPath)

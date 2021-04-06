@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Introduction to R | Introduction to Environmental Data Science</title>
+  <title>2 Introduction to R | Introduction to Environmental Data Science</title>
   <meta name="description" content="Background, concepts and exercises for using R for environmental data science. The focus is on applying the R language and various libraries for data manipulation, data analysis, time series, modeling, and spatial data/mapping. The output format for this example is bookdown::gitbook. Book is under development, and currently just has five chapters, including this prerequisite chapter." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Introduction to R | Introduction to Environmental Data Science" />
+  <meta property="og:title" content="2 Introduction to R | Introduction to Environmental Data Science" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Introduction to R | Introduction to Environmental Data Science" />
+  <meta name="twitter:title" content="2 Introduction to R | Introduction to Environmental Data Science" />
   
   <meta name="twitter:description" content="Background, concepts and exercises for using R for environmental data science. The focus is on applying the R language and various libraries for data manipulation, data analysis, time series, modeling, and spatial data/mapping. The output format for this example is bookdown::gitbook. Book is under development, and currently just has five chapters, including this prerequisite chapter." />
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Jerry Davis" />
 
 
-<meta name="date" content="2021-04-04" />
+<meta name="date" content="2021-04-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -148,7 +148,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#data"><i class="fa fa-check"></i><b>1.1</b> Data</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#packages-to-install"><i class="fa fa-check"></i><b>1.1</b> Packages to install</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#data"><i class="fa fa-check"></i><b>1.2</b> Data</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>2</b> Introduction to R</a>
 <ul>
@@ -291,7 +292,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="introduction-to-r" class="section level1" number="2">
-<h1><span class="header-section-number">Chapter 2</span> Introduction to R</h1>
+<h1><span class="header-section-number">2</span> Introduction to R</h1>
 <p>We’re assuming you’re either new to R or need a refresher.</p>
 <p>We’ll start with some basic R operations entered directly in the console in RStudio.</p>
 <div id="variables" class="section level2" number="2.1">
@@ -304,22 +305,22 @@ We’ll use <code>&lt;-</code> because it is more common and avoids some confusi
 <p>Variable names must start with a letter, have no spaces, and not use any names
 that are built into the R language or used in package libraries, such as
 reserved words like <code>for</code> or function names like <code>log()</code></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="introduction-to-r.html#cb6-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb6-2"><a href="introduction-to-r.html#cb6-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">8</span></span>
-<span id="cb6-3"><a href="introduction-to-r.html#cb6-3" aria-hidden="true" tabindex="-1"></a>longitude <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">122.4</span></span>
-<span id="cb6-4"><a href="introduction-to-r.html#cb6-4" aria-hidden="true" tabindex="-1"></a>latitude <span class="ot">&lt;-</span> <span class="fl">37.8</span></span>
-<span id="cb6-5"><a href="introduction-to-r.html#cb6-5" aria-hidden="true" tabindex="-1"></a>my_name <span class="ot">&lt;-</span> <span class="st">&quot;Inigo Montoya&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="introduction-to-r.html#cb10-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb10-2"><a href="introduction-to-r.html#cb10-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">8</span></span>
+<span id="cb10-3"><a href="introduction-to-r.html#cb10-3" aria-hidden="true" tabindex="-1"></a>longitude <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">122.4</span></span>
+<span id="cb10-4"><a href="introduction-to-r.html#cb10-4" aria-hidden="true" tabindex="-1"></a>latitude <span class="ot">&lt;-</span> <span class="fl">37.8</span></span>
+<span id="cb10-5"><a href="introduction-to-r.html#cb10-5" aria-hidden="true" tabindex="-1"></a>my_name <span class="ot">&lt;-</span> <span class="st">&quot;Inigo Montoya&quot;</span></span></code></pre></div>
 <p>To check the value of a variable or other object, you can just enter the name in
 the console, or even in the code in a code chunk.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="introduction-to-r.html#cb7-1" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="introduction-to-r.html#cb11-1" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="introduction-to-r.html#cb9-1" aria-hidden="true" tabindex="-1"></a>y</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="introduction-to-r.html#cb13-1" aria-hidden="true" tabindex="-1"></a>y</span></code></pre></div>
 <pre><code>## [1] 8</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="introduction-to-r.html#cb11-1" aria-hidden="true" tabindex="-1"></a>longitude</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="introduction-to-r.html#cb15-1" aria-hidden="true" tabindex="-1"></a>longitude</span></code></pre></div>
 <pre><code>## [1] -122.4</code></pre>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="introduction-to-r.html#cb13-1" aria-hidden="true" tabindex="-1"></a>latitude</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="introduction-to-r.html#cb17-1" aria-hidden="true" tabindex="-1"></a>latitude</span></code></pre></div>
 <pre><code>## [1] 37.8</code></pre>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="introduction-to-r.html#cb15-1" aria-hidden="true" tabindex="-1"></a>my_name</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="introduction-to-r.html#cb19-1" aria-hidden="true" tabindex="-1"></a>my_name</span></code></pre></div>
 <pre><code>## [1] &quot;Inigo Montoya&quot;</code></pre>
 <p>This is counter to the way printing out values work in programming, and you will
 need to know how this method works as well because you will want to use your code
@@ -327,15 +328,15 @@ to develop tools that accomplish things, and there are also limitations to what 
 can see by just naming variables.</p>
 <p>To see the values of variables in programming mode, use the <code>print()</code> function,
 or to concatenate character string output, use <code>paste()</code>:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="introduction-to-r.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="introduction-to-r.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(x)</span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="introduction-to-r.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(y)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="introduction-to-r.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(y)</span></code></pre></div>
 <pre><code>## [1] 8</code></pre>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="introduction-to-r.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(latitude)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="introduction-to-r.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(latitude)</span></code></pre></div>
 <pre><code>## [1] 37.8</code></pre>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="introduction-to-r.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;The location is latitude&quot;</span>, latitude, <span class="st">&quot;longitude&quot;</span>, longitude)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="introduction-to-r.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;The location is latitude&quot;</span>, latitude, <span class="st">&quot;longitude&quot;</span>, longitude)</span></code></pre></div>
 <pre><code>## [1] &quot;The location is latitude 37.8 longitude -122.4&quot;</code></pre>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="introduction-to-r.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;My name is&quot;</span>, my_name, <span class="st">&quot;-- Prepare to die.&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="introduction-to-r.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;My name is&quot;</span>, my_name, <span class="st">&quot;-- Prepare to die.&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;My name is Inigo Montoya -- Prepare to die.&quot;</code></pre>
 </div>
 <div id="functions" class="section level2" number="2.2">
@@ -379,22 +380,22 @@ sqrt(a**2 + b**2)
 paste(&quot;My name is&quot;, aname)</code></pre>
 <p>Note that some of those expressions used previously assigned variables – x, a, b, c, aname.</p>
 <p>An expression can be entered in the console to display its current value.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="introduction-to-r.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cos</span>(pi)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="introduction-to-r.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cos</span>(pi)</span></code></pre></div>
 <pre><code>## [1] -1</code></pre>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="introduction-to-r.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">cos</span>(pi))</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="introduction-to-r.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">cos</span>(pi))</span></code></pre></div>
 <pre><code>## [1] -1</code></pre>
 <p>A <em>statement</em> in R does something. It represents a directive we’re assigning to the computer, or
 maybe the environment we’re running on the computer (like RStudio, which then runs R). A simple
 <code>print()</code> <em>statement</em> seems a lot like what we just did when we entered an expression in the console, but recognize that it <em>does something</em>:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="introduction-to-r.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&quot;Hello, World&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="introduction-to-r.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&quot;Hello, World&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;Hello, World&quot;</code></pre>
 <p>Which is the same as just typing “Hello, World,” but that’s just because the job of the console is to display what we are looking for [where we are the ones <em>doing something</em>], or if our statement includes something to display.</p>
 <p>Statements in R are usually put on one line, but you can use a semicolon to have multiple statements on one line, if desired:</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="introduction-to-r.html#cb35-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span>; <span class="fu">print</span>(x); <span class="fu">print</span>(x<span class="sc">**</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="introduction-to-r.html#cb39-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span>; <span class="fu">print</span>(x); <span class="fu">print</span>(x<span class="sc">**</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
 <pre><code>## [1] 25</code></pre>
 <p>Many (perhaps most) statements don’t actually display anything. For instance:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="introduction-to-r.html#cb38-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="introduction-to-r.html#cb42-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span></code></pre></div>
 <p>doesn’t display anything, but it does assign the value 5 to the variable x, so it <em>does something</em>. It’s an <em>assignment statement</em> and uses that special assignment operator <code>&lt;-</code> . Most languages just use <code>=</code> which the designers of R didn’t want to use, to avoid confusing it with the equal sign meaning “is equal to.”</p>
 <p><em>An assignment statement assigns an expression to a variable.</em> If that variable already exists, it is reused with the new value. For instance it’s completely legit (and commonly done in coding) to update the variable in an assignment statement. This is very common when using a counter variable:</p>
 <pre><code>i = i + 1</code></pre>
@@ -406,12 +407,12 @@ The <code>**</code> part is interpreted as <em>raise to a power</em>. What is to
 <h2><span class="header-section-number">2.4</span> Data Types</h2>
 <p>Variables, constants and other data elements in R have data types.
 Common types are numeric and character.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="introduction-to-r.html#cb40-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb40-2"><a href="introduction-to-r.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="introduction-to-r.html#cb44-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb44-2"><a href="introduction-to-r.html#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(x)</span></code></pre></div>
 <pre><code>## [1] &quot;numeric&quot;</code></pre>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="introduction-to-r.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(<span class="fl">4.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="introduction-to-r.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(<span class="fl">4.5</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;numeric&quot;</code></pre>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="introduction-to-r.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(<span class="st">&quot;Fred&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="introduction-to-r.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(<span class="st">&quot;Fred&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;character&quot;</code></pre>
 <div id="integers" class="section level3" number="2.4.1">
 <h3><span class="header-section-number">2.4.1</span> Integers</h3>
@@ -423,26 +424,26 @@ We’re going to be looking at various <code>as.</code> functions in R, more on 
 but we should look at <code>as.integer()</code> now. Most other languages use <code>int()</code> for this,
 and what it does is converts <em>any number</em> into an integer, <em>truncating</em> it to an
 integer, not rounding it.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="introduction-to-r.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.integer</span>(<span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="introduction-to-r.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.integer</span>(<span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="introduction-to-r.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.integer</span>(<span class="fl">4.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="introduction-to-r.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.integer</span>(<span class="fl">4.5</span>)</span></code></pre></div>
 <pre><code>## [1] 4</code></pre>
 <p>To round a number, there’s a <code>round()</code> function or you can easily use <code>as.integer</code> adding 0.5:</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="introduction-to-r.html#cb50-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fl">4.8</span></span>
-<span id="cb50-2"><a href="introduction-to-r.html#cb50-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fl">4.2</span></span>
-<span id="cb50-3"><a href="introduction-to-r.html#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="fu">as.integer</span>(x <span class="sc">+</span> <span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="introduction-to-r.html#cb54-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fl">4.8</span></span>
+<span id="cb54-2"><a href="introduction-to-r.html#cb54-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fl">4.2</span></span>
+<span id="cb54-3"><a href="introduction-to-r.html#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="fu">as.integer</span>(x <span class="sc">+</span> <span class="fl">0.5</span>)</span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="introduction-to-r.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="introduction-to-r.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(x)</span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="introduction-to-r.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.integer</span>(y <span class="sc">+</span> <span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="introduction-to-r.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.integer</span>(y <span class="sc">+</span> <span class="fl">0.5</span>)</span></code></pre></div>
 <pre><code>## [1] 4</code></pre>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="introduction-to-r.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(y)</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="introduction-to-r.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(y)</span></code></pre></div>
 <pre><code>## [1] 4</code></pre>
 <p>Integer divison:</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="introduction-to-r.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">%/%</span> <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="introduction-to-r.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">%/%</span> <span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
 <p>Integer remainder from division (the modulus, using a <code>%%</code> to represent the modulo):</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="introduction-to-r.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">%%</span> <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="introduction-to-r.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">%%</span> <span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
 <p>Surprisingly, the values returned by integer division or the remainder are not stored as integers. R seems to prefer floating point…</p>
 </div>
@@ -453,11 +454,11 @@ integer, not rounding it.</p>
 with rows and columns, where rows might be <em>observations</em> and columns might be <em>variables</em>.
 We’ll read this type of data in from spreadsheets or even more commonly from comma-separated-variable (CSV)
 text files that spreadsheet programs like Excel commonly read in just like their native format.</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="introduction-to-r.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(iGIScData)</span>
-<span id="cb62-2"><a href="introduction-to-r.html#cb62-2" aria-hidden="true" tabindex="-1"></a>sierraFeb</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="introduction-to-r.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(iGIScData)</span>
+<span id="cb66-2"><a href="introduction-to-r.html#cb66-2" aria-hidden="true" tabindex="-1"></a>sierraFeb</span></code></pre></div>
 <pre><code>## # A tibble: 82 x 7
 ##    STATION_NAME                      COUNTY   ELEVATION LATITUDE LONGITUDE PRECIPITATION TEMPERATURE
-##    &lt;chr&gt;                             &lt;chr&gt;        &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;
+##    &lt;chr&gt;                             &lt;fct&gt;        &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;
 ##  1 GROVELAND 2, CA US                Tuolumne     853.      37.8     -120.         176.          6.1
 ##  2 CANYON DAM, CA US                 Plumas      1390.      40.2     -121.         164.          1.4
 ##  3 KERN RIVER PH 3, CA US            Kern         824.      35.8     -118.          67.1         8.9
@@ -481,24 +482,24 @@ What we mostly refer to as vectors are formally called <em>atomic vectors</em> w
 that they be <em>homogeneous</em> sets of whatever type we’re referring to, such as a vector of numbers,
 or a vector of strings, or a vector of dates/times.</p>
 <p>You can create a simple vector with the <code>c()</code> function:</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="introduction-to-r.html#cb64-1" aria-hidden="true" tabindex="-1"></a>lats <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">37.5</span>,<span class="fl">47.4</span>,<span class="fl">29.4</span>,<span class="fl">33.4</span>)</span>
-<span id="cb64-2"><a href="introduction-to-r.html#cb64-2" aria-hidden="true" tabindex="-1"></a>lats</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="introduction-to-r.html#cb68-1" aria-hidden="true" tabindex="-1"></a>lats <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">37.5</span>,<span class="fl">47.4</span>,<span class="fl">29.4</span>,<span class="fl">33.4</span>)</span>
+<span id="cb68-2"><a href="introduction-to-r.html#cb68-2" aria-hidden="true" tabindex="-1"></a>lats</span></code></pre></div>
 <pre><code>## [1] 37.5 47.4 29.4 33.4</code></pre>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="introduction-to-r.html#cb66-1" aria-hidden="true" tabindex="-1"></a>states <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;VA&quot;</span>, <span class="st">&quot;WA&quot;</span>, <span class="st">&quot;TX&quot;</span>, <span class="st">&quot;AZ&quot;</span>)</span>
-<span id="cb66-2"><a href="introduction-to-r.html#cb66-2" aria-hidden="true" tabindex="-1"></a>states</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="introduction-to-r.html#cb70-1" aria-hidden="true" tabindex="-1"></a>states <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;VA&quot;</span>, <span class="st">&quot;WA&quot;</span>, <span class="st">&quot;TX&quot;</span>, <span class="st">&quot;AZ&quot;</span>)</span>
+<span id="cb70-2"><a href="introduction-to-r.html#cb70-2" aria-hidden="true" tabindex="-1"></a>states</span></code></pre></div>
 <pre><code>## [1] &quot;VA&quot; &quot;WA&quot; &quot;TX&quot; &quot;AZ&quot;</code></pre>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="introduction-to-r.html#cb68-1" aria-hidden="true" tabindex="-1"></a>zips <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">23173</span>, <span class="dv">98801</span>, <span class="dv">78006</span>, <span class="dv">85001</span>)</span>
-<span id="cb68-2"><a href="introduction-to-r.html#cb68-2" aria-hidden="true" tabindex="-1"></a>zips</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="introduction-to-r.html#cb72-1" aria-hidden="true" tabindex="-1"></a>zips <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">23173</span>, <span class="dv">98801</span>, <span class="dv">78006</span>, <span class="dv">85001</span>)</span>
+<span id="cb72-2"><a href="introduction-to-r.html#cb72-2" aria-hidden="true" tabindex="-1"></a>zips</span></code></pre></div>
 <pre><code>## [1] 23173 98801 78006 85001</code></pre>
 <p>The class of a vector is the type of data it holds</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="introduction-to-r.html#cb70-1" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">10.7</span>, <span class="fl">9.7</span>, <span class="fl">7.7</span>, <span class="fl">9.2</span>, <span class="fl">7.3</span>, <span class="fl">6.7</span>)</span>
-<span id="cb70-2"><a href="introduction-to-r.html#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(temp)</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="introduction-to-r.html#cb74-1" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">10.7</span>, <span class="fl">9.7</span>, <span class="fl">7.7</span>, <span class="fl">9.2</span>, <span class="fl">7.3</span>, <span class="fl">6.7</span>)</span>
+<span id="cb74-2"><a href="introduction-to-r.html#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(temp)</span></code></pre></div>
 <pre><code>## [1] &quot;numeric&quot;</code></pre>
 <p>Vectors can only have one data class, and if mixed with character types, numeric elements will become character:</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="introduction-to-r.html#cb72-1" aria-hidden="true" tabindex="-1"></a>mixed <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="st">&quot;fred&quot;</span>, <span class="dv">7</span>)</span>
-<span id="cb72-2"><a href="introduction-to-r.html#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mixed)</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="introduction-to-r.html#cb76-1" aria-hidden="true" tabindex="-1"></a>mixed <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="st">&quot;fred&quot;</span>, <span class="dv">7</span>)</span>
+<span id="cb76-2"><a href="introduction-to-r.html#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mixed)</span></code></pre></div>
 <pre><code>## [1] &quot;character&quot;</code></pre>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="introduction-to-r.html#cb74-1" aria-hidden="true" tabindex="-1"></a>mixed[<span class="dv">3</span>]   <span class="co"># gets a subset, example of coercion</span></span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="introduction-to-r.html#cb78-1" aria-hidden="true" tabindex="-1"></a>mixed[<span class="dv">3</span>]   <span class="co"># gets a subset, example of coercion</span></span></code></pre></div>
 <pre><code>## [1] &quot;7&quot;</code></pre>
 <div id="na" class="section level4" number="2.6.1.1">
 <h4><span class="header-section-number">2.6.1.1</span> NA</h4>
@@ -506,31 +507,31 @@ or a vector of strings, or a vector of dates/times.</p>
 - null
 - nodata
 - NA “not available” or “not applicable”</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="introduction-to-r.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">c</span>(<span class="st">&quot;1&quot;</span>,<span class="st">&quot;Fred&quot;</span>,<span class="st">&quot;5&quot;</span>)) <span class="co"># note NA introduced by coercion</span></span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="introduction-to-r.html#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">c</span>(<span class="st">&quot;1&quot;</span>,<span class="st">&quot;Fred&quot;</span>,<span class="st">&quot;5&quot;</span>)) <span class="co"># note NA introduced by coercion</span></span></code></pre></div>
 <pre><code>## Warning: NAs introduced by coercion</code></pre>
 <pre><code>## [1]  1 NA  5</code></pre>
 <p>Ignoring NA in statistical summaries is commonly used. Where normally the summary statistic can only return NA…</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="introduction-to-r.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">as.numeric</span>(<span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;Fred&quot;</span>, <span class="st">&quot;5&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="introduction-to-r.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">as.numeric</span>(<span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;Fred&quot;</span>, <span class="st">&quot;5&quot;</span>)))</span></code></pre></div>
 <pre><code>## Warning in mean(as.numeric(c(&quot;1&quot;, &quot;Fred&quot;, &quot;5&quot;))): NAs introduced by coercion</code></pre>
 <pre><code>## [1] NA</code></pre>
 <p>… with <code>na.rm=T</code> you can still get the result for all actual data:</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="introduction-to-r.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">as.numeric</span>(<span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;Fred&quot;</span>, <span class="st">&quot;5&quot;</span>)), <span class="at">na.rm=</span>T)</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="introduction-to-r.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">as.numeric</span>(<span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;Fred&quot;</span>, <span class="st">&quot;5&quot;</span>)), <span class="at">na.rm=</span>T)</span></code></pre></div>
 <pre><code>## Warning in mean(as.numeric(c(&quot;1&quot;, &quot;Fred&quot;, &quot;5&quot;)), na.rm = T): NAs introduced by coercion</code></pre>
 <pre><code>## [1] 3</code></pre>
 <p>Don’t confuse with <code>nan</code> (“not a number”) which is used for things like imaginary numbers (explore the help for more on this)</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="introduction-to-r.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(<span class="cn">NA</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="introduction-to-r.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(<span class="cn">NA</span>)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="introduction-to-r.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.nan</span>(<span class="cn">NA</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="introduction-to-r.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.nan</span>(<span class="cn">NA</span>)</span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="introduction-to-r.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(<span class="fu">as.numeric</span>(<span class="st">&#39;&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="introduction-to-r.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(<span class="fu">as.numeric</span>(<span class="st">&#39;&#39;</span>))</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="introduction-to-r.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.nan</span>(<span class="fu">as.numeric</span>(<span class="st">&#39;&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="introduction-to-r.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.nan</span>(<span class="fu">as.numeric</span>(<span class="st">&#39;&#39;</span>))</span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="introduction-to-r.html#cb93-1" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="sc">-</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="introduction-to-r.html#cb97-1" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="sc">-</span><span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## Warning in sqrt(-1): NaNs produced</code></pre>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="introduction-to-r.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(i) <span class="co"># interestingly nan is also na</span></span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="introduction-to-r.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(i) <span class="co"># interestingly nan is also na</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="introduction-to-r.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.nan</span>(i)</span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="introduction-to-r.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.nan</span>(i)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 </div>
 <div id="sequences" class="section level4" number="2.6.1.2">
@@ -540,55 +541,56 @@ or a vector of strings, or a vector of dates/times.</p>
 c(1:10)
 c(1,2,3,4,5,6,7,8,9,10)</code></pre>
 <p>The seq() function has special uses like using a step parameter:</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="introduction-to-r.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">2</span>,<span class="dv">10</span>,<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="introduction-to-r.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">2</span>,<span class="dv">10</span>,<span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1]  2  4  6  8 10</code></pre>
 </div>
 <div id="vectorization-and-vector-arithmetic" class="section level4" number="2.6.1.3">
 <h4><span class="header-section-number">2.6.1.3</span> Vectorization and vector arithmetic</h4>
 <p>Arithmetic on vectors operates element-wise</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="introduction-to-r.html#cb102-1" aria-hidden="true" tabindex="-1"></a>elev <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">52</span>,<span class="dv">394</span>,<span class="dv">510</span>,<span class="dv">564</span>,<span class="dv">725</span>,<span class="dv">848</span>,<span class="dv">1042</span>,<span class="dv">1225</span>,<span class="dv">1486</span>,<span class="dv">1775</span>,<span class="dv">1899</span>,<span class="dv">2551</span>)</span>
-<span id="cb102-2"><a href="introduction-to-r.html#cb102-2" aria-hidden="true" tabindex="-1"></a>elevft <span class="ot">&lt;-</span> elev <span class="sc">/</span> <span class="fl">0.3048</span></span>
-<span id="cb102-3"><a href="introduction-to-r.html#cb102-3" aria-hidden="true" tabindex="-1"></a>elevft</span></code></pre></div>
-<pre><code>##  [1]  170.6037 1292.6509 1673.2283 1850.3937 2378.6089 2782.1522 3418.6352 4019.0289 4875.3281 5823.4908 6230.3150 8369.4226</code></pre>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="introduction-to-r.html#cb106-1" aria-hidden="true" tabindex="-1"></a>elev <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">52</span>,<span class="dv">394</span>,<span class="dv">510</span>,<span class="dv">564</span>,<span class="dv">725</span>,<span class="dv">848</span>,<span class="dv">1042</span>,<span class="dv">1225</span>,<span class="dv">1486</span>,<span class="dv">1775</span>,<span class="dv">1899</span>,<span class="dv">2551</span>)</span>
+<span id="cb106-2"><a href="introduction-to-r.html#cb106-2" aria-hidden="true" tabindex="-1"></a>elevft <span class="ot">&lt;-</span> elev <span class="sc">/</span> <span class="fl">0.3048</span></span>
+<span id="cb106-3"><a href="introduction-to-r.html#cb106-3" aria-hidden="true" tabindex="-1"></a>elevft</span></code></pre></div>
+<pre><code>##  [1]  170.6037 1292.6509 1673.2283 1850.3937 2378.6089 2782.1522 3418.6352 4019.0289 4875.3281 5823.4908 6230.3150
+## [12] 8369.4226</code></pre>
 <p>Another example, with 2 vectors:</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="introduction-to-r.html#cb104-1" aria-hidden="true" tabindex="-1"></a>temp03 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">13.1</span>,<span class="fl">11.4</span>,<span class="fl">9.4</span>,<span class="fl">10.9</span>,<span class="fl">8.9</span>,<span class="fl">8.4</span>,<span class="fl">6.7</span>,<span class="fl">7.6</span>,<span class="fl">2.8</span>,<span class="fl">1.6</span>,<span class="fl">1.2</span>,<span class="sc">-</span><span class="fl">2.1</span>)</span>
-<span id="cb104-2"><a href="introduction-to-r.html#cb104-2" aria-hidden="true" tabindex="-1"></a>temp02 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">10.7</span>,<span class="fl">9.7</span>,<span class="fl">7.7</span>,<span class="fl">9.2</span>,<span class="fl">7.3</span>,<span class="fl">6.7</span>,<span class="fl">4.0</span>,<span class="fl">5.0</span>,<span class="fl">0.9</span>,<span class="sc">-</span><span class="fl">1.1</span>,<span class="sc">-</span><span class="fl">0.8</span>,<span class="sc">-</span><span class="fl">4.4</span>)</span>
-<span id="cb104-3"><a href="introduction-to-r.html#cb104-3" aria-hidden="true" tabindex="-1"></a>tempdiff <span class="ot">&lt;-</span> temp03 <span class="sc">-</span> temp02</span>
-<span id="cb104-4"><a href="introduction-to-r.html#cb104-4" aria-hidden="true" tabindex="-1"></a>tempdiff</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="introduction-to-r.html#cb108-1" aria-hidden="true" tabindex="-1"></a>temp03 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">13.1</span>,<span class="fl">11.4</span>,<span class="fl">9.4</span>,<span class="fl">10.9</span>,<span class="fl">8.9</span>,<span class="fl">8.4</span>,<span class="fl">6.7</span>,<span class="fl">7.6</span>,<span class="fl">2.8</span>,<span class="fl">1.6</span>,<span class="fl">1.2</span>,<span class="sc">-</span><span class="fl">2.1</span>)</span>
+<span id="cb108-2"><a href="introduction-to-r.html#cb108-2" aria-hidden="true" tabindex="-1"></a>temp02 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">10.7</span>,<span class="fl">9.7</span>,<span class="fl">7.7</span>,<span class="fl">9.2</span>,<span class="fl">7.3</span>,<span class="fl">6.7</span>,<span class="fl">4.0</span>,<span class="fl">5.0</span>,<span class="fl">0.9</span>,<span class="sc">-</span><span class="fl">1.1</span>,<span class="sc">-</span><span class="fl">0.8</span>,<span class="sc">-</span><span class="fl">4.4</span>)</span>
+<span id="cb108-3"><a href="introduction-to-r.html#cb108-3" aria-hidden="true" tabindex="-1"></a>tempdiff <span class="ot">&lt;-</span> temp03 <span class="sc">-</span> temp02</span>
+<span id="cb108-4"><a href="introduction-to-r.html#cb108-4" aria-hidden="true" tabindex="-1"></a>tempdiff</span></code></pre></div>
 <pre><code>##  [1] 2.4 1.7 1.7 1.7 1.6 1.7 2.7 2.6 1.9 2.7 2.0 2.3</code></pre>
 </div>
 <div id="plotting-vectors" class="section level4" number="2.6.1.4">
 <h4><span class="header-section-number">2.6.1.4</span> Plotting vectors</h4>
 <p>Vectors of Feb temperature, elevation and latitude at stations in the Sierra:</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="introduction-to-r.html#cb106-1" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">10.7</span>, <span class="fl">9.7</span>, <span class="fl">7.7</span>, <span class="fl">9.2</span>, <span class="fl">7.3</span>, <span class="fl">6.7</span>, <span class="fl">4.0</span>, <span class="fl">5.0</span>, <span class="fl">0.9</span>, <span class="sc">-</span><span class="fl">1.1</span>, <span class="sc">-</span><span class="fl">0.8</span>, <span class="sc">-</span><span class="fl">4.4</span>)</span>
-<span id="cb106-2"><a href="introduction-to-r.html#cb106-2" aria-hidden="true" tabindex="-1"></a>elev <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">52</span>, <span class="dv">394</span>, <span class="dv">510</span>, <span class="dv">564</span>, <span class="dv">725</span>, <span class="dv">848</span>, <span class="dv">1042</span>, <span class="dv">1225</span>, <span class="dv">1486</span>, <span class="dv">1775</span>, <span class="dv">1899</span>, <span class="dv">2551</span>)</span>
-<span id="cb106-3"><a href="introduction-to-r.html#cb106-3" aria-hidden="true" tabindex="-1"></a>lat <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">39.52</span>, <span class="fl">38.91</span>, <span class="fl">37.97</span>, <span class="fl">38.70</span>, <span class="fl">39.09</span>, <span class="fl">39.25</span>, <span class="fl">39.94</span>, <span class="fl">37.75</span>, <span class="fl">40.35</span>, <span class="fl">39.33</span>, <span class="fl">39.17</span>, <span class="fl">38.21</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="introduction-to-r.html#cb110-1" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">10.7</span>, <span class="fl">9.7</span>, <span class="fl">7.7</span>, <span class="fl">9.2</span>, <span class="fl">7.3</span>, <span class="fl">6.7</span>, <span class="fl">4.0</span>, <span class="fl">5.0</span>, <span class="fl">0.9</span>, <span class="sc">-</span><span class="fl">1.1</span>, <span class="sc">-</span><span class="fl">0.8</span>, <span class="sc">-</span><span class="fl">4.4</span>)</span>
+<span id="cb110-2"><a href="introduction-to-r.html#cb110-2" aria-hidden="true" tabindex="-1"></a>elev <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">52</span>, <span class="dv">394</span>, <span class="dv">510</span>, <span class="dv">564</span>, <span class="dv">725</span>, <span class="dv">848</span>, <span class="dv">1042</span>, <span class="dv">1225</span>, <span class="dv">1486</span>, <span class="dv">1775</span>, <span class="dv">1899</span>, <span class="dv">2551</span>)</span>
+<span id="cb110-3"><a href="introduction-to-r.html#cb110-3" aria-hidden="true" tabindex="-1"></a>lat <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">39.52</span>, <span class="fl">38.91</span>, <span class="fl">37.97</span>, <span class="fl">38.70</span>, <span class="fl">39.09</span>, <span class="fl">39.25</span>, <span class="fl">39.94</span>, <span class="fl">37.75</span>, <span class="fl">40.35</span>, <span class="fl">39.33</span>, <span class="fl">39.17</span>, <span class="fl">38.21</span>)</span></code></pre></div>
 <p><strong>Plot individually</strong></p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="introduction-to-r.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(temp)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-57"></span>
-<img src="EnvDataSci_files/figure-html/unnamed-chunk-57-1.png" alt="Temperature" width="672" />
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="introduction-to-r.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(temp)</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-31"></span>
+<img src="EnvDataSci_files/figure-html/unnamed-chunk-31-1.png" alt="Temperature" width="672" />
 <p class="caption">
 Figure 2.1: Temperature
 </p>
 </div>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="introduction-to-r.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(elev)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-58"></span>
-<img src="EnvDataSci_files/figure-html/unnamed-chunk-58-1.png" alt="Elevation" width="672" />
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="introduction-to-r.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(elev)</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-32"></span>
+<img src="EnvDataSci_files/figure-html/unnamed-chunk-32-1.png" alt="Elevation" width="672" />
 <p class="caption">
 Figure 2.2: Elevation
 </p>
 </div>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="introduction-to-r.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lat)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-59"></span>
-<img src="EnvDataSci_files/figure-html/unnamed-chunk-59-1.png" alt="Latitude" width="672" />
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="introduction-to-r.html#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lat)</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-33"></span>
+<img src="EnvDataSci_files/figure-html/unnamed-chunk-33-1.png" alt="Latitude" width="672" />
 <p class="caption">
 Figure 2.3: Latitude
 </p>
 </div>
 <p><strong>Then plot as a scatterplot</strong></p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="introduction-to-r.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(elev,temp)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-60"></span>
-<img src="EnvDataSci_files/figure-html/unnamed-chunk-60-1.png" alt="Temperature~Elevation" width="672" />
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="introduction-to-r.html#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(elev,temp)</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-34"></span>
+<img src="EnvDataSci_files/figure-html/unnamed-chunk-34-1.png" alt="Temperature~Elevation" width="672" />
 <p class="caption">
 Figure 2.4: Temperature~Elevation
 </p>
@@ -597,22 +599,22 @@ Figure 2.4: Temperature~Elevation
 <div id="named-indices" class="section level4" number="2.6.1.5">
 <h4><span class="header-section-number">2.6.1.5</span> Named indices</h4>
 <p>Vector indices can be named.</p>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="introduction-to-r.html#cb111-1" aria-hidden="true" tabindex="-1"></a>codes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">380</span>, <span class="dv">124</span>, <span class="dv">818</span>)</span>
-<span id="cb111-2"><a href="introduction-to-r.html#cb111-2" aria-hidden="true" tabindex="-1"></a>codes</span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="introduction-to-r.html#cb115-1" aria-hidden="true" tabindex="-1"></a>codes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">380</span>, <span class="dv">124</span>, <span class="dv">818</span>)</span>
+<span id="cb115-2"><a href="introduction-to-r.html#cb115-2" aria-hidden="true" tabindex="-1"></a>codes</span></code></pre></div>
 <pre><code>## [1] 380 124 818</code></pre>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="introduction-to-r.html#cb113-1" aria-hidden="true" tabindex="-1"></a>codes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">italy =</span> <span class="dv">380</span>, <span class="at">canada =</span> <span class="dv">124</span>, <span class="at">egypt =</span> <span class="dv">818</span>)</span>
-<span id="cb113-2"><a href="introduction-to-r.html#cb113-2" aria-hidden="true" tabindex="-1"></a>codes</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="introduction-to-r.html#cb117-1" aria-hidden="true" tabindex="-1"></a>codes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">italy =</span> <span class="dv">380</span>, <span class="at">canada =</span> <span class="dv">124</span>, <span class="at">egypt =</span> <span class="dv">818</span>)</span>
+<span id="cb117-2"><a href="introduction-to-r.html#cb117-2" aria-hidden="true" tabindex="-1"></a>codes</span></code></pre></div>
 <pre><code>##  italy canada  egypt 
 ##    380    124    818</code></pre>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="introduction-to-r.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(codes)</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="introduction-to-r.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(codes)</span></code></pre></div>
 <pre><code>##  Named num [1:3] 380 124 818
 ##  - attr(*, &quot;names&quot;)= chr [1:3] &quot;italy&quot; &quot;canada&quot; &quot;egypt&quot;</code></pre>
 <p>Why? I guess so you can refer to observations by name instead of index.
 The following are equivalent:</p>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="introduction-to-r.html#cb117-1" aria-hidden="true" tabindex="-1"></a>codes[<span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="introduction-to-r.html#cb121-1" aria-hidden="true" tabindex="-1"></a>codes[<span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## italy 
 ##   380</code></pre>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="introduction-to-r.html#cb119-1" aria-hidden="true" tabindex="-1"></a>codes[<span class="st">&quot;italy&quot;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="introduction-to-r.html#cb123-1" aria-hidden="true" tabindex="-1"></a>codes[<span class="st">&quot;italy&quot;</span>]</span></code></pre></div>
 <pre><code>## italy 
 ##   380</code></pre>
 </div>
@@ -624,37 +626,37 @@ The following are equivalent:</p>
 <div id="matrices" class="section level3" number="2.6.3">
 <h3><span class="header-section-number">2.6.3</span> Matrices</h3>
 <p>Vectors are commonly used as a column in a matrix (or as we’ll see, a data frame), like a variable</p>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="introduction-to-r.html#cb121-1" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">10.7</span>, <span class="fl">9.7</span>, <span class="fl">7.7</span>, <span class="fl">9.2</span>, <span class="fl">7.3</span>, <span class="fl">6.7</span>, <span class="fl">4.0</span>, <span class="fl">5.0</span>, <span class="fl">0.9</span>, <span class="sc">-</span><span class="fl">1.1</span>, <span class="sc">-</span><span class="fl">0.8</span>, <span class="sc">-</span><span class="fl">4.4</span>)</span>
-<span id="cb121-2"><a href="introduction-to-r.html#cb121-2" aria-hidden="true" tabindex="-1"></a>elev <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">52</span>, <span class="dv">394</span>, <span class="dv">510</span>, <span class="dv">564</span>, <span class="dv">725</span>, <span class="dv">848</span>, <span class="dv">1042</span>, <span class="dv">1225</span>, <span class="dv">1486</span>, <span class="dv">1775</span>, <span class="dv">1899</span>, <span class="dv">2551</span>)</span>
-<span id="cb121-3"><a href="introduction-to-r.html#cb121-3" aria-hidden="true" tabindex="-1"></a>lat <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">39.52</span>, <span class="fl">38.91</span>, <span class="fl">37.97</span>, <span class="fl">38.70</span>, <span class="fl">39.09</span>, <span class="fl">39.25</span>, <span class="fl">39.94</span>, <span class="fl">37.75</span>, <span class="fl">40.35</span>, <span class="fl">39.33</span>, <span class="fl">39.17</span>, <span class="fl">38.21</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="introduction-to-r.html#cb125-1" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">10.7</span>, <span class="fl">9.7</span>, <span class="fl">7.7</span>, <span class="fl">9.2</span>, <span class="fl">7.3</span>, <span class="fl">6.7</span>, <span class="fl">4.0</span>, <span class="fl">5.0</span>, <span class="fl">0.9</span>, <span class="sc">-</span><span class="fl">1.1</span>, <span class="sc">-</span><span class="fl">0.8</span>, <span class="sc">-</span><span class="fl">4.4</span>)</span>
+<span id="cb125-2"><a href="introduction-to-r.html#cb125-2" aria-hidden="true" tabindex="-1"></a>elev <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">52</span>, <span class="dv">394</span>, <span class="dv">510</span>, <span class="dv">564</span>, <span class="dv">725</span>, <span class="dv">848</span>, <span class="dv">1042</span>, <span class="dv">1225</span>, <span class="dv">1486</span>, <span class="dv">1775</span>, <span class="dv">1899</span>, <span class="dv">2551</span>)</span>
+<span id="cb125-3"><a href="introduction-to-r.html#cb125-3" aria-hidden="true" tabindex="-1"></a>lat <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">39.52</span>, <span class="fl">38.91</span>, <span class="fl">37.97</span>, <span class="fl">38.70</span>, <span class="fl">39.09</span>, <span class="fl">39.25</span>, <span class="fl">39.94</span>, <span class="fl">37.75</span>, <span class="fl">40.35</span>, <span class="fl">39.33</span>, <span class="fl">39.17</span>, <span class="fl">38.21</span>)</span></code></pre></div>
 <p><strong>Building a matrix from vectors as columns</strong></p>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="introduction-to-r.html#cb122-1" aria-hidden="true" tabindex="-1"></a>sierradata <span class="ot">&lt;-</span> <span class="fu">cbind</span>(temp, elev, lat)</span>
-<span id="cb122-2"><a href="introduction-to-r.html#cb122-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(sierradata)</span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="introduction-to-r.html#cb126-1" aria-hidden="true" tabindex="-1"></a>sierradata <span class="ot">&lt;-</span> <span class="fu">cbind</span>(temp, elev, lat)</span>
+<span id="cb126-2"><a href="introduction-to-r.html#cb126-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(sierradata)</span></code></pre></div>
 <pre><code>## [1] &quot;matrix&quot; &quot;array&quot;</code></pre>
 <div id="dimensions-for-arrays-and-matrices" class="section level4" number="2.6.3.1">
 <h4><span class="header-section-number">2.6.3.1</span> Dimensions for arrays and matrices</h4>
 <p>Note: a matrix is just a 2D array. Arrays have 1, 3, or more dimensions.</p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="introduction-to-r.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(sierradata)</span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="introduction-to-r.html#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(sierradata)</span></code></pre></div>
 <pre><code>## [1] 12  3</code></pre>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="introduction-to-r.html#cb126-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span></span>
-<span id="cb126-2"><a href="introduction-to-r.html#cb126-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(a) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>)   <span class="co"># matrix</span></span>
-<span id="cb126-3"><a href="introduction-to-r.html#cb126-3" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(a)</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="introduction-to-r.html#cb130-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span></span>
+<span id="cb130-2"><a href="introduction-to-r.html#cb130-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(a) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>)   <span class="co"># matrix</span></span>
+<span id="cb130-3"><a href="introduction-to-r.html#cb130-3" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(a)</span></code></pre></div>
 <pre><code>## [1] &quot;matrix&quot; &quot;array&quot;</code></pre>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="introduction-to-r.html#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(a) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">2</span>)  <span class="co"># 3D array</span></span>
-<span id="cb128-2"><a href="introduction-to-r.html#cb128-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(a)</span></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="introduction-to-r.html#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(a) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">2</span>)  <span class="co"># 3D array</span></span>
+<span id="cb132-2"><a href="introduction-to-r.html#cb132-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(a)</span></code></pre></div>
 <pre><code>## [1] &quot;array&quot;</code></pre>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="introduction-to-r.html#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(a) <span class="ot">&lt;-</span> <span class="dv">12</span>        <span class="co"># 1D array</span></span>
-<span id="cb130-2"><a href="introduction-to-r.html#cb130-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(a)</span></code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="introduction-to-r.html#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(a) <span class="ot">&lt;-</span> <span class="dv">12</span>        <span class="co"># 1D array</span></span>
+<span id="cb134-2"><a href="introduction-to-r.html#cb134-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(a)</span></code></pre></div>
 <pre><code>## [1] &quot;array&quot;</code></pre>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="introduction-to-r.html#cb132-1" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">ncol=</span><span class="dv">1</span>)  <span class="co"># 1 column matrix is allowed</span></span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="introduction-to-r.html#cb136-1" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">ncol=</span><span class="dv">1</span>)  <span class="co"># 1 column matrix is allowed</span></span></code></pre></div>
 </div>
 </div>
 <div id="data-frames" class="section level3" number="2.6.4">
 <h3><span class="header-section-number">2.6.4</span> Data frames</h3>
 <p>A data frame is a database with fields (as vectors) with records (rows), so is very important for data analysis and GIS. They’re kind of like a spreadsheet with rules (first row is field names, fields all one type). So even though they’re more complex than a list, we use them so frequently they become quite familiar [whereas I continue to find lists confusing, especially when discovering them as what a particular function returns.]</p>
-<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="introduction-to-r.html#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span>
-<span id="cb133-2"><a href="introduction-to-r.html#cb133-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="at">package =</span> <span class="st">&#39;palmerpenguins&#39;</span>)</span>
-<span id="cb133-3"><a href="introduction-to-r.html#cb133-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(penguins)</span></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="introduction-to-r.html#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span>
+<span id="cb137-2"><a href="introduction-to-r.html#cb137-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="at">package =</span> <span class="st">&#39;palmerpenguins&#39;</span>)</span>
+<span id="cb137-3"><a href="introduction-to-r.html#cb137-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(penguins)</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 8
 ##   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex     year
 ##   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt; &lt;fct&gt;  &lt;int&gt;
@@ -665,17 +667,10 @@ The following are equivalent:</p>
 ## 5 Adelie  Torgersen           36.7          19.3               193        3450 female  2007
 ## 6 Adelie  Torgersen           39.3          20.6               190        3650 male    2007</code></pre>
 <p><strong>Creating a data frame out of a matrix</strong></p>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="introduction-to-r.html#cb135-1" aria-hidden="true" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(sierradata)</span>
-<span id="cb135-2"><a href="introduction-to-r.html#cb135-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">data =</span> mydata, <span class="at">x =</span> elev, <span class="at">y =</span> temp)</span></code></pre></div>
-<pre><code>## Warning in plot.window(...): &quot;data&quot; is not a graphical parameter</code></pre>
-<pre><code>## Warning in plot.xy(xy, type, ...): &quot;data&quot; is not a graphical parameter</code></pre>
-<pre><code>## Warning in axis(side = side, at = at, labels = labels, ...): &quot;data&quot; is not a graphical parameter
-
-## Warning in axis(side = side, at = at, labels = labels, ...): &quot;data&quot; is not a graphical parameter</code></pre>
-<pre><code>## Warning in box(...): &quot;data&quot; is not a graphical parameter</code></pre>
-<pre><code>## Warning in title(...): &quot;data&quot; is not a graphical parameter</code></pre>
-<div class="figure"><span id="fig:unnamed-chunk-68"></span>
-<img src="EnvDataSci_files/figure-html/unnamed-chunk-68-1.png" alt="Temperature~Elevation" width="672" />
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="introduction-to-r.html#cb139-1" aria-hidden="true" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(sierradata)</span>
+<span id="cb139-2"><a href="introduction-to-r.html#cb139-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">data =</span> mydata, <span class="at">x =</span> elev, <span class="at">y =</span> temp)</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-42"></span>
+<img src="EnvDataSci_files/figure-html/unnamed-chunk-42-1.png" alt="Temperature~Elevation" width="672" />
 <p class="caption">
 Figure 2.5: Temperature~Elevation
 </p>
@@ -683,46 +678,34 @@ Figure 2.5: Temperature~Elevation
 <p><strong>Read a data frame from a CSV</strong></p>
 <p>We’ll be looking at this more in the next chapter, but a common need is to read data from a spreadsheet stored in the CSV format. Normally, you’d have that stored with your project and can just specify the file name, but we’ll access CSVs from the iGIScData package. Since you have this installed, it will already be on your computer, but not in your project folder. The path to it can be derived using the <code>system.file()</code> function.</p>
 <p>Reading a csv in <code>readr</code> (part of the tidyverse that we’ll be looking at in the next chapter) is done with <code>read_csv()</code>:</p>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="introduction-to-r.html#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb141-2"><a href="introduction-to-r.html#cb141-2" aria-hidden="true" tabindex="-1"></a>csvPath <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;TRI_1987_BaySites.csv&quot;</span>, <span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>
-<span id="cb141-3"><a href="introduction-to-r.html#cb141-3" aria-hidden="true" tabindex="-1"></a>TRI87 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(csvPath)</span></code></pre></div>
-<pre><code>## 
-## -- Column specification --------------------------------------------------------------------------------------------------------------------------------
-## cols(
-##   TRI_FACILITY_ID = col_character(),
-##   count = col_double(),
-##   FACILITY_NAME = col_character(),
-##   COUNTY = col_character(),
-##   air_releases = col_double(),
-##   fugitive_air = col_double(),
-##   stack_air = col_double(),
-##   LATITUDE = col_double(),
-##   LONGITUDE = col_double()
-## )</code></pre>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="introduction-to-r.html#cb143-1" aria-hidden="true" tabindex="-1"></a>TRI87</span></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="introduction-to-r.html#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb140-2"><a href="introduction-to-r.html#cb140-2" aria-hidden="true" tabindex="-1"></a>csvPath <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;TRI_1987_BaySites.csv&quot;</span>, <span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>
+<span id="cb140-3"><a href="introduction-to-r.html#cb140-3" aria-hidden="true" tabindex="-1"></a>TRI87 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(csvPath)</span>
+<span id="cb140-4"><a href="introduction-to-r.html#cb140-4" aria-hidden="true" tabindex="-1"></a>TRI87</span></code></pre></div>
 <pre><code>## # A tibble: 335 x 9
-##    TRI_FACILITY_ID count FACILITY_NAME                                 COUNTY      air_releases fugitive_air stack_air LATITUDE LONGITUDE
-##    &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;                                         &lt;chr&gt;              &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-##  1 91002FRMND585BR     2 FORUM IND                                     SAN MATEO           1423         1423         0     37.5     -122.
-##  2 92052ZPMNF2970C     1 ZEP MFG CO                                    SANTA CLARA          337          337         0     37.4     -122.
-##  3 93117TLDYN3165P     2 TELEDYNE MEC                                  SANTA CLARA        12600        12600         0     37.4     -122.
-##  4 94002GTWSG477HA     2 MORGAN ADVANCED CERAMICS BELMONT WESGO METALS SAN MATEO          18700        18700         0     37.5     -122.
-##  5 94002SMPRD120SE     2 SEM PRODS INC                                 SAN MATEO           1500          500      1000     37.5     -122.
-##  6 94025HBLNN151CO     2 HEUBLEIN INC                                  SAN MATEO            500            0       500     37.5     -122.
-##  7 94025RYCHM300CO    10 TE CONNECTIVITY CORP                          SAN MATEO         144871        47562     97309     37.5     -122.
-##  8 94025SNFRD990OB     1 SANFORD METAL PROCESSING CO                   SAN MATEO           9675         9675         0     37.5     -122.
-##  9 94026BYPCK3575H     2 BAY PACKAGING &amp; CONVERTING CO INC             SAN MATEO          80000        32000     48000     37.5     -122.
-## 10 94026CDRSY3475E     2 CDR SYS CORP                                  SAN MATEO         126800            0    126800     37.5     -122.
+##    TRI_FACILITY_ID count FACILITY_NAME              COUNTY  air_releases fugitive_air stack_air LATITUDE LONGITUDE
+##    &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;                      &lt;chr&gt;          &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+##  1 91002FRMND585BR     2 FORUM IND                  SAN MA~         1423         1423         0     37.5     -122.
+##  2 92052ZPMNF2970C     1 ZEP MFG CO                 SANTA ~          337          337         0     37.4     -122.
+##  3 93117TLDYN3165P     2 TELEDYNE MEC               SANTA ~        12600        12600         0     37.4     -122.
+##  4 94002GTWSG477HA     2 MORGAN ADVANCED CERAMICS ~ SAN MA~        18700        18700         0     37.5     -122.
+##  5 94002SMPRD120SE     2 SEM PRODS INC              SAN MA~         1500          500      1000     37.5     -122.
+##  6 94025HBLNN151CO     2 HEUBLEIN INC               SAN MA~          500            0       500     37.5     -122.
+##  7 94025RYCHM300CO    10 TE CONNECTIVITY CORP       SAN MA~       144871        47562     97309     37.5     -122.
+##  8 94025SNFRD990OB     1 SANFORD METAL PROCESSING ~ SAN MA~         9675         9675         0     37.5     -122.
+##  9 94026BYPCK3575H     2 BAY PACKAGING &amp; CONVERTIN~ SAN MA~        80000        32000     48000     37.5     -122.
+## 10 94026CDRSY3475E     2 CDR SYS CORP               SAN MA~       126800            0    126800     37.5     -122.
 ## # ... with 325 more rows</code></pre>
 <p><strong>Sort, Index, &amp; Max/Min</strong></p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="introduction-to-r.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">sort</span>(TRI87<span class="sc">$</span>air_releases))</span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="introduction-to-r.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">sort</span>(TRI87<span class="sc">$</span>air_releases))</span></code></pre></div>
 <pre><code>## [1]  2  5  5  7  9 10</code></pre>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="introduction-to-r.html#cb147-1" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">order</span>(TRI87<span class="sc">$</span>air_releases)</span>
-<span id="cb147-2"><a href="introduction-to-r.html#cb147-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(TRI87<span class="sc">$</span>FACILITY_NAME[index])   <span class="co"># displays facilities in order of their air releases</span></span></code></pre></div>
-<pre><code>## [1] &quot;AIR PRODUCTS MANUFACTURING CORP&quot;          &quot;UNITED FIBERS&quot;                            &quot;CLOROX MANUFACTURING CO&quot;                 
-## [4] &quot;ICI AMERICAS INC WESTERN RESEARCH CENTER&quot; &quot;UNION CARBIDE CORP&quot;                       &quot;SCOTTS-SIERRA HORTICULTURAL PRODS CO INC&quot;</code></pre>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="introduction-to-r.html#cb149-1" aria-hidden="true" tabindex="-1"></a>i_max <span class="ot">&lt;-</span> <span class="fu">which.max</span>(TRI87<span class="sc">$</span>air_releases)</span>
-<span id="cb149-2"><a href="introduction-to-r.html#cb149-2" aria-hidden="true" tabindex="-1"></a>TRI87<span class="sc">$</span>FACILITY_NAME[i_max]   <span class="co"># was NUMMI at the time</span></span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="introduction-to-r.html#cb144-1" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">order</span>(TRI87<span class="sc">$</span>air_releases)</span>
+<span id="cb144-2"><a href="introduction-to-r.html#cb144-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(TRI87<span class="sc">$</span>FACILITY_NAME[index])   <span class="co"># displays facilities in order of their air releases</span></span></code></pre></div>
+<pre><code>## [1] &quot;AIR PRODUCTS MANUFACTURING CORP&quot;          &quot;UNITED FIBERS&quot;                           
+## [3] &quot;CLOROX MANUFACTURING CO&quot;                  &quot;ICI AMERICAS INC WESTERN RESEARCH CENTER&quot;
+## [5] &quot;UNION CARBIDE CORP&quot;                       &quot;SCOTTS-SIERRA HORTICULTURAL PRODS CO INC&quot;</code></pre>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="introduction-to-r.html#cb146-1" aria-hidden="true" tabindex="-1"></a>i_max <span class="ot">&lt;-</span> <span class="fu">which.max</span>(TRI87<span class="sc">$</span>air_releases)</span>
+<span id="cb146-2"><a href="introduction-to-r.html#cb146-2" aria-hidden="true" tabindex="-1"></a>TRI87<span class="sc">$</span>FACILITY_NAME[i_max]   <span class="co"># was NUMMI at the time</span></span></code></pre></div>
 <pre><code>## [1] &quot;TESLA INC&quot;</code></pre>
 </div>
 <div id="factors" class="section level3" number="2.6.5">
@@ -731,43 +714,44 @@ Figure 2.5: Temperature~Elevation
 - Normally used for categorical data.
 - Built on an <em>integer</em> vector
 - Levels are the set of predefined values.</p>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="introduction-to-r.html#cb151-1" aria-hidden="true" tabindex="-1"></a>fruit <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;orange&quot;</span>, <span class="st">&quot;banana&quot;</span>))</span>
-<span id="cb151-2"><a href="introduction-to-r.html#cb151-2" aria-hidden="true" tabindex="-1"></a>fruit   <span class="co"># note that levels will be in alphabetical order</span></span></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="introduction-to-r.html#cb148-1" aria-hidden="true" tabindex="-1"></a>fruit <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;orange&quot;</span>, <span class="st">&quot;banana&quot;</span>))</span>
+<span id="cb148-2"><a href="introduction-to-r.html#cb148-2" aria-hidden="true" tabindex="-1"></a>fruit   <span class="co"># note that levels will be in alphabetical order</span></span></code></pre></div>
 <pre><code>## [1] apple  banana orange banana
 ## Levels: apple banana orange</code></pre>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="introduction-to-r.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(fruit)</span></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="introduction-to-r.html#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(fruit)</span></code></pre></div>
 <pre><code>## [1] &quot;factor&quot;</code></pre>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="introduction-to-r.html#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(fruit)</span></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="introduction-to-r.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(fruit)</span></code></pre></div>
 <pre><code>## [1] &quot;integer&quot;</code></pre>
 <p>An equivalent conversion:</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="introduction-to-r.html#cb157-1" aria-hidden="true" tabindex="-1"></a>fruitint <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">2</span>) <span class="co"># equivalent conversion</span></span>
-<span id="cb157-2"><a href="introduction-to-r.html#cb157-2" aria-hidden="true" tabindex="-1"></a>fruit <span class="ot">&lt;-</span> <span class="fu">factor</span>(fruitint, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;orange&quot;</span>))</span>
-<span id="cb157-3"><a href="introduction-to-r.html#cb157-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(fruit)</span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="introduction-to-r.html#cb154-1" aria-hidden="true" tabindex="-1"></a>fruitint <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">2</span>) <span class="co"># equivalent conversion</span></span>
+<span id="cb154-2"><a href="introduction-to-r.html#cb154-2" aria-hidden="true" tabindex="-1"></a>fruit <span class="ot">&lt;-</span> <span class="fu">factor</span>(fruitint, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;orange&quot;</span>))</span>
+<span id="cb154-3"><a href="introduction-to-r.html#cb154-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(fruit)</span></code></pre></div>
 <pre><code>##  Factor w/ 3 levels &quot;apple&quot;,&quot;banana&quot;,..: 1 2 3 2</code></pre>
 <div id="categorical-data-and-factors" class="section level4" number="2.6.5.1">
 <h4><span class="header-section-number">2.6.5.1</span> Categorical Data and Factors</h4>
 <p>While character data might be seen as categorical (e.g. “urban,” “agricultural,” “forest” land covers), to be used as categorical variables they must be made into factors.</p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="introduction-to-r.html#cb159-1" aria-hidden="true" tabindex="-1"></a>grain_order <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;clay&quot;</span>, <span class="st">&quot;silt&quot;</span>, <span class="st">&quot;sand&quot;</span>)</span>
-<span id="cb159-2"><a href="introduction-to-r.html#cb159-2" aria-hidden="true" tabindex="-1"></a>grain_char <span class="ot">&lt;-</span> <span class="fu">sample</span>(grain_order, <span class="dv">36</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb159-3"><a href="introduction-to-r.html#cb159-3" aria-hidden="true" tabindex="-1"></a>grain_fact <span class="ot">&lt;-</span> <span class="fu">factor</span>(grain_char, <span class="at">levels =</span> grain_order)</span>
-<span id="cb159-4"><a href="introduction-to-r.html#cb159-4" aria-hidden="true" tabindex="-1"></a>grain_char</span></code></pre></div>
-<pre><code>##  [1] &quot;silt&quot; &quot;clay&quot; &quot;silt&quot; &quot;silt&quot; &quot;silt&quot; &quot;silt&quot; &quot;clay&quot; &quot;sand&quot; &quot;sand&quot; &quot;sand&quot; &quot;silt&quot; &quot;clay&quot; &quot;clay&quot; &quot;sand&quot; &quot;clay&quot; &quot;clay&quot; &quot;clay&quot; &quot;sand&quot; &quot;sand&quot; &quot;clay&quot; &quot;silt&quot;
-## [22] &quot;sand&quot; &quot;clay&quot; &quot;clay&quot; &quot;silt&quot; &quot;silt&quot; &quot;silt&quot; &quot;clay&quot; &quot;silt&quot; &quot;silt&quot; &quot;clay&quot; &quot;silt&quot; &quot;clay&quot; &quot;clay&quot; &quot;silt&quot; &quot;silt&quot;</code></pre>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="introduction-to-r.html#cb161-1" aria-hidden="true" tabindex="-1"></a>grain_fact</span></code></pre></div>
-<pre><code>##  [1] silt clay silt silt silt silt clay sand sand sand silt clay clay sand clay clay clay sand sand clay silt sand clay clay silt silt silt clay silt
-## [30] silt clay silt clay clay silt silt
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="introduction-to-r.html#cb156-1" aria-hidden="true" tabindex="-1"></a>grain_order <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;clay&quot;</span>, <span class="st">&quot;silt&quot;</span>, <span class="st">&quot;sand&quot;</span>)</span>
+<span id="cb156-2"><a href="introduction-to-r.html#cb156-2" aria-hidden="true" tabindex="-1"></a>grain_char <span class="ot">&lt;-</span> <span class="fu">sample</span>(grain_order, <span class="dv">36</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb156-3"><a href="introduction-to-r.html#cb156-3" aria-hidden="true" tabindex="-1"></a>grain_fact <span class="ot">&lt;-</span> <span class="fu">factor</span>(grain_char, <span class="at">levels =</span> grain_order)</span>
+<span id="cb156-4"><a href="introduction-to-r.html#cb156-4" aria-hidden="true" tabindex="-1"></a>grain_char</span></code></pre></div>
+<pre><code>##  [1] &quot;sand&quot; &quot;clay&quot; &quot;clay&quot; &quot;silt&quot; &quot;silt&quot; &quot;silt&quot; &quot;clay&quot; &quot;silt&quot; &quot;silt&quot; &quot;sand&quot; &quot;silt&quot; &quot;sand&quot; &quot;silt&quot; &quot;clay&quot; &quot;clay&quot;
+## [16] &quot;clay&quot; &quot;sand&quot; &quot;clay&quot; &quot;silt&quot; &quot;clay&quot; &quot;clay&quot; &quot;clay&quot; &quot;sand&quot; &quot;clay&quot; &quot;silt&quot; &quot;silt&quot; &quot;silt&quot; &quot;sand&quot; &quot;clay&quot; &quot;silt&quot;
+## [31] &quot;clay&quot; &quot;clay&quot; &quot;silt&quot; &quot;clay&quot; &quot;silt&quot; &quot;clay&quot;</code></pre>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="introduction-to-r.html#cb158-1" aria-hidden="true" tabindex="-1"></a>grain_fact</span></code></pre></div>
+<pre><code>##  [1] sand clay clay silt silt silt clay silt silt sand silt sand silt clay clay clay sand clay silt clay clay clay
+## [23] sand clay silt silt silt sand clay silt clay clay silt clay silt clay
 ## Levels: clay silt sand</code></pre>
 <p>To make a categorical variable a factor:</p>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="introduction-to-r.html#cb163-1" aria-hidden="true" tabindex="-1"></a>fruit <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;apples&quot;</span>, <span class="st">&quot;oranges&quot;</span>, <span class="st">&quot;bananas&quot;</span>, <span class="st">&quot;oranges&quot;</span>)</span>
-<span id="cb163-2"><a href="introduction-to-r.html#cb163-2" aria-hidden="true" tabindex="-1"></a>farm <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;organic&quot;</span>, <span class="st">&quot;conventional&quot;</span>, <span class="st">&quot;organic&quot;</span>, <span class="st">&quot;organic&quot;</span>)</span>
-<span id="cb163-3"><a href="introduction-to-r.html#cb163-3" aria-hidden="true" tabindex="-1"></a>ag <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">cbind</span>(fruit, farm))</span>
-<span id="cb163-4"><a href="introduction-to-r.html#cb163-4" aria-hidden="true" tabindex="-1"></a>ag<span class="sc">$</span>fruit <span class="ot">&lt;-</span> <span class="fu">factor</span>(ag<span class="sc">$</span>fruit)</span>
-<span id="cb163-5"><a href="introduction-to-r.html#cb163-5" aria-hidden="true" tabindex="-1"></a>ag<span class="sc">$</span>fruit</span></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="introduction-to-r.html#cb160-1" aria-hidden="true" tabindex="-1"></a>fruit <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;apples&quot;</span>, <span class="st">&quot;oranges&quot;</span>, <span class="st">&quot;bananas&quot;</span>, <span class="st">&quot;oranges&quot;</span>)</span>
+<span id="cb160-2"><a href="introduction-to-r.html#cb160-2" aria-hidden="true" tabindex="-1"></a>farm <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;organic&quot;</span>, <span class="st">&quot;conventional&quot;</span>, <span class="st">&quot;organic&quot;</span>, <span class="st">&quot;organic&quot;</span>)</span>
+<span id="cb160-3"><a href="introduction-to-r.html#cb160-3" aria-hidden="true" tabindex="-1"></a>ag <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">cbind</span>(fruit, farm))</span>
+<span id="cb160-4"><a href="introduction-to-r.html#cb160-4" aria-hidden="true" tabindex="-1"></a>ag<span class="sc">$</span>fruit <span class="ot">&lt;-</span> <span class="fu">factor</span>(ag<span class="sc">$</span>fruit)</span>
+<span id="cb160-5"><a href="introduction-to-r.html#cb160-5" aria-hidden="true" tabindex="-1"></a>ag<span class="sc">$</span>fruit</span></code></pre></div>
 <pre><code>## [1] apples  oranges bananas oranges
 ## Levels: apples bananas oranges</code></pre>
 <p><strong>Factor example</strong></p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="introduction-to-r.html#cb165-1" aria-hidden="true" tabindex="-1"></a>sierraFeb<span class="sc">$</span>COUNTY <span class="ot">&lt;-</span> <span class="fu">factor</span>(sierraFeb<span class="sc">$</span>COUNTY)</span>
-<span id="cb165-2"><a href="introduction-to-r.html#cb165-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(sierraFeb<span class="sc">$</span>COUNTY)</span></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="introduction-to-r.html#cb162-1" aria-hidden="true" tabindex="-1"></a>sierraFeb<span class="sc">$</span>COUNTY <span class="ot">&lt;-</span> <span class="fu">factor</span>(sierraFeb<span class="sc">$</span>COUNTY)</span>
+<span id="cb162-2"><a href="introduction-to-r.html#cb162-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(sierraFeb<span class="sc">$</span>COUNTY)</span></code></pre></div>
 <pre><code>##  Factor w/ 21 levels &quot;Amador&quot;,&quot;Butte&quot;,..: 20 14 7 12 12 2 19 11 2 19 ...</code></pre>
 </div>
 </div>
@@ -790,8 +774,8 @@ operational structures are used in all computer programming languages:</p>
 <p><code>for(i in 1:10) print(paste(i, 1/i))</code></p></li>
 <li><p>Functions (defining your own then using it in your main script)</p></li>
 </ul>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="introduction-to-r.html#cb167-1" aria-hidden="true" tabindex="-1"></a>turnright <span class="ot">&lt;-</span> <span class="cf">function</span>(ang){(ang <span class="sc">+</span> <span class="dv">90</span>) <span class="sc">%%</span> <span class="dv">360</span>}</span>
-<span id="cb167-2"><a href="introduction-to-r.html#cb167-2" aria-hidden="true" tabindex="-1"></a><span class="fu">turnright</span>(<span class="fu">c</span>(<span class="dv">260</span>, <span class="dv">270</span>, <span class="dv">280</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="introduction-to-r.html#cb164-1" aria-hidden="true" tabindex="-1"></a>turnright <span class="ot">&lt;-</span> <span class="cf">function</span>(ang){(ang <span class="sc">+</span> <span class="dv">90</span>) <span class="sc">%%</span> <span class="dv">360</span>}</span>
+<span id="cb164-2"><a href="introduction-to-r.html#cb164-2" aria-hidden="true" tabindex="-1"></a><span class="fu">turnright</span>(<span class="fu">c</span>(<span class="dv">260</span>, <span class="dv">270</span>, <span class="dv">280</span>))</span></code></pre></div>
 <pre><code>## [1] 350   0  10</code></pre>
 <p><strong>Free-standing scripts</strong></p>
 <p>As we move forward, we’ll be wanting to develop complete, free-standing scripts that have all of the needed libraries and data.
@@ -807,55 +791,30 @@ those packages.</p>
 <p>We’ll use a package that includes data from
 Irizarry, Rafael (2020) <em>Introduction to Data Science</em> section 2.13.1.</p>
 <p>Identify all states with murder rates ≤ that of Italy.</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="introduction-to-r.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dslabs)</span></code></pre></div>
-<pre><code>## Warning: package &#39;dslabs&#39; was built under R version 4.0.4</code></pre>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="introduction-to-r.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(murders)</span>
-<span id="cb171-2"><a href="introduction-to-r.html#cb171-2" aria-hidden="true" tabindex="-1"></a>murder_rate <span class="ot">&lt;-</span> murders<span class="sc">$</span>total <span class="sc">/</span> murders<span class="sc">$</span>population <span class="sc">*</span> <span class="dv">100000</span></span>
-<span id="cb171-3"><a href="introduction-to-r.html#cb171-3" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> murder_rate <span class="sc">&lt;=</span> <span class="fl">0.71</span> </span>
-<span id="cb171-4"><a href="introduction-to-r.html#cb171-4" aria-hidden="true" tabindex="-1"></a>murders<span class="sc">$</span>abb[i]</span></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="introduction-to-r.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dslabs)</span>
+<span id="cb166-2"><a href="introduction-to-r.html#cb166-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(murders)</span>
+<span id="cb166-3"><a href="introduction-to-r.html#cb166-3" aria-hidden="true" tabindex="-1"></a>murder_rate <span class="ot">&lt;-</span> murders<span class="sc">$</span>total <span class="sc">/</span> murders<span class="sc">$</span>population <span class="sc">*</span> <span class="dv">100000</span></span>
+<span id="cb166-4"><a href="introduction-to-r.html#cb166-4" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> murder_rate <span class="sc">&lt;=</span> <span class="fl">0.71</span> </span>
+<span id="cb166-5"><a href="introduction-to-r.html#cb166-5" aria-hidden="true" tabindex="-1"></a>murders<span class="sc">$</span>abb[i]</span></code></pre></div>
 <pre><code>## [1] &quot;HI&quot; &quot;IA&quot; &quot;NH&quot; &quot;ND&quot; &quot;VT&quot;</code></pre>
 <p><strong>which</strong></p>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="introduction-to-r.html#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb173-2"><a href="introduction-to-r.html#cb173-2" aria-hidden="true" tabindex="-1"></a>TRI87 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/TRI_1987_BaySites.csv&quot;</span>)</span></code></pre></div>
-<pre><code>## 
-## -- Column specification --------------------------------------------------------------------------------------------------------------------------------
-## cols(
-##   TRI_FACILITY_ID = col_character(),
-##   count = col_double(),
-##   FACILITY_NAME = col_character(),
-##   COUNTY = col_character(),
-##   air_releases = col_double(),
-##   fugitive_air = col_double(),
-##   stack_air = col_double(),
-##   LATITUDE = col_double(),
-##   LONGITUDE = col_double()
-## )</code></pre>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="introduction-to-r.html#cb175-1" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="fu">which</span>(TRI87<span class="sc">$</span>air_releases <span class="sc">&gt;</span> <span class="fl">1e6</span>)</span>
-<span id="cb175-2"><a href="introduction-to-r.html#cb175-2" aria-hidden="true" tabindex="-1"></a>TRI87<span class="sc">$</span>FACILITY_NAME[i]</span></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="introduction-to-r.html#cb168-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb168-2"><a href="introduction-to-r.html#cb168-2" aria-hidden="true" tabindex="-1"></a>TRI87 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/TRI_1987_BaySites.csv&quot;</span>)</span>
+<span id="cb168-3"><a href="introduction-to-r.html#cb168-3" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="fu">which</span>(TRI87<span class="sc">$</span>air_releases <span class="sc">&gt;</span> <span class="fl">1e6</span>)</span>
+<span id="cb168-4"><a href="introduction-to-r.html#cb168-4" aria-hidden="true" tabindex="-1"></a>TRI87<span class="sc">$</span>FACILITY_NAME[i]</span></code></pre></div>
 <pre><code>## [1] &quot;VALERO REFINING CO-CALI FORNIA BENICIA REFINERY&quot; &quot;TESLA INC&quot;                                      
 ## [3] &quot;TESORO REFINING &amp; MARKETING CO LLC&quot;              &quot;HGST INC&quot;</code></pre>
 <p><strong>%in%</strong></p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="introduction-to-r.html#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb177-2"><a href="introduction-to-r.html#cb177-2" aria-hidden="true" tabindex="-1"></a>csvPath <span class="ot">=</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;TRI_1987_BaySites.csv&quot;</span>, <span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>
-<span id="cb177-3"><a href="introduction-to-r.html#cb177-3" aria-hidden="true" tabindex="-1"></a>TRI87 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(csvPath)</span></code></pre></div>
-<pre><code>## 
-## -- Column specification --------------------------------------------------------------------------------------------------------------------------------
-## cols(
-##   TRI_FACILITY_ID = col_character(),
-##   count = col_double(),
-##   FACILITY_NAME = col_character(),
-##   COUNTY = col_character(),
-##   air_releases = col_double(),
-##   fugitive_air = col_double(),
-##   stack_air = col_double(),
-##   LATITUDE = col_double(),
-##   LONGITUDE = col_double()
-## )</code></pre>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="introduction-to-r.html#cb179-1" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> TRI87<span class="sc">$</span>COUNTY <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;NAPA&quot;</span>,<span class="st">&quot;SONOMA&quot;</span>)</span>
-<span id="cb179-2"><a href="introduction-to-r.html#cb179-2" aria-hidden="true" tabindex="-1"></a>TRI87<span class="sc">$</span>FACILITY_NAME[i]</span></code></pre></div>
-<pre><code>## [1] &quot;SAWYER OF NAPA&quot;                                &quot;BERINGER VINEYARDS&quot;                            &quot;CAL-WOOD DOOR INC&quot;                            
-## [4] &quot;SOLA OPTICAL USA INC&quot;                          &quot;KEYSIGHT TECHNOLOGIES INC&quot;                     &quot;SANTA ROSA STAINLESS STEEL&quot;                   
-## [7] &quot;OPTICAL COATING LABORATORY INC&quot;                &quot;MGM BRAKES&quot;                                    &quot;SEBASTIANI VINEYARDS INC, SONOMA CASK CELLARS&quot;</code></pre>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="introduction-to-r.html#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb170-2"><a href="introduction-to-r.html#cb170-2" aria-hidden="true" tabindex="-1"></a>csvPath <span class="ot">=</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;TRI_1987_BaySites.csv&quot;</span>, <span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>
+<span id="cb170-3"><a href="introduction-to-r.html#cb170-3" aria-hidden="true" tabindex="-1"></a>TRI87 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(csvPath)</span>
+<span id="cb170-4"><a href="introduction-to-r.html#cb170-4" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> TRI87<span class="sc">$</span>COUNTY <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;NAPA&quot;</span>,<span class="st">&quot;SONOMA&quot;</span>)</span>
+<span id="cb170-5"><a href="introduction-to-r.html#cb170-5" aria-hidden="true" tabindex="-1"></a>TRI87<span class="sc">$</span>FACILITY_NAME[i]</span></code></pre></div>
+<pre><code>## [1] &quot;SAWYER OF NAPA&quot;                                &quot;BERINGER VINEYARDS&quot;                           
+## [3] &quot;CAL-WOOD DOOR INC&quot;                             &quot;SOLA OPTICAL USA INC&quot;                         
+## [5] &quot;KEYSIGHT TECHNOLOGIES INC&quot;                     &quot;SANTA ROSA STAINLESS STEEL&quot;                   
+## [7] &quot;OPTICAL COATING LABORATORY INC&quot;                &quot;MGM BRAKES&quot;                                   
+## [9] &quot;SEBASTIANI VINEYARDS INC, SONOMA CASK CELLARS&quot;</code></pre>
 </div>
 <div id="apply-functions" class="section level3" number="2.7.2">
 <h3><span class="header-section-number">2.7.2</span> Apply functions</h3>
@@ -863,17 +822,17 @@ Irizarry, Rafael (2020) <em>Introduction to Data Science</em> section 2.13.1.</p
 <ul>
 <li><code>apply</code> derives values at margins of rows and columns, e.g. to sum across rows or down columns</li>
 </ul>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="introduction-to-r.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="co"># matrix apply – the same would apply to data frames</span></span>
-<span id="cb181-2"><a href="introduction-to-r.html#cb181-2" aria-hidden="true" tabindex="-1"></a>matrix12 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span></span>
-<span id="cb181-3"><a href="introduction-to-r.html#cb181-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(matrix12) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)</span>
-<span id="cb181-4"><a href="introduction-to-r.html#cb181-4" aria-hidden="true" tabindex="-1"></a>rowsums <span class="ot">&lt;-</span> <span class="fu">apply</span>(matrix12, <span class="dv">1</span>, sum)</span>
-<span id="cb181-5"><a href="introduction-to-r.html#cb181-5" aria-hidden="true" tabindex="-1"></a>colsums <span class="ot">&lt;-</span> <span class="fu">apply</span>(matrix12, <span class="dv">2</span>, sum)</span>
-<span id="cb181-6"><a href="introduction-to-r.html#cb181-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(rowsums)</span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="introduction-to-r.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="co"># matrix apply – the same would apply to data frames</span></span>
+<span id="cb172-2"><a href="introduction-to-r.html#cb172-2" aria-hidden="true" tabindex="-1"></a>matrix12 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span></span>
+<span id="cb172-3"><a href="introduction-to-r.html#cb172-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(matrix12) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)</span>
+<span id="cb172-4"><a href="introduction-to-r.html#cb172-4" aria-hidden="true" tabindex="-1"></a>rowsums <span class="ot">&lt;-</span> <span class="fu">apply</span>(matrix12, <span class="dv">1</span>, sum)</span>
+<span id="cb172-5"><a href="introduction-to-r.html#cb172-5" aria-hidden="true" tabindex="-1"></a>colsums <span class="ot">&lt;-</span> <span class="fu">apply</span>(matrix12, <span class="dv">2</span>, sum)</span>
+<span id="cb172-6"><a href="introduction-to-r.html#cb172-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(rowsums)</span></code></pre></div>
 <pre><code>## [1] 78</code></pre>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="introduction-to-r.html#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(colsums)</span></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="introduction-to-r.html#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(colsums)</span></code></pre></div>
 <pre><code>## [1] 78</code></pre>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="introduction-to-r.html#cb185-1" aria-hidden="true" tabindex="-1"></a>zero <span class="ot">&lt;-</span> <span class="fu">sum</span>(rowsums) <span class="sc">-</span> <span class="fu">sum</span>(colsums)</span>
-<span id="cb185-2"><a href="introduction-to-r.html#cb185-2" aria-hidden="true" tabindex="-1"></a>matrix12</span></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="introduction-to-r.html#cb176-1" aria-hidden="true" tabindex="-1"></a>zero <span class="ot">&lt;-</span> <span class="fu">sum</span>(rowsums) <span class="sc">-</span> <span class="fu">sum</span>(colsums)</span>
+<span id="cb176-2"><a href="introduction-to-r.html#cb176-2" aria-hidden="true" tabindex="-1"></a>matrix12</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4]
 ## [1,]    1    4    7   10
 ## [2,]    2    5    8   11
@@ -884,17 +843,17 @@ Irizarry, Rafael (2020) <em>Introduction to Data Science</em> section 2.13.1.</p
 <ul>
 <li>all elements of a vector – unary functions only</li>
 </ul>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="introduction-to-r.html#cb187-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, sqrt)</span></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="introduction-to-r.html#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, sqrt)</span></code></pre></div>
 <pre><code>##  [1] 1.000000 1.414214 1.732051 2.000000 2.236068 2.449490 2.645751 2.828427 3.000000 3.162278 3.316625 3.464102</code></pre>
 <ul>
 <li>or all variables of a data frame (not a matrix), where it works much like a column-based apply (since variables are columns) but more easily interpreted without the need of specifying columns with 2:</li>
 </ul>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="introduction-to-r.html#cb189-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(cars,mean)  <span class="co"># same as apply(cars,2,mean)</span></span></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="introduction-to-r.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(cars,mean)  <span class="co"># same as apply(cars,2,mean)</span></span></code></pre></div>
 <pre><code>## speed  dist 
 ## 15.40 42.98</code></pre>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="introduction-to-r.html#cb191-1" aria-hidden="true" tabindex="-1"></a>temp02 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">10.7</span>,<span class="fl">9.7</span>,<span class="fl">7.7</span>,<span class="fl">9.2</span>,<span class="fl">7.3</span>,<span class="fl">6.7</span>,<span class="fl">4.0</span>,<span class="fl">5.0</span>,<span class="fl">0.9</span>,<span class="sc">-</span><span class="fl">1.1</span>,<span class="sc">-</span><span class="fl">0.8</span>,<span class="sc">-</span><span class="fl">4.4</span>)</span>
-<span id="cb191-2"><a href="introduction-to-r.html#cb191-2" aria-hidden="true" tabindex="-1"></a>temp03 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">13.1</span>,<span class="fl">11.4</span>,<span class="fl">9.4</span>,<span class="fl">10.9</span>,<span class="fl">8.9</span>,<span class="fl">8.4</span>,<span class="fl">6.7</span>,<span class="fl">7.6</span>,<span class="fl">2.8</span>,<span class="fl">1.6</span>,<span class="fl">1.2</span>,<span class="sc">-</span><span class="fl">2.1</span>)</span>
-<span id="cb191-3"><a href="introduction-to-r.html#cb191-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="fu">as.data.frame</span>(<span class="fu">cbind</span>(temp02,temp03)),mean) <span class="co"># has to be a data frame</span></span></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="introduction-to-r.html#cb182-1" aria-hidden="true" tabindex="-1"></a>temp02 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">10.7</span>,<span class="fl">9.7</span>,<span class="fl">7.7</span>,<span class="fl">9.2</span>,<span class="fl">7.3</span>,<span class="fl">6.7</span>,<span class="fl">4.0</span>,<span class="fl">5.0</span>,<span class="fl">0.9</span>,<span class="sc">-</span><span class="fl">1.1</span>,<span class="sc">-</span><span class="fl">0.8</span>,<span class="sc">-</span><span class="fl">4.4</span>)</span>
+<span id="cb182-2"><a href="introduction-to-r.html#cb182-2" aria-hidden="true" tabindex="-1"></a>temp03 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">13.1</span>,<span class="fl">11.4</span>,<span class="fl">9.4</span>,<span class="fl">10.9</span>,<span class="fl">8.9</span>,<span class="fl">8.4</span>,<span class="fl">6.7</span>,<span class="fl">7.6</span>,<span class="fl">2.8</span>,<span class="fl">1.6</span>,<span class="fl">1.2</span>,<span class="sc">-</span><span class="fl">2.1</span>)</span>
+<span id="cb182-3"><a href="introduction-to-r.html#cb182-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="fu">as.data.frame</span>(<span class="fu">cbind</span>(temp02,temp03)),mean) <span class="co"># has to be a data frame</span></span></code></pre></div>
 <pre><code>##   temp02   temp03 
 ## 4.575000 6.658333</code></pre>
 <p>While various <code>apply</code> functions are in base R, the purrr package takes these further.<br />

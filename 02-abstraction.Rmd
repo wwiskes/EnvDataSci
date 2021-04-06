@@ -54,7 +54,7 @@ How created
     - `read.csv` creates a regular data frame
 - You can also use the `tibble()` function
 
-```{r}
+```{r message=F}
 library(tidyverse) # includes readr, ggplot2, and dplyr which we'll use in this chapter
 library(iGIScData)
 csvPath <- system.file("extdata","TRI_1987_BaySites.csv", package="iGIScData")
@@ -92,7 +92,7 @@ summary(eucoakrainfallrunoffTDR)
 
 ## Visualizing data with a Tukey box plot
 
-```{r}
+```{r warning=F}
 ggplot(data = eucoakrainfallrunoffTDR) + geom_boxplot(mapping = aes(x=site, y=runoffL_euc))
 ```
 

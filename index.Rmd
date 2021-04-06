@@ -14,6 +14,7 @@ description: "Background, concepts and exercises for using R for environmental d
 
 This book is intended to work in concert with a series of lectures and discussions among the participants in Geog 604/704 Environmental Data Science at San Francisco State University.  Data packages will be created on GitHub.
 
+## Packages to install
 
 Participants need to have R and RStudio installed, and at least the following packages:
 
@@ -23,14 +24,36 @@ Participants need to have R and RStudio installed, and at least the following pa
     - stringr
     - tidyr
 - lubridate
-- palmerpenguins
 - sf
 - raster
 - tmap
 
+To install these packages, the following code will work:
+
+```
+install.packages(c("tidyverse", "lubridate", "sf", "raster", "tmap"))
+```
+
+You can always add more packages as needed, do them one at a time, whatever. But 
+generally *don't reinstall the packages again with the unless you actually want to reinstall it*, maybe because it's been updated. So generally I don't include `install.packages()` in my script. Once installed, you can access the packages with the library function, e.g.
+
+```{r message=F}
+library(tidyverse)
+```
+
+which you *will* want to include in your script.
+ 
 ## Data
-We'll be using data from various sources, but one repository that includes data we've developed in the iGISc at SFSU is stored on GitHub and you'll need to install that package. GitHub packages require a bit more work on 
+
+We'll be using data from various sources, including data on CRAN like the code packages 
+above which you install the same way -- so use `install.packages("palmerpenguins")`. 
+
+<img src="logoIGIScSFSU150.png" align="right">
+
+We've also created a repository on GitHub that includes data we've developed in the iGISc at SFSU, and youu'll need to install that package a slightly different way. GitHub packages require a bit more work on 
 the user's part since we need to first install `remotes` then use that to install the GitHub data package:
+
+
 
 ```
 install.packages("remotes")
@@ -41,9 +64,8 @@ Note: you can also use `devtools` instead of `remotes` if you have that installe
 
 Then you can access it just like other built-in data by including:
 
-```{r}
+```{r message=F}
 library(iGIScData)
-
 ```
 
 To see what's in it, you'll see the various datasets listed in:
@@ -61,4 +83,4 @@ TRI87 <- read_csv(csvPath)
 
 or something similar for shapefiles.
 
-<img src="logoIGIScSFSU150.png">
+
