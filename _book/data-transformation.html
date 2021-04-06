@@ -493,6 +493,70 @@ from a pivot_longer:</p>
 <span id="cb26-5"><a href="data-transformation.html#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(site, runoffL)) <span class="sc">+</span></span>
 <span id="cb26-6"><a href="data-transformation.html#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_grid</span>(tree <span class="sc">~</span> .)</span></code></pre></div>
 <p><img src="EnvDataSci_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><strong>Combining a pivot with bind_rows to create a runoff/rainfall scatterplot colored by tree</strong></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="data-transformation.html#cb27-1" aria-hidden="true" tabindex="-1"></a>runoffPivot <span class="ot">&lt;-</span> eucoakrainfallrunoffTDR <span class="sc">%&gt;%</span></span>
+<span id="cb27-2"><a href="data-transformation.html#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">&quot;runoffL&quot;</span>),</span>
+<span id="cb27-3"><a href="data-transformation.html#cb27-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;tree&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;runoffL&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb27-4"><a href="data-transformation.html#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tree =</span> <span class="fu">str_sub</span>(tree, <span class="fu">str_length</span>(tree)<span class="sc">-</span><span class="dv">2</span>, <span class="fu">str_length</span>(tree)),</span>
+<span id="cb27-5"><a href="data-transformation.html#cb27-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">Date =</span> <span class="fu">as.Date</span>(date, <span class="st">&quot;%m/%d/%Y&quot;</span>))</span>
+<span id="cb27-6"><a href="data-transformation.html#cb27-6" aria-hidden="true" tabindex="-1"></a>euc <span class="ot">&lt;-</span> runoffPivot <span class="sc">%&gt;%</span></span>
+<span id="cb27-7"><a href="data-transformation.html#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tree <span class="sc">==</span> <span class="st">&quot;euc&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb27-8"><a href="data-transformation.html#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rain_subcanopy =</span> rain_euc,</span>
+<span id="cb27-9"><a href="data-transformation.html#cb27-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">slope =</span> slope_euc,    <span class="at">aspect =</span> aspect_euc,</span>
+<span id="cb27-10"><a href="data-transformation.html#cb27-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">surface_tension =</span> surface_tension_euc,</span>
+<span id="cb27-11"><a href="data-transformation.html#cb27-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">runoff_rainfall_ratio =</span> runoff_rainfall_ratio_euc) <span class="sc">%&gt;%</span></span>
+<span id="cb27-12"><a href="data-transformation.html#cb27-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(site, <span class="st">`</span><span class="at">site #</span><span class="st">`</span>, tree, Date, month, rain_mm, </span>
+<span id="cb27-13"><a href="data-transformation.html#cb27-13" aria-hidden="true" tabindex="-1"></a>         rain_subcanopy, slope, aspect, runoffL,     </span>
+<span id="cb27-14"><a href="data-transformation.html#cb27-14" aria-hidden="true" tabindex="-1"></a>         surface_tension, runoff_rainfall_ratio)</span>
+<span id="cb27-15"><a href="data-transformation.html#cb27-15" aria-hidden="true" tabindex="-1"></a>oak <span class="ot">&lt;-</span> runoffPivot <span class="sc">%&gt;%</span></span>
+<span id="cb27-16"><a href="data-transformation.html#cb27-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tree <span class="sc">==</span> <span class="st">&quot;oak&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb27-17"><a href="data-transformation.html#cb27-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rain_subcanopy =</span> rain_oak,</span>
+<span id="cb27-18"><a href="data-transformation.html#cb27-18" aria-hidden="true" tabindex="-1"></a>         <span class="at">slope =</span> slope_oak, <span class="at">aspect =</span> aspect_oak,</span>
+<span id="cb27-19"><a href="data-transformation.html#cb27-19" aria-hidden="true" tabindex="-1"></a>         <span class="at">surface_tension =</span> surface_tension_oak,</span>
+<span id="cb27-20"><a href="data-transformation.html#cb27-20" aria-hidden="true" tabindex="-1"></a>         <span class="at">runoff_rainfall_ratio =</span> runoff_rainfall_ratio_oak) <span class="sc">%&gt;%</span></span>
+<span id="cb27-21"><a href="data-transformation.html#cb27-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(site, <span class="st">`</span><span class="at">site #</span><span class="st">`</span>, tree, Date, month, rain_mm, </span>
+<span id="cb27-22"><a href="data-transformation.html#cb27-22" aria-hidden="true" tabindex="-1"></a>         rain_subcanopy, slope, aspect, runoffL, </span>
+<span id="cb27-23"><a href="data-transformation.html#cb27-23" aria-hidden="true" tabindex="-1"></a>         surface_tension, runoff_rainfall_ratio)</span>
+<span id="cb27-24"><a href="data-transformation.html#cb27-24" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(euc, oak) <span class="sc">%&gt;%</span></span>
+<span id="cb27-25"><a href="data-transformation.html#cb27-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb27-26"><a href="data-transformation.html#cb27-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> rain_mm, <span class="at">y =</span> runoffL, <span class="at">color =</span> tree)) <span class="sc">+</span></span>
+<span id="cb27-27"><a href="data-transformation.html#cb27-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> rain_mm, <span class="at">y=</span> runoffL, <span class="at">color =</span> tree), </span>
+<span id="cb27-28"><a href="data-transformation.html#cb27-28" aria-hidden="true" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="sc">+</span></span>
+<span id="cb27-29"><a href="data-transformation.html#cb27-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;seagreen4&quot;</span>, <span class="st">&quot;orange3&quot;</span>))</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><strong>Using pivot_wider with traffic stop data (from Claudia Engel (2021) <em>Data Wrangling</em>)</strong></p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="data-transformation.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb28-2"><a href="data-transformation.html#cb28-2" aria-hidden="true" tabindex="-1"></a>csvPath <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;MS_trafficstops_bw_age.csv&quot;</span>, <span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>
+<span id="cb28-3"><a href="data-transformation.html#cb28-3" aria-hidden="true" tabindex="-1"></a>trafficStops <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(csvPath) <span class="sc">%&gt;%</span></span>
+<span id="cb28-4"><a href="data-transformation.html#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">year</span>(stop_date))</span>
+<span id="cb28-5"><a href="data-transformation.html#cb28-5" aria-hidden="true" tabindex="-1"></a>trafficCounts <span class="ot">&lt;-</span> trafficStops <span class="sc">%&gt;%</span></span>
+<span id="cb28-6"><a href="data-transformation.html#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(year,violation_raw)</span>
+<span id="cb28-7"><a href="data-transformation.html#cb28-7" aria-hidden="true" tabindex="-1"></a>trafficCounts <span class="sc">%&gt;%</span></span>
+<span id="cb28-8"><a href="data-transformation.html#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> year, </span>
+<span id="cb28-9"><a href="data-transformation.html#cb28-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> n)</span></code></pre></div>
+<pre><code>## # A tibble: 19 x 5
+##    violation_raw                                     `2013` `2014` `2015` `2016`
+##    &lt;chr&gt;                                              &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;
+##  1 ??                                                  5018   4368   2935    682
+##  2 Careless driving                                     607    561    709    270
+##  3 Child or youth restraint not used properly as re~   1313    873    709    286
+##  4 Driving while license suspended                     3258   2306   2455    516
+##  5 Driving wrong way                                     40     33     38     14
+##  6 Expired or no non-commercial driver license or p~   1433    984   1166    358
+##  7 Failure to comply with financial responsibility ~      1      1     NA     NA
+##  8 Failure to maintain required liability insurance    7096   5193   7889   2874
+##  9 Failure to obey sign or traffic control device       607    356    388    122
+## 10 Failure to yield right of way (FTY ROW)              292    206    203     65
+## 11 Following too closely                                179    117    153     41
+## 12 Improper passing                                     178    155    178     71
+## 13 Improper turn                                         65     54     67     22
+## 14 Operating without equipment as required by law       967    744    964    425
+## 15 Other (non-mapped)                                   421    289    365    129
+## 16 Reckless driving                                     233    229    284    125
+## 17 Seat belt not used properly as required             7027   5768   4912   2547
+## 18 Speeding                                             713    948    978    167
+## 19 Speeding - Regulated or posted speed limit and a~  39818  31888  38721  15044</code></pre>
+<p>Note that this table is <em>not</em> tidy, but provides a useful table for a report.</p>
 
 </div>
 </div>
