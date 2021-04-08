@@ -442,7 +442,7 @@ sierraFeb$COUNTY <- factor(sierraFeb$COUNTY)
 str(sierraFeb$COUNTY)
 ```
 
-## Programming and Logic
+## Programming scripts in RStudio
 
 Given the exploratory nature of the R language, we sometimes forget that it provides
 significant capabilities as a programming language where we can solve more 
@@ -470,17 +470,21 @@ turnright <- function(ang){(ang + 90) %% 360}
 turnright(c(260, 270, 280))
 ```
 
-**Free-standing scripts**
+**Free-standing scripts and RStudio projects**
 
-As we move forward, we'll be wanting to develop complete, free-standing scripts that have all of the needed libraries and data.
-Your scripts should stand on their own. One example of this that may seem insignificant is using print() statements instead
-of just naming the object or variable in the console. While that is common in exploratory work, we need to learn to 
-create free-standing scripts.  
+As we move forward, we'll be wanting to develop complete, free-standing scripts that have all of the needed libraries and data. Your scripts should stand on their own. One example of this that may seem insignificant is using print() statements instead of just naming the object or variable in the console. While that is common in exploratory work, we need to learn to create free-standing scripts.
 
 However, "free standing" still allows for loading libraries of functions we'll be using. 
-We're still talking about high-level (*scripting*), not low-level programming, so we can depend on those libraries that 
-any user can access by installing those packages. If we develop our own packages, we just need to provide the user the ability to install
-those packages. 
+We're still talking about high-level (*scripting*), not low-level programming, so we can depend on those libraries that any user can access by installing those packages. If we develop our own packages, we just need to provide the user the ability to install those packages. 
+
+**RStudio projects** are going to be the way we'll want to work for the rest of this book, so each time we start looking at a new data set, or even create one from scratch, you need to create a project to 
+go with it, using File/New Project and specify in a new directory (unless you already have data in an existing one), and specifying a location. Most likely the default location to place it in will work but you can change that.
+
+In this book, we'll be making a lot of use of data provided for you from various data packages such as built-in data, `palmerpenguins` or `iGIScData`, but they correspond to specific research projects, such as Sierra Climate to which several data frames and spatial data apply. *You should create a* **`sierra`** *project for those problems* and return to it every time it applies. 
+
+In that project, you'll build a series of scripts, many of which you'll re-use to develop new methods. When you're working on your own project with your own data, which you should store in a **`data`** folder inside the project folder.  *All paths are local, and the default working directory is the project folder, so you can specify* **`"data/mydata.csv"`** *as the path* to a csv of that name.
+
+*It's very important to get used to working this way, so start now.*
 
 ### Subsetting with logic
 
