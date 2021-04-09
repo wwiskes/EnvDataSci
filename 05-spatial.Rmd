@@ -424,10 +424,11 @@ m
 
 1. Using the method of building simple sf geometries, build a simple 1x1 square object and plot it. Remember that you have to close the polygon, so the first vertex is the same as the last (of 5) vertices. Provide your code only.
 
-```{r include=F}
+```{r include=T}
 library(sf)
 library(tidyverse)
-square <- st_sfc(st_polygon(list(rbind(c(0,0),c(0,1),c(1,1),c(1,0),c(0,0)))))
+s <- st_polygon(list(rbind(c(0,1),c(0,2),c(1,2),c(1,1),c(0,1))))
+square <- st_sfc(s)
 plot(square)
 ```
 

@@ -27,10 +27,10 @@ fig:unnamed-chunk-105
 fig:unnamed-chunk-106
 fig:unnamed-chunk-107
 fig:unnamed-chunk-108
-fig:unnamed-chunk-119
-fig:unnamed-chunk-120
-fig:unnamed-chunk-121
-fig:unnamed-chunk-124
+fig:unnamed-chunk-127
+fig:unnamed-chunk-128
+fig:unnamed-chunk-129
+fig:unnamed-chunk-132
 prerequisites
 packages-to-install
 data
@@ -54,7 +54,7 @@ dimensions-for-arrays-and-matrices
 data-frames
 factors
 categorical-data-and-factors
-programming-and-logic
+programming-scripts-in-rstudio
 subsetting-with-logic
 apply-functions
 exercises
@@ -102,7 +102,9 @@ pairs-plot
 exercises-2
 data-transformation
 data-joins
-set-operation
+set-operations
+binding-rows-and-columns
+pivotting-data-frames
 spatial-data-and-maps
 spatial-data
 simple-feature-geometry-sfg-and-simple-feature-column-sfc
@@ -127,11 +129,3 @@ usethisuse_data
 usethiscreate_package
 devtoolsdocument
 raw-data
-binding-rows-and-columns
-set-operations
-pivotting-data-frames
-fig:unnamed-chunk-28
-fig:unnamed-chunk-29
-fig:unnamed-chunk-30
-fig:unnamed-chunk-39
-programming-scripts-in-rstudio
