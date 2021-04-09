@@ -109,9 +109,11 @@ print(cos(pi))
 A *statement* in R does something. It represents a directive we're assigning to the computer, or
 maybe the environment we're running on the computer (like RStudio, which then runs R). A simple
 `print()` *statement* seems a lot like what we just did when we entered an expression in the console, but recognize that it *does something*:
+
 ```{r}
 print("Hello, World")
 ```
+
 Which is the same as just typing "Hello, World", but that's just because the job of the console is to display what we are looking for [where we are the ones *doing something*], or if our statement includes something to display.
 
 Statements in R are usually put on one line, but you can use a semicolon to have multiple statements on one line, if desired:
@@ -480,7 +482,7 @@ We're still talking about high-level (*scripting*), not low-level programming, s
 **RStudio projects** are going to be the way we'll want to work for the rest of this book, so each time we start looking at a new data set, or even create one from scratch, you need to create a project to 
 go with it, using File/New Project and specify in a new directory (unless you already have data in an existing one), and specifying a location. Most likely the default location to place it in will work but you can change that.
 
-In this book, we'll be making a lot of use of data provided for you from various data packages such as built-in data, `palmerpenguins` or `iGIScData`, but they correspond to specific research projects, such as Sierra Climate to which several data frames and spatial data apply. *You should create a* **`sierra`** *project for those problems* and return to it every time it applies. 
+In this book, we'll be making a lot of use of data provided for you from various data packages such as built-in data, `palmerpenguins` or `iGIScData`, but they correspond to specific research projects, such as Sierra Climate to which several data frames and spatial data apply. *You should create a* **`sierra`** *project for those problems* and return to it every time it applies. We'll try to include a reminder about using a particular project.
 
 In that project, you'll build a series of scripts, many of which you'll re-use to develop new methods. When you're working on your own project with your own data, which you should store in a **`data`** folder inside the project folder.  *All paths are local, and the default working directory is the project folder, so you can specify* **`"data/mydata.csv"`** *as the path* to a csv of that name.
 
@@ -491,7 +493,7 @@ In that project, you'll build a series of scripts, many of which you'll re-use t
 We'll use a package that includes data from 
 Irizarry, Rafael (2020) *Introduction to Data Science* section 2.13.1.
 
-Identify all states with murder rates ≤ that of Italy.
+Identify all states with murder rates ≤ that of Italy. [Start by creating a **new `murders` project**.]
 
 
 ```{r message=F, warning=F}
@@ -501,7 +503,7 @@ murder_rate <- murders$total / murders$population * 100000
 i <- murder_rate <= 0.71 
 murders$abb[i]
 ```
-**which**
+**which** [in a **new `air_quality` project**]
 
 ```{r message=F}
 library(readr)
@@ -525,7 +527,8 @@ TRI87$FACILITY_NAME[i]
 
 There are many apply functions in R, and they largely obviate the need for looping.  For instance: 
 
-- `apply` derives values at margins of rows and columns, e.g. to sum across rows or down columns
+- `apply` derives values at margins of rows and columns, e.g. to sum across rows or down columns [create the following in a **new `generic_methods` project** which you'll use for a variety of generic methods]
+
 ```{r}
 # matrix apply – the same would apply to data frames
 matrix12 <- 1:12
@@ -569,7 +572,7 @@ See:  <a href="https://github.com/rstudio/cheatsheets/raw/master/purrr.pdf">purr
 
 ## Exercises
 
-1. Assign variables for your name, city, state and zip code, and use `paste()` to combine them, and assign them to the variable `me`. What is the class of `me`?
+1. Assign variables for your name, city, state and zip code, and use `paste()` to combine them, and assign them to the variable `me`. What is the class of `me`? [Do this and the next several problems in your `generic_methods` project.]
 
 2. Knowing that trigonometric functions require angles (including azimuth directions) to be provided in radians, and that degrees can be converted into radians by dividing by 180 and multiplying that by pi, derive the sine of 30 degrees with an R expression.  (Base R knows what pi is, so you can just use `pi`)
 
@@ -583,7 +586,7 @@ See:  <a href="https://github.com/rstudio/cheatsheets/raw/master/purrr.pdf">purr
 
 7. Create two sequences, `a` and `b`, with `a` all odd numbers from 1 to 99, `b` all even numbers from 2 to 100. Then derive c through vector division of `b/a`.  Plot a and c together as a scatterplot.
 
-8. Build the sierradata data frame from the data at the top of the **Matrices** section, also given here:
+8. Build the sierradata data frame [in a **`sierra` project**] from the data at the top of the **Matrices** section, also given here:
 ```
 temp <- c(10.7, 9.7, 7.7, 9.2, 7.3, 6.7, 4.0, 5.0, 0.9, -1.1, -0.8, -4.4)
 elev <- c(52, 394, 510, 564, 725, 848, 1042, 1225, 1486, 1775, 1899, 2551)

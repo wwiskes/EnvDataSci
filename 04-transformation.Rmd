@@ -20,7 +20,7 @@ To bring in variables from another data frame based on a common join field.
 There are multiple types of joins. Probably the most common is **`left_join`** since it starts
 from the data frame (or sf) you want to continue working with and bring in data
 from an additional source. You'll retain all records of the first data set. 
-For any non-matches, NA is assigned.
+For any non-matches, NA is assigned. [**`air_quality`**]
 
 ```{r message=F, warning=F}
 library(tidyverse)
@@ -49,7 +49,7 @@ and NA is assigned to non-matches
 We need to join NCDC monthly climate data for all California weather stations to a selection of 82 stations that are in the Sierra. 
 
 - The monthly data has 12 rows (1/month) for each station
-- The right_join gets all months for all stations, so we weed out the non-Sierra stations by removing NAs from a field only with Sierra station data
+- The right_join gets all months for all stations, so we weed out the non-Sierra stations by removing NAs from a field only with Sierra station data [**`sierra`**]
 
 ```{r message=F}
 sierra <- right_join(sierraStations, CA_ClimateNormals, by="STATION") %>%
@@ -74,6 +74,7 @@ are the same for each, or not the same. The three set methods are:
 - `dplyr::`**`union(x,y)`** retains rows that appear in either or both of x and y
 - `dplyr::`**`setdiff(x,y)`** retains rows that appear in x but not in y
 
+[**`generic_methods`**]
 ```{r message=F}
 squares <- (1:10)^2
 evens <- seq(0,100,2)
@@ -122,7 +123,7 @@ useful in a particular analysis. A common need to pivot is 2+ variables with the
 In our meadows study cross-section created by intersecting normalized difference vegetation
 index (NDVI) values from multispectral drone imagery with surveyed elevation and vegetation
 types (xeric, mesic, and hydric), we have fields `NDVIgrowing` from a July 2019 growing season and `NDVIsenescent` from a September 2020 dry season, but would like 'growing' and 'senescent' to be factors with a single `NDVI` variable. This is how we used `pivot_longer` to accomplish this, using data
-from the `iGIScData` data package:
+from the `iGIScData` data package [**`NDVI`**]:
 
 ```{r message=F}
 XSptsPheno <- XSptsNDVI %>%
@@ -147,7 +148,7 @@ XSptsPheno %>%
 ```
 
 Pivots turn out to be commonly useful. Runoff graphing from the Eucalyptus/Oak study also benefitted
-from a pivot_longer:
+from a pivot_longer [**`eucoak`**]:
 
 ```{r message=F, warning=F}
 eucoakrainfallrunoffTDR %>%

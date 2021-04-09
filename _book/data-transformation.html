@@ -24,7 +24,7 @@
 <meta name="author" content="Jerry Davis" />
 
 
-<meta name="date" content="2021-04-08" />
+<meta name="date" content="2021-04-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -53,16 +53,6 @@
 
 <link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
-<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-1.3.1/leaflet.js"></script>
-<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
-<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
-<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.0.3/leaflet.js"></script>
-<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
-<script src="libs/leaflet-providers-plugin-2.0.3/leaflet-providers-plugin.js"></script>
 
 
 <style type="text/css">
@@ -219,16 +209,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3" data-path="visualization.html"><a href="visualization.html#plotting-two-variables"><i class="fa fa-check"></i><b>4.3</b> Plotting two variables</a>
 <ul>
 <li class="chapter" data-level="4.3.1" data-path="visualization.html"><a href="visualization.html#two-continuous-variables"><i class="fa fa-check"></i><b>4.3.1</b> Two continuous variables</a></li>
-<li class="chapter" data-level="4.3.2" data-path="visualization.html"><a href="visualization.html#two-variables-one-discrete"><i class="fa fa-check"></i><b>4.3.2</b> Two variables, one discrete</a></li>
+<li class="chapter" data-level="4.3.2" data-path="visualization.html"><a href="visualization.html#two-variables-one-discrete-eucoak"><i class="fa fa-check"></i><b>4.3.2</b> Two variables, one discrete [<code>eucoak</code>]</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="visualization.html"><a href="visualization.html#color-systems"><i class="fa fa-check"></i><b>4.4</b> Color systems</a>
 <ul>
 <li class="chapter" data-level="4.4.1" data-path="visualization.html"><a href="visualization.html#color-from-variable-in-aesthetics"><i class="fa fa-check"></i><b>4.4.1</b> Color from variable, in aesthetics</a></li>
-<li class="chapter" data-level="4.4.2" data-path="visualization.html"><a href="visualization.html#trend-line"><i class="fa fa-check"></i><b>4.4.2</b> Trend line</a></li>
+<li class="chapter" data-level="4.4.2" data-path="visualization.html"><a href="visualization.html#trend-line-sierra"><i class="fa fa-check"></i><b>4.4.2</b> Trend line [<code>sierra</code>]</a></li>
 <li class="chapter" data-level="4.4.3" data-path="visualization.html"><a href="visualization.html#general-symbology"><i class="fa fa-check"></i><b>4.4.3</b> General symbology</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="visualization.html"><a href="visualization.html#titles-and-subtitles"><i class="fa fa-check"></i><b>4.5</b> Titles and subtitles</a></li>
-<li class="chapter" data-level="4.6" data-path="visualization.html"><a href="visualization.html#pairs-plot"><i class="fa fa-check"></i><b>4.6</b> Pairs Plot</a></li>
+<li class="chapter" data-level="4.6" data-path="visualization.html"><a href="visualization.html#pairs-plot-sierra"><i class="fa fa-check"></i><b>4.6</b> Pairs Plot [<code>sierra</code>]</a></li>
 <li class="chapter" data-level="4.7" data-path="visualization.html"><a href="visualization.html#exercises-2"><i class="fa fa-check"></i><b>4.7</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>5</b> Data Transformation</a>
@@ -317,20 +307,20 @@ relevant cheat sheet is actually called “Data Wrangling”
 There are multiple types of joins. Probably the most common is <strong><code>left_join</code></strong> since it starts
 from the data frame (or sf) you want to continue working with and bring in data
 from an additional source. You’ll retain all records of the first data set.
-For any non-matches, NA is assigned.</p>
-<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="data-transformation.html#cb336-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb336-2"><a href="data-transformation.html#cb336-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(iGIScData)</span>
-<span id="cb336-3"><a href="data-transformation.html#cb336-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
-<span id="cb336-4"><a href="data-transformation.html#cb336-4" aria-hidden="true" tabindex="-1"></a>csvPath <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;CA_MdInc.csv&quot;</span>, <span class="at">package =</span> <span class="st">&quot;iGIScData&quot;</span>)</span>
-<span id="cb336-5"><a href="data-transformation.html#cb336-5" aria-hidden="true" tabindex="-1"></a>income <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(csvPath) <span class="sc">%&gt;%</span></span>
-<span id="cb336-6"><a href="data-transformation.html#cb336-6" aria-hidden="true" tabindex="-1"></a>   <span class="fu">select</span>(trID, HHinc2016) <span class="sc">%&gt;%</span></span>
-<span id="cb336-7"><a href="data-transformation.html#cb336-7" aria-hidden="true" tabindex="-1"></a>   <span class="fu">mutate</span>(<span class="at">HHinc2016 =</span> <span class="fu">as.numeric</span>(HHinc2016),</span>
-<span id="cb336-8"><a href="data-transformation.html#cb336-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">joinid =</span> <span class="fu">str_c</span>(<span class="st">&quot;0&quot;</span>, trID)) <span class="sc">%&gt;%</span></span>
-<span id="cb336-9"><a href="data-transformation.html#cb336-9" aria-hidden="true" tabindex="-1"></a>   <span class="fu">select</span>(joinid, HHinc2016)</span>
-<span id="cb336-10"><a href="data-transformation.html#cb336-10" aria-hidden="true" tabindex="-1"></a>census <span class="ot">&lt;-</span> BayAreaTracts <span class="sc">%&gt;%</span></span>
-<span id="cb336-11"><a href="data-transformation.html#cb336-11" aria-hidden="true" tabindex="-1"></a>   <span class="fu">left_join</span>(income, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;FIPS&quot;</span> <span class="ot">=</span> <span class="st">&quot;joinid&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb336-12"><a href="data-transformation.html#cb336-12" aria-hidden="true" tabindex="-1"></a>   <span class="fu">select</span>(FIPS, POP12_SQMI, POP2012, HHinc2016)</span>
-<span id="cb336-13"><a href="data-transformation.html#cb336-13" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(census <span class="sc">%&gt;%</span> <span class="fu">st_set_geometry</span>(<span class="cn">NULL</span>))</span></code></pre></div>
+For any non-matches, NA is assigned. [<strong><code>air_quality</code></strong>]</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="data-transformation.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="data-transformation.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(iGIScData)</span>
+<span id="cb1-3"><a href="data-transformation.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb1-4"><a href="data-transformation.html#cb1-4" aria-hidden="true" tabindex="-1"></a>csvPath <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;CA_MdInc.csv&quot;</span>, <span class="at">package =</span> <span class="st">&quot;iGIScData&quot;</span>)</span>
+<span id="cb1-5"><a href="data-transformation.html#cb1-5" aria-hidden="true" tabindex="-1"></a>income <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(csvPath) <span class="sc">%&gt;%</span></span>
+<span id="cb1-6"><a href="data-transformation.html#cb1-6" aria-hidden="true" tabindex="-1"></a>   <span class="fu">select</span>(trID, HHinc2016) <span class="sc">%&gt;%</span></span>
+<span id="cb1-7"><a href="data-transformation.html#cb1-7" aria-hidden="true" tabindex="-1"></a>   <span class="fu">mutate</span>(<span class="at">HHinc2016 =</span> <span class="fu">as.numeric</span>(HHinc2016),</span>
+<span id="cb1-8"><a href="data-transformation.html#cb1-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">joinid =</span> <span class="fu">str_c</span>(<span class="st">&quot;0&quot;</span>, trID)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-9"><a href="data-transformation.html#cb1-9" aria-hidden="true" tabindex="-1"></a>   <span class="fu">select</span>(joinid, HHinc2016)</span>
+<span id="cb1-10"><a href="data-transformation.html#cb1-10" aria-hidden="true" tabindex="-1"></a>census <span class="ot">&lt;-</span> BayAreaTracts <span class="sc">%&gt;%</span></span>
+<span id="cb1-11"><a href="data-transformation.html#cb1-11" aria-hidden="true" tabindex="-1"></a>   <span class="fu">left_join</span>(income, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;FIPS&quot;</span> <span class="ot">=</span> <span class="st">&quot;joinid&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-12"><a href="data-transformation.html#cb1-12" aria-hidden="true" tabindex="-1"></a>   <span class="fu">select</span>(FIPS, POP12_SQMI, POP2012, HHinc2016)</span>
+<span id="cb1-13"><a href="data-transformation.html#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(census <span class="sc">%&gt;%</span> <span class="fu">st_set_geometry</span>(<span class="cn">NULL</span>))</span></code></pre></div>
 <pre><code>##          FIPS POP12_SQMI POP2012 HHinc2016
 ## 1 06001400100   1118.797    2976    177417
 ## 2 06001400200   9130.435    2100    153125
@@ -349,11 +339,11 @@ and NA is assigned to non-matches</li>
 We need to join NCDC monthly climate data for all California weather stations to a selection of 82 stations that are in the Sierra.</p>
 <ul>
 <li>The monthly data has 12 rows (1/month) for each station</li>
-<li>The right_join gets all months for all stations, so we weed out the non-Sierra stations by removing NAs from a field only with Sierra station data</li>
+<li>The right_join gets all months for all stations, so we weed out the non-Sierra stations by removing NAs from a field only with Sierra station data [<strong><code>sierra</code></strong>]</li>
 </ul>
-<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="data-transformation.html#cb338-1" aria-hidden="true" tabindex="-1"></a>sierra <span class="ot">&lt;-</span> <span class="fu">right_join</span>(sierraStations, CA_ClimateNormals, <span class="at">by=</span><span class="st">&quot;STATION&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb338-2"><a href="data-transformation.html#cb338-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(STATION_NA)) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>STATION_NA)</span>
-<span id="cb338-3"><a href="data-transformation.html#cb338-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sierra <span class="sc">%&gt;%</span> <span class="fu">filter</span>(DATE <span class="sc">==</span> <span class="st">&quot;01&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(NAME, ELEVATION, <span class="st">`</span><span class="at">MLY-TAVG-NORMAL</span><span class="st">`</span>), <span class="at">n=</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="data-transformation.html#cb3-1" aria-hidden="true" tabindex="-1"></a>sierra <span class="ot">&lt;-</span> <span class="fu">right_join</span>(sierraStations, CA_ClimateNormals, <span class="at">by=</span><span class="st">&quot;STATION&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="data-transformation.html#cb3-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(STATION_NA)) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>STATION_NA)</span>
+<span id="cb3-3"><a href="data-transformation.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sierra <span class="sc">%&gt;%</span> <span class="fu">filter</span>(DATE <span class="sc">==</span> <span class="st">&quot;01&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(NAME, ELEVATION, <span class="st">`</span><span class="at">MLY-TAVG-NORMAL</span><span class="st">`</span>), <span class="at">n=</span><span class="dv">10</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 10 x 3
 ##    NAME                              ELEVATION `MLY-TAVG-NORMAL`
 ##    &lt;chr&gt;                                 &lt;dbl&gt;             &lt;dbl&gt;
@@ -369,8 +359,8 @@ We need to join NCDC monthly climate data for all California weather stations to
 ## 10 LEMON COVE, CA US                     156.                8.6</code></pre>
 <p>The exact same thing however could be accomplished with an inner_join and
 it doesn’t required removing the NAs:</p>
-<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="data-transformation.html#cb340-1" aria-hidden="true" tabindex="-1"></a>sierraAlso <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(sierraStations, CA_ClimateNormals, <span class="at">by=</span><span class="st">&quot;STATION&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb340-2"><a href="data-transformation.html#cb340-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">select</span>(<span class="sc">-</span>STATION_NA)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="data-transformation.html#cb5-1" aria-hidden="true" tabindex="-1"></a>sierraAlso <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(sierraStations, CA_ClimateNormals, <span class="at">by=</span><span class="st">&quot;STATION&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="data-transformation.html#cb5-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">select</span>(<span class="sc">-</span>STATION_NA)</span></code></pre></div>
 </div>
 <div id="set-operations" class="section level2" number="5.2">
 <h2><span class="header-section-number">5.2</span> Set Operations</h2>
@@ -381,21 +371,22 @@ are the same for each, or not the same. The three set methods are:</p>
 <li><code>dplyr::</code><strong><code>union(x,y)</code></strong> retains rows that appear in either or both of x and y</li>
 <li><code>dplyr::</code><strong><code>setdiff(x,y)</code></strong> retains rows that appear in x but not in y</li>
 </ul>
-<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="data-transformation.html#cb341-1" aria-hidden="true" tabindex="-1"></a>squares <span class="ot">&lt;-</span> (<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb341-2"><a href="data-transformation.html#cb341-2" aria-hidden="true" tabindex="-1"></a>evens <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">2</span>)</span>
-<span id="cb341-3"><a href="data-transformation.html#cb341-3" aria-hidden="true" tabindex="-1"></a>squares</span></code></pre></div>
+<p>[<strong><code>generic_methods</code></strong>]</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="data-transformation.html#cb6-1" aria-hidden="true" tabindex="-1"></a>squares <span class="ot">&lt;-</span> (<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb6-2"><a href="data-transformation.html#cb6-2" aria-hidden="true" tabindex="-1"></a>evens <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">2</span>)</span>
+<span id="cb6-3"><a href="data-transformation.html#cb6-3" aria-hidden="true" tabindex="-1"></a>squares</span></code></pre></div>
 <pre><code>##  [1]   1   4   9  16  25  36  49  64  81 100</code></pre>
-<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="data-transformation.html#cb343-1" aria-hidden="true" tabindex="-1"></a>evens</span></code></pre></div>
-<pre><code>##  [1]   0   2   4   6   8  10  12  14  16  18  20  22  24  26  28  30  32  34  36  38  40  42  44  46  48
-## [26]  50  52  54  56  58  60  62  64  66  68  70  72  74  76  78  80  82  84  86  88  90  92  94  96  98
-## [51] 100</code></pre>
-<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="data-transformation.html#cb345-1" aria-hidden="true" tabindex="-1"></a><span class="fu">intersect</span>(squares,evens)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="data-transformation.html#cb8-1" aria-hidden="true" tabindex="-1"></a>evens</span></code></pre></div>
+<pre><code>##  [1]   0   2   4   6   8  10  12  14  16  18  20  22  24  26  28  30  32  34  36
+## [20]  38  40  42  44  46  48  50  52  54  56  58  60  62  64  66  68  70  72  74
+## [39]  76  78  80  82  84  86  88  90  92  94  96  98 100</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="data-transformation.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">intersect</span>(squares,evens)</span></code></pre></div>
 <pre><code>## [1]   4  16  36  64 100</code></pre>
-<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="data-transformation.html#cb347-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(<span class="fu">union</span>(squares,evens))</span></code></pre></div>
-<pre><code>##  [1]   0   1   2   4   6   8   9  10  12  14  16  18  20  22  24  25  26  28  30  32  34  36  38  40  42
-## [26]  44  46  48  49  50  52  54  56  58  60  62  64  66  68  70  72  74  76  78  80  81  82  84  86  88
-## [51]  90  92  94  96  98 100</code></pre>
-<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="data-transformation.html#cb349-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(<span class="fu">setdiff</span>(squares,evens))</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="data-transformation.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(<span class="fu">union</span>(squares,evens))</span></code></pre></div>
+<pre><code>##  [1]   0   1   2   4   6   8   9  10  12  14  16  18  20  22  24  25  26  28  30
+## [20]  32  34  36  38  40  42  44  46  48  49  50  52  54  56  58  60  62  64  66
+## [39]  68  70  72  74  76  78  80  81  82  84  86  88  90  92  94  96  98 100</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="data-transformation.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(<span class="fu">setdiff</span>(squares,evens))</span></code></pre></div>
 <pre><code>## [1]  1  9 25 49 81</code></pre>
 </div>
 <div id="binding-rows-and-columns" class="section level2" number="5.3">
@@ -403,38 +394,40 @@ are the same for each, or not the same. The three set methods are:</p>
 <p>These <code>dplyr</code> functions are similar to <code>cbind</code> and <code>rbind</code> in base R, but always
 creates data frames. For instance, <code>cbind</code> usually creates matrices, and make all vectors
 the same class. Note that in <code>bind_cols</code>, the order of data in rows must be the same.</p>
-<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="data-transformation.html#cb351-1" aria-hidden="true" tabindex="-1"></a>states <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(<span class="at">abb=</span>state.abb,</span>
-<span id="cb351-2"><a href="data-transformation.html#cb351-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">name=</span>state.name,</span>
-<span id="cb351-3"><a href="data-transformation.html#cb351-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">region=</span>state.region,</span>
-<span id="cb351-4"><a href="data-transformation.html#cb351-4" aria-hidden="true" tabindex="-1"></a>                    state.x77)</span>
-<span id="cb351-5"><a href="data-transformation.html#cb351-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(states)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="data-transformation.html#cb16-1" aria-hidden="true" tabindex="-1"></a>states <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(<span class="at">abb=</span>state.abb,</span>
+<span id="cb16-2"><a href="data-transformation.html#cb16-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">name=</span>state.name,</span>
+<span id="cb16-3"><a href="data-transformation.html#cb16-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">region=</span>state.region,</span>
+<span id="cb16-4"><a href="data-transformation.html#cb16-4" aria-hidden="true" tabindex="-1"></a>                    state.x77)</span>
+<span id="cb16-5"><a href="data-transformation.html#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(states)</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 11
-##   abb   name       region Population Income Illiteracy `Life Exp` Murder `HS Grad` Frost   Area
-##   &lt;chr&gt; &lt;chr&gt;      &lt;fct&gt;       &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
-## 1 AL    Alabama    South        3615   3624        2.1       69.0   15.1      41.3    20  50708
-## 2 AK    Alaska     West          365   6315        1.5       69.3   11.3      66.7   152 566432
-## 3 AZ    Arizona    West         2212   4530        1.8       70.6    7.8      58.1    15 113417
-## 4 AR    Arkansas   South        2110   3378        1.9       70.7   10.1      39.9    65  51945
-## 5 CA    California West        21198   5114        1.1       71.7   10.3      62.6    20 156361
-## 6 CO    Colorado   West         2541   4884        0.7       72.1    6.8      63.9   166 103766</code></pre>
+##   abb   name  region Population Income Illiteracy `Life Exp` Murder `HS Grad`
+##   &lt;chr&gt; &lt;chr&gt; &lt;fct&gt;       &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;
+## 1 AL    Alab~ South        3615   3624        2.1       69.0   15.1      41.3
+## 2 AK    Alas~ West          365   6315        1.5       69.3   11.3      66.7
+## 3 AZ    Ariz~ West         2212   4530        1.8       70.6    7.8      58.1
+## 4 AR    Arka~ South        2110   3378        1.9       70.7   10.1      39.9
+## 5 CA    Cali~ West        21198   5114        1.1       71.7   10.3      62.6
+## 6 CO    Colo~ West         2541   4884        0.7       72.1    6.8      63.9
+## # ... with 2 more variables: Frost &lt;dbl&gt;, Area &lt;dbl&gt;</code></pre>
 <p>To compare, note that <code>cbind</code> converts numeric fields to character when any other
 field is character, and character fields are converted to character integers where there are any repeats,
 which would require manipulating them into factors:</p>
-<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="data-transformation.html#cb353-1" aria-hidden="true" tabindex="-1"></a>states <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(<span class="fu">cbind</span>(<span class="at">abb=</span>state.abb, </span>
-<span id="cb353-2"><a href="data-transformation.html#cb353-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">name=</span>state.name, </span>
-<span id="cb353-3"><a href="data-transformation.html#cb353-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">region=</span>state.region,</span>
-<span id="cb353-4"><a href="data-transformation.html#cb353-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">division=</span>state.division,</span>
-<span id="cb353-5"><a href="data-transformation.html#cb353-5" aria-hidden="true" tabindex="-1"></a>                          state.x77))</span>
-<span id="cb353-6"><a href="data-transformation.html#cb353-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(states)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="data-transformation.html#cb18-1" aria-hidden="true" tabindex="-1"></a>states <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(<span class="fu">cbind</span>(<span class="at">abb=</span>state.abb, </span>
+<span id="cb18-2"><a href="data-transformation.html#cb18-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">name=</span>state.name, </span>
+<span id="cb18-3"><a href="data-transformation.html#cb18-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">region=</span>state.region,</span>
+<span id="cb18-4"><a href="data-transformation.html#cb18-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">division=</span>state.division,</span>
+<span id="cb18-5"><a href="data-transformation.html#cb18-5" aria-hidden="true" tabindex="-1"></a>                          state.x77))</span>
+<span id="cb18-6"><a href="data-transformation.html#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(states)</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 12
-##   abb   name       region division Population Income Illiteracy `Life Exp` Murder `HS Grad` Frost Area  
-##   &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; 
-## 1 AL    Alabama    2      4        3615       3624   2.1        69.05      15.1   41.3      20    50708 
-## 2 AK    Alaska     4      9        365        6315   1.5        69.31      11.3   66.7      152   566432
-## 3 AZ    Arizona    4      8        2212       4530   1.8        70.55      7.8    58.1      15    113417
-## 4 AR    Arkansas   2      5        2110       3378   1.9        70.66      10.1   39.9      65    51945 
-## 5 CA    California 4      9        21198      5114   1.1        71.71      10.3   62.6      20    156361
-## 6 CO    Colorado   4      8        2541       4884   0.7        72.06      6.8    63.9      166   103766</code></pre>
+##   abb   name  region division Population Income Illiteracy `Life Exp` Murder
+##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt; 
+## 1 AL    Alab~ 2      4        3615       3624   2.1        69.05      15.1  
+## 2 AK    Alas~ 4      9        365        6315   1.5        69.31      11.3  
+## 3 AZ    Ariz~ 4      8        2212       4530   1.8        70.55      7.8   
+## 4 AR    Arka~ 2      5        2110       3378   1.9        70.66      10.1  
+## 5 CA    Cali~ 4      9        21198      5114   1.1        71.71      10.3  
+## 6 CO    Colo~ 4      8        2541       4884   0.7        72.06      6.8   
+## # ... with 3 more variables: `HS Grad` &lt;chr&gt;, Frost &lt;chr&gt;, Area &lt;chr&gt;</code></pre>
 </div>
 <div id="pivotting-data-frames" class="section level2" number="5.4">
 <h2><span class="header-section-number">5.4</span> Pivotting data frames</h2>
@@ -447,123 +440,123 @@ useful in a particular analysis. A common need to pivot is 2+ variables with the
 <p>In our meadows study cross-section created by intersecting normalized difference vegetation
 index (NDVI) values from multispectral drone imagery with surveyed elevation and vegetation
 types (xeric, mesic, and hydric), we have fields <code>NDVIgrowing</code> from a July 2019 growing season and <code>NDVIsenescent</code> from a September 2020 dry season, but would like ‘growing’ and ‘senescent’ to be factors with a single <code>NDVI</code> variable. This is how we used <code>pivot_longer</code> to accomplish this, using data
-from the <code>iGIScData</code> data package:</p>
-<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="data-transformation.html#cb355-1" aria-hidden="true" tabindex="-1"></a>XSptsPheno <span class="ot">&lt;-</span> XSptsNDVI <span class="sc">%&gt;%</span></span>
-<span id="cb355-2"><a href="data-transformation.html#cb355-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">&quot;NDVI&quot;</span>), </span>
-<span id="cb355-3"><a href="data-transformation.html#cb355-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">names_to =</span> <span class="st">&quot;phenology&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;NDVI&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb355-4"><a href="data-transformation.html#cb355-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">phenology =</span> <span class="fu">str_sub</span>(phenology, <span class="dv">5</span>, <span class="fu">str_length</span>(phenology)))</span></code></pre></div>
+from the <code>iGIScData</code> data package [<strong><code>NDVI</code></strong>]:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="data-transformation.html#cb20-1" aria-hidden="true" tabindex="-1"></a>XSptsPheno <span class="ot">&lt;-</span> XSptsNDVI <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="data-transformation.html#cb20-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">&quot;NDVI&quot;</span>), </span>
+<span id="cb20-3"><a href="data-transformation.html#cb20-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">names_to =</span> <span class="st">&quot;phenology&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;NDVI&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-4"><a href="data-transformation.html#cb20-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">phenology =</span> <span class="fu">str_sub</span>(phenology, <span class="dv">5</span>, <span class="fu">str_length</span>(phenology)))</span></code></pre></div>
 <p>Then to do the opposite use <code>pivot_wider</code>:</p>
-<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="data-transformation.html#cb356-1" aria-hidden="true" tabindex="-1"></a>XSptsPheno <span class="sc">%&gt;%</span></span>
-<span id="cb356-2"><a href="data-transformation.html#cb356-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> phenology, <span class="at">names_prefix =</span> <span class="st">&quot;NDVI&quot;</span>, </span>
-<span id="cb356-3"><a href="data-transformation.html#cb356-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> NDVI)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="data-transformation.html#cb21-1" aria-hidden="true" tabindex="-1"></a>XSptsPheno <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="data-transformation.html#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> phenology, <span class="at">names_prefix =</span> <span class="st">&quot;NDVI&quot;</span>, </span>
+<span id="cb21-3"><a href="data-transformation.html#cb21-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> NDVI)</span></code></pre></div>
 <pre><code>## # A tibble: 29 x 6
-##    DistNtoS elevation vegetation      geometry                    NDVIgrowing NDVIsenescent
-##       &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;                             &lt;dbl&gt;         &lt;dbl&gt;
-##  1      0       1510. Artemisia       c(718649.456, 4397466.714)        0.326         0.140
-##  2     16.7     1510. mixed graminoid c(718649.4309, 4397450.077)       0.627         0.259
-##  3     28.6     1510. mixed graminoid c(718649.413, 4397438.222)        0.686         0.329
-##  4     30.5     1510. mixed graminoid c(718649.4101, 4397436.33)        0.668         0.282
-##  5     31.1     1510. mixed graminoid c(718649.4092, 4397435.732)       0.655         0.266
-##  6     33.4     1510. mixed graminoid c(718649.4058, 4397433.441)       0.617         0.274
-##  7     35.6     1510. mixed graminoid c(718649.4025, 4397431.249)       0.623         0.275
-##  8     37       1510. mixed graminoid c(718649.4004, 4397429.854)       0.589         0.242
-##  9     74       1510. mixed graminoid c(718649.3448, 4397392.994)       0.641         0.325
-## 10    101       1510. mixed graminoid c(718649.3042, 4397366.097)       0.558         0.312
+##    DistNtoS elevation vegetation    geometry           NDVIgrowing NDVIsenescent
+##       &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;                    &lt;dbl&gt;         &lt;dbl&gt;
+##  1      0       1510. Artemisia     c(718649.456, 439~       0.326         0.140
+##  2     16.7     1510. mixed gramin~ c(718649.4309, 43~       0.627         0.259
+##  3     28.6     1510. mixed gramin~ c(718649.413, 439~       0.686         0.329
+##  4     30.5     1510. mixed gramin~ c(718649.4101, 43~       0.668         0.282
+##  5     31.1     1510. mixed gramin~ c(718649.4092, 43~       0.655         0.266
+##  6     33.4     1510. mixed gramin~ c(718649.4058, 43~       0.617         0.274
+##  7     35.6     1510. mixed gramin~ c(718649.4025, 43~       0.623         0.275
+##  8     37       1510. mixed gramin~ c(718649.4004, 43~       0.589         0.242
+##  9     74       1510. mixed gramin~ c(718649.3448, 43~       0.641         0.325
+## 10    101       1510. mixed gramin~ c(718649.3042, 43~       0.558         0.312
 ## # ... with 19 more rows</code></pre>
-<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="data-transformation.html#cb358-1" aria-hidden="true" tabindex="-1"></a>XSptsPheno</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="data-transformation.html#cb23-1" aria-hidden="true" tabindex="-1"></a>XSptsPheno</span></code></pre></div>
 <pre><code>## # A tibble: 58 x 6
-##    DistNtoS elevation vegetation      geometry                    phenology  NDVI
-##       &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;                       &lt;chr&gt;     &lt;dbl&gt;
-##  1      0       1510. Artemisia       c(718649.456, 4397466.714)  growing   0.326
-##  2      0       1510. Artemisia       c(718649.456, 4397466.714)  senescent 0.140
-##  3     16.7     1510. mixed graminoid c(718649.4309, 4397450.077) growing   0.627
-##  4     16.7     1510. mixed graminoid c(718649.4309, 4397450.077) senescent 0.259
-##  5     28.6     1510. mixed graminoid c(718649.413, 4397438.222)  growing   0.686
-##  6     28.6     1510. mixed graminoid c(718649.413, 4397438.222)  senescent 0.329
-##  7     30.5     1510. mixed graminoid c(718649.4101, 4397436.33)  growing   0.668
-##  8     30.5     1510. mixed graminoid c(718649.4101, 4397436.33)  senescent 0.282
-##  9     31.1     1510. mixed graminoid c(718649.4092, 4397435.732) growing   0.655
-## 10     31.1     1510. mixed graminoid c(718649.4092, 4397435.732) senescent 0.266
+##    DistNtoS elevation vegetation      geometry                   phenology  NDVI
+##       &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;                      &lt;chr&gt;     &lt;dbl&gt;
+##  1      0       1510. Artemisia       c(718649.456, 4397466.714) growing   0.326
+##  2      0       1510. Artemisia       c(718649.456, 4397466.714) senescent 0.140
+##  3     16.7     1510. mixed graminoid c(718649.4309, 4397450.07~ growing   0.627
+##  4     16.7     1510. mixed graminoid c(718649.4309, 4397450.07~ senescent 0.259
+##  5     28.6     1510. mixed graminoid c(718649.413, 4397438.222) growing   0.686
+##  6     28.6     1510. mixed graminoid c(718649.413, 4397438.222) senescent 0.329
+##  7     30.5     1510. mixed graminoid c(718649.4101, 4397436.33) growing   0.668
+##  8     30.5     1510. mixed graminoid c(718649.4101, 4397436.33) senescent 0.282
+##  9     31.1     1510. mixed graminoid c(718649.4092, 4397435.73~ growing   0.655
+## 10     31.1     1510. mixed graminoid c(718649.4092, 4397435.73~ senescent 0.266
 ## # ... with 48 more rows</code></pre>
-<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="data-transformation.html#cb360-1" aria-hidden="true" tabindex="-1"></a>XSptsPheno <span class="sc">%&gt;%</span></span>
-<span id="cb360-2"><a href="data-transformation.html#cb360-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb360-3"><a href="data-transformation.html#cb360-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(elevation, NDVI, <span class="at">shape=</span>vegetation, </span>
-<span id="cb360-4"><a href="data-transformation.html#cb360-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> phenology), <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
-<span id="cb360-5"><a href="data-transformation.html#cb360-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(elevation, NDVI, </span>
-<span id="cb360-6"><a href="data-transformation.html#cb360-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> phenology), <span class="at">method=</span><span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-122-1.png" width="672" /></p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="data-transformation.html#cb25-1" aria-hidden="true" tabindex="-1"></a>XSptsPheno <span class="sc">%&gt;%</span></span>
+<span id="cb25-2"><a href="data-transformation.html#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb25-3"><a href="data-transformation.html#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(elevation, NDVI, <span class="at">shape=</span>vegetation, </span>
+<span id="cb25-4"><a href="data-transformation.html#cb25-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> phenology), <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb25-5"><a href="data-transformation.html#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(elevation, NDVI, </span>
+<span id="cb25-6"><a href="data-transformation.html#cb25-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> phenology), <span class="at">method=</span><span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>Pivots turn out to be commonly useful. Runoff graphing from the Eucalyptus/Oak study also benefitted
-from a pivot_longer:</p>
-<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="data-transformation.html#cb361-1" aria-hidden="true" tabindex="-1"></a>eucoakrainfallrunoffTDR <span class="sc">%&gt;%</span></span>
-<span id="cb361-2"><a href="data-transformation.html#cb361-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">&quot;runoffL&quot;</span>),</span>
-<span id="cb361-3"><a href="data-transformation.html#cb361-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;tree&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;runoffL&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb361-4"><a href="data-transformation.html#cb361-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tree =</span> <span class="fu">str_sub</span>(tree, <span class="fu">str_length</span>(tree)<span class="sc">-</span><span class="dv">2</span>, <span class="fu">str_length</span>(tree))) <span class="sc">%&gt;%</span></span>
-<span id="cb361-5"><a href="data-transformation.html#cb361-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(site, runoffL)) <span class="sc">+</span></span>
-<span id="cb361-6"><a href="data-transformation.html#cb361-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_grid</span>(tree <span class="sc">~</span> .)</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-123-1.png" width="672" /></p>
+from a pivot_longer [<strong><code>eucoak</code></strong>]:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="data-transformation.html#cb26-1" aria-hidden="true" tabindex="-1"></a>eucoakrainfallrunoffTDR <span class="sc">%&gt;%</span></span>
+<span id="cb26-2"><a href="data-transformation.html#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">&quot;runoffL&quot;</span>),</span>
+<span id="cb26-3"><a href="data-transformation.html#cb26-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;tree&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;runoffL&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb26-4"><a href="data-transformation.html#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tree =</span> <span class="fu">str_sub</span>(tree, <span class="fu">str_length</span>(tree)<span class="sc">-</span><span class="dv">2</span>, <span class="fu">str_length</span>(tree))) <span class="sc">%&gt;%</span></span>
+<span id="cb26-5"><a href="data-transformation.html#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(site, runoffL)) <span class="sc">+</span></span>
+<span id="cb26-6"><a href="data-transformation.html#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_grid</span>(tree <span class="sc">~</span> .)</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p><strong>Combining a pivot with bind_rows to create a runoff/rainfall scatterplot colored by tree</strong></p>
-<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="data-transformation.html#cb362-1" aria-hidden="true" tabindex="-1"></a>runoffPivot <span class="ot">&lt;-</span> eucoakrainfallrunoffTDR <span class="sc">%&gt;%</span></span>
-<span id="cb362-2"><a href="data-transformation.html#cb362-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">&quot;runoffL&quot;</span>),</span>
-<span id="cb362-3"><a href="data-transformation.html#cb362-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;tree&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;runoffL&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb362-4"><a href="data-transformation.html#cb362-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tree =</span> <span class="fu">str_sub</span>(tree, <span class="fu">str_length</span>(tree)<span class="sc">-</span><span class="dv">2</span>, <span class="fu">str_length</span>(tree)),</span>
-<span id="cb362-5"><a href="data-transformation.html#cb362-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">Date =</span> <span class="fu">as.Date</span>(date, <span class="st">&quot;%m/%d/%Y&quot;</span>))</span>
-<span id="cb362-6"><a href="data-transformation.html#cb362-6" aria-hidden="true" tabindex="-1"></a>euc <span class="ot">&lt;-</span> runoffPivot <span class="sc">%&gt;%</span></span>
-<span id="cb362-7"><a href="data-transformation.html#cb362-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tree <span class="sc">==</span> <span class="st">&quot;euc&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb362-8"><a href="data-transformation.html#cb362-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rain_subcanopy =</span> rain_euc,</span>
-<span id="cb362-9"><a href="data-transformation.html#cb362-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">slope =</span> slope_euc,    <span class="at">aspect =</span> aspect_euc,</span>
-<span id="cb362-10"><a href="data-transformation.html#cb362-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">surface_tension =</span> surface_tension_euc,</span>
-<span id="cb362-11"><a href="data-transformation.html#cb362-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">runoff_rainfall_ratio =</span> runoff_rainfall_ratio_euc) <span class="sc">%&gt;%</span></span>
-<span id="cb362-12"><a href="data-transformation.html#cb362-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(site, <span class="st">`</span><span class="at">site #</span><span class="st">`</span>, tree, Date, month, rain_mm, </span>
-<span id="cb362-13"><a href="data-transformation.html#cb362-13" aria-hidden="true" tabindex="-1"></a>         rain_subcanopy, slope, aspect, runoffL,     </span>
-<span id="cb362-14"><a href="data-transformation.html#cb362-14" aria-hidden="true" tabindex="-1"></a>         surface_tension, runoff_rainfall_ratio)</span>
-<span id="cb362-15"><a href="data-transformation.html#cb362-15" aria-hidden="true" tabindex="-1"></a>oak <span class="ot">&lt;-</span> runoffPivot <span class="sc">%&gt;%</span></span>
-<span id="cb362-16"><a href="data-transformation.html#cb362-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tree <span class="sc">==</span> <span class="st">&quot;oak&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb362-17"><a href="data-transformation.html#cb362-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rain_subcanopy =</span> rain_oak,</span>
-<span id="cb362-18"><a href="data-transformation.html#cb362-18" aria-hidden="true" tabindex="-1"></a>         <span class="at">slope =</span> slope_oak, <span class="at">aspect =</span> aspect_oak,</span>
-<span id="cb362-19"><a href="data-transformation.html#cb362-19" aria-hidden="true" tabindex="-1"></a>         <span class="at">surface_tension =</span> surface_tension_oak,</span>
-<span id="cb362-20"><a href="data-transformation.html#cb362-20" aria-hidden="true" tabindex="-1"></a>         <span class="at">runoff_rainfall_ratio =</span> runoff_rainfall_ratio_oak) <span class="sc">%&gt;%</span></span>
-<span id="cb362-21"><a href="data-transformation.html#cb362-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(site, <span class="st">`</span><span class="at">site #</span><span class="st">`</span>, tree, Date, month, rain_mm, </span>
-<span id="cb362-22"><a href="data-transformation.html#cb362-22" aria-hidden="true" tabindex="-1"></a>         rain_subcanopy, slope, aspect, runoffL, </span>
-<span id="cb362-23"><a href="data-transformation.html#cb362-23" aria-hidden="true" tabindex="-1"></a>         surface_tension, runoff_rainfall_ratio)</span>
-<span id="cb362-24"><a href="data-transformation.html#cb362-24" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(euc, oak) <span class="sc">%&gt;%</span></span>
-<span id="cb362-25"><a href="data-transformation.html#cb362-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb362-26"><a href="data-transformation.html#cb362-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> rain_mm, <span class="at">y =</span> runoffL, <span class="at">color =</span> tree)) <span class="sc">+</span></span>
-<span id="cb362-27"><a href="data-transformation.html#cb362-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> rain_mm, <span class="at">y=</span> runoffL, <span class="at">color =</span> tree), </span>
-<span id="cb362-28"><a href="data-transformation.html#cb362-28" aria-hidden="true" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="sc">+</span></span>
-<span id="cb362-29"><a href="data-transformation.html#cb362-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;seagreen4&quot;</span>, <span class="st">&quot;orange3&quot;</span>))</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-124-1.png" width="672" /></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="data-transformation.html#cb27-1" aria-hidden="true" tabindex="-1"></a>runoffPivot <span class="ot">&lt;-</span> eucoakrainfallrunoffTDR <span class="sc">%&gt;%</span></span>
+<span id="cb27-2"><a href="data-transformation.html#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">&quot;runoffL&quot;</span>),</span>
+<span id="cb27-3"><a href="data-transformation.html#cb27-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;tree&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;runoffL&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb27-4"><a href="data-transformation.html#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tree =</span> <span class="fu">str_sub</span>(tree, <span class="fu">str_length</span>(tree)<span class="sc">-</span><span class="dv">2</span>, <span class="fu">str_length</span>(tree)),</span>
+<span id="cb27-5"><a href="data-transformation.html#cb27-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">Date =</span> <span class="fu">as.Date</span>(date, <span class="st">&quot;%m/%d/%Y&quot;</span>))</span>
+<span id="cb27-6"><a href="data-transformation.html#cb27-6" aria-hidden="true" tabindex="-1"></a>euc <span class="ot">&lt;-</span> runoffPivot <span class="sc">%&gt;%</span></span>
+<span id="cb27-7"><a href="data-transformation.html#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tree <span class="sc">==</span> <span class="st">&quot;euc&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb27-8"><a href="data-transformation.html#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rain_subcanopy =</span> rain_euc,</span>
+<span id="cb27-9"><a href="data-transformation.html#cb27-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">slope =</span> slope_euc,    <span class="at">aspect =</span> aspect_euc,</span>
+<span id="cb27-10"><a href="data-transformation.html#cb27-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">surface_tension =</span> surface_tension_euc,</span>
+<span id="cb27-11"><a href="data-transformation.html#cb27-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">runoff_rainfall_ratio =</span> runoff_rainfall_ratio_euc) <span class="sc">%&gt;%</span></span>
+<span id="cb27-12"><a href="data-transformation.html#cb27-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(site, <span class="st">`</span><span class="at">site #</span><span class="st">`</span>, tree, Date, month, rain_mm, </span>
+<span id="cb27-13"><a href="data-transformation.html#cb27-13" aria-hidden="true" tabindex="-1"></a>         rain_subcanopy, slope, aspect, runoffL,     </span>
+<span id="cb27-14"><a href="data-transformation.html#cb27-14" aria-hidden="true" tabindex="-1"></a>         surface_tension, runoff_rainfall_ratio)</span>
+<span id="cb27-15"><a href="data-transformation.html#cb27-15" aria-hidden="true" tabindex="-1"></a>oak <span class="ot">&lt;-</span> runoffPivot <span class="sc">%&gt;%</span></span>
+<span id="cb27-16"><a href="data-transformation.html#cb27-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tree <span class="sc">==</span> <span class="st">&quot;oak&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb27-17"><a href="data-transformation.html#cb27-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rain_subcanopy =</span> rain_oak,</span>
+<span id="cb27-18"><a href="data-transformation.html#cb27-18" aria-hidden="true" tabindex="-1"></a>         <span class="at">slope =</span> slope_oak, <span class="at">aspect =</span> aspect_oak,</span>
+<span id="cb27-19"><a href="data-transformation.html#cb27-19" aria-hidden="true" tabindex="-1"></a>         <span class="at">surface_tension =</span> surface_tension_oak,</span>
+<span id="cb27-20"><a href="data-transformation.html#cb27-20" aria-hidden="true" tabindex="-1"></a>         <span class="at">runoff_rainfall_ratio =</span> runoff_rainfall_ratio_oak) <span class="sc">%&gt;%</span></span>
+<span id="cb27-21"><a href="data-transformation.html#cb27-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(site, <span class="st">`</span><span class="at">site #</span><span class="st">`</span>, tree, Date, month, rain_mm, </span>
+<span id="cb27-22"><a href="data-transformation.html#cb27-22" aria-hidden="true" tabindex="-1"></a>         rain_subcanopy, slope, aspect, runoffL, </span>
+<span id="cb27-23"><a href="data-transformation.html#cb27-23" aria-hidden="true" tabindex="-1"></a>         surface_tension, runoff_rainfall_ratio)</span>
+<span id="cb27-24"><a href="data-transformation.html#cb27-24" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(euc, oak) <span class="sc">%&gt;%</span></span>
+<span id="cb27-25"><a href="data-transformation.html#cb27-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb27-26"><a href="data-transformation.html#cb27-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> rain_mm, <span class="at">y =</span> runoffL, <span class="at">color =</span> tree)) <span class="sc">+</span></span>
+<span id="cb27-27"><a href="data-transformation.html#cb27-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> rain_mm, <span class="at">y=</span> runoffL, <span class="at">color =</span> tree), </span>
+<span id="cb27-28"><a href="data-transformation.html#cb27-28" aria-hidden="true" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="sc">+</span></span>
+<span id="cb27-29"><a href="data-transformation.html#cb27-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;seagreen4&quot;</span>, <span class="st">&quot;orange3&quot;</span>))</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p><strong>Using pivot_wider with traffic stop data (from Claudia Engel (2021) <em>Data Wrangling</em>)</strong></p>
-<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="data-transformation.html#cb363-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
-<span id="cb363-2"><a href="data-transformation.html#cb363-2" aria-hidden="true" tabindex="-1"></a>csvPath <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;MS_trafficstops_bw_age.csv&quot;</span>, <span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>
-<span id="cb363-3"><a href="data-transformation.html#cb363-3" aria-hidden="true" tabindex="-1"></a>trafficStops <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(csvPath) <span class="sc">%&gt;%</span></span>
-<span id="cb363-4"><a href="data-transformation.html#cb363-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">year</span>(stop_date))</span>
-<span id="cb363-5"><a href="data-transformation.html#cb363-5" aria-hidden="true" tabindex="-1"></a>trafficCounts <span class="ot">&lt;-</span> trafficStops <span class="sc">%&gt;%</span></span>
-<span id="cb363-6"><a href="data-transformation.html#cb363-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(year,violation_raw)</span>
-<span id="cb363-7"><a href="data-transformation.html#cb363-7" aria-hidden="true" tabindex="-1"></a>trafficCounts <span class="sc">%&gt;%</span></span>
-<span id="cb363-8"><a href="data-transformation.html#cb363-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> year, </span>
-<span id="cb363-9"><a href="data-transformation.html#cb363-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> n)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="data-transformation.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb28-2"><a href="data-transformation.html#cb28-2" aria-hidden="true" tabindex="-1"></a>csvPath <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;MS_trafficstops_bw_age.csv&quot;</span>, <span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>
+<span id="cb28-3"><a href="data-transformation.html#cb28-3" aria-hidden="true" tabindex="-1"></a>trafficStops <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(csvPath) <span class="sc">%&gt;%</span></span>
+<span id="cb28-4"><a href="data-transformation.html#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">year</span>(stop_date))</span>
+<span id="cb28-5"><a href="data-transformation.html#cb28-5" aria-hidden="true" tabindex="-1"></a>trafficCounts <span class="ot">&lt;-</span> trafficStops <span class="sc">%&gt;%</span></span>
+<span id="cb28-6"><a href="data-transformation.html#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(year,violation_raw)</span>
+<span id="cb28-7"><a href="data-transformation.html#cb28-7" aria-hidden="true" tabindex="-1"></a>trafficCounts <span class="sc">%&gt;%</span></span>
+<span id="cb28-8"><a href="data-transformation.html#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> year, </span>
+<span id="cb28-9"><a href="data-transformation.html#cb28-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> n)</span></code></pre></div>
 <pre><code>## # A tibble: 19 x 5
-##    violation_raw                                               `2013` `2014` `2015` `2016`
-##    &lt;chr&gt;                                                        &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;
-##  1 ??                                                            5018   4368   2935    682
-##  2 Careless driving                                               607    561    709    270
-##  3 Child or youth restraint not used properly as required        1313    873    709    286
-##  4 Driving while license suspended                               3258   2306   2455    516
-##  5 Driving wrong way                                               40     33     38     14
-##  6 Expired or no non-commercial driver license or permit         1433    984   1166    358
-##  7 Failure to comply with financial responsibility law              1      1     NA     NA
-##  8 Failure to maintain required liability insurance              7096   5193   7889   2874
-##  9 Failure to obey sign or traffic control device                 607    356    388    122
-## 10 Failure to yield right of way (FTY ROW)                        292    206    203     65
-## 11 Following too closely                                          179    117    153     41
-## 12 Improper passing                                               178    155    178     71
-## 13 Improper turn                                                   65     54     67     22
-## 14 Operating without equipment as required by law                 967    744    964    425
-## 15 Other (non-mapped)                                             421    289    365    129
-## 16 Reckless driving                                               233    229    284    125
-## 17 Seat belt not used properly as required                       7027   5768   4912   2547
-## 18 Speeding                                                       713    948    978    167
-## 19 Speeding - Regulated or posted speed limit and actual speed  39818  31888  38721  15044</code></pre>
+##    violation_raw                                     `2013` `2014` `2015` `2016`
+##    &lt;chr&gt;                                              &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;
+##  1 ??                                                  5018   4368   2935    682
+##  2 Careless driving                                     607    561    709    270
+##  3 Child or youth restraint not used properly as re~   1313    873    709    286
+##  4 Driving while license suspended                     3258   2306   2455    516
+##  5 Driving wrong way                                     40     33     38     14
+##  6 Expired or no non-commercial driver license or p~   1433    984   1166    358
+##  7 Failure to comply with financial responsibility ~      1      1     NA     NA
+##  8 Failure to maintain required liability insurance    7096   5193   7889   2874
+##  9 Failure to obey sign or traffic control device       607    356    388    122
+## 10 Failure to yield right of way (FTY ROW)              292    206    203     65
+## 11 Following too closely                                179    117    153     41
+## 12 Improper passing                                     178    155    178     71
+## 13 Improper turn                                         65     54     67     22
+## 14 Operating without equipment as required by law       967    744    964    425
+## 15 Other (non-mapped)                                   421    289    365    129
+## 16 Reckless driving                                     233    229    284    125
+## 17 Seat belt not used properly as required             7027   5768   4912   2547
+## 18 Speeding                                             713    948    978    167
+## 19 Speeding - Regulated or posted speed limit and a~  39818  31888  38721  15044</code></pre>
 <p>Note that this table is <em>not</em> tidy, but provides a useful table for a report.</p>
 
 </div>
@@ -624,20 +617,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

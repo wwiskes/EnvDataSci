@@ -44,7 +44,7 @@ library(sf)
 library(iGIScData)
 ```
 
-
+[**`generic_methods`**]
 ```{r fig.cap="Building simple geometries in sf"}
 library(sf)
 eyes <- st_multipoint(rbind(c(1,5), c(3,5)))
@@ -61,6 +61,8 @@ An sfc just has the one column, so is not quite like a shapefile.
 
 - But it can have a coordinate referencing system CRS, and so can be mapped.
 - Kind of like a shapefile with no other attributes than shape
+
+[**`westUS`**]
 
 ### Building a mappable sfc from scratch
 
@@ -98,7 +100,7 @@ ggplot(twostates) + geom_sf() + geom_sf_text(aes(label = abb))
 - shapefile is an open GIS format for points, polylines, polygons
 
 You would normally have shapefiles (and all the files that go with them -- .shx, etc.)
-stored on your computer, but we'll access one from the iGIScData external data folder:
+stored on your computer, but we'll access one from the iGIScData external data folder [**`sierra`**]:
 
 ```{r}
 library(iGIScData)
@@ -117,7 +119,7 @@ sierraFebpts <- st_as_sf(sierraFeb, coords = c("LONGITUDE", "LATITUDE"), crs=432
 plot(sierraFebpts)
 ```
 
-
+[**`air_quality`**]
 ```{r, message=FALSE, warning=FALSE, fig.cap="ggplot map of Bay Area TRI sites, census centroids, freeways"}
 library(tidyverse)
 library(sf)
@@ -170,7 +172,7 @@ One way to remove geometry:
 ### Spatial join `st_join`
 
 A spatial join with st_join
-joins data from census where TRI points occur
+joins data from census where TRI points occur [**`air_quality`**]
 
 ```{r, message=FALSE}
 TRI_sp <- st_as_sf(TRI_2017_CA, coords = c("LONGITUDE", "LATITUDE"), crs=4326) %>%
@@ -201,7 +203,7 @@ some better options in ggplot2 and tmap.
 
 Simple Features are feature-based, so based on the name I guess it's not surprising that sf doesn't have support for rasters. But we can use the raster package for that. 
 
-**A bit of raster reading and map algebra with Marble Mountains elevation data**
+**A bit of raster reading and map algebra with Marble Mountains elevation data [`marbles`]**
 
 ```{r message=FALSE}
 library(raster)
@@ -277,7 +279,7 @@ ggplot(CA_counties) + geom_sf(aes(fill=MED_AGE)) +
 ```
 
 
-**Map in ggplot2, zoomed into two counties:**
+**Map in ggplot2, zoomed into two counties [`air_quality`]:**
 
 ```{r warning=FALSE}
 library(tidyverse); library(sf); library(iGIScData)
@@ -303,7 +305,7 @@ ggplot() +
 
 Raster display in ggplot2 is currently a little awkward, as are rasters in general in the feature-dominated GIS world.
 
-We can use a trick: converting rasters to a grid of points:
+We can use a trick: converting rasters to a grid of points [**`marbles`**:
 
 ```{r}
 library(tidyverse)
@@ -332,7 +334,7 @@ library(tmap)
 tm_shape(world) + tm_fill() + tm_borders()
 ```
 
-**Color by variable**
+**Color by variable [`air_quality`]**
 
 ```{r}
 library(sf)
@@ -341,7 +343,7 @@ tm_shape(BayAreaTracts) + tm_fill(col = "MED_AGE")
 
 ```
 
-**tmap of sierraFeb with hillshade and point symbols**
+**tmap of sierraFeb with hillshade and point symbols [`sierra`]**
 
 ```{r warning=FALSE}
 library(tmap)
@@ -374,14 +376,14 @@ The word "static" in "static maps" isn't something you would have heard in a car
 
 Interactive maps change the game in having tools for changing scale, and *always* being "printed" on a computer or device where the color of the background isn't necessarily white. We are increasingly used to using interactive maps on our phones or other devices, and often get frustrated not being able to zoom into a static map.
 
-A widely used interactive mapping system is Leaflet, but we're going to use tmap to access Leaflet behind the scenes and allow us to create maps with one set of commands.  The key parameter needed is tmap_mode which must be set to "view" to create an interactive map.
+A widely used interactive mapping system is Leaflet, but we're going to use tmap to access Leaflet behind the scenes and allow us to create maps with one set of commands.  The key parameter needed is tmap_mode which must be set to "view" to create an interactive map. [**`air_quality`**]
 
 ```{r}
 tmap_mode("view")
 tm_shape(BayAreaTracts) + tm_fill(col = "MED_AGE", alpha = 0.5)
 ```
 
-
+[**`sierra`**]
 ```{r}
 library(tmap)
 library(sf)
@@ -396,9 +398,6 @@ tm_basemap(leaflet::providers$Esri.NatGeoWorldMap) +
   tm_layout(legend.position=c("RIGHT","TOP"))
 
 ```
-
-
-
 
 #### Leaflet
 
@@ -424,7 +423,7 @@ m
 
 1. Using the method of building simple sf geometries, build a simple 1x1 square object and plot it. Remember that you have to close the polygon, so the first vertex is the same as the last (of 5) vertices. Provide your code only.
 
-```{r include=T}
+```{r include=F}
 library(sf)
 library(tidyverse)
 s <- st_polygon(list(rbind(c(0,1),c(0,2),c(1,2),c(1,1),c(0,1))))
@@ -432,7 +431,7 @@ square <- st_sfc(s)
 plot(square)
 ```
 
-2. Build a map in ggplot of Colorado, Wyoming, and Utah with these boundary vertices in GCS. As with the square, remember to close each figure, and assign the crs to what is needed for GCS: 4326. Submit map as exported plot, and code in the submittal text block.
+2. Build a map in ggplot of Colorado, Wyoming, and Utah with these boundary vertices in GCS. As with the square, remember to close each figure, and assign the crs to what is needed for GCS: 4326. Submit map as exported plot, and code in the submittal text block. [**`westUS`**]
 
 - Colorado: (-109,41),(-102,41),(-102,37),(-109,37)
 - Wyoming: (-111,45),(-104,45),(-104,41),(-111,41)
@@ -553,7 +552,7 @@ v <- raster(volcano)
 plot(v)
 ```
 
-9. Use tmap to create a simple map from the SW_States (polygons) and peaksp (points) data we created earlier.  Hints: you'll want to use tm_text with text set to "peak" to label the points, along with the parameter `auto.placement=TRUE`.
+9. Use tmap to create a simple map from the SW_States (polygons) and peaksp (points) data we created earlier.  Hints: you'll want to use tm_text with text set to "peak" to label the points, along with the parameter `auto.placement=TRUE`. [**`westUS`**]
 
 ```{r include=F}
 library(tmap)

@@ -36,7 +36,8 @@ The ggplot2 system provides plots of single and multiple variables, using variou
     - dot plots
 - discrete
     - bar
-    
+
+[**Create a new `NDVI` project**]    
 ```{r}
 library(iGIScData)
 library(tidyverse)
@@ -64,7 +65,7 @@ XSptsPheno %>%
   geom_histogram(binwidth=0.05)
 ```
 
-**Normal histogram**: easier to visualize the distribution, see modes
+**Normal histogram**: easier to visualize the distribution, see modes [**`sierra`**]
 ```{r warning=FALSE, fig.cap="Distribution of Average Monthly Temperatures, Sierra Nevada"}
 sierraData %>%
     ggplot(aes(TEMPERATURE)) +
@@ -82,7 +83,7 @@ sierraData %>%
 
 ### Density Plot
 
-Density represents how much out of the total. The total area (sum of widths of bins times densities of that bin) adds up to 1.
+Density represents how much out of the total. The total area (sum of widths of bins times densities of that bin) adds up to 1. [**`NDVI`**]
 
 ```{r fig.cap="Density plot of NDVI, Knuthson Meadow"}
 XSptsPheno %>% 
@@ -139,6 +140,8 @@ write_csv(eucoak, "data/tidy_eucoak.csv")
 
 ```
 
+[**`eucoak`**]
+
 ```{r warning=FALSE, fig.cap="Runoff under Eucalyptus and Oak in Bay Area sites"}
 tidy_eucoak %>%
   ggplot(aes(log(runoff_L),fill=tree)) +
@@ -160,7 +163,7 @@ ggplot(data = tidy_eucoak) +
 
 ```
 
-**Visualizing soil CO_2_ data with a Tukey box plot**
+**Visualizing soil CO_2_ data with a Tukey box plot [`soilCO2`]**
 
 ```{r warning=FALSE, fig.cap = "Visualizing soil CO_2_ data with a Tukey box plot"}
 co2 <- soilCO2_97
@@ -173,7 +176,7 @@ ggplot(data = co2, mapping = aes(x = SITE, y = `CO2%`)) +
 ## Plotting two variables
 ### Two continuous variables
 
-We've looked at this before -- the scatterplot
+We've looked at this before -- the scatterplot [**`sierra`**]
 
 ```{r warning=FALSE, fig.cap="Scatter plot of February temperature vs elevation"}
 ggplot(data=sierraFeb) + 
@@ -194,7 +197,7 @@ ggplot(data=sierraFeb) +
 - color is defined outside of aes, so is applies to all points.
 - mapping is first argument of  geom_point, so `mapping = ` is not needed.
 
-### Two variables, one discrete
+### Two variables, one discrete [`eucoak`]
 
 ```{r warning=FALSE, fig.cap="Two variables, one discrete"}
 ggplot(tidy_eucoak) +
@@ -210,7 +213,7 @@ You can find a lot about color systems. See these sources:
 
 ### Color from variable, in aesthetics
 
-In this graph, color is defined inside aes, so is based on COUNTY
+In this graph, color is defined inside aes, so is based on COUNTY [**`sierra`**]
 
 ```{r warning=FALSE, fig.cap="Color set within aes()"}
 ggplot(data=sierraFeb) + 
@@ -226,7 +229,7 @@ sierraFeb %>%
   geom_line(color="red")
 ```
 
-Note the use of pipe to start with the data then apply ggplot.
+Note the use of pipe to start with the data then apply ggplot. [**`generic_methods`**]
 
 **River map & profile**
 
@@ -259,7 +262,7 @@ ggplot(longprofile, aes(longd,s)) + geom_point(aes(col=s), size=3) +
 
 ```
 
-### Trend line
+### Trend line [`sierra`]
 
 ```{r fig.cap="Trend line using geom_smooth with a linear model"}
 sierraFeb %>%
@@ -289,7 +292,7 @@ A useful vignette accessed by `vignette("ggplot2-specs")` lets you see aesthetic
 
 #### Categorical symbology
 
-One example of a "Big Data" resource is EPA's Toxic Release Inventory that tracks releases from a wide array of sources, from oil refineries on down.  One way of dealing with big data in terms of exploring meaning is to use symbology to try to make sense of it.
+One example of a "Big Data" resource is EPA's Toxic Release Inventory [**`air_quality`**] that tracks releases from a wide array of sources, from oil refineries on down.  One way of dealing with big data in terms of exploring meaning is to use symbology to try to make sense of it.
 
 ```{r message=FALSE, fig.cap="EPA Toxic Release Inventory, as a big data set needing symbology clarification"}
 csvPath <- system.file("extdata","TRI_2017_CA.csv", package="iGIScData")
@@ -300,7 +303,7 @@ ggplot(data = TRI, aes(log(`5.2_STACK_AIR`), log(`5.1_FUGITIVE_AIR`),
        geom_point()
 ```
 
-#### Graphs from grouped data
+#### Graphs from grouped data [`NDVI`]
 
 ```{r warning=FALSE, fig.cap="NDVI symbolized by vegetation in two seasons"}
 XSptsPheno %>%
@@ -310,6 +313,8 @@ XSptsPheno %>%
   geom_smooth(aes(elevation, NDVI, 
                  color = phenology), method="lm") 
 ```
+
+[**`eucoak`**]
 
 ```{r warning=FALSE, fig.cap="Eucalyptus and Oak: rainfall and runoff"}
 ggplot(data = tidy_eucoak) +
@@ -344,7 +349,7 @@ ggplot(data = tidy_eucoak) +
 
 ```
 
-## Pairs Plot
+## Pairs Plot [`sierra`]
 
 ```{r warning=FALSE, fig.cap="Pairs plot for Sierra Nevada stations variables"}
 sierraFeb %>%
@@ -354,11 +359,11 @@ sierraFeb %>%
 
 ## Exercises
 
-1. Create a bar graph of the counts of the species in the penguins data frame.  What can you say about what it shows?
+1. Create a bar graph of the counts of the species in the **`penguins`** data frame.  What can you say about what it shows?
 
-2. Use bind_cols in dplyr to create a tibble from built-in vectors state.abb and state.region, then use ggplot with geom_bar to create a bar graph of the four regions.
+2. Use bind_cols in dplyr to create a tibble from built-in vectors state.abb and state.region, then use ggplot with geom_bar to create a bar graph of the four regions. [**`generic_methods`**]
 
-3. Convert the built-in time series `treering` into a tibble `tr`using the `tibble()` functions with the single variable assigned as `treering = treering`, then create a histogram, using that tibble and variable for the `data` and `x` settings needed. Attach a screen capture of the histogram.
+3. Convert the built-in time series `treering` into a tibble `tr`using the `tibble()` functions with the single variable assigned as `treering = treering`, then create a histogram, using that tibble and variable for the `data` and `x` settings needed. Attach a screen capture of the histogram. 
 
 ```{r include=FALSE}
 library(tidyverse)

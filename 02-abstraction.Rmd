@@ -52,7 +52,7 @@ How created
 - Reading from a CSV, using one of a variety of Tidyverse functions similarly named to base functions:
     - `read_csv` creates a tibble (in general, underscores are used in the Tidyverse)
     - `read.csv` creates a regular data frame
-- You can also use the `tibble()` function
+- You can also use the `tibble()` function [**`air_quality` project**]
 
 ```{r message=F}
 library(tidyverse) # includes readr, ggplot2, and dplyr which we'll use in this chapter
@@ -109,7 +109,7 @@ The following methods are quickly discovered to be essential as part of explorin
 
 ### Select, mutate, and the pipe
 
-**The pipe `%>%`**:  Read `%>%` as "and then..."  This is bigger than it sounds and opens up a lot of possibilities.  See example below, and observe how the expression becomes several lines long. In the process, we'll see examples of new variables with mutate and selecting (and in the process *ordering*) variables:
+**The pipe `%>%`**:  Read `%>%` as "and then..."  This is bigger than it sounds and opens up a lot of possibilities.  See example below, and observe how the expression becomes several lines long. In the process, we'll see examples of new variables with mutate and selecting (and in the process *ordering*) variables. [If you haven't already created it, this should be in a **`eucoak` project**]
 
 ```{r}
 runoff <- eucoakrainfallrunoffTDR %>%
@@ -185,7 +185,7 @@ eucoakSiteAvg
 ```
 
 
-**Summarizing by group with TRI data**
+**Summarizing by group with TRI data [`air_quality` project]**
 
 ```{r, message=FALSE}
 csvPath <- system.file("extdata","TRI_2017_CA.csv", package="iGIScData")
@@ -203,7 +203,7 @@ TRI_BySite <- read_csv(csvPath) %>%
 
 ### Count
 
-Count is a simple variant on summarize by group, since the only statistic is the count of events.
+Count is a simple variant on summarize by group, since the only statistic is the count of events. [**`eucoak` project**]
 
 ```{r}
 tidy_eucoak %>% count(tree)
@@ -220,7 +220,7 @@ tidy_eucoak %>%
 
 ### Sorting after summarizing
 
-Using the marine debris data from NOAA Marine Debris Program's *Marine Debris Monitoring and Assessment Project*
+Using the marine debris data from NOAA Marine Debris Program's *Marine Debris Monitoring and Assessment Project* [in a **new `litter` project**]
 ```{r}
 shorelineLatLong <- ConcentrationReport %>%
   group_by(`Shoreline Name`) %>%
@@ -242,7 +242,7 @@ The dot "." operator derives from UNIX syntax, and refers to "here".
 A similar specification is used in piped sequences
 
 - The advantage of the pipe is you don't have to keep referencing the data frame.
-- The dot is then used to connect to items inside the data frame:
+- The dot is then used to connect to items inside the data frame [in **`air_quality`**]
 
 ```{r}
 csvPath <- system.file("extdata","TRI_1987_BaySites.csv", package="iGIScData")
@@ -255,13 +255,13 @@ head(stackrate)
 
 ## Exercises
 
-1. Create a tibble with 20 rows of two variables `norm` and `unif` with `norm` created with `rnorm()` and `unif` created with `runif()`.
+1. Create a tibble with 20 rows of two variables `norm` and `unif` with `norm` created with `rnorm()` and `unif` created with `runif()`. [**`generic_methods`**]
 
-2. Read in "TRI_2017_CA.csv" in two ways, as a normal data frame assigned to df and as a tibble assigned to tb. What field names result for what's listed in the CSV as `5.1_FUGITIVE_AIR`?
+2. Read in "TRI_2017_CA.csv" [**`air_quality`**] in two ways, as a normal data frame assigned to df and as a tibble assigned to tb. What field names result for what's listed in the CSV as `5.1_FUGITIVE_AIR`?
 
 3. Use the summary function to investigate the variables in either the data.frame or tibble you just created. What type of field and what values are assigned to BIA_CODE?
 
-4. Create a boxplot of `body_mass_g` by `species` from the `penguins` data frame in the palmerpenguins package. Access the data with data(package = 'palmerpenguins'), and also remember `library(ggplot2)` or `library(tidyverse)`.
+4. Create a boxplot of `body_mass_g` by `species` from the `penguins` data frame in the palmerpenguins package [in a **`penguins` project**]. Access the data with data(package = 'palmerpenguins'), and also remember `library(ggplot2)` or `library(tidyverse)`.
 
 ```{r include=FALSE}
 library(tidyverse)
@@ -328,7 +328,7 @@ is through the cheat sheet that can be downloaded from
 ### Detecting matches
 
 These functions look for patterns within existing strings which can then be used subset observations
-based on those patterns. 
+based on those patterns. [These can be investigated in your **`generic_methods` project**]
 
 - **`str_detect`** detects patterns in a string, returns true or false if detected
 - **`str_locate`** detects patterns in a string, returns start and end position if detected, or NA if not
