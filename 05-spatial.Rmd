@@ -44,7 +44,7 @@ library(sf)
 library(iGIScData)
 ```
 
-[**`generic_methods`**]
+[As usual, go to the relevant project, in this case **`generic_methods`**]
 ```{r fig.cap="Building simple geometries in sf"}
 library(sf)
 eyes <- st_multipoint(rbind(c(1,5), c(3,5)))
