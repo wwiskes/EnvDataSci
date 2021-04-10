@@ -1,0 +1,98 @@
+# Statistics and Modeling
+
+```{r echo=F, message=F}
+library(iGIScData)
+library(tidyverse)
+sierraFeb <- sierraFeb %>%
+  filter(!is.na(TEMPERATURE))
+model1 = lm(TEMPERATURE ~ ELEVATION, data = sierraFeb)
+cc = model1$coefficients
+sierraFeb$resid = resid(model1)
+sierraFeb$predict = predict(model1) 
+eqn = paste("temperature =", paste(round(cc[1],2), paste(round(cc[-1], digits=3), sep="*", collapse=" + ", paste("elevation")), sep=" + "), "+ e")
+ggplot(sierraFeb, aes(x=ELEVATION, y=TEMPERATURE)) + 
+  geom_smooth(method="lm", se=FALSE, color="lightgrey") +
+  geom_segment(aes(xend=ELEVATION, yend=predict), alpha=.2) +
+  geom_point(aes(color=resid)) +
+  scale_color_gradient2(low="blue", mid="ivory2", high="red") +
+  guides(color=FALSE) +
+  theme_bw() +
+  ggtitle(paste("Residuals (e) from model: ",eqn))
+```
+
+## Goals of statistical analysis
+
+To frame how we might approach statistical analysis and modeling, there are
+various goals that are commonly involved:
+
+- To understand our data
+   - nature of our data, through summary statistics and various graphics like histograms
+   - spatial statistical analysis
+   - time series analysis
+- To *group* or *classify* things based on their properties
+   - using factors to define groups, and deriving grouped summaries
+   - comparing *observed* vs *expected* counts or probabilities
+- To understand how variables relate to one another
+   - or maybe even explain variations in other variables, through correlation analysis
+- To *model* behavior and maybe *predict* it
+   - various linear models
+- To *confirm* our observations from exploration (field/lab/vis)
+   - inferential statistics e.g. difference of means tests, ANOVA, X^2
+- To have the confidence to draw conclusions, make informed decisions
+- To help *communicate* our work
+
+These goals can be seen in the context of a typical research paper or thesis outline in environmental science:
+
+- Introduction
+- Literature Review
+- Methodology
+- Results
+   - field, lab, geospatial data
+- Analysis
+   - statistical analysis
+   - qualitative analysis
+   - visualization
+- Discussion
+   - making sense of analysis
+   - possibly recursive, with visualization
+- Conclusion
+   - conclusion about what the above shows
+   - new questions for further research
+   - possible policy recommendation
+
+## Summary Statistics
+
+A simple statistical summary is very easy to do in base R:
+
+```{r message=F}
+summary(tidy_eucoak)
+```
+
+### Summarize by group:  *stratifying a summary*
+
+```{r message=F}
+eucoakrainfallrunoffTDR %>%
+  group_by(site) %>%
+  summarize(
+    rain = mean(rain_mm, na.rm = TRUE),
+    rainSD = sd(rain_mm, na.rm = TRUE),
+    runoffL_oak = mean(runoffL_oak, na.rm = TRUE),
+    runoffL_euc = mean(runoffL_euc, na.rm = TRUE),
+    runoffL_oakMax = max(runoffL_oak, na.rm = TRUE),
+    runoffL_eucMax = max(runoffL_oak, na.rm = TRUE),
+  )
+
+```
+
+### Boxplot for visualizing distributions by group
+
+A Tukey boxplot is a good way to visualize distributions by group. In this soil CO_2
+study of the Marble Mountains, some sites had much greater variance, and some sites
+tended to be low vs high:
+
+```{r message=F, warning=F}
+soilCO2_97$SITE <- factor(soilCO2_97$SITE)
+ggplot(data = soilCO2_97, mapping = aes(x = SITE, y = `CO2%`)) +
+  geom_boxplot()
+```
+

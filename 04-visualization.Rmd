@@ -37,8 +37,9 @@ The ggplot2 system provides plots of single and multiple variables, using variou
 - discrete
     - bar
 
-[**Create a new `NDVI` project**]    
-```{r}
+[**Create a new `NDVI` project**]
+
+```{r message=F}
 library(iGIScData)
 library(tidyverse)
 summary(XSptsNDVI)
@@ -50,23 +51,22 @@ ggplot(XSptsNDVI, aes(vegetation)) +
 
 **First, to prepare the data, we need to use a pivot_longer on XSptsNDVI:**
 
-```{r}
+```{r warning=F, message=F}
 XSptsPheno <- XSptsNDVI %>%
   filter(vegetation != "pine") %>%
   pivot_longer(cols = starts_with("NDVI"), names_to = "phenology", values_to = "NDVI") %>%
   mutate(phenology = str_sub(phenology, 5, str_length(phenology)))
 ```
 
-```{r warning=FALSE, fig.cap="Distribution of NDVI, Knuthson Meadow"} 
+```{r warning=FALSE, message=F, fig.cap="Distribution of NDVI, Knuthson Meadow"} 
 XSptsPheno <- read_csv("data/XSptsPheno.csv")
-
 XSptsPheno %>%
   ggplot(aes(NDVI)) + 
   geom_histogram(binwidth=0.05)
 ```
 
 **Normal histogram**: easier to visualize the distribution, see modes [**`sierra`**]
-```{r warning=FALSE, fig.cap="Distribution of Average Monthly Temperatures, Sierra Nevada"}
+```{r warning=FALSE, message=F, fig.cap="Distribution of Average Monthly Temperatures, Sierra Nevada"}
 sierraData %>%
     ggplot(aes(TEMPERATURE)) +
   geom_histogram(fill="dark green")
@@ -85,11 +85,10 @@ sierraData %>%
 
 Density represents how much out of the total. The total area (sum of widths of bins times densities of that bin) adds up to 1. [**`NDVI`**]
 
-```{r fig.cap="Density plot of NDVI, Knuthson Meadow"}
+```{r warning=F, fig.cap="Density plot of NDVI, Knuthson Meadow"}
 XSptsPheno %>% 
   ggplot(aes(NDVI)) + 
   geom_density()
-
 ```
 
 Note that NDVI values are <1 so bins are very small numbers, so in this case densities can be >1.
@@ -114,7 +113,6 @@ runoffPivot <- eucoakrainfallrunoffTDR %>%
   mutate(
     tree = str_sub(tree, str_length(tree)-2, str_length(tree)),
     Date = as.Date(date, "%m/%d/%Y"))  # variable date is just a string, needs converting to date format
-
 euc <- runoffPivot %>%
   filter(tree == "euc") %>%
   mutate(
@@ -123,8 +121,8 @@ euc <- runoffPivot %>%
     aspect = aspect_euc,
     surface_tension = surface_tension_euc,
     runoff_rainfall_ratio = runoff_rainfall_ratio_euc) %>%
-  select(site, `site #`, tree, Date, month, rain_mm, rain_subcanopy, slope, aspect, runoff_L, surface_tension, runoff_rainfall_ratio)
-
+  select(site, `site #`, tree, Date, month, rain_mm, rain_subcanopy, slope, aspect, runoff_L,
+         surface_tension, runoff_rainfall_ratio)
 oak <- runoffPivot %>%
   filter(tree == "oak") %>%
   mutate(
@@ -133,11 +131,10 @@ oak <- runoffPivot %>%
     aspect = aspect_oak,
     surface_tension = surface_tension_oak,
     runoff_rainfall_ratio = runoff_rainfall_ratio_oak) %>%
-  select(site, `site #`, tree, Date, month, rain_mm, rain_subcanopy, slope, aspect, runoff_L, surface_tension, runoff_rainfall_ratio)
-
+  select(site, `site #`, tree, Date, month, rain_mm, rain_subcanopy, slope, aspect, runoff_L,
+         surface_tension, runoff_rainfall_ratio)
 eucoak <- rbind(euc, oak)
 write_csv(eucoak, "data/tidy_eucoak.csv")
-
 ```
 
 [**`eucoak`**]
@@ -147,7 +144,6 @@ tidy_eucoak %>%
   ggplot(aes(log(runoff_L),fill=tree)) +
   geom_density(alpha=0.2)
 ```
-
 
 ### boxplot
 
@@ -222,6 +218,7 @@ ggplot(data=sierraFeb) +
 ```
 
 **Plotting lines using the same x,y in aesthetics**
+
 ```{r warning=FALSE, fig.cap="Using aesthetics settings for both points and lines"}
 sierraFeb %>%
   ggplot(aes(TEMPERATURE,ELEVATION)) +
@@ -255,16 +252,16 @@ ggplot(longprofile, aes(x,y)) +
 ggplot(longprofile, aes(longd,z)) + geom_line(aes(col=s), size=1.5) + geom_point()  +
   scale_color_gradient(low="green", high="red") +
   ggtitle("Elevation over longitudinal distance upstream")
+```
+```{r message=F, warning=F, fig.cap="Slope by longitudinal distance"}
 ggplot(longprofile, aes(longd,s)) + geom_point(aes(col=s), size=3) +
   scale_color_gradient(low="green", high="red") +
   ggtitle("Slope over longitudinal distance upstream")
-#summary(lm(s~longd, data=longprofile))
-
 ```
 
 ### Trend line [`sierra`]
 
-```{r fig.cap="Trend line using geom_smooth with a linear model"}
+```{r warning=F, message=F, fig.cap="Trend line using geom_smooth with a linear model"}
 sierraFeb %>%
   ggplot(aes(TEMPERATURE,ELEVATION)) +
   geom_point(color="blue") +
@@ -294,7 +291,7 @@ A useful vignette accessed by `vignette("ggplot2-specs")` lets you see aesthetic
 
 One example of a "Big Data" resource is EPA's Toxic Release Inventory [**`air_quality`**] that tracks releases from a wide array of sources, from oil refineries on down.  One way of dealing with big data in terms of exploring meaning is to use symbology to try to make sense of it.
 
-```{r message=FALSE, fig.cap="EPA Toxic Release Inventory, as a big data set needing symbology clarification"}
+```{r message=F, warning=F, fig.cap="EPA Toxic Release Inventory, as a big data set needing symbology clarification"}
 csvPath <- system.file("extdata","TRI_2017_CA.csv", package="iGIScData")
 TRI <- read_csv(csvPath) %>%
   filter(`5.1_FUGITIVE_AIR` > 100 & `5.2_STACK_AIR` > 100)
@@ -372,14 +369,13 @@ str(tr)
 ggplot(data=tr, aes(x=treering)) + geom_histogram()
 ```
 
-4. Start by clearing your environment with the broom icon in the Environment tab, then we'll create two tibbles: Create a new tibble `st` using `bind_cols` with `Name=state.name`, `Abb=state.abb`, `Region=state.region`, then a tibble created from `state.x77` with `as_tibble`. Then use the save button in the Environment tab to save these two tibbles as "Q4.RData", and attach that for your answer.
+4. Start by clearing your environment with the broom icon in the Environment tab, then we'll create two tibbles: Create a new tibble `st` using `bind_cols` with `Name=state.name`, `Abb=state.abb`, `Region=state.region`, and `as_tibble(state.x77)`. *Note that this works since all of the parts are sorted by state.* Then use the save button in the Environment tab to save `st` as "Q4.RData", and attach that for your answer.
 
-```{r include=FALSE}
+```{r include=F}
 #st <- as_tibble(state.x77)
 st <- bind_cols(Name=state.name, Abb=state.abb, Region=state.region, as_tibble(state.x77))
 st
 ```
-
 
 5. From `st`, create a density plot from the variable `Frost` (number of days with frost for that state).  Attach that plot, and answer: approximately what is the modal value?
 
