@@ -360,11 +360,97 @@ varies by bankfull discharge in a relationship that looks something like:
 
 <img src="img/SbyQ_rivers.png">
 
-<img src="img/meandering.png" alt="meandering">
 <img src="img/braided.png" alt="braided">
+<img src="img/meandering.png" alt="meandering">
 <img src="img/anastomosed.png" alt="anastomosed">
 
+No interaction between covariate and factor 
 
+- No relationship between discharge and channel type.  
+- Another interpretation:  the slope of the relationship between the covariate and response variable is about the same for each group; only the intercept differs.  Assumes parallel slopes.
+
+`log10(S) ~ strtype * log10(Q)`   … interaction between covariate and factor
+
+`log10(S) ~ strtype + log10(Q)`   … no interaction, parallel slopes
+
+If models are not significantly different, remove interaction term due to parsimony, and satisfies this ANCOVA requirement.
+
+
+```{r message=F, warning=F}
+library(tidyverse)
+csvPath <- system.file("extdata","streams.csv", package="iGIScData")
+streams <- read_csv(csvPath)
+streams$strtype <- factor(streams$type, labels=c("Anastomosing","Braided","Meandering"))
+summary(streams)
+ggplot(streams, aes(Q, S, color=strtype)) +
+  geom_point()
+library(scales) # needed for the trans_format function below
+ggplot(streams, aes(Q, S, color=strtype)) +
+  geom_point() + geom_smooth(method="lm", se = FALSE) + 
+  scale_x_continuous(trans=log10_trans(),
+                     labels = trans_format("log10", math_format(10^.x))) +
+  scale_y_continuous(trans=log10_trans(),
+                     labels = trans_format("log10", math_format(10^.x)))
+ancova = lm(log10(S)~strtype*log10(Q), data=streams)
+summary(ancova)
+anova(ancova)
+
+# Now an additive model, which does not have that interaction
+ancova2 = lm(log10(S)~strtype+log10(Q), data=streams)
+anova(ancova2)
+anova(ancova,ancova2)   
+   # not significantly different, so model simplification is justified
+
+# Now we remove the strtype term
+ancova3 = update(ancova2, ~ . - strtype)  
+anova(ancova2,ancova3)  
+   # Goes too far.  Removing the strtype creates a significantly different model
+
+step(ancova)
+
+```
+
+**Part of general linear model (lm)**
+
+ANOVA & ANCOVA are applications of a general linear model.
+
+- Uses lm in R
+- Response variable is continuous, assumed normally distributed
+
+*Not the same as Generalized Linear Model (GLM)*
+
+- *With GLM, response variable may be from count data (e.g. Poisson), probabilities of occurrence (logistic regression) or other non-normal distributions.*
+
+`mymodel = lm(log10(s) ~ strtype + log10(Q))`
+
+- The linear model, with categorical explanatory variable  + covariate
+
+`anova(mymodel)`
+
+- Displays the Analysis of Variance table from the linear model
+
+### Generalized Linear Model (GLM)
+
+The glm in R allows you to work with various types of data using various distributions, described as families such as:
+
+- gaussian : normal distribution – what is used with lm
+- binomial : logit – used with probabilities.
+   - Used for *logistic regression*
+- poisson : for counts.  Commonly used for species counts.
+- see help(glm) for other examples
+
+Great explanation of poisson distribution using meteor showers at:
+
+<a href="https://towardsdatascience.com/the-poisson-distribution-and-poisson-process-explained-4e2cb17d459">https://towardsdatascience.com/the-poisson-distribution-and-poisson-process-explained-4e2cb17d459</a>
+
+## Spatial Statistical Analysis
+
+[under construction]
+
+- What patterns can we see?
+- What is the effect of scale?
+- Relationships among variables – do they vary spatially?
+- Analyses can be visual – looking at a map
 
 
 
