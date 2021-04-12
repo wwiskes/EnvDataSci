@@ -59,10 +59,15 @@ These goals can be seen in the context of a typical research paper or thesis out
    - conclusion about what the above shows
    - new questions for further research
    - possible policy recommendation
+   
+The scope and theory of statistical analysis and models is extensive, and there are many good books
+on the subject that employ the R language. This chapter is a short review of some of
+these methods and how they apply to environmental data science.
 
 ## Summary Statistics
 
-A simple statistical summary is very easy to do in base R:
+Summary statistics such as mean, standard deviation, variance, minimum, maximum, and range are derived in quite a few
+R functions, commonly as a parameter or a sub-function (see `mutate`). A an overall simple statistical summary is very easy to do in base R:
 
 ```{r message=F}
 summary(tidy_eucoak)
@@ -95,4 +100,272 @@ soilCO2_97$SITE <- factor(soilCO2_97$SITE)
 ggplot(data = soilCO2_97, mapping = aes(x = SITE, y = `CO2%`)) +
   geom_boxplot()
 ```
+
+### Generating pseudorandom numbers
+
+Functions commonly used in R books for quickly creating a lot of numbers to display are those
+that generate pseudorandom numbers. These are also useful in statistical methods that
+need a lot of these, such as in Monte Carlo simulation. The two most commonly used are:
+
+- **`runif()`** generates a vector of `n` pseudorandom numbers ranging by default from `min=0` to `max=1`.
+- **`rnorm()`** generates a vector of `n` normally distributed pseudorandom numbers with a default 
+`mean=0` and `sd=0`.
+
+To see both in action as x and y:
+
+```{r message=F, warning=F}
+x <- as_tibble(runif(n=1000, min=10, max=20))
+names(x) <- 'x'
+ggplot(x, aes(x=x)) + geom_histogram()
+y <- as_tibble(rnorm(n=1000, mean=100, sd=10))
+names(y) <- 'y'
+ggplot(y, aes(x=y)) + geom_histogram()
+ggplot(y, aes(x=y)) + geom_density()
+xy <- bind_cols(x,y)
+ggplot(xy, aes(x=x,y=y)) + geom_point()
+```
+
+## Statistical tests
+
+Tests that compare our data to other data or look at relationships among variables are important statistical
+methods, and you should refer to statistical references to best understand how to apply
+the appropriate methods for your research. 
+
+### Comparing samples and groupings
+
+A common need in environmental research is to compare samples of a phenomenon or compare samples with an assumed standard population. The simplest application of this is the t-test, which can only involve comparing two samples or one sample with a population.  Analysis of Variance extends this to allow for more than two groups, and can be seen as a linear model where the categorical grouping (as a factor in R) is one of the variables.
+
+#### t.test and a non-parametric alternative, the Kruskal-Wallis Rank Sum test
+
+```{r include=F}
+XSptsPheno <- XSptsNDVI %>%
+      pivot_longer(cols = starts_with("NDVI"), 
+                   names_to = "phenology", values_to = "NDVI") %>%
+      mutate(phenology = str_sub(phenology, 5, str_length(phenology)))
+```
+
+```{r message=F, warning=F, fig.cap="NDVI by phenology"}
+XSptsPheno %>%
+  ggplot(aes(NDVI, fill=phenology)) +
+  geom_density(alpha=0.2)
+t.test(NDVI~phenology, data=XSptsPheno) 
+```
+
+While these data sets appear reasonably normal, the Shapiro-Wilk test (which uses a null hypothesis of normal) 
+has a p value < 0.05 for the senescent group, so the data can't be assumed to be normal.
+
+```{r message=F, warning=F}
+shapiro.test(XSptsPheno$NDVI[XSptsPheno$phenology=="growing"])
+shapiro.test(XSptsPheno$NDVI[XSptsPheno$phenology=="senescent"])
+
+```
+
+Therefore we should use a non-parametric alternative such as the Kruskal-Wallis Rank Sum test:
+
+```{r warning=F, message=F}
+kruskal.test(NDVI~phenology, data=XSptsPheno)
+```
+
+[**`eucoak`**] For the question "Is the runoff under Eucalyptus canopy significantly different from that under oaks?" we'll then start by test for normality of each of the two samples (euc and oak)
+
+```{r warning=F, message=F}
+shapiro.test(tidy_eucoak$runoff_L[tidy_eucoak$tree == "euc"])
+shapiro.test(tidy_eucoak$runoff_L[tidy_eucoak$tree == "oak"])
+```
+
+which shows clearly that both samples are non-normal. So we might apply the non-parametric Kruskal-Wallis
+test:
+
+```{r warning=F, message=F}
+kruskal.test(runoff_L~tree, data=tidy_eucoak)
+```
+
+and no significant difference can be seen. If we look at the data graphically, this makes sense:
+
+```{r warning=FALSE, message=F, fig.cap="Runoff under Eucalyptus and Oak in Bay Area sites"}
+tidy_eucoak %>%
+  ggplot(aes(log(runoff_L),fill=tree)) +
+  geom_density(alpha=0.2)
+```
+
+However, some of this may result from major variations among sites, which is apparent in this boxplot:
+
+```{r message=F, warning=F, fig.cap = "runoff at various sites contrasting euc and oak"}
+ggplot(data = tidy_eucoak) +
+  geom_boxplot(aes(x=site, y=runoff_L, color=tree))
+
+```
+
+We might restrict our analysis to Tilden Park sites in the East Bay.
+
+```{r warning=F, message=F}
+tilden <- tidy_eucoak %>% filter(str_detect(tidy_eucoak$site,"TP"))
+tilden %>%
+  ggplot(aes(log(runoff_L),fill=tree)) +
+  geom_density(alpha=0.2)
+
+```
+
+
+```{r warning=F, message=F}
+shapiro.test(tilden$runoff_L[tilden$tree == "euc"])
+shapiro.test(tilden$runoff_L[tilden$tree == "oak"])
+```
+
+So once again, as is common with small sample sets, we need a non-parametric test.
+
+```{r warning=F, message=F}
+kruskal.test(runoff_L~tree, data=tilden)
+```
+
+**Analysis process from exploration to testing**
+
+[**`eucoak`**] In the year runoff was studied, there were no runoff events sufficient to mobilize sediments.  The next year, January had a big event, so we collected sediments and processed them in the lab.
+
+Questions:  
+
+- Is there a difference between eucs and oaks in terms of fine sediment yield?
+- Is there a difference between eucs and oaks in terms of total sediment yield? (includes litter)
+
+```{r warning=F, message=F}
+csvPath <- system.file("extdata", "eucoaksediment.csv", package="iGIScData")
+eucoaksed <- read_csv(csvPath)
+summary(eucoaksed)
+eucoaksed %>%
+  group_by(trtype) %>%
+  summarize(meanfines = mean(fines_g, na.rm=T), sdfines = sd(fines_g, na.rm=T),
+            meantotal = mean(total_g, na.rm=T), sdtotal = sd(total_g, na.rm=T))
+eucoakLong <- eucoaksed %>% 
+  pivot_longer(col=c(fines_g,litter_g), 
+               names_to = "sed_type", 
+               values_to = "sed_g")
+eucoakLong %>%
+  ggplot(aes(trtype, sed_g, col=sed_type)) + 
+  geom_boxplot()
+eucoakLong %>%
+  ggplot(aes(sed_g, col=sed_type)) + 
+  geom_density() +
+  facet_grid(trtype ~ .)
+shapiro.test(eucoaksed$fines_g[eucoaksed$trtype == "euc"])
+shapiro.test(eucoaksed$fines_g[eucoaksed$trtype == "oak"])
+t.test(fines_g~trtype, data=eucoaksed) 
+shapiro.test(eucoaksed$total_g[eucoaksed$trtype == "euc"])
+shapiro.test(eucoaksed$total_g[eucoaksed$trtype == "oak"])
+kruskal.test(total_g~trtype, data=eucoaksed) 
+```
+
+So we used a t test for the fines_g, and the test suggests that there's a significant 
+difference in sediment yield for fines, but the Kruskal-Wallis test on total sediment
+(including litter) did not show a significant difference. Both results support
+the conclusion that oaks in this study produced more soil erosion, largely because
+the Eucalyptus stands generate so much litter cover, and that litter also made the
+total sediment yield not significantly different.
+
+#### Analysis of Variance
+
+Purpose is to compare group. Can be thought of as an extension of a t test where you have more than two groups, or as a linear model where one variable is a factor.
+
+- Response variable is a continuous variable
+- Explanatory variable is the grouping -- categorical (a factor in R)
+
+*"Are water samples from streams draining sandstone, limestone, and shale different based on pH?"*
+<img src="img/PigeonMtWaterSample.png" align = "left">
+<img src="img/CaveCoveSink.png" align = "center">
+<img src="img/HelenHighwaterSpring.png" align = "right">
+
+### Correlation
+
+r = Pearson's product-moment correlation -- negative or positive
+
+r^2^ = amount of variance in one variable "explained" by the other – always positive.
+
+Can show with a pairs plot:  `pairs(dataframe)`, but is tricky
+
+Here's an easier method from the psych package [**`sierra`**]
+
+```{r message=F, warning=F}
+library(psych)
+pairs.panels(sierraFeb %>% select(LATITUDE, LONGITUDE, ELEVATION, PRECIPITATION, TEMPERATURE))
+```
+
+## Modeling in R
+
+- `lm(y ~ x)`	linear regression
+- `lm(y ~ x1 + x2 + x3)`	multiple regression
+- `glm(y ~ x, family = poisson)`	generalized linear model, poisson distribution; 
+see ?family to see those supported, including binomial, gaussian, poisson, etc.
+- `aov(y ~ x)`	analysis of variance (same as lm except in the summary)
+- gam(y ~ x)	generalized additive models
+- tree(y ~ x)  or  rpart(y ~ x)	regression/classification trees    
+
+```{r message=F, warning=F}
+model1 <- lm(TEMPERATURE ~ ELEVATION, data = sierraFeb)
+summary(model1)
+```
+
+Probably the most important statistic is the p value for the predictor variable ELEVATION, which in this case is very small <2e-16.
+
+```{r echo=F, message=F}
+library(iGIScData)
+library(tidyverse)
+sierraFeb <- sierraFeb %>%
+  filter(!is.na(TEMPERATURE))
+model1 = lm(TEMPERATURE ~ ELEVATION, data = sierraFeb)
+cc = model1$coefficients
+sierraFeb$resid = resid(model1)
+sierraFeb$predict = predict(model1) 
+eqn = paste("temperature =", paste(round(cc[1],2), paste(round(cc[-1], digits=3), sep="*", collapse=" + ", paste("elevation")), sep=" + "), "+ e")
+ggplot(sierraFeb, aes(x=ELEVATION, y=TEMPERATURE)) + 
+  geom_smooth(method="lm", se=FALSE, color="lightgrey") +
+  geom_segment(aes(xend=ELEVATION, yend=predict), alpha=.2) +
+  geom_point(aes(color=resid)) +
+  scale_color_gradient2(low="blue", mid="ivory2", high="red") +
+  guides(color=FALSE) +
+  theme_bw() +
+  ggtitle(paste("Residuals (e) from model: ",eqn))
+model1
+```
+
+**Making Predictions**
+
+```{r message=F, warning=F}
+eqn
+a <- model1$coefficients[1]
+b <- model1$coefficients[2]
+elevations <- c(500, 1000, 1500, 2000)
+elevations
+tempEstimate <- a + b * elevations
+tempEstimate
+```
+
+### Analysis of Covariance
+
+Same purpose as Analysis of Variance, but also takes into account the influence of other variables called covariates. In a way, combines a linear model with an analysis of variance.
+
+*"Are water samples from streams draining sandstone, limestone,  and shale different based on pH, while taking into account elevation?"*
+
+<img src="img/UpperSinkingCoveGeology.png">
+
+Response variable is modeled from the factor (ANOVA) plus the covariate (regression)
+
+- ANOVA:   pH ~ rocktype
+- Regression:  pH ~ elevation
+- ANCOVA:  pH ~ rocktype + elevation
+   - Yet shouldn't involve interaction between rocktype and elevation
+   
+**Example:  stream types distinguished by discharge and slope**
+
+Three common river types are meandering, braided and anastomosed. For each, their slope
+varies by bankfull discharge in a relationship that looks something like:
+
+<img src="img/SbyQ_rivers.png">
+
+<img src="img/meandering.png" alt="meandering">
+<img src="img/braided.png" alt="braided">
+<img src="img/anastomosed.png" alt="anastomosed">
+
+
+
+
+
 
