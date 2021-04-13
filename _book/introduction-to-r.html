@@ -24,7 +24,7 @@
 <meta name="author" content="Jerry Davis" />
 
 
-<meta name="date" content="2021-04-11" />
+<meta name="date" content="2021-04-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -282,6 +282,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.4.1" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#analysis-of-covariance"><i class="fa fa-check"></i><b>7.4.1</b> Analysis of Covariance</a></li>
 <li class="chapter" data-level="7.4.2" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#generalized-linear-model-glm"><i class="fa fa-check"></i><b>7.4.2</b> Generalized Linear Model (GLM)</a></li>
 </ul></li>
+<li class="chapter" data-level="7.5" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#spatial-statistical-analysis"><i class="fa fa-check"></i><b>7.5</b> Spatial Statistical Analysis</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#spatial-autocorrelation"><i class="fa fa-check"></i><b>7.5.1</b> Spatial Autocorrelation</a></li>
+<li class="chapter" data-level="7.5.2" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#mapping-residuals"><i class="fa fa-check"></i><b>7.5.2</b> Mapping Residuals</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>8</b> Time Series</a></li>
 <li class="chapter" data-level="9" data-path="machine-learning.html"><a href="machine-learning.html"><i class="fa fa-check"></i><b>9</b> Machine Learning</a></li>
@@ -481,18 +486,18 @@ text files that spreadsheet programs like Excel commonly read in just like their
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="introduction-to-r.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(iGIScData)</span>
 <span id="cb64-2"><a href="introduction-to-r.html#cb64-2" aria-hidden="true" tabindex="-1"></a>sierraFeb</span></code></pre></div>
 <pre><code>## # A tibble: 82 x 7
-##    STATION_NAME                      COUNTY  ELEVATION LATITUDE LONGITUDE PRECIPITATION TEMPERATURE
-##    &lt;chr&gt;                             &lt;fct&gt;       &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;
-##  1 GROVELAND 2, CA US                Tuolum~     853.      37.8     -120.         176.          6.1
-##  2 CANYON DAM, CA US                 Plumas     1390.      40.2     -121.         164.          1.4
-##  3 KERN RIVER PH 3, CA US            Kern        824.      35.8     -118.          67.1         8.9
-##  4 DONNER MEMORIAL ST PARK, CA US    Nevada     1810.      39.3     -120.         167.         -0.9
-##  5 BOWMAN DAM, CA US                 Nevada     1641.      39.5     -121.         277.          2.9
-##  6 BRUSH CREEK RANGER STATION, CA US Butte      1085.      39.7     -121.         296.         NA  
-##  7 GRANT GROVE, CA US                Tulare     2012.      36.7     -119.         186.          1.7
-##  8 LEE VINING, CA US                 Mono       2072.      38.0     -119.          71.9         0.4
-##  9 OROVILLE MUNICIPAL AIRPORT, CA US Butte        57.9     39.5     -122.         138.         10.3
-## 10 LEMON COVE, CA US                 Tulare      156.      36.4     -119.          62.7        11.3
+##    STATION_NAME                      COUNTY   ELEVATION LATITUDE LONGITUDE PRECIPITATION TEMPERATURE
+##    &lt;chr&gt;                             &lt;fct&gt;        &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;
+##  1 GROVELAND 2, CA US                Tuolumne     853.      37.8     -120.         176.          6.1
+##  2 CANYON DAM, CA US                 Plumas      1390.      40.2     -121.         164.          1.4
+##  3 KERN RIVER PH 3, CA US            Kern         824.      35.8     -118.          67.1         8.9
+##  4 DONNER MEMORIAL ST PARK, CA US    Nevada      1810.      39.3     -120.         167.         -0.9
+##  5 BOWMAN DAM, CA US                 Nevada      1641.      39.5     -121.         277.          2.9
+##  6 BRUSH CREEK RANGER STATION, CA US Butte       1085.      39.7     -121.         296.         NA  
+##  7 GRANT GROVE, CA US                Tulare      2012.      36.7     -119.         186.          1.7
+##  8 LEE VINING, CA US                 Mono        2072.      38.0     -119.          71.9         0.4
+##  9 OROVILLE MUNICIPAL AIRPORT, CA US Butte         57.9     39.5     -122.         138.         10.3
+## 10 LEMON COVE, CA US                 Tulare       156.      36.4     -119.          62.7        11.3
 ## # ... with 72 more rows</code></pre>
 </div>
 <div id="data-structures-in-r" class="section level2" number="2.6">
@@ -574,8 +579,7 @@ c(1,2,3,4,5,6,7,8,9,10)</code></pre>
 <div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="introduction-to-r.html#cb104-1" aria-hidden="true" tabindex="-1"></a>elev <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">52</span>,<span class="dv">394</span>,<span class="dv">510</span>,<span class="dv">564</span>,<span class="dv">725</span>,<span class="dv">848</span>,<span class="dv">1042</span>,<span class="dv">1225</span>,<span class="dv">1486</span>,<span class="dv">1775</span>,<span class="dv">1899</span>,<span class="dv">2551</span>)</span>
 <span id="cb104-2"><a href="introduction-to-r.html#cb104-2" aria-hidden="true" tabindex="-1"></a>elevft <span class="ot">&lt;-</span> elev <span class="sc">/</span> <span class="fl">0.3048</span></span>
 <span id="cb104-3"><a href="introduction-to-r.html#cb104-3" aria-hidden="true" tabindex="-1"></a>elevft</span></code></pre></div>
-<pre><code>##  [1]  170.6037 1292.6509 1673.2283 1850.3937 2378.6089 2782.1522 3418.6352 4019.0289 4875.3281
-## [10] 5823.4908 6230.3150 8369.4226</code></pre>
+<pre><code>##  [1]  170.6037 1292.6509 1673.2283 1850.3937 2378.6089 2782.1522 3418.6352 4019.0289 4875.3281 5823.4908 6230.3150 8369.4226</code></pre>
 <p>Another example, with 2 vectors:</p>
 <div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="introduction-to-r.html#cb106-1" aria-hidden="true" tabindex="-1"></a>temp03 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">13.1</span>,<span class="fl">11.4</span>,<span class="fl">9.4</span>,<span class="fl">10.9</span>,<span class="fl">8.9</span>,<span class="fl">8.4</span>,<span class="fl">6.7</span>,<span class="fl">7.6</span>,<span class="fl">2.8</span>,<span class="fl">1.6</span>,<span class="fl">1.2</span>,<span class="sc">-</span><span class="fl">2.1</span>)</span>
 <span id="cb106-2"><a href="introduction-to-r.html#cb106-2" aria-hidden="true" tabindex="-1"></a>temp02 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">10.7</span>,<span class="fl">9.7</span>,<span class="fl">7.7</span>,<span class="fl">9.2</span>,<span class="fl">7.3</span>,<span class="fl">6.7</span>,<span class="fl">4.0</span>,<span class="fl">5.0</span>,<span class="fl">0.9</span>,<span class="sc">-</span><span class="fl">1.1</span>,<span class="sc">-</span><span class="fl">0.8</span>,<span class="sc">-</span><span class="fl">4.4</span>)</span>
@@ -591,30 +595,30 @@ c(1,2,3,4,5,6,7,8,9,10)</code></pre>
 <span id="cb108-3"><a href="introduction-to-r.html#cb108-3" aria-hidden="true" tabindex="-1"></a>lat <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">39.52</span>, <span class="fl">38.91</span>, <span class="fl">37.97</span>, <span class="fl">38.70</span>, <span class="fl">39.09</span>, <span class="fl">39.25</span>, <span class="fl">39.94</span>, <span class="fl">37.75</span>, <span class="fl">40.35</span>, <span class="fl">39.33</span>, <span class="fl">39.17</span>, <span class="fl">38.21</span>)</span></code></pre></div>
 <p><strong>Plot individually</strong></p>
 <div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="introduction-to-r.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(temp)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-34"></span>
-<img src="EnvDataSci_files/figure-html/unnamed-chunk-34-1.png" alt="Temperature" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-71"></span>
+<img src="EnvDataSci_files/figure-html/unnamed-chunk-71-1.png" alt="Temperature" width="672" />
 <p class="caption">
 Figure 2.1: Temperature
 </p>
 </div>
 <div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="introduction-to-r.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(elev)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-35"></span>
-<img src="EnvDataSci_files/figure-html/unnamed-chunk-35-1.png" alt="Elevation" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-72"></span>
+<img src="EnvDataSci_files/figure-html/unnamed-chunk-72-1.png" alt="Elevation" width="672" />
 <p class="caption">
 Figure 2.2: Elevation
 </p>
 </div>
 <div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="introduction-to-r.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lat)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-36"></span>
-<img src="EnvDataSci_files/figure-html/unnamed-chunk-36-1.png" alt="Latitude" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-73"></span>
+<img src="EnvDataSci_files/figure-html/unnamed-chunk-73-1.png" alt="Latitude" width="672" />
 <p class="caption">
 Figure 2.3: Latitude
 </p>
 </div>
 <p><strong>Then plot as a scatterplot</strong></p>
 <div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="introduction-to-r.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(elev,temp)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-37"></span>
-<img src="EnvDataSci_files/figure-html/unnamed-chunk-37-1.png" alt="Temperature~Elevation" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-74"></span>
+<img src="EnvDataSci_files/figure-html/unnamed-chunk-74-1.png" alt="Temperature~Elevation" width="672" />
 <p class="caption">
 Figure 2.4: Temperature~Elevation
 </p>
@@ -693,8 +697,8 @@ The following are equivalent:</p>
 <p><strong>Creating a data frame out of a matrix</strong></p>
 <div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="introduction-to-r.html#cb137-1" aria-hidden="true" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(sierradata)</span>
 <span id="cb137-2"><a href="introduction-to-r.html#cb137-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">data =</span> mydata, <span class="at">x =</span> elev, <span class="at">y =</span> temp)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-45"></span>
-<img src="EnvDataSci_files/figure-html/unnamed-chunk-45-1.png" alt="Temperature~Elevation" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-82"></span>
+<img src="EnvDataSci_files/figure-html/unnamed-chunk-82-1.png" alt="Temperature~Elevation" width="672" />
 <p class="caption">
 Figure 2.5: Temperature~Elevation
 </p>
@@ -707,27 +711,26 @@ Figure 2.5: Temperature~Elevation
 <span id="cb138-3"><a href="introduction-to-r.html#cb138-3" aria-hidden="true" tabindex="-1"></a>TRI87 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(csvPath)</span>
 <span id="cb138-4"><a href="introduction-to-r.html#cb138-4" aria-hidden="true" tabindex="-1"></a>TRI87</span></code></pre></div>
 <pre><code>## # A tibble: 335 x 9
-##    TRI_FACILITY_ID count FACILITY_NAME COUNTY air_releases fugitive_air stack_air LATITUDE
-##    &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;         &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-##  1 91002FRMND585BR     2 FORUM IND     SAN M~         1423         1423         0     37.5
-##  2 92052ZPMNF2970C     1 ZEP MFG CO    SANTA~          337          337         0     37.4
-##  3 93117TLDYN3165P     2 TELEDYNE MEC  SANTA~        12600        12600         0     37.4
-##  4 94002GTWSG477HA     2 MORGAN ADVAN~ SAN M~        18700        18700         0     37.5
-##  5 94002SMPRD120SE     2 SEM PRODS INC SAN M~         1500          500      1000     37.5
-##  6 94025HBLNN151CO     2 HEUBLEIN INC  SAN M~          500            0       500     37.5
-##  7 94025RYCHM300CO    10 TE CONNECTIV~ SAN M~       144871        47562     97309     37.5
-##  8 94025SNFRD990OB     1 SANFORD META~ SAN M~         9675         9675         0     37.5
-##  9 94026BYPCK3575H     2 BAY PACKAGIN~ SAN M~        80000        32000     48000     37.5
-## 10 94026CDRSY3475E     2 CDR SYS CORP  SAN M~       126800            0    126800     37.5
-## # ... with 325 more rows, and 1 more variable: LONGITUDE &lt;dbl&gt;</code></pre>
+##    TRI_FACILITY_ID count FACILITY_NAME                               COUNTY     air_releases fugitive_air stack_air LATITUDE LONGITUDE
+##    &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;                                       &lt;chr&gt;             &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+##  1 91002FRMND585BR     2 FORUM IND                                   SAN MATEO          1423         1423         0     37.5     -122.
+##  2 92052ZPMNF2970C     1 ZEP MFG CO                                  SANTA CLA~          337          337         0     37.4     -122.
+##  3 93117TLDYN3165P     2 TELEDYNE MEC                                SANTA CLA~        12600        12600         0     37.4     -122.
+##  4 94002GTWSG477HA     2 MORGAN ADVANCED CERAMICS BELMONT WESGO MET~ SAN MATEO         18700        18700         0     37.5     -122.
+##  5 94002SMPRD120SE     2 SEM PRODS INC                               SAN MATEO          1500          500      1000     37.5     -122.
+##  6 94025HBLNN151CO     2 HEUBLEIN INC                                SAN MATEO           500            0       500     37.5     -122.
+##  7 94025RYCHM300CO    10 TE CONNECTIVITY CORP                        SAN MATEO        144871        47562     97309     37.5     -122.
+##  8 94025SNFRD990OB     1 SANFORD METAL PROCESSING CO                 SAN MATEO          9675         9675         0     37.5     -122.
+##  9 94026BYPCK3575H     2 BAY PACKAGING &amp; CONVERTING CO INC           SAN MATEO         80000        32000     48000     37.5     -122.
+## 10 94026CDRSY3475E     2 CDR SYS CORP                                SAN MATEO        126800            0    126800     37.5     -122.
+## # ... with 325 more rows</code></pre>
 <p><strong>Sort, Index, &amp; Max/Min</strong></p>
 <div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="introduction-to-r.html#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">sort</span>(TRI87<span class="sc">$</span>air_releases))</span></code></pre></div>
 <pre><code>## [1]  2  5  5  7  9 10</code></pre>
 <div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="introduction-to-r.html#cb142-1" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">order</span>(TRI87<span class="sc">$</span>air_releases)</span>
 <span id="cb142-2"><a href="introduction-to-r.html#cb142-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(TRI87<span class="sc">$</span>FACILITY_NAME[index])   <span class="co"># displays facilities in order of their air releases</span></span></code></pre></div>
-<pre><code>## [1] &quot;AIR PRODUCTS MANUFACTURING CORP&quot;          &quot;UNITED FIBERS&quot;                           
-## [3] &quot;CLOROX MANUFACTURING CO&quot;                  &quot;ICI AMERICAS INC WESTERN RESEARCH CENTER&quot;
-## [5] &quot;UNION CARBIDE CORP&quot;                       &quot;SCOTTS-SIERRA HORTICULTURAL PRODS CO INC&quot;</code></pre>
+<pre><code>## [1] &quot;AIR PRODUCTS MANUFACTURING CORP&quot;          &quot;UNITED FIBERS&quot;                            &quot;CLOROX MANUFACTURING CO&quot;                 
+## [4] &quot;ICI AMERICAS INC WESTERN RESEARCH CENTER&quot; &quot;UNION CARBIDE CORP&quot;                       &quot;SCOTTS-SIERRA HORTICULTURAL PRODS CO INC&quot;</code></pre>
 <div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="introduction-to-r.html#cb144-1" aria-hidden="true" tabindex="-1"></a>i_max <span class="ot">&lt;-</span> <span class="fu">which.max</span>(TRI87<span class="sc">$</span>air_releases)</span>
 <span id="cb144-2"><a href="introduction-to-r.html#cb144-2" aria-hidden="true" tabindex="-1"></a>TRI87<span class="sc">$</span>FACILITY_NAME[i_max]   <span class="co"># was NUMMI at the time</span></span></code></pre></div>
 <pre><code>## [1] &quot;TESLA INC&quot;</code></pre>
@@ -758,12 +761,11 @@ Figure 2.5: Temperature~Elevation
 <span id="cb154-2"><a href="introduction-to-r.html#cb154-2" aria-hidden="true" tabindex="-1"></a>grain_char <span class="ot">&lt;-</span> <span class="fu">sample</span>(grain_order, <span class="dv">36</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb154-3"><a href="introduction-to-r.html#cb154-3" aria-hidden="true" tabindex="-1"></a>grain_fact <span class="ot">&lt;-</span> <span class="fu">factor</span>(grain_char, <span class="at">levels =</span> grain_order)</span>
 <span id="cb154-4"><a href="introduction-to-r.html#cb154-4" aria-hidden="true" tabindex="-1"></a>grain_char</span></code></pre></div>
-<pre><code>##  [1] &quot;sand&quot; &quot;silt&quot; &quot;clay&quot; &quot;silt&quot; &quot;clay&quot; &quot;clay&quot; &quot;sand&quot; &quot;clay&quot; &quot;clay&quot; &quot;silt&quot; &quot;sand&quot; &quot;silt&quot; &quot;sand&quot;
-## [14] &quot;silt&quot; &quot;clay&quot; &quot;sand&quot; &quot;clay&quot; &quot;silt&quot; &quot;sand&quot; &quot;sand&quot; &quot;sand&quot; &quot;clay&quot; &quot;silt&quot; &quot;clay&quot; &quot;sand&quot; &quot;sand&quot;
-## [27] &quot;silt&quot; &quot;clay&quot; &quot;silt&quot; &quot;sand&quot; &quot;clay&quot; &quot;clay&quot; &quot;sand&quot; &quot;clay&quot; &quot;silt&quot; &quot;sand&quot;</code></pre>
+<pre><code>##  [1] &quot;sand&quot; &quot;silt&quot; &quot;clay&quot; &quot;sand&quot; &quot;clay&quot; &quot;silt&quot; &quot;sand&quot; &quot;sand&quot; &quot;sand&quot; &quot;clay&quot; &quot;silt&quot; &quot;clay&quot; &quot;sand&quot; &quot;sand&quot; &quot;silt&quot; &quot;clay&quot; &quot;silt&quot; &quot;sand&quot;
+## [19] &quot;clay&quot; &quot;clay&quot; &quot;sand&quot; &quot;clay&quot; &quot;silt&quot; &quot;sand&quot; &quot;sand&quot; &quot;sand&quot; &quot;sand&quot; &quot;sand&quot; &quot;silt&quot; &quot;sand&quot; &quot;clay&quot; &quot;silt&quot; &quot;clay&quot; &quot;silt&quot; &quot;silt&quot; &quot;sand&quot;</code></pre>
 <div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="introduction-to-r.html#cb156-1" aria-hidden="true" tabindex="-1"></a>grain_fact</span></code></pre></div>
-<pre><code>##  [1] sand silt clay silt clay clay sand clay clay silt sand silt sand silt clay sand clay silt sand
-## [20] sand sand clay silt clay sand sand silt clay silt sand clay clay sand clay silt sand
+<pre><code>##  [1] sand silt clay sand clay silt sand sand sand clay silt clay sand sand silt clay silt sand clay clay sand clay silt sand sand sand
+## [27] sand sand silt sand clay silt clay silt silt sand
 ## Levels: clay silt sand</code></pre>
 <p>To make a categorical variable a factor:</p>
 <div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="introduction-to-r.html#cb158-1" aria-hidden="true" tabindex="-1"></a>fruit <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;apples&quot;</span>, <span class="st">&quot;oranges&quot;</span>, <span class="st">&quot;bananas&quot;</span>, <span class="st">&quot;oranges&quot;</span>)</span>
@@ -826,10 +828,8 @@ Irizarry, Rafael (2020) <em>Introduction to Data Science</em> section 2.13.1.</p
 <span id="cb166-2"><a href="introduction-to-r.html#cb166-2" aria-hidden="true" tabindex="-1"></a>TRI87 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/TRI_1987_BaySites.csv&quot;</span>)</span>
 <span id="cb166-3"><a href="introduction-to-r.html#cb166-3" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="fu">which</span>(TRI87<span class="sc">$</span>air_releases <span class="sc">&gt;</span> <span class="fl">1e6</span>)</span>
 <span id="cb166-4"><a href="introduction-to-r.html#cb166-4" aria-hidden="true" tabindex="-1"></a>TRI87<span class="sc">$</span>FACILITY_NAME[i]</span></code></pre></div>
-<pre><code>## [1] &quot;VALERO REFINING CO-CALI FORNIA BENICIA REFINERY&quot;
-## [2] &quot;TESLA INC&quot;                                      
-## [3] &quot;TESORO REFINING &amp; MARKETING CO LLC&quot;             
-## [4] &quot;HGST INC&quot;</code></pre>
+<pre><code>## [1] &quot;VALERO REFINING CO-CALI FORNIA BENICIA REFINERY&quot; &quot;TESLA INC&quot;                                      
+## [3] &quot;TESORO REFINING &amp; MARKETING CO LLC&quot;              &quot;HGST INC&quot;</code></pre>
 <p><strong>%in%</strong></p>
 <div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="introduction-to-r.html#cb168-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
 <span id="cb168-2"><a href="introduction-to-r.html#cb168-2" aria-hidden="true" tabindex="-1"></a>csvPath <span class="ot">=</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;TRI_1987_BaySites.csv&quot;</span>, <span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>
@@ -870,8 +870,7 @@ Irizarry, Rafael (2020) <em>Introduction to Data Science</em> section 2.13.1.</p
 <li>all elements of a vector – unary functions only</li>
 </ul>
 <div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="introduction-to-r.html#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, sqrt)</span></code></pre></div>
-<pre><code>##  [1] 1.000000 1.414214 1.732051 2.000000 2.236068 2.449490 2.645751 2.828427 3.000000 3.162278
-## [11] 3.316625 3.464102</code></pre>
+<pre><code>##  [1] 1.000000 1.414214 1.732051 2.000000 2.236068 2.449490 2.645751 2.828427 3.000000 3.162278 3.316625 3.464102</code></pre>
 <ul>
 <li>or all variables of a data frame (not a matrix), where it works much like a column-based apply (since variables are columns) but more easily interpreted without the need of specifying columns with 2:</li>
 </ul>

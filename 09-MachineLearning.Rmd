@@ -1,3 +1,4 @@
 # Machine Learning
 
-[Planned]
+[Currently on the wish list, but will take some time.  
+Goal is to identify a very basic one with applications for environmental research]

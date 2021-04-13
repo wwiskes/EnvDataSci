@@ -1,0 +1,3135 @@
+--- 
+title: "Introduction to Environmental Data Science"
+author: "Jerry Davis"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "Background, concepts and exercises for using R for environmental data science.  The focus is on applying the R language and various libraries for data manipulation, data analysis, time series, modeling, and spatial data/mapping. The output format for this example is bookdown::gitbook.  Book is under development, and currently just has five chapters, including this prerequisite chapter."
+---
+
+# Prerequisites
+
+This book is intended to work in concert with a series of lectures and discussions among the participants in Geog 604/704 Environmental Data Science at San Francisco State University.  Data packages will be created on GitHub.
+
+## Packages to install
+
+Participants need to have R and RStudio installed, and at least the following packages:
+
+- tidyverse (to include ggplot2, dplyr, tidyr, stringr, etc.)
+    - ggplot2
+    - dplyr
+    - stringr
+    - tidyr
+- lubridate
+- sf
+- raster
+- tmap
+
+To install these packages, the following code will work:
+
+```
+install.packages(c("tidyverse", "lubridate", "sf", "raster", "tmap"))
+```
+
+You can always add more packages as needed, do them one at a time, whatever. But 
+generally *don't reinstall the packages again with the unless you actually want to reinstall it*, maybe because it's been updated. So generally I don't include `install.packages()` in my script. Once installed, you can access the packages with the library function, e.g.
+
+```{r message=F}
+library(tidyverse)
+```
+
+which you *will* want to include in your script.
+ 
+## Data
+
+We'll be using data from various sources, including data on CRAN like the code packages 
+above which you install the same way -- so use `install.packages("palmerpenguins")`. 
+
+We've also created a repository on GitHub that includes data we've developed in the iGISc at SFSU, and you'll need to install that package a slightly different way. 
+
+<img src="img/logoIGISc200200.png" align=right>
+
+GitHub packages require a bit more work on 
+the user's part since we need to first install `remotes` then use that to install the GitHub data package:
+
+```
+install.packages("remotes")
+remotes::install_github("iGISc/iGIScData")
+```
+
+Note: you can also use `devtools` instead of `remotes` if you have that installed. They do the same thing; `remotes` is a subset of `devtools`. If you see a message about Rtools, you can ignore it since that is only needed for building tools from C++ and things like that.
+
+Then you can access it just like other built-in data by including:
+
+```{r message=F}
+library(iGIScData)
+```
+
+To see what's in it, you'll see the various datasets listed in:
+
+```{r}
+data(package="iGIScData")
+```
+
+Those package datasets can be used directly as sf data (if the sf library is installed) or data frames (all tibbles).  Raw data can also be read from the `extdata` folder that is installed on your computer when you install the package, using code such as:
+
+```
+csvPath <- system.file("extdata","TRI_1987_BaySites.csv", package="iGIScData")
+TRI87 <- read_csv(csvPath)
+```
+
+or something similar for shapefiles.
+
+
+
+<!--chapter:end:index.Rmd-->
+
+```{r include=FALSE}
+library(tidyverse)
+```
+
+# Introduction to R
+
+We're assuming you're either new to R or need a refresher.
+
+We'll start with some basic R operations entered directly in the console in RStudio.
+
+## Variables
+Variables are objects that store values. Every computer language, like in math, stores
+values by assigning them constants or results of expressions.
+`x <- 5` uses the R standard assignment operator `<-` though you can also use `=`. 
+We'll use `<-` because it is more common and avoids some confusion with other syntax.
+```
+
+```
+Variable names must start with a letter, have no spaces, and not use any names 
+that are built into the R language or used in package libraries, such as
+reserved words like `for` or function names like `log()`
+```{r}
+x <- 5
+y <- 8
+longitude <- -122.4
+latitude <- 37.8
+my_name <- "Inigo Montoya"
+```
+To check the value of a variable or other object, you can just enter the name in 
+the console, or even in the code in a code chunk. 
+```{r}
+x
+y
+longitude
+latitude
+my_name
+
+
+```
+This is counter to the way printing out values work in programming, and you will
+need to know how this method works as well because you will want to use your code
+to develop tools that accomplish things, and there are also limitations to what you
+can see by just naming variables.
+
+To see the values of variables in programming mode, use the `print()` function, 
+or to concatenate character string output, use `paste()`: 
+```{r}
+print(x)
+print(y)
+print(latitude)
+paste("The location is latitude", latitude, "longitude", longitude)
+paste("My name is", my_name, "-- Prepare to die.")
+
+```
+## Functions
+Once you have variables or other objects to work with, most of your work 
+involves *functions* such as the well-known math functions
+```
+log10(100)
+log(exp(5))
+cos(pi)
+sin(90 * pi/180)
+```
+Most of your work will involve functions and there are too many to name, 
+even in the base functions, not to mention all the packages we will want to use. 
+You will likely have already used the `install.packages()` and `library()` functions 
+that add in an array of other functions.
+Later we'll also learn how to write our own functions, a capability that is easy to
+accomplish and also gives you a sense of what developing your own package might be like.
+
+**Arithmetic operators**
+There are of course all the normal arithmetic operators (that are actually functions)
+like + - * /.  You're probably familiar with these from using equations in Excel if not 
+in some other programming language you may have learned. These operators look a bit different
+from how they'd look when creating a nicely formatted equation.$\frac{NIR - R}{NIR + R}$
+instead has to look like `(NIR-R)/(NIR+R)`.  Similarly `*` *must* be used to multiply; there's no implied multiplication 
+that we expect in a math equation like $x(2+y)$ which would need to be written `x*(2+y)`.
+
+In contrast to those four well-known operators, the symbol used to exponentiate -- raise to a power -- 
+varies among programming languages. R uses ** so the the Pythagorean theorem $c^2=a^2+b^2$ would be written `c**2 = a**2 + b**2` 
+except for the fact that it wouldn't make sense as a statement to R. 
+We'll need to talk about expressions and statements.
+
+## Expressions and Statements
+
+The concepts of expressions and statements are very important to understand in any programming language.
+
+An *expression* in R (or any programming language) has a *value* just like a variable has a value.
+An expression will commonly combine variables and functions to be *evaluated* to derive the value
+of the expression. Here are some examples of expressions:
+```
+5
+x
+x*2
+sin(x)
+sqrt(a**2 + b**2)
+(-b+sqrt(b**2-4*a*c))/2*a
+paste("My name is", aname)
+```
+
+Note that some of those expressions used previously assigned variables -- x, a, b, c, aname. 
+
+An expression can be entered in the console to display its current value.
+```{r}
+cos(pi)
+print(cos(pi))
+```
+
+A *statement* in R does something. It represents a directive we're assigning to the computer, or
+maybe the environment we're running on the computer (like RStudio, which then runs R). A simple
+`print()` *statement* seems a lot like what we just did when we entered an expression in the console, but recognize that it *does something*:
+
+```{r}
+print("Hello, World")
+```
+
+Which is the same as just typing "Hello, World", but that's just because the job of the console is to display what we are looking for [where we are the ones *doing something*], or if our statement includes something to display.
+
+Statements in R are usually put on one line, but you can use a semicolon to have multiple statements on one line, if desired:
+
+```{r}
+x <- 5; print(x); print(x**2)
+```
+
+Many (perhaps most) statements don't actually display anything. For instance:
+```{r}
+x <- 5
+```
+doesn't display anything, but it does assign the value 5 to the variable x, so it *does something*. It's an *assignment statement* and uses that special assignment operator `<-` .  Most languages just use `=` which the designers of R didn't want to use, to avoid confusing it with the equal sign meaning "is equal to". 
+
+*An assignment statement assigns an expression to a variable.* If that variable already exists, it is reused with the new value. For instance it's completely legit (and commonly done in coding) to update the variable in an assignment statement.  This is very common when using a counter variable:
+```
+i = i + 1
+```
+You're simply updating the index variable with the next value. This also illustrates why it's *not* an equation:  $i=i+1$ doesn't work as an equation (unless i is actually $\infty$ but that's just really weird.)
+
+And `c**2 = a**2 + b**2` doesn't make sense as an R statement because `c**2` isn't a variable to be created. 
+The `**` part is interpreted as *raise to a power*.  What is to the left of the assignment operator `=` *must* be a variable to be assigned the value of the expression.
+
+## Data Types
+Variables, constants and other data elements in R have data types.
+Common types are numeric and character.
+```{r}
+x <- 5
+class(x)
+class(4.5)
+class("Fred")
+```
+### Integers
+By default, R creates double-precision floating-point numeric variables 
+To create integer variables:
+- append an L to a constant, e.g. `5L` is an integer 5
+- convert with `as.integer`
+We're going to be looking at various `as.` functions in R, more on that later, 
+but we should look at `as.integer()` now.  Most other languages use `int()` for this,
+and what it does is converts *any number* into an integer, *truncating* it to an
+integer, not rounding it. 
+
+```{r}
+as.integer(5)
+as.integer(4.5)
+```
+To round a number, there's a `round()` function or you can easily use `as.integer` adding 0.5:
+```{r}
+x <- 4.8
+y <- 4.2
+as.integer(x + 0.5)
+round(x)
+as.integer(y + 0.5)
+round(y)
+```
+
+
+Integer divison:
+```{r}
+5 %/% 2
+```
+Integer remainder from division (the modulus, using a `%%` to represent the modulo):
+```{r}
+5 %% 2
+```
+Surprisingly, the values returned by integer division or the remainder are not stored as integers.  R seems to prefer floating point...
+
+## Rectangular data
+A common data format used in most types of research is *rectangular* data such as in a spreadsheet,
+with rows and columns, where rows might be *observations* and columns might be *variables*.
+We'll read this type of data in from spreadsheets or even more commonly from comma-separated-variable (CSV)
+text files that spreadsheet programs like Excel commonly read in just like their native format.
+```{r include=FALSE}
+## sierraFeb <- read_csv("data/sierraFeb.csv")
+## Don't need this anymore, as long as the iGIScData is installed from GitHub
+```
+```{r}
+library(iGIScData)
+sierraFeb
+```
+## Data Structures in R
+We looked briefly at numeric and character string (we'll abbreviate simply as "string" from here on).
+We'll also look at factors and dates/times later on.
+
+### Vectors
+A vector is an ordered collection of numbers, strings, vectors, data frames, etc.
+What we mostly refer to as vectors are formally called *atomic vectors* which requires
+that they be *homogeneous* sets of whatever type we're referring to, such as a vector of numbers, 
+or a vector of strings, or a vector of dates/times.
+
+You can create a simple vector with the `c()` function:
+```{r}
+lats <- c(37.5,47.4,29.4,33.4)
+lats
+states = c("VA", "WA", "TX", "AZ")
+states
+zips = c(23173, 98801, 78006, 85001)
+zips
+```
+The class of a vector is the type of data it holds
+
+```{r}
+
+```
+
+
+```{r}
+temp <- c(10.7, 9.7, 7.7, 9.2, 7.3, 6.7)
+class(temp)
+```
+Vectors can only have one data class, and if mixed with character types, numeric elements will become character:
+```{r}
+mixed <- c(1, "fred", 7)
+class(mixed)
+mixed[3]   # gets a subset, example of coercion
+```
+
+#### NA
+Data science requires dealing with missing data by storing some sort of null value, called various things:
+- null
+- nodata
+- NA "not available" or "not applicable"
+```{r}
+as.numeric(c("1","Fred","5")) # note NA introduced by coercion
+```
+Ignoring NA in statistical summaries is commonly used. Where normally the summary statistic can only return NA...
+```{r}
+mean(as.numeric(c("1", "Fred", "5")))
+```
+... with `na.rm=T` you can still get the result for all actual data:
+```{r}
+mean(as.numeric(c("1", "Fred", "5")), na.rm=T)
+```
+Don't confuse with `nan` ("not a number") which is used for things like imaginary numbers (explore the help for more on this)
+
+```{r}
+is.na(NA)
+is.nan(NA)
+is.na(as.numeric(''))
+is.nan(as.numeric(''))
+i <- sqrt(-1)
+is.na(i) # interestingly nan is also na
+is.nan(i)
+```
+#### Sequences
+An easy way to make a vector from a sequence of values.  The following 3 examples are equivalent:
+```
+seq(1,10)
+c(1:10)
+c(1,2,3,4,5,6,7,8,9,10)
+```
+The seq() function has special uses like using a step parameter:
+```{r}
+seq(2,10,2)
+```
+#### Vectorization and vector arithmetic
+Arithmetic on vectors operates element-wise
+```{r}
+elev <- c(52,394,510,564,725,848,1042,1225,1486,1775,1899,2551)
+elevft <- elev / 0.3048
+elevft
+
+```
+Another example, with 2 vectors:
+```{r}
+temp03 <- c(13.1,11.4,9.4,10.9,8.9,8.4,6.7,7.6,2.8,1.6,1.2,-2.1)
+temp02 <- c(10.7,9.7,7.7,9.2,7.3,6.7,4.0,5.0,0.9,-1.1,-0.8,-4.4)
+tempdiff <- temp03 - temp02
+tempdiff
+
+```
+#### Plotting vectors
+Vectors of Feb temperature, elevation and latitude at stations in the Sierra:
+```{r}
+temp <- c(10.7, 9.7, 7.7, 9.2, 7.3, 6.7, 4.0, 5.0, 0.9, -1.1, -0.8, -4.4)
+elev <- c(52, 394, 510, 564, 725, 848, 1042, 1225, 1486, 1775, 1899, 2551)
+lat <- c(39.52, 38.91, 37.97, 38.70, 39.09, 39.25, 39.94, 37.75, 40.35, 39.33, 39.17, 38.21)
+
+```
+
+**Plot individually**
+```{r fig.cap="Temperature"}
+plot(temp)
+```
+```{r fig.cap="Elevation"}
+plot(elev)
+```
+```{r fig.cap="Latitude"}
+plot(lat)
+```
+
+**Then plot as a scatterplot**
+```{r fig.cap="Temperature~Elevation"}
+plot(elev,temp)
+```
+#### Named indices
+Vector indices can be named.
+```{r}
+codes <- c(380, 124, 818)
+codes
+codes <- c(italy = 380, canada = 124, egypt = 818)
+codes
+str(codes)
+```
+Why?  I guess so you can refer to observations by name instead of index. 
+The following are equivalent:
+```{r}
+codes[1]
+codes["italy"]
+```
+
+### Lists
+Lists can be heterogeneous, with multiple class types. Lists are actually used a lot in R, but we won't see them for a while.
+
+### Matrices
+Vectors are commonly used as a column in a matrix (or as we'll see, a data frame), like a variable
+```{r}
+temp <- c(10.7, 9.7, 7.7, 9.2, 7.3, 6.7, 4.0, 5.0, 0.9, -1.1, -0.8, -4.4)
+elev <- c(52, 394, 510, 564, 725, 848, 1042, 1225, 1486, 1775, 1899, 2551)
+lat <- c(39.52, 38.91, 37.97, 38.70, 39.09, 39.25, 39.94, 37.75, 40.35, 39.33, 39.17, 38.21)
+```
+**Building a matrix from vectors as columns**
+```{r}
+sierradata <- cbind(temp, elev, lat)
+class(sierradata)
+```
+
+#### Dimensions for arrays and matrices
+Note:  a matrix is just a 2D array.  Arrays have 1, 3, or more dimensions.
+```{r}
+dim(sierradata)
+```
+
+```{r}
+a <- 1:12
+dim(a) <- c(3, 4)   # matrix
+class(a)
+dim(a) <- c(2,3,2)  # 3D array
+class(a)
+dim(a) <- 12        # 1D array
+class(a)
+b <- matrix(1:12, ncol=1)  # 1 column matrix is allowed
+
+```
+### Data frames
+A data frame is a database with fields (as vectors) with records (rows), so is very important for data analysis and GIS.  They're kind of like a spreadsheet with rules (first row is field names, fields all one type). So even though they're more complex than a list, we use them so frequently they become quite familiar [whereas I continue to find lists confusing, especially when discovering them as what a particular function returns.]
+
+```{r warning=FALSE}
+library(palmerpenguins)
+data(package = 'palmerpenguins')
+head(penguins)
+```
+**Creating a data frame out of a matrix**
+```{r fig.cap="Temperature~Elevation", warning=F}
+mydata <- as.data.frame(sierradata)
+plot(data = mydata, x = elev, y = temp)
+```
+
+**Read a data frame from a CSV**
+
+We'll be looking at this more in the next chapter, but a common need is to read data from a spreadsheet stored in the CSV format.  Normally, you'd have that stored with your project and can just specify the file name, but we'll access CSVs from the iGIScData package. Since you have this installed, it will already be on your computer, but not in your project folder. The path to it can be derived using the `system.file()` function.  
+
+Reading a csv in `readr` (part of the tidyverse that we'll be looking at in the next chapter) is done with `read_csv()`:
+
+```{r message=F}
+library(readr)
+csvPath <- system.file("extdata","TRI_1987_BaySites.csv", package="iGIScData")
+TRI87 <- read_csv(csvPath)
+TRI87
+```
+
+**Sort, Index, & Max/Min**
+
+```{r}
+head(sort(TRI87$air_releases))
+index <- order(TRI87$air_releases)
+head(TRI87$FACILITY_NAME[index])   # displays facilities in order of their air releases
+i_max <- which.max(TRI87$air_releases)
+TRI87$FACILITY_NAME[i_max]   # was NUMMI at the time
+```
+
+### Factors
+
+Factors are vectors with predefined values
+- Normally used for categorical data.
+- Built on an *integer* vector
+- Levels are the set of predefined values.
+
+```{r}
+fruit <- factor(c("apple", "banana", "orange", "banana"))
+fruit   # note that levels will be in alphabetical order
+class(fruit)
+typeof(fruit)
+```
+
+An equivalent conversion:
+
+```{r}
+fruitint <- c(1, 2, 3, 2) # equivalent conversion
+fruit <- factor(fruitint, labels = c("apple", "banana", "orange"))
+str(fruit)
+
+```
+
+#### Categorical Data and Factors
+
+While character data might be seen as categorical (e.g. "urban", "agricultural", "forest" land covers), to be used as categorical variables they must be made into factors.
+
+```{r}
+grain_order <- c("clay", "silt", "sand")
+grain_char <- sample(grain_order, 36, replace = TRUE)
+grain_fact <- factor(grain_char, levels = grain_order)
+grain_char
+grain_fact
+```
+
+To make a categorical variable a factor:
+```{r}
+fruit <- c("apples", "oranges", "bananas", "oranges")
+farm <- c("organic", "conventional", "organic", "organic")
+ag <- as.data.frame(cbind(fruit, farm))
+ag$fruit <- factor(ag$fruit)
+ag$fruit
+```
+**Factor example**
+```{r}
+sierraFeb$COUNTY <- factor(sierraFeb$COUNTY)
+str(sierraFeb$COUNTY)
+```
+
+## Programming scripts in RStudio
+
+Given the exploratory nature of the R language, we sometimes forget that it provides
+significant capabilities as a programming language where we can solve more 
+complex problems by coding procedures and using logic to control the process
+and handle a range of possible scenarios.
+
+Programming languages are used for a wide range of purposes, from developing operating
+systems built from low-level code to high-level *scripting* used to run existing functions
+in libraries. R and Python are commonly used for scripting, and you may be familiar with
+using arcpy to script ArcGIS geoprocessing tools. But whether low- or high-level, some common
+operational structures are used in all computer programming languages:
+
+- Conditional operations: *If* a condition is true, do this, and maybe otherwise do something *else*.
+
+  `if x!=0 {print(1/x)} else {print("Can't divide by 0")}`
+
+- Loops
+
+  `for(i in 1:10) print(paste(i, 1/i))`
+
+- Functions (defining your own then using it in your main script)
+
+```{r}
+turnright <- function(ang){(ang + 90) %% 360}
+turnright(c(260, 270, 280))
+```
+
+**Free-standing scripts and RStudio projects**
+
+As we move forward, we'll be wanting to develop complete, free-standing scripts that have all of the needed libraries and data. Your scripts should stand on their own. One example of this that may seem insignificant is using print() statements instead of just naming the object or variable in the console. While that is common in exploratory work, we need to learn to create free-standing scripts.
+
+However, "free standing" still allows for loading libraries of functions we'll be using. 
+We're still talking about high-level (*scripting*), not low-level programming, so we can depend on those libraries that any user can access by installing those packages. If we develop our own packages, we just need to provide the user the ability to install those packages. 
+
+**RStudio projects** are going to be the way we'll want to work for the rest of this book, so each time we start looking at a new data set, or even create one from scratch, you need to create a project to 
+go with it, using File/New Project and specify in a new directory (unless you already have data in an existing one), and specifying a location. Most likely the default location to place it in will work but you can change that.
+
+In this book, we'll be making a lot of use of data provided for you from various data packages such as built-in data, `palmerpenguins` or `iGIScData`, but they correspond to specific research projects, such as Sierra Climate to which several data frames and spatial data apply. *You should create a* **`sierra`** *project for those problems* and return to it every time it applies. We'll try to include a reminder about using a particular project.
+
+In that project, you'll build a series of scripts, many of which you'll re-use to develop new methods. When you're working on your own project with your own data, which you should store in a **`data`** folder inside the project folder.  *All paths are local, and the default working directory is the project folder, so you can specify* **`"data/mydata.csv"`** *as the path* to a csv of that name.
+
+*It's very important to get used to working this way, so start now.*
+
+### Subsetting with logic
+
+We'll use a package that includes data from 
+Irizarry, Rafael (2020) *Introduction to Data Science* section 2.13.1.
+
+Identify all states with murder rates ≤ that of Italy. [Start by creating a **new `murders` project**.]
+
+
+```{r message=F, warning=F}
+library(dslabs)
+data(murders)
+murder_rate <- murders$total / murders$population * 100000
+i <- murder_rate <= 0.71 
+murders$abb[i]
+```
+**which** [in a **new `air_quality` project**]
+
+```{r message=F}
+library(readr)
+TRI87 <- read_csv("data/TRI_1987_BaySites.csv")
+i <- which(TRI87$air_releases > 1e6)
+TRI87$FACILITY_NAME[i]
+```
+
+**%in%**
+
+```{r message=F}
+library(readr)
+csvPath = system.file("extdata","TRI_1987_BaySites.csv", package="iGIScData")
+TRI87 <- read_csv(csvPath)
+i <- TRI87$COUNTY %in% c("NAPA","SONOMA")
+TRI87$FACILITY_NAME[i]
+
+```
+
+### Apply functions
+
+There are many apply functions in R, and they largely obviate the need for looping.  For instance: 
+
+- `apply` derives values at margins of rows and columns, e.g. to sum across rows or down columns [create the following in a **new `generic_methods` project** which you'll use for a variety of generic methods]
+
+```{r}
+# matrix apply – the same would apply to data frames
+matrix12 <- 1:12
+dim(matrix12) <- c(3,4)
+rowsums <- apply(matrix12, 1, sum)
+colsums <- apply(matrix12, 2, sum)
+sum(rowsums)
+sum(colsums)
+zero <- sum(rowsums) - sum(colsums)
+matrix12
+```
+
+Apply functions satisfy one of the needs that spreadsheets are used for.  Consider how of ten you use sum, mean or similar  functions in Excel.
+
+**`sapply`**
+
+sapply applies functions to either:
+
+- all elements of a vector – unary functions only
+```{r}
+sapply(1:12, sqrt)
+```
+
+- or all variables of a data frame (not a matrix), where it works much like a column-based apply (since variables are columns) but more easily interpreted without the need of specifying columns with 2:
+
+```{r}
+sapply(cars,mean)  # same as apply(cars,2,mean)
+```
+
+```{r}
+temp02 <- c(10.7,9.7,7.7,9.2,7.3,6.7,4.0,5.0,0.9,-1.1,-0.8,-4.4)
+temp03 <- c(13.1,11.4,9.4,10.9,8.9,8.4,6.7,7.6,2.8,1.6,1.2,-2.1)
+sapply(as.data.frame(cbind(temp02,temp03)),mean) # has to be a data frame
+```
+
+While various `apply` functions are in base R, the purrr package takes these further.  
+See:  <a href="https://github.com/rstudio/cheatsheets/raw/master/purrr.pdf">purrr cheat sheet</a>
+
+
+
+
+## Exercises
+
+1. Assign variables for your name, city, state and zip code, and use `paste()` to combine them, and assign them to the variable `me`. What is the class of `me`? [Do this and the next several problems in your `generic_methods` project.]
+
+2. Knowing that trigonometric functions require angles (including azimuth directions) to be provided in radians, and that degrees can be converted into radians by dividing by 180 and multiplying that by pi, derive the sine of 30 degrees with an R expression.  (Base R knows what pi is, so you can just use `pi`)
+
+3. If two sides of a right triangle on a map can be represented as $dX$ and $dY$ and the direct line path between them $c$, and the coordinates of 2 points on a map might be given as $(x1,y1)$ and $(x2,y2)$, with $dX=x2-x1$ and $dY=y2-y1$, use the Pythagorean theorem to derive the distance between them and assign that expression to $c$.
+
+4. You can create a vector uniform random numbers from 0 to 1 using `runif(n=30)` where n=30 says to make 30 of them. Use the `round()` function to round each of the values, and provide what you created and explain what happened.
+
+5. Create two vectors of 10 numbers each with the c() function, then assigning to x and y. Then plot(x,y), and provide the three lines of code you used to do the assignment and plot.
+
+6. Change your code from #5 so that one value is NA (entered simply as `NA`, no quotation marks), and derive the mean value for x.  Then add `,na.rm=T` to the parameters for `mean()`. Also do this for y.  Describe your results and explain what happens.
+
+7. Create two sequences, `a` and `b`, with `a` all odd numbers from 1 to 99, `b` all even numbers from 2 to 100. Then derive c through vector division of `b/a`.  Plot a and c together as a scatterplot.
+
+8. Build the sierradata data frame [in a **`sierra` project**] from the data at the top of the **Matrices** section, also given here:
+```
+temp <- c(10.7, 9.7, 7.7, 9.2, 7.3, 6.7, 4.0, 5.0, 0.9, -1.1, -0.8, -4.4)
+elev <- c(52, 394, 510, 564, 725, 848, 1042, 1225, 1486, 1775, 1899, 2551)
+lat <- c(39.52, 38.91, 37.97, 38.70, 39.09, 39.25, 39.94, 37.75, 40.35, 39.33, 39.17, 38.21)
+```
+Create a data frame from it using the same steps, and plot temp against latitude.
+
+9. From the `sierradata` matrix built with `cbind()`, derive colmeans using the `mean` parameter on the columns `2` for `apply()`.
+
+10. Do the same thing with the sierra data data frame with `sapply()`.
+
+
+
+
+
+
+
+
+
+<!--chapter:end:02-introduction.Rmd-->
+
+# Data Abstraction
+
+At this point, we've learned the basics of working with the R language. From here we'll want to explore how to analyze data, both statistically and spatially. One part of this is abstracting information from existing data sets by selecting variables and observations and summarizing their statistics. 
+
+Some useful methods for data abstraction can be found in the various packages of "the tidyverse" which can be included all at once with the **`tidyverse`** package. We'll start **`dplyr`**, which includes an array of data manipulation tools, including `select` for selecting variables, `filter` for subsetting  observations, **`summarize`** for reducing variables to summary statistics, typically stratified by groups, and **`mutate`** for creating new variables from mathematical expressions from existing variables. Some dplyr tools such as data joins we'll look at later in the data transformation chapter. 
+
+## Background: Exploratory Data Analysis
+
+In 1961, John Tukey proposed a new approach to data analysis, defining it as "Procedures for analyzing data, techniques for interpreting the results of such procedures, ways of planning the gathering of data to make its analysis easier, more precise or more accurate, and all the machinery and results of (mathematical) statistics which apply to analyzing data."  
+<img src="img/Tukey1961.png" width="161" height="230" style="horizontal-align:right">He followed this up in 1977 with *Exploratory Data Analysis*. 
+
+Exploratory data analysis (EDA) in part as an approach to analyzing data via summaries, tables and graphics.  The key word is *exploratory*, in contrast with *confirmatory* statistics. Both are important, but ignoring exploration is ignoring enlightenment.
+
+Some purposes of EDA are:
+
+- to suggest hypotheses
+- to assess assumptions on which inference will be based
+- to select appropriate inferential statistical tools
+- to guide further data collection
+
+These concepts led to the development of S at Bell Labs (John Chambers, 1976), then R, built on clear design and extensive, clear graphics.
+
+## The Tidyverse and what we'll explore in this chapter
+
+The Tidyverse refers to a suite of R packages developed at RStudio (see <a href="https://rstudio.com">R Studio</a> and <a href="https://r4ds.had.co.nz">R for Data Science</a>) for facilitating data processing and analysis. While R itself is designed around EDA, the Tidyverse takes it further. Some of the packages in the Tidyverse that are widely used are:
+
+- **`dplyr`** : data manipulation like a database
+- **`readr`** : better methods for reading and writing rectangular data
+- **`tidyr`** : reorganization methods that extend dplyr's database capabilities
+- **`purrr`** : expanded programming toolkit including enhanced "apply" methods
+- **`tibble`** : improved data frame
+- **`stringr`** : string manipulation library
+- **`ggplot2`** : graphing system based on *the grammar of graphics*
+
+In this chapter, we'll be mostly exploring **dplyr**, with a few other things thrown in like reading data frames with **readr**. For simplicity, we can just include `library(tidyverse)` to get everything.
+
+## Tibbles
+
+Tibbles are an improved type of data frame
+
+- part of the Tidyverse
+- serve the same purpose as a data frame, and all data frame operations work
+
+Advantages
+
+- display better
+- can be composed of more complex objects like lists, etc.
+- can be grouped
+
+How created
+
+- Reading from a CSV, using one of a variety of Tidyverse functions similarly named to base functions:
+    - `read_csv` creates a tibble (in general, underscores are used in the Tidyverse)
+    - `read.csv` creates a regular data frame
+- You can also use the `tibble()` function [**`air_quality` project**]
+
+```{r message=F}
+library(tidyverse) # includes readr, ggplot2, and dplyr which we'll use in this chapter
+library(iGIScData)
+csvPath <- system.file("extdata","TRI_1987_BaySites.csv", package="iGIScData")
+TRI87 <- read_csv(csvPath)
+a <- rnorm(10)
+b <- runif(10)
+ab <- tibble(a,b)
+ab
+```
+### `read_csv` vs. `read.csv`
+
+You might be tempted to use read.csv from base R
+
+- They look a lot alike, so you might confuse them
+- You don't need to load library(readr)
+- read.csv "fixes" some things and that might be desired:
+problematic field names like   `MLY-TAVG-NORMAL` become `MLY.TAVG.NORMAL`
+- numbers stored as characters are converted to numbers
+"01" becomes 1, "02" becomes 2, etc.
+
+However, there are potential problems
+
+- You may not want some of those changes, and want to specify those changes separately
+- There are known problems that read_csv avoids
+
+Recommendation:  Use `read_csv` and `write_csv`.
+
+## Statistical summary of variables
+
+A simple statistical summary is very easy to do:
+
+```{r}
+summary(eucoakrainfallrunoffTDR)
+```
+
+## Visualizing data with a Tukey box plot
+
+```{r warning=F}
+ggplot(data = eucoakrainfallrunoffTDR) + geom_boxplot(mapping = aes(x=site, y=runoffL_euc))
+```
+
+## Database operations with `dplyr`
+
+As part of exploring our data, we'll typically simplify or reduce it for our purposes. 
+The following methods are quickly discovered to be essential as part of exploring and analyzing data. 
+
+- **select rows** using logic, such as population > 10000, with `filter`
+- **select variable columns** you want to retain with `select`
+- **add** new variables and assign their values with `mutate`
+- **sort** rows based on a a field with `arrange` 
+- **summarize** by group
+
+### Select, mutate, and the pipe
+
+**The pipe `%>%`**:  Read `%>%` as "and then..."  This is bigger than it sounds and opens up a lot of possibilities.  See example below, and observe how the expression becomes several lines long. In the process, we'll see examples of new variables with mutate and selecting (and in the process *ordering*) variables. [If you haven't already created it, this should be in a **`eucoak` project**]
+
+```{r}
+runoff <- eucoakrainfallrunoffTDR %>%
+  mutate(Date = as.Date(date,"%m/%d/%Y"),
+         rain_subcanopy = (rain_oak + rain_euc)/2) %>%
+  select(site, Date, rain_mm, rain_subcanopy, 
+         runoffL_oak, runoffL_euc, slope_oak, slope_euc)
+runoff
+```
+
+*Note: to just rename a variable, use `rename` instead of `mutate`. It will stay in position.*
+
+**Helper functions for `select()`**
+
+In the `select()` example above, we listed all of the variables, but there are a variety
+of helper functions for using logic to specify which variables to select:
+ 
+- `contains("_")` or any substring of interest in the variable name
+- `starts_with("runoff")
+- `ends_with("euc")`
+- `everything()`
+- `matches()` a regular expression
+- `num_range("x",1:5)` for the common situation where a series of variable names combine a string and a number
+- `one_of(myList)` for when you have a group of variable names
+- range of variable: e.g. runoffL_oak:slope_euc could have followed rain_subcanopy above
+- all but (-): preface a variable or a set of variabe names with - to select all others
+
+
+ 
+### filter
+ 
+ `filter` lets you select observations that meet criteria, similar to an SQL WHERE clause.
+ 
+```{r}
+runoff2007 <- runoff %>%
+  filter(Date >= as.Date("01/01/2007", "%m/%d/%Y"))
+runoff2007
+```
+ **Filtering out NA with `!is.na`**
+ 
+ Here's an important one. There are many times you need to avoid NAs.  
+ We commonly see summary statistics using `na.rm = TRUE` in order to *ignore* NAs when calculating a statistic like `mean`.
+ 
+ To simply filter out NAs from a vector or a variable use a filter:
+ `feb_filt <- feb_s %>% filter(!is.na(TEMP))`
+ 
+### Writing a data frame to a csv
+
+Let's say you have created a data frame, maybe with read_csv
+
+`runoff20062007 <- read_csv(csvPath)`
+
+Then you do some processing to change it, maybe adding variables, reorganizing, etc., and you want to write out your new `eucoak`, so you just need to use `write_csv`
+
+`write_csv(eucoak, "data/tidy_eucoak.csv")`
+
+### Summarize by group
+
+You'll find that you need to use this all the time with real data. You have a bunch of data where some categorical variable is defining a grouping, like our site field in the eucoak data. We'd like to just create average slope, rainfall, and runoff for each site. Note that it involves two steps, first defining which field defines the group, then the various summary statistics we'd like to store.  In this case all of the slopes under oak remain the same for a given site -- it's a *site* characteristic -- and the same applies to the euc site, so we can just grab the first value (mean would have also worked of course).
+
+```{r}
+eucoakSiteAvg <- runoff %>%
+  group_by(site) %>%
+  summarize(
+    rain = mean(rain_mm, na.rm = TRUE),
+    rain_subcanopy = mean(rain_subcanopy, na.rm = TRUE),
+    runoffL_oak = mean(runoffL_oak, na.rm = TRUE),
+    runoffL_euc = mean(runoffL_euc, na.rm = TRUE),
+    slope_oak = first(slope_oak),
+    slope_euc = first(slope_euc)
+  )
+eucoakSiteAvg
+```
+
+
+**Summarizing by group with TRI data [`air_quality` project]**
+
+```{r, message=FALSE}
+csvPath <- system.file("extdata","TRI_2017_CA.csv", package="iGIScData")
+TRI_BySite <- read_csv(csvPath) %>%
+  mutate(all_air = `5.1_FUGITIVE_AIR` + `5.2_STACK_AIR`) %>%
+  filter(all_air > 0) %>%
+  group_by(FACILITY_NAME) %>%
+  summarize(
+    FACILITY_NAME = first(FACILITY_NAME),
+    air_releases = sum(all_air, na.rm = TRUE),
+    mean_fugitive = mean(`5.1_FUGITIVE_AIR`, na.rm = TRUE), 
+    LATITUDE = first(LATITUDE), LONGITUDE = first(LONGITUDE))
+
+```
+
+### Count
+
+Count is a simple variant on summarize by group, since the only statistic is the count of events. [**`eucoak` project**]
+
+```{r}
+tidy_eucoak %>% count(tree)
+
+```
+
+**Another way is to use n():**
+
+```{r}
+tidy_eucoak %>%
+  group_by(tree) %>%
+  summarize(n = n())
+```
+
+### Sorting after summarizing
+
+Using the marine debris data from NOAA Marine Debris Program's *Marine Debris Monitoring and Assessment Project* [in a **new `litter` project**]
+```{r}
+shorelineLatLong <- ConcentrationReport %>%
+  group_by(`Shoreline Name`) %>%
+  summarize(
+    latitude = mean((`Latitude Start`+`Latitude End`)/2),
+    longitude = mean((`Longitude Start`+`Longitude End`)/2)
+  ) %>%
+  arrange(latitude)
+shorelineLatLong
+
+```
+
+## The dot operator
+
+The dot "." operator derives from UNIX syntax, and refers to "here".
+
+- For accessing files in the current folder, the path is "./filename"
+
+A similar specification is used in piped sequences
+
+- The advantage of the pipe is you don't have to keep referencing the data frame.
+- The dot is then used to connect to items inside the data frame [in **`air_quality`**]
+
+```{r}
+csvPath <- system.file("extdata","TRI_1987_BaySites.csv", package="iGIScData")
+TRI87 <- read_csv(csvPath)
+stackrate <- TRI87 %>%
+  mutate(stackrate = stack_air/air_releases) %>%
+  .$stackrate
+head(stackrate)
+```
+
+## Exercises
+
+1. Create a tibble with 20 rows of two variables `norm` and `unif` with `norm` created with `rnorm()` and `unif` created with `runif()`. [**`generic_methods`**]
+
+2. Read in "TRI_2017_CA.csv" [**`air_quality`**] in two ways, as a normal data frame assigned to df and as a tibble assigned to tb. What field names result for what's listed in the CSV as `5.1_FUGITIVE_AIR`?
+
+3. Use the summary function to investigate the variables in either the data.frame or tibble you just created. What type of field and what values are assigned to BIA_CODE?
+
+4. Create a boxplot of `body_mass_g` by `species` from the `penguins` data frame in the palmerpenguins package [in a **`penguins` project**]. Access the data with data(package = 'palmerpenguins'), and also remember `library(ggplot2)` or `library(tidyverse)`.
+
+```{r include=FALSE}
+library(tidyverse)
+library(palmerpenguins)
+data(package = 'palmerpenguins')
+```
+
+```{r include=FALSE}
+ggplot(penguins, aes(x=species, y=body_mass_g)) + geom_boxplot()
+```
+
+
+5. Use select, mutate, and the pipe to create a penguinMass tibble where the only original variable retained is species, but with body_mass_kg created as $\frac{1}{1000}$ the body_mass_g. The statement should start with `penguinMass <- penguins` and use a pipe plus the other functions after that.
+
+```{r include=FALSE}
+penguinMass <- penguins %>%
+  mutate(body_mass_kg = body_mass_g / 1000) %>%
+  select(species, body_mass_kg)
+penguinMass
+```
+
+6. Now, also with penguins, create FemaleChinstaps to include only the female Chinstrap penguins. Start with `FemaleChinstraps <- penguins %>%`
+
+```{r include=FALSE}
+FemaleChinstraps <- penguins %>%
+  filter(sex == "female") %>%
+  filter(species == "Chinstrap")
+FemaleChinstraps
+```
+
+7. Now, summarize by `species` groups to create mean and standard deviation variables from `bill_length_mm`, `bill_depth_mm`, `flipper_length_mm`, and `body_mass_g`. Preface the variable names with either `avg.` or `sd.` Include `na.rm=T` with all statistics function calls.
+
+```{r include=FALSE}
+penguins %>%
+  group_by(species, sex) %>%
+  summarize(avg.bill_length_mm = mean(bill_length_mm, na.rm=T),
+            avg.bill_depth_mm = mean(bill_depth_mm, na.rm=T),
+            avg.flipper_length_mm = mean(flipper_length_mm, na.rm=T),
+            avg.body_mass_g = mean(body_mass_g, na.rm=T),
+            sd.bill_length_mm = sd(bill_length_mm, na.rm=T),
+            sd.bill_depth_mm = sd(bill_depth_mm, na.rm=T),
+            sd.flipper_length_mm = sd(flipper_length_mm, na.rm=T),
+            sd.body_mass_g = sd(body_mass_g, na.rm=T))
+
+```
+
+8. Sort the penguins by `body_mass_g`.
+
+```{r include=FALSE}
+penguins %>%
+  arrange(body_mass_g)
+```
+
+## String Abstraction
+
+Character string manipulation is surprisingly critical to data analysis, and so 
+the **`stringr`** package was developed to provide a wider array of string processing
+tools than what is in base R, including fucntions for detecting matches, subsetting strings,
+managing lengths, replacing substrings with other text, and joining, splitting, and sorting strings. 
+We'll look at some of the stringr functions, but a good way to learn about the wide array of functions 
+is through the cheat sheet that can be downloaded from
+<a href="https://www.rstudio.com/resources/cheatsheets/">https://www.rstudio.com/resources/cheatsheets/</a>.
+
+### Detecting matches
+
+These functions look for patterns within existing strings which can then be used subset observations
+based on those patterns. [These can be investigated in your **`generic_methods` project**]
+
+- **`str_detect`** detects patterns in a string, returns true or false if detected
+- **`str_locate`** detects patterns in a string, returns start and end position if detected, or NA if not
+- **`str_which`** returns the indices of strings that match a pattern
+- **`str_count`** counts the number of matches in each string
+
+```{r include=F}
+library(tidyverse)
+library(iGIScData)
+```
+
+```{r warning=F}
+str_detect(fruit,"qu")
+fruit[str_detect(fruit,"qu")]
+tail(str_locate(fruit, "qu"),15)
+str_which(fruit, "qu")
+fruit[str_which(fruit,"qu")]
+str_count(fruit,"qu")
+
+```
+
+### Subsetting Strings
+
+Subsetting in this case includes its normal use of abstracting the observations specified 
+by a match (similar to a filter for data frames), or just a specified part of a string specified by start and end character positions, or the part of the string that matches an expression.
+
+- **`str_sub`** extracts a part of a string from a start to and end character position
+- **`str_subset`** returns the strings that contain a pattern match
+- **`str_extract`** returns the first (or if `str_extract_all` then all matches) pattern matches
+- **`str_match`** returns the first (or `_all`) pattern match as a matrix
+
+```{r}
+qfruit <- str_subset(fruit, "q")
+qfruit
+str_sub(qfruit,1,2)
+str_sub("94132",1,2)
+str_extract(qfruit,"[aeiou]")
+```
+
+### String Length
+
+The length of strings is often useful in an analysis process, either just knowing the length
+as an integer, or purposefully increasing or reducing it. 
+
+- **`str_length`** simply returns the length of the string as an integer
+- **`str_pad`** adds a specified character (typically a space " ") to either end of a string
+- **`str_trim`** removes whitespace from the either end of a string
+
+```{r}
+qfruit <- str_subset(fruit,"q")
+qfruit
+str_length(qfruit)
+name <- "Inigo Montoya"
+str_length(name)
+firstname <- str_sub(name,1,str_locate(name," ")[1]-1)
+firstname
+lastname <- str_sub(name,str_locate(name," ")[1]+1,str_length(name))
+lastname
+str_pad(qfruit,10,"both")
+str_trim(str_pad(qfruit,10,"both"),"both")
+```
+
+### Replacing substrings with other text ("mutating" strings)
+
+These methods range from converting case to replace substrings.
+
+- **`str_to_lower`** converts strings to lower case
+- **`str_to_upper`** converts strings to upper case
+- **`str_to_title`** capitalizes strings (makes the first character of each word upper case)
+- **`str_sub`** a special use of this function to replace substrings with a specified string
+- **`str_replace`** replaces the first matched pattern (or all with `str_replace_all`) with a specified string
+
+```{r}
+str_to_lower(name)
+str_to_upper(name)
+str_to_title("for whom the bell tolls")
+str_sub(name,1,str_locate(name," ")-1) <- "Diego"
+str_replace(qfruit,"q","z")
+```
+
+### Concatenating and splitting
+
+One very common string function is that to concatenate strings, and somewhat less common
+though useful is splitting them using a key separator like space, comma, or line end. One use of
+using str_c in the example below is to create a comparable join field based on a numeric character 
+string that might need a zero or something at the left or right.
+
+- **`str_c`** The `paste()` function in base R will work but you might want the default separator setting to be "" instead
+of " ", so `str_c` is just `paste` with a default "" separator, but you can also use " ". 
+- **`str_split`** splits a string into parts based upon the detection of a specified separator like space, comma, or line end
+
+```{r message=F}
+str_split("for whom the bell tolls", " ")
+str_c("for","whom","the","bell","tolls",sep=" ")
+csvPath <- system.file("extdata","CA_MdInc.csv",package="iGIScData")
+CA_MdInc <- read_csv(csvPath)
+join_id <- str_c("0",CA_MdInc$NAME) # could also use str_pad(CA_MdInc$NAME,1,side="left",pad="0")
+head(CA_MdInc)
+head(join_id)
+```
+
+## Dates and times with `lubridate`
+
+Makes it easy to work with dates and times.
+
+- Can parse many forms
+- We'll look at more with time series
+- See the cheat sheet for more information, but the following examples may
+demonstrate that it's pretty easy to use, and does a good job of making your 
+job easier.
+
+```{r}
+library(lubridate)
+dmy("20 September 2020")
+dmy_hm("20 September 2020 10:45")
+mdy_hms("September 20, 2020 10:48")
+mdy_hm("9/20/20 10:50")
+mdy("9.20.20")
+start704 <- dmy_hm("24 August 2020 16:00")
+end704 <- mdy_hm("12/18/2020 4:45 pm")
+year(start704)
+month(start704)
+day(end704)
+hour(end704)
+end704-start704
+as_date(end704)
+hms::as_hms(end704)
+
+```
+
+Note the use of :: after the package
+Sometimes you need to specify the package and function name this way, for instance if more than one package has a function of the same name.  
+	`dplyr::select(...)`
+
+
+
+
+
+
+
+
+
+
+
+<!--chapter:end:03-abstraction.Rmd-->
+
+# Visualization
+
+In this section we'll explore visualization methods in R. Visualization has been a key element of R since its inception, since visualization is central to the exploratory philosophy of the language. The base *plot* system generally does a good job in coming up with the most likely graphical output based on the data you provide. 
+
+```{r include=FALSE}
+library(tidyverse)
+library(palmerpenguins)
+data(package = "palmerpenguins")
+```
+
+```{r fig.cap="Flipper length by species"}
+plot(penguins$body_mass_g, penguins$flipper_length_mm)
+plot(penguins$species, penguins$flipper_length_mm)
+```
+
+## ggplot2
+
+We'll mostly focus however on gpplot2, based on the *Grammar of Graphics* because it provides considerable control over your graphics while remaining fairly easily readable, as long as you buy into its grammar.
+
+ggplot2 looks at three aspects of a graph:
+
+- data : where are the data coming from?
+- geometry : what type of graph are we creating?
+- aesthetics : what choices can we make about symbology and how do we connect symbology to data?
+
+See https://rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf
+
+The ggplot2 system provides plots of single and multiple variables, using various coordinate systems (including geographic).
+
+
+## Plotting one variable
+
+- continuous
+    - histograms
+    - density plots
+    - dot plots
+- discrete
+    - bar
+
+[**Create a new `NDVI` project**]
+
+```{r message=F}
+library(iGIScData)
+library(tidyverse)
+summary(XSptsNDVI)
+ggplot(XSptsNDVI, aes(vegetation)) + 
+  geom_bar()
+```
+
+### Histogram
+
+**First, to prepare the data, we need to use a pivot_longer on XSptsNDVI:**
+
+```{r warning=F, message=F}
+XSptsPheno <- XSptsNDVI %>%
+  filter(vegetation != "pine") %>%
+  pivot_longer(cols = starts_with("NDVI"), names_to = "phenology", values_to = "NDVI") %>%
+  mutate(phenology = str_sub(phenology, 5, str_length(phenology)))
+```
+
+```{r warning=FALSE, message=F, fig.cap="Distribution of NDVI, Knuthson Meadow"} 
+XSptsPheno <- read_csv("data/XSptsPheno.csv")
+XSptsPheno %>%
+  ggplot(aes(NDVI)) + 
+  geom_histogram(binwidth=0.05)
+```
+
+**Normal histogram**: easier to visualize the distribution, see modes [**`sierra`**]
+```{r warning=FALSE, message=F, fig.cap="Distribution of Average Monthly Temperatures, Sierra Nevada"}
+sierraData %>%
+    ggplot(aes(TEMPERATURE)) +
+  geom_histogram(fill="dark green")
+```
+
+**Cumulative histogram with proportions**: easier to see percentiles, median
+```{r warning=FALSE, fig.cap="Cumulative Distribution of Average Monthly Temperatures, Sierra Nevada"}
+n <- length(sierraData$TEMPERATURE)
+sierraData %>%
+  ggplot(aes(TEMPERATURE)) +
+  geom_histogram(aes(y=cumsum(..count..)/n), fill="dark goldenrod")
+
+```
+
+### Density Plot
+
+Density represents how much out of the total. The total area (sum of widths of bins times densities of that bin) adds up to 1. [**`NDVI`**]
+
+```{r warning=F, fig.cap="Density plot of NDVI, Knuthson Meadow"}
+XSptsPheno %>% 
+  ggplot(aes(NDVI)) + 
+  geom_density()
+```
+
+Note that NDVI values are <1 so bins are very small numbers, so in this case densities can be >1.
+
+**Using alpha and mapping phenology as fill color**.  This illustrates two useful ggplot methods:
+
+- "mapping" a variable (phenology) to an aesthetic property (fill color of the density polygon)
+- setting a a property (alpha = 0.2) to all polygons of the density plot.  The alpha channel of colors defines its opacity, from invisible (0) to opaque (1) so is commonly used to set as its reverse, transparency.
+
+```{r}
+XSptsPheno %>%
+  ggplot(aes(NDVI, fill=phenology)) +
+  geom_density(alpha=0.2)
+```
+
+```{r include=FALSE}
+## DON'T REALLY NEED THIS -- STORED AS tidy_eucoak
+library(tidyverse)
+runoffPivot <- eucoakrainfallrunoffTDR %>%
+  pivot_longer(cols = starts_with("runoffL_"), 
+               names_to = "tree", values_to = "runoff_L") %>%
+  mutate(
+    tree = str_sub(tree, str_length(tree)-2, str_length(tree)),
+    Date = as.Date(date, "%m/%d/%Y"))  # variable date is just a string, needs converting to date format
+euc <- runoffPivot %>%
+  filter(tree == "euc") %>%
+  mutate(
+    rain_subcanopy = rain_euc,
+    slope = slope_euc,
+    aspect = aspect_euc,
+    surface_tension = surface_tension_euc,
+    runoff_rainfall_ratio = runoff_rainfall_ratio_euc) %>%
+  select(site, `site #`, tree, Date, month, rain_mm, rain_subcanopy, slope, aspect, runoff_L,
+         surface_tension, runoff_rainfall_ratio)
+oak <- runoffPivot %>%
+  filter(tree == "oak") %>%
+  mutate(
+    rain_subcanopy = rain_oak,
+    slope = slope_oak,
+    aspect = aspect_oak,
+    surface_tension = surface_tension_oak,
+    runoff_rainfall_ratio = runoff_rainfall_ratio_oak) %>%
+  select(site, `site #`, tree, Date, month, rain_mm, rain_subcanopy, slope, aspect, runoff_L,
+         surface_tension, runoff_rainfall_ratio)
+eucoak <- rbind(euc, oak)
+write_csv(eucoak, "data/tidy_eucoak.csv")
+```
+
+[**`eucoak`**]
+
+```{r warning=FALSE, fig.cap="Runoff under Eucalyptus and Oak in Bay Area sites"}
+tidy_eucoak %>%
+  ggplot(aes(log(runoff_L),fill=tree)) +
+  geom_density(alpha=0.2)
+```
+
+### boxplot
+
+```{r warning=FALSE, fig.cap="Runoff under Eucalyptus and Oak, Bay Area Sites"}
+ggplot(data = tidy_eucoak) +
+  geom_boxplot(aes(x = site, y = runoff_L))
+
+```
+**Get color from tree within `aes()`**
+```{r warning=FALSE, fig.cap="Runoff at Bay Area Sites, colored as Eucalyptus and Oak"}
+ggplot(data = tidy_eucoak) +
+  geom_boxplot(aes(x=site, y=runoff_L, color=tree))
+
+```
+
+**Visualizing soil CO_2_ data with a Tukey box plot [`soilCO2`]**
+
+```{r warning=FALSE, fig.cap = "Visualizing soil CO_2_ data with a Tukey box plot"}
+co2 <- soilCO2_97
+co2$SITE <- factor(co2$SITE)  # in order to make the numeric field a factor
+ggplot(data = co2, mapping = aes(x = SITE, y = `CO2%`)) +
+  geom_boxplot()
+
+```
+
+## Plotting two variables
+### Two continuous variables
+
+We've looked at this before -- the scatterplot [**`sierra`**]
+
+```{r warning=FALSE, fig.cap="Scatter plot of February temperature vs elevation"}
+ggplot(data=sierraFeb) + 
+  geom_point(mapping = aes(TEMPERATURE, ELEVATION))
+
+```
+
+- The aes ("aesthetics") function specifies the variables to use as x and y coordinates 
+- geom_point creates a scatter plot of those coordinate points
+
+**Set color for all (*not* in aes())**
+
+```{r warning=FALSE}
+ggplot(data=sierraFeb) + 
+  geom_point(aes(TEMPERATURE, ELEVATION), color="blue")
+```
+
+- color is defined outside of aes, so is applies to all points.
+- mapping is first argument of  geom_point, so `mapping = ` is not needed.
+
+### Two variables, one discrete [`eucoak`]
+
+```{r warning=FALSE, fig.cap="Two variables, one discrete"}
+ggplot(tidy_eucoak) +
+  geom_bar(aes(site, runoff_L), stat="identity")
+```
+
+## Color systems
+
+You can find a lot about color systems. See these sources:
+
+<a href="http://sape.inf.usi.ch/quick-reference/ggplot2/colour">http://sape.inf.usi.ch/quick-reference/ggplot2/colour</a>
+<a href="http://applied-r.com/rcolorbrewer-palettes/">http://applied-r.com/rcolorbrewer-palettes/</a>
+
+### Color from variable, in aesthetics
+
+In this graph, color is defined inside aes, so is based on COUNTY [**`sierra`**]
+
+```{r warning=FALSE, fig.cap="Color set within aes()"}
+ggplot(data=sierraFeb) + 
+  geom_point(aes(TEMPERATURE, ELEVATION, color=COUNTY))
+
+```
+
+**Plotting lines using the same x,y in aesthetics**
+
+```{r warning=FALSE, fig.cap="Using aesthetics settings for both points and lines"}
+sierraFeb %>%
+  ggplot(aes(TEMPERATURE,ELEVATION)) +
+  geom_point(color="blue") +
+  geom_line(color="red")
+```
+
+Note the use of pipe to start with the data then apply ggplot. [**`generic_methods`**]
+
+**River map & profile**
+
+```{r fig.cap="Longitudinal Profiles"}
+x <- c(1000, 1100, 1300, 1500, 1600, 1800, 1900)
+y <- c(500, 700, 800, 1000, 1200, 1300, 1500)
+z <- c(0, 1, 2, 5, 25, 75, 150)
+d <- rep(NA, length(x))
+longd <- rep(NA, length(x))
+s <- rep(NA, length(x))
+for(i in 1:length(x)){
+  if(i==1){longd[i] <- 0; d[i] <-0}
+  else{
+    d[i] <- sqrt((x[i]-x[i-1])^2 + (y[i]-y[i-1])^2)
+    longd[i] <- longd[i-1] + d[i]
+    s[i-1] <- (z[i]-z[i-1])/d[i]}}
+longprofile <- bind_cols(x=x,y=y,z=z,d=d,longd=longd,s=s)
+ggplot(longprofile, aes(x,y)) +
+  geom_line(mapping=aes(col=s), size=1.2) + 
+  geom_point(mapping=aes(col=s, size=z)) +
+  coord_fixed(ratio=1) + scale_color_gradient(low="green", high="red") +
+  ggtitle("Simulated river path, elevations and slopes")
+ggplot(longprofile, aes(longd,z)) + geom_line(aes(col=s), size=1.5) + geom_point()  +
+  scale_color_gradient(low="green", high="red") +
+  ggtitle("Elevation over longitudinal distance upstream")
+```
+```{r message=F, warning=F, fig.cap="Slope by longitudinal distance"}
+ggplot(longprofile, aes(longd,s)) + geom_point(aes(col=s), size=3) +
+  scale_color_gradient(low="green", high="red") +
+  ggtitle("Slope over longitudinal distance upstream")
+```
+
+### Trend line [`sierra`]
+
+```{r warning=F, message=F, fig.cap="Trend line using geom_smooth with a linear model"}
+sierraFeb %>%
+  ggplot(aes(TEMPERATURE,ELEVATION)) +
+  geom_point(color="blue") +
+  geom_smooth(color="red", method="lm")
+
+```
+
+### General symbology
+A useful vignette accessed by `vignette("ggplot2-specs")` lets you see aesthetic specifications for symbols, including:
+
+- Color & fill
+- Lines
+   - line type, size, ends
+- Polygon
+   - border color, linetype, size
+   - fill
+- Points
+   - shape
+   - size
+   - color & fill
+   - stroke
+- Text
+   - font face & size
+   - justification
+
+#### Categorical symbology
+
+One example of a "Big Data" resource is EPA's Toxic Release Inventory [**`air_quality`**] that tracks releases from a wide array of sources, from oil refineries on down.  One way of dealing with big data in terms of exploring meaning is to use symbology to try to make sense of it.
+
+```{r message=F, warning=F, fig.cap="EPA Toxic Release Inventory, as a big data set needing symbology clarification"}
+csvPath <- system.file("extdata","TRI_2017_CA.csv", package="iGIScData")
+TRI <- read_csv(csvPath) %>%
+  filter(`5.1_FUGITIVE_AIR` > 100 & `5.2_STACK_AIR` > 100)
+ggplot(data = TRI, aes(log(`5.2_STACK_AIR`), log(`5.1_FUGITIVE_AIR`), 
+                       color = INDUSTRY_SECTOR)) +
+       geom_point()
+```
+
+#### Graphs from grouped data [`NDVI`]
+
+```{r warning=FALSE, fig.cap="NDVI symbolized by vegetation in two seasons"}
+XSptsPheno %>%
+  ggplot() +
+  geom_point(aes(elevation, NDVI, shape=vegetation, 
+                 color = phenology), size = 3) +
+  geom_smooth(aes(elevation, NDVI, 
+                 color = phenology), method="lm") 
+```
+
+[**`eucoak`**]
+
+```{r warning=FALSE, fig.cap="Eucalyptus and Oak: rainfall and runoff"}
+ggplot(data = tidy_eucoak) +
+  geom_point(mapping = aes(x = rain_mm, y = runoff_L, color = tree)) +
+  geom_smooth(mapping = aes(x = rain_mm, y= runoff_L, color = tree), 
+              method = "lm") +
+  scale_color_manual(values = c("seagreen4", "orange3"))
+
+```
+
+#### Faceted graphs
+
+This is another option to displaying groups of data, with parallel graphs
+
+```{r warning=FALSE, fig.cap="Faceted graph alternative"}
+ggplot(data = tidy_eucoak) +
+  geom_point(aes(x=rain_mm,y=runoff_L)) +
+  geom_smooth(aes(x=rain_mm,y=runoff_L), method="lm") +
+  facet_grid(tree ~ .)
+
+```
+
+## Titles and subtitles
+
+```{r warning=FALSE, fig.cap="Titles added"}
+ggplot(data = tidy_eucoak) +
+  geom_point(aes(x=rain_mm,y=runoff_L, color=tree)) +
+  geom_smooth(aes(x=rain_mm,y=runoff_L, color=tree), method="lm") +
+  scale_color_manual(values=c("seagreen4","orange3")) +
+  labs(title="rainfall ~ runoff", 
+       subtitle="eucalyptus & oak sites, 2016")
+
+```
+
+## Pairs Plot [`sierra`]
+
+```{r warning=FALSE, fig.cap="Pairs plot for Sierra Nevada stations variables"}
+sierraFeb %>%
+  select(LATITUDE, ELEVATION, TEMPERATURE, PRECIPITATION) %>%
+  pairs()
+```
+
+## Exercises
+
+1. Create a bar graph of the counts of the species in the **`penguins`** data frame.  What can you say about what it shows?
+
+2. Use bind_cols in dplyr to create a tibble from built-in vectors state.abb and state.region, then use ggplot with geom_bar to create a bar graph of the four regions. [**`generic_methods`**]
+
+3. Convert the built-in time series `treering` into a tibble `tr`using the `tibble()` functions with the single variable assigned as `treering = treering`, then create a histogram, using that tibble and variable for the `data` and `x` settings needed. Attach a screen capture of the histogram. 
+
+```{r include=FALSE}
+library(tidyverse)
+tr <- tibble(treering = treering)
+str(tr)
+ggplot(data=tr, aes(x=treering)) + geom_histogram()
+```
+
+4. Start by clearing your environment with the broom icon in the Environment tab, then we'll create two tibbles: Create a new tibble `st` using `bind_cols` with `Name=state.name`, `Abb=state.abb`, `Region=state.region`, and `as_tibble(state.x77)`. *Note that this works since all of the parts are sorted by state.* Then use the save button in the Environment tab to save `st` as "Q4.RData", and attach that for your answer.
+
+```{r include=F}
+#st <- as_tibble(state.x77)
+st <- bind_cols(Name=state.name, Abb=state.abb, Region=state.region, as_tibble(state.x77))
+st
+```
+
+5. From `st`, create a density plot from the variable `Frost` (number of days with frost for that state).  Attach that plot, and answer: approximately what is the modal value?
+
+```{r include=FALSE}
+#st <- as_tibble(state.x77)
+ggplot(data=st, aes(x=Frost)) + geom_density()
+```
+
+6. From `st` create a a boxplot of `Area` by `Region`.  Which region has the highest and which has the lowest median Area?  Do the same for `Frost`.
+
+```{r include=FALSE}
+ggplot(data=st, aes(x=Region, y=Area)) + geom_boxplot()
+ggplot(data=st, aes(x=Region, y=Frost)) + geom_boxplot()
+```
+
+7. From st, compare murder rate (y=Murder) to Frost (x) in a scatter plot, colored by Region.
+
+```{r include=FALSE}
+st %>%
+  ggplot(aes(x=Frost, y=Murder)) + geom_point(aes(col=Region)) + geom_smooth(method="lm")
+print(st$Name[which.max(st$Murder)])
+```
+
+8. Add a trend line (smooth) with method="lm" to your scatterplot, not colored by Region (but keep the points colored by Region). What can you say about what this graph is showing you?
+
+9. Add a title to your graph.
+
+10. Change your scatterplot to place labels using the Abb variable (still colored by Region) using `geom_label(aes(label=Abb, col=Region))`. Any observations about outliers?
+
+```{r include=FALSE}
+st %>%
+  ggplot(aes(x=Frost, y=Murder)) + geom_label(aes(label=Abb, col=Region)) + geom_smooth(method="lm")
+
+```
+
+
+<!--chapter:end:04-visualization.Rmd-->
+
+# Data Transformation
+
+The goal of this section is to continue where we started in the earlier chapter on data abstraction with **`dplyr`** to look at more transformational functions, and **`tidyr`** adds other tools like pivot tables.
+
+- **`dplyr`** tools: 
+   - joins: `left_join`, `right_join`, `inner_join`, `full_join`, `semi_join`, `anti_join`
+   - set operations: `intersect`, `union`, `setdiff`
+   - binding rows and columns: `bind_cols`, `bind_rows`
+- **`tidyr`** tools:
+   - pivot tables: `pivot_longer`, `pivot_wider`
+   
+
+The term "data wrangling" has been used for what we're doing with these tools, and the
+relevant cheat sheet is actually called "Data Wrangling"
+<a href="https://rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">https://rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf</a>
+
+## Data joins
+
+To bring in variables from another data frame based on a common join field.
+There are multiple types of joins. Probably the most common is **`left_join`** since it starts
+from the data frame (or sf) you want to continue working with and bring in data
+from an additional source. You'll retain all records of the first data set. 
+For any non-matches, NA is assigned. [**`air_quality`**]
+
+```{r message=F, warning=F}
+library(tidyverse)
+library(iGIScData)
+library(sf)
+csvPath <- system.file("extdata", "CA_MdInc.csv", package = "iGIScData")
+income <- read_csv(csvPath) %>%
+   select(trID, HHinc2016) %>%
+   mutate(HHinc2016 = as.numeric(HHinc2016),
+          joinid = str_c("0", trID)) %>%
+   select(joinid, HHinc2016)
+census <- BayAreaTracts %>%
+   left_join(income, by = c("FIPS" = "joinid")) %>%
+   select(FIPS, POP12_SQMI, POP2012, HHinc2016)
+head(census %>% st_set_geometry(NULL))
+```
+
+Other joins are:
+
+- **`right_join`** where you end up retaining all the rows of the second data set
+and NA is assigned to non-matches
+- **`inner_join`** where you only retain records for matches
+- **`full_join`** where records are retained for both sides, and NAs assigned to non-matches
+
+**Right join example**
+We need to join NCDC monthly climate data for all California weather stations to a selection of 82 stations that are in the Sierra. 
+
+- The monthly data has 12 rows (1/month) for each station
+- The right_join gets all months for all stations, so we weed out the non-Sierra stations by removing NAs from a field only with Sierra station data [**`sierra`**]
+
+```{r message=F}
+sierra <- right_join(sierraStations, CA_ClimateNormals, by="STATION") %>%
+   filter(!is.na(STATION_NA)) %>% select(-STATION_NA)
+head(sierra %>% filter(DATE == "01") %>% select(NAME, ELEVATION, `MLY-TAVG-NORMAL`), n=10)
+```
+
+The exact same thing however could be accomplished with an inner_join and
+it doesn't required removing the NAs:
+
+```{r message=F}
+sierraAlso <- inner_join(sierraStations, CA_ClimateNormals, by="STATION") %>%
+   select(-STATION_NA)
+```
+
+## Set Operations
+
+Set operations compare two data frames (or vectors) to handle observations or rows that 
+are the same for each, or not the same. The three set methods are:
+
+- `dplyr::`**`intersect(x,y)`** retains rows that appear in *both* x and y
+- `dplyr::`**`union(x,y)`** retains rows that appear in either or both of x and y
+- `dplyr::`**`setdiff(x,y)`** retains rows that appear in x but not in y
+
+[**`generic_methods`**]
+```{r message=F}
+squares <- (1:10)^2
+evens <- seq(0,100,2)
+squares
+evens
+intersect(squares,evens)
+sort(union(squares,evens))
+sort(setdiff(squares,evens))
+```
+
+## Binding Rows and Columns
+
+These `dplyr` functions are similar to `cbind` and `rbind` in base R, but always 
+creates data frames. For instance, `cbind` usually creates matrices, and make all vectors
+the same class. Note that in `bind_cols`, the order of data in rows must be the same.
+
+```{r message=F}
+states <- bind_cols(abb=state.abb,
+                    name=state.name,
+                    region=state.region,
+                    state.x77)
+head(states)
+```
+
+To compare, note that `cbind` converts numeric fields to character when any other 
+field is character, and character fields are converted to character integers where there are any repeats, 
+which would require manipulating them into factors:
+
+```{r message=F}
+states <- as_tibble(cbind(abb=state.abb, 
+                          name=state.name, 
+                          region=state.region,
+                          division=state.division,
+                          state.x77))
+head(states)
+```
+
+## Pivotting data frames
+
+Pivot tables are a popular tool in Excel, allowing you to transform your data to be more
+useful in a particular analysis. A common need to pivot is 2+ variables with the same data where the variable name should be a factor. `Tidyr` has **`pivot_wider`** and **`pivot_longer`**.  
+
+- **`pivot_wider`** pivots rows into variables.
+- **`pivot_longer`** pivots variables into rows, creating factors.
+
+In our meadows study cross-section created by intersecting normalized difference vegetation
+index (NDVI) values from multispectral drone imagery with surveyed elevation and vegetation
+types (xeric, mesic, and hydric), we have fields `NDVIgrowing` from a July 2019 growing season and `NDVIsenescent` from a September 2020 dry season, but would like 'growing' and 'senescent' to be factors with a single `NDVI` variable. This is how we used `pivot_longer` to accomplish this, using data
+from the `iGIScData` data package [**`NDVI`**]:
+
+```{r message=F}
+XSptsPheno <- XSptsNDVI %>%
+      pivot_longer(cols = starts_with("NDVI"), 
+                   names_to = "phenology", values_to = "NDVI") %>%
+      mutate(phenology = str_sub(phenology, 5, str_length(phenology)))
+```
+
+Then to do the opposite use `pivot_wider`:
+
+```{r message=F}
+XSptsPheno %>%
+  pivot_wider(names_from = phenology, names_prefix = "NDVI", 
+              values_from = NDVI)
+XSptsPheno
+XSptsPheno %>%
+  ggplot() +
+  geom_point(aes(elevation, NDVI, shape=vegetation, 
+                 color = phenology), size = 5) +
+  geom_smooth(aes(elevation, NDVI, 
+                 color = phenology), method="lm")
+```
+
+Pivots turn out to be commonly useful. Runoff graphing from the Eucalyptus/Oak study also benefitted
+from a pivot_longer [**`eucoak`**]:
+
+```{r message=F, warning=F}
+eucoakrainfallrunoffTDR %>%
+  pivot_longer(cols = starts_with("runoffL"),
+               names_to = "tree", values_to = "runoffL") %>%
+  mutate(tree = str_sub(tree, str_length(tree)-2, str_length(tree))) %>%
+  ggplot() + geom_boxplot(aes(site, runoffL)) +
+    facet_grid(tree ~ .)
+```
+
+**Combining a pivot with bind_rows to create a runoff/rainfall scatterplot colored by tree**
+
+```{r message=F, warning=F}
+runoffPivot <- eucoakrainfallrunoffTDR %>%
+  pivot_longer(cols = starts_with("runoffL"),
+               names_to = "tree", values_to = "runoffL") %>%
+  mutate(tree = str_sub(tree, str_length(tree)-2, str_length(tree)),
+         Date = as.Date(date, "%m/%d/%Y"))
+euc <- runoffPivot %>%
+  filter(tree == "euc") %>%
+  mutate(rain_subcanopy = rain_euc,
+         slope = slope_euc,    aspect = aspect_euc,
+         surface_tension = surface_tension_euc,
+         runoff_rainfall_ratio = runoff_rainfall_ratio_euc) %>%
+  select(site, `site #`, tree, Date, month, rain_mm, 
+         rain_subcanopy, slope, aspect, runoffL,     
+         surface_tension, runoff_rainfall_ratio)
+oak <- runoffPivot %>%
+  filter(tree == "oak") %>%
+  mutate(rain_subcanopy = rain_oak,
+         slope = slope_oak, aspect = aspect_oak,
+         surface_tension = surface_tension_oak,
+         runoff_rainfall_ratio = runoff_rainfall_ratio_oak) %>%
+  select(site, `site #`, tree, Date, month, rain_mm, 
+         rain_subcanopy, slope, aspect, runoffL, 
+         surface_tension, runoff_rainfall_ratio)
+bind_rows(euc, oak) %>%
+  ggplot() +
+  geom_point(mapping = aes(x = rain_mm, y = runoffL, color = tree)) +
+  geom_smooth(mapping = aes(x = rain_mm, y= runoffL, color = tree), 
+              method = "lm") +
+  scale_color_manual(values = c("seagreen4", "orange3"))
+```
+
+**Using pivot_wider with traffic stop data (from Claudia Engel (2021) *Data Wrangling*)**
+
+```{r message=F}
+library(lubridate)
+csvPath <- system.file("extdata","MS_trafficstops_bw_age.csv", package="iGIScData")
+trafficStops <- read_csv(csvPath) %>%
+  mutate(year = year(stop_date))
+trafficCounts <- trafficStops %>%
+  count(year,violation_raw)
+trafficCounts %>%
+  pivot_wider(names_from = year, 
+              values_from = n)
+
+```
+
+Note that this table is *not* tidy, but provides a useful table for a report.
+
+<!--chapter:end:05-transformation.Rmd-->
+
+# Spatial Data and Maps
+
+We'll explore the basics of simple features (sf) for building spatial datasets, then some common mapping methods, probably:
+
+- ggplot2
+- tmap
+
+## Spatial Data 
+
+To work with spatial data requires extending R to deal with it using packages.  Many have been developed, but the field is starting to mature using international open GIS standards.
+
+**`sp`**  (until recently, the dominant library of spatial tools)
+
+- Includes functions for working with spatial data
+- Includes `spplot` to create maps
+- Also needs `rgdal` package for `readOGR` – reads spatial data frames.  
+
+**`sf`** (Simple Features)
+
+- ISO 19125 standard for GIS geometries
+- Also has functions for working with spatial data, but clearer to use.
+- Doesn't need many additional packages, though you may still need `rgdal` installed for some tools you want to use.
+- Replacing `sp` and `spplot` though you'll still find them in code. We'll give it a try...
+- Works with ggplot2 and tmap for nice looking maps.
+
+Cheat sheet: https://github.com/rstudio/cheatsheets/raw/master/sf.pdf
+
+#### simple feature geometry sfg and simple feature column sfc
+
+
+
+### Examples of simple geometry building in sf 
+
+sf functions have the pattern st_* 
+
+st means "space and time"
+
+See Geocomputation with R at https://geocompr.robinlovelace.net/ or  https://r-spatial.github.io/sf/
+	for more details, but here's an example of manual feature creation of sf geometries (sfg):
+
+```{r message=FALSE}
+library(tidyverse)
+library(sf)
+library(iGIScData)
+```
+
+[As usual, go to the relevant project, in this case **`generic_methods`**]
+```{r fig.cap="Building simple geometries in sf"}
+library(sf)
+eyes <- st_multipoint(rbind(c(1,5), c(3,5)))
+nose <- st_point(c(2,4))
+mouth <- st_linestring(rbind(c(1,3),c(3, 3)))
+border <- st_polygon(list(rbind(c(0,5), c(1,2), c(2,1), c(3,2), 
+                              c(4,5), c(3,7), c(1,7), c(0,5))))
+face <- st_sfc(eyes, nose, mouth, border)  # sfc = sf column 
+plot(face)
+```
+
+The face was a simple feature column (sfc) built from the list of sfgs. 
+An sfc just has the one column, so is not quite like a shapefile.
+
+- But it can have a coordinate referencing system CRS, and so can be mapped.
+- Kind of like a shapefile with no other attributes than shape
+
+[**`westUS`**]
+
+### Building a mappable sfc from scratch
+
+```{r fig.cap="A simple map built from scratch with hard-coded data as simple feature columns"}
+CA_matrix <- rbind(c(-124,42),c(-120,42),c(-120,39),c(-114.5,35),
+  c(-114.1,34.3),c(-114.6,32.7),c(-117,32.5),c(-118.5,34),c(-120.5,34.5),
+  c(-122,36.5),c(-121.8,36.8),c(-122,37),c(-122.4,37.3),c(-122.5,37.8),
+  c(-123,38),c(-123.7,39),c(-124,40),c(-124.4,40.5),c(-124,41),c(-124,42))
+NV_matrix <- rbind(c(-120,42),c(-114,42),c(-114,36),c(-114.5,36),
+  c(-114.5,35),c(-120,39),c(-120,42))
+CA_list <- list(CA_matrix);       NV_list <- list(NV_matrix)
+CA_poly <- st_polygon(CA_list);   NV_poly <- st_polygon(NV_list)
+sfc_2states <- st_sfc(CA_poly,NV_poly,crs=4326)  # crs=4326 specifies GCS
+st_geometry_type(sfc_2states)
+library(tidyverse)
+ggplot() + geom_sf(data = sfc_2states)
+
+```
+
+**sf class**
+
+Is like a shapefile:  has attributes to which geometry is added, and can be used like a data frame.
+
+```{r fig.cap="Using an sf class to build a map, displaying an attribute"}
+attributes <- bind_rows(c(abb="CA", area=423970, pop=39.56e6),
+                        c(abb="NV", area=286382, pop=3.03e6))
+twostates <- st_sf(attributes, geometry = sfc_2states)
+ggplot(twostates) + geom_sf() + geom_sf_text(aes(label = abb))
+```
+
+### Creating features from shapefiles or tables
+
+**sf's `st_read` reads shapefiles**
+
+- shapefile is an open GIS format for points, polylines, polygons
+
+You would normally have shapefiles (and all the files that go with them -- .shx, etc.)
+stored on your computer, but we'll access one from the iGIScData external data folder [**`sierra`**]:
+
+```{r}
+library(iGIScData)
+library(sf)
+shpPath <- system.file("extdata","CA_counties.shp", package="iGIScData")
+CA_counties <- st_read(shpPath)
+plot(CA_counties)
+```
+
+**`st_as_sf` converts data frames**
+
+- using coordinates read from x and y variables, with crs set to coordinate system (4326 for GCS)
+
+```{r}
+sierraFebpts <- st_as_sf(sierraFeb, coords = c("LONGITUDE", "LATITUDE"), crs=4326)
+plot(sierraFebpts)
+```
+
+[**`air_quality`**]
+```{r, message=FALSE, warning=FALSE, fig.cap="ggplot map of Bay Area TRI sites, census centroids, freeways"}
+library(tidyverse)
+library(sf)
+library(iGIScData)
+censusCentroids <- st_centroid(BayAreaTracts)
+TRI_sp <- st_as_sf(TRI_2017_CA, coords = c("LONGITUDE", "LATITUDE"), 
+        crs=4326) # simple way to specify coordinate reference
+bnd <- st_bbox(censusCentroids)
+ggplot() +
+  geom_sf(data = BayAreaCounties, aes(fill = NAME)) +
+  geom_sf(data = censusCentroids) +
+  geom_sf(data = CAfreeways, color = "grey") +
+  geom_sf(data = TRI_sp, color = "yellow") +
+  coord_sf(xlim = c(bnd[1], bnd[3]), ylim = c(bnd[2], bnd[4])) +
+  labs(title="Bay Area Counties, Freeways and Census Tract Centroids")
+```
+
+### Coordinate Referencing System
+
+Say you have data you need to make spatial with a spatial reference
+
+`sierra <- read_csv("sierraClimate.csv")`
+
+EPSG or CRS codes are an easy way to provide coordinate referencing.  
+
+Two ways of doing the same thing. 
+
+1. Spell it out:
+```
+GCS <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+wsta = st_as_sf(sierra, coords = c("LONGITUDE","LATITUDE"), crs=GCS)
+```
+
+2. Google to find the code you need and assign it to the crs parameter:
+
+`wsta <- st_as_sf(sierra, coords = c("LONGITUDE","LATITUDE"), crs=4326)`
+
+#### *Removing* Geometry
+
+There are many instances where you want to remove geometry from a sf data frame
+
+- Some R functions run into problems with geometry and produce confusing error messages, like "non-numeric argument"
+
+- You're wanting to work with an sf data frame in a non-spatial way
+
+One way to remove geometry:
+
+`myNonSFdf <- mySFdf %>% st_set_geometry(NULL)`
+
+### Spatial join `st_join`
+
+A spatial join with st_join
+joins data from census where TRI points occur [**`air_quality`**]
+
+```{r, message=FALSE}
+TRI_sp <- st_as_sf(TRI_2017_CA, coords = c("LONGITUDE", "LATITUDE"), crs=4326) %>%
+  st_join(BayAreaTracts) %>%
+  filter(CNTY_FIPS %in% c("013", "095"))
+```
+
+
+### Plotting maps in the base plot system
+
+There are various programs for creating maps from spatial data, and we'll look at a few after we've looked at rasters. As usual, the base plot system often does something useful when you give it data.
+
+```{r}
+plot(BayAreaCounties)
+```
+
+And with just one variable:
+
+```{r}
+plot(BayAreaCounties["POP_SQMI"])
+```
+
+There's a lot more we could do with the base plot system, but we'll mostly focus on
+some better options in ggplot2 and tmap.
+
+
+## Raster GIS in R
+
+Simple Features are feature-based, so based on the name I guess it's not surprising that sf doesn't have support for rasters. But we can use the raster package for that. 
+
+**A bit of raster reading and map algebra with Marble Mountains elevation data [`marbles`]**
+
+```{r message=FALSE}
+library(raster)
+rasPath <- system.file("extdata","elev.tif", package="iGIScData")
+elev <- raster(rasPath)
+slope <- terrain(elev, opt="slope")
+aspect <- terrain(elev, opt="aspect")
+slopeclasses <-matrix(c(0,0.2,1, 0.2,0.4,2, 0.4,0.6,3,
+                        0.6,0.8,4, 0.8,1,5), ncol=3, byrow=TRUE)
+slopeclass <- reclassify(slope, rcl = slopeclasses)
+
+plot(elev)
+plot(slope)
+plot(slopeclass)
+plot(aspect)
+```
+
+### Raster from scratch
+
+```{r}
+new_raster2 <- raster(nrows = 6, ncols = 6, res = 0.5,
+                      xmn = -1.5, xmx = 1.5, ymn = -1.5, ymx = 1.5,
+                      vals = 1:36)
+plot(new_raster2)
+
+```
+
+
+## ggplot2 for maps
+
+The Grammar of Graphics is the gg of ggplot.
+
+- Key concept is separating aesthetics from data
+- Aesthetics can come from variables (using aes()setting) or be constant for the graph
+
+Mapping tools that follow this lead
+
+- ggplot, as we have seen, and it continues to be enhanced
+- tmap (Thematic Maps) https://github.com/mtennekes/tmap
+Tennekes, M., 2018, tmap: Thematic Maps in R, *Journal of Statistical Software* 84(6), 1-39
+
+```{r}
+ggplot(CA_counties) + geom_sf()
+
+```
+
+
+Try `?geom_sf` and you'll find that its first parameters is mapping with `aes()` by default. The data property is inherited from the ggplot call, but commonly you'll want to specify data=something in your geom_sf call.
+
+**Another simple ggplot, with labels**
+
+```{r}
+ggplot(CA_counties) + geom_sf() +
+  geom_sf_text(aes(label = NAME), size = 1.5)
+
+```
+
+**and now with fill color**
+
+```{r}
+ggplot(CA_counties) + geom_sf(aes(fill = MED_AGE)) +
+  geom_sf_text(aes(label = NAME), col="white", size=1.5)
+```
+
+**Repositioned legend, no "x" or "y" labels**
+
+```{r warning=FALSE}
+ggplot(CA_counties) + geom_sf(aes(fill=MED_AGE)) +
+  geom_sf_text(aes(label = NAME), col="white", size=1.5) +
+  theme(legend.position = c(0.8, 0.8)) +
+  labs(x="",y="")
+
+```
+
+
+**Map in ggplot2, zoomed into two counties [`air_quality`]:**
+
+```{r warning=FALSE}
+library(tidyverse); library(sf); library(iGIScData)
+census <- BayAreaTracts %>%
+   filter(CNTY_FIPS %in% c("013", "095"))
+TRI <- TRI_2017_CA %>%
+  st_as_sf(coords = c("LONGITUDE", "LATITUDE"), crs=4326) %>%
+  st_join(census) %>%
+  filter(CNTY_FIPS %in% c("013", "095"),
+         (`5.1_FUGITIVE_AIR` + `5.2_STACK_AIR`) > 0)
+bnd = st_bbox(census)
+ggplot() +
+  geom_sf(data = BayAreaCounties, aes(fill = NAME)) +
+  geom_sf(data = census, color="grey40", fill = NA) +
+  geom_sf(data = TRI) +
+  coord_sf(xlim = c(bnd[1], bnd[3]), ylim = c(bnd[2], bnd[4])) +
+  labs(title="Census Tracts and TRI air-release sites") +
+  theme(legend.position = "none")
+
+```
+
+### Rasters in ggplot2
+
+Raster display in ggplot2 is currently a little awkward, as are rasters in general in the feature-dominated GIS world.
+
+We can use a trick: converting rasters to a grid of points [**`marbles`**:
+
+```{r}
+library(tidyverse)
+library(sf)
+library(raster)
+rasPath <- system.file("extdata","elev.tif", package="iGIScData")
+elev <- raster(rasPath)
+shpPath <- system.file("extdata","trails.shp", package="iGIScData")
+trails <- st_read(shpPath)
+elevpts = as.data.frame(rasterToPoints(elev))
+ggplot() +
+  geom_raster(data = elevpts, aes(x = x, y = y, fill = elev)) +
+  geom_sf(data = trails)
+```
+
+## tmap
+
+Basic building block is tm_shape(data) followed by various layer elements such as tm_fill()
+shape can be features or raster
+See Geocomputation with R Chapter 8 "Making Maps with R" for more information.
+https://geocompr.robinlovelace.net/adv-map.html
+
+```{r}
+library(spData)
+library(tmap)
+tm_shape(world) + tm_fill() + tm_borders()
+```
+
+**Color by variable [`air_quality`]**
+
+```{r}
+library(sf)
+library(tmap)
+tm_shape(BayAreaTracts) + tm_fill(col = "MED_AGE")
+
+```
+
+**tmap of sierraFeb with hillshade and point symbols [`sierra`]**
+
+```{r warning=FALSE}
+library(tmap)
+library(sf)
+library(raster)
+library(iGIScData)
+tmap_mode("plot")
+tmap_options(max.categories = 8)
+sierra <- st_as_sf(sierraFeb, coords = c("LONGITUDE", "LATITUDE"), crs = 4326)
+rasPath <- system.file("extdata","ca_hillsh_WGS84.tif", package="iGIScData")
+hillsh <- raster(rasPath)
+bounds <- st_bbox(sierra)
+tm_shape(hillsh,bbox=bounds)+
+  tm_raster(palette="-Greys",legend.show=FALSE,n=10) + tm_shape(sierra) + tm_symbols(col="TEMPERATURE",
+     palette=c("blue","red"), style="cont",n=8) +
+  tm_legend() + 
+  tm_layout(legend.position=c("RIGHT","TOP"))
+
+```
+
+*Note: "-Greys" needed to avoid negative image, since "Greys" go from light to dark, and to match reflectance as with b&w photography, they need to go from dark to light.*
+
+### Interactive Maps
+
+The word "static" in "static maps" isn't something you would have heard in a cartography class 30 years ago, since essentially *all* maps then were static. Very important in designing maps is considering your audience, and one characteristic of the audience of those maps of yore were that they were printed and thus fixed on paper.  A lot of cartographic design relates to that property:  
+
+- Figure-to-ground relationships assume "ground" is a white piece of paper (or possibly a standard white background in a pdf), so good cartographic color schemes tend to range from light for low values to dark for high values.
+- Scale is fixed and there are no "tools" for changing scale, so a lot of attention must be paid to providing scale information.
+- Similarly, without the ability to see the map at different scales, inset maps are often needed to provide context.
+
+Interactive maps change the game in having tools for changing scale, and *always* being "printed" on a computer or device where the color of the background isn't necessarily white. We are increasingly used to using interactive maps on our phones or other devices, and often get frustrated not being able to zoom into a static map.
+
+A widely used interactive mapping system is Leaflet, but we're going to use tmap to access Leaflet behind the scenes and allow us to create maps with one set of commands.  The key parameter needed is tmap_mode which must be set to "view" to create an interactive map. [**`air_quality`**]
+
+```{r}
+tmap_mode("view")
+tm_shape(BayAreaTracts) + tm_fill(col = "MED_AGE", alpha = 0.5)
+```
+
+[**`sierra`**]
+```{r}
+library(tmap)
+library(sf)
+tmap_mode("view")
+tmap_options(max.categories = 8)
+sierra <- st_as_sf(sierraFeb, coords = c("LONGITUDE", "LATITUDE"), crs = 4326)
+bounds <- st_bbox(sierra)
+tm_basemap(leaflet::providers$Esri.NatGeoWorldMap) +
+  tm_shape(sierra) + tm_symbols(col="TEMPERATURE",
+  palette=c("blue","red"), style="cont",n=8,size=0.2) +
+  tm_legend() + 
+  tm_layout(legend.position=c("RIGHT","TOP"))
+
+```
+
+#### Leaflet
+
+Now that we've seen an app that used it, let's look briefly at Leaflet itself, and we'll see that even the Leaflet package in R actually uses JavaScript...
+
+Leaflet is designed as "An open-source JavaScript library for mobile-friendly interactive maps"   https://leafletjs.com
+"The **R** package **leaflet** is an interface to the JavaScript library **Leaflet** to create interactive web maps. It was developed on top of the htmlwidgets framework, which means the maps can be rendered in **RMarkdown** (v2) documents (which is why you can see it in this document), Shiny apps, and RStudio IDE / the R console." 
+
+https://blog.rstudio.com/2015/06/24/leaflet-interactive-web-maps-with-r/
+
+https://github.com/rstudio/cheatsheets/blob/master/leaflet.pdf
+
+```{r}
+library(leaflet)
+m <- leaflet() %>%
+  addTiles() %>%  # default OpenStreetMap tiles
+  addMarkers(lng=174.768, lat=-36.852,
+             popup="The birthplace of R")
+m 
+```
+
+## Exercises
+
+1. Using the method of building simple sf geometries, build a simple 1x1 square object and plot it. Remember that you have to close the polygon, so the first vertex is the same as the last (of 5) vertices. Provide your code only.
+
+```{r include=F}
+library(sf)
+library(tidyverse)
+s <- st_polygon(list(rbind(c(0,1),c(0,2),c(1,2),c(1,1),c(0,1))))
+square <- st_sfc(s)
+plot(square)
+```
+
+2. Build a map in ggplot of Colorado, Wyoming, and Utah with these boundary vertices in GCS. As with the square, remember to close each figure, and assign the crs to what is needed for GCS: 4326. Submit map as exported plot, and code in the submittal text block. [**`westUS`**]
+
+- Colorado: (-109,41),(-102,41),(-102,37),(-109,37)
+- Wyoming: (-111,45),(-104,45),(-104,41),(-111,41)
+- Utah: (-114,42),(-111,42),(-111,41),(-109,41),(-109,37),(-114,37)
+- Arizona: (-114,37),(-109,37),(-109,31.3),(-111,31.3),(-114.8,32.5),
+           (-114.6,32.7),(-114.1,34.3),(-114.5,35),(-114.5,36),(-114,36)
+- New Mexico: (-109,37),(-103,37),(-103,32),(-106.6,32),(-106.5,31.8),
+           (-108.2,31.8),(-108.2,31.3),(-109,31.3)
+
+```{r include=F}
+CO <- st_polygon(list(rbind(c(-109,41),c(-102,41),c(-102,37),c(-109,37),c(-109,41))))
+WY <- st_polygon(list(rbind(c(-111,45),c(-104,45),c(-104,41),c(-111,41),c(-111,45))))
+UT <- st_polygon(list(rbind(c(-114,42),c(-111,42),c(-111,41),c(-109,41),c(-109,37),
+                            c(-114,37),c(-114,42))))
+AZ <- st_polygon(list(rbind(c(-114,37),c(-109,37),c(-109,31.3),c(-111,31.3),c(-114.8,32.5),c(-114.6,32.7),c(-114.1,34.3),c(-114.5,35),c(-114.5,36),c(-114,36),c(-114,37))))
+NM <- st_polygon(list(rbind(c(-109,37),c(-103,37),c(-103,32),c(-106.6,32),c(-106.5,31.8),c(-108.2,31.8),c(-108.2,31.3),c(-109,31.3),c(-109,37))))
+sfc5states <- st_sfc(CO,WY,UT,AZ,NM, crs=4326)
+ggplot() + geom_sf(data=sfc5states)
+
+```
+
+3. Add in the code for CA and NV and create kind of a western US map...
+```{r include=F}
+CO <- st_polygon(list(rbind(c(-109,41),c(-102,41),c(-102,37),c(-109,37),c(-109,41))))
+WY <- st_polygon(list(rbind(c(-111,45),c(-104,45),c(-104,41),c(-111,41),c(-111,45))))
+UT <- st_polygon(list(rbind(c(-114,42),c(-111,42),c(-111,41),c(-109,41),c(-109,37),c(-114,37),c(-114,42))))
+AZ <- st_polygon(list(rbind(c(-114,37),c(-109,37),c(-109,31.3),c(-111,31.3),c(-114.8,32.5),c(-114.6,32.7),c(-114.1,34.3),c(-114.5,35),c(-114.5,36),c(-114,36),c(-114,37))))
+NM <- st_polygon(list(rbind(c(-109,37),c(-103,37),c(-103,32),c(-106.6,32),c(-106.5,31.8),c(-108.2,31.8),c(-108.2,31.3),c(-109,31.3),c(-109,37))))
+
+CA <- st_polygon(list(rbind(c(-124,42),c(-120,42),c(-120,39),c(-114.5,35),
+  c(-114.1,34.3),c(-114.6,32.7),c(-117,32.5),c(-118.5,34),c(-120.5,34.5),
+  c(-122,36.5),c(-121.8,36.8),c(-122,37),c(-122.4,37.3),c(-122.5,37.8),
+  c(-123,38),c(-123.7,39),c(-124,40),c(-124.4,40.5),c(-124,41),c(-124,42))))
+NV <- st_polygon(list(rbind(c(-120,42),c(-114,42),c(-114,36),c(-114.5,36),
+  c(-114.5,35),c(-120,39),c(-120,42))))
+
+sfc7states <- st_sfc(CO,WY,UT,AZ,NM,CA,NV, crs=4326)
+ggplot() + geom_sf(data=sfc7states)
+
+```
+
+4. Create an sf class from the seven states adding the fields `name`, `abb`, `area_sqkm`, and `population`, and create a map labeling with the name.
+
+- Colorado, CO, 269837, 5758736
+- Wyoming, WY, 253600, 578759
+- Utah, UT, 84899, 3205958
+- Arizona, AZ, 295234, 7278717
+- New Mexico, NM, 314917, 2096829
+- California, CA, 423970, 39368078
+- Nevada, NV, 286382, 3080156
+
+```{r include=F}
+attributes <- bind_rows(c(name="Colorado", abb="CO", area=269837, pop=5758736),
+                        c(name="Wyoming", abb="WY", area=253600, pop=578759),
+                        c(name="Utah", abb="UT", area=84899, pop=3205958),
+                        c(name="Arizona", abb="AZ", area=295234, pop=7278717),
+                        c(name="New Mexico", abb="NM", area=314917, pop=2096829),
+                        c(name="California", abb="CA", area=423970, pop=39368078),
+                        c(name="Nevada", abb="NV", area=286382, pop=3080156))
+SW_States <- st_sf(attributes, geometry = sfc7states)
+ggplot(SW_States) + geom_sf(aes(fill=pop)) + geom_sf_text(aes(label = name))
+```
+
+5. Create a tibble for the highest peaks in the 7 states, with the following names, elevations in m, longitude and latitude, and add them to that map:
+
+- Wheeler Peak, 4011, -105.4, 36.5
+- Mt. Whitney, 4421, -118.2, 36.5
+- Boundary Peak, 4007, -118.35, 37.9
+- Kings Peak, 4120, -110.3, 40.8
+- Gannett Peak, 4209, -109, 43.2
+- Mt. Elbert, 4401, -106.4, 39.1
+- Humphreys Peak, 3852, -111.7, 35.4
+
+Note: the easiest way to do this is with the tribble function, starting with:
+```
+peaks <- tribble(
+  ~peak, ~elev, ~longitude, ~latitude,
+  "Wheeler Peak", 4011, -105.4, 36.5,
+```
+
+```{r include=F}
+peaks <- tribble(
+  ~peak, ~elev, ~longitude, ~latitude,
+  "Wheeler Peak", 4011, -105.4, 36.5,
+  "Mt. Whitney", 4421, -118.2, 36.5,
+  "Boundary Peak", 4007, -118.35, 37.9,
+  "Kings Peak", 4120, -110.3, 40.8,
+  "Gannett Peak", 4209, -109, 43.2,
+  "Mt. Elbert", 4401, -106.4, 39.1,
+  "Humphreys Peak", 3852, -111.7, 35.4)
+peaksp <- st_as_sf(peaks, coords=c("longitude", "latitude"), crs=4326)
+
+ggplot(SW_States) + geom_sf(aes(fill=pop)) + geom_sf(data=peaksp) + geom_sf_label(data=peaksp, aes(label=peak))
+
+  
+```
+
+6. Use a spatial join to add the points to the states to provide a new attribute maximum elevation, and display that using geom_sf_text() with the state polygons.
+
+```{r include=F}
+SW_States %>%
+  st_join(peaksp) %>%
+  ggplot() + geom_sf() + geom_sf_text(aes(label=elev))
+
+```
+
+7. From the CA_counties and CAfreeways feature data in iGIScData, make a simple map in ggplot, with freeways colored red.
+
+```{r include=F}
+ggplot(CA_counties) + geom_sf() + geom_sf(data=CAfreeways, col="red")
+```
+
+8. After adding the raster library, create a raster from the built-in `volcano` matrix of elevations from Auckland's Maunga Whau Volcano, and use plot() to display it.  We'd do more with that dataset but we don't know what the cell size is.
+
+```{r include=F}
+library(raster)
+v <- raster(volcano)
+plot(v)
+```
+
+9. Use tmap to create a simple map from the SW_States (polygons) and peaksp (points) data we created earlier.  Hints: you'll want to use tm_text with text set to "peak" to label the points, along with the parameter `auto.placement=TRUE`. [**`westUS`**]
+
+```{r include=F}
+library(tmap)
+tmap_mode("plot")
+tm_shape(SW_States) + tm_borders() +
+  tm_shape(peaksp) + tm_symbols(col = "red") + tm_text(text="peak", auto.placement=T)
+```
+
+10. Change the map to the view mode, but don't use the state borders since the basemap will have them. Just before adding shapes, set the basemap to leaflet::providers$Esri.NatGeoWorldMap, then continue to the peaks after the + to see the peaks on a National Geographic basemap.
+
+```{r include=F}
+tmap_mode("view")
+tm_basemap(leaflet::providers$Esri.NatGeoWorldMap) +
+tm_shape(peaksp) + tm_symbols(col = "red") + tm_text(text="peak", auto.placement=T)
+
+```
+
+
+
+<!--chapter:end:06-spatial.Rmd-->
+
+# Statistics and Modeling
+
+```{r echo=F, message=F}
+library(iGIScData)
+library(tidyverse)
+sierraFeb <- sierraFeb %>%
+  filter(!is.na(TEMPERATURE))
+model1 = lm(TEMPERATURE ~ ELEVATION, data = sierraFeb)
+cc = model1$coefficients
+sierraFeb$resid = resid(model1)
+sierraFeb$predict = predict(model1) 
+eqn = paste("temperature =", paste(round(cc[1],2), paste(round(cc[-1], digits=3), sep="*", collapse=" + ", paste("elevation")), sep=" + "), "+ e")
+ggplot(sierraFeb, aes(x=ELEVATION, y=TEMPERATURE)) + 
+  geom_smooth(method="lm", se=FALSE, color="lightgrey") +
+  geom_segment(aes(xend=ELEVATION, yend=predict), alpha=.2) +
+  geom_point(aes(color=resid)) +
+  scale_color_gradient2(low="blue", mid="ivory2", high="red") +
+  guides(color=FALSE) +
+  theme_bw() +
+  ggtitle(paste("Residuals (e) from model: ",eqn))
+```
+
+## Goals of statistical analysis
+
+To frame how we might approach statistical analysis and modeling, there are
+various goals that are commonly involved:
+
+- To understand our data
+   - nature of our data, through summary statistics and various graphics like histograms
+   - spatial statistical analysis
+   - time series analysis
+- To *group* or *classify* things based on their properties
+   - using factors to define groups, and deriving grouped summaries
+   - comparing *observed* vs *expected* counts or probabilities
+- To understand how variables relate to one another
+   - or maybe even explain variations in other variables, through correlation analysis
+- To *model* behavior and maybe *predict* it
+   - various linear models
+- To *confirm* our observations from exploration (field/lab/vis)
+   - inferential statistics e.g. difference of means tests, ANOVA, X^2
+- To have the confidence to draw conclusions, make informed decisions
+- To help *communicate* our work
+
+These goals can be seen in the context of a typical research paper or thesis outline in environmental science:
+
+- Introduction
+- Literature Review
+- Methodology
+- Results
+   - field, lab, geospatial data
+- Analysis
+   - statistical analysis
+   - qualitative analysis
+   - visualization
+- Discussion
+   - making sense of analysis
+   - possibly recursive, with visualization
+- Conclusion
+   - conclusion about what the above shows
+   - new questions for further research
+   - possible policy recommendation
+   
+The scope and theory of statistical analysis and models is extensive, and there are many good books
+on the subject that employ the R language. This chapter is a short review of some of
+these methods and how they apply to environmental data science.
+
+## Summary Statistics
+
+Summary statistics such as mean, standard deviation, variance, minimum, maximum, and range are derived in quite a few
+R functions, commonly as a parameter or a sub-function (see `mutate`). A an overall simple statistical summary is very easy to do in base R:
+
+```{r message=F}
+summary(tidy_eucoak)
+```
+
+### Summarize by group:  *stratifying a summary*
+
+```{r message=F}
+eucoakrainfallrunoffTDR %>%
+  group_by(site) %>%
+  summarize(
+    rain = mean(rain_mm, na.rm = TRUE),
+    rainSD = sd(rain_mm, na.rm = TRUE),
+    runoffL_oak = mean(runoffL_oak, na.rm = TRUE),
+    runoffL_euc = mean(runoffL_euc, na.rm = TRUE),
+    runoffL_oakMax = max(runoffL_oak, na.rm = TRUE),
+    runoffL_eucMax = max(runoffL_oak, na.rm = TRUE),
+  )
+
+```
+
+### Boxplot for visualizing distributions by group
+
+A Tukey boxplot is a good way to visualize distributions by group. In this soil CO_2
+study of the Marble Mountains, some sites had much greater variance, and some sites
+tended to be low vs high:
+
+```{r message=F, warning=F}
+soilCO2_97$SITE <- factor(soilCO2_97$SITE)
+ggplot(data = soilCO2_97, mapping = aes(x = SITE, y = `CO2%`)) +
+  geom_boxplot()
+```
+
+### Generating pseudorandom numbers
+
+Functions commonly used in R books for quickly creating a lot of numbers to display are those
+that generate pseudorandom numbers. These are also useful in statistical methods that
+need a lot of these, such as in Monte Carlo simulation. The two most commonly used are:
+
+- **`runif()`** generates a vector of `n` pseudorandom numbers ranging by default from `min=0` to `max=1`.
+- **`rnorm()`** generates a vector of `n` normally distributed pseudorandom numbers with a default 
+`mean=0` and `sd=0`.
+
+To see both in action as x and y:
+
+```{r message=F, warning=F}
+x <- as_tibble(runif(n=1000, min=10, max=20))
+names(x) <- 'x'
+ggplot(x, aes(x=x)) + geom_histogram()
+y <- as_tibble(rnorm(n=1000, mean=100, sd=10))
+names(y) <- 'y'
+ggplot(y, aes(x=y)) + geom_histogram()
+ggplot(y, aes(x=y)) + geom_density()
+xy <- bind_cols(x,y)
+ggplot(xy, aes(x=x,y=y)) + geom_point()
+```
+
+## Statistical tests
+
+Tests that compare our data to other data or look at relationships among variables are important statistical
+methods, and you should refer to statistical references to best understand how to apply
+the appropriate methods for your research. 
+
+### Comparing samples and groupings
+
+A common need in environmental research is to compare samples of a phenomenon or compare samples with an assumed standard population. The simplest application of this is the t-test, which can only involve comparing two samples or one sample with a population.  Analysis of Variance extends this to allow for more than two groups, and can be seen as a linear model where the categorical grouping (as a factor in R) is one of the variables.
+
+#### t.test and a non-parametric alternative, the Kruskal-Wallis Rank Sum test
+
+```{r include=F}
+XSptsPheno <- XSptsNDVI %>%
+      pivot_longer(cols = starts_with("NDVI"), 
+                   names_to = "phenology", values_to = "NDVI") %>%
+      mutate(phenology = str_sub(phenology, 5, str_length(phenology)))
+```
+
+```{r message=F, warning=F, fig.cap="NDVI by phenology"}
+XSptsPheno %>%
+  ggplot(aes(NDVI, fill=phenology)) +
+  geom_density(alpha=0.2)
+t.test(NDVI~phenology, data=XSptsPheno) 
+```
+
+While these data sets appear reasonably normal, the Shapiro-Wilk test (which uses a null hypothesis of normal) 
+has a p value < 0.05 for the senescent group, so the data can't be assumed to be normal.
+
+```{r message=F, warning=F}
+shapiro.test(XSptsPheno$NDVI[XSptsPheno$phenology=="growing"])
+shapiro.test(XSptsPheno$NDVI[XSptsPheno$phenology=="senescent"])
+
+```
+
+Therefore we should use a non-parametric alternative such as the Kruskal-Wallis Rank Sum test:
+
+```{r warning=F, message=F}
+kruskal.test(NDVI~phenology, data=XSptsPheno)
+```
+
+[**`eucoak`**] For the question "Is the runoff under Eucalyptus canopy significantly different from that under oaks?" we'll then start by test for normality of each of the two samples (euc and oak)
+
+```{r warning=F, message=F}
+shapiro.test(tidy_eucoak$runoff_L[tidy_eucoak$tree == "euc"])
+shapiro.test(tidy_eucoak$runoff_L[tidy_eucoak$tree == "oak"])
+```
+
+which shows clearly that both samples are non-normal. So we might apply the non-parametric Kruskal-Wallis
+test:
+
+```{r warning=F, message=F}
+kruskal.test(runoff_L~tree, data=tidy_eucoak)
+```
+
+and no significant difference can be seen. If we look at the data graphically, this makes sense:
+
+```{r warning=FALSE, message=F, fig.cap="Runoff under Eucalyptus and Oak in Bay Area sites"}
+tidy_eucoak %>%
+  ggplot(aes(log(runoff_L),fill=tree)) +
+  geom_density(alpha=0.2)
+```
+
+However, some of this may result from major variations among sites, which is apparent in this boxplot:
+
+```{r message=F, warning=F, fig.cap = "runoff at various sites contrasting euc and oak"}
+ggplot(data = tidy_eucoak) +
+  geom_boxplot(aes(x=site, y=runoff_L, color=tree))
+
+```
+
+We might restrict our analysis to Tilden Park sites in the East Bay.
+
+```{r warning=F, message=F}
+tilden <- tidy_eucoak %>% filter(str_detect(tidy_eucoak$site,"TP"))
+tilden %>%
+  ggplot(aes(log(runoff_L),fill=tree)) +
+  geom_density(alpha=0.2)
+
+```
+
+
+```{r warning=F, message=F}
+shapiro.test(tilden$runoff_L[tilden$tree == "euc"])
+shapiro.test(tilden$runoff_L[tilden$tree == "oak"])
+```
+
+So once again, as is common with small sample sets, we need a non-parametric test.
+
+```{r warning=F, message=F}
+kruskal.test(runoff_L~tree, data=tilden)
+```
+
+**Analysis process from exploration to testing**
+
+[**`eucoak`**] In the year runoff was studied, there were no runoff events sufficient to mobilize sediments.  The next year, January had a big event, so we collected sediments and processed them in the lab.
+
+Questions:  
+
+- Is there a difference between eucs and oaks in terms of fine sediment yield?
+- Is there a difference between eucs and oaks in terms of total sediment yield? (includes litter)
+
+```{r warning=F, message=F}
+csvPath <- system.file("extdata", "eucoaksediment.csv", package="iGIScData")
+eucoaksed <- read_csv(csvPath)
+summary(eucoaksed)
+eucoaksed %>%
+  group_by(trtype) %>%
+  summarize(meanfines = mean(fines_g, na.rm=T), sdfines = sd(fines_g, na.rm=T),
+            meantotal = mean(total_g, na.rm=T), sdtotal = sd(total_g, na.rm=T))
+eucoakLong <- eucoaksed %>% 
+  pivot_longer(col=c(fines_g,litter_g), 
+               names_to = "sed_type", 
+               values_to = "sed_g")
+eucoakLong %>%
+  ggplot(aes(trtype, sed_g, col=sed_type)) + 
+  geom_boxplot()
+eucoakLong %>%
+  ggplot(aes(sed_g, col=sed_type)) + 
+  geom_density() +
+  facet_grid(trtype ~ .)
+shapiro.test(eucoaksed$fines_g[eucoaksed$trtype == "euc"])
+shapiro.test(eucoaksed$fines_g[eucoaksed$trtype == "oak"])
+t.test(fines_g~trtype, data=eucoaksed) 
+shapiro.test(eucoaksed$total_g[eucoaksed$trtype == "euc"])
+shapiro.test(eucoaksed$total_g[eucoaksed$trtype == "oak"])
+kruskal.test(total_g~trtype, data=eucoaksed) 
+```
+
+So we used a t test for the fines_g, and the test suggests that there's a significant 
+difference in sediment yield for fines, but the Kruskal-Wallis test on total sediment
+(including litter) did not show a significant difference. Both results support
+the conclusion that oaks in this study produced more soil erosion, largely because
+the Eucalyptus stands generate so much litter cover, and that litter also made the
+total sediment yield not significantly different.
+
+#### Analysis of Variance
+
+Purpose is to compare groups based upon continuous variables. Can be thought of as an extension of a t test where you have more than two groups, or as a linear model where one variable is a factor.
+
+- Response variable is a continuous variable
+- Explanatory variable is the grouping -- categorical (a factor in R)
+
+*"Are water samples from streams draining sandstone, limestone, and shale different based on pH?"*
+<img src="img/PigeonMtWaterSample.png" align = "left">
+<img src="img/CaveCoveSink.png" align = "center">
+<img src="img/HelenHighwaterSpring.png" align = "right">
+
+### Correlation
+
+r = Pearson's product-moment correlation -- negative or positive
+
+r^2^ = amount of variance in one variable "explained" by the other – always positive.
+
+Can show with a pairs plot:  `pairs(dataframe)`, but is tricky
+
+Here's an easier method from the psych package [**`sierra`**]
+
+```{r message=F, warning=F}
+library(psych)
+pairs.panels(sierraFeb %>% select(LATITUDE, LONGITUDE, ELEVATION, PRECIPITATION, TEMPERATURE))
+```
+
+## Modeling in R
+
+- `lm(y ~ x)`	linear regression
+- `lm(y ~ x1 + x2 + x3)`	multiple regression
+- `glm(y ~ x, family = poisson)`	generalized linear model, poisson distribution; 
+see ?family to see those supported, including binomial, gaussian, poisson, etc.
+- `aov(y ~ x)`	analysis of variance (same as lm except in the summary)
+- gam(y ~ x)	generalized additive models
+- tree(y ~ x)  or  rpart(y ~ x)	regression/classification trees    
+
+```{r message=F, warning=F}
+model1 <- lm(TEMPERATURE ~ ELEVATION, data = sierraFeb)
+summary(model1)
+```
+
+Probably the most important statistic is the p value for the predictor variable ELEVATION, which in this case is very small <2e-16.
+
+```{r echo=F, message=F}
+library(iGIScData)
+library(tidyverse)
+sierraFeb <- sierraFeb %>%
+  filter(!is.na(TEMPERATURE))
+model1 = lm(TEMPERATURE ~ ELEVATION, data = sierraFeb)
+cc = model1$coefficients
+sierraFeb$resid = resid(model1)
+sierraFeb$predict = predict(model1) 
+eqn = paste("temperature =", paste(round(cc[1],2), paste(round(cc[-1], digits=3), sep="*", collapse=" + ", paste("elevation")), sep=" + "), "+ e")
+ggplot(sierraFeb, aes(x=ELEVATION, y=TEMPERATURE)) + 
+  geom_smooth(method="lm", se=FALSE, color="lightgrey") +
+  geom_segment(aes(xend=ELEVATION, yend=predict), alpha=.2) +
+  geom_point(aes(color=resid)) +
+  scale_color_gradient2(low="blue", mid="ivory2", high="red") +
+  guides(color=FALSE) +
+  theme_bw() +
+  ggtitle(paste("Residuals (e) from model: ",eqn))
+model1
+```
+
+**Making Predictions**
+
+```{r message=F, warning=F}
+eqn
+a <- model1$coefficients[1]
+b <- model1$coefficients[2]
+elevations <- c(500, 1000, 1500, 2000)
+elevations
+tempEstimate <- a + b * elevations
+tempEstimate
+```
+
+### Analysis of Covariance
+
+Same purpose as Analysis of Variance, but also takes into account the influence of other variables called covariates. In a way, combines a linear model with an analysis of variance.
+
+*"Are water samples from streams draining sandstone, limestone,  and shale different based on pH, while taking into account elevation?"*
+
+<img src="img/UpperSinkingCoveGeology.png">
+
+Response variable is modeled from the factor (ANOVA) plus the covariate (regression)
+
+- ANOVA:   pH ~ rocktype
+- Regression:  pH ~ elevation
+- ANCOVA:  pH ~ rocktype + elevation
+   - Yet shouldn't involve interaction between rocktype and elevation
+   
+**Example:  stream types distinguished by discharge and slope**
+
+Three common river types are meandering, braided and anastomosed. For each, their slope
+varies by bankfull discharge in a relationship that looks something like:
+
+<img src="img/SbyQ_rivers.png">
+
+<img src="img/braided.png" alt="braided">
+<img src="img/meandering.png" alt="meandering">
+<img src="img/anastomosed.png" alt="anastomosed">
+
+No interaction between covariate and factor 
+
+- No relationship between discharge and channel type.  
+- Another interpretation:  the slope of the relationship between the covariate and response variable is about the same for each group; only the intercept differs.  Assumes parallel slopes.
+
+`log10(S) ~ strtype * log10(Q)`   … interaction between covariate and factor
+
+`log10(S) ~ strtype + log10(Q)`   … no interaction, parallel slopes
+
+If models are not significantly different, remove interaction term due to parsimony, and satisfies this ANCOVA requirement.
+
+
+```{r message=F, warning=F}
+library(tidyverse)
+csvPath <- system.file("extdata","streams.csv", package="iGIScData")
+streams <- read_csv(csvPath)
+streams$strtype <- factor(streams$type, labels=c("Anastomosing","Braided","Meandering"))
+summary(streams)
+ggplot(streams, aes(Q, S, color=strtype)) +
+  geom_point()
+library(scales) # needed for the trans_format function below
+ggplot(streams, aes(Q, S, color=strtype)) +
+  geom_point() + geom_smooth(method="lm", se = FALSE) + 
+  scale_x_continuous(trans=log10_trans(),
+                     labels = trans_format("log10", math_format(10^.x))) +
+  scale_y_continuous(trans=log10_trans(),
+                     labels = trans_format("log10", math_format(10^.x)))
+ancova = lm(log10(S)~strtype*log10(Q), data=streams)
+summary(ancova)
+anova(ancova)
+
+# Now an additive model, which does not have that interaction
+ancova2 = lm(log10(S)~strtype+log10(Q), data=streams)
+anova(ancova2)
+anova(ancova,ancova2)   
+   # not significantly different, so model simplification is justified
+
+# Now we remove the strtype term
+ancova3 = update(ancova2, ~ . - strtype)  
+anova(ancova2,ancova3)  
+   # Goes too far.  Removing the strtype creates a significantly different model
+
+step(ancova)
+
+```
+
+**Part of general linear model (lm)**
+
+ANOVA & ANCOVA are applications of a general linear model.
+
+- Uses lm in R
+- Response variable is continuous, assumed normally distributed
+
+*Not the same as Generalized Linear Model (GLM)*
+
+- *With GLM, response variable may be from count data (e.g. Poisson), probabilities of occurrence (logistic regression) or other non-normal distributions.*
+
+`mymodel = lm(log10(s) ~ strtype + log10(Q))`
+
+- The linear model, with categorical explanatory variable  + covariate
+
+`anova(mymodel)`
+
+- Displays the Analysis of Variance table from the linear model
+
+### Generalized Linear Model (GLM)
+
+The glm in R allows you to work with various types of data using various distributions, described as families such as:
+
+- gaussian : normal distribution – what is used with lm
+- binomial : logit – used with probabilities.
+   - Used for *logistic regression*
+- poisson : for counts.  Commonly used for species counts.
+- see help(glm) for other examples
+
+Great explanation of poisson distribution using meteor showers at:
+
+<a href="https://towardsdatascience.com/the-poisson-distribution-and-poisson-process-explained-4e2cb17d459">https://towardsdatascience.com/the-poisson-distribution-and-poisson-process-explained-4e2cb17d459</a>
+
+## Spatial Statistical Analysis
+
+Spatial statistical analysis brings in the spatial dimension to a statistical analysis, 
+ranging from visual analysis of patterns to specialized spatial statistical methods.
+There are many applications for these methods in environmental research, since 
+spatial patterns are generally highly relevant.  We might ask:
+
+- What patterns can we see?
+- What is the effect of scale?
+- Relationships among variables – do they vary spatially?
+
+```{r message=F, warning=F, echo=F, results='hide'}
+library(tidyverse)
+library(iGIScData)
+library(sf); library(raster)
+rasPath <- system.file("extdata", "ca_hillsh_WGS84.tif", package="iGIScData")
+hillsh <- raster(rasPath)
+hillshpts <- as.data.frame(rasterToPoints(hillsh))
+#CA_counties
+CAbasemap <- ggplot() + 
+  geom_raster(aes(x=x, y=y, fill=ca_hillsh_WGS84), hillshpts) + guides(fill=F) +
+  geom_sf(data=CA_counties, fill=NA) +
+  scale_fill_gradient(low = "#606060", high = "#FFFFFF") +
+  labs(x='', y='')
+sierra <- st_as_sf(filter(sierraFeb, !is.na(TEMPERATURE)), coords=c("LONGITUDE", "LATITUDE"), crs=4326)
+model1 <- lm(TEMPERATURE ~ ELEVATION, data = sierra)
+cc <- model1$coefficients
+sierra$resid <- resid(model1)
+sierra$predict <- predict(model1) 
+eqn = paste("temperature =", paste(round(cc[1],2), paste(round(cc[-1], digits=3), sep="*", collapse=" + ", paste("elevation")), sep=" + "), "+ e")
+ct <- st_read(system.file("extdata","CA_places.shp",package="iGIScData"))
+ct$AREANAME_pad <- paste0(str_replace_all(ct$AREANAME, '[A-Za-z]',' '), ct$AREANAME)
+bounds <- st_bbox(sierra)
+sierrabasemap <- CAbasemap + 
+  geom_sf(data=ct) +
+  geom_sf_text(mapping = aes(label=AREANAME_pad), data=ct, size = 2, nudge_x = 0.1, nudge_y = 0.1) +
+  coord_sf(xlim = c(bounds[1], bounds[3]), ylim = c(bounds[2],bounds[4]))
+sierrabasemap +
+  geom_sf(mapping = aes(color = TEMPERATURE), alpha=0.7, data=sierra, size=2.5) +
+  scale_color_gradient2(low="blue", mid="ivory2", high="red", 
+                        midpoint=mean(sierra$TEMPERATURE)) +
+  coord_sf(xlim = c(bounds[1], bounds[3]), ylim = c(bounds[2],bounds[4]))  +
+  labs(title="February Normals") + theme(legend.position = c(0.8, 0.85)) + 
+  theme(legend.key.size = unit(0.4, 'cm'), 
+        legend.title = element_text(size=8))
+```
+
+### Spatial Autocorrelation
+
+[Need to add a Moran's I section here]
+
+
+### Mapping Residuals
+
+If the *residuals* from regression are spatially autocorrelated, look for patterns in the residuals to find other explanatory variables. 
+
+```{r message=F, warning=F, results='hide'}
+library(tidyverse)
+library(iGIScData)
+library(sf); library(raster)
+rasPath <- system.file("extdata", "ca_hillsh_WGS84.tif", package="iGIScData")
+hillsh <- raster(rasPath)
+hillshpts <- as.data.frame(rasterToPoints(hillsh))
+CAbasemap <- ggplot() + 
+  geom_raster(aes(x=x, y=y, fill=ca_hillsh_WGS84), hillshpts) + guides(fill=F) +
+  geom_sf(data=CA_counties, fill=NA) +
+  scale_fill_gradient(low = "#606060", high = "#FFFFFF") +
+  labs(x='', y='')
+sierra <- st_as_sf(filter(sierraFeb, !is.na(TEMPERATURE)), coords=c("LONGITUDE", "LATITUDE"), crs=4326)
+model1 <- lm(TEMPERATURE ~ ELEVATION, data = sierra)
+cc <- model1$coefficients
+sierra$resid <- resid(model1)
+sierra$predict <- predict(model1) 
+eqn = paste("temperature =", paste(round(cc[1],2), paste(round(cc[-1], digits=3), sep="*", collapse=" + ", paste("elevation")), sep=" + "), "+ e")
+ct <- st_read(system.file("extdata","CA_places.shp",package="iGIScData"))
+ct$AREANAME_pad <- paste0(str_replace_all(ct$AREANAME, '[A-Za-z]',' '), ct$AREANAME)
+bounds <- st_bbox(sierra)
+sierrabasemap <- CAbasemap + 
+  geom_sf(data=ct) +
+  geom_sf_text(mapping = aes(label=AREANAME_pad), data=ct, size = 2, nudge_x = 0.1, nudge_y = 0.1) +
+  coord_sf(xlim = c(bounds[1], bounds[3]), ylim = c(bounds[2],bounds[4]))
+sierrabasemap +
+  geom_sf(mapping = aes(color = resid), alpha=0.7, data=sierra, size=2.5) +
+  scale_color_gradient2(low="blue", mid="ivory2", high="red", 
+                        midpoint=mean(sierra$resid)) +
+  coord_sf(xlim = c(bounds[1], bounds[3]), ylim = c(bounds[2],bounds[4]))  +
+  labs(title="Residuals", subtitle=eqn) + theme(legend.position = c(0.8, 0.85)) + 
+  theme(legend.key.size = unit(0.4, 'cm'), 
+        legend.title = element_text(size=8))
+```
+
+
+<!--chapter:end:07-statistics.Rmd-->
+
+# Time Series
+
+```{r}
+plot(stl(co2, s.window = "periodic")) # co2 is already a time series
+```
+
+A time series (ts) is created with the ts() function.
+
+- the time unit can be anything – not actually saved with the ts
+- observations must be a regularly spaced series
+
+```{r message=F, warning=F}
+library(tidyverse)
+SFhighF <- c(58,61,62,63,64,67,67,68,71,70,64,58)
+SFlowF  <- c(47,48,49,50,51,53,54,55,56,55,51,47)
+SFhighC <- (SFhighF-32)*5/9
+SFlowC  <- (SFlowF-32)*5/9
+SFtempC <- bind_cols(high=SFhighC,low=SFlowC)
+plot(SFtempC);                  plot(ts(SFtempC))
+
+```
+
+### frequency setting
+
+Frequency setting is a key parameter for ts()
+
+- sets how many observations per time unit
+- ts() mostly doesn't seem to care what the time unit is, however some functions figure it out, at least for an annual time unit, e.g. that 1-12 means months when there's a frequency of 12
+
+```{r message=F, warning=F}
+plot(ts(SFtempC, frequency=1), main="monthly time unit")
+plot(ts(SFtempC, frequency=12), main="yearly time unit")
+
+```
+
+**frequency < 1**
+
+If you have data of lower frequency than 1 per unit
+
+- e.g. greenhouse gas data values every 20 years, starting in year 20, frequency 1/20 = 0.05
+
+```{r warning=F, message=F}
+library(dslabs)
+data("greenhouse_gases")
+GHGwide <- pivot_wider(greenhouse_gases, names_from = gas, 
+                       values_from = concentration)
+GHG <- ts(GHGwide, frequency=0.05, start=20) 
+plot(GHG)
+
+```
+
+**start and end parameters**
+
+- the time of the first (start) and last (end) observations. Either a single number or a vector of two numbers (the second of which is an integer), which specify a natural time unit and a (1-based) number of samples into the time unit.
+- Example with year as the time unit and monthly data, starting July 2019 and ending June 2020:
+
+`frequency=12, start=c(2019,7), end=c(2020,6)`
+
+### moving average (ma)
+
+- Simple generalization of sequential data
+- The order parameter is how many values are averaged in the moving window
+   - should be an odd number
+   
+```{r message=F, warning=F}
+library(forecast)
+ts(SFtempC, frequency=12)
+ma(ts(SFtempC,frequency=12),order=3)
+```
+
+**moving average of CO2 data**
+
+Difference shows time-local fluctuations, a component of the data
+
+```{r message=F, warning=F}
+library(dslabs)
+data("greenhouse_gases")
+GHGwide <- pivot_wider(greenhouse_gases, 
+           names_from = gas, 
+           values_from = concentration)
+CO2 <- ts(GHGwide$CO2,
+          frequency = 0.05)
+library(forecast)
+CO2ma <- ma(CO2, order=7)
+plot(CO2)
+plot(CO2ma)
+plot(CO2-CO2ma)
+```
+
+### loess (local regression) smoothing
+
+[place holder -- need to work out]
+
+From: 
+
+<a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/loess">https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/loess</a> 
+
+Local Polynomial Regression Fitting
+
+- Fit a polynomial surface determined by one or more numerical predictors, using local fitting.
+
+From:  
+<a href="http://r-statistics.co/Loess-Regression-With-R.html">http://r-statistics.co/Loess-Regression-With-R.html</a>
+
+a non-parametric approach that fits regressions within local neighborhoods
+
+- if X variables are bound within a range  [?]
+
+## Decomposing time series
+
+: separating a time series into its constituent components
+
+- original data
+- trend component, removes seasonal and remainder
+- if seasonal, also a seasonal component. Note that **season** relates to the time unit. If 1 year, "seasonality" refers to the
+normal usage of seasons over a year. But if 1 day, seasons refers to different parts of a day, etc.
+- irregular "random" remainder (time-local variation)
+
+**Mauna Loa CO~2~ data with seasonality**
+
+A good place to see the effect of seasonality is to look at the Mauna Loa CO~2~ data, which shows regular annual cycles, yet with
+a regularly increasing trend over the years. The decomposition shows the original observations, followed by a trend line that removes the seasonal and local (short-term) random irregularities, a detrended *seasonal* picture which removes that trend to just show the seasonal cycles, followed by the random irregularities. Note the vertical scale: the units are all the same -- parts per million -- so the actual amplitude of the seasonal cycle should be the same as the annual amplitude of the observations, it's just scaled to the chart height, which tends to exaggerate the seasonal cycles and random irregularities. 
+
+```{r message=F, warning=F, fig.cap="Decomposition of Mauna Loa monthly co2 time series (in base) extending from 1959 to 1981"}
+plot(decompose(co2))
+```
+
+**Seasonal decomposition using `loess`**
+
+The above uses the classical seasonal decomposition by moving averages. The loess method that does something 
+similar is `stl`.
+
+```{r message=F, warning=F}
+plot(stl(co2, s.window="periodic"))
+
+```
+
+
+
+<!--chapter:end:08-TimeSeries.Rmd-->
+
+# Machine Learning
+
+[Currently on the wish list, but will take some time.  
+Goal is to identify a very basic one with applications for environmental research]
+
+<!--chapter:end:09-MachineLearning.Rmd-->
+
+# Building a Data Package for GitHub
+
+These are just some notes on building data packages, based mostly on Chapter 14 "External Packages" of <a href="https://r-pkgs.org/">r-pkgs.org</a>, which also covers code packages. 
+
+For our package, `iGIScData`, we provided data in two ways:
+
+- `rda` files: normal external data that are ready to use as data frames, simple feature (sf) data, and rasters.
+
+- raw data as CSVs, shapefiles and TIFFs.
+
+## `rda` files
+
+These files need to be prepared from data in R and go in the data folder. The process is made very easy by using `usethis::use_data()` package: 
+
+### `usethis::use_data()`
+
+`usethis::use_data()` is used to add data as rda files to the `data` folder. These data can be data frames, simple features, rasters, and I'm sure other things. 
+
+I used a script `addData.R` that I put in the `data-raw` folder which built the data (usually with `read_csv()`, `st_read()`, or `raster()` and maybe some other processing like `mutate`, `filter`, etc.) to create the data set, and then `usethis::use_data()` to store it in the data folder.  Here's an simple example with just a csv converted directly, and it takes care of storing the result in the `data` folder as an `.rda` file:
+
+```
+sierraFeb <- read_csv("data-raw/sierraFeb.csv")
+usethis::use_data(sierraFeb)
+```
+
+### `usethis::create_package()`
+
+This creates the package and uses roxygen to document it. I think you just need to run this once, then the `devtools::document()` does the rest, and can be run again to update it. 
+
+### `devtools::document()`
+
+This creates documentation on the data sets, using the file `R/data.R`, which will need to have lines of code similar to the following to document each data set. Note that the name of the data set goes last, in quotes. The formatting of the field names and descriptions is a bit tricky and doesn't follow normal R rules. As a result, sometimes my field names don't exactly match the actual field names. Maybe I'll get around to changing the original field names with `rename`. Note that the organization is important, with the title of the data first, a blank line, then a description, etc.:
+```
+#' Sierra February climate data
+#'
+#' Selection from SierraData to only include February data
+#'
+#' @format A data frame with 82 entries and 7 variables selected and renamed \describe{
+#'   \item{STATION_NAME}{Station name}
+#'   \item{COUNTY}{County Name}
+#'   \item{ELEVATION}{Elevation in meters}
+#'   \item{LATITUDE}{Latitude in decimal degrees}
+#'   \item{LONGITUDE}{Longitude in decimal degrees}
+#'   \item{PRECIPITATION}{February Average Precipitation in mm}
+#'   \item{TEMPERATURE}{Febrary Average Temperature in degrees C}
+#' }
+#' @source \url{https://www.ncdc.noaa.gov/}
+"sierraFeb"
+```
+
+Once these are on GitHub, a user can simply install the package with 
+`devtools::install_github("iGISc/iGIScData")` -- to use the `iGIScData` we created.  Then to access the data just like built-in data, the user just needs to load that library with `library(iGIScData)`
+
+But we also wanted to provide raw CSVs, shapefiles and rasters, in order to demonstrate how to read those. 
+
+## Raw data
+
+Raw data (e.g. CSVs, shapefiles, and rasters) are simply stored in the `inst/extdata` folder. Just create those folders and put the files there. Make sure to include all the files (like the multiple files that go with a shapefile). Then, to access the data once the data package is installed, the user just needs to use the `system.file()` function to provide the path and then use that with the appropriate read function; e.g. for a CSV, something like:
+
+```
+csvPath <- system.file("extdata","TRI_2017_CA.csv")
+TRI_2017_CA <- read_csv(csvPath)
+```
+
+<!--chapter:end:10-AppendixDataPackage.Rmd-->
+

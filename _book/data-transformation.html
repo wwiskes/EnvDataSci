@@ -24,7 +24,7 @@
 <meta name="author" content="Jerry Davis" />
 
 
-<meta name="date" content="2021-04-11" />
+<meta name="date" content="2021-04-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -282,6 +282,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.4.1" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#analysis-of-covariance"><i class="fa fa-check"></i><b>7.4.1</b> Analysis of Covariance</a></li>
 <li class="chapter" data-level="7.4.2" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#generalized-linear-model-glm"><i class="fa fa-check"></i><b>7.4.2</b> Generalized Linear Model (GLM)</a></li>
 </ul></li>
+<li class="chapter" data-level="7.5" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#spatial-statistical-analysis"><i class="fa fa-check"></i><b>7.5</b> Spatial Statistical Analysis</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#spatial-autocorrelation"><i class="fa fa-check"></i><b>7.5.1</b> Spatial Autocorrelation</a></li>
+<li class="chapter" data-level="7.5.2" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#mapping-residuals"><i class="fa fa-check"></i><b>7.5.2</b> Mapping Residuals</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>8</b> Time Series</a></li>
 <li class="chapter" data-level="9" data-path="machine-learning.html"><a href="machine-learning.html"><i class="fa fa-check"></i><b>9</b> Machine Learning</a></li>
@@ -409,15 +414,13 @@ are the same for each, or not the same. The three set methods are:</p>
 <span id="cb330-3"><a href="data-transformation.html#cb330-3" aria-hidden="true" tabindex="-1"></a>squares</span></code></pre></div>
 <pre><code>##  [1]   1   4   9  16  25  36  49  64  81 100</code></pre>
 <div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="data-transformation.html#cb332-1" aria-hidden="true" tabindex="-1"></a>evens</span></code></pre></div>
-<pre><code>##  [1]   0   2   4   6   8  10  12  14  16  18  20  22  24  26  28  30  32  34  36  38  40  42  44
-## [24]  46  48  50  52  54  56  58  60  62  64  66  68  70  72  74  76  78  80  82  84  86  88  90
-## [47]  92  94  96  98 100</code></pre>
+<pre><code>##  [1]   0   2   4   6   8  10  12  14  16  18  20  22  24  26  28  30  32  34  36  38  40  42  44  46  48  50  52  54  56  58  60  62
+## [33]  64  66  68  70  72  74  76  78  80  82  84  86  88  90  92  94  96  98 100</code></pre>
 <div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="data-transformation.html#cb334-1" aria-hidden="true" tabindex="-1"></a><span class="fu">intersect</span>(squares,evens)</span></code></pre></div>
 <pre><code>## [1]   4  16  36  64 100</code></pre>
 <div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="data-transformation.html#cb336-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(<span class="fu">union</span>(squares,evens))</span></code></pre></div>
-<pre><code>##  [1]   0   1   2   4   6   8   9  10  12  14  16  18  20  22  24  25  26  28  30  32  34  36  38
-## [24]  40  42  44  46  48  49  50  52  54  56  58  60  62  64  66  68  70  72  74  76  78  80  81
-## [47]  82  84  86  88  90  92  94  96  98 100</code></pre>
+<pre><code>##  [1]   0   1   2   4   6   8   9  10  12  14  16  18  20  22  24  25  26  28  30  32  34  36  38  40  42  44  46  48  49  50  52  54
+## [33]  56  58  60  62  64  66  68  70  72  74  76  78  80  81  82  84  86  88  90  92  94  96  98 100</code></pre>
 <div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="data-transformation.html#cb338-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(<span class="fu">setdiff</span>(squares,evens))</span></code></pre></div>
 <pre><code>## [1]  1  9 25 49 81</code></pre>
 </div>
@@ -450,14 +453,14 @@ which would require manipulating them into factors:</p>
 <span id="cb342-5"><a href="data-transformation.html#cb342-5" aria-hidden="true" tabindex="-1"></a>                          state.x77))</span>
 <span id="cb342-6"><a href="data-transformation.html#cb342-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(states)</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 12
-##   abb   name   region division Population Income Illiteracy `Life Exp` Murder `HS Grad` Frost Area 
-##   &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;
-## 1 AL    Alaba~ 2      4        3615       3624   2.1        69.05      15.1   41.3      20    50708
-## 2 AK    Alaska 4      9        365        6315   1.5        69.31      11.3   66.7      152   5664~
-## 3 AZ    Arizo~ 4      8        2212       4530   1.8        70.55      7.8    58.1      15    1134~
-## 4 AR    Arkan~ 2      5        2110       3378   1.9        70.66      10.1   39.9      65    51945
-## 5 CA    Calif~ 4      9        21198      5114   1.1        71.71      10.3   62.6      20    1563~
-## 6 CO    Color~ 4      8        2541       4884   0.7        72.06      6.8    63.9      166   1037~</code></pre>
+##   abb   name       region division Population Income Illiteracy `Life Exp` Murder `HS Grad` Frost Area  
+##   &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; 
+## 1 AL    Alabama    2      4        3615       3624   2.1        69.05      15.1   41.3      20    50708 
+## 2 AK    Alaska     4      9        365        6315   1.5        69.31      11.3   66.7      152   566432
+## 3 AZ    Arizona    4      8        2212       4530   1.8        70.55      7.8    58.1      15    113417
+## 4 AR    Arkansas   2      5        2110       3378   1.9        70.66      10.1   39.9      65    51945 
+## 5 CA    California 4      9        21198      5114   1.1        71.71      10.3   62.6      20    156361
+## 6 CO    Colorado   4      8        2541       4884   0.7        72.06      6.8    63.9      166   103766</code></pre>
 </div>
 <div id="pivotting-data-frames" class="section level2" number="5.4">
 <h2><span class="header-section-number">5.4</span> Pivotting data frames</h2>
@@ -514,7 +517,7 @@ from the <code>iGIScData</code> data package [<strong><code>NDVI</code></strong>
 <span id="cb349-4"><a href="data-transformation.html#cb349-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> phenology), <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
 <span id="cb349-5"><a href="data-transformation.html#cb349-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(elevation, NDVI, </span>
 <span id="cb349-6"><a href="data-transformation.html#cb349-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> phenology), <span class="at">method=</span><span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-126-1.png" width="672" /></p>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-163-1.png" width="672" /></p>
 <p>Pivots turn out to be commonly useful. Runoff graphing from the Eucalyptus/Oak study also benefitted
 from a pivot_longer [<strong><code>eucoak</code></strong>]:</p>
 <div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="data-transformation.html#cb350-1" aria-hidden="true" tabindex="-1"></a>eucoakrainfallrunoffTDR <span class="sc">%&gt;%</span></span>
@@ -523,7 +526,7 @@ from a pivot_longer [<strong><code>eucoak</code></strong>]:</p>
 <span id="cb350-4"><a href="data-transformation.html#cb350-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tree =</span> <span class="fu">str_sub</span>(tree, <span class="fu">str_length</span>(tree)<span class="sc">-</span><span class="dv">2</span>, <span class="fu">str_length</span>(tree))) <span class="sc">%&gt;%</span></span>
 <span id="cb350-5"><a href="data-transformation.html#cb350-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(site, runoffL)) <span class="sc">+</span></span>
 <span id="cb350-6"><a href="data-transformation.html#cb350-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_grid</span>(tree <span class="sc">~</span> .)</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-127-1.png" width="672" /></p>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-164-1.png" width="672" /></p>
 <p><strong>Combining a pivot with bind_rows to create a runoff/rainfall scatterplot colored by tree</strong></p>
 <div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="data-transformation.html#cb351-1" aria-hidden="true" tabindex="-1"></a>runoffPivot <span class="ot">&lt;-</span> eucoakrainfallrunoffTDR <span class="sc">%&gt;%</span></span>
 <span id="cb351-2"><a href="data-transformation.html#cb351-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">&quot;runoffL&quot;</span>),</span>
@@ -554,7 +557,7 @@ from a pivot_longer [<strong><code>eucoak</code></strong>]:</p>
 <span id="cb351-27"><a href="data-transformation.html#cb351-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> rain_mm, <span class="at">y=</span> runoffL, <span class="at">color =</span> tree), </span>
 <span id="cb351-28"><a href="data-transformation.html#cb351-28" aria-hidden="true" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="sc">+</span></span>
 <span id="cb351-29"><a href="data-transformation.html#cb351-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;seagreen4&quot;</span>, <span class="st">&quot;orange3&quot;</span>))</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-128-1.png" width="672" /></p>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-165-1.png" width="672" /></p>
 <p><strong>Using pivot_wider with traffic stop data (from Claudia Engel (2021) <em>Data Wrangling</em>)</strong></p>
 <div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="data-transformation.html#cb352-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
 <span id="cb352-2"><a href="data-transformation.html#cb352-2" aria-hidden="true" tabindex="-1"></a>csvPath <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;MS_trafficstops_bw_age.csv&quot;</span>, <span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>

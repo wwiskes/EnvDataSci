@@ -24,7 +24,7 @@
 <meta name="author" content="Jerry Davis" />
 
 
-<meta name="date" content="2021-04-11" />
+<meta name="date" content="2021-04-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -53,16 +53,6 @@
 
 <link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
-<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-1.3.1/leaflet.js"></script>
-<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
-<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
-<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.0.3/leaflet.js"></script>
-<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
-<script src="libs/leaflet-providers-plugin-2.0.3/leaflet-providers-plugin.js"></script>
 
 
 <style type="text/css">
@@ -282,8 +272,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.4.1" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#analysis-of-covariance"><i class="fa fa-check"></i><b>7.4.1</b> Analysis of Covariance</a></li>
 <li class="chapter" data-level="7.4.2" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#generalized-linear-model-glm"><i class="fa fa-check"></i><b>7.4.2</b> Generalized Linear Model (GLM)</a></li>
 </ul></li>
+<li class="chapter" data-level="7.5" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#spatial-statistical-analysis"><i class="fa fa-check"></i><b>7.5</b> Spatial Statistical Analysis</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#spatial-autocorrelation"><i class="fa fa-check"></i><b>7.5.1</b> Spatial Autocorrelation</a></li>
+<li class="chapter" data-level="7.5.2" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#mapping-residuals"><i class="fa fa-check"></i><b>7.5.2</b> Mapping Residuals</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>8</b> Time Series</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>8</b> Time Series</a>
+<ul>
+<li class="chapter" data-level="8.0.1" data-path="time-series.html"><a href="time-series.html#frequency-setting"><i class="fa fa-check"></i><b>8.0.1</b> frequency setting</a></li>
+<li class="chapter" data-level="8.0.2" data-path="time-series.html"><a href="time-series.html#moving-average-ma"><i class="fa fa-check"></i><b>8.0.2</b> moving average (ma)</a></li>
+<li class="chapter" data-level="8.0.3" data-path="time-series.html"><a href="time-series.html#loess-local-regression-smoothing"><i class="fa fa-check"></i><b>8.0.3</b> loess (local regression) smoothing</a></li>
+<li class="chapter" data-level="8.1" data-path="time-series.html"><a href="time-series.html#decomposing-time-series"><i class="fa fa-check"></i><b>8.1</b> Decomposing time series</a></li>
+</ul></li>
 <li class="chapter" data-level="9" data-path="machine-learning.html"><a href="machine-learning.html"><i class="fa fa-check"></i><b>9</b> Machine Learning</a></li>
 <li class="chapter" data-level="10" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html"><i class="fa fa-check"></i><b>10</b> Building a Data Package for GitHub</a>
 <ul>
@@ -317,8 +318,145 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="time-series" class="section level1" number="8">
 <h1><span class="header-section-number">8</span> Time Series</h1>
-<p>[under construction]</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="time-series.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">stl</span>(co2, <span class="at">s.window =</span> <span class="st">&quot;periodic&quot;</span>)) <span class="co"># co2 is already a time series</span></span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>A time series (ts) is created with the ts() function.</p>
+<ul>
+<li>the time unit can be anything – not actually saved with the ts</li>
+<li>observations must be a regularly spaced series</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="time-series.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a href="time-series.html#cb2-2" aria-hidden="true" tabindex="-1"></a>SFhighF <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">58</span>,<span class="dv">61</span>,<span class="dv">62</span>,<span class="dv">63</span>,<span class="dv">64</span>,<span class="dv">67</span>,<span class="dv">67</span>,<span class="dv">68</span>,<span class="dv">71</span>,<span class="dv">70</span>,<span class="dv">64</span>,<span class="dv">58</span>)</span>
+<span id="cb2-3"><a href="time-series.html#cb2-3" aria-hidden="true" tabindex="-1"></a>SFlowF  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">47</span>,<span class="dv">48</span>,<span class="dv">49</span>,<span class="dv">50</span>,<span class="dv">51</span>,<span class="dv">53</span>,<span class="dv">54</span>,<span class="dv">55</span>,<span class="dv">56</span>,<span class="dv">55</span>,<span class="dv">51</span>,<span class="dv">47</span>)</span>
+<span id="cb2-4"><a href="time-series.html#cb2-4" aria-hidden="true" tabindex="-1"></a>SFhighC <span class="ot">&lt;-</span> (SFhighF<span class="dv">-32</span>)<span class="sc">*</span><span class="dv">5</span><span class="sc">/</span><span class="dv">9</span></span>
+<span id="cb2-5"><a href="time-series.html#cb2-5" aria-hidden="true" tabindex="-1"></a>SFlowC  <span class="ot">&lt;-</span> (SFlowF<span class="dv">-32</span>)<span class="sc">*</span><span class="dv">5</span><span class="sc">/</span><span class="dv">9</span></span>
+<span id="cb2-6"><a href="time-series.html#cb2-6" aria-hidden="true" tabindex="-1"></a>SFtempC <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(<span class="at">high=</span>SFhighC,<span class="at">low=</span>SFlowC)</span>
+<span id="cb2-7"><a href="time-series.html#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(SFtempC);                  <span class="fu">plot</span>(<span class="fu">ts</span>(SFtempC))</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-2-1.png" width="672" /><img src="EnvDataSci_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
+<div id="frequency-setting" class="section level3" number="8.0.1">
+<h3><span class="header-section-number">8.0.1</span> frequency setting</h3>
+<p>Frequency setting is a key parameter for ts()</p>
+<ul>
+<li>sets how many observations per time unit</li>
+<li>ts() mostly doesn’t seem to care what the time unit is, however some functions figure it out, at least for an annual time unit, e.g. that 1-12 means months when there’s a frequency of 12</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="time-series.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">ts</span>(SFtempC, <span class="at">frequency=</span><span class="dv">1</span>), <span class="at">main=</span><span class="st">&quot;monthly time unit&quot;</span>)</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="time-series.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">ts</span>(SFtempC, <span class="at">frequency=</span><span class="dv">12</span>), <span class="at">main=</span><span class="st">&quot;yearly time unit&quot;</span>)</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
+<p><strong>frequency &lt; 1</strong></p>
+<p>If you have data of lower frequency than 1 per unit</p>
+<ul>
+<li>e.g. greenhouse gas data values every 20 years, starting in year 20, frequency 1/20 = 0.05</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="time-series.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dslabs)</span>
+<span id="cb5-2"><a href="time-series.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;greenhouse_gases&quot;</span>)</span>
+<span id="cb5-3"><a href="time-series.html#cb5-3" aria-hidden="true" tabindex="-1"></a>GHGwide <span class="ot">&lt;-</span> <span class="fu">pivot_wider</span>(greenhouse_gases, <span class="at">names_from =</span> gas, </span>
+<span id="cb5-4"><a href="time-series.html#cb5-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">values_from =</span> concentration)</span>
+<span id="cb5-5"><a href="time-series.html#cb5-5" aria-hidden="true" tabindex="-1"></a>GHG <span class="ot">&lt;-</span> <span class="fu">ts</span>(GHGwide, <span class="at">frequency=</span><span class="fl">0.05</span>, <span class="at">start=</span><span class="dv">20</span>) </span>
+<span id="cb5-6"><a href="time-series.html#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(GHG)</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><strong>start and end parameters</strong></p>
+<ul>
+<li>the time of the first (start) and last (end) observations. Either a single number or a vector of two numbers (the second of which is an integer), which specify a natural time unit and a (1-based) number of samples into the time unit.</li>
+<li>Example with year as the time unit and monthly data, starting July 2019 and ending June 2020:</li>
+</ul>
+<p><code>frequency=12, start=c(2019,7), end=c(2020,6)</code></p>
+</div>
+<div id="moving-average-ma" class="section level3" number="8.0.2">
+<h3><span class="header-section-number">8.0.2</span> moving average (ma)</h3>
+<ul>
+<li>Simple generalization of sequential data</li>
+<li>The order parameter is how many values are averaged in the moving window
+<ul>
+<li>should be an odd number</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="time-series.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb6-2"><a href="time-series.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ts</span>(SFtempC, <span class="at">frequency=</span><span class="dv">12</span>)</span></code></pre></div>
+<pre><code>##           high       low
+## Jan 1 14.44444  8.333333
+## Feb 1 16.11111  8.888889
+## Mar 1 16.66667  9.444444
+## Apr 1 17.22222 10.000000
+## May 1 17.77778 10.555556
+## Jun 1 19.44444 11.666667
+## Jul 1 19.44444 12.222222
+## Aug 1 20.00000 12.777778
+## Sep 1 21.66667 13.333333
+## Oct 1 21.11111 12.777778
+## Nov 1 17.77778 10.555556
+## Dec 1 14.44444  8.333333</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="time-series.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ma</span>(<span class="fu">ts</span>(SFtempC,<span class="at">frequency=</span><span class="dv">12</span>),<span class="at">order=</span><span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##           [,1]      [,2]
+## Jan 1       NA        NA
+## Feb 1 15.74074  8.888889
+## Mar 1 16.66667  9.444444
+## Apr 1 17.22222 10.000000
+## May 1 18.14815 10.740741
+## Jun 1 18.88889 11.481481
+## Jul 1 19.62963 12.222222
+## Aug 1 20.37037 12.777778
+## Sep 1 20.92593 12.962963
+## Oct 1 20.18519 12.222222
+## Nov 1 17.77778 10.555556
+## Dec 1       NA        NA</code></pre>
+<p><strong>moving average of CO2 data</strong></p>
+<p>Difference shows time-local fluctuations, a component of the data</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="time-series.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dslabs)</span>
+<span id="cb10-2"><a href="time-series.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;greenhouse_gases&quot;</span>)</span>
+<span id="cb10-3"><a href="time-series.html#cb10-3" aria-hidden="true" tabindex="-1"></a>GHGwide <span class="ot">&lt;-</span> <span class="fu">pivot_wider</span>(greenhouse_gases, </span>
+<span id="cb10-4"><a href="time-series.html#cb10-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">names_from =</span> gas, </span>
+<span id="cb10-5"><a href="time-series.html#cb10-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">values_from =</span> concentration)</span>
+<span id="cb10-6"><a href="time-series.html#cb10-6" aria-hidden="true" tabindex="-1"></a>CO2 <span class="ot">&lt;-</span> <span class="fu">ts</span>(GHGwide<span class="sc">$</span>CO2,</span>
+<span id="cb10-7"><a href="time-series.html#cb10-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">frequency =</span> <span class="fl">0.05</span>)</span>
+<span id="cb10-8"><a href="time-series.html#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb10-9"><a href="time-series.html#cb10-9" aria-hidden="true" tabindex="-1"></a>CO2ma <span class="ot">&lt;-</span> <span class="fu">ma</span>(CO2, <span class="at">order=</span><span class="dv">7</span>)</span>
+<span id="cb10-10"><a href="time-series.html#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(CO2)</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="time-series.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(CO2ma)</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="time-series.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(CO2<span class="sc">-</span>CO2ma)</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-6-3.png" width="672" /></p>
+</div>
+<div id="loess-local-regression-smoothing" class="section level3" number="8.0.3">
+<h3><span class="header-section-number">8.0.3</span> loess (local regression) smoothing</h3>
+<p>[place holder – need to work out]</p>
+<p>From:</p>
+<p><a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/loess">https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/loess</a></p>
+<p>Local Polynomial Regression Fitting</p>
+<ul>
+<li>Fit a polynomial surface determined by one or more numerical predictors, using local fitting.</li>
+</ul>
+<p>From:<br />
+<a href="http://r-statistics.co/Loess-Regression-With-R.html">http://r-statistics.co/Loess-Regression-With-R.html</a></p>
+<p>a non-parametric approach that fits regressions within local neighborhoods</p>
+<ul>
+<li>if X variables are bound within a range [?]</li>
+</ul>
+</div>
+<div id="decomposing-time-series" class="section level2" number="8.1">
+<h2><span class="header-section-number">8.1</span> Decomposing time series</h2>
+<p>: separating a time series into its constituent components</p>
+<ul>
+<li>original data</li>
+<li>trend component, removes seasonal and remainder</li>
+<li>if seasonal, also a seasonal component. Note that <strong>season</strong> relates to the time unit. If 1 year, “seasonality” refers to the
+normal usage of seasons over a year. But if 1 day, seasons refers to different parts of a day, etc.</li>
+<li>irregular “random” remainder (time-local variation)</li>
+</ul>
+<p><strong>Mauna Loa CO<sub>2</sub> data with seasonality</strong></p>
+<p>A good place to see the effect of seasonality is to look at the Mauna Loa CO<sub>2</sub> data, which shows regular annual cycles, yet with
+a regularly increasing trend over the years. The decomposition shows the original observations, followed by a trend line that removes the seasonal and local (short-term) random irregularities, a detrended <em>seasonal</em> picture which removes that trend to just show the seasonal cycles, followed by the random irregularities. Note the vertical scale: the units are all the same – parts per million – so the amplitude of the seasonal chart should be the same as the annual amplitude of the observations, it’s just scaled to the chart height, which tends to exaggerate the seasonal cycles and random irregularities.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="time-series.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">decompose</span>(co2))</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-7"></span>
+<img src="EnvDataSci_files/figure-html/unnamed-chunk-7-1.png" alt="Decomposition of Mauna Loa monthly co2 time series (in base) extending from 1959 to 1981" width="672" />
+<p class="caption">
+Figure 8.1: Decomposition of Mauna Loa monthly co2 time series (in base) extending from 1959 to 1981
+</p>
+</div>
 
+</div>
 </div>
             </section>
 
@@ -376,20 +514,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

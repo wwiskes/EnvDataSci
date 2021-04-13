@@ -24,7 +24,7 @@
 <meta name="author" content="Jerry Davis" />
 
 
-<meta name="date" content="2021-04-11" />
+<meta name="date" content="2021-04-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -282,6 +282,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.4.1" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#analysis-of-covariance"><i class="fa fa-check"></i><b>7.4.1</b> Analysis of Covariance</a></li>
 <li class="chapter" data-level="7.4.2" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#generalized-linear-model-glm"><i class="fa fa-check"></i><b>7.4.2</b> Generalized Linear Model (GLM)</a></li>
 </ul></li>
+<li class="chapter" data-level="7.5" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#spatial-statistical-analysis"><i class="fa fa-check"></i><b>7.5</b> Spatial Statistical Analysis</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#spatial-autocorrelation"><i class="fa fa-check"></i><b>7.5.1</b> Spatial Autocorrelation</a></li>
+<li class="chapter" data-level="7.5.2" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#mapping-residuals"><i class="fa fa-check"></i><b>7.5.2</b> Mapping Residuals</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>8</b> Time Series</a></li>
 <li class="chapter" data-level="9" data-path="machine-learning.html"><a href="machine-learning.html"><i class="fa fa-check"></i><b>9</b> Machine Learning</a></li>
@@ -378,18 +383,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb183-7"><a href="data-abstraction.html#cb183-7" aria-hidden="true" tabindex="-1"></a>ab <span class="ot">&lt;-</span> <span class="fu">tibble</span>(a,b)</span>
 <span id="cb183-8"><a href="data-abstraction.html#cb183-8" aria-hidden="true" tabindex="-1"></a>ab</span></code></pre></div>
 <pre><code>## # A tibble: 10 x 2
-##           a     b
-##       &lt;dbl&gt; &lt;dbl&gt;
-##  1 -0.00968 0.183
-##  2  0.482   0.138
-##  3 -0.622   0.507
-##  4 -1.32    0.959
-##  5 -0.760   0.507
-##  6 -1.04    0.834
-##  7 -1.19    0.786
-##  8 -0.363   0.890
-##  9 -1.55    0.959
-## 10 -0.191   0.571</code></pre>
+##         a     b
+##     &lt;dbl&gt; &lt;dbl&gt;
+##  1 -0.142 0.463
+##  2  0.420 0.994
+##  3  0.943 0.114
+##  4 -1.09  0.931
+##  5  1.74  0.718
+##  6  0.971 0.986
+##  7  1.23  0.793
+##  8  0.178 0.688
+##  9 -0.574 0.473
+## 10 -2.23  0.896</code></pre>
 <div id="read_csv-vs.-read.csv" class="section level3" number="3.3.1">
 <h3><span class="header-section-number">3.3.1</span> <code>read_csv</code> vs. <code>read.csv</code></h3>
 <p>You might be tempted to use read.csv from base R</p>
@@ -413,43 +418,35 @@ problematic field names like <code>MLY-TAVG-NORMAL</code> become <code>MLY.TAVG
 <h2><span class="header-section-number">3.4</span> Statistical summary of variables</h2>
 <p>A simple statistical summary is very easy to do:</p>
 <div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="data-abstraction.html#cb185-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(eucoakrainfallrunoffTDR)</span></code></pre></div>
-<pre><code>##      site               site #          date              month              rain_mm     
-##  Length:90          Min.   :1.000   Length:90          Length:90          Min.   : 1.00  
-##  Class :character   1st Qu.:2.000   Class :character   Class :character   1st Qu.:16.00  
-##  Mode  :character   Median :4.000   Mode  :character   Mode  :character   Median :28.50  
-##                     Mean   :4.422                                         Mean   :37.99  
-##                     3rd Qu.:6.000                                         3rd Qu.:63.25  
-##                     Max.   :8.000                                         Max.   :99.00  
-##                                                                           NA&#39;s   :18     
-##     rain_oak        rain_euc      runoffL_oak      runoffL_euc      slope_oak       slope_euc    
-##  Min.   : 1.00   Min.   : 1.00   Min.   : 0.000   Min.   : 0.00   Min.   : 9.00   Min.   : 9.00  
-##  1st Qu.:16.00   1st Qu.:14.75   1st Qu.: 0.000   1st Qu.: 0.07   1st Qu.:12.00   1st Qu.:12.00  
-##  Median :30.50   Median :30.00   Median : 0.450   Median : 1.20   Median :24.50   Median :23.00  
-##  Mean   :35.08   Mean   :34.60   Mean   : 2.032   Mean   : 2.45   Mean   :21.62   Mean   :19.34  
-##  3rd Qu.:50.50   3rd Qu.:50.00   3rd Qu.: 2.800   3rd Qu.: 3.30   3rd Qu.:30.50   3rd Qu.:25.00  
-##  Max.   :98.00   Max.   :96.00   Max.   :14.000   Max.   :16.00   Max.   :32.00   Max.   :31.00  
-##  NA&#39;s   :2       NA&#39;s   :2       NA&#39;s   :5        NA&#39;s   :3                                      
-##    aspect_oak      aspect_euc    surface_tension_oak surface_tension_euc runoff_rainfall_ratio_oak
-##  Min.   :100.0   Min.   :106.0   Min.   :37.40       Min.   :28.51       Min.   :0.00000          
-##  1st Qu.:143.0   1st Qu.:175.0   1st Qu.:72.75       1st Qu.:32.79       1st Qu.:0.00000          
-##  Median :189.0   Median :196.5   Median :72.75       Median :37.40       Median :0.02046          
-##  Mean   :181.9   Mean   :191.2   Mean   :68.35       Mean   :43.11       Mean   :0.05357          
-##  3rd Qu.:220.0   3rd Qu.:224.0   3rd Qu.:72.75       3rd Qu.:56.41       3rd Qu.:0.08485          
-##  Max.   :264.0   Max.   :296.0   Max.   :72.75       Max.   :72.75       Max.   :0.42000          
-##                                  NA&#39;s   :22          NA&#39;s   :22          NA&#39;s   :5                
-##  runoff_rainfall_ratio_euc
-##  Min.   :0.000000         
-##  1st Qu.:0.003027         
-##  Median :0.047619         
-##  Mean   :0.065902         
-##  3rd Qu.:0.083603         
-##  Max.   :0.335652         
-##  NA&#39;s   :3</code></pre>
+<pre><code>##      site               site #          date              month              rain_mm         rain_oak        rain_euc    
+##  Length:90          Min.   :1.000   Length:90          Length:90          Min.   : 1.00   Min.   : 1.00   Min.   : 1.00  
+##  Class :character   1st Qu.:2.000   Class :character   Class :character   1st Qu.:16.00   1st Qu.:16.00   1st Qu.:14.75  
+##  Mode  :character   Median :4.000   Mode  :character   Mode  :character   Median :28.50   Median :30.50   Median :30.00  
+##                     Mean   :4.422                                         Mean   :37.99   Mean   :35.08   Mean   :34.60  
+##                     3rd Qu.:6.000                                         3rd Qu.:63.25   3rd Qu.:50.50   3rd Qu.:50.00  
+##                     Max.   :8.000                                         Max.   :99.00   Max.   :98.00   Max.   :96.00  
+##                                                                           NA&#39;s   :18      NA&#39;s   :2       NA&#39;s   :2      
+##   runoffL_oak      runoffL_euc      slope_oak       slope_euc       aspect_oak      aspect_euc    surface_tension_oak
+##  Min.   : 0.000   Min.   : 0.00   Min.   : 9.00   Min.   : 9.00   Min.   :100.0   Min.   :106.0   Min.   :37.40      
+##  1st Qu.: 0.000   1st Qu.: 0.07   1st Qu.:12.00   1st Qu.:12.00   1st Qu.:143.0   1st Qu.:175.0   1st Qu.:72.75      
+##  Median : 0.450   Median : 1.20   Median :24.50   Median :23.00   Median :189.0   Median :196.5   Median :72.75      
+##  Mean   : 2.032   Mean   : 2.45   Mean   :21.62   Mean   :19.34   Mean   :181.9   Mean   :191.2   Mean   :68.35      
+##  3rd Qu.: 2.800   3rd Qu.: 3.30   3rd Qu.:30.50   3rd Qu.:25.00   3rd Qu.:220.0   3rd Qu.:224.0   3rd Qu.:72.75      
+##  Max.   :14.000   Max.   :16.00   Max.   :32.00   Max.   :31.00   Max.   :264.0   Max.   :296.0   Max.   :72.75      
+##  NA&#39;s   :5        NA&#39;s   :3                                                                       NA&#39;s   :22         
+##  surface_tension_euc runoff_rainfall_ratio_oak runoff_rainfall_ratio_euc
+##  Min.   :28.51       Min.   :0.00000           Min.   :0.000000         
+##  1st Qu.:32.79       1st Qu.:0.00000           1st Qu.:0.003027         
+##  Median :37.40       Median :0.02046           Median :0.047619         
+##  Mean   :43.11       Mean   :0.05357           Mean   :0.065902         
+##  3rd Qu.:56.41       3rd Qu.:0.08485           3rd Qu.:0.083603         
+##  Max.   :72.75       Max.   :0.42000           Max.   :0.335652         
+##  NA&#39;s   :22          NA&#39;s   :5                 NA&#39;s   :3</code></pre>
 </div>
 <div id="visualizing-data-with-a-tukey-box-plot" class="section level2" number="3.5">
 <h2><span class="header-section-number">3.5</span> Visualizing data with a Tukey box plot</h2>
 <div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="data-abstraction.html#cb187-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> eucoakrainfallrunoffTDR) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>site, <span class="at">y=</span>runoffL_euc))</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-63-1.png" width="672" /></p>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-100-1.png" width="672" /></p>
 </div>
 <div id="database-operations-with-dplyr" class="section level2" number="3.6">
 <h2><span class="header-section-number">3.6</span> Database operations with <code>dplyr</code></h2>
@@ -644,7 +641,7 @@ We commonly see summary statistics using <code>na.rm = TRUE</code> in order to <
 <div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="data-abstraction.html#cb208-1" aria-hidden="true" tabindex="-1"></a>csvPath <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;TRI_1987_BaySites.csv&quot;</span>, <span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>
 <span id="cb208-2"><a href="data-abstraction.html#cb208-2" aria-hidden="true" tabindex="-1"></a>TRI87 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(csvPath)</span></code></pre></div>
 <pre><code>## 
-## -- Column specification ---------------------------------------------------------------------------
+## -- Column specification --------------------------------------------------------------------------------------------------------------
 ## cols(
 ##   TRI_FACILITY_ID = col_character(),
 ##   count = col_double(),
