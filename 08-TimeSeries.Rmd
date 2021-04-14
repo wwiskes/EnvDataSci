@@ -6,7 +6,8 @@ plot(stl(co2, s.window = "periodic")) # co2 is already a time series
 
 Time series data are widely used in the financial sector for obvious reasons, and 
 these methods can be very useful environmental data science especially in studies
-involving collection of environmental data from data loggers such as eddy covariance
+such as looking at long-term climate change variables such as the Mauna Loa CO~2~
+data above, or at the much finer temporal scale, environmental data from data loggers such as eddy covariance
 flux towers.
 
 <img src="img/RCVfluxTower1.png">

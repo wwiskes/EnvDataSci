@@ -159,3 +159,4 @@ usethisuse_data
 usethiscreate_package
 devtoolsdocument
 raw-data
+fig:unnamed-chunk-7
