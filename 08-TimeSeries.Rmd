@@ -4,6 +4,16 @@
 plot(stl(co2, s.window = "periodic")) # co2 is already a time series
 ```
 
+Time series data are widely used in the financial sector for obvious reasons, and 
+these methods can be very useful environmental data science especially in studies
+involving collection of environmental data from data loggers such as eddy covariance
+flux towers.
+
+<img src="img/RCVfluxTower1.png">
+<img src="img/LoneyGraph.png">
+<img src="img/RCVfluxTower2.png">
+
+
 A time series (ts) is created with the ts() function.
 
 - the time unit can be anything – not actually saved with the ts
@@ -142,6 +152,8 @@ plot(stl(co2, s.window="periodic"))
 
 **Marble Mountains karst resurgence study**
 
+[**`Marbles`**]
+
 For a study of chemical water quality and hydrology of a karst system in the Marble Mountains of California, 
 a spring *resurgence* was instrumented to measure water level, temperature, and specific conductance (a surrogate for total dissolved solids) over a 4-year period.
 
@@ -166,6 +178,8 @@ plot(fit)
 ```
 
 ### lag regression
+
+[**`SolarRad_Temp`**]
 
 ```{r warning=F, message=F}
 library(readxl)
@@ -208,3 +222,95 @@ ggplot(seasonals) +
 which.max(seasonals$Rad)
 which.max(seasonals$Temp)
 ```
+
+### Ensemble Average
+
+For any time series data with meaningful time units like days or years (or even weeks
+when the data varies by days of the week -- this was the case with COVID-19 data), 
+ensemble averages are a good way to visualize changes in a variable over that time unit.
+
+As you could see from the decomposition and sequential graphics we created for the Bugac and Manaus
+solar radiation and temperature data, looking at what happens over one day as an "ensemble" of
+all of the days -- where the mean value is displayed along with error bars based on 
+standard deviations of the distribution -- might be a useful figure.
+
+```{r message=F, warning=F}
+library(cowplot)
+Manaus <- read_xls(system.file("extdata","SolarRad_Temp.xls",package="iGIScData"), 
+                   sheet="ManausBrazil", col_types = "numeric") %>%
+  dplyr::select(Year:Tair) %>% filter(Year != "YYYY")
+ManausSum <- Manaus %>% group_by(Hr) %>% 
+  summarize(meanRad = mean(SolarRad), meanTemp = mean(Tair),
+            sdRad = sd(SolarRad), sdTemp = sd(Tair))
+px <- ManausSum %>% ggplot(aes(x=Hr)) + scale_x_continuous(breaks=seq(0,24,3))
+p1 <- px + geom_line(aes(y=meanRad), col="blue") + 
+  geom_errorbar(aes(ymax = meanRad + sdRad, ymin = meanRad - sdRad)) +
+  ggtitle("Manaus 2005 ensemble solar radiation")
+p2 <- px + geom_line(aes(y=meanTemp),col="red") + 
+  geom_errorbar(aes(ymax=meanTemp+sdTemp, ymin=meanTemp-sdTemp)) +
+  ggtitle("Manaus 2005 ensemble air temperature")
+plot_grid(plotlist=list(p1,p2), ncol=1, align='v') # from cowplot
+
+Bugac <- read_xls(system.file("extdata","SolarRad_Temp.xls",package="iGIScData"), 
+                   sheet="BugacHungary", col_types = "numeric") %>%
+  dplyr::select(Year:Tair) %>% filter(Year != "YYYY")
+BugacSum <- Bugac %>% group_by(Hr) %>% 
+  summarize(meanRad = mean(SolarRad), meanTemp = mean(Tair),
+            sdRad = sd(SolarRad), sdTemp = sd(Tair))
+px <- BugacSum %>% ggplot(aes(x=Hr)) + scale_x_continuous(breaks=seq(0,24,3))
+p1 <- px + geom_line(aes(y=meanRad), col="blue") + 
+  geom_errorbar(aes(ymax = meanRad + sdRad, ymin = meanRad - sdRad)) +
+  ggtitle("Bugac 2005 ensemble solar radiation")
+p2 <- px + geom_line(aes(y=meanTemp),col="red") + 
+  geom_errorbar(aes(ymax=meanTemp+sdTemp, ymin=meanTemp-sdTemp)) +
+  ggtitle("Bugac 2005 ensemble air temperature")
+plot_grid(plotlist=list(p1,p2), ncol=1, align='v') # from cowplot
+
+```
+
+### Julian Dates
+
+Julian dates are the number of days since some start date
+
+- The origin (Julian date 0) can be arbitrary
+- Default for julian() is 1970-01-01
+
+For climatological work where the year is very important, it usually means the number of days of any given year
+
+- lubridate's yday() gives you this.
+- same thing as setting the origin for julian() as the 12-31 of the previous year.
+- Useful in time series when the year is the time unit and observations are by days of the year (e.g. for climate data)
+
+
+
+```{R warning = F, message=F}
+library(lubridate)
+julian(ymd("2020-01-01"))
+julian(ymd("1970-01-01"))
+yday(ymd("2020-01-01"))
+julian(ymd("2020-01-01"), origin=ymd("2019-12-31"))
+```
+
+To create a decimal yday including fractional days, here's a function:
+
+```
+ydayDec <- function(d) {
+           yday(d)-1 + hour(d)/24 + minute(d)/1440 + second(d)/86400}
+```
+
+## Learning more about time series in R
+
+It can be confusing, partly because of the major use of time series in the financial sector, so a search gets you quickly into the monetizing world...
+
+One good source is actually at CRAN:
+<a href="https://cran.r-project.org/web/views/TimeSeries.html">https://cran.r-project.org/web/views/TimeSeries.html</a> 
+
+Time series data library:
+<a href="https://pkg.yangzhuoranyang.com/tsdl/">https://pkg.yangzhuoranyang.com/tsdl/</a>
+
+Understanding time series in R:
+<a href="https://a-little-book-of-r-for-time-series.readthedocs.io/">https://a-little-book-of-r-for-time-series.readthedocs.io/</a>
+
+
+
+ 

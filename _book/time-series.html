@@ -24,7 +24,7 @@
 <meta name="author" content="Jerry Davis" />
 
 
-<meta name="date" content="2021-04-13" />
+<meta name="date" content="2021-04-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="statistics-and-modeling.html"/>
-<link rel="next" href="machine-learning.html"/>
+<link rel="next" href="building-a-data-package-for-github.html"/>
 <script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -53,6 +53,16 @@
 
 <link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.3/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.0.3/leaflet-providers-plugin.js"></script>
 
 
 <style type="text/css">
@@ -286,18 +296,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.1" data-path="time-series.html"><a href="time-series.html#decomposing-time-series"><i class="fa fa-check"></i><b>8.1</b> Decomposing time series</a>
 <ul>
 <li class="chapter" data-level="8.1.1" data-path="time-series.html"><a href="time-series.html#lag-regression"><i class="fa fa-check"></i><b>8.1.1</b> lag regression</a></li>
+<li class="chapter" data-level="8.1.2" data-path="time-series.html"><a href="time-series.html#ensemble-average"><i class="fa fa-check"></i><b>8.1.2</b> Ensemble Average</a></li>
+<li class="chapter" data-level="8.1.3" data-path="time-series.html"><a href="time-series.html#julian-dates"><i class="fa fa-check"></i><b>8.1.3</b> Julian Dates</a></li>
 </ul></li>
+<li class="chapter" data-level="8.2" data-path="time-series.html"><a href="time-series.html#learning-more-about-time-series-in-r"><i class="fa fa-check"></i><b>8.2</b> Learning more about time series in R</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="machine-learning.html"><a href="machine-learning.html"><i class="fa fa-check"></i><b>9</b> Machine Learning</a></li>
-<li class="chapter" data-level="10" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html"><i class="fa fa-check"></i><b>10</b> Building a Data Package for GitHub</a>
+<li class="chapter" data-level="9" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html"><i class="fa fa-check"></i><b>9</b> Building a Data Package for GitHub</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html#rda-files"><i class="fa fa-check"></i><b>10.1</b> <code>rda</code> files</a>
+<li class="chapter" data-level="9.1" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html#rda-files"><i class="fa fa-check"></i><b>9.1</b> <code>rda</code> files</a>
 <ul>
-<li class="chapter" data-level="10.1.1" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html#usethisuse_data"><i class="fa fa-check"></i><b>10.1.1</b> <code>usethis::use_data()</code></a></li>
-<li class="chapter" data-level="10.1.2" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html#usethiscreate_package"><i class="fa fa-check"></i><b>10.1.2</b> <code>usethis::create_package()</code></a></li>
-<li class="chapter" data-level="10.1.3" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html#devtoolsdocument"><i class="fa fa-check"></i><b>10.1.3</b> <code>devtools::document()</code></a></li>
+<li class="chapter" data-level="9.1.1" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html#usethisuse_data"><i class="fa fa-check"></i><b>9.1.1</b> <code>usethis::use_data()</code></a></li>
+<li class="chapter" data-level="9.1.2" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html#usethiscreate_package"><i class="fa fa-check"></i><b>9.1.2</b> <code>usethis::create_package()</code></a></li>
+<li class="chapter" data-level="9.1.3" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html#devtoolsdocument"><i class="fa fa-check"></i><b>9.1.3</b> <code>devtools::document()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="10.2" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html#raw-data"><i class="fa fa-check"></i><b>10.2</b> Raw data</a></li>
+<li class="chapter" data-level="9.2" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html#raw-data"><i class="fa fa-check"></i><b>9.2</b> Raw data</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -321,21 +333,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="time-series" class="section level1" number="8">
 <h1><span class="header-section-number">8</span> Time Series</h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="time-series.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">stl</span>(co2, <span class="at">s.window =</span> <span class="st">&quot;periodic&quot;</span>)) <span class="co"># co2 is already a time series</span></span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb479-1"><a href="time-series.html#cb479-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">stl</span>(co2, <span class="at">s.window =</span> <span class="st">&quot;periodic&quot;</span>)) <span class="co"># co2 is already a time series</span></span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-185-1.png" width="672" /></p>
+<p>Time series data are widely used in the financial sector for obvious reasons, and
+these methods can be very useful environmental data science especially in studies
+involving collection of environmental data from data loggers such as eddy covariance
+flux towers.</p>
+<p><img src="img/RCVfluxTower1.png">
+<img src="img/LoneyGraph.png">
+<img src="img/RCVfluxTower2.png"></p>
 <p>A time series (ts) is created with the ts() function.</p>
 <ul>
 <li>the time unit can be anything – not actually saved with the ts</li>
 <li>observations must be a regularly spaced series</li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="time-series.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb2-2"><a href="time-series.html#cb2-2" aria-hidden="true" tabindex="-1"></a>SFhighF <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">58</span>,<span class="dv">61</span>,<span class="dv">62</span>,<span class="dv">63</span>,<span class="dv">64</span>,<span class="dv">67</span>,<span class="dv">67</span>,<span class="dv">68</span>,<span class="dv">71</span>,<span class="dv">70</span>,<span class="dv">64</span>,<span class="dv">58</span>)</span>
-<span id="cb2-3"><a href="time-series.html#cb2-3" aria-hidden="true" tabindex="-1"></a>SFlowF  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">47</span>,<span class="dv">48</span>,<span class="dv">49</span>,<span class="dv">50</span>,<span class="dv">51</span>,<span class="dv">53</span>,<span class="dv">54</span>,<span class="dv">55</span>,<span class="dv">56</span>,<span class="dv">55</span>,<span class="dv">51</span>,<span class="dv">47</span>)</span>
-<span id="cb2-4"><a href="time-series.html#cb2-4" aria-hidden="true" tabindex="-1"></a>SFhighC <span class="ot">&lt;-</span> (SFhighF<span class="dv">-32</span>)<span class="sc">*</span><span class="dv">5</span><span class="sc">/</span><span class="dv">9</span></span>
-<span id="cb2-5"><a href="time-series.html#cb2-5" aria-hidden="true" tabindex="-1"></a>SFlowC  <span class="ot">&lt;-</span> (SFlowF<span class="dv">-32</span>)<span class="sc">*</span><span class="dv">5</span><span class="sc">/</span><span class="dv">9</span></span>
-<span id="cb2-6"><a href="time-series.html#cb2-6" aria-hidden="true" tabindex="-1"></a>SFtempC <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(<span class="at">high=</span>SFhighC,<span class="at">low=</span>SFlowC)</span>
-<span id="cb2-7"><a href="time-series.html#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(SFtempC);                  <span class="fu">plot</span>(<span class="fu">ts</span>(SFtempC))</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-2-1.png" width="672" /><img src="EnvDataSci_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
+<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb480-1"><a href="time-series.html#cb480-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb480-2"><a href="time-series.html#cb480-2" aria-hidden="true" tabindex="-1"></a>SFhighF <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">58</span>,<span class="dv">61</span>,<span class="dv">62</span>,<span class="dv">63</span>,<span class="dv">64</span>,<span class="dv">67</span>,<span class="dv">67</span>,<span class="dv">68</span>,<span class="dv">71</span>,<span class="dv">70</span>,<span class="dv">64</span>,<span class="dv">58</span>)</span>
+<span id="cb480-3"><a href="time-series.html#cb480-3" aria-hidden="true" tabindex="-1"></a>SFlowF  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">47</span>,<span class="dv">48</span>,<span class="dv">49</span>,<span class="dv">50</span>,<span class="dv">51</span>,<span class="dv">53</span>,<span class="dv">54</span>,<span class="dv">55</span>,<span class="dv">56</span>,<span class="dv">55</span>,<span class="dv">51</span>,<span class="dv">47</span>)</span>
+<span id="cb480-4"><a href="time-series.html#cb480-4" aria-hidden="true" tabindex="-1"></a>SFhighC <span class="ot">&lt;-</span> (SFhighF<span class="dv">-32</span>)<span class="sc">*</span><span class="dv">5</span><span class="sc">/</span><span class="dv">9</span></span>
+<span id="cb480-5"><a href="time-series.html#cb480-5" aria-hidden="true" tabindex="-1"></a>SFlowC  <span class="ot">&lt;-</span> (SFlowF<span class="dv">-32</span>)<span class="sc">*</span><span class="dv">5</span><span class="sc">/</span><span class="dv">9</span></span>
+<span id="cb480-6"><a href="time-series.html#cb480-6" aria-hidden="true" tabindex="-1"></a>SFtempC <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(<span class="at">high=</span>SFhighC,<span class="at">low=</span>SFlowC)</span>
+<span id="cb480-7"><a href="time-series.html#cb480-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(SFtempC);                  <span class="fu">plot</span>(<span class="fu">ts</span>(SFtempC))</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-186-1.png" width="672" /><img src="EnvDataSci_files/figure-html/unnamed-chunk-186-2.png" width="672" /></p>
 <div id="frequency-setting" class="section level3" number="8.0.1">
 <h3><span class="header-section-number">8.0.1</span> frequency setting</h3>
 <p>Frequency setting is a key parameter for ts()</p>
@@ -343,22 +362,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>sets how many observations per time unit</li>
 <li>ts() mostly doesn’t seem to care what the time unit is, however some functions figure it out, at least for an annual time unit, e.g. that 1-12 means months when there’s a frequency of 12</li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="time-series.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">ts</span>(SFtempC, <span class="at">frequency=</span><span class="dv">1</span>), <span class="at">main=</span><span class="st">&quot;monthly time unit&quot;</span>)</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="time-series.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">ts</span>(SFtempC, <span class="at">frequency=</span><span class="dv">12</span>), <span class="at">main=</span><span class="st">&quot;yearly time unit&quot;</span>)</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
+<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb481-1"><a href="time-series.html#cb481-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">ts</span>(SFtempC, <span class="at">frequency=</span><span class="dv">1</span>), <span class="at">main=</span><span class="st">&quot;monthly time unit&quot;</span>)</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-187-1.png" width="672" /></p>
+<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb482-1"><a href="time-series.html#cb482-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">ts</span>(SFtempC, <span class="at">frequency=</span><span class="dv">12</span>), <span class="at">main=</span><span class="st">&quot;yearly time unit&quot;</span>)</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-187-2.png" width="672" /></p>
 <p><strong>frequency &lt; 1</strong></p>
 <p>If you have data of lower frequency than 1 per unit</p>
 <ul>
 <li>e.g. greenhouse gas data values every 20 years, starting in year 20, frequency 1/20 = 0.05</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="time-series.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dslabs)</span>
-<span id="cb5-2"><a href="time-series.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;greenhouse_gases&quot;</span>)</span>
-<span id="cb5-3"><a href="time-series.html#cb5-3" aria-hidden="true" tabindex="-1"></a>GHGwide <span class="ot">&lt;-</span> <span class="fu">pivot_wider</span>(greenhouse_gases, <span class="at">names_from =</span> gas, </span>
-<span id="cb5-4"><a href="time-series.html#cb5-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">values_from =</span> concentration)</span>
-<span id="cb5-5"><a href="time-series.html#cb5-5" aria-hidden="true" tabindex="-1"></a>GHG <span class="ot">&lt;-</span> <span class="fu">ts</span>(GHGwide, <span class="at">frequency=</span><span class="fl">0.05</span>, <span class="at">start=</span><span class="dv">20</span>) </span>
-<span id="cb5-6"><a href="time-series.html#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(GHG)</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb483-1"><a href="time-series.html#cb483-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dslabs)</span>
+<span id="cb483-2"><a href="time-series.html#cb483-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;greenhouse_gases&quot;</span>)</span>
+<span id="cb483-3"><a href="time-series.html#cb483-3" aria-hidden="true" tabindex="-1"></a>GHGwide <span class="ot">&lt;-</span> <span class="fu">pivot_wider</span>(greenhouse_gases, <span class="at">names_from =</span> gas, </span>
+<span id="cb483-4"><a href="time-series.html#cb483-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">values_from =</span> concentration)</span>
+<span id="cb483-5"><a href="time-series.html#cb483-5" aria-hidden="true" tabindex="-1"></a>GHG <span class="ot">&lt;-</span> <span class="fu">ts</span>(GHGwide, <span class="at">frequency=</span><span class="fl">0.05</span>, <span class="at">start=</span><span class="dv">20</span>) </span>
+<span id="cb483-6"><a href="time-series.html#cb483-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(GHG)</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-188-1.png" width="672" /></p>
 <p><strong>start and end parameters</strong></p>
 <ul>
 <li>the time of the first (start) and last (end) observations. Either a single number or a vector of two numbers (the second of which is an integer), which specify a natural time unit and a (1-based) number of samples into the time unit.</li>
@@ -375,8 +394,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>should be an odd number</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="time-series.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
-<span id="cb6-2"><a href="time-series.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ts</span>(SFtempC, <span class="at">frequency=</span><span class="dv">12</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb484-1"><a href="time-series.html#cb484-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb484-2"><a href="time-series.html#cb484-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ts</span>(SFtempC, <span class="at">frequency=</span><span class="dv">12</span>)</span></code></pre></div>
 <pre><code>##           high       low
 ## Jan 1 14.44444  8.333333
 ## Feb 1 16.11111  8.888889
@@ -390,7 +409,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Oct 1 21.11111 12.777778
 ## Nov 1 17.77778 10.555556
 ## Dec 1 14.44444  8.333333</code></pre>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="time-series.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ma</span>(<span class="fu">ts</span>(SFtempC,<span class="at">frequency=</span><span class="dv">12</span>),<span class="at">order=</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb486-1"><a href="time-series.html#cb486-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ma</span>(<span class="fu">ts</span>(SFtempC,<span class="at">frequency=</span><span class="dv">12</span>),<span class="at">order=</span><span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##           [,1]      [,2]
 ## Jan 1       NA        NA
 ## Feb 1 15.74074  8.888889
@@ -406,21 +425,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Dec 1       NA        NA</code></pre>
 <p><strong>moving average of CO2 data</strong></p>
 <p>Difference shows time-local fluctuations, a component of the data</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="time-series.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dslabs)</span>
-<span id="cb10-2"><a href="time-series.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;greenhouse_gases&quot;</span>)</span>
-<span id="cb10-3"><a href="time-series.html#cb10-3" aria-hidden="true" tabindex="-1"></a>GHGwide <span class="ot">&lt;-</span> <span class="fu">pivot_wider</span>(greenhouse_gases, </span>
-<span id="cb10-4"><a href="time-series.html#cb10-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">names_from =</span> gas, </span>
-<span id="cb10-5"><a href="time-series.html#cb10-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">values_from =</span> concentration)</span>
-<span id="cb10-6"><a href="time-series.html#cb10-6" aria-hidden="true" tabindex="-1"></a>CO2 <span class="ot">&lt;-</span> <span class="fu">ts</span>(GHGwide<span class="sc">$</span>CO2,</span>
-<span id="cb10-7"><a href="time-series.html#cb10-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">frequency =</span> <span class="fl">0.05</span>)</span>
-<span id="cb10-8"><a href="time-series.html#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
-<span id="cb10-9"><a href="time-series.html#cb10-9" aria-hidden="true" tabindex="-1"></a>CO2ma <span class="ot">&lt;-</span> <span class="fu">ma</span>(CO2, <span class="at">order=</span><span class="dv">7</span>)</span>
-<span id="cb10-10"><a href="time-series.html#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(CO2)</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="time-series.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(CO2ma)</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="time-series.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(CO2<span class="sc">-</span>CO2ma)</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-6-3.png" width="672" /></p>
+<div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb488-1"><a href="time-series.html#cb488-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dslabs)</span>
+<span id="cb488-2"><a href="time-series.html#cb488-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;greenhouse_gases&quot;</span>)</span>
+<span id="cb488-3"><a href="time-series.html#cb488-3" aria-hidden="true" tabindex="-1"></a>GHGwide <span class="ot">&lt;-</span> <span class="fu">pivot_wider</span>(greenhouse_gases, </span>
+<span id="cb488-4"><a href="time-series.html#cb488-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">names_from =</span> gas, </span>
+<span id="cb488-5"><a href="time-series.html#cb488-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">values_from =</span> concentration)</span>
+<span id="cb488-6"><a href="time-series.html#cb488-6" aria-hidden="true" tabindex="-1"></a>CO2 <span class="ot">&lt;-</span> <span class="fu">ts</span>(GHGwide<span class="sc">$</span>CO2,</span>
+<span id="cb488-7"><a href="time-series.html#cb488-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">frequency =</span> <span class="fl">0.05</span>)</span>
+<span id="cb488-8"><a href="time-series.html#cb488-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb488-9"><a href="time-series.html#cb488-9" aria-hidden="true" tabindex="-1"></a>CO2ma <span class="ot">&lt;-</span> <span class="fu">ma</span>(CO2, <span class="at">order=</span><span class="dv">7</span>)</span>
+<span id="cb488-10"><a href="time-series.html#cb488-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(CO2)</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-190-1.png" width="672" /></p>
+<div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb489-1"><a href="time-series.html#cb489-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(CO2ma)</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-190-2.png" width="672" /></p>
+<div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb490-1"><a href="time-series.html#cb490-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(CO2<span class="sc">-</span>CO2ma)</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-190-3.png" width="672" /></p>
 </div>
 <div id="loess-local-regression-smoothing" class="section level3" number="8.0.3">
 <h3><span class="header-section-number">8.0.3</span> loess (local regression) smoothing</h3>
@@ -453,9 +472,9 @@ at first, then the “loess” method used by <code>stl</code>.</p>
 <p><strong>Mauna Loa CO<sub>2</sub> data with seasonality</strong></p>
 <p>A good place to see the effect of seasonality is to look at the Mauna Loa CO<sub>2</sub> data, which shows regular annual cycles, yet with
 a regularly increasing trend over the years. The decomposition shows the original observations, followed by a trend line that removes the seasonal and local (short-term) random irregularities, a detrended <em>seasonal</em> picture which removes that trend to just show the seasonal cycles, followed by the random irregularities. Note the vertical scale: the units are all the same – parts per million – so the actual amplitude of the seasonal cycle should be the same as the annual amplitude of the observations, it’s just scaled to the chart height, which tends to exaggerate the seasonal cycles and random irregularities.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="time-series.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">decompose</span>(co2))</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-7"></span>
-<img src="EnvDataSci_files/figure-html/unnamed-chunk-7-1.png" alt="Decomposition of Mauna Loa monthly co2 time series (in base) extending from 1959 to 1981" width="672" />
+<div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb491-1"><a href="time-series.html#cb491-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">decompose</span>(co2))</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-191"></span>
+<img src="EnvDataSci_files/figure-html/unnamed-chunk-191-1.png" alt="Decomposition of Mauna Loa monthly co2 time series (in base) extending from 1959 to 1981" width="672" />
 <p class="caption">
 Figure 8.1: Decomposition of Mauna Loa monthly co2 time series (in base) extending from 1959 to 1981
 </p>
@@ -464,9 +483,10 @@ Figure 8.1: Decomposition of Mauna Loa monthly co2 time series (in base) extendi
 <p>The <code>stl</code> function stands for “Seasonal decomposition of Time series by Loess.”<br />
 Loess is a smoothing algorithm, that wor. If s.window = “periodic” the mean is used for smoothing;
 the seasonal values are removed and the remainder smoothed to find the trend.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="time-series.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">stl</span>(co2, <span class="at">s.window=</span><span class="st">&quot;periodic&quot;</span>))</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<div class="sourceCode" id="cb492"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb492-1"><a href="time-series.html#cb492-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">stl</span>(co2, <span class="at">s.window=</span><span class="st">&quot;periodic&quot;</span>))</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-192-1.png" width="672" /></p>
 <p><strong>Marble Mountains karst resurgence study</strong></p>
+<p>[<strong><code>Marbles</code></strong>]</p>
 <p>For a study of chemical water quality and hydrology of a karst system in the Marble Mountains of California,
 a spring <em>resurgence</em> was instrumented to measure water level, temperature, and specific conductance (a surrogate for total dissolved solids) over a 4-year period.</p>
 <p><img src="img/resurgenceInstallation.png">
@@ -475,78 +495,162 @@ a spring <em>resurgence</em> was instrumented to measure water level, temperatur
 <img src="img/instrumentationLower.png">
 <img src="img/instrumentationDiagram.png">
 <img src="img/stillingWell.png"></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="time-series.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse); <span class="fu">library</span>(lubridate)</span>
-<span id="cb15-2"><a href="time-series.html#cb15-2" aria-hidden="true" tabindex="-1"></a>resurg <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;resurgenceData.csv&quot;</span>,<span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb15-3"><a href="time-series.html#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date_time =</span> <span class="fu">mdy_hms</span>(<span class="fu">paste</span>(date, time))) <span class="sc">%&gt;%</span></span>
-<span id="cb15-4"><a href="time-series.html#cb15-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(date_time, ATemp, BTemp, wlevelm, EC, InputV)</span>
-<span id="cb15-5"><a href="time-series.html#cb15-5" aria-hidden="true" tabindex="-1"></a>resurgTS <span class="ot">&lt;-</span> <span class="fu">ts</span>(resurg, <span class="at">frequency =</span> <span class="dv">12</span><span class="sc">*</span><span class="dv">365</span>, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">1994</span>, <span class="dv">266</span><span class="sc">*</span><span class="dv">12</span><span class="sc">+</span><span class="dv">7</span>))</span>
-<span id="cb15-6"><a href="time-series.html#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(resurgTS)</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="time-series.html#cb16-1" aria-hidden="true" tabindex="-1"></a>wlevelm <span class="ot">&lt;-</span> <span class="fu">ts</span>(resurg<span class="sc">$</span>wlevelm, <span class="at">frequency =</span> <span class="dv">12</span><span class="sc">*</span><span class="dv">365</span>, </span>
-<span id="cb16-2"><a href="time-series.html#cb16-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">1994</span>, <span class="dv">266</span><span class="sc">*</span><span class="dv">12</span><span class="sc">+</span><span class="dv">7</span>))</span>
-<span id="cb16-3"><a href="time-series.html#cb16-3" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">stl</span>(wlevelm, <span class="at">s.window=</span><span class="st">&quot;periodic&quot;</span>)</span>
-<span id="cb16-4"><a href="time-series.html#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit)</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
+<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="time-series.html#cb493-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse); <span class="fu">library</span>(lubridate)</span>
+<span id="cb493-2"><a href="time-series.html#cb493-2" aria-hidden="true" tabindex="-1"></a>resurg <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;resurgenceData.csv&quot;</span>,<span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb493-3"><a href="time-series.html#cb493-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date_time =</span> <span class="fu">mdy_hms</span>(<span class="fu">paste</span>(date, time))) <span class="sc">%&gt;%</span></span>
+<span id="cb493-4"><a href="time-series.html#cb493-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(date_time, ATemp, BTemp, wlevelm, EC, InputV)</span>
+<span id="cb493-5"><a href="time-series.html#cb493-5" aria-hidden="true" tabindex="-1"></a>resurgTS <span class="ot">&lt;-</span> <span class="fu">ts</span>(resurg, <span class="at">frequency =</span> <span class="dv">12</span><span class="sc">*</span><span class="dv">365</span>, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">1994</span>, <span class="dv">266</span><span class="sc">*</span><span class="dv">12</span><span class="sc">+</span><span class="dv">7</span>))</span>
+<span id="cb493-6"><a href="time-series.html#cb493-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(resurgTS)</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-193-1.png" width="672" /></p>
+<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb494-1"><a href="time-series.html#cb494-1" aria-hidden="true" tabindex="-1"></a>wlevelm <span class="ot">&lt;-</span> <span class="fu">ts</span>(resurg<span class="sc">$</span>wlevelm, <span class="at">frequency =</span> <span class="dv">12</span><span class="sc">*</span><span class="dv">365</span>, </span>
+<span id="cb494-2"><a href="time-series.html#cb494-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">1994</span>, <span class="dv">266</span><span class="sc">*</span><span class="dv">12</span><span class="sc">+</span><span class="dv">7</span>))</span>
+<span id="cb494-3"><a href="time-series.html#cb494-3" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">stl</span>(wlevelm, <span class="at">s.window=</span><span class="st">&quot;periodic&quot;</span>)</span>
+<span id="cb494-4"><a href="time-series.html#cb494-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit)</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-193-2.png" width="672" /></p>
 <div id="lag-regression" class="section level3" number="8.1.1">
 <h3><span class="header-section-number">8.1.1</span> lag regression</h3>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="time-series.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb17-2"><a href="time-series.html#cb17-2" aria-hidden="true" tabindex="-1"></a>BugacSolstice <span class="ot">&lt;-</span> <span class="fu">read_xls</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;SolarRad_Temp.xls&quot;</span>, <span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>), </span>
-<span id="cb17-3"><a href="time-series.html#cb17-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">sheet=</span><span class="st">&quot;BugacHungary&quot;</span>, <span class="at">col_types =</span> <span class="st">&quot;numeric&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb17-4"><a href="time-series.html#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Year <span class="sc">!=</span> <span class="st">&quot;YYYY&quot;</span> <span class="sc">&amp;</span> <span class="st">`</span><span class="at">Day of Yr</span><span class="st">`</span> <span class="sc">&lt;</span> <span class="dv">177</span> <span class="sc">&amp;</span> <span class="st">`</span><span class="at">Day of Yr</span><span class="st">`</span> <span class="sc">&gt;</span> <span class="dv">168</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb17-5"><a href="time-series.html#cb17-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(SolarRad, Tair)</span>
-<span id="cb17-6"><a href="time-series.html#cb17-6" aria-hidden="true" tabindex="-1"></a>BugacSolsticeTS <span class="ot">&lt;-</span> <span class="fu">ts</span>(BugacSolstice, <span class="at">frequency =</span> <span class="dv">48</span>)</span>
-<span id="cb17-7"><a href="time-series.html#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(BugacSolstice, <span class="at">main=</span><span class="st">&quot;a simple scatter plot that illustrates hysteresis&quot;</span>); <span class="fu">plot</span>(BugacSolsticeTS)</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-10-1.png" width="672" /><img src="EnvDataSci_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="time-series.html#cb18-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="cf">function</span>(i) {<span class="fu">sqrt</span>(<span class="fu">sum</span>(<span class="fu">lm</span>(Tair<span class="sc">~</span><span class="fu">lag</span>(SolarRad,i), <span class="at">data=</span>BugacSolsticeTS)<span class="sc">$</span>resid<span class="sc">**</span><span class="dv">2</span>))}</span>
-<span id="cb18-2"><a href="time-series.html#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">5</span>){<span class="fu">print</span>(<span class="fu">paste</span>(i,<span class="st">&quot;:&quot;</span>,<span class="fu">mod</span>(i),<span class="at">sep=</span><span class="st">&quot;&quot;</span>))}</span></code></pre></div>
+<p>[<strong><code>SolarRad_Temp</code></strong>]</p>
+<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb495-1"><a href="time-series.html#cb495-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb495-2"><a href="time-series.html#cb495-2" aria-hidden="true" tabindex="-1"></a>BugacSolstice <span class="ot">&lt;-</span> <span class="fu">read_xls</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;SolarRad_Temp.xls&quot;</span>, <span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>), </span>
+<span id="cb495-3"><a href="time-series.html#cb495-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">sheet=</span><span class="st">&quot;BugacHungary&quot;</span>, <span class="at">col_types =</span> <span class="st">&quot;numeric&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb495-4"><a href="time-series.html#cb495-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Year <span class="sc">!=</span> <span class="st">&quot;YYYY&quot;</span> <span class="sc">&amp;</span> <span class="st">`</span><span class="at">Day of Yr</span><span class="st">`</span> <span class="sc">&lt;</span> <span class="dv">177</span> <span class="sc">&amp;</span> <span class="st">`</span><span class="at">Day of Yr</span><span class="st">`</span> <span class="sc">&gt;</span> <span class="dv">168</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb495-5"><a href="time-series.html#cb495-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(SolarRad, Tair)</span>
+<span id="cb495-6"><a href="time-series.html#cb495-6" aria-hidden="true" tabindex="-1"></a>BugacSolsticeTS <span class="ot">&lt;-</span> <span class="fu">ts</span>(BugacSolstice, <span class="at">frequency =</span> <span class="dv">48</span>)</span>
+<span id="cb495-7"><a href="time-series.html#cb495-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(BugacSolstice, <span class="at">main=</span><span class="st">&quot;a simple scatter plot that illustrates hysteresis&quot;</span>); <span class="fu">plot</span>(BugacSolsticeTS)</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-194-1.png" width="672" /><img src="EnvDataSci_files/figure-html/unnamed-chunk-194-2.png" width="672" /></p>
+<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb496-1"><a href="time-series.html#cb496-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="cf">function</span>(i) {<span class="fu">sqrt</span>(<span class="fu">sum</span>(<span class="fu">lm</span>(Tair<span class="sc">~</span><span class="fu">lag</span>(SolarRad,i), <span class="at">data=</span>BugacSolsticeTS)<span class="sc">$</span>resid<span class="sc">**</span><span class="dv">2</span>))}</span>
+<span id="cb496-2"><a href="time-series.html#cb496-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">5</span>){<span class="fu">print</span>(<span class="fu">paste</span>(i,<span class="st">&quot;:&quot;</span>,<span class="fu">mod</span>(i),<span class="at">sep=</span><span class="st">&quot;&quot;</span>))}</span></code></pre></div>
 <pre><code>## [1] &quot;0:64.0135215060866&quot;
 ## [1] &quot;1:55.8980329398225&quot;
 ## [1] &quot;2:50.4934737943067&quot;
 ## [1] &quot;3:48.1321353382658&quot;
 ## [1] &quot;4:49.6489246846601&quot;
 ## [1] &quot;5:54.3634439433188&quot;</code></pre>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="time-series.html#cb20-1" aria-hidden="true" tabindex="-1"></a>SolarRad_comp <span class="ot">&lt;-</span> <span class="fu">decompose</span>(<span class="fu">ts</span>(BugacSolstice<span class="sc">$</span>SolarRad, <span class="at">frequency =</span> <span class="dv">48</span>))</span>
-<span id="cb20-2"><a href="time-series.html#cb20-2" aria-hidden="true" tabindex="-1"></a>Tair_comp <span class="ot">&lt;-</span> <span class="fu">decompose</span>(<span class="fu">ts</span>(BugacSolstice<span class="sc">$</span>Tair, <span class="at">frequency =</span> <span class="dv">48</span>))</span>
-<span id="cb20-3"><a href="time-series.html#cb20-3" aria-hidden="true" tabindex="-1"></a>seasonals <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(<span class="at">Rad =</span> SolarRad_comp<span class="sc">$</span>seasonal, <span class="at">Temp =</span> Tair_comp<span class="sc">$</span>seasonal)</span>
-<span id="cb20-4"><a href="time-series.html#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(seasonals) <span class="sc">+</span> </span>
-<span id="cb20-5"><a href="time-series.html#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">seq_along</span>(Rad), <span class="at">y=</span>Rad<span class="sc">/</span><span class="dv">50</span>), <span class="at">col=</span><span class="st">&quot;red&quot;</span>, <span class="at">size=</span><span class="dv">1</span>) <span class="sc">+</span> </span>
-<span id="cb20-6"><a href="time-series.html#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">seq_along</span>(Temp), <span class="at">y=</span>Temp), <span class="at">col=</span><span class="st">&quot;darkgreen&quot;</span>,<span class="at">size=</span><span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb20-7"><a href="time-series.html#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">480</span>,<span class="dv">12</span>))</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-10-3.png" width="672" /></p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="time-series.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which.max</span>(seasonals<span class="sc">$</span>Rad)</span></code></pre></div>
+<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb498-1"><a href="time-series.html#cb498-1" aria-hidden="true" tabindex="-1"></a>SolarRad_comp <span class="ot">&lt;-</span> <span class="fu">decompose</span>(<span class="fu">ts</span>(BugacSolstice<span class="sc">$</span>SolarRad, <span class="at">frequency =</span> <span class="dv">48</span>))</span>
+<span id="cb498-2"><a href="time-series.html#cb498-2" aria-hidden="true" tabindex="-1"></a>Tair_comp <span class="ot">&lt;-</span> <span class="fu">decompose</span>(<span class="fu">ts</span>(BugacSolstice<span class="sc">$</span>Tair, <span class="at">frequency =</span> <span class="dv">48</span>))</span>
+<span id="cb498-3"><a href="time-series.html#cb498-3" aria-hidden="true" tabindex="-1"></a>seasonals <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(<span class="at">Rad =</span> SolarRad_comp<span class="sc">$</span>seasonal, <span class="at">Temp =</span> Tair_comp<span class="sc">$</span>seasonal)</span>
+<span id="cb498-4"><a href="time-series.html#cb498-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(seasonals) <span class="sc">+</span> </span>
+<span id="cb498-5"><a href="time-series.html#cb498-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">seq_along</span>(Rad), <span class="at">y=</span>Rad<span class="sc">/</span><span class="dv">50</span>), <span class="at">col=</span><span class="st">&quot;red&quot;</span>, <span class="at">size=</span><span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb498-6"><a href="time-series.html#cb498-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">seq_along</span>(Temp), <span class="at">y=</span>Temp), <span class="at">col=</span><span class="st">&quot;darkgreen&quot;</span>,<span class="at">size=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb498-7"><a href="time-series.html#cb498-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">480</span>,<span class="dv">12</span>))</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-194-3.png" width="672" /></p>
+<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb499-1"><a href="time-series.html#cb499-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which.max</span>(seasonals<span class="sc">$</span>Rad)</span></code></pre></div>
 <pre><code>## [1] 23</code></pre>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="time-series.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which.max</span>(seasonals<span class="sc">$</span>Temp)</span></code></pre></div>
+<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb501-1"><a href="time-series.html#cb501-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which.max</span>(seasonals<span class="sc">$</span>Temp)</span></code></pre></div>
 <pre><code>## [1] 28</code></pre>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="time-series.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb25-2"><a href="time-series.html#cb25-2" aria-hidden="true" tabindex="-1"></a>ManausSolstice <span class="ot">&lt;-</span> <span class="fu">read_xls</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;SolarRad_Temp.xls&quot;</span>, <span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>), </span>
-<span id="cb25-3"><a href="time-series.html#cb25-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">sheet=</span><span class="st">&quot;ManausBrazil&quot;</span>, <span class="at">col_types =</span> <span class="st">&quot;numeric&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb25-4"><a href="time-series.html#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Year <span class="sc">!=</span> <span class="st">&quot;YYYY&quot;</span> <span class="sc">&amp;</span> <span class="st">`</span><span class="at">Day of Yr</span><span class="st">`</span> <span class="sc">&lt;</span> <span class="dv">177</span> <span class="sc">&amp;</span> <span class="st">`</span><span class="at">Day of Yr</span><span class="st">`</span> <span class="sc">&gt;</span> <span class="dv">168</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb25-5"><a href="time-series.html#cb25-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(SolarRad, Tair)</span>
-<span id="cb25-6"><a href="time-series.html#cb25-6" aria-hidden="true" tabindex="-1"></a>ManausSolsticeTS <span class="ot">&lt;-</span> <span class="fu">ts</span>(ManausSolstice, <span class="at">frequency =</span> <span class="dv">48</span>)</span>
-<span id="cb25-7"><a href="time-series.html#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ManausSolstice, <span class="at">main=</span><span class="st">&quot;Manaus Brazil&quot;</span>); <span class="fu">plot</span>(ManausSolsticeTS)</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-11-1.png" width="672" /><img src="EnvDataSci_files/figure-html/unnamed-chunk-11-2.png" width="672" /></p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="time-series.html#cb26-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="cf">function</span>(i) {<span class="fu">sqrt</span>(<span class="fu">sum</span>(<span class="fu">lm</span>(Tair<span class="sc">~</span><span class="fu">lag</span>(SolarRad,i), <span class="at">data=</span>ManausSolsticeTS)<span class="sc">$</span>resid<span class="sc">**</span><span class="dv">2</span>))}</span>
-<span id="cb26-2"><a href="time-series.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">5</span>){<span class="fu">print</span>(<span class="fu">paste</span>(i,<span class="st">&quot;:&quot;</span>,<span class="fu">mod</span>(i),<span class="at">sep=</span><span class="st">&quot;&quot;</span>))}</span></code></pre></div>
+<div class="sourceCode" id="cb503"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb503-1"><a href="time-series.html#cb503-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb503-2"><a href="time-series.html#cb503-2" aria-hidden="true" tabindex="-1"></a>ManausSolstice <span class="ot">&lt;-</span> <span class="fu">read_xls</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;SolarRad_Temp.xls&quot;</span>, <span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>), </span>
+<span id="cb503-3"><a href="time-series.html#cb503-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">sheet=</span><span class="st">&quot;ManausBrazil&quot;</span>, <span class="at">col_types =</span> <span class="st">&quot;numeric&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb503-4"><a href="time-series.html#cb503-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Year <span class="sc">!=</span> <span class="st">&quot;YYYY&quot;</span> <span class="sc">&amp;</span> <span class="st">`</span><span class="at">Day of Yr</span><span class="st">`</span> <span class="sc">&lt;</span> <span class="dv">177</span> <span class="sc">&amp;</span> <span class="st">`</span><span class="at">Day of Yr</span><span class="st">`</span> <span class="sc">&gt;</span> <span class="dv">168</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb503-5"><a href="time-series.html#cb503-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(SolarRad, Tair)</span>
+<span id="cb503-6"><a href="time-series.html#cb503-6" aria-hidden="true" tabindex="-1"></a>ManausSolsticeTS <span class="ot">&lt;-</span> <span class="fu">ts</span>(ManausSolstice, <span class="at">frequency =</span> <span class="dv">48</span>)</span>
+<span id="cb503-7"><a href="time-series.html#cb503-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ManausSolstice, <span class="at">main=</span><span class="st">&quot;Manaus Brazil&quot;</span>); <span class="fu">plot</span>(ManausSolsticeTS)</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-195-1.png" width="672" /><img src="EnvDataSci_files/figure-html/unnamed-chunk-195-2.png" width="672" /></p>
+<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb504-1"><a href="time-series.html#cb504-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="cf">function</span>(i) {<span class="fu">sqrt</span>(<span class="fu">sum</span>(<span class="fu">lm</span>(Tair<span class="sc">~</span><span class="fu">lag</span>(SolarRad,i), <span class="at">data=</span>ManausSolsticeTS)<span class="sc">$</span>resid<span class="sc">**</span><span class="dv">2</span>))}</span>
+<span id="cb504-2"><a href="time-series.html#cb504-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">5</span>){<span class="fu">print</span>(<span class="fu">paste</span>(i,<span class="st">&quot;:&quot;</span>,<span class="fu">mod</span>(i),<span class="at">sep=</span><span class="st">&quot;&quot;</span>))}</span></code></pre></div>
 <pre><code>## [1] &quot;0:36.6765871805181&quot;
 ## [1] &quot;1:33.572327106606&quot;
 ## [1] &quot;2:31.9789648893589&quot;
 ## [1] &quot;3:31.2029493549955&quot;
 ## [1] &quot;4:31.6171985286944&quot;
 ## [1] &quot;5:32.6933416047147&quot;</code></pre>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="time-series.html#cb28-1" aria-hidden="true" tabindex="-1"></a>SolarRad_comp <span class="ot">&lt;-</span> <span class="fu">decompose</span>(<span class="fu">ts</span>(ManausSolstice<span class="sc">$</span>SolarRad, <span class="at">frequency =</span> <span class="dv">48</span>))</span>
-<span id="cb28-2"><a href="time-series.html#cb28-2" aria-hidden="true" tabindex="-1"></a>Tair_comp <span class="ot">&lt;-</span> <span class="fu">decompose</span>(<span class="fu">ts</span>(ManausSolstice<span class="sc">$</span>Tair, <span class="at">frequency =</span> <span class="dv">48</span>))</span>
-<span id="cb28-3"><a href="time-series.html#cb28-3" aria-hidden="true" tabindex="-1"></a>seasonals <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(<span class="at">Rad =</span> SolarRad_comp<span class="sc">$</span>seasonal, <span class="at">Temp =</span> Tair_comp<span class="sc">$</span>seasonal)</span>
-<span id="cb28-4"><a href="time-series.html#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(seasonals) <span class="sc">+</span> </span>
-<span id="cb28-5"><a href="time-series.html#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">seq_along</span>(Rad), <span class="at">y=</span>Rad<span class="sc">/</span><span class="dv">50</span>), <span class="at">col=</span><span class="st">&quot;red&quot;</span>, <span class="at">size=</span><span class="dv">1</span>) <span class="sc">+</span> </span>
-<span id="cb28-6"><a href="time-series.html#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">seq_along</span>(Temp), <span class="at">y=</span>Temp), <span class="at">col=</span><span class="st">&quot;darkgreen&quot;</span>,<span class="at">size=</span><span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb28-7"><a href="time-series.html#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">480</span>,<span class="dv">12</span>))</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-11-3.png" width="672" /></p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="time-series.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which.max</span>(seasonals<span class="sc">$</span>Rad)</span></code></pre></div>
+<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb506-1"><a href="time-series.html#cb506-1" aria-hidden="true" tabindex="-1"></a>SolarRad_comp <span class="ot">&lt;-</span> <span class="fu">decompose</span>(<span class="fu">ts</span>(ManausSolstice<span class="sc">$</span>SolarRad, <span class="at">frequency =</span> <span class="dv">48</span>))</span>
+<span id="cb506-2"><a href="time-series.html#cb506-2" aria-hidden="true" tabindex="-1"></a>Tair_comp <span class="ot">&lt;-</span> <span class="fu">decompose</span>(<span class="fu">ts</span>(ManausSolstice<span class="sc">$</span>Tair, <span class="at">frequency =</span> <span class="dv">48</span>))</span>
+<span id="cb506-3"><a href="time-series.html#cb506-3" aria-hidden="true" tabindex="-1"></a>seasonals <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(<span class="at">Rad =</span> SolarRad_comp<span class="sc">$</span>seasonal, <span class="at">Temp =</span> Tair_comp<span class="sc">$</span>seasonal)</span>
+<span id="cb506-4"><a href="time-series.html#cb506-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(seasonals) <span class="sc">+</span> </span>
+<span id="cb506-5"><a href="time-series.html#cb506-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">seq_along</span>(Rad), <span class="at">y=</span>Rad<span class="sc">/</span><span class="dv">50</span>), <span class="at">col=</span><span class="st">&quot;red&quot;</span>, <span class="at">size=</span><span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb506-6"><a href="time-series.html#cb506-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">seq_along</span>(Temp), <span class="at">y=</span>Temp), <span class="at">col=</span><span class="st">&quot;darkgreen&quot;</span>,<span class="at">size=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb506-7"><a href="time-series.html#cb506-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">480</span>,<span class="dv">12</span>))</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-195-3.png" width="672" /></p>
+<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb507-1"><a href="time-series.html#cb507-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which.max</span>(seasonals<span class="sc">$</span>Rad)</span></code></pre></div>
 <pre><code>## [1] 30</code></pre>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="time-series.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which.max</span>(seasonals<span class="sc">$</span>Temp)</span></code></pre></div>
+<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb509-1"><a href="time-series.html#cb509-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which.max</span>(seasonals<span class="sc">$</span>Temp)</span></code></pre></div>
 <pre><code>## [1] 30</code></pre>
-
 </div>
+<div id="ensemble-average" class="section level3" number="8.1.2">
+<h3><span class="header-section-number">8.1.2</span> Ensemble Average</h3>
+<p>For any time series data with meaningful time units like days or years (or even weeks
+when the data varies by days of the week – this was the case with COVID-19 data),
+ensemble averages are a good way to visualize changes in a variable over that time unit.</p>
+<p>As you could see from the decomposition and sequential graphics we created for the Bugac and Manaus
+solar radiation and temperature data, looking at what happens over one day as an “ensemble” of
+all of the days – where the mean value is displayed along with error bars based on
+standard deviations of the distribution – might be a useful figure.</p>
+<div class="sourceCode" id="cb511"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb511-1"><a href="time-series.html#cb511-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span>
+<span id="cb511-2"><a href="time-series.html#cb511-2" aria-hidden="true" tabindex="-1"></a>Manaus <span class="ot">&lt;-</span> <span class="fu">read_xls</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;SolarRad_Temp.xls&quot;</span>,<span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>), </span>
+<span id="cb511-3"><a href="time-series.html#cb511-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">sheet=</span><span class="st">&quot;ManausBrazil&quot;</span>, <span class="at">col_types =</span> <span class="st">&quot;numeric&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb511-4"><a href="time-series.html#cb511-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Year<span class="sc">:</span>Tair) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Year <span class="sc">!=</span> <span class="st">&quot;YYYY&quot;</span>)</span>
+<span id="cb511-5"><a href="time-series.html#cb511-5" aria-hidden="true" tabindex="-1"></a>ManausSum <span class="ot">&lt;-</span> Manaus <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Hr) <span class="sc">%&gt;%</span> </span>
+<span id="cb511-6"><a href="time-series.html#cb511-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">meanRad =</span> <span class="fu">mean</span>(SolarRad), <span class="at">meanTemp =</span> <span class="fu">mean</span>(Tair),</span>
+<span id="cb511-7"><a href="time-series.html#cb511-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">sdRad =</span> <span class="fu">sd</span>(SolarRad), <span class="at">sdTemp =</span> <span class="fu">sd</span>(Tair))</span>
+<span id="cb511-8"><a href="time-series.html#cb511-8" aria-hidden="true" tabindex="-1"></a>px <span class="ot">&lt;-</span> ManausSum <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Hr)) <span class="sc">+</span> <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">24</span>,<span class="dv">3</span>))</span>
+<span id="cb511-9"><a href="time-series.html#cb511-9" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> px <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y=</span>meanRad), <span class="at">col=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb511-10"><a href="time-series.html#cb511-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymax =</span> meanRad <span class="sc">+</span> sdRad, <span class="at">ymin =</span> meanRad <span class="sc">-</span> sdRad)) <span class="sc">+</span></span>
+<span id="cb511-11"><a href="time-series.html#cb511-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Manaus 2005 ensemble solar radiation&quot;</span>)</span>
+<span id="cb511-12"><a href="time-series.html#cb511-12" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> px <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y=</span>meanTemp),<span class="at">col=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb511-13"><a href="time-series.html#cb511-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymax=</span>meanTemp<span class="sc">+</span>sdTemp, <span class="at">ymin=</span>meanTemp<span class="sc">-</span>sdTemp)) <span class="sc">+</span></span>
+<span id="cb511-14"><a href="time-series.html#cb511-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Manaus 2005 ensemble air temperature&quot;</span>)</span>
+<span id="cb511-15"><a href="time-series.html#cb511-15" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_grid</span>(<span class="at">plotlist=</span><span class="fu">list</span>(p1,p2), <span class="at">ncol=</span><span class="dv">1</span>, <span class="at">align=</span><span class="st">&#39;v&#39;</span>) <span class="co"># from cowplot</span></span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-196-1.png" width="672" /></p>
+<div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb512-1"><a href="time-series.html#cb512-1" aria-hidden="true" tabindex="-1"></a>Bugac <span class="ot">&lt;-</span> <span class="fu">read_xls</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;SolarRad_Temp.xls&quot;</span>,<span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>), </span>
+<span id="cb512-2"><a href="time-series.html#cb512-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">sheet=</span><span class="st">&quot;BugacHungary&quot;</span>, <span class="at">col_types =</span> <span class="st">&quot;numeric&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb512-3"><a href="time-series.html#cb512-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Year<span class="sc">:</span>Tair) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Year <span class="sc">!=</span> <span class="st">&quot;YYYY&quot;</span>)</span>
+<span id="cb512-4"><a href="time-series.html#cb512-4" aria-hidden="true" tabindex="-1"></a>BugacSum <span class="ot">&lt;-</span> Bugac <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Hr) <span class="sc">%&gt;%</span> </span>
+<span id="cb512-5"><a href="time-series.html#cb512-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">meanRad =</span> <span class="fu">mean</span>(SolarRad), <span class="at">meanTemp =</span> <span class="fu">mean</span>(Tair),</span>
+<span id="cb512-6"><a href="time-series.html#cb512-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">sdRad =</span> <span class="fu">sd</span>(SolarRad), <span class="at">sdTemp =</span> <span class="fu">sd</span>(Tair))</span>
+<span id="cb512-7"><a href="time-series.html#cb512-7" aria-hidden="true" tabindex="-1"></a>px <span class="ot">&lt;-</span> BugacSum <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Hr)) <span class="sc">+</span> <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">24</span>,<span class="dv">3</span>))</span>
+<span id="cb512-8"><a href="time-series.html#cb512-8" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> px <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y=</span>meanRad), <span class="at">col=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb512-9"><a href="time-series.html#cb512-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymax =</span> meanRad <span class="sc">+</span> sdRad, <span class="at">ymin =</span> meanRad <span class="sc">-</span> sdRad)) <span class="sc">+</span></span>
+<span id="cb512-10"><a href="time-series.html#cb512-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Bugac 2005 ensemble solar radiation&quot;</span>)</span>
+<span id="cb512-11"><a href="time-series.html#cb512-11" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> px <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y=</span>meanTemp),<span class="at">col=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb512-12"><a href="time-series.html#cb512-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymax=</span>meanTemp<span class="sc">+</span>sdTemp, <span class="at">ymin=</span>meanTemp<span class="sc">-</span>sdTemp)) <span class="sc">+</span></span>
+<span id="cb512-13"><a href="time-series.html#cb512-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Bugac 2005 ensemble air temperature&quot;</span>)</span>
+<span id="cb512-14"><a href="time-series.html#cb512-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_grid</span>(<span class="at">plotlist=</span><span class="fu">list</span>(p1,p2), <span class="at">ncol=</span><span class="dv">1</span>, <span class="at">align=</span><span class="st">&#39;v&#39;</span>) <span class="co"># from cowplot</span></span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-196-2.png" width="672" /></p>
+</div>
+<div id="julian-dates" class="section level3" number="8.1.3">
+<h3><span class="header-section-number">8.1.3</span> Julian Dates</h3>
+<p>Julian dates are the number of days since some start date</p>
+<ul>
+<li>The origin (Julian date 0) can be arbitrary</li>
+<li>Default for julian() is 1970-01-01</li>
+</ul>
+<p>For climatological work where the year is very important, it usually means the number of days of any given year</p>
+<ul>
+<li>lubridate’s yday() gives you this.</li>
+<li>same thing as setting the origin for julian() as the 12-31 of the previous year.</li>
+<li>Useful in time series when the year is the time unit and observations are by days of the year (e.g. for climate data)</li>
+</ul>
+<div class="sourceCode" id="cb513"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb513-1"><a href="time-series.html#cb513-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb513-2"><a href="time-series.html#cb513-2" aria-hidden="true" tabindex="-1"></a><span class="fu">julian</span>(<span class="fu">ymd</span>(<span class="st">&quot;2020-01-01&quot;</span>))</span></code></pre></div>
+<pre><code>## [1] 18262
+## attr(,&quot;origin&quot;)
+## [1] &quot;1970-01-01&quot;</code></pre>
+<div class="sourceCode" id="cb515"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb515-1"><a href="time-series.html#cb515-1" aria-hidden="true" tabindex="-1"></a><span class="fu">julian</span>(<span class="fu">ymd</span>(<span class="st">&quot;1970-01-01&quot;</span>))</span></code></pre></div>
+<pre><code>## [1] 0
+## attr(,&quot;origin&quot;)
+## [1] &quot;1970-01-01&quot;</code></pre>
+<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb517-1"><a href="time-series.html#cb517-1" aria-hidden="true" tabindex="-1"></a><span class="fu">yday</span>(<span class="fu">ymd</span>(<span class="st">&quot;2020-01-01&quot;</span>))</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<div class="sourceCode" id="cb519"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb519-1"><a href="time-series.html#cb519-1" aria-hidden="true" tabindex="-1"></a><span class="fu">julian</span>(<span class="fu">ymd</span>(<span class="st">&quot;2020-01-01&quot;</span>), <span class="at">origin=</span><span class="fu">ymd</span>(<span class="st">&quot;2019-12-31&quot;</span>))</span></code></pre></div>
+<pre><code>## [1] 1
+## attr(,&quot;origin&quot;)
+## [1] &quot;2019-12-31&quot;</code></pre>
+<p>To create a decimal yday including fractional days, here’s a function:</p>
+<pre><code>ydayDec &lt;- function(d) {
+           yday(d)-1 + hour(d)/24 + minute(d)/1440 + second(d)/86400}</code></pre>
+</div>
+</div>
+<div id="learning-more-about-time-series-in-r" class="section level2" number="8.2">
+<h2><span class="header-section-number">8.2</span> Learning more about time series in R</h2>
+<p>It can be confusing, partly because of the major use of time series in the financial sector, so a search gets you quickly into the monetizing world…</p>
+<p>One good source is actually at CRAN:
+<a href="https://cran.r-project.org/web/views/TimeSeries.html">https://cran.r-project.org/web/views/TimeSeries.html</a></p>
+<p>Time series data library:
+<a href="https://pkg.yangzhuoranyang.com/tsdl/">https://pkg.yangzhuoranyang.com/tsdl/</a></p>
+<p>Understanding time series in R:
+<a href="https://a-little-book-of-r-for-time-series.readthedocs.io/">https://a-little-book-of-r-for-time-series.readthedocs.io/</a></p>
+
 </div>
 </div>
             </section>
@@ -555,7 +659,7 @@ a spring <em>resurgence</em> was instrumented to measure water level, temperatur
         </div>
       </div>
 <a href="statistics-and-modeling.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="machine-learning.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="building-a-data-package-for-github.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -605,6 +709,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
