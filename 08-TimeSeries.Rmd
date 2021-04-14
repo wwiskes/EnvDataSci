@@ -108,13 +108,16 @@ a non-parametric approach that fits regressions within local neighborhoods
 
 ## Decomposing time series
 
-: separating a time series into its constituent components
+: separating a time series into its constituent components. 
 
 - original data
 - trend component, removes seasonal and remainder
 - if seasonal, also a seasonal component. Note that **season** relates to the time unit. If 1 year, "seasonality" refers to the
 normal usage of seasons over a year. But if 1 day, seasons refers to different parts of a day, etc.
 - irregular "random" remainder (time-local variation)
+
+There are two common decomposition methods, the classic method `decompose` using moving averages, which we'll look
+at first, then the "loess" method used by `stl`.
 
 **Mauna Loa CO~2~ data with seasonality**
 
@@ -125,14 +128,83 @@ a regularly increasing trend over the years. The decomposition shows the origina
 plot(decompose(co2))
 ```
 
-**Seasonal decomposition using `loess`**
+**Seasonal decomposition using loess**
 
-The above uses the classical seasonal decomposition by moving averages. The loess method that does something 
-similar is `stl`.
+The `stl` function stands for "Seasonal decomposition of Time series by Loess".  
+Loess is a smoothing algorithm, that wor. If s.window = "periodic" the mean is used for smoothing;
+the seasonal values are removed and the remainder smoothed to find the trend. 
+
 
 ```{r message=F, warning=F}
 plot(stl(co2, s.window="periodic"))
 
 ```
 
+**Marble Mountains karst resurgence study**
 
+For a study of chemical water quality and hydrology of a karst system in the Marble Mountains of California, 
+a spring *resurgence* was instrumented to measure water level, temperature, and specific conductance (a surrogate for total dissolved solids) over a 4-year period.
+
+<img src="img/resurgenceInstallation.png">
+<img src="img/resurgenceProfile.png">
+<img src="img/instrumentationPicture.png">
+<img src="img/instrumentationLower.png">
+<img src="img/instrumentationDiagram.png">
+<img src="img/stillingWell.png">
+
+```{r message=F, warning=F}
+library(tidyverse); library(lubridate)
+resurg <- read_csv(system.file("extdata","resurgenceData.csv",package="iGIScData")) %>%
+  mutate(date_time = mdy_hms(paste(date, time))) %>%
+  dplyr::select(date_time, ATemp, BTemp, wlevelm, EC, InputV)
+resurgTS <- ts(resurg, frequency = 12*365, start = c(1994, 266*12+7))
+plot(resurgTS)
+wlevelm <- ts(resurg$wlevelm, frequency = 12*365, 
+              start = c(1994, 266*12+7))
+fit <- stl(wlevelm, s.window="periodic")
+plot(fit)
+```
+
+### lag regression
+
+```{r warning=F, message=F}
+library(readxl)
+BugacSolstice <- read_xls(system.file("extdata", "SolarRad_Temp.xls", package="iGIScData"), 
+                          sheet="BugacHungary", col_types = "numeric") %>%
+  filter(Year != "YYYY" & `Day of Yr` < 177 & `Day of Yr` > 168) %>%
+  dplyr::select(SolarRad, Tair)
+BugacSolsticeTS <- ts(BugacSolstice, frequency = 48)
+plot(BugacSolstice, main="a simple scatter plot that illustrates hysteresis"); plot(BugacSolsticeTS)
+mod <- function(i) {sqrt(sum(lm(Tair~lag(SolarRad,i), data=BugacSolsticeTS)$resid**2))}
+for(i in 0:5){print(paste(i,":",mod(i),sep=""))}
+SolarRad_comp <- decompose(ts(BugacSolstice$SolarRad, frequency = 48))
+Tair_comp <- decompose(ts(BugacSolstice$Tair, frequency = 48))
+seasonals <- bind_cols(Rad = SolarRad_comp$seasonal, Temp = Tair_comp$seasonal)
+ggplot(seasonals) + 
+  geom_line(aes(x=seq_along(Rad), y=Rad/50), col="red", size=1) + 
+  geom_line(aes(x=seq_along(Temp), y=Temp), col="darkgreen",size=1) +
+  scale_x_continuous(breaks = seq(0,480,12))
+which.max(seasonals$Rad)
+which.max(seasonals$Temp)
+```
+
+```{r warning=F, message=F}
+library(readxl)
+ManausSolstice <- read_xls(system.file("extdata", "SolarRad_Temp.xls", package="iGIScData"), 
+                          sheet="ManausBrazil", col_types = "numeric") %>%
+  filter(Year != "YYYY" & `Day of Yr` < 177 & `Day of Yr` > 168) %>%
+  dplyr::select(SolarRad, Tair)
+ManausSolsticeTS <- ts(ManausSolstice, frequency = 48)
+plot(ManausSolstice, main="Manaus Brazil"); plot(ManausSolsticeTS)
+mod <- function(i) {sqrt(sum(lm(Tair~lag(SolarRad,i), data=ManausSolsticeTS)$resid**2))}
+for(i in 0:5){print(paste(i,":",mod(i),sep=""))}
+SolarRad_comp <- decompose(ts(ManausSolstice$SolarRad, frequency = 48))
+Tair_comp <- decompose(ts(ManausSolstice$Tair, frequency = 48))
+seasonals <- bind_cols(Rad = SolarRad_comp$seasonal, Temp = Tair_comp$seasonal)
+ggplot(seasonals) + 
+  geom_line(aes(x=seq_along(Rad), y=Rad/50), col="red", size=1) + 
+  geom_line(aes(x=seq_along(Temp), y=Temp), col="darkgreen",size=1) +
+  scale_x_continuous(breaks = seq(0,480,12))
+which.max(seasonals$Rad)
+which.max(seasonals$Temp)
+```

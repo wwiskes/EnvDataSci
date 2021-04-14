@@ -285,7 +285,7 @@ Here's an easier method from the psych package [**`sierra`**]
 
 ```{r message=F, warning=F}
 library(psych)
-pairs.panels(sierraFeb %>% select(LATITUDE, LONGITUDE, ELEVATION, PRECIPITATION, TEMPERATURE))
+pairs.panels(sierraFeb %>% dplyr::select(LATITUDE, LONGITUDE, ELEVATION, PRECIPITATION, TEMPERATURE))
 ```
 
 ## Modeling in R

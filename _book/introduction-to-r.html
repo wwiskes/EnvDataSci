@@ -288,7 +288,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.5.2" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#mapping-residuals"><i class="fa fa-check"></i><b>7.5.2</b> Mapping Residuals</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>8</b> Time Series</a></li>
+<li class="chapter" data-level="8" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>8</b> Time Series</a>
+<ul>
+<li class="chapter" data-level="8.0.1" data-path="time-series.html"><a href="time-series.html#frequency-setting"><i class="fa fa-check"></i><b>8.0.1</b> frequency setting</a></li>
+<li class="chapter" data-level="8.0.2" data-path="time-series.html"><a href="time-series.html#moving-average-ma"><i class="fa fa-check"></i><b>8.0.2</b> moving average (ma)</a></li>
+<li class="chapter" data-level="8.0.3" data-path="time-series.html"><a href="time-series.html#loess-local-regression-smoothing"><i class="fa fa-check"></i><b>8.0.3</b> loess (local regression) smoothing</a></li>
+<li class="chapter" data-level="8.1" data-path="time-series.html"><a href="time-series.html#decomposing-time-series"><i class="fa fa-check"></i><b>8.1</b> Decomposing time series</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="time-series.html"><a href="time-series.html#lag-regression"><i class="fa fa-check"></i><b>8.1.1</b> lag regression</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="9" data-path="machine-learning.html"><a href="machine-learning.html"><i class="fa fa-check"></i><b>9</b> Machine Learning</a></li>
 <li class="chapter" data-level="10" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html"><i class="fa fa-check"></i><b>10</b> Building a Data Package for GitHub</a>
 <ul>
@@ -487,7 +496,7 @@ text files that spreadsheet programs like Excel commonly read in just like their
 <span id="cb64-2"><a href="introduction-to-r.html#cb64-2" aria-hidden="true" tabindex="-1"></a>sierraFeb</span></code></pre></div>
 <pre><code>## # A tibble: 82 x 7
 ##    STATION_NAME                      COUNTY   ELEVATION LATITUDE LONGITUDE PRECIPITATION TEMPERATURE
-##    &lt;chr&gt;                             &lt;fct&gt;        &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;
+##    &lt;chr&gt;                             &lt;chr&gt;        &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;
 ##  1 GROVELAND 2, CA US                Tuolumne     853.      37.8     -120.         176.          6.1
 ##  2 CANYON DAM, CA US                 Plumas      1390.      40.2     -121.         164.          1.4
 ##  3 KERN RIVER PH 3, CA US            Kern         824.      35.8     -118.          67.1         8.9
@@ -595,30 +604,30 @@ c(1,2,3,4,5,6,7,8,9,10)</code></pre>
 <span id="cb108-3"><a href="introduction-to-r.html#cb108-3" aria-hidden="true" tabindex="-1"></a>lat <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">39.52</span>, <span class="fl">38.91</span>, <span class="fl">37.97</span>, <span class="fl">38.70</span>, <span class="fl">39.09</span>, <span class="fl">39.25</span>, <span class="fl">39.94</span>, <span class="fl">37.75</span>, <span class="fl">40.35</span>, <span class="fl">39.33</span>, <span class="fl">39.17</span>, <span class="fl">38.21</span>)</span></code></pre></div>
 <p><strong>Plot individually</strong></p>
 <div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="introduction-to-r.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(temp)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-71"></span>
-<img src="EnvDataSci_files/figure-html/unnamed-chunk-71-1.png" alt="Temperature" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-32"></span>
+<img src="EnvDataSci_files/figure-html/unnamed-chunk-32-1.png" alt="Temperature" width="672" />
 <p class="caption">
 Figure 2.1: Temperature
 </p>
 </div>
 <div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="introduction-to-r.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(elev)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-72"></span>
-<img src="EnvDataSci_files/figure-html/unnamed-chunk-72-1.png" alt="Elevation" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-33"></span>
+<img src="EnvDataSci_files/figure-html/unnamed-chunk-33-1.png" alt="Elevation" width="672" />
 <p class="caption">
 Figure 2.2: Elevation
 </p>
 </div>
 <div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="introduction-to-r.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lat)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-73"></span>
-<img src="EnvDataSci_files/figure-html/unnamed-chunk-73-1.png" alt="Latitude" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-34"></span>
+<img src="EnvDataSci_files/figure-html/unnamed-chunk-34-1.png" alt="Latitude" width="672" />
 <p class="caption">
 Figure 2.3: Latitude
 </p>
 </div>
 <p><strong>Then plot as a scatterplot</strong></p>
 <div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="introduction-to-r.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(elev,temp)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-74"></span>
-<img src="EnvDataSci_files/figure-html/unnamed-chunk-74-1.png" alt="Temperature~Elevation" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-35"></span>
+<img src="EnvDataSci_files/figure-html/unnamed-chunk-35-1.png" alt="Temperature~Elevation" width="672" />
 <p class="caption">
 Figure 2.4: Temperature~Elevation
 </p>
@@ -697,8 +706,8 @@ The following are equivalent:</p>
 <p><strong>Creating a data frame out of a matrix</strong></p>
 <div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="introduction-to-r.html#cb137-1" aria-hidden="true" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(sierradata)</span>
 <span id="cb137-2"><a href="introduction-to-r.html#cb137-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">data =</span> mydata, <span class="at">x =</span> elev, <span class="at">y =</span> temp)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-82"></span>
-<img src="EnvDataSci_files/figure-html/unnamed-chunk-82-1.png" alt="Temperature~Elevation" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-43"></span>
+<img src="EnvDataSci_files/figure-html/unnamed-chunk-43-1.png" alt="Temperature~Elevation" width="672" />
 <p class="caption">
 Figure 2.5: Temperature~Elevation
 </p>
@@ -711,18 +720,18 @@ Figure 2.5: Temperature~Elevation
 <span id="cb138-3"><a href="introduction-to-r.html#cb138-3" aria-hidden="true" tabindex="-1"></a>TRI87 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(csvPath)</span>
 <span id="cb138-4"><a href="introduction-to-r.html#cb138-4" aria-hidden="true" tabindex="-1"></a>TRI87</span></code></pre></div>
 <pre><code>## # A tibble: 335 x 9
-##    TRI_FACILITY_ID count FACILITY_NAME                               COUNTY     air_releases fugitive_air stack_air LATITUDE LONGITUDE
-##    &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;                                       &lt;chr&gt;             &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-##  1 91002FRMND585BR     2 FORUM IND                                   SAN MATEO          1423         1423         0     37.5     -122.
-##  2 92052ZPMNF2970C     1 ZEP MFG CO                                  SANTA CLA~          337          337         0     37.4     -122.
-##  3 93117TLDYN3165P     2 TELEDYNE MEC                                SANTA CLA~        12600        12600         0     37.4     -122.
-##  4 94002GTWSG477HA     2 MORGAN ADVANCED CERAMICS BELMONT WESGO MET~ SAN MATEO         18700        18700         0     37.5     -122.
-##  5 94002SMPRD120SE     2 SEM PRODS INC                               SAN MATEO          1500          500      1000     37.5     -122.
-##  6 94025HBLNN151CO     2 HEUBLEIN INC                                SAN MATEO           500            0       500     37.5     -122.
-##  7 94025RYCHM300CO    10 TE CONNECTIVITY CORP                        SAN MATEO        144871        47562     97309     37.5     -122.
-##  8 94025SNFRD990OB     1 SANFORD METAL PROCESSING CO                 SAN MATEO          9675         9675         0     37.5     -122.
-##  9 94026BYPCK3575H     2 BAY PACKAGING &amp; CONVERTING CO INC           SAN MATEO         80000        32000     48000     37.5     -122.
-## 10 94026CDRSY3475E     2 CDR SYS CORP                                SAN MATEO        126800            0    126800     37.5     -122.
+##    TRI_FACILITY_ID count FACILITY_NAME                                 COUNTY      air_releases fugitive_air stack_air LATITUDE LONGITUDE
+##    &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;                                         &lt;chr&gt;              &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+##  1 91002FRMND585BR     2 FORUM IND                                     SAN MATEO           1423         1423         0     37.5     -122.
+##  2 92052ZPMNF2970C     1 ZEP MFG CO                                    SANTA CLARA          337          337         0     37.4     -122.
+##  3 93117TLDYN3165P     2 TELEDYNE MEC                                  SANTA CLARA        12600        12600         0     37.4     -122.
+##  4 94002GTWSG477HA     2 MORGAN ADVANCED CERAMICS BELMONT WESGO METALS SAN MATEO          18700        18700         0     37.5     -122.
+##  5 94002SMPRD120SE     2 SEM PRODS INC                                 SAN MATEO           1500          500      1000     37.5     -122.
+##  6 94025HBLNN151CO     2 HEUBLEIN INC                                  SAN MATEO            500            0       500     37.5     -122.
+##  7 94025RYCHM300CO    10 TE CONNECTIVITY CORP                          SAN MATEO         144871        47562     97309     37.5     -122.
+##  8 94025SNFRD990OB     1 SANFORD METAL PROCESSING CO                   SAN MATEO           9675         9675         0     37.5     -122.
+##  9 94026BYPCK3575H     2 BAY PACKAGING &amp; CONVERTING CO INC             SAN MATEO          80000        32000     48000     37.5     -122.
+## 10 94026CDRSY3475E     2 CDR SYS CORP                                  SAN MATEO         126800            0    126800     37.5     -122.
 ## # ... with 325 more rows</code></pre>
 <p><strong>Sort, Index, &amp; Max/Min</strong></p>
 <div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="introduction-to-r.html#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">sort</span>(TRI87<span class="sc">$</span>air_releases))</span></code></pre></div>
@@ -761,11 +770,11 @@ Figure 2.5: Temperature~Elevation
 <span id="cb154-2"><a href="introduction-to-r.html#cb154-2" aria-hidden="true" tabindex="-1"></a>grain_char <span class="ot">&lt;-</span> <span class="fu">sample</span>(grain_order, <span class="dv">36</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb154-3"><a href="introduction-to-r.html#cb154-3" aria-hidden="true" tabindex="-1"></a>grain_fact <span class="ot">&lt;-</span> <span class="fu">factor</span>(grain_char, <span class="at">levels =</span> grain_order)</span>
 <span id="cb154-4"><a href="introduction-to-r.html#cb154-4" aria-hidden="true" tabindex="-1"></a>grain_char</span></code></pre></div>
-<pre><code>##  [1] &quot;sand&quot; &quot;silt&quot; &quot;clay&quot; &quot;sand&quot; &quot;clay&quot; &quot;silt&quot; &quot;sand&quot; &quot;sand&quot; &quot;sand&quot; &quot;clay&quot; &quot;silt&quot; &quot;clay&quot; &quot;sand&quot; &quot;sand&quot; &quot;silt&quot; &quot;clay&quot; &quot;silt&quot; &quot;sand&quot;
-## [19] &quot;clay&quot; &quot;clay&quot; &quot;sand&quot; &quot;clay&quot; &quot;silt&quot; &quot;sand&quot; &quot;sand&quot; &quot;sand&quot; &quot;sand&quot; &quot;sand&quot; &quot;silt&quot; &quot;sand&quot; &quot;clay&quot; &quot;silt&quot; &quot;clay&quot; &quot;silt&quot; &quot;silt&quot; &quot;sand&quot;</code></pre>
+<pre><code>##  [1] &quot;sand&quot; &quot;silt&quot; &quot;sand&quot; &quot;silt&quot; &quot;clay&quot; &quot;silt&quot; &quot;silt&quot; &quot;clay&quot; &quot;sand&quot; &quot;sand&quot; &quot;sand&quot; &quot;clay&quot; &quot;clay&quot; &quot;silt&quot; &quot;clay&quot; &quot;silt&quot; &quot;silt&quot; &quot;sand&quot; &quot;silt&quot;
+## [20] &quot;clay&quot; &quot;silt&quot; &quot;clay&quot; &quot;clay&quot; &quot;sand&quot; &quot;clay&quot; &quot;clay&quot; &quot;silt&quot; &quot;clay&quot; &quot;clay&quot; &quot;sand&quot; &quot;clay&quot; &quot;silt&quot; &quot;sand&quot; &quot;clay&quot; &quot;sand&quot; &quot;silt&quot;</code></pre>
 <div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="introduction-to-r.html#cb156-1" aria-hidden="true" tabindex="-1"></a>grain_fact</span></code></pre></div>
-<pre><code>##  [1] sand silt clay sand clay silt sand sand sand clay silt clay sand sand silt clay silt sand clay clay sand clay silt sand sand sand
-## [27] sand sand silt sand clay silt clay silt silt sand
+<pre><code>##  [1] sand silt sand silt clay silt silt clay sand sand sand clay clay silt clay silt silt sand silt clay silt clay clay sand clay clay silt
+## [28] clay clay sand clay silt sand clay sand silt
 ## Levels: clay silt sand</code></pre>
 <p>To make a categorical variable a factor:</p>
 <div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="introduction-to-r.html#cb158-1" aria-hidden="true" tabindex="-1"></a>fruit <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;apples&quot;</span>, <span class="st">&quot;oranges&quot;</span>, <span class="st">&quot;bananas&quot;</span>, <span class="st">&quot;oranges&quot;</span>)</span>

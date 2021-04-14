@@ -121,7 +121,7 @@ euc <- runoffPivot %>%
     aspect = aspect_euc,
     surface_tension = surface_tension_euc,
     runoff_rainfall_ratio = runoff_rainfall_ratio_euc) %>%
-  select(site, `site #`, tree, Date, month, rain_mm, rain_subcanopy, slope, aspect, runoff_L,
+  dplyr::select(site, `site #`, tree, Date, month, rain_mm, rain_subcanopy, slope, aspect, runoff_L,
          surface_tension, runoff_rainfall_ratio)
 oak <- runoffPivot %>%
   filter(tree == "oak") %>%
@@ -131,7 +131,7 @@ oak <- runoffPivot %>%
     aspect = aspect_oak,
     surface_tension = surface_tension_oak,
     runoff_rainfall_ratio = runoff_rainfall_ratio_oak) %>%
-  select(site, `site #`, tree, Date, month, rain_mm, rain_subcanopy, slope, aspect, runoff_L,
+  dplyr::select(site, `site #`, tree, Date, month, rain_mm, rain_subcanopy, slope, aspect, runoff_L,
          surface_tension, runoff_rainfall_ratio)
 eucoak <- rbind(euc, oak)
 write_csv(eucoak, "data/tidy_eucoak.csv")
@@ -162,9 +162,9 @@ ggplot(data = tidy_eucoak) +
 **Visualizing soil CO_2_ data with a Tukey box plot [`soilCO2`]**
 
 ```{r warning=FALSE, fig.cap = "Visualizing soil CO_2_ data with a Tukey box plot"}
-co2 <- soilCO2_97
-co2$SITE <- factor(co2$SITE)  # in order to make the numeric field a factor
-ggplot(data = co2, mapping = aes(x = SITE, y = `CO2%`)) +
+soilCO2 <- soilCO2_97
+soilCO2$SITE <- factor(soilCO2$SITE)  # in order to make the numeric field a factor
+ggplot(data = soilCO2, mapping = aes(x = SITE, y = `CO2%`)) +
   geom_boxplot()
 
 ```
@@ -350,7 +350,7 @@ ggplot(data = tidy_eucoak) +
 
 ```{r warning=FALSE, fig.cap="Pairs plot for Sierra Nevada stations variables"}
 sierraFeb %>%
-  select(LATITUDE, ELEVATION, TEMPERATURE, PRECIPITATION) %>%
+  dplyr::select(LATITUDE, ELEVATION, TEMPERATURE, PRECIPITATION) %>%
   pairs()
 ```
 

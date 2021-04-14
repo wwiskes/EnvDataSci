@@ -115,7 +115,7 @@ The following methods are quickly discovered to be essential as part of explorin
 runoff <- eucoakrainfallrunoffTDR %>%
   mutate(Date = as.Date(date,"%m/%d/%Y"),
          rain_subcanopy = (rain_oak + rain_euc)/2) %>%
-  select(site, Date, rain_mm, rain_subcanopy, 
+  dplyr::select(site, Date, rain_mm, rain_subcanopy, 
          runoffL_oak, runoffL_euc, slope_oak, slope_euc)
 runoff
 ```
@@ -279,7 +279,7 @@ ggplot(penguins, aes(x=species, y=body_mass_g)) + geom_boxplot()
 ```{r include=FALSE}
 penguinMass <- penguins %>%
   mutate(body_mass_kg = body_mass_g / 1000) %>%
-  select(species, body_mass_kg)
+  dplyr::select(species, body_mass_kg)
 penguinMass
 ```
 
