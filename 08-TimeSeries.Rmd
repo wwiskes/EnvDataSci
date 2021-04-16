@@ -4,6 +4,7 @@
 plot(stl(co2, s.window = "periodic")) # co2 is already a time series
 ```
 
+
 Time series data are widely used in the financial sector for obvious reasons, and 
 these methods can be very useful environmental data science especially in studies
 such as looking at long-term climate change variables such as the Mauna Loa CO~2~
@@ -14,6 +15,8 @@ flux towers.
 <img src="img/LoneyGraph.png">
 <img src="img/RCVfluxTower2.png">
 
+
+## Creation of time series (ts) data
 
 A time series (ts) is created with the ts() function.
 

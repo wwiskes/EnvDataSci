@@ -288,16 +288,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="8" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>8</b> Time Series</a>
 <ul>
-<li class="chapter" data-level="8.0.1" data-path="time-series.html"><a href="time-series.html#frequency-setting"><i class="fa fa-check"></i><b>8.0.1</b> frequency setting</a></li>
-<li class="chapter" data-level="8.0.2" data-path="time-series.html"><a href="time-series.html#moving-average-ma"><i class="fa fa-check"></i><b>8.0.2</b> moving average (ma)</a></li>
-<li class="chapter" data-level="8.0.3" data-path="time-series.html"><a href="time-series.html#loess-local-regression-smoothing"><i class="fa fa-check"></i><b>8.0.3</b> loess (local regression) smoothing</a></li>
-<li class="chapter" data-level="8.1" data-path="time-series.html"><a href="time-series.html#decomposing-time-series"><i class="fa fa-check"></i><b>8.1</b> Decomposing time series</a>
+<li class="chapter" data-level="8.1" data-path="time-series.html"><a href="time-series.html#creation-of-time-series-ts-data"><i class="fa fa-check"></i><b>8.1</b> Creation of time series (ts) data</a>
 <ul>
-<li class="chapter" data-level="8.1.1" data-path="time-series.html"><a href="time-series.html#lag-regression"><i class="fa fa-check"></i><b>8.1.1</b> lag regression</a></li>
-<li class="chapter" data-level="8.1.2" data-path="time-series.html"><a href="time-series.html#ensemble-average"><i class="fa fa-check"></i><b>8.1.2</b> Ensemble Average</a></li>
-<li class="chapter" data-level="8.1.3" data-path="time-series.html"><a href="time-series.html#julian-dates"><i class="fa fa-check"></i><b>8.1.3</b> Julian Dates</a></li>
+<li class="chapter" data-level="8.1.1" data-path="time-series.html"><a href="time-series.html#frequency-setting"><i class="fa fa-check"></i><b>8.1.1</b> frequency setting</a></li>
+<li class="chapter" data-level="8.1.2" data-path="time-series.html"><a href="time-series.html#moving-average-ma"><i class="fa fa-check"></i><b>8.1.2</b> moving average (ma)</a></li>
+<li class="chapter" data-level="8.1.3" data-path="time-series.html"><a href="time-series.html#loess-local-regression-smoothing"><i class="fa fa-check"></i><b>8.1.3</b> loess (local regression) smoothing</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="time-series.html"><a href="time-series.html#learning-more-about-time-series-in-r"><i class="fa fa-check"></i><b>8.2</b> Learning more about time series in R</a></li>
+<li class="chapter" data-level="8.2" data-path="time-series.html"><a href="time-series.html#decomposing-time-series"><i class="fa fa-check"></i><b>8.2</b> Decomposing time series</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="time-series.html"><a href="time-series.html#lag-regression"><i class="fa fa-check"></i><b>8.2.1</b> lag regression</a></li>
+<li class="chapter" data-level="8.2.2" data-path="time-series.html"><a href="time-series.html#ensemble-average"><i class="fa fa-check"></i><b>8.2.2</b> Ensemble Average</a></li>
+<li class="chapter" data-level="8.2.3" data-path="time-series.html"><a href="time-series.html#julian-dates"><i class="fa fa-check"></i><b>8.2.3</b> Julian Dates</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="time-series.html"><a href="time-series.html#learning-more-about-time-series-in-r"><i class="fa fa-check"></i><b>8.3</b> Learning more about time series in R</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="communication.html"><a href="communication.html"><i class="fa fa-check"></i><b>9</b> Communication</a></li>
 <li class="chapter" data-level="10" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html"><i class="fa fa-check"></i><b>10</b> Building a Data Package for GitHub</a>
@@ -342,6 +345,8 @@ flux towers.</p>
 <p><img src="img/RCVfluxTower1.png">
 <img src="img/LoneyGraph.png">
 <img src="img/RCVfluxTower2.png"></p>
+<div id="creation-of-time-series-ts-data" class="section level2" number="8.1">
+<h2><span class="header-section-number">8.1</span> Creation of time series (ts) data</h2>
 <p>A time series (ts) is created with the ts() function.</p>
 <ul>
 <li>the time unit can be anything – not actually saved with the ts</li>
@@ -355,8 +360,8 @@ flux towers.</p>
 <span id="cb480-6"><a href="time-series.html#cb480-6" aria-hidden="true" tabindex="-1"></a>SFtempC <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(<span class="at">high=</span>SFhighC,<span class="at">low=</span>SFlowC)</span>
 <span id="cb480-7"><a href="time-series.html#cb480-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(SFtempC);                  <span class="fu">plot</span>(<span class="fu">ts</span>(SFtempC))</span></code></pre></div>
 <p><img src="EnvDataSci_files/figure-html/unnamed-chunk-186-1.png" width="672" /><img src="EnvDataSci_files/figure-html/unnamed-chunk-186-2.png" width="672" /></p>
-<div id="frequency-setting" class="section level3" number="8.0.1">
-<h3><span class="header-section-number">8.0.1</span> frequency setting</h3>
+<div id="frequency-setting" class="section level3" number="8.1.1">
+<h3><span class="header-section-number">8.1.1</span> frequency setting</h3>
 <p>Frequency setting is a key parameter for ts()</p>
 <ul>
 <li>sets how many observations per time unit</li>
@@ -385,8 +390,8 @@ flux towers.</p>
 </ul>
 <p><code>frequency=12, start=c(2019,7), end=c(2020,6)</code></p>
 </div>
-<div id="moving-average-ma" class="section level3" number="8.0.2">
-<h3><span class="header-section-number">8.0.2</span> moving average (ma)</h3>
+<div id="moving-average-ma" class="section level3" number="8.1.2">
+<h3><span class="header-section-number">8.1.2</span> moving average (ma)</h3>
 <ul>
 <li>Simple generalization of sequential data</li>
 <li>The order parameter is how many values are averaged in the moving window
@@ -441,8 +446,8 @@ flux towers.</p>
 <div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb490-1"><a href="time-series.html#cb490-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(CO2<span class="sc">-</span>CO2ma)</span></code></pre></div>
 <p><img src="EnvDataSci_files/figure-html/unnamed-chunk-190-3.png" width="672" /></p>
 </div>
-<div id="loess-local-regression-smoothing" class="section level3" number="8.0.3">
-<h3><span class="header-section-number">8.0.3</span> loess (local regression) smoothing</h3>
+<div id="loess-local-regression-smoothing" class="section level3" number="8.1.3">
+<h3><span class="header-section-number">8.1.3</span> loess (local regression) smoothing</h3>
 <p>[place holder – need to work out]</p>
 <p>From:</p>
 <p><a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/loess">https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/loess</a></p>
@@ -457,8 +462,9 @@ flux towers.</p>
 <li>if X variables are bound within a range [?]</li>
 </ul>
 </div>
-<div id="decomposing-time-series" class="section level2" number="8.1">
-<h2><span class="header-section-number">8.1</span> Decomposing time series</h2>
+</div>
+<div id="decomposing-time-series" class="section level2" number="8.2">
+<h2><span class="header-section-number">8.2</span> Decomposing time series</h2>
 <p>: separating a time series into its constituent components.</p>
 <ul>
 <li>original data</li>
@@ -507,8 +513,8 @@ a spring <em>resurgence</em> was instrumented to measure water level, temperatur
 <span id="cb494-3"><a href="time-series.html#cb494-3" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">stl</span>(wlevelm, <span class="at">s.window=</span><span class="st">&quot;periodic&quot;</span>)</span>
 <span id="cb494-4"><a href="time-series.html#cb494-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit)</span></code></pre></div>
 <p><img src="EnvDataSci_files/figure-html/unnamed-chunk-193-2.png" width="672" /></p>
-<div id="lag-regression" class="section level3" number="8.1.1">
-<h3><span class="header-section-number">8.1.1</span> lag regression</h3>
+<div id="lag-regression" class="section level3" number="8.2.1">
+<h3><span class="header-section-number">8.2.1</span> lag regression</h3>
 <p>[<strong><code>SolarRad_Temp</code></strong>]</p>
 <div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb495-1"><a href="time-series.html#cb495-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
 <span id="cb495-2"><a href="time-series.html#cb495-2" aria-hidden="true" tabindex="-1"></a>BugacSolstice <span class="ot">&lt;-</span> <span class="fu">read_xls</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;SolarRad_Temp.xls&quot;</span>, <span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>), </span>
@@ -567,8 +573,8 @@ a spring <em>resurgence</em> was instrumented to measure water level, temperatur
 <div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb509-1"><a href="time-series.html#cb509-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which.max</span>(seasonals<span class="sc">$</span>Temp)</span></code></pre></div>
 <pre><code>## [1] 30</code></pre>
 </div>
-<div id="ensemble-average" class="section level3" number="8.1.2">
-<h3><span class="header-section-number">8.1.2</span> Ensemble Average</h3>
+<div id="ensemble-average" class="section level3" number="8.2.2">
+<h3><span class="header-section-number">8.2.2</span> Ensemble Average</h3>
 <p>For any time series data with meaningful time units like days or years (or even weeks
 when the data varies by days of the week – this was the case with COVID-19 data),
 ensemble averages are a good way to visualize changes in a variable over that time unit.</p>
@@ -608,8 +614,8 @@ standard deviations of the distribution – might be a useful figure.</p>
 <span id="cb512-14"><a href="time-series.html#cb512-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_grid</span>(<span class="at">plotlist=</span><span class="fu">list</span>(p1,p2), <span class="at">ncol=</span><span class="dv">1</span>, <span class="at">align=</span><span class="st">&#39;v&#39;</span>) <span class="co"># from cowplot</span></span></code></pre></div>
 <p><img src="EnvDataSci_files/figure-html/unnamed-chunk-196-2.png" width="672" /></p>
 </div>
-<div id="julian-dates" class="section level3" number="8.1.3">
-<h3><span class="header-section-number">8.1.3</span> Julian Dates</h3>
+<div id="julian-dates" class="section level3" number="8.2.3">
+<h3><span class="header-section-number">8.2.3</span> Julian Dates</h3>
 <p>Julian dates are the number of days since some start date</p>
 <ul>
 <li>The origin (Julian date 0) can be arbitrary</li>
@@ -641,8 +647,8 @@ standard deviations of the distribution – might be a useful figure.</p>
            yday(d)-1 + hour(d)/24 + minute(d)/1440 + second(d)/86400}</code></pre>
 </div>
 </div>
-<div id="learning-more-about-time-series-in-r" class="section level2" number="8.2">
-<h2><span class="header-section-number">8.2</span> Learning more about time series in R</h2>
+<div id="learning-more-about-time-series-in-r" class="section level2" number="8.3">
+<h2><span class="header-section-number">8.3</span> Learning more about time series in R</h2>
 <p>It can be confusing, partly because of the major use of time series in the financial sector, so a search gets you quickly into the monetizing world…</p>
 <p>One good source is actually at CRAN:
 <a href="https://cran.r-project.org/web/views/TimeSeries.html">https://cran.r-project.org/web/views/TimeSeries.html</a></p>

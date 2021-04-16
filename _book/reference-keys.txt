@@ -145,6 +145,7 @@ spatial-statistical-analysis
 spatial-autocorrelation
 mapping-residuals
 time-series
+creation-of-time-series-ts-data
 frequency-setting
 moving-average-ma
 loess-local-regression-smoothing
