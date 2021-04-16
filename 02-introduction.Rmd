@@ -363,7 +363,7 @@ A data frame is a database with fields (as vectors) with records (rows), so is v
 
 ```{r warning=FALSE}
 library(palmerpenguins)
-data(package = 'palmerpenguins')
+# data(package = 'palmerpenguins')
 head(penguins)
 ```
 **Creating a data frame out of a matrix**

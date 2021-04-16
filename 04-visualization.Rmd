@@ -5,7 +5,6 @@ In this section we'll explore visualization methods in R. Visualization has been
 ```{r include=FALSE}
 library(tidyverse)
 library(palmerpenguins)
-data(package = "palmerpenguins")
 ```
 
 ```{r fig.cap="Flipper length by species"}

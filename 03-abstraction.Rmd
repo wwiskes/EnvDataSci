@@ -266,7 +266,6 @@ head(stackrate)
 ```{r include=FALSE}
 library(tidyverse)
 library(palmerpenguins)
-data(package = 'palmerpenguins')
 ```
 
 ```{r include=FALSE}

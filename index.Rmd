@@ -71,7 +71,7 @@ library(iGIScData)
 
 To see what's in it, you'll see the various datasets listed in:
 
-```{r}
+```
 data(package="iGIScData")
 ```
 
