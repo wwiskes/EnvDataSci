@@ -1,0 +1,29 @@
+---
+title: "09-communication"
+author: "Jerry Davis"
+date: "4/16/2021"
+output: html_document
+---
+
+# Communication
+
+Communication of research is central to environmental data science, and while this
+can use many venues such as professional meetings and publications, outreach on the
+internet is especially important. This chapter will delve into probably the best
+way to build a web site for communicating our research:  **Shiny**.
+
+In short, Shiny is used for building interactive web apps. It's from the RStudio folks, 
+who provide some useful resources for building a Shiny app: 
+
+<a href="https://shiny.rstudio.com">https://shiny.rstudio.com</a>
+<a href="https://shiny.rstudio.com/tutorial">https://shiny.rstudio.com/tutorial</a>
+
+Hosting is the one challenge, though you can host on shinyapps.io.  
+
+<a href="https://www.shinyapps.io/">https://www.shinyapps.io/</a>
+
+which is free for 5 apps, 25 hours usage/month.
+
+*[TODO: Add some examples of Shiny app code, though can't be run in bookdown,
+maybe creating a Shiny Rmarkdown script with `runtime: shiny` to access via
+a code package??]*

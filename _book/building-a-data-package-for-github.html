@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>9 Building a Data Package for GitHub | Introduction to Environmental Data Science</title>
+  <title>10 Building a Data Package for GitHub | 09-communication</title>
   <meta name="description" content="Background, concepts and exercises for using R for environmental data science. The focus is on applying the R language and various libraries for data manipulation, data analysis, time series, modeling, and spatial data/mapping. The output format for this example is bookdown::gitbook. Book is under development, and currently just has five chapters, including this prerequisite chapter." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="9 Building a Data Package for GitHub | Introduction to Environmental Data Science" />
+  <meta property="og:title" content="10 Building a Data Package for GitHub | 09-communication" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="9 Building a Data Package for GitHub | Introduction to Environmental Data Science" />
+  <meta name="twitter:title" content="10 Building a Data Package for GitHub | 09-communication" />
   
   <meta name="twitter:description" content="Background, concepts and exercises for using R for environmental data science. The focus is on applying the R language and various libraries for data manipulation, data analysis, time series, modeling, and spatial data/mapping. The output format for this example is bookdown::gitbook. Book is under development, and currently just has five chapters, including this prerequisite chapter." />
   
@@ -24,14 +24,13 @@
 <meta name="author" content="Jerry Davis" />
 
 
-<meta name="date" content="2021-04-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="time-series.html"/>
+<link rel="prev" href="communication.html"/>
 
 <script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -301,15 +300,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="8.2" data-path="time-series.html"><a href="time-series.html#learning-more-about-time-series-in-r"><i class="fa fa-check"></i><b>8.2</b> Learning more about time series in R</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html"><i class="fa fa-check"></i><b>9</b> Building a Data Package for GitHub</a>
+<li class="chapter" data-level="9" data-path="communication.html"><a href="communication.html"><i class="fa fa-check"></i><b>9</b> Communication</a></li>
+<li class="chapter" data-level="10" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html"><i class="fa fa-check"></i><b>10</b> Building a Data Package for GitHub</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html#rda-files"><i class="fa fa-check"></i><b>9.1</b> <code>rda</code> files</a>
+<li class="chapter" data-level="10.1" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html#rda-files"><i class="fa fa-check"></i><b>10.1</b> <code>rda</code> files</a>
 <ul>
-<li class="chapter" data-level="9.1.1" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html#usethisuse_data"><i class="fa fa-check"></i><b>9.1.1</b> <code>usethis::use_data()</code></a></li>
-<li class="chapter" data-level="9.1.2" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html#usethiscreate_package"><i class="fa fa-check"></i><b>9.1.2</b> <code>usethis::create_package()</code></a></li>
-<li class="chapter" data-level="9.1.3" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html#devtoolsdocument"><i class="fa fa-check"></i><b>9.1.3</b> <code>devtools::document()</code></a></li>
+<li class="chapter" data-level="10.1.1" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html#usethisuse_data"><i class="fa fa-check"></i><b>10.1.1</b> <code>usethis::use_data()</code></a></li>
+<li class="chapter" data-level="10.1.2" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html#usethiscreate_package"><i class="fa fa-check"></i><b>10.1.2</b> <code>usethis::create_package()</code></a></li>
+<li class="chapter" data-level="10.1.3" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html#devtoolsdocument"><i class="fa fa-check"></i><b>10.1.3</b> <code>devtools::document()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html#raw-data"><i class="fa fa-check"></i><b>9.2</b> Raw data</a></li>
+<li class="chapter" data-level="10.2" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html#raw-data"><i class="fa fa-check"></i><b>10.2</b> Raw data</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -323,7 +323,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Environmental Data Science</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">09-communication</a>
           </h1>
         </div>
 
@@ -331,30 +331,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="building-a-data-package-for-github" class="section level1" number="9">
-<h1><span class="header-section-number">9</span> Building a Data Package for GitHub</h1>
+<div id="building-a-data-package-for-github" class="section level1" number="10">
+<h1><span class="header-section-number">10</span> Building a Data Package for GitHub</h1>
 <p>These are just some notes on building data packages, based mostly on Chapter 14 “External Packages” of <a href="https://r-pkgs.org/">r-pkgs.org</a>, which also covers code packages.</p>
 <p>For our package, <code>iGIScData</code>, we provided data in two ways:</p>
 <ul>
 <li><p><code>rda</code> files: normal external data that are ready to use as data frames, simple feature (sf) data, and rasters.</p></li>
 <li><p>raw data as CSVs, shapefiles and TIFFs.</p></li>
 </ul>
-<div id="rda-files" class="section level2" number="9.1">
-<h2><span class="header-section-number">9.1</span> <code>rda</code> files</h2>
+<div id="rda-files" class="section level2" number="10.1">
+<h2><span class="header-section-number">10.1</span> <code>rda</code> files</h2>
 <p>These files need to be prepared from data in R and go in the data folder. The process is made very easy by using <code>usethis::use_data()</code> package:</p>
-<div id="usethisuse_data" class="section level3" number="9.1.1">
-<h3><span class="header-section-number">9.1.1</span> <code>usethis::use_data()</code></h3>
+<div id="usethisuse_data" class="section level3" number="10.1.1">
+<h3><span class="header-section-number">10.1.1</span> <code>usethis::use_data()</code></h3>
 <p><code>usethis::use_data()</code> is used to add data as rda files to the <code>data</code> folder. These data can be data frames, simple features, rasters, and I’m sure other things.</p>
 <p>I used a script <code>addData.R</code> that I put in the <code>data-raw</code> folder which built the data (usually with <code>read_csv()</code>, <code>st_read()</code>, or <code>raster()</code> and maybe some other processing like <code>mutate</code>, <code>filter</code>, etc.) to create the data set, and then <code>usethis::use_data()</code> to store it in the data folder. Here’s an simple example with just a csv converted directly, and it takes care of storing the result in the <code>data</code> folder as an <code>.rda</code> file:</p>
 <pre><code>sierraFeb &lt;- read_csv(&quot;data-raw/sierraFeb.csv&quot;)
 usethis::use_data(sierraFeb)</code></pre>
 </div>
-<div id="usethiscreate_package" class="section level3" number="9.1.2">
-<h3><span class="header-section-number">9.1.2</span> <code>usethis::create_package()</code></h3>
+<div id="usethiscreate_package" class="section level3" number="10.1.2">
+<h3><span class="header-section-number">10.1.2</span> <code>usethis::create_package()</code></h3>
 <p>This creates the package and uses roxygen to document it. I think you just need to run this once, then the <code>devtools::document()</code> does the rest, and can be run again to update it.</p>
 </div>
-<div id="devtoolsdocument" class="section level3" number="9.1.3">
-<h3><span class="header-section-number">9.1.3</span> <code>devtools::document()</code></h3>
+<div id="devtoolsdocument" class="section level3" number="10.1.3">
+<h3><span class="header-section-number">10.1.3</span> <code>devtools::document()</code></h3>
 <p>This creates documentation on the data sets, using the file <code>R/data.R</code>, which will need to have lines of code similar to the following to document each data set. Note that the name of the data set goes last, in quotes. The formatting of the field names and descriptions is a bit tricky and doesn’t follow normal R rules. As a result, sometimes my field names don’t exactly match the actual field names. Maybe I’ll get around to changing the original field names with <code>rename</code>. Note that the organization is important, with the title of the data first, a blank line, then a description, etc.:</p>
 <pre><code>#&#39; Sierra February climate data
 #&#39;
@@ -376,8 +376,8 @@ usethis::use_data(sierraFeb)</code></pre>
 <p>But we also wanted to provide raw CSVs, shapefiles and rasters, in order to demonstrate how to read those.</p>
 </div>
 </div>
-<div id="raw-data" class="section level2" number="9.2">
-<h2><span class="header-section-number">9.2</span> Raw data</h2>
+<div id="raw-data" class="section level2" number="10.2">
+<h2><span class="header-section-number">10.2</span> Raw data</h2>
 <p>Raw data (e.g. CSVs, shapefiles, and rasters) are simply stored in the <code>inst/extdata</code> folder. Just create those folders and put the files there. Make sure to include all the files (like the multiple files that go with a shapefile). Then, to access the data once the data package is installed, the user just needs to use the <code>system.file()</code> function to provide the path and then use that with the appropriate read function; e.g. for a CSV, something like:</p>
 <pre><code>csvPath &lt;- system.file(&quot;extdata&quot;,&quot;TRI_2017_CA.csv&quot;)
 TRI_2017_CA &lt;- read_csv(csvPath)</code></pre>
@@ -389,7 +389,7 @@ TRI_2017_CA &lt;- read_csv(csvPath)</code></pre>
           </div>
         </div>
       </div>
-<a href="time-series.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="communication.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>

@@ -153,10 +153,10 @@ lag-regression
 ensemble-average
 julian-dates
 learning-more-about-time-series-in-r
+communication
 building-a-data-package-for-github
 rda-files
 usethisuse_data
 usethiscreate_package
 devtoolsdocument
 raw-data
-fig:unnamed-chunk-7
