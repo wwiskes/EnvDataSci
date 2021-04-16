@@ -291,16 +291,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.1" data-path="time-series.html"><a href="time-series.html#creation-of-time-series-ts-data"><i class="fa fa-check"></i><b>8.1</b> Creation of time series (ts) data</a>
 <ul>
 <li class="chapter" data-level="8.1.1" data-path="time-series.html"><a href="time-series.html#frequency-setting"><i class="fa fa-check"></i><b>8.1.1</b> frequency setting</a></li>
-<li class="chapter" data-level="8.1.2" data-path="time-series.html"><a href="time-series.html#moving-average-ma"><i class="fa fa-check"></i><b>8.1.2</b> moving average (ma)</a></li>
-<li class="chapter" data-level="8.1.3" data-path="time-series.html"><a href="time-series.html#loess-local-regression-smoothing"><i class="fa fa-check"></i><b>8.1.3</b> loess (local regression) smoothing</a></li>
+<li class="chapter" data-level="8.1.2" data-path="time-series.html"><a href="time-series.html#data-logger-data-from-marble-mountains-resurgence"><i class="fa fa-check"></i><b>8.1.2</b> Data logger data from Marble Mountains resurgence</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="time-series.html"><a href="time-series.html#decomposing-time-series"><i class="fa fa-check"></i><b>8.2</b> Decomposing time series</a>
+<li class="chapter" data-level="8.2" data-path="time-series.html"><a href="time-series.html#data-smoothing-methods"><i class="fa fa-check"></i><b>8.2</b> Data smoothing methods</a>
 <ul>
-<li class="chapter" data-level="8.2.1" data-path="time-series.html"><a href="time-series.html#lag-regression"><i class="fa fa-check"></i><b>8.2.1</b> lag regression</a></li>
-<li class="chapter" data-level="8.2.2" data-path="time-series.html"><a href="time-series.html#ensemble-average"><i class="fa fa-check"></i><b>8.2.2</b> Ensemble Average</a></li>
-<li class="chapter" data-level="8.2.3" data-path="time-series.html"><a href="time-series.html#julian-dates"><i class="fa fa-check"></i><b>8.2.3</b> Julian Dates</a></li>
+<li class="chapter" data-level="8.2.1" data-path="time-series.html"><a href="time-series.html#moving-average-ma"><i class="fa fa-check"></i><b>8.2.1</b> moving average (ma)</a></li>
+<li class="chapter" data-level="8.2.2" data-path="time-series.html"><a href="time-series.html#loess-local-regression-smoothing"><i class="fa fa-check"></i><b>8.2.2</b> loess (local regression) smoothing</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="time-series.html"><a href="time-series.html#learning-more-about-time-series-in-r"><i class="fa fa-check"></i><b>8.3</b> Learning more about time series in R</a></li>
+<li class="chapter" data-level="8.3" data-path="time-series.html"><a href="time-series.html#decomposing-time-series"><i class="fa fa-check"></i><b>8.3</b> Decomposing time series</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="time-series.html"><a href="time-series.html#lag-regression"><i class="fa fa-check"></i><b>8.3.1</b> lag regression</a></li>
+<li class="chapter" data-level="8.3.2" data-path="time-series.html"><a href="time-series.html#ensemble-average"><i class="fa fa-check"></i><b>8.3.2</b> Ensemble Average</a></li>
+<li class="chapter" data-level="8.3.3" data-path="time-series.html"><a href="time-series.html#julian-dates"><i class="fa fa-check"></i><b>8.3.3</b> Julian Dates</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="time-series.html"><a href="time-series.html#learning-more-about-time-series-in-r"><i class="fa fa-check"></i><b>8.4</b> Learning more about time series in R</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="communication.html"><a href="communication.html"><i class="fa fa-check"></i><b>9</b> Communication</a></li>
 <li class="chapter" data-level="10" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html"><i class="fa fa-check"></i><b>10</b> Building a Data Package for GitHub</a>
@@ -396,18 +400,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb183-7"><a href="data-abstraction.html#cb183-7" aria-hidden="true" tabindex="-1"></a>ab <span class="ot">&lt;-</span> <span class="fu">tibble</span>(a,b)</span>
 <span id="cb183-8"><a href="data-abstraction.html#cb183-8" aria-hidden="true" tabindex="-1"></a>ab</span></code></pre></div>
 <pre><code>## # A tibble: 10 x 2
-##         a      b
-##     &lt;dbl&gt;  &lt;dbl&gt;
-##  1  0.360 0.517 
-##  2  1.50  0.0626
-##  3 -0.788 0.183 
-##  4  1.46  0.546 
-##  5  1.24  0.879 
-##  6 -0.106 0.434 
-##  7  0.450 0.882 
-##  8 -1.74  0.616 
-##  9  1.05  0.272 
-## 10  0.671 0.964</code></pre>
+##         a     b
+##     &lt;dbl&gt; &lt;dbl&gt;
+##  1  0.805 0.787
+##  2  1.33  0.730
+##  3  0.846 0.812
+##  4  0.672 0.413
+##  5  0.143 0.739
+##  6  0.940 0.394
+##  7 -0.545 0.711
+##  8  0.252 0.139
+##  9  0.161 0.747
+## 10  0.212 0.508</code></pre>
 <div id="read_csv-vs.-read.csv" class="section level3" number="3.3.1">
 <h3><span class="header-section-number">3.3.1</span> <code>read_csv</code> vs. <code>read.csv</code></h3>
 <p>You might be tempted to use read.csv from base R</p>
@@ -459,7 +463,7 @@ problematic field names like <code>MLY-TAVG-NORMAL</code> become <code>MLY.TAVG
 <div id="visualizing-data-with-a-tukey-box-plot" class="section level2" number="3.5">
 <h2><span class="header-section-number">3.5</span> Visualizing data with a Tukey box plot</h2>
 <div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="data-abstraction.html#cb187-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> eucoakrainfallrunoffTDR) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>site, <span class="at">y=</span>runoffL_euc))</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
 </div>
 <div id="database-operations-with-dplyr" class="section level2" number="3.6">
 <h2><span class="header-section-number">3.6</span> Database operations with <code>dplyr</code></h2>

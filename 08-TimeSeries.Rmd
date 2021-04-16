@@ -70,6 +70,32 @@ plot(GHG)
 
 `frequency=12, start=c(2019,7), end=c(2020,6)`
 
+### Data logger data from Marble Mountains resurgence
+
+[**`Marbles`**]
+
+For a study of chemical water quality and hydrology of a karst system in the Marble Mountains of California, 
+a spring *resurgence* was instrumented to measure water level, temperature, and specific conductance (a surrogate for total dissolved solids) over a 4-year period.
+
+<img src="img/resurgenceInstallation.png">
+<img src="img/resurgenceProfile.png">
+<img src="img/instrumentationPicture.png">
+<img src="img/instrumentationLower.png">
+<img src="img/instrumentationDiagram.png">
+<img src="img/stillingWell.png">
+
+```{r message=F, warning=F}
+library(tidyverse); library(lubridate)
+resurg <- read_csv(system.file("extdata","resurgenceData.csv",package="iGIScData")) %>%
+  mutate(date_time = mdy_hms(paste(date, time))) %>%
+  dplyr::select(date_time, ATemp, BTemp, wlevelm, EC, InputV)
+resurgTS <- ts(resurg, frequency = 12*365, start = c(1994, 266*12+7))
+plot(resurgTS)
+```
+
+
+## Data smoothing methods
+
 ### moving average (ma)
 
 - Simple generalization of sequential data
@@ -158,23 +184,15 @@ plot(stl(co2, s.window="periodic"))
 
 [**`Marbles`**]
 
-For a study of chemical water quality and hydrology of a karst system in the Marble Mountains of California, 
-a spring *resurgence* was instrumented to measure water level, temperature, and specific conductance (a surrogate for total dissolved solids) over a 4-year period.
+In the Marble Mountains karst resurgence study, water level water level has an annual seasonality
+that might be best understand by decomposition.
 
-<img src="img/resurgenceInstallation.png">
-<img src="img/resurgenceProfile.png">
-<img src="img/instrumentationPicture.png">
-<img src="img/instrumentationLower.png">
-<img src="img/instrumentationDiagram.png">
-<img src="img/stillingWell.png">
 
 ```{r message=F, warning=F}
 library(tidyverse); library(lubridate)
 resurg <- read_csv(system.file("extdata","resurgenceData.csv",package="iGIScData")) %>%
   mutate(date_time = mdy_hms(paste(date, time))) %>%
   dplyr::select(date_time, ATemp, BTemp, wlevelm, EC, InputV)
-resurgTS <- ts(resurg, frequency = 12*365, start = c(1994, 266*12+7))
-plot(resurgTS)
 wlevelm <- ts(resurg$wlevelm, frequency = 12*365, 
               start = c(1994, 266*12+7))
 fit <- stl(wlevelm, s.window="periodic")
