@@ -4,24 +4,23 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2 Introduction to R | 09-communication</title>
-  <meta name="description" content="Background, concepts and exercises for using R for environmental data science. The focus is on applying the R language and various libraries for data manipulation, data analysis, time series, modeling, and spatial data/mapping. The output format for this example is bookdown::gitbook. Book is under development, and currently just has five chapters, including this prerequisite chapter." />
+  <title>2 Introduction to R | EnvDataSci.utf8</title>
+  <meta name="description" content="" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2 Introduction to R | 09-communication" />
+  <meta property="og:title" content="2 Introduction to R | EnvDataSci.utf8" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="Background, concepts and exercises for using R for environmental data science. The focus is on applying the R language and various libraries for data manipulation, data analysis, time series, modeling, and spatial data/mapping. The output format for this example is bookdown::gitbook. Book is under development, and currently just has five chapters, including this prerequisite chapter." />
+  
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 Introduction to R | 09-communication" />
+  <meta name="twitter:title" content="2 Introduction to R | EnvDataSci.utf8" />
   
-  <meta name="twitter:description" content="Background, concepts and exercises for using R for environmental data science. The focus is on applying the R language and various libraries for data manipulation, data analysis, time series, modeling, and spatial data/mapping. The output format for this example is bookdown::gitbook. Book is under development, and currently just has five chapters, including this prerequisite chapter." />
+  
   
 
-<meta name="author" content="Jerry Davis" />
 
 
 
@@ -323,7 +322,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">09-communication</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
           </h1>
         </div>
 
@@ -496,20 +495,20 @@ We’ll read this type of data in from spreadsheets or even more commonly from c
 text files that spreadsheet programs like Excel commonly read in just like their native format.</p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="introduction-to-r.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(iGIScData)</span>
 <span id="cb64-2"><a href="introduction-to-r.html#cb64-2" aria-hidden="true" tabindex="-1"></a>sierraFeb</span></code></pre></div>
-<pre><code>## # A tibble: 82 x 7
-##    STATION_NAME                      COUNTY   ELEVATION LATITUDE LONGITUDE PRECIPITATION TEMPERATURE
-##    &lt;chr&gt;                             &lt;chr&gt;        &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;
-##  1 GROVELAND 2, CA US                Tuolumne     853.      37.8     -120.         176.          6.1
-##  2 CANYON DAM, CA US                 Plumas      1390.      40.2     -121.         164.          1.4
-##  3 KERN RIVER PH 3, CA US            Kern         824.      35.8     -118.          67.1         8.9
-##  4 DONNER MEMORIAL ST PARK, CA US    Nevada      1810.      39.3     -120.         167.         -0.9
-##  5 BOWMAN DAM, CA US                 Nevada      1641.      39.5     -121.         277.          2.9
-##  6 BRUSH CREEK RANGER STATION, CA US Butte       1085.      39.7     -121.         296.         NA  
-##  7 GRANT GROVE, CA US                Tulare      2012.      36.7     -119.         186.          1.7
-##  8 LEE VINING, CA US                 Mono        2072.      38.0     -119.          71.9         0.4
-##  9 OROVILLE MUNICIPAL AIRPORT, CA US Butte         57.9     39.5     -122.         138.         10.3
-## 10 LEMON COVE, CA US                 Tulare       156.      36.4     -119.          62.7        11.3
-## # ... with 72 more rows</code></pre>
+<pre><code>## # A tibble: 62 x 9
+##    STATION_NAME                      COUNTY    ELEVATION LATITUDE LONGITUDE PRECIPITATION TEMPERATURE  resid predict
+##    &lt;chr&gt;                             &lt;fct&gt;         &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+##  1 GROVELAND 2, CA US                Tuolumne      853.      37.8     -120.         176.          6.1 -0.574   6.67 
+##  2 CANYON DAM, CA US                 Plumas       1390.      40.2     -121.         164.          1.4 -2.00    3.40 
+##  3 KERN RIVER PH 3, CA US            Kern          824.      35.8     -118.          67.1         8.9  2.05    6.85 
+##  4 DONNER MEMORIAL ST PARK, CA US    Nevada       1810.      39.3     -120.         167.         -0.9 -1.74    0.840
+##  5 BOWMAN DAM, CA US                 Nevada       1641.      39.5     -121.         277.          2.9  1.03    1.87 
+##  6 GRANT GROVE, CA US                Tulare       2012.      36.7     -119.         186.          1.7  2.09   -0.394
+##  7 LEE VINING, CA US                 Mono         2072.      38.0     -119.          71.9         0.4  1.16   -0.760
+##  8 OROVILLE MUNICIPAL AIRPORT, CA US Butte          57.9     39.5     -122.         138.         10.3 -1.23   11.5  
+##  9 LEMON COVE, CA US                 Tulare        156.      36.4     -119.          62.7        11.3  0.373  10.9  
+## 10 CALAVERAS BIG TREES, CA US        Calaveras    1431       38.3     -120.         254           2.7 -0.450   3.15 
+## # ... with 52 more rows</code></pre>
 </div>
 <div id="data-structures-in-r" class="section level2" number="2.6">
 <h2><span class="header-section-number">2.6</span> Data Structures in R</h2>
@@ -773,11 +772,11 @@ Figure 2.5: Temperature~Elevation
 <span id="cb154-2"><a href="introduction-to-r.html#cb154-2" aria-hidden="true" tabindex="-1"></a>grain_char <span class="ot">&lt;-</span> <span class="fu">sample</span>(grain_order, <span class="dv">36</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb154-3"><a href="introduction-to-r.html#cb154-3" aria-hidden="true" tabindex="-1"></a>grain_fact <span class="ot">&lt;-</span> <span class="fu">factor</span>(grain_char, <span class="at">levels =</span> grain_order)</span>
 <span id="cb154-4"><a href="introduction-to-r.html#cb154-4" aria-hidden="true" tabindex="-1"></a>grain_char</span></code></pre></div>
-<pre><code>##  [1] &quot;sand&quot; &quot;clay&quot; &quot;sand&quot; &quot;silt&quot; &quot;clay&quot; &quot;silt&quot; &quot;sand&quot; &quot;sand&quot; &quot;silt&quot; &quot;sand&quot; &quot;sand&quot; &quot;clay&quot; &quot;silt&quot; &quot;sand&quot; &quot;clay&quot; &quot;sand&quot; &quot;silt&quot; &quot;clay&quot;
-## [19] &quot;sand&quot; &quot;silt&quot; &quot;silt&quot; &quot;sand&quot; &quot;silt&quot; &quot;clay&quot; &quot;clay&quot; &quot;sand&quot; &quot;sand&quot; &quot;sand&quot; &quot;silt&quot; &quot;clay&quot; &quot;clay&quot; &quot;silt&quot; &quot;sand&quot; &quot;sand&quot; &quot;sand&quot; &quot;silt&quot;</code></pre>
+<pre><code>##  [1] &quot;clay&quot; &quot;clay&quot; &quot;sand&quot; &quot;clay&quot; &quot;sand&quot; &quot;sand&quot; &quot;sand&quot; &quot;silt&quot; &quot;silt&quot; &quot;clay&quot; &quot;sand&quot; &quot;sand&quot; &quot;silt&quot; &quot;clay&quot; &quot;silt&quot; &quot;silt&quot; &quot;clay&quot; &quot;clay&quot;
+## [19] &quot;clay&quot; &quot;clay&quot; &quot;silt&quot; &quot;clay&quot; &quot;silt&quot; &quot;silt&quot; &quot;silt&quot; &quot;clay&quot; &quot;sand&quot; &quot;silt&quot; &quot;sand&quot; &quot;silt&quot; &quot;sand&quot; &quot;sand&quot; &quot;silt&quot; &quot;clay&quot; &quot;sand&quot; &quot;sand&quot;</code></pre>
 <div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="introduction-to-r.html#cb156-1" aria-hidden="true" tabindex="-1"></a>grain_fact</span></code></pre></div>
-<pre><code>##  [1] sand clay sand silt clay silt sand sand silt sand sand clay silt sand clay sand silt clay sand silt silt sand silt clay clay
-## [26] sand sand sand silt clay clay silt sand sand sand silt
+<pre><code>##  [1] clay clay sand clay sand sand sand silt silt clay sand sand silt clay silt silt clay clay clay clay silt clay silt silt silt
+## [26] clay sand silt sand silt sand sand silt clay sand sand
 ## Levels: clay silt sand</code></pre>
 <p>To make a categorical variable a factor:</p>
 <div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="introduction-to-r.html#cb158-1" aria-hidden="true" tabindex="-1"></a>fruit <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;apples&quot;</span>, <span class="st">&quot;oranges&quot;</span>, <span class="st">&quot;bananas&quot;</span>, <span class="st">&quot;oranges&quot;</span>)</span>
@@ -790,7 +789,7 @@ Figure 2.5: Temperature~Elevation
 <p><strong>Factor example</strong></p>
 <div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="introduction-to-r.html#cb160-1" aria-hidden="true" tabindex="-1"></a>sierraFeb<span class="sc">$</span>COUNTY <span class="ot">&lt;-</span> <span class="fu">factor</span>(sierraFeb<span class="sc">$</span>COUNTY)</span>
 <span id="cb160-2"><a href="introduction-to-r.html#cb160-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(sierraFeb<span class="sc">$</span>COUNTY)</span></code></pre></div>
-<pre><code>##  Factor w/ 21 levels &quot;Amador&quot;,&quot;Butte&quot;,..: 20 14 7 12 12 2 19 11 2 19 ...</code></pre>
+<pre><code>##  Factor w/ 20 levels &quot;Amador&quot;,&quot;Butte&quot;,..: 19 14 7 12 12 18 11 2 18 3 ...</code></pre>
 </div>
 </div>
 </div>

@@ -1,10 +1,3 @@
----
-title: "09-communication"
-author: "Jerry Davis"
-date: "4/16/2021"
-output: html_document
----
-
 # Communication
 
 Communication of research is central to environmental data science, and while this
