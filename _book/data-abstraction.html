@@ -217,16 +217,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3" data-path="visualization.html"><a href="visualization.html#plotting-two-variables"><i class="fa fa-check"></i><b>4.3</b> Plotting two variables</a>
 <ul>
 <li class="chapter" data-level="4.3.1" data-path="visualization.html"><a href="visualization.html#two-continuous-variables"><i class="fa fa-check"></i><b>4.3.1</b> Two continuous variables</a></li>
-<li class="chapter" data-level="4.3.2" data-path="visualization.html"><a href="visualization.html#two-variables-one-discrete-eucoak"><i class="fa fa-check"></i><b>4.3.2</b> Two variables, one discrete [<code>eucoak</code>]</a></li>
+<li class="chapter" data-level="4.3.2" data-path="visualization.html"><a href="visualization.html#two-variables-one-discrete"><i class="fa fa-check"></i><b>4.3.2</b> Two variables, one discrete</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="visualization.html"><a href="visualization.html#color-systems"><i class="fa fa-check"></i><b>4.4</b> Color systems</a>
 <ul>
 <li class="chapter" data-level="4.4.1" data-path="visualization.html"><a href="visualization.html#color-from-variable-in-aesthetics"><i class="fa fa-check"></i><b>4.4.1</b> Color from variable, in aesthetics</a></li>
-<li class="chapter" data-level="4.4.2" data-path="visualization.html"><a href="visualization.html#trend-line-sierra"><i class="fa fa-check"></i><b>4.4.2</b> Trend line [<code>sierra</code>]</a></li>
+<li class="chapter" data-level="4.4.2" data-path="visualization.html"><a href="visualization.html#trend-line"><i class="fa fa-check"></i><b>4.4.2</b> Trend line</a></li>
 <li class="chapter" data-level="4.4.3" data-path="visualization.html"><a href="visualization.html#general-symbology"><i class="fa fa-check"></i><b>4.4.3</b> General symbology</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="visualization.html"><a href="visualization.html#titles-and-subtitles"><i class="fa fa-check"></i><b>4.5</b> Titles and subtitles</a></li>
-<li class="chapter" data-level="4.6" data-path="visualization.html"><a href="visualization.html#pairs-plot-sierra"><i class="fa fa-check"></i><b>4.6</b> Pairs Plot [<code>sierra</code>]</a></li>
+<li class="chapter" data-level="4.6" data-path="visualization.html"><a href="visualization.html#pairs-plot"><i class="fa fa-check"></i><b>4.6</b> Pairs Plot</a></li>
 <li class="chapter" data-level="4.7" data-path="visualization.html"><a href="visualization.html#exercises-2"><i class="fa fa-check"></i><b>4.7</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>5</b> Data Transformation</a>
@@ -389,29 +389,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>read_csv</code> creates a tibble (in general, underscores are used in the Tidyverse)</li>
 <li><code>read.csv</code> creates a regular data frame</li>
 </ul></li>
-<li>You can also use the <code>tibble()</code> function [<strong><code>air_quality</code> project</strong>]</li>
 </ul>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="data-abstraction.html#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># includes readr, ggplot2, and dplyr which we&#39;ll use in this chapter</span></span>
-<span id="cb183-2"><a href="data-abstraction.html#cb183-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(iGIScData)</span>
-<span id="cb183-3"><a href="data-abstraction.html#cb183-3" aria-hidden="true" tabindex="-1"></a>csvPath <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;TRI_1987_BaySites.csv&quot;</span>, <span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>
-<span id="cb183-4"><a href="data-abstraction.html#cb183-4" aria-hidden="true" tabindex="-1"></a>TRI87 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(csvPath)</span>
-<span id="cb183-5"><a href="data-abstraction.html#cb183-5" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)</span>
-<span id="cb183-6"><a href="data-abstraction.html#cb183-6" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">10</span>)</span>
-<span id="cb183-7"><a href="data-abstraction.html#cb183-7" aria-hidden="true" tabindex="-1"></a>ab <span class="ot">&lt;-</span> <span class="fu">tibble</span>(a,b)</span>
-<span id="cb183-8"><a href="data-abstraction.html#cb183-8" aria-hidden="true" tabindex="-1"></a>ab</span></code></pre></div>
+<p>[<strong><code>air_quality</code> project</strong>]</p>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="data-abstraction.html#cb185-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># includes readr, ggplot2, and dplyr which we&#39;ll use in this chapter</span></span>
+<span id="cb185-2"><a href="data-abstraction.html#cb185-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(iGIScData)</span>
+<span id="cb185-3"><a href="data-abstraction.html#cb185-3" aria-hidden="true" tabindex="-1"></a>csvPath <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;TRI_1987_BaySites.csv&quot;</span>, <span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>
+<span id="cb185-4"><a href="data-abstraction.html#cb185-4" aria-hidden="true" tabindex="-1"></a>TRI87 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(csvPath)</span></code></pre></div>
+<ul>
+<li>You can also use the <code>tibble()</code> function</li>
+</ul>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="data-abstraction.html#cb186-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)</span>
+<span id="cb186-2"><a href="data-abstraction.html#cb186-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">10</span>)</span>
+<span id="cb186-3"><a href="data-abstraction.html#cb186-3" aria-hidden="true" tabindex="-1"></a>ab <span class="ot">&lt;-</span> <span class="fu">tibble</span>(a,b)</span>
+<span id="cb186-4"><a href="data-abstraction.html#cb186-4" aria-hidden="true" tabindex="-1"></a>ab</span></code></pre></div>
 <pre><code>## # A tibble: 10 x 2
-##         a     b
-##     &lt;dbl&gt; &lt;dbl&gt;
-##  1  0.805 0.787
-##  2  1.33  0.730
-##  3  0.846 0.812
-##  4  0.672 0.413
-##  5  0.143 0.739
-##  6  0.940 0.394
-##  7 -0.545 0.711
-##  8  0.252 0.139
-##  9  0.161 0.747
-## 10  0.212 0.508</code></pre>
+##          a      b
+##      &lt;dbl&gt;  &lt;dbl&gt;
+##  1  0.696  0.957 
+##  2  0.0986 0.0721
+##  3  0.670  0.956 
+##  4  0.803  0.723 
+##  5  1.61   0.371 
+##  6  0.164  0.520 
+##  7 -0.243  0.0735
+##  8 -1.54   0.778 
+##  9 -2.13   0.263 
+## 10 -0.208  0.219</code></pre>
 <div id="read_csv-vs.-read.csv" class="section level3" number="3.3.1">
 <h3><span class="header-section-number">3.3.1</span> <code>read_csv</code> vs. <code>read.csv</code></h3>
 <p>You might be tempted to use read.csv from base R</p>
@@ -433,8 +436,8 @@ problematic field names like <code>MLY-TAVG-NORMAL</code> become <code>MLY.TAVG
 </div>
 <div id="statistical-summary-of-variables" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span> Statistical summary of variables</h2>
-<p>A simple statistical summary is very easy to do:</p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="data-abstraction.html#cb185-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(eucoakrainfallrunoffTDR)</span></code></pre></div>
+<p>A simple statistical summary is very easy to do [<strong><code>eucoak</code></strong>]:</p>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="data-abstraction.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(eucoakrainfallrunoffTDR)</span></code></pre></div>
 <pre><code>##      site               site #          date              month              rain_mm         rain_oak        rain_euc    
 ##  Length:90          Min.   :1.000   Length:90          Length:90          Min.   : 1.00   Min.   : 1.00   Min.   : 1.00  
 ##  Class :character   1st Qu.:2.000   Class :character   Class :character   1st Qu.:16.00   1st Qu.:16.00   1st Qu.:14.75  
@@ -462,8 +465,8 @@ problematic field names like <code>MLY-TAVG-NORMAL</code> become <code>MLY.TAVG
 </div>
 <div id="visualizing-data-with-a-tukey-box-plot" class="section level2" number="3.5">
 <h2><span class="header-section-number">3.5</span> Visualizing data with a Tukey box plot</h2>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="data-abstraction.html#cb187-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> eucoakrainfallrunoffTDR) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>site, <span class="at">y=</span>runoffL_euc))</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="data-abstraction.html#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> eucoakrainfallrunoffTDR) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>site, <span class="at">y=</span>runoffL_euc))</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-63-1.png" width="672" /></p>
 </div>
 <div id="database-operations-with-dplyr" class="section level2" number="3.6">
 <h2><span class="header-section-number">3.6</span> Database operations with <code>dplyr</code></h2>
@@ -479,12 +482,12 @@ The following methods are quickly discovered to be essential as part of explorin
 <div id="select-mutate-and-the-pipe" class="section level3" number="3.6.1">
 <h3><span class="header-section-number">3.6.1</span> Select, mutate, and the pipe</h3>
 <p><strong>The pipe <code>%&gt;%</code></strong>: Read <code>%&gt;%</code> as “and then…” This is bigger than it sounds and opens up a lot of possibilities. See example below, and observe how the expression becomes several lines long. In the process, we’ll see examples of new variables with mutate and selecting (and in the process <em>ordering</em>) variables. [If you haven’t already created it, this should be in a <strong><code>eucoak</code> project</strong>]</p>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="data-abstraction.html#cb188-1" aria-hidden="true" tabindex="-1"></a>runoff <span class="ot">&lt;-</span> eucoakrainfallrunoffTDR <span class="sc">%&gt;%</span></span>
-<span id="cb188-2"><a href="data-abstraction.html#cb188-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Date =</span> <span class="fu">as.Date</span>(date,<span class="st">&quot;%m/%d/%Y&quot;</span>),</span>
-<span id="cb188-3"><a href="data-abstraction.html#cb188-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">rain_subcanopy =</span> (rain_oak <span class="sc">+</span> rain_euc)<span class="sc">/</span><span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb188-4"><a href="data-abstraction.html#cb188-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(site, Date, rain_mm, rain_subcanopy, </span>
-<span id="cb188-5"><a href="data-abstraction.html#cb188-5" aria-hidden="true" tabindex="-1"></a>         runoffL_oak, runoffL_euc, slope_oak, slope_euc)</span>
-<span id="cb188-6"><a href="data-abstraction.html#cb188-6" aria-hidden="true" tabindex="-1"></a>runoff</span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="data-abstraction.html#cb191-1" aria-hidden="true" tabindex="-1"></a>runoff <span class="ot">&lt;-</span> eucoakrainfallrunoffTDR <span class="sc">%&gt;%</span></span>
+<span id="cb191-2"><a href="data-abstraction.html#cb191-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Date =</span> <span class="fu">as.Date</span>(date,<span class="st">&quot;%m/%d/%Y&quot;</span>),</span>
+<span id="cb191-3"><a href="data-abstraction.html#cb191-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">rain_subcanopy =</span> (rain_oak <span class="sc">+</span> rain_euc)<span class="sc">/</span><span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb191-4"><a href="data-abstraction.html#cb191-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(site, Date, rain_mm, rain_subcanopy, </span>
+<span id="cb191-5"><a href="data-abstraction.html#cb191-5" aria-hidden="true" tabindex="-1"></a>         runoffL_oak, runoffL_euc, slope_oak, slope_euc)</span>
+<span id="cb191-6"><a href="data-abstraction.html#cb191-6" aria-hidden="true" tabindex="-1"></a>runoff</span></code></pre></div>
 <pre><code>## # A tibble: 90 x 8
 ##    site  Date       rain_mm rain_subcanopy runoffL_oak runoffL_euc slope_oak slope_euc
 ##    &lt;chr&gt; &lt;date&gt;       &lt;dbl&gt;          &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
@@ -518,9 +521,9 @@ of helper functions for using logic to specify which variables to select:</p>
 <div id="filter" class="section level3" number="3.6.2">
 <h3><span class="header-section-number">3.6.2</span> filter</h3>
 <p><code>filter</code> lets you select observations that meet criteria, similar to an SQL WHERE clause.</p>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="data-abstraction.html#cb190-1" aria-hidden="true" tabindex="-1"></a>runoff2007 <span class="ot">&lt;-</span> runoff <span class="sc">%&gt;%</span></span>
-<span id="cb190-2"><a href="data-abstraction.html#cb190-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Date <span class="sc">&gt;=</span> <span class="fu">as.Date</span>(<span class="st">&quot;01/01/2007&quot;</span>, <span class="st">&quot;%m/%d/%Y&quot;</span>))</span>
-<span id="cb190-3"><a href="data-abstraction.html#cb190-3" aria-hidden="true" tabindex="-1"></a>runoff2007</span></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="data-abstraction.html#cb193-1" aria-hidden="true" tabindex="-1"></a>runoff2007 <span class="ot">&lt;-</span> runoff <span class="sc">%&gt;%</span></span>
+<span id="cb193-2"><a href="data-abstraction.html#cb193-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Date <span class="sc">&gt;=</span> <span class="fu">as.Date</span>(<span class="st">&quot;01/01/2007&quot;</span>, <span class="st">&quot;%m/%d/%Y&quot;</span>))</span>
+<span id="cb193-3"><a href="data-abstraction.html#cb193-3" aria-hidden="true" tabindex="-1"></a>runoff2007</span></code></pre></div>
 <pre><code>## # A tibble: 51 x 8
 ##    site  Date       rain_mm rain_subcanopy runoffL_oak runoffL_euc slope_oak slope_euc
 ##    &lt;chr&gt; &lt;date&gt;       &lt;dbl&gt;          &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
@@ -551,18 +554,17 @@ We commonly see summary statistics using <code>na.rm = TRUE</code> in order to <
 <div id="summarize-by-group" class="section level3" number="3.6.4">
 <h3><span class="header-section-number">3.6.4</span> Summarize by group</h3>
 <p>You’ll find that you need to use this all the time with real data. You have a bunch of data where some categorical variable is defining a grouping, like our site field in the eucoak data. We’d like to just create average slope, rainfall, and runoff for each site. Note that it involves two steps, first defining which field defines the group, then the various summary statistics we’d like to store. In this case all of the slopes under oak remain the same for a given site – it’s a <em>site</em> characteristic – and the same applies to the euc site, so we can just grab the first value (mean would have also worked of course).</p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="data-abstraction.html#cb192-1" aria-hidden="true" tabindex="-1"></a>eucoakSiteAvg <span class="ot">&lt;-</span> runoff <span class="sc">%&gt;%</span></span>
-<span id="cb192-2"><a href="data-abstraction.html#cb192-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(site) <span class="sc">%&gt;%</span></span>
-<span id="cb192-3"><a href="data-abstraction.html#cb192-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb192-4"><a href="data-abstraction.html#cb192-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">rain =</span> <span class="fu">mean</span>(rain_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb192-5"><a href="data-abstraction.html#cb192-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">rain_subcanopy =</span> <span class="fu">mean</span>(rain_subcanopy, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb192-6"><a href="data-abstraction.html#cb192-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">runoffL_oak =</span> <span class="fu">mean</span>(runoffL_oak, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb192-7"><a href="data-abstraction.html#cb192-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">runoffL_euc =</span> <span class="fu">mean</span>(runoffL_euc, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb192-8"><a href="data-abstraction.html#cb192-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">slope_oak =</span> <span class="fu">first</span>(slope_oak),</span>
-<span id="cb192-9"><a href="data-abstraction.html#cb192-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">slope_euc =</span> <span class="fu">first</span>(slope_euc)</span>
-<span id="cb192-10"><a href="data-abstraction.html#cb192-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="data-abstraction.html#cb194-1" aria-hidden="true" tabindex="-1"></a>eucoakSiteAvg</span></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="data-abstraction.html#cb195-1" aria-hidden="true" tabindex="-1"></a>eucoakSiteAvg <span class="ot">&lt;-</span> runoff <span class="sc">%&gt;%</span></span>
+<span id="cb195-2"><a href="data-abstraction.html#cb195-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(site) <span class="sc">%&gt;%</span></span>
+<span id="cb195-3"><a href="data-abstraction.html#cb195-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb195-4"><a href="data-abstraction.html#cb195-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">rain =</span> <span class="fu">mean</span>(rain_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb195-5"><a href="data-abstraction.html#cb195-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">rain_subcanopy =</span> <span class="fu">mean</span>(rain_subcanopy, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb195-6"><a href="data-abstraction.html#cb195-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">runoffL_oak =</span> <span class="fu">mean</span>(runoffL_oak, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb195-7"><a href="data-abstraction.html#cb195-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">runoffL_euc =</span> <span class="fu">mean</span>(runoffL_euc, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb195-8"><a href="data-abstraction.html#cb195-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">slope_oak =</span> <span class="fu">first</span>(slope_oak),</span>
+<span id="cb195-9"><a href="data-abstraction.html#cb195-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">slope_euc =</span> <span class="fu">first</span>(slope_euc)</span>
+<span id="cb195-10"><a href="data-abstraction.html#cb195-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb195-11"><a href="data-abstraction.html#cb195-11" aria-hidden="true" tabindex="-1"></a>eucoakSiteAvg</span></code></pre></div>
 <pre><code>## # A tibble: 8 x 7
 ##   site   rain rain_subcanopy runoffL_oak runoffL_euc slope_oak slope_euc
 ##   &lt;chr&gt; &lt;dbl&gt;          &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
@@ -575,41 +577,30 @@ We commonly see summary statistics using <code>na.rm = TRUE</code> in order to <
 ## 7 TP3    32.1           27.8      0.381        0.815      25          18
 ## 8 TP4    32.5           35.7      0.231        2.83       12          12</code></pre>
 <p><strong>Summarizing by group with TRI data [<code>air_quality</code> project]</strong></p>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="data-abstraction.html#cb196-1" aria-hidden="true" tabindex="-1"></a>csvPath <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;TRI_2017_CA.csv&quot;</span>, <span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>
-<span id="cb196-2"><a href="data-abstraction.html#cb196-2" aria-hidden="true" tabindex="-1"></a>TRI_BySite <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(csvPath) <span class="sc">%&gt;%</span></span>
-<span id="cb196-3"><a href="data-abstraction.html#cb196-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">all_air =</span> <span class="st">`</span><span class="at">5.1_FUGITIVE_AIR</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">5.2_STACK_AIR</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb196-4"><a href="data-abstraction.html#cb196-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(all_air <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb196-5"><a href="data-abstraction.html#cb196-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(FACILITY_NAME) <span class="sc">%&gt;%</span></span>
-<span id="cb196-6"><a href="data-abstraction.html#cb196-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb196-7"><a href="data-abstraction.html#cb196-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">FACILITY_NAME =</span> <span class="fu">first</span>(FACILITY_NAME),</span>
-<span id="cb196-8"><a href="data-abstraction.html#cb196-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">air_releases =</span> <span class="fu">sum</span>(all_air, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb196-9"><a href="data-abstraction.html#cb196-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_fugitive =</span> <span class="fu">mean</span>(<span class="st">`</span><span class="at">5.1_FUGITIVE_AIR</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
-<span id="cb196-10"><a href="data-abstraction.html#cb196-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">LATITUDE =</span> <span class="fu">first</span>(LATITUDE), <span class="at">LONGITUDE =</span> <span class="fu">first</span>(LONGITUDE))</span></code></pre></div>
-<pre><code>## Warning: Missing column names filled in: &#39;X110&#39; [110]</code></pre>
-<pre><code>## Warning: 3807 parsing failures.
-## row col    expected      actual                                                                               file
-##   1  -- 110 columns 109 columns &#39;C:/Users/900008452/Documents/R/win-library/4.0/iGIScData/extdata/TRI_2017_CA.csv&#39;
-##   2  -- 110 columns 109 columns &#39;C:/Users/900008452/Documents/R/win-library/4.0/iGIScData/extdata/TRI_2017_CA.csv&#39;
-##   3  -- 110 columns 109 columns &#39;C:/Users/900008452/Documents/R/win-library/4.0/iGIScData/extdata/TRI_2017_CA.csv&#39;
-##   4  -- 110 columns 109 columns &#39;C:/Users/900008452/Documents/R/win-library/4.0/iGIScData/extdata/TRI_2017_CA.csv&#39;
-##   5  -- 110 columns 109 columns &#39;C:/Users/900008452/Documents/R/win-library/4.0/iGIScData/extdata/TRI_2017_CA.csv&#39;
-## ... ... ........... ........... ..................................................................................
-## See problems(...) for more details.</code></pre>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="data-abstraction.html#cb197-1" aria-hidden="true" tabindex="-1"></a>csvPath <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;TRI_2017_CA.csv&quot;</span>, <span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>
+<span id="cb197-2"><a href="data-abstraction.html#cb197-2" aria-hidden="true" tabindex="-1"></a>TRI_BySite <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(csvPath) <span class="sc">%&gt;%</span></span>
+<span id="cb197-3"><a href="data-abstraction.html#cb197-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">all_air =</span> <span class="st">`</span><span class="at">5.1_FUGITIVE_AIR</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">5.2_STACK_AIR</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb197-4"><a href="data-abstraction.html#cb197-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(all_air <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb197-5"><a href="data-abstraction.html#cb197-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(FACILITY_NAME) <span class="sc">%&gt;%</span></span>
+<span id="cb197-6"><a href="data-abstraction.html#cb197-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb197-7"><a href="data-abstraction.html#cb197-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">FACILITY_NAME =</span> <span class="fu">first</span>(FACILITY_NAME),</span>
+<span id="cb197-8"><a href="data-abstraction.html#cb197-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">air_releases =</span> <span class="fu">sum</span>(all_air, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb197-9"><a href="data-abstraction.html#cb197-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_fugitive =</span> <span class="fu">mean</span>(<span class="st">`</span><span class="at">5.1_FUGITIVE_AIR</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb197-10"><a href="data-abstraction.html#cb197-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">LATITUDE =</span> <span class="fu">first</span>(LATITUDE), <span class="at">LONGITUDE =</span> <span class="fu">first</span>(LONGITUDE))</span></code></pre></div>
 </div>
 <div id="count" class="section level3" number="3.6.5">
 <h3><span class="header-section-number">3.6.5</span> Count</h3>
 <p>Count is a simple variant on summarize by group, since the only statistic is the count of events. [<strong><code>eucoak</code> project</strong>]</p>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="data-abstraction.html#cb199-1" aria-hidden="true" tabindex="-1"></a>tidy_eucoak <span class="sc">%&gt;%</span> <span class="fu">count</span>(tree)</span></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="data-abstraction.html#cb198-1" aria-hidden="true" tabindex="-1"></a>tidy_eucoak <span class="sc">%&gt;%</span> <span class="fu">count</span>(tree)</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 2
 ##   tree      n
 ##   &lt;chr&gt; &lt;int&gt;
 ## 1 euc      90
 ## 2 oak      90</code></pre>
 <p><strong>Another way is to use n():</strong></p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="data-abstraction.html#cb201-1" aria-hidden="true" tabindex="-1"></a>tidy_eucoak <span class="sc">%&gt;%</span></span>
-<span id="cb201-2"><a href="data-abstraction.html#cb201-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(tree) <span class="sc">%&gt;%</span></span>
-<span id="cb201-3"><a href="data-abstraction.html#cb201-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>())</span></code></pre></div>
-<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="data-abstraction.html#cb200-1" aria-hidden="true" tabindex="-1"></a>tidy_eucoak <span class="sc">%&gt;%</span></span>
+<span id="cb200-2"><a href="data-abstraction.html#cb200-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(tree) <span class="sc">%&gt;%</span></span>
+<span id="cb200-3"><a href="data-abstraction.html#cb200-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>())</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 2
 ##   tree      n
 ##   &lt;chr&gt; &lt;int&gt;
@@ -619,15 +610,14 @@ We commonly see summary statistics using <code>na.rm = TRUE</code> in order to <
 <div id="sorting-after-summarizing" class="section level3" number="3.6.6">
 <h3><span class="header-section-number">3.6.6</span> Sorting after summarizing</h3>
 <p>Using the marine debris data from NOAA Marine Debris Program’s <em>Marine Debris Monitoring and Assessment Project</em> [in a <strong>new <code>litter</code> project</strong>]</p>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="data-abstraction.html#cb204-1" aria-hidden="true" tabindex="-1"></a>shorelineLatLong <span class="ot">&lt;-</span> ConcentrationReport <span class="sc">%&gt;%</span></span>
-<span id="cb204-2"><a href="data-abstraction.html#cb204-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="st">`</span><span class="at">Shoreline Name</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb204-3"><a href="data-abstraction.html#cb204-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb204-4"><a href="data-abstraction.html#cb204-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">latitude =</span> <span class="fu">mean</span>((<span class="st">`</span><span class="at">Latitude Start</span><span class="st">`</span><span class="sc">+</span><span class="st">`</span><span class="at">Latitude End</span><span class="st">`</span>)<span class="sc">/</span><span class="dv">2</span>),</span>
-<span id="cb204-5"><a href="data-abstraction.html#cb204-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">longitude =</span> <span class="fu">mean</span>((<span class="st">`</span><span class="at">Longitude Start</span><span class="st">`</span><span class="sc">+</span><span class="st">`</span><span class="at">Longitude End</span><span class="st">`</span>)<span class="sc">/</span><span class="dv">2</span>)</span>
-<span id="cb204-6"><a href="data-abstraction.html#cb204-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb204-7"><a href="data-abstraction.html#cb204-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(latitude)</span></code></pre></div>
-<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="data-abstraction.html#cb206-1" aria-hidden="true" tabindex="-1"></a>shorelineLatLong</span></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="data-abstraction.html#cb202-1" aria-hidden="true" tabindex="-1"></a>shorelineLatLong <span class="ot">&lt;-</span> ConcentrationReport <span class="sc">%&gt;%</span></span>
+<span id="cb202-2"><a href="data-abstraction.html#cb202-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="st">`</span><span class="at">Shoreline Name</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb202-3"><a href="data-abstraction.html#cb202-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb202-4"><a href="data-abstraction.html#cb202-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">latitude =</span> <span class="fu">mean</span>((<span class="st">`</span><span class="at">Latitude Start</span><span class="st">`</span><span class="sc">+</span><span class="st">`</span><span class="at">Latitude End</span><span class="st">`</span>)<span class="sc">/</span><span class="dv">2</span>),</span>
+<span id="cb202-5"><a href="data-abstraction.html#cb202-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">longitude =</span> <span class="fu">mean</span>((<span class="st">`</span><span class="at">Longitude Start</span><span class="st">`</span><span class="sc">+</span><span class="st">`</span><span class="at">Longitude End</span><span class="st">`</span>)<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb202-6"><a href="data-abstraction.html#cb202-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb202-7"><a href="data-abstraction.html#cb202-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(latitude)</span>
+<span id="cb202-8"><a href="data-abstraction.html#cb202-8" aria-hidden="true" tabindex="-1"></a>shorelineLatLong</span></code></pre></div>
 <pre><code>## # A tibble: 38 x 3
 ##    `Shoreline Name`   latitude longitude
 ##    &lt;chr&gt;                 &lt;dbl&gt;     &lt;dbl&gt;
@@ -655,25 +645,12 @@ We commonly see summary statistics using <code>na.rm = TRUE</code> in order to <
 <li>The advantage of the pipe is you don’t have to keep referencing the data frame.</li>
 <li>The dot is then used to connect to items inside the data frame [in <strong><code>air_quality</code></strong>]</li>
 </ul>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="data-abstraction.html#cb208-1" aria-hidden="true" tabindex="-1"></a>csvPath <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;TRI_1987_BaySites.csv&quot;</span>, <span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>
-<span id="cb208-2"><a href="data-abstraction.html#cb208-2" aria-hidden="true" tabindex="-1"></a>TRI87 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(csvPath)</span></code></pre></div>
-<pre><code>## 
-## -- Column specification -----------------------------------------------------------------------------------------------------------
-## cols(
-##   TRI_FACILITY_ID = col_character(),
-##   count = col_double(),
-##   FACILITY_NAME = col_character(),
-##   COUNTY = col_character(),
-##   air_releases = col_double(),
-##   fugitive_air = col_double(),
-##   stack_air = col_double(),
-##   LATITUDE = col_double(),
-##   LONGITUDE = col_double()
-## )</code></pre>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="data-abstraction.html#cb210-1" aria-hidden="true" tabindex="-1"></a>stackrate <span class="ot">&lt;-</span> TRI87 <span class="sc">%&gt;%</span></span>
-<span id="cb210-2"><a href="data-abstraction.html#cb210-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">stackrate =</span> stack_air<span class="sc">/</span>air_releases) <span class="sc">%&gt;%</span></span>
-<span id="cb210-3"><a href="data-abstraction.html#cb210-3" aria-hidden="true" tabindex="-1"></a>  .<span class="sc">$</span>stackrate</span>
-<span id="cb210-4"><a href="data-abstraction.html#cb210-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(stackrate)</span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="data-abstraction.html#cb204-1" aria-hidden="true" tabindex="-1"></a>csvPath <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;TRI_1987_BaySites.csv&quot;</span>, <span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>
+<span id="cb204-2"><a href="data-abstraction.html#cb204-2" aria-hidden="true" tabindex="-1"></a>TRI87 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(csvPath)</span>
+<span id="cb204-3"><a href="data-abstraction.html#cb204-3" aria-hidden="true" tabindex="-1"></a>stackrate <span class="ot">&lt;-</span> TRI87 <span class="sc">%&gt;%</span></span>
+<span id="cb204-4"><a href="data-abstraction.html#cb204-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">stackrate =</span> stack_air<span class="sc">/</span>air_releases) <span class="sc">%&gt;%</span></span>
+<span id="cb204-5"><a href="data-abstraction.html#cb204-5" aria-hidden="true" tabindex="-1"></a>  .<span class="sc">$</span>stackrate</span>
+<span id="cb204-6"><a href="data-abstraction.html#cb204-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(stackrate)</span></code></pre></div>
 <pre><code>## [1] 0.0000000 0.0000000 0.0000000 0.0000000 0.6666667 1.0000000</code></pre>
 </div>
 <div id="exercises-1" class="section level2" number="3.8">
@@ -708,21 +685,21 @@ based on those patterns. [These can be investigated in your <strong><code>generi
 <li><strong><code>str_which</code></strong> returns the indices of strings that match a pattern</li>
 <li><strong><code>str_count</code></strong> counts the number of matches in each string</li>
 </ul>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="data-abstraction.html#cb212-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(fruit,<span class="st">&quot;qu&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="data-abstraction.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(fruit,<span class="st">&quot;qu&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] FALSE FALSE FALSE FALSE</code></pre>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="data-abstraction.html#cb214-1" aria-hidden="true" tabindex="-1"></a>fruit[<span class="fu">str_detect</span>(fruit,<span class="st">&quot;qu&quot;</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="data-abstraction.html#cb208-1" aria-hidden="true" tabindex="-1"></a>fruit[<span class="fu">str_detect</span>(fruit,<span class="st">&quot;qu&quot;</span>)]</span></code></pre></div>
 <pre><code>## character(0)</code></pre>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="data-abstraction.html#cb216-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(<span class="fu">str_locate</span>(fruit, <span class="st">&quot;qu&quot;</span>),<span class="dv">15</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="data-abstraction.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(<span class="fu">str_locate</span>(fruit, <span class="st">&quot;qu&quot;</span>),<span class="dv">15</span>)</span></code></pre></div>
 <pre><code>##      start end
 ## [1,]    NA  NA
 ## [2,]    NA  NA
 ## [3,]    NA  NA
 ## [4,]    NA  NA</code></pre>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="data-abstraction.html#cb218-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_which</span>(fruit, <span class="st">&quot;qu&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="data-abstraction.html#cb212-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_which</span>(fruit, <span class="st">&quot;qu&quot;</span>)</span></code></pre></div>
 <pre><code>## integer(0)</code></pre>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="data-abstraction.html#cb220-1" aria-hidden="true" tabindex="-1"></a>fruit[<span class="fu">str_which</span>(fruit,<span class="st">&quot;qu&quot;</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="data-abstraction.html#cb214-1" aria-hidden="true" tabindex="-1"></a>fruit[<span class="fu">str_which</span>(fruit,<span class="st">&quot;qu&quot;</span>)]</span></code></pre></div>
 <pre><code>## character(0)</code></pre>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="data-abstraction.html#cb222-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_count</span>(fruit,<span class="st">&quot;qu&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="data-abstraction.html#cb216-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_count</span>(fruit,<span class="st">&quot;qu&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] 0 0 0 0</code></pre>
 </div>
 <div id="subsetting-strings" class="section level3" number="3.9.2">
@@ -735,14 +712,14 @@ by a match (similar to a filter for data frames), or just a specified part of a 
 <li><strong><code>str_extract</code></strong> returns the first (or if <code>str_extract_all</code> then all matches) pattern matches</li>
 <li><strong><code>str_match</code></strong> returns the first (or <code>_all</code>) pattern match as a matrix</li>
 </ul>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="data-abstraction.html#cb224-1" aria-hidden="true" tabindex="-1"></a>qfruit <span class="ot">&lt;-</span> <span class="fu">str_subset</span>(fruit, <span class="st">&quot;q&quot;</span>)</span>
-<span id="cb224-2"><a href="data-abstraction.html#cb224-2" aria-hidden="true" tabindex="-1"></a>qfruit</span></code></pre></div>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="data-abstraction.html#cb218-1" aria-hidden="true" tabindex="-1"></a>qfruit <span class="ot">&lt;-</span> <span class="fu">str_subset</span>(fruit, <span class="st">&quot;q&quot;</span>)</span>
+<span id="cb218-2"><a href="data-abstraction.html#cb218-2" aria-hidden="true" tabindex="-1"></a>qfruit</span></code></pre></div>
 <pre><code>## character(0)</code></pre>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="data-abstraction.html#cb226-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_sub</span>(qfruit,<span class="dv">1</span>,<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="data-abstraction.html#cb220-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_sub</span>(qfruit,<span class="dv">1</span>,<span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## character(0)</code></pre>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="data-abstraction.html#cb228-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_sub</span>(<span class="st">&quot;94132&quot;</span>,<span class="dv">1</span>,<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="data-abstraction.html#cb222-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_sub</span>(<span class="st">&quot;94132&quot;</span>,<span class="dv">1</span>,<span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;94&quot;</code></pre>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="data-abstraction.html#cb230-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_extract</span>(qfruit,<span class="st">&quot;[aeiou]&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="data-abstraction.html#cb224-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_extract</span>(qfruit,<span class="st">&quot;[aeiou]&quot;</span>)</span></code></pre></div>
 <pre><code>## character(0)</code></pre>
 </div>
 <div id="string-length" class="section level3" number="3.9.3">
@@ -754,23 +731,23 @@ as an integer, or purposefully increasing or reducing it.</p>
 <li><strong><code>str_pad</code></strong> adds a specified character (typically a space " ") to either end of a string</li>
 <li><strong><code>str_trim</code></strong> removes whitespace from the either end of a string</li>
 </ul>
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="data-abstraction.html#cb232-1" aria-hidden="true" tabindex="-1"></a>qfruit <span class="ot">&lt;-</span> <span class="fu">str_subset</span>(fruit,<span class="st">&quot;q&quot;</span>)</span>
-<span id="cb232-2"><a href="data-abstraction.html#cb232-2" aria-hidden="true" tabindex="-1"></a>qfruit</span></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="data-abstraction.html#cb226-1" aria-hidden="true" tabindex="-1"></a>qfruit <span class="ot">&lt;-</span> <span class="fu">str_subset</span>(fruit,<span class="st">&quot;q&quot;</span>)</span>
+<span id="cb226-2"><a href="data-abstraction.html#cb226-2" aria-hidden="true" tabindex="-1"></a>qfruit</span></code></pre></div>
 <pre><code>## character(0)</code></pre>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="data-abstraction.html#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_length</span>(qfruit)</span></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="data-abstraction.html#cb228-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_length</span>(qfruit)</span></code></pre></div>
 <pre><code>## integer(0)</code></pre>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="data-abstraction.html#cb236-1" aria-hidden="true" tabindex="-1"></a>name <span class="ot">&lt;-</span> <span class="st">&quot;Inigo Montoya&quot;</span></span>
-<span id="cb236-2"><a href="data-abstraction.html#cb236-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str_length</span>(name)</span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="data-abstraction.html#cb230-1" aria-hidden="true" tabindex="-1"></a>name <span class="ot">&lt;-</span> <span class="st">&quot;Inigo Montoya&quot;</span></span>
+<span id="cb230-2"><a href="data-abstraction.html#cb230-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str_length</span>(name)</span></code></pre></div>
 <pre><code>## [1] 13</code></pre>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="data-abstraction.html#cb238-1" aria-hidden="true" tabindex="-1"></a>firstname <span class="ot">&lt;-</span> <span class="fu">str_sub</span>(name,<span class="dv">1</span>,<span class="fu">str_locate</span>(name,<span class="st">&quot; &quot;</span>)[<span class="dv">1</span>]<span class="sc">-</span><span class="dv">1</span>)</span>
-<span id="cb238-2"><a href="data-abstraction.html#cb238-2" aria-hidden="true" tabindex="-1"></a>firstname</span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="data-abstraction.html#cb232-1" aria-hidden="true" tabindex="-1"></a>firstname <span class="ot">&lt;-</span> <span class="fu">str_sub</span>(name,<span class="dv">1</span>,<span class="fu">str_locate</span>(name,<span class="st">&quot; &quot;</span>)[<span class="dv">1</span>]<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb232-2"><a href="data-abstraction.html#cb232-2" aria-hidden="true" tabindex="-1"></a>firstname</span></code></pre></div>
 <pre><code>## [1] &quot;Inigo&quot;</code></pre>
-<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="data-abstraction.html#cb240-1" aria-hidden="true" tabindex="-1"></a>lastname <span class="ot">&lt;-</span> <span class="fu">str_sub</span>(name,<span class="fu">str_locate</span>(name,<span class="st">&quot; &quot;</span>)[<span class="dv">1</span>]<span class="sc">+</span><span class="dv">1</span>,<span class="fu">str_length</span>(name))</span>
-<span id="cb240-2"><a href="data-abstraction.html#cb240-2" aria-hidden="true" tabindex="-1"></a>lastname</span></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="data-abstraction.html#cb234-1" aria-hidden="true" tabindex="-1"></a>lastname <span class="ot">&lt;-</span> <span class="fu">str_sub</span>(name,<span class="fu">str_locate</span>(name,<span class="st">&quot; &quot;</span>)[<span class="dv">1</span>]<span class="sc">+</span><span class="dv">1</span>,<span class="fu">str_length</span>(name))</span>
+<span id="cb234-2"><a href="data-abstraction.html#cb234-2" aria-hidden="true" tabindex="-1"></a>lastname</span></code></pre></div>
 <pre><code>## [1] &quot;Montoya&quot;</code></pre>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="data-abstraction.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_pad</span>(qfruit,<span class="dv">10</span>,<span class="st">&quot;both&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="data-abstraction.html#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_pad</span>(qfruit,<span class="dv">10</span>,<span class="st">&quot;both&quot;</span>)</span></code></pre></div>
 <pre><code>## character(0)</code></pre>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="data-abstraction.html#cb244-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_trim</span>(<span class="fu">str_pad</span>(qfruit,<span class="dv">10</span>,<span class="st">&quot;both&quot;</span>),<span class="st">&quot;both&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="data-abstraction.html#cb238-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_trim</span>(<span class="fu">str_pad</span>(qfruit,<span class="dv">10</span>,<span class="st">&quot;both&quot;</span>),<span class="st">&quot;both&quot;</span>)</span></code></pre></div>
 <pre><code>## character(0)</code></pre>
 </div>
 <div id="replacing-substrings-with-other-text-mutating-strings" class="section level3" number="3.9.4">
@@ -783,14 +760,14 @@ as an integer, or purposefully increasing or reducing it.</p>
 <li><strong><code>str_sub</code></strong> a special use of this function to replace substrings with a specified string</li>
 <li><strong><code>str_replace</code></strong> replaces the first matched pattern (or all with <code>str_replace_all</code>) with a specified string</li>
 </ul>
-<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="data-abstraction.html#cb246-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_to_lower</span>(name)</span></code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="data-abstraction.html#cb240-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_to_lower</span>(name)</span></code></pre></div>
 <pre><code>## [1] &quot;inigo montoya&quot;</code></pre>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="data-abstraction.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_to_upper</span>(name)</span></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="data-abstraction.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_to_upper</span>(name)</span></code></pre></div>
 <pre><code>## [1] &quot;INIGO MONTOYA&quot;</code></pre>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="data-abstraction.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_to_title</span>(<span class="st">&quot;for whom the bell tolls&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="data-abstraction.html#cb244-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_to_title</span>(<span class="st">&quot;for whom the bell tolls&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;For Whom The Bell Tolls&quot;</code></pre>
-<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="data-abstraction.html#cb252-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_sub</span>(name,<span class="dv">1</span>,<span class="fu">str_locate</span>(name,<span class="st">&quot; &quot;</span>)<span class="sc">-</span><span class="dv">1</span>) <span class="ot">&lt;-</span> <span class="st">&quot;Diego&quot;</span></span>
-<span id="cb252-2"><a href="data-abstraction.html#cb252-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str_replace</span>(qfruit,<span class="st">&quot;q&quot;</span>,<span class="st">&quot;z&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="data-abstraction.html#cb246-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_sub</span>(name,<span class="dv">1</span>,<span class="fu">str_locate</span>(name,<span class="st">&quot; &quot;</span>)<span class="sc">-</span><span class="dv">1</span>) <span class="ot">&lt;-</span> <span class="st">&quot;Diego&quot;</span></span>
+<span id="cb246-2"><a href="data-abstraction.html#cb246-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str_replace</span>(qfruit,<span class="st">&quot;q&quot;</span>,<span class="st">&quot;z&quot;</span>)</span></code></pre></div>
 <pre><code>## character(0)</code></pre>
 </div>
 <div id="concatenating-and-splitting" class="section level3" number="3.9.5">
@@ -804,15 +781,15 @@ string that might need a zero or something at the left or right.</p>
 of " “, so <code>str_c</code> is just <code>paste</code> with a default”" separator, but you can also use " ".</li>
 <li><strong><code>str_split</code></strong> splits a string into parts based upon the detection of a specified separator like space, comma, or line end</li>
 </ul>
-<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="data-abstraction.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_split</span>(<span class="st">&quot;for whom the bell tolls&quot;</span>, <span class="st">&quot; &quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="data-abstraction.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_split</span>(<span class="st">&quot;for whom the bell tolls&quot;</span>, <span class="st">&quot; &quot;</span>)</span></code></pre></div>
 <pre><code>## [[1]]
 ## [1] &quot;for&quot;   &quot;whom&quot;  &quot;the&quot;   &quot;bell&quot;  &quot;tolls&quot;</code></pre>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="data-abstraction.html#cb256-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_c</span>(<span class="st">&quot;for&quot;</span>,<span class="st">&quot;whom&quot;</span>,<span class="st">&quot;the&quot;</span>,<span class="st">&quot;bell&quot;</span>,<span class="st">&quot;tolls&quot;</span>,<span class="at">sep=</span><span class="st">&quot; &quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="data-abstraction.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_c</span>(<span class="st">&quot;for&quot;</span>,<span class="st">&quot;whom&quot;</span>,<span class="st">&quot;the&quot;</span>,<span class="st">&quot;bell&quot;</span>,<span class="st">&quot;tolls&quot;</span>,<span class="at">sep=</span><span class="st">&quot; &quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;for whom the bell tolls&quot;</code></pre>
-<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="data-abstraction.html#cb258-1" aria-hidden="true" tabindex="-1"></a>csvPath <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;CA_MdInc.csv&quot;</span>,<span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>
-<span id="cb258-2"><a href="data-abstraction.html#cb258-2" aria-hidden="true" tabindex="-1"></a>CA_MdInc <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(csvPath)</span>
-<span id="cb258-3"><a href="data-abstraction.html#cb258-3" aria-hidden="true" tabindex="-1"></a>join_id <span class="ot">&lt;-</span> <span class="fu">str_c</span>(<span class="st">&quot;0&quot;</span>,CA_MdInc<span class="sc">$</span>NAME) <span class="co"># could also use str_pad(CA_MdInc$NAME,1,side=&quot;left&quot;,pad=&quot;0&quot;)</span></span>
-<span id="cb258-4"><a href="data-abstraction.html#cb258-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(CA_MdInc)</span></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="data-abstraction.html#cb252-1" aria-hidden="true" tabindex="-1"></a>csvPath <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;CA_MdInc.csv&quot;</span>,<span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>
+<span id="cb252-2"><a href="data-abstraction.html#cb252-2" aria-hidden="true" tabindex="-1"></a>CA_MdInc <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(csvPath)</span>
+<span id="cb252-3"><a href="data-abstraction.html#cb252-3" aria-hidden="true" tabindex="-1"></a>join_id <span class="ot">&lt;-</span> <span class="fu">str_c</span>(<span class="st">&quot;0&quot;</span>,CA_MdInc<span class="sc">$</span>NAME) <span class="co"># could also use str_pad(CA_MdInc$NAME,1,side=&quot;left&quot;,pad=&quot;0&quot;)</span></span>
+<span id="cb252-4"><a href="data-abstraction.html#cb252-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(CA_MdInc)</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 3
 ##         trID     NAME HHinc2016
 ##        &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
@@ -822,7 +799,7 @@ of " “, so <code>str_c</code> is just <code>paste</code> with a default”" se
 ## 4 6001400400 60014004     99539
 ## 5 6001400500 60014005     83650
 ## 6 6001400600 60014006     61597</code></pre>
-<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="data-abstraction.html#cb260-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(join_id)</span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="data-abstraction.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(join_id)</span></code></pre></div>
 <pre><code>## [1] &quot;060014001&quot; &quot;060014002&quot; &quot;060014003&quot; &quot;060014004&quot; &quot;060014005&quot; &quot;060014006&quot;</code></pre>
 </div>
 </div>
@@ -836,32 +813,32 @@ of " “, so <code>str_c</code> is just <code>paste</code> with a default”" se
 demonstrate that it’s pretty easy to use, and does a good job of making your
 job easier.</li>
 </ul>
-<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="data-abstraction.html#cb262-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
-<span id="cb262-2"><a href="data-abstraction.html#cb262-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dmy</span>(<span class="st">&quot;20 September 2020&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="data-abstraction.html#cb256-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb256-2"><a href="data-abstraction.html#cb256-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dmy</span>(<span class="st">&quot;20 September 2020&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;2020-09-20&quot;</code></pre>
-<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="data-abstraction.html#cb264-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dmy_hm</span>(<span class="st">&quot;20 September 2020 10:45&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="data-abstraction.html#cb258-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dmy_hm</span>(<span class="st">&quot;20 September 2020 10:45&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;2020-09-20 10:45:00 UTC&quot;</code></pre>
-<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="data-abstraction.html#cb266-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mdy_hms</span>(<span class="st">&quot;September 20, 2020 10:48&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="data-abstraction.html#cb260-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mdy_hms</span>(<span class="st">&quot;September 20, 2020 10:48&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;2020-09-20 20:10:48 UTC&quot;</code></pre>
-<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="data-abstraction.html#cb268-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mdy_hm</span>(<span class="st">&quot;9/20/20 10:50&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="data-abstraction.html#cb262-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mdy_hm</span>(<span class="st">&quot;9/20/20 10:50&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;2020-09-20 10:50:00 UTC&quot;</code></pre>
-<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="data-abstraction.html#cb270-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mdy</span>(<span class="st">&quot;9.20.20&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="data-abstraction.html#cb264-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mdy</span>(<span class="st">&quot;9.20.20&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;2020-09-20&quot;</code></pre>
-<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="data-abstraction.html#cb272-1" aria-hidden="true" tabindex="-1"></a>start704 <span class="ot">&lt;-</span> <span class="fu">dmy_hm</span>(<span class="st">&quot;24 August 2020 16:00&quot;</span>)</span>
-<span id="cb272-2"><a href="data-abstraction.html#cb272-2" aria-hidden="true" tabindex="-1"></a>end704 <span class="ot">&lt;-</span> <span class="fu">mdy_hm</span>(<span class="st">&quot;12/18/2020 4:45 pm&quot;</span>)</span>
-<span id="cb272-3"><a href="data-abstraction.html#cb272-3" aria-hidden="true" tabindex="-1"></a><span class="fu">year</span>(start704)</span></code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="data-abstraction.html#cb266-1" aria-hidden="true" tabindex="-1"></a>start704 <span class="ot">&lt;-</span> <span class="fu">dmy_hm</span>(<span class="st">&quot;24 August 2020 16:00&quot;</span>)</span>
+<span id="cb266-2"><a href="data-abstraction.html#cb266-2" aria-hidden="true" tabindex="-1"></a>end704 <span class="ot">&lt;-</span> <span class="fu">mdy_hm</span>(<span class="st">&quot;12/18/2020 4:45 pm&quot;</span>)</span>
+<span id="cb266-3"><a href="data-abstraction.html#cb266-3" aria-hidden="true" tabindex="-1"></a><span class="fu">year</span>(start704)</span></code></pre></div>
 <pre><code>## [1] 2020</code></pre>
-<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="data-abstraction.html#cb274-1" aria-hidden="true" tabindex="-1"></a><span class="fu">month</span>(start704)</span></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="data-abstraction.html#cb268-1" aria-hidden="true" tabindex="-1"></a><span class="fu">month</span>(start704)</span></code></pre></div>
 <pre><code>## [1] 8</code></pre>
-<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="data-abstraction.html#cb276-1" aria-hidden="true" tabindex="-1"></a><span class="fu">day</span>(end704)</span></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="data-abstraction.html#cb270-1" aria-hidden="true" tabindex="-1"></a><span class="fu">day</span>(end704)</span></code></pre></div>
 <pre><code>## [1] 18</code></pre>
-<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="data-abstraction.html#cb278-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hour</span>(end704)</span></code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="data-abstraction.html#cb272-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hour</span>(end704)</span></code></pre></div>
 <pre><code>## [1] 16</code></pre>
-<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="data-abstraction.html#cb280-1" aria-hidden="true" tabindex="-1"></a>end704<span class="sc">-</span>start704</span></code></pre></div>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="data-abstraction.html#cb274-1" aria-hidden="true" tabindex="-1"></a>end704<span class="sc">-</span>start704</span></code></pre></div>
 <pre><code>## Time difference of 116.0312 days</code></pre>
-<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="data-abstraction.html#cb282-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_date</span>(end704)</span></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="data-abstraction.html#cb276-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_date</span>(end704)</span></code></pre></div>
 <pre><code>## [1] &quot;2020-12-18&quot;</code></pre>
-<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="data-abstraction.html#cb284-1" aria-hidden="true" tabindex="-1"></a>hms<span class="sc">::</span><span class="fu">as_hms</span>(end704)</span></code></pre></div>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="data-abstraction.html#cb278-1" aria-hidden="true" tabindex="-1"></a>hms<span class="sc">::</span><span class="fu">as_hms</span>(end704)</span></code></pre></div>
 <pre><code>## 16:45:00</code></pre>
 <p>Note the use of :: after the package
 Sometimes you need to specify the package and function name this way, for instance if more than one package has a function of the same name.<br />

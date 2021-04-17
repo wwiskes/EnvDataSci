@@ -70,15 +70,17 @@ accomplish and also gives you a sense of what developing your own package might 
 
 **Arithmetic operators**
 There are of course all the normal arithmetic operators (that are actually functions)
-like + - * /.  You're probably familiar with these from using equations in Excel if not 
+like plus + and minus - or the key-stroke approximations of multiply * and divide / operators.
+You're probably familiar with these approximations from using equations in Excel if not 
 in some other programming language you may have learned. These operators look a bit different
-from how they'd look when creating a nicely formatted equation.$\frac{NIR - R}{NIR + R}$
-instead has to look like `(NIR-R)/(NIR+R)`.  Similarly `*` *must* be used to multiply; there's no implied multiplication 
+from how they'd look when creating a nicely formatted equation. 
+
+For example, $\frac{NIR - R}{NIR + R}$ instead has to look like `(NIR-R)/(NIR+R)`.
+Similarly `*` *must* be used to multiply; there's no implied multiplication 
 that we expect in a math equation like $x(2+y)$ which would need to be written `x*(2+y)`.
 
 In contrast to those four well-known operators, the symbol used to exponentiate -- raise to a power -- 
-varies among programming languages. R uses ** so the the Pythagorean theorem $c^2=a^2+b^2$ would be written `c**2 = a**2 + b**2` 
-except for the fact that it wouldn't make sense as a statement to R. 
+varies among programming languages. R uses ** so the the Pythagorean theorem $c^2=a^2+b^2$ would be written `c**2 = a**2 + b**2` except for the fact that it wouldn't make sense as a statement to R. 
 We'll need to talk about expressions and statements.
 
 ## Expressions and Statements
@@ -100,10 +102,12 @@ paste("My name is", aname)
 
 Note that some of those expressions used previously assigned variables -- x, a, b, c, aname. 
 
-An expression can be entered in the console to display its current value.
+An expression can be entered in the console to display its current value, and this is commonly done in R for objects of many types and complexity.
+
 ```{r}
 cos(pi)
 print(cos(pi))
+state.x77
 ```
 
 A *statement* in R does something. It represents a directive we're assigning to the computer, or
@@ -126,7 +130,7 @@ Many (perhaps most) statements don't actually display anything. For instance:
 ```{r}
 x <- 5
 ```
-doesn't display anything, but it does assign the value 5 to the variable x, so it *does something*. It's an *assignment statement* and uses that special assignment operator `<-` .  Most languages just use `=` which the designers of R didn't want to use, to avoid confusing it with the equal sign meaning "is equal to". 
+doesn't display anything, but it does assign the value 5 to the variable x, so it simply *does something*. It's an *assignment statement* and uses that special assignment operator `<-` .  Most languages just use `=` which the designers of R didn't want to use, to avoid confusing it with the equal sign meaning "is equal to". 
 
 *An assignment statement assigns an expression to a variable.* If that variable already exists, it is reused with the new value. For instance it's completely legit (and commonly done in coding) to update the variable in an assignment statement.  This is very common when using a counter variable:
 ```
@@ -363,7 +367,6 @@ A data frame is a database with fields (as vectors) with records (rows), so is v
 
 ```{r warning=FALSE}
 library(palmerpenguins)
-# data(package = 'palmerpenguins')
 head(penguins)
 ```
 **Creating a data frame out of a matrix**

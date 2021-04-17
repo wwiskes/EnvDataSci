@@ -49,16 +49,23 @@ Advantages
 
 How created
 
+
 - Reading from a CSV, using one of a variety of Tidyverse functions similarly named to base functions:
     - `read_csv` creates a tibble (in general, underscores are used in the Tidyverse)
     - `read.csv` creates a regular data frame
-- You can also use the `tibble()` function [**`air_quality` project**]
 
+[**`air_quality` project**]
+ 
 ```{r message=F}
 library(tidyverse) # includes readr, ggplot2, and dplyr which we'll use in this chapter
 library(iGIScData)
 csvPath <- system.file("extdata","TRI_1987_BaySites.csv", package="iGIScData")
 TRI87 <- read_csv(csvPath)
+```
+
+- You can also use the `tibble()` function
+
+```{r message=F, warning=F}
 a <- rnorm(10)
 b <- runif(10)
 ab <- tibble(a,b)
@@ -84,7 +91,7 @@ Recommendation:  Use `read_csv` and `write_csv`.
 
 ## Statistical summary of variables
 
-A simple statistical summary is very easy to do:
+A simple statistical summary is very easy to do [**`eucoak`**]:
 
 ```{r}
 summary(eucoakrainfallrunoffTDR)
@@ -170,7 +177,7 @@ Then you do some processing to change it, maybe adding variables, reorganizing, 
 
 You'll find that you need to use this all the time with real data. You have a bunch of data where some categorical variable is defining a grouping, like our site field in the eucoak data. We'd like to just create average slope, rainfall, and runoff for each site. Note that it involves two steps, first defining which field defines the group, then the various summary statistics we'd like to store.  In this case all of the slopes under oak remain the same for a given site -- it's a *site* characteristic -- and the same applies to the euc site, so we can just grab the first value (mean would have also worked of course).
 
-```{r}
+```{r warning=F, message=F}
 eucoakSiteAvg <- runoff %>%
   group_by(site) %>%
   summarize(
@@ -187,7 +194,7 @@ eucoakSiteAvg
 
 **Summarizing by group with TRI data [`air_quality` project]**
 
-```{r, message=FALSE}
+```{r, message=FALSE, warning=F}
 csvPath <- system.file("extdata","TRI_2017_CA.csv", package="iGIScData")
 TRI_BySite <- read_csv(csvPath) %>%
   mutate(all_air = `5.1_FUGITIVE_AIR` + `5.2_STACK_AIR`) %>%
@@ -205,14 +212,14 @@ TRI_BySite <- read_csv(csvPath) %>%
 
 Count is a simple variant on summarize by group, since the only statistic is the count of events. [**`eucoak` project**]
 
-```{r}
+```{r message=F, warning=F}
 tidy_eucoak %>% count(tree)
 
 ```
 
 **Another way is to use n():**
 
-```{r}
+```{r message=F, warning=F}
 tidy_eucoak %>%
   group_by(tree) %>%
   summarize(n = n())
@@ -221,7 +228,7 @@ tidy_eucoak %>%
 ### Sorting after summarizing
 
 Using the marine debris data from NOAA Marine Debris Program's *Marine Debris Monitoring and Assessment Project* [in a **new `litter` project**]
-```{r}
+```{r message=F, warning=F}
 shorelineLatLong <- ConcentrationReport %>%
   group_by(`Shoreline Name`) %>%
   summarize(
@@ -244,7 +251,7 @@ A similar specification is used in piped sequences
 - The advantage of the pipe is you don't have to keep referencing the data frame.
 - The dot is then used to connect to items inside the data frame [in **`air_quality`**]
 
-```{r}
+```{r message=F, warning=F}
 csvPath <- system.file("extdata","TRI_1987_BaySites.csv", package="iGIScData")
 TRI87 <- read_csv(csvPath)
 stackrate <- TRI87 %>%

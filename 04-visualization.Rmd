@@ -158,7 +158,9 @@ ggplot(data = tidy_eucoak) +
 
 ```
 
-**Visualizing soil CO_2_ data with a Tukey box plot [`soilCO2`]**
+**Visualizing soil CO_2_ data with a Tukey box plot**
+
+[**`soilCO2`**]
 
 ```{r warning=FALSE, fig.cap = "Visualizing soil CO_2_ data with a Tukey box plot"}
 soilCO2 <- soilCO2_97
@@ -171,7 +173,7 @@ ggplot(data = soilCO2, mapping = aes(x = SITE, y = `CO2%`)) +
 ## Plotting two variables
 ### Two continuous variables
 
-We've looked at this before -- the scatterplot [**`sierra`**]
+[**`sierra`**] We've looked at this before -- the scatterplot 
 
 ```{r warning=FALSE, fig.cap="Scatter plot of February temperature vs elevation"}
 ggplot(data=sierraFeb) + 
@@ -192,7 +194,9 @@ ggplot(data=sierraFeb) +
 - color is defined outside of aes, so is applies to all points.
 - mapping is first argument of  geom_point, so `mapping = ` is not needed.
 
-### Two variables, one discrete [`eucoak`]
+### Two variables, one discrete 
+
+[**`eucoak`**]
 
 ```{r warning=FALSE, fig.cap="Two variables, one discrete"}
 ggplot(tidy_eucoak) +
@@ -258,7 +262,9 @@ ggplot(longprofile, aes(longd,s)) + geom_point(aes(col=s), size=3) +
   ggtitle("Slope over longitudinal distance upstream")
 ```
 
-### Trend line [`sierra`]
+### Trend line
+
+[**`sierra`**]
 
 ```{r warning=F, message=F, fig.cap="Trend line using geom_smooth with a linear model"}
 sierraFeb %>%
@@ -299,7 +305,9 @@ ggplot(data = TRI, aes(log(`5.2_STACK_AIR`), log(`5.1_FUGITIVE_AIR`),
        geom_point()
 ```
 
-#### Graphs from grouped data [`NDVI`]
+#### Graphs from grouped data 
+
+[**`NDVI`**]
 
 ```{r warning=FALSE, fig.cap="NDVI symbolized by vegetation in two seasons"}
 XSptsPheno %>%
@@ -345,11 +353,17 @@ ggplot(data = tidy_eucoak) +
 
 ```
 
-## Pairs Plot [`sierra`]
+## Pairs Plot
+
+[**`sierra`**] Pairs plots are an excellent exploratory tool to see which variables are correlated. 
+Since only continuous data are useful for this, and since pairs plots can quickly get
+overly complex, it's good to use dplyr::select to select the continuous variables, or 
+maybe use a helper function like is.numeric with dplyr::select_if:
 
 ```{r warning=FALSE, fig.cap="Pairs plot for Sierra Nevada stations variables"}
 sierraFeb %>%
-  dplyr::select(LATITUDE, ELEVATION, TEMPERATURE, PRECIPITATION) %>%
+     dplyr::select_if(is.numeric) %>%
+#    dplyr::select(LATITUDE, ELEVATION, TEMPERATURE, PRECIPITATION) %>%
   pairs()
 ```
 
