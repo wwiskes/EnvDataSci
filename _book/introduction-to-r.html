@@ -665,30 +665,30 @@ c(1,2,3,4,5,6,7,8,9,10)</code></pre>
 <span id="cb110-3"><a href="introduction-to-r.html#cb110-3" aria-hidden="true" tabindex="-1"></a>lat <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">39.52</span>, <span class="fl">38.91</span>, <span class="fl">37.97</span>, <span class="fl">38.70</span>, <span class="fl">39.09</span>, <span class="fl">39.25</span>, <span class="fl">39.94</span>, <span class="fl">37.75</span>, <span class="fl">40.35</span>, <span class="fl">39.33</span>, <span class="fl">39.17</span>, <span class="fl">38.21</span>)</span></code></pre></div>
 <p><strong>Plot individually</strong></p>
 <div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="introduction-to-r.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(temp)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-33"></span>
-<img src="EnvDataSci_files/figure-html/unnamed-chunk-33-1.png" alt="Temperature" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-30"></span>
+<img src="EnvDataSci_files/figure-html/unnamed-chunk-30-1.png" alt="Temperature" width="672" />
 <p class="caption">
 Figure 2.1: Temperature
 </p>
 </div>
 <div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="introduction-to-r.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(elev)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-34"></span>
-<img src="EnvDataSci_files/figure-html/unnamed-chunk-34-1.png" alt="Elevation" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-31"></span>
+<img src="EnvDataSci_files/figure-html/unnamed-chunk-31-1.png" alt="Elevation" width="672" />
 <p class="caption">
 Figure 2.2: Elevation
 </p>
 </div>
 <div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="introduction-to-r.html#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lat)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-35"></span>
-<img src="EnvDataSci_files/figure-html/unnamed-chunk-35-1.png" alt="Latitude" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-32"></span>
+<img src="EnvDataSci_files/figure-html/unnamed-chunk-32-1.png" alt="Latitude" width="672" />
 <p class="caption">
 Figure 2.3: Latitude
 </p>
 </div>
 <p><strong>Then plot as a scatterplot</strong></p>
 <div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="introduction-to-r.html#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(elev,temp)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-36"></span>
-<img src="EnvDataSci_files/figure-html/unnamed-chunk-36-1.png" alt="Temperature~Elevation" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-33"></span>
+<img src="EnvDataSci_files/figure-html/unnamed-chunk-33-1.png" alt="Temperature~Elevation" width="672" />
 <p class="caption">
 Figure 2.4: Temperature~Elevation
 </p>
@@ -766,8 +766,8 @@ The following are equivalent:</p>
 <p><strong>Creating a data frame out of a matrix</strong></p>
 <div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="introduction-to-r.html#cb139-1" aria-hidden="true" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(sierradata)</span>
 <span id="cb139-2"><a href="introduction-to-r.html#cb139-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">data =</span> mydata, <span class="at">x =</span> elev, <span class="at">y =</span> temp)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-44"></span>
-<img src="EnvDataSci_files/figure-html/unnamed-chunk-44-1.png" alt="Temperature~Elevation" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-41"></span>
+<img src="EnvDataSci_files/figure-html/unnamed-chunk-41-1.png" alt="Temperature~Elevation" width="672" />
 <p class="caption">
 Figure 2.5: Temperature~Elevation
 </p>
@@ -780,27 +780,26 @@ Figure 2.5: Temperature~Elevation
 <span id="cb140-3"><a href="introduction-to-r.html#cb140-3" aria-hidden="true" tabindex="-1"></a>TRI87 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(csvPath)</span>
 <span id="cb140-4"><a href="introduction-to-r.html#cb140-4" aria-hidden="true" tabindex="-1"></a>TRI87</span></code></pre></div>
 <pre><code>## # A tibble: 335 x 9
-##    TRI_FACILITY_ID count FACILITY_NAME                            COUNTY     air_releases fugitive_air stack_air LATITUDE LONGITUDE
-##    &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;                                    &lt;chr&gt;             &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-##  1 91002FRMND585BR     2 FORUM IND                                SAN MATEO          1423         1423         0     37.5     -122.
-##  2 92052ZPMNF2970C     1 ZEP MFG CO                               SANTA CLA~          337          337         0     37.4     -122.
-##  3 93117TLDYN3165P     2 TELEDYNE MEC                             SANTA CLA~        12600        12600         0     37.4     -122.
-##  4 94002GTWSG477HA     2 MORGAN ADVANCED CERAMICS BELMONT WESGO ~ SAN MATEO         18700        18700         0     37.5     -122.
-##  5 94002SMPRD120SE     2 SEM PRODS INC                            SAN MATEO          1500          500      1000     37.5     -122.
-##  6 94025HBLNN151CO     2 HEUBLEIN INC                             SAN MATEO           500            0       500     37.5     -122.
-##  7 94025RYCHM300CO    10 TE CONNECTIVITY CORP                     SAN MATEO        144871        47562     97309     37.5     -122.
-##  8 94025SNFRD990OB     1 SANFORD METAL PROCESSING CO              SAN MATEO          9675         9675         0     37.5     -122.
-##  9 94026BYPCK3575H     2 BAY PACKAGING &amp; CONVERTING CO INC        SAN MATEO         80000        32000     48000     37.5     -122.
-## 10 94026CDRSY3475E     2 CDR SYS CORP                             SAN MATEO        126800            0    126800     37.5     -122.
+##    TRI_FACILITY_ID count FACILITY_NAME                             COUNTY     air_releases fugitive_air stack_air LATITUDE LONGITUDE
+##    &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;                                     &lt;chr&gt;             &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+##  1 91002FRMND585BR     2 FORUM IND                                 SAN MATEO          1423         1423         0     37.5     -122.
+##  2 92052ZPMNF2970C     1 ZEP MFG CO                                SANTA CLA~          337          337         0     37.4     -122.
+##  3 93117TLDYN3165P     2 TELEDYNE MEC                              SANTA CLA~        12600        12600         0     37.4     -122.
+##  4 94002GTWSG477HA     2 MORGAN ADVANCED CERAMICS BELMONT WESGO M~ SAN MATEO         18700        18700         0     37.5     -122.
+##  5 94002SMPRD120SE     2 SEM PRODS INC                             SAN MATEO          1500          500      1000     37.5     -122.
+##  6 94025HBLNN151CO     2 HEUBLEIN INC                              SAN MATEO           500            0       500     37.5     -122.
+##  7 94025RYCHM300CO    10 TE CONNECTIVITY CORP                      SAN MATEO        144871        47562     97309     37.5     -122.
+##  8 94025SNFRD990OB     1 SANFORD METAL PROCESSING CO               SAN MATEO          9675         9675         0     37.5     -122.
+##  9 94026BYPCK3575H     2 BAY PACKAGING &amp; CONVERTING CO INC         SAN MATEO         80000        32000     48000     37.5     -122.
+## 10 94026CDRSY3475E     2 CDR SYS CORP                              SAN MATEO        126800            0    126800     37.5     -122.
 ## # ... with 325 more rows</code></pre>
 <p><strong>Sort, Index, &amp; Max/Min</strong></p>
 <div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="introduction-to-r.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">sort</span>(TRI87<span class="sc">$</span>air_releases))</span></code></pre></div>
 <pre><code>## [1]  2  5  5  7  9 10</code></pre>
 <div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="introduction-to-r.html#cb144-1" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">order</span>(TRI87<span class="sc">$</span>air_releases)</span>
 <span id="cb144-2"><a href="introduction-to-r.html#cb144-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(TRI87<span class="sc">$</span>FACILITY_NAME[index])   <span class="co"># displays facilities in order of their air releases</span></span></code></pre></div>
-<pre><code>## [1] &quot;AIR PRODUCTS MANUFACTURING CORP&quot;          &quot;UNITED FIBERS&quot;                           
-## [3] &quot;CLOROX MANUFACTURING CO&quot;                  &quot;ICI AMERICAS INC WESTERN RESEARCH CENTER&quot;
-## [5] &quot;UNION CARBIDE CORP&quot;                       &quot;SCOTTS-SIERRA HORTICULTURAL PRODS CO INC&quot;</code></pre>
+<pre><code>## [1] &quot;AIR PRODUCTS MANUFACTURING CORP&quot;          &quot;UNITED FIBERS&quot;                            &quot;CLOROX MANUFACTURING CO&quot;                 
+## [4] &quot;ICI AMERICAS INC WESTERN RESEARCH CENTER&quot; &quot;UNION CARBIDE CORP&quot;                       &quot;SCOTTS-SIERRA HORTICULTURAL PRODS CO INC&quot;</code></pre>
 <div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="introduction-to-r.html#cb146-1" aria-hidden="true" tabindex="-1"></a>i_max <span class="ot">&lt;-</span> <span class="fu">which.max</span>(TRI87<span class="sc">$</span>air_releases)</span>
 <span id="cb146-2"><a href="introduction-to-r.html#cb146-2" aria-hidden="true" tabindex="-1"></a>TRI87<span class="sc">$</span>FACILITY_NAME[i_max]   <span class="co"># was NUMMI at the time</span></span></code></pre></div>
 <pre><code>## [1] &quot;TESLA INC&quot;</code></pre>
@@ -831,11 +830,11 @@ Figure 2.5: Temperature~Elevation
 <span id="cb156-2"><a href="introduction-to-r.html#cb156-2" aria-hidden="true" tabindex="-1"></a>grain_char <span class="ot">&lt;-</span> <span class="fu">sample</span>(grain_order, <span class="dv">36</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb156-3"><a href="introduction-to-r.html#cb156-3" aria-hidden="true" tabindex="-1"></a>grain_fact <span class="ot">&lt;-</span> <span class="fu">factor</span>(grain_char, <span class="at">levels =</span> grain_order)</span>
 <span id="cb156-4"><a href="introduction-to-r.html#cb156-4" aria-hidden="true" tabindex="-1"></a>grain_char</span></code></pre></div>
-<pre><code>##  [1] &quot;clay&quot; &quot;clay&quot; &quot;silt&quot; &quot;sand&quot; &quot;sand&quot; &quot;sand&quot; &quot;clay&quot; &quot;sand&quot; &quot;silt&quot; &quot;clay&quot; &quot;silt&quot; &quot;clay&quot; &quot;clay&quot; &quot;clay&quot; &quot;sand&quot; &quot;silt&quot; &quot;silt&quot; &quot;clay&quot;
-## [19] &quot;silt&quot; &quot;silt&quot; &quot;silt&quot; &quot;sand&quot; &quot;silt&quot; &quot;sand&quot; &quot;silt&quot; &quot;sand&quot; &quot;clay&quot; &quot;clay&quot; &quot;clay&quot; &quot;silt&quot; &quot;sand&quot; &quot;sand&quot; &quot;sand&quot; &quot;silt&quot; &quot;clay&quot; &quot;silt&quot;</code></pre>
+<pre><code>##  [1] &quot;silt&quot; &quot;sand&quot; &quot;silt&quot; &quot;sand&quot; &quot;sand&quot; &quot;clay&quot; &quot;sand&quot; &quot;sand&quot; &quot;clay&quot; &quot;silt&quot; &quot;silt&quot; &quot;sand&quot; &quot;sand&quot; &quot;clay&quot; &quot;clay&quot; &quot;sand&quot; &quot;silt&quot; &quot;clay&quot;
+## [19] &quot;clay&quot; &quot;clay&quot; &quot;clay&quot; &quot;clay&quot; &quot;clay&quot; &quot;sand&quot; &quot;clay&quot; &quot;silt&quot; &quot;sand&quot; &quot;clay&quot; &quot;silt&quot; &quot;silt&quot; &quot;sand&quot; &quot;sand&quot; &quot;sand&quot; &quot;clay&quot; &quot;clay&quot; &quot;clay&quot;</code></pre>
 <div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="introduction-to-r.html#cb158-1" aria-hidden="true" tabindex="-1"></a>grain_fact</span></code></pre></div>
-<pre><code>##  [1] clay clay silt sand sand sand clay sand silt clay silt clay clay clay sand silt silt clay silt silt silt sand silt sand silt
-## [26] sand clay clay clay silt sand sand sand silt clay silt
+<pre><code>##  [1] silt sand silt sand sand clay sand sand clay silt silt sand sand clay clay sand silt clay clay clay clay clay clay sand clay
+## [26] silt sand clay silt silt sand sand sand clay clay clay
 ## Levels: clay silt sand</code></pre>
 <p>To make a categorical variable a factor:</p>
 <div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="introduction-to-r.html#cb160-1" aria-hidden="true" tabindex="-1"></a>fruit <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;apples&quot;</span>, <span class="st">&quot;oranges&quot;</span>, <span class="st">&quot;bananas&quot;</span>, <span class="st">&quot;oranges&quot;</span>)</span>
