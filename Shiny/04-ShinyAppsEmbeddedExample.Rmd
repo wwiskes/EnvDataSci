@@ -1,7 +1,7 @@
 ---
-title: "test"
-author: "Jerry Davis"
-date: "4/17/2021"
+title: "Default Shiny Markdown Example"
+author: "RStudio"
+date: ""
 output: html_document
 runtime: shiny
 ---
