@@ -1,5 +1,5 @@
 ---
-title: "ShinyInline"
+title: "Inline Shiny Apps"
 author: "Jerry Davis"
 date: "4/17/2021"
 output: html_document
@@ -10,14 +10,10 @@ runtime: shiny
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-This R Markdown document is made interactive using Shiny. Unlike the more traditional workflow of creating static reports, you can now create documents that allow your readers to change the assumptions underlying your analysis and see the results immediately. 
-
-To learn more, see [Interactive Documents](http://rmarkdown.rstudio.com/authoring_shiny.html).
-
 ## Inline Application
 
-It's also possible to embed an entire Shiny application as inline an R Markdown document. The following code can also 
-be used to create a Shiny web app by saving it as `app.r` in an RStudio Shiny app project:
+This R Markdown document is made interactive using Shiny, and employs an Inline Application with the complete Shiny app code included. 
+The code shown can also be used to create a Shiny web app by saving it as `app.r` in an RStudio Shiny app project. In terms of complexity of inputs, this app is pretty straightforward -- the fluidPage is pretty standard for the ui section.  The leaflet map is pretty straightforward (though getting the point symbology right took some experimentation.  There are also some other tricks that make it a bit more complicated, such as web scraping to download new data, and using `observe` as a way to observe some parameters to allow the current zoom level to stick. 
 
 ```{r MODISfires, warning=F, message=F, collapse=T}
 library(shiny); library(sf); library(leaflet); library(tidyverse); library(lubridate)
@@ -71,6 +67,12 @@ server <- function(input, output, session) {
 shinyApp(ui = ui, server = server, options = list(width = "100%", height = 800))
 ```
 
+To learn more, see [Interactive Documents](http://rmarkdown.rstudio.com/authoring_shiny.html).
+
+Some good resources on Shiny apps:
+
+- <a href="https://shiny.rstudio.com/images/shiny-cheatsheet.pdf">https://shiny.rstudio.com/images/shiny-cheatsheet.pdf</a>
+- The Shiny tutorial at <a href="https://shiny.rstudio.com/tutorial/">https://shiny.rstudio.com/tutorial/</a>, worth spending some time on to learn more about getting Shiny apps working. There's a lot to understand about reactivity for instance. 
 
 
 
