@@ -1,0 +1,13 @@
+name: MODISfires
+title: MODISfires
+username:
+account: spedunkler
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2984055
+bundleId: 3726909
+url: https://spedunkler.shinyapps.io/MODISfires/
+when: 1602443302.55347
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: app2020.R|appFirstTryNoObserve.R|appWebScrape.R|appYear.R|bozo.zip|igisc.gif|igisc.png|modis_fire_2009_365_conus.dbf|modis_fire_2009_365_conus.prj|modis_fire_2009_365_conus.shp|modis_fire_2009_365_conus.shx|modis_fire_2009_365_conus_shapefile.zip|modis_fire_2016_366_conus.dbf|modis_fire_2016_366_conus.prj|modis_fire_2016_366_conus.shp|modis_fire_2016_366_conus.shx|modis_fire_2016_366_conus_shapefile.zip|modis_fire_2017_365_conus.dbf|modis_fire_2017_365_conus.prj|modis_fire_2017_365_conus.shp|modis_fire_2017_365_conus.shx|modis_fire_2017_365_conus_shapefile.zip|modis_fire_2018_365_conus.dbf|modis_fire_2018_365_conus.prj|modis_fire_2018_365_conus.shp|modis_fire_2018_365_conus.shx|modis_fire_2018_365_conus_shapefile.zip|modis_fire_2019_220_conus.dbf|modis_fire_2019_220_conus.prj|modis_fire_2019_220_conus.shp|modis_fire_2019_220_conus.shx|modis_fire_2019_220_conus_shapefile.zip|modis_fire_2020_282_conus.dbf|modis_fire_2020_282_conus.prj|modis_fire_2020_282_conus.shp|modis_fire_2020_282_conus.shx|modis_fire_2020_283_conus.dbf|modis_fire_2020_283_conus.prj|modis_fire_2020_283_conus.shp|modis_fire_2020_283_conus.shx|modis_fire_2020_284_conus.dbf|modis_fire_2020_284_conus.prj|modis_fire_2020_284_conus.shp|modis_fire_2020_284_conus.shx|modis_fire_2020_284_conus_shapefile.zip|modis_fire_2020_285_conus.dbf|modis_fire_2020_285_conus.prj|modis_fire_2020_285_conus.shp|modis_fire_2020_285_conus.shx|modis_fire_2020_285_conus_shapefile.zip|shape.zip
