@@ -307,15 +307,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.4" data-path="time-series.html"><a href="time-series.html#learning-more-about-time-series-in-r"><i class="fa fa-check"></i><b>8.4</b> Learning more about time series in R</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="communication.html"><a href="communication.html"><i class="fa fa-check"></i><b>9</b> Communication</a></li>
-<li class="chapter" data-level="10" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html"><i class="fa fa-check"></i><b>10</b> Building a Data Package for GitHub</a>
+<li class="chapter" data-level="10" data-path="appendix-building-a-data-package-for-github.html"><a href="appendix-building-a-data-package-for-github.html"><i class="fa fa-check"></i><b>10</b> Appendix: Building a Data Package for GitHub</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html#rda-files"><i class="fa fa-check"></i><b>10.1</b> <code>rda</code> files</a>
+<li class="chapter" data-level="10.1" data-path="appendix-building-a-data-package-for-github.html"><a href="appendix-building-a-data-package-for-github.html#rda-files"><i class="fa fa-check"></i><b>10.1</b> <code>rda</code> files</a>
 <ul>
-<li class="chapter" data-level="10.1.1" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html#usethisuse_data"><i class="fa fa-check"></i><b>10.1.1</b> <code>usethis::use_data()</code></a></li>
-<li class="chapter" data-level="10.1.2" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html#usethiscreate_package"><i class="fa fa-check"></i><b>10.1.2</b> <code>usethis::create_package()</code></a></li>
-<li class="chapter" data-level="10.1.3" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html#devtoolsdocument"><i class="fa fa-check"></i><b>10.1.3</b> <code>devtools::document()</code></a></li>
+<li class="chapter" data-level="10.1.1" data-path="appendix-building-a-data-package-for-github.html"><a href="appendix-building-a-data-package-for-github.html#usethisuse_data"><i class="fa fa-check"></i><b>10.1.1</b> <code>usethis::use_data()</code></a></li>
+<li class="chapter" data-level="10.1.2" data-path="appendix-building-a-data-package-for-github.html"><a href="appendix-building-a-data-package-for-github.html#usethiscreate_package"><i class="fa fa-check"></i><b>10.1.2</b> <code>usethis::create_package()</code></a></li>
+<li class="chapter" data-level="10.1.3" data-path="appendix-building-a-data-package-for-github.html"><a href="appendix-building-a-data-package-for-github.html#devtoolsdocument"><i class="fa fa-check"></i><b>10.1.3</b> <code>devtools::document()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="10.2" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html#raw-data"><i class="fa fa-check"></i><b>10.2</b> Raw data</a></li>
+<li class="chapter" data-level="10.2" data-path="appendix-building-a-data-package-for-github.html"><a href="appendix-building-a-data-package-for-github.html#raw-data"><i class="fa fa-check"></i><b>10.2</b> Raw data</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -780,18 +780,18 @@ Figure 2.5: Temperature~Elevation
 <span id="cb140-3"><a href="introduction-to-r.html#cb140-3" aria-hidden="true" tabindex="-1"></a>TRI87 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(csvPath)</span>
 <span id="cb140-4"><a href="introduction-to-r.html#cb140-4" aria-hidden="true" tabindex="-1"></a>TRI87</span></code></pre></div>
 <pre><code>## # A tibble: 335 x 9
-##    TRI_FACILITY_ID count FACILITY_NAME                             COUNTY     air_releases fugitive_air stack_air LATITUDE LONGITUDE
-##    &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;                                     &lt;chr&gt;             &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-##  1 91002FRMND585BR     2 FORUM IND                                 SAN MATEO          1423         1423         0     37.5     -122.
-##  2 92052ZPMNF2970C     1 ZEP MFG CO                                SANTA CLA~          337          337         0     37.4     -122.
-##  3 93117TLDYN3165P     2 TELEDYNE MEC                              SANTA CLA~        12600        12600         0     37.4     -122.
-##  4 94002GTWSG477HA     2 MORGAN ADVANCED CERAMICS BELMONT WESGO M~ SAN MATEO         18700        18700         0     37.5     -122.
-##  5 94002SMPRD120SE     2 SEM PRODS INC                             SAN MATEO          1500          500      1000     37.5     -122.
-##  6 94025HBLNN151CO     2 HEUBLEIN INC                              SAN MATEO           500            0       500     37.5     -122.
-##  7 94025RYCHM300CO    10 TE CONNECTIVITY CORP                      SAN MATEO        144871        47562     97309     37.5     -122.
-##  8 94025SNFRD990OB     1 SANFORD METAL PROCESSING CO               SAN MATEO          9675         9675         0     37.5     -122.
-##  9 94026BYPCK3575H     2 BAY PACKAGING &amp; CONVERTING CO INC         SAN MATEO         80000        32000     48000     37.5     -122.
-## 10 94026CDRSY3475E     2 CDR SYS CORP                              SAN MATEO        126800            0    126800     37.5     -122.
+##    TRI_FACILITY_ID count FACILITY_NAME                                 COUNTY      air_releases fugitive_air stack_air LATITUDE LONGITUDE
+##    &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;                                         &lt;chr&gt;              &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+##  1 91002FRMND585BR     2 FORUM IND                                     SAN MATEO           1423         1423         0     37.5     -122.
+##  2 92052ZPMNF2970C     1 ZEP MFG CO                                    SANTA CLARA          337          337         0     37.4     -122.
+##  3 93117TLDYN3165P     2 TELEDYNE MEC                                  SANTA CLARA        12600        12600         0     37.4     -122.
+##  4 94002GTWSG477HA     2 MORGAN ADVANCED CERAMICS BELMONT WESGO METALS SAN MATEO          18700        18700         0     37.5     -122.
+##  5 94002SMPRD120SE     2 SEM PRODS INC                                 SAN MATEO           1500          500      1000     37.5     -122.
+##  6 94025HBLNN151CO     2 HEUBLEIN INC                                  SAN MATEO            500            0       500     37.5     -122.
+##  7 94025RYCHM300CO    10 TE CONNECTIVITY CORP                          SAN MATEO         144871        47562     97309     37.5     -122.
+##  8 94025SNFRD990OB     1 SANFORD METAL PROCESSING CO                   SAN MATEO           9675         9675         0     37.5     -122.
+##  9 94026BYPCK3575H     2 BAY PACKAGING &amp; CONVERTING CO INC             SAN MATEO          80000        32000     48000     37.5     -122.
+## 10 94026CDRSY3475E     2 CDR SYS CORP                                  SAN MATEO         126800            0    126800     37.5     -122.
 ## # ... with 325 more rows</code></pre>
 <p><strong>Sort, Index, &amp; Max/Min</strong></p>
 <div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="introduction-to-r.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">sort</span>(TRI87<span class="sc">$</span>air_releases))</span></code></pre></div>
@@ -830,11 +830,11 @@ Figure 2.5: Temperature~Elevation
 <span id="cb156-2"><a href="introduction-to-r.html#cb156-2" aria-hidden="true" tabindex="-1"></a>grain_char <span class="ot">&lt;-</span> <span class="fu">sample</span>(grain_order, <span class="dv">36</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb156-3"><a href="introduction-to-r.html#cb156-3" aria-hidden="true" tabindex="-1"></a>grain_fact <span class="ot">&lt;-</span> <span class="fu">factor</span>(grain_char, <span class="at">levels =</span> grain_order)</span>
 <span id="cb156-4"><a href="introduction-to-r.html#cb156-4" aria-hidden="true" tabindex="-1"></a>grain_char</span></code></pre></div>
-<pre><code>##  [1] &quot;silt&quot; &quot;sand&quot; &quot;silt&quot; &quot;sand&quot; &quot;sand&quot; &quot;clay&quot; &quot;sand&quot; &quot;sand&quot; &quot;clay&quot; &quot;silt&quot; &quot;silt&quot; &quot;sand&quot; &quot;sand&quot; &quot;clay&quot; &quot;clay&quot; &quot;sand&quot; &quot;silt&quot; &quot;clay&quot;
-## [19] &quot;clay&quot; &quot;clay&quot; &quot;clay&quot; &quot;clay&quot; &quot;clay&quot; &quot;sand&quot; &quot;clay&quot; &quot;silt&quot; &quot;sand&quot; &quot;clay&quot; &quot;silt&quot; &quot;silt&quot; &quot;sand&quot; &quot;sand&quot; &quot;sand&quot; &quot;clay&quot; &quot;clay&quot; &quot;clay&quot;</code></pre>
+<pre><code>##  [1] &quot;silt&quot; &quot;sand&quot; &quot;sand&quot; &quot;silt&quot; &quot;clay&quot; &quot;silt&quot; &quot;sand&quot; &quot;silt&quot; &quot;sand&quot; &quot;sand&quot; &quot;silt&quot; &quot;silt&quot; &quot;silt&quot; &quot;silt&quot; &quot;silt&quot; &quot;sand&quot; &quot;clay&quot; &quot;sand&quot; &quot;sand&quot;
+## [20] &quot;sand&quot; &quot;silt&quot; &quot;silt&quot; &quot;sand&quot; &quot;sand&quot; &quot;sand&quot; &quot;sand&quot; &quot;sand&quot; &quot;sand&quot; &quot;clay&quot; &quot;silt&quot; &quot;sand&quot; &quot;sand&quot; &quot;sand&quot; &quot;clay&quot; &quot;sand&quot; &quot;clay&quot;</code></pre>
 <div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="introduction-to-r.html#cb158-1" aria-hidden="true" tabindex="-1"></a>grain_fact</span></code></pre></div>
-<pre><code>##  [1] silt sand silt sand sand clay sand sand clay silt silt sand sand clay clay sand silt clay clay clay clay clay clay sand clay
-## [26] silt sand clay silt silt sand sand sand clay clay clay
+<pre><code>##  [1] silt sand sand silt clay silt sand silt sand sand silt silt silt silt silt sand clay sand sand sand silt silt sand sand sand sand sand
+## [28] sand clay silt sand sand sand clay sand clay
 ## Levels: clay silt sand</code></pre>
 <p>To make a categorical variable a factor:</p>
 <div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="introduction-to-r.html#cb160-1" aria-hidden="true" tabindex="-1"></a>fruit <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;apples&quot;</span>, <span class="st">&quot;oranges&quot;</span>, <span class="st">&quot;bananas&quot;</span>, <span class="st">&quot;oranges&quot;</span>)</span>

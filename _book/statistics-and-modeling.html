@@ -307,15 +307,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.4" data-path="time-series.html"><a href="time-series.html#learning-more-about-time-series-in-r"><i class="fa fa-check"></i><b>8.4</b> Learning more about time series in R</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="communication.html"><a href="communication.html"><i class="fa fa-check"></i><b>9</b> Communication</a></li>
-<li class="chapter" data-level="10" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html"><i class="fa fa-check"></i><b>10</b> Building a Data Package for GitHub</a>
+<li class="chapter" data-level="10" data-path="appendix-building-a-data-package-for-github.html"><a href="appendix-building-a-data-package-for-github.html"><i class="fa fa-check"></i><b>10</b> Appendix: Building a Data Package for GitHub</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html#rda-files"><i class="fa fa-check"></i><b>10.1</b> <code>rda</code> files</a>
+<li class="chapter" data-level="10.1" data-path="appendix-building-a-data-package-for-github.html"><a href="appendix-building-a-data-package-for-github.html#rda-files"><i class="fa fa-check"></i><b>10.1</b> <code>rda</code> files</a>
 <ul>
-<li class="chapter" data-level="10.1.1" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html#usethisuse_data"><i class="fa fa-check"></i><b>10.1.1</b> <code>usethis::use_data()</code></a></li>
-<li class="chapter" data-level="10.1.2" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html#usethiscreate_package"><i class="fa fa-check"></i><b>10.1.2</b> <code>usethis::create_package()</code></a></li>
-<li class="chapter" data-level="10.1.3" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html#devtoolsdocument"><i class="fa fa-check"></i><b>10.1.3</b> <code>devtools::document()</code></a></li>
+<li class="chapter" data-level="10.1.1" data-path="appendix-building-a-data-package-for-github.html"><a href="appendix-building-a-data-package-for-github.html#usethisuse_data"><i class="fa fa-check"></i><b>10.1.1</b> <code>usethis::use_data()</code></a></li>
+<li class="chapter" data-level="10.1.2" data-path="appendix-building-a-data-package-for-github.html"><a href="appendix-building-a-data-package-for-github.html#usethiscreate_package"><i class="fa fa-check"></i><b>10.1.2</b> <code>usethis::create_package()</code></a></li>
+<li class="chapter" data-level="10.1.3" data-path="appendix-building-a-data-package-for-github.html"><a href="appendix-building-a-data-package-for-github.html#devtoolsdocument"><i class="fa fa-check"></i><b>10.1.3</b> <code>devtools::document()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="10.2" data-path="building-a-data-package-for-github.html"><a href="building-a-data-package-for-github.html#raw-data"><i class="fa fa-check"></i><b>10.2</b> Raw data</a></li>
+<li class="chapter" data-level="10.2" data-path="appendix-building-a-data-package-for-github.html"><a href="appendix-building-a-data-package-for-github.html#raw-data"><i class="fa fa-check"></i><b>10.2</b> Raw data</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -618,22 +618,14 @@ Figure 7.3: runoff at various sites contrasting euc and oak
 ##                                                           3rd Qu.:25.00   3rd Qu.:1.245   3rd Qu.: 95.75   3rd Qu.:317.0  
 ##                                                           Max.   :32.00   Max.   :1.490   Max.   :135.00   Max.   :328.5  
 ##                                                                                                                           
-##  mean_runoff_ratio med_runoff_ratio  std_runoff_ratio     fines_g         litter_g        total_g       fineTotalRatio  
-##  Min.   :0.00450   Min.   :0.00000   Min.   :0.01070   Min.   : 7.50   Min.   :14.00   Min.   : 23.50   Min.   :0.1300  
-##  1st Qu.:0.02285   1st Qu.:0.01105   1st Qu.:0.01642   1st Qu.:13.30   1st Qu.:18.80   1st Qu.: 35.00   1st Qu.:0.2700  
-##  Median :0.04835   Median :0.04950   Median :0.02740   Median :18.10   Median :40.40   Median : 60.50   Median :0.3900  
-##  Mean   :0.06679   Mean   :0.06179   Mean   :0.04355   Mean   :27.77   Mean   :41.32   Mean   : 69.12   Mean   :0.3715  
-##  3rd Qu.:0.12172   3rd Qu.:0.09492   3rd Qu.:0.05735   3rd Qu.:45.00   3rd Qu.:57.50   3rd Qu.: 95.50   3rd Qu.:0.4900  
-##  Max.   :0.16480   Max.   :0.16430   Max.   :0.11480   Max.   :66.70   Max.   :97.80   Max.   :125.90   Max.   :0.5500  
-##                                                        NA&#39;s   :1       NA&#39;s   :1       NA&#39;s   :1        NA&#39;s   :1       
-##  fineRainRatio  
-##  Min.   :0.025  
-##  1st Qu.:0.044  
-##  Median :0.064  
-##  Mean   :0.097  
-##  3rd Qu.:0.141  
-##  Max.   :0.293  
-##  NA&#39;s   :1</code></pre>
+##  mean_runoff_ratio med_runoff_ratio  std_runoff_ratio     fines_g         litter_g        total_g       fineTotalRatio   fineRainRatio  
+##  Min.   :0.00450   Min.   :0.00000   Min.   :0.01070   Min.   : 7.50   Min.   :14.00   Min.   : 23.50   Min.   :0.1300   Min.   :0.025  
+##  1st Qu.:0.02285   1st Qu.:0.01105   1st Qu.:0.01642   1st Qu.:13.30   1st Qu.:18.80   1st Qu.: 35.00   1st Qu.:0.2700   1st Qu.:0.044  
+##  Median :0.04835   Median :0.04950   Median :0.02740   Median :18.10   Median :40.40   Median : 60.50   Median :0.3900   Median :0.064  
+##  Mean   :0.06679   Mean   :0.06179   Mean   :0.04355   Mean   :27.77   Mean   :41.32   Mean   : 69.12   Mean   :0.3715   Mean   :0.097  
+##  3rd Qu.:0.12172   3rd Qu.:0.09492   3rd Qu.:0.05735   3rd Qu.:45.00   3rd Qu.:57.50   3rd Qu.: 95.50   3rd Qu.:0.4900   3rd Qu.:0.141  
+##  Max.   :0.16480   Max.   :0.16430   Max.   :0.11480   Max.   :66.70   Max.   :97.80   Max.   :125.90   Max.   :0.5500   Max.   :0.293  
+##                                                        NA&#39;s   :1       NA&#39;s   :1       NA&#39;s   :1        NA&#39;s   :1        NA&#39;s   :1</code></pre>
 <div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="statistics-and-modeling.html#cb442-1" aria-hidden="true" tabindex="-1"></a>eucoaksed <span class="sc">%&gt;%</span></span>
 <span id="cb442-2"><a href="statistics-and-modeling.html#cb442-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(trtype) <span class="sc">%&gt;%</span></span>
 <span id="cb442-3"><a href="statistics-and-modeling.html#cb442-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">meanfines =</span> <span class="fu">mean</span>(fines_g, <span class="at">na.rm=</span>T), <span class="at">sdfines =</span> <span class="fu">sd</span>(fines_g, <span class="at">na.rm=</span>T),</span>

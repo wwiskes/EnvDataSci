@@ -157,7 +157,7 @@ ensemble-average
 julian-dates
 learning-more-about-time-series-in-r
 communication
-building-a-data-package-for-github
+appendix-building-a-data-package-for-github
 rda-files
 usethisuse_data
 usethiscreate_package

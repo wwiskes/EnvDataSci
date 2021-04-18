@@ -1,0 +1,119 @@
+---
+title: "Intro to Shiny: Input/Output"
+author: "Jerry Davis"
+date: "4/17/2021"
+output: html_document
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Shiny lets you include interactive controls letting the user manipulating your R analysis.
+
+Since Shiny requires a host to run the R code on, we can't create it as part of 
+a chapter in the book. But we can look at it in this RMarkdown document, which can run
+RMarkdown using the 'shiny' runtime method in RStudio.  We'll explore Shiny interactive input widgets and
+output functions, then look at using these to build a Shiny app which can be 
+run on your computer or hosted on the web.
+
+To learn more about Shiny apps, see [Interactive Documents](http://rmarkdown.rstudio.com/authoring_shiny.html).
+
+## Inputs and Outputs
+
+We'll start by looking at Shiny inputs and outputs:  
+
+- Inputs are the interactive controls (widgets) that let the user change the resulting output.
+- Outputs are the graphs, maps or tables, and are automatically updated whenever inputs change. 
+
+The following includes a couple of widget-controlled input settings to be used in a plot produced by `renderPlot`
+
+- a `selectInput` that is used to set the `breaks` parameter for the `hist` function as a number of bins
+- a `sliderInput` to set the `adjust` (bandwidth adjustment) parameter for the density plot
+
+Note how the input variables are accessed by the output function as `input$n_breaks` and `input$bw_adjust`:
+
+```{r eruptions}
+inputPanel(
+  selectInput("n_breaks", label = "Number of bins:",
+              choices = c(10, 20, 35, 50), selected = 20),
+  
+  sliderInput("bw_adjust", label = "Bandwidth adjustment:",
+              min = 0.2, max = 2, value = 1, step = 0.2)
+)
+
+renderPlot({
+  hist(faithful$eruptions, probability = TRUE, breaks = as.numeric(input$n_breaks),
+       xlab = "Duration (minutes)", main = "Geyser eruption duration")
+  
+  dens <- density(faithful$eruptions, adjust = input$bw_adjust)
+  lines(dens, col = "blue")
+})
+```
+
+## Input widgets
+
+You can explore the various input and output methods in the cheat sheet...
+
+<a href="https://shiny.rstudio.com/images/shiny-cheatsheet.pdf">https://shiny.rstudio.com/images/shiny-cheatsheet.pdf</a>
+
+... but we'll start by looking at a selection on input widgets and see what they produce.
+Here's a couple of simple ones, with a simple print output:
+
+```{r}
+numericInput(inputId="n", "sample size", value = 25)
+renderPrint(print(input$n))
+sliderInput(inputId="i", "input", min=1, max=30, value = 15)
+renderPrint(print(input$i))
+```
+
+### Creating a plot
+
+The above widgets went to a rendered print output, but the same simple inputs can of course be used to create a plot:
+
+```{r}
+sliderInput(inputId="bins", "number of bins", min=1, max=30, value = 15)
+renderPlot(hist(rnorm(100), breaks=input$bins))
+```
+
+### Other input widgets
+
+There are lots of other input widgets that are pretty easy to see how they apply based on the type of control we need to set:
+
+- **`radioButtons()`** for choosing just one, and by default the first is chosen
+```{r}
+radioButtons(inputId="which_one", label="Select:", choices = c("Choice 1"="Choice1","Choice 2"="Choice2","Choice 3"="Choice3"))
+renderPrint(print(input$which_one))
+```
+
+- **`checkboxGroupInput()`** for choosing multiples
+```{r}
+checkboxGroupInput(inputId="which", label="Select:", choices = c("Choice 1"="Choice1","Choice 2"="Choice2","Choice 3"="Choice3"))
+renderPrint(print(input$which))
+```
+
+- **`dateInput()`**
+```{r}
+dateInput(inputId="date", label="Select date:")
+renderPrint(print(input$date))
+```
+
+- **`fileInput()`**
+```{r}
+fileInput(inputId="file", label="Select file:")
+renderPrint(print(input$file))
+```
+
+- **`textInput()`**
+```{r}
+textInput(inputId="text", label="Enter text:")
+renderPrint(print(input$text))
+```
+
+- **`actionLink()`**
+```{r}
+actionLink(inputId="action", label="Action:")
+renderPrint(print(input$action))
+```
+

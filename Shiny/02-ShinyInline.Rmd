@@ -1,0 +1,88 @@
+---
+title: "Shiny App"
+author: "Jerry Davis"
+date: "4/17/2021"
+output: html_document
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In this document, we'll explore the very basics of Shiny Web Apps, with complete code that
+can be used to create the app.R script from which it's run. Shiny apps can be created in RStudio as a *Shiny Web Application* project type. 
+
+## A simple Shiny app created as an Inline Application
+
+This R Markdown document is made interactive using Shiny, and employs an Inline Application with the complete Shiny app code included. 
+
+The code shown can also be used to create a Shiny web app by saving it as `app.R` in an RStudio Shiny app project.
+It illustrates the basic elements of a Shiny app:
+
+- Optionally some code at the top to set things up, such as loading packages and setting up data.
+- The **ui** section, which determines what the user will see, such as input widgets (like `numericInput`) and an area to plot things in, in this case `plotOutput`. In order to fit well on the page, the `fluidPage` function is used to hold it in; we could have also used `inputPanel` as we did earlier, but the result is not as well laid out.
+- The **server** section, which uses two parameters (input, output) created in the user interface to:
+   - provide data from the input widget (in this case `numericInput` which creates `input$n`) such as parameter settings to functions (e.g. `rnorm()` here which needs a sample size provided by `input$n`) in the rendered output (of in this case `hist`) 
+   - to render an output using a render___ method such as `renderPlot` which will run everything inside it (in this case a histogram)
+- Providing that `ui` and `server` to the `shinyApp` function.
+
+```{r simpleInline, warning=F, message=F}
+library(shiny)
+ui <- fluidPage(
+    numericInput(input="n",
+                 "Sample size", value=25),
+    plotOutput(outputId = "hist"))
+server <- function(input, output) {
+    output$hist <- renderPlot({
+        hist(rnorm(input$n))
+    })
+}   
+shinyApp(ui=ui,server=server)
+```
+
+This Shiny app is very short, which is useful in wrapping your head around these
+basic elements, which is important to understand. You can use this exact code to 
+create `app.R` in a Shiny web application project to see what you get when you click
+the Run App button. 
+
+- Create a new RStudio instance, and create a new Shiny Web Application. It will create the Old Faithful
+app.  Have a look at the code and use Run App to see what it does.
+- Then replace the app.R code with the above even simpler code, and check it out.
+
+One thing to note about how the Shiny web app (or inline or embedded app) works as opposed
+to just using the Shiny I/O methods we looked at earlier is the way the ui and server communicate
+about the plot creation: We didn't use `plotOutput` in the I/O methods; we just used 
+the input widgets to set parameters in the `renderPlot`.
+
+Instead, this Shiny web app has the `renderPlot` in the **server** section, and a 
+new function `plotOutput` is used to both specify the location of the plot and set
+`outputId` to be used as a variable to append to `output$` in the **server** section.
+Referring to the **Outputs** section of the cheat sheet, we can see that various render\*() 
+functions work with corresponding \*Output() functions:
+
+- `renderDataTable()` works with `dataTableOutput()`
+- `renderImage(    )` works with `imageOutput()`
+- `renderPlot(     )` works with `plotOutput()`
+- `renderPrint(    )` works with `verbatimTextOutput()`
+- `renderTable(    )` works with `tableOutput()`
+- `renderText(     )` works with `textOutput()`
+- `renderUI(       )` works with `uiOutput()` and `htmlOutput()`
+
+And there are others.  For instance, as we'll see in the next document:
+
+- `renderLeaflet(  )` works with `leafletOutput()`
+
+
+
+You should explore these resources to learn more about creating useful Shiny web apps:
+
+- <a href="https://shiny.rstudio.com/images/shiny-cheatsheet.pdf">https://shiny.rstudio.com/images/shiny-cheatsheet.pdf</a>
+- The Shiny tutorial at <a href="https://shiny.rstudio.com/tutorial/">https://shiny.rstudio.com/tutorial/</a>, worth spending some time on to learn more about getting Shiny apps working. There's a lot to understand about reactivity for instance. 
+
+
+To learn more about inline apps in R Markdown, see [Interactive Documents](http://rmarkdown.rstudio.com/authoring_shiny.html).
+
+
+
+
