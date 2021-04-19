@@ -597,9 +597,22 @@ lat <- c(39.52, 38.91, 37.97, 38.70, 39.09, 39.25, 39.94, 37.75, 40.35, 39.33, 3
 ```
 Create a data frame from it using the same steps, and plot temp against latitude.
 
+```{r echo=F, message=F, warning=F, include=F}
+temp <- c(10.7, 9.7, 7.7, 9.2, 7.3, 6.7, 4.0, 5.0, 0.9, -1.1, -0.8, -4.4)
+elev <- c(52, 394, 510, 564, 725, 848, 1042, 1225, 1486, 1775, 1899, 2551)
+lat <- c(39.52, 38.91, 37.97, 38.70, 39.09, 39.25, 39.94, 37.75, 40.35, 39.33, 39.17, 38.21)
+sierradata<-as.data.frame(cbind(temp,elev,lat))
+plot(sierradata$temp, sierradata$lat)
+```
+
+
 9. From the `sierradata` matrix built with `cbind()`, derive colmeans using the `mean` parameter on the columns `2` for `apply()`.
 
 10. Do the same thing with the sierra data data frame with `sapply()`.
+```{r include=F}
+sapply(sierradata,mean)
+```
+
 
 
 

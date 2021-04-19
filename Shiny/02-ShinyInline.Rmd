@@ -1,5 +1,5 @@
 ---
-title: "Shiny App"
+title: "Shiny Apps"
 author: "Jerry Davis"
 date: "4/17/2021"
 output: html_document
@@ -74,6 +74,42 @@ And there are others.  For instance, as we'll see in the next document:
 - `renderLeaflet(  )` works with `leafletOutput()`
 
 
+**`renderDataTable()` and `dataTableOutput()`**
+
+```{r DataTable, warning=F, message=F}
+library(shiny); library(tidyverse)
+ui <- fluidPage(
+    numericInput(input="n",
+                 "Sample size", value=25),
+    dataTableOutput(outputId = "varTable"))
+server <- function(input, output) {
+    output$varTable <- renderDataTable(tibble(a=rnorm(input$n), b=rnorm(input$n)))}
+shinyApp(ui=ui,server=server)
+```
+
+
+**`renderPrint()` and `verbatimTextOutput()`-- mono-spaced font like a character variable**
+
+```{r PrintOut, warning=F, message=F}
+library(shiny); library(tidyverse)
+ui <- fluidPage(
+    textInput(inputId="monotxt", label="Enter text:", value="Some text"),
+    verbatimTextOutput(outputId = "prn"))
+server <- function(input, output) {
+    output$prn <- renderPrint(print(input$monotxt))}
+shinyApp(ui=ui,server=server)
+```
+
+**`renderText()` and `textOutput()` -- formatted text output**
+```{r TextOut, warning=F, message=F}
+library(shiny); library(tidyverse)
+ui <- fluidPage(
+    textInput(inputId="text", label="Enter text:", value="Some text"),
+    textOutput(outputId = "txt"))
+server <- function(input, output) {
+    output$txt <- renderText(print(input$text))}
+shinyApp(ui=ui,server=server)
+```
 
 You should explore these resources to learn more about creating useful Shiny web apps:
 

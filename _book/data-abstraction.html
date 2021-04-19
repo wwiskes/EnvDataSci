@@ -403,18 +403,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb186-3"><a href="data-abstraction.html#cb186-3" aria-hidden="true" tabindex="-1"></a>ab <span class="ot">&lt;-</span> <span class="fu">tibble</span>(a,b)</span>
 <span id="cb186-4"><a href="data-abstraction.html#cb186-4" aria-hidden="true" tabindex="-1"></a>ab</span></code></pre></div>
 <pre><code>## # A tibble: 10 x 2
-##         a      b
-##     &lt;dbl&gt;  &lt;dbl&gt;
-##  1  0.363 0.0904
-##  2 -0.169 0.784 
-##  3 -0.123 0.763 
-##  4  1.28  0.362 
-##  5  1.33  0.563 
-##  6 -1.61  0.784 
-##  7 -0.655 0.282 
-##  8 -1.25  0.594 
-##  9  0.207 0.579 
-## 10 -0.347 0.646</code></pre>
+##          a      b
+##      &lt;dbl&gt;  &lt;dbl&gt;
+##  1  1.23   0.264 
+##  2 -1.40   0.592 
+##  3 -0.976  0.999 
+##  4  0.244  0.250 
+##  5  0.254  0.662 
+##  6  0.792  0.0751
+##  7 -1.08   0.168 
+##  8 -0.0998 0.234 
+##  9 -0.284  0.581 
+## 10 -1.46   0.908</code></pre>
 <div id="read_csv-vs.-read.csv" class="section level3" number="3.3.1">
 <h3><span class="header-section-number">3.3.1</span> <code>read_csv</code> vs. <code>read.csv</code></h3>
 <p>You might be tempted to use read.csv from base R</p>
@@ -438,35 +438,35 @@ problematic field names like <code>MLY-TAVG-NORMAL</code> become <code>MLY.TAVG
 <h2><span class="header-section-number">3.4</span> Statistical summary of variables</h2>
 <p>A simple statistical summary is very easy to do [<strong><code>eucoak</code></strong>]:</p>
 <div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="data-abstraction.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(eucoakrainfallrunoffTDR)</span></code></pre></div>
-<pre><code>##      site               site #          date              month              rain_mm         rain_oak        rain_euc      runoffL_oak    
-##  Length:90          Min.   :1.000   Length:90          Length:90          Min.   : 1.00   Min.   : 1.00   Min.   : 1.00   Min.   : 0.000  
-##  Class :character   1st Qu.:2.000   Class :character   Class :character   1st Qu.:16.00   1st Qu.:16.00   1st Qu.:14.75   1st Qu.: 0.000  
-##  Mode  :character   Median :4.000   Mode  :character   Mode  :character   Median :28.50   Median :30.50   Median :30.00   Median : 0.450  
-##                     Mean   :4.422                                         Mean   :37.99   Mean   :35.08   Mean   :34.60   Mean   : 2.032  
-##                     3rd Qu.:6.000                                         3rd Qu.:63.25   3rd Qu.:50.50   3rd Qu.:50.00   3rd Qu.: 2.800  
-##                     Max.   :8.000                                         Max.   :99.00   Max.   :98.00   Max.   :96.00   Max.   :14.000  
-##                                                                           NA&#39;s   :18      NA&#39;s   :2       NA&#39;s   :2       NA&#39;s   :5       
-##   runoffL_euc      slope_oak       slope_euc       aspect_oak      aspect_euc    surface_tension_oak surface_tension_euc
-##  Min.   : 0.00   Min.   : 9.00   Min.   : 9.00   Min.   :100.0   Min.   :106.0   Min.   :37.40       Min.   :28.51      
-##  1st Qu.: 0.07   1st Qu.:12.00   1st Qu.:12.00   1st Qu.:143.0   1st Qu.:175.0   1st Qu.:72.75       1st Qu.:32.79      
-##  Median : 1.20   Median :24.50   Median :23.00   Median :189.0   Median :196.5   Median :72.75       Median :37.40      
-##  Mean   : 2.45   Mean   :21.62   Mean   :19.34   Mean   :181.9   Mean   :191.2   Mean   :68.35       Mean   :43.11      
-##  3rd Qu.: 3.30   3rd Qu.:30.50   3rd Qu.:25.00   3rd Qu.:220.0   3rd Qu.:224.0   3rd Qu.:72.75       3rd Qu.:56.41      
-##  Max.   :16.00   Max.   :32.00   Max.   :31.00   Max.   :264.0   Max.   :296.0   Max.   :72.75       Max.   :72.75      
-##  NA&#39;s   :3                                                                       NA&#39;s   :22          NA&#39;s   :22         
-##  runoff_rainfall_ratio_oak runoff_rainfall_ratio_euc
-##  Min.   :0.00000           Min.   :0.000000         
-##  1st Qu.:0.00000           1st Qu.:0.003027         
-##  Median :0.02046           Median :0.047619         
-##  Mean   :0.05357           Mean   :0.065902         
-##  3rd Qu.:0.08485           3rd Qu.:0.083603         
-##  Max.   :0.42000           Max.   :0.335652         
-##  NA&#39;s   :5                 NA&#39;s   :3</code></pre>
+<pre><code>##      site               site #          date              month              rain_mm         rain_oak    
+##  Length:90          Min.   :1.000   Length:90          Length:90          Min.   : 1.00   Min.   : 1.00  
+##  Class :character   1st Qu.:2.000   Class :character   Class :character   1st Qu.:16.00   1st Qu.:16.00  
+##  Mode  :character   Median :4.000   Mode  :character   Mode  :character   Median :28.50   Median :30.50  
+##                     Mean   :4.422                                         Mean   :37.99   Mean   :35.08  
+##                     3rd Qu.:6.000                                         3rd Qu.:63.25   3rd Qu.:50.50  
+##                     Max.   :8.000                                         Max.   :99.00   Max.   :98.00  
+##                                                                           NA&#39;s   :18      NA&#39;s   :2      
+##     rain_euc      runoffL_oak      runoffL_euc      slope_oak       slope_euc       aspect_oak   
+##  Min.   : 1.00   Min.   : 0.000   Min.   : 0.00   Min.   : 9.00   Min.   : 9.00   Min.   :100.0  
+##  1st Qu.:14.75   1st Qu.: 0.000   1st Qu.: 0.07   1st Qu.:12.00   1st Qu.:12.00   1st Qu.:143.0  
+##  Median :30.00   Median : 0.450   Median : 1.20   Median :24.50   Median :23.00   Median :189.0  
+##  Mean   :34.60   Mean   : 2.032   Mean   : 2.45   Mean   :21.62   Mean   :19.34   Mean   :181.9  
+##  3rd Qu.:50.00   3rd Qu.: 2.800   3rd Qu.: 3.30   3rd Qu.:30.50   3rd Qu.:25.00   3rd Qu.:220.0  
+##  Max.   :96.00   Max.   :14.000   Max.   :16.00   Max.   :32.00   Max.   :31.00   Max.   :264.0  
+##  NA&#39;s   :2       NA&#39;s   :5        NA&#39;s   :3                                                      
+##    aspect_euc    surface_tension_oak surface_tension_euc runoff_rainfall_ratio_oak runoff_rainfall_ratio_euc
+##  Min.   :106.0   Min.   :37.40       Min.   :28.51       Min.   :0.00000           Min.   :0.000000         
+##  1st Qu.:175.0   1st Qu.:72.75       1st Qu.:32.79       1st Qu.:0.00000           1st Qu.:0.003027         
+##  Median :196.5   Median :72.75       Median :37.40       Median :0.02046           Median :0.047619         
+##  Mean   :191.2   Mean   :68.35       Mean   :43.11       Mean   :0.05357           Mean   :0.065902         
+##  3rd Qu.:224.0   3rd Qu.:72.75       3rd Qu.:56.41       3rd Qu.:0.08485           3rd Qu.:0.083603         
+##  Max.   :296.0   Max.   :72.75       Max.   :72.75       Max.   :0.42000           Max.   :0.335652         
+##                  NA&#39;s   :22          NA&#39;s   :22          NA&#39;s   :5                 NA&#39;s   :3</code></pre>
 </div>
 <div id="visualizing-data-with-a-tukey-box-plot" class="section level2" number="3.5">
 <h2><span class="header-section-number">3.5</span> Visualizing data with a Tukey box plot</h2>
 <div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="data-abstraction.html#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> eucoakrainfallrunoffTDR) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>site, <span class="at">y=</span>runoffL_euc))</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-71-1.png" width="672" /></p>
 </div>
 <div id="database-operations-with-dplyr" class="section level2" number="3.6">
 <h2><span class="header-section-number">3.6</span> Database operations with <code>dplyr</code></h2>

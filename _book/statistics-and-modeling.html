@@ -339,7 +339,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="statistics-and-modeling" class="section level1" number="7">
 <h1><span class="header-section-number">7</span> Statistics and Modeling</h1>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-161-1.png" width="672" /></p>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-172-1.png" width="672" /></p>
 <div id="goals-of-statistical-analysis" class="section level2" number="7.1">
 <h2><span class="header-section-number">7.1</span> Goals of statistical analysis</h2>
 <p>To frame how we might approach statistical analysis and modeling, there are
@@ -407,22 +407,22 @@ these methods and how they apply to environmental data science.</p>
 <p>Summary statistics such as mean, standard deviation, variance, minimum, maximum, and range are derived in quite a few
 R functions, commonly as a parameter or a sub-function (see <code>mutate</code>). A an overall simple statistical summary is very easy to do in base R:</p>
 <div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="statistics-and-modeling.html#cb407-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(tidy_eucoak)</span></code></pre></div>
-<pre><code>##      site               site #          tree                Date               month              rain_mm      rain_subcanopy 
-##  Length:180         Min.   :1.000   Length:180         Min.   :2006-11-08   Length:180         Min.   : 1.00   Min.   : 1.00  
-##  Class :character   1st Qu.:2.000   Class :character   1st Qu.:2006-12-07   Class :character   1st Qu.:16.00   1st Qu.:16.00  
-##  Mode  :character   Median :4.000   Mode  :character   Median :2007-01-30   Mode  :character   Median :28.50   Median :30.00  
-##                     Mean   :4.422                      Mean   :2007-01-29                      Mean   :37.99   Mean   :34.84  
-##                     3rd Qu.:6.000                      3rd Qu.:2007-03-22                      3rd Qu.:63.25   3rd Qu.:50.00  
-##                     Max.   :8.000                      Max.   :2007-05-07                      Max.   :99.00   Max.   :98.00  
-##                                                                                                NA&#39;s   :36      NA&#39;s   :4      
-##      slope           aspect         runoff_L      surface_tension runoff_rainfall_ratio
-##  Min.   : 9.00   Min.   :100.0   Min.   : 0.000   Min.   :28.51   Min.   :0.00000      
-##  1st Qu.:12.00   1st Qu.:143.0   1st Qu.: 0.000   1st Qu.:37.40   1st Qu.:0.00000      
-##  Median :24.00   Median :196.0   Median : 0.825   Median :62.60   Median :0.03347      
-##  Mean   :20.48   Mean   :186.6   Mean   : 2.244   Mean   :55.73   Mean   :0.05981      
-##  3rd Qu.:27.00   3rd Qu.:221.8   3rd Qu.: 3.200   3rd Qu.:72.75   3rd Qu.:0.08474      
-##  Max.   :32.00   Max.   :296.0   Max.   :16.000   Max.   :72.75   Max.   :0.42000      
-##                                  NA&#39;s   :8        NA&#39;s   :44      NA&#39;s   :8</code></pre>
+<pre><code>##      site               site #          tree                Date               month              rain_mm     
+##  Length:180         Min.   :1.000   Length:180         Min.   :2006-11-08   Length:180         Min.   : 1.00  
+##  Class :character   1st Qu.:2.000   Class :character   1st Qu.:2006-12-07   Class :character   1st Qu.:16.00  
+##  Mode  :character   Median :4.000   Mode  :character   Median :2007-01-30   Mode  :character   Median :28.50  
+##                     Mean   :4.422                      Mean   :2007-01-29                      Mean   :37.99  
+##                     3rd Qu.:6.000                      3rd Qu.:2007-03-22                      3rd Qu.:63.25  
+##                     Max.   :8.000                      Max.   :2007-05-07                      Max.   :99.00  
+##                                                                                                NA&#39;s   :36     
+##  rain_subcanopy      slope           aspect         runoff_L      surface_tension runoff_rainfall_ratio
+##  Min.   : 1.00   Min.   : 9.00   Min.   :100.0   Min.   : 0.000   Min.   :28.51   Min.   :0.00000      
+##  1st Qu.:16.00   1st Qu.:12.00   1st Qu.:143.0   1st Qu.: 0.000   1st Qu.:37.40   1st Qu.:0.00000      
+##  Median :30.00   Median :24.00   Median :196.0   Median : 0.825   Median :62.60   Median :0.03347      
+##  Mean   :34.84   Mean   :20.48   Mean   :186.6   Mean   : 2.244   Mean   :55.73   Mean   :0.05981      
+##  3rd Qu.:50.00   3rd Qu.:27.00   3rd Qu.:221.8   3rd Qu.: 3.200   3rd Qu.:72.75   3rd Qu.:0.08474      
+##  Max.   :98.00   Max.   :32.00   Max.   :296.0   Max.   :16.000   Max.   :72.75   Max.   :0.42000      
+##  NA&#39;s   :4                                       NA&#39;s   :8        NA&#39;s   :44      NA&#39;s   :8</code></pre>
 <div id="summarize-by-group-stratifying-a-summary" class="section level3" number="7.2.1">
 <h3><span class="header-section-number">7.2.1</span> Summarize by group: <em>stratifying a summary</em></h3>
 <div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="statistics-and-modeling.html#cb409-1" aria-hidden="true" tabindex="-1"></a>eucoakrainfallrunoffTDR <span class="sc">%&gt;%</span></span>
@@ -455,7 +455,7 @@ tended to be low vs high:</p>
 <div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="statistics-and-modeling.html#cb411-1" aria-hidden="true" tabindex="-1"></a>soilCO2_97<span class="sc">$</span>SITE <span class="ot">&lt;-</span> <span class="fu">factor</span>(soilCO2_97<span class="sc">$</span>SITE)</span>
 <span id="cb411-2"><a href="statistics-and-modeling.html#cb411-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> soilCO2_97, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> SITE, <span class="at">y =</span> <span class="st">`</span><span class="at">CO2%</span><span class="st">`</span>)) <span class="sc">+</span></span>
 <span id="cb411-3"><a href="statistics-and-modeling.html#cb411-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-164-1.png" width="672" /></p>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-175-1.png" width="672" /></p>
 </div>
 <div id="generating-pseudorandom-numbers" class="section level3" number="7.2.3">
 <h3><span class="header-section-number">7.2.3</span> Generating pseudorandom numbers</h3>
@@ -471,16 +471,16 @@ need a lot of these, such as in Monte Carlo simulation. The two most commonly us
 <div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="statistics-and-modeling.html#cb412-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(<span class="fu">runif</span>(<span class="at">n=</span><span class="dv">1000</span>, <span class="at">min=</span><span class="dv">10</span>, <span class="at">max=</span><span class="dv">20</span>))</span>
 <span id="cb412-2"><a href="statistics-and-modeling.html#cb412-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(x) <span class="ot">&lt;-</span> <span class="st">&#39;x&#39;</span></span>
 <span id="cb412-3"><a href="statistics-and-modeling.html#cb412-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(x, <span class="fu">aes</span>(<span class="at">x=</span>x)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-165-1.png" width="672" /></p>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-176-1.png" width="672" /></p>
 <div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="statistics-and-modeling.html#cb413-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(<span class="fu">rnorm</span>(<span class="at">n=</span><span class="dv">1000</span>, <span class="at">mean=</span><span class="dv">100</span>, <span class="at">sd=</span><span class="dv">10</span>))</span>
 <span id="cb413-2"><a href="statistics-and-modeling.html#cb413-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(y) <span class="ot">&lt;-</span> <span class="st">&#39;y&#39;</span></span>
 <span id="cb413-3"><a href="statistics-and-modeling.html#cb413-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(y, <span class="fu">aes</span>(<span class="at">x=</span>y)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-165-2.png" width="672" /></p>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-176-2.png" width="672" /></p>
 <div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="statistics-and-modeling.html#cb414-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(y, <span class="fu">aes</span>(<span class="at">x=</span>y)) <span class="sc">+</span> <span class="fu">geom_density</span>()</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-165-3.png" width="672" /></p>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-176-3.png" width="672" /></p>
 <div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="statistics-and-modeling.html#cb415-1" aria-hidden="true" tabindex="-1"></a>xy <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(x,y)</span>
 <span id="cb415-2"><a href="statistics-and-modeling.html#cb415-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(xy, <span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span>y)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-165-4.png" width="672" /></p>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-176-4.png" width="672" /></p>
 </div>
 </div>
 <div id="statistical-tests" class="section level2" number="7.3">
@@ -496,8 +496,8 @@ the appropriate methods for your research.</p>
 <div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="statistics-and-modeling.html#cb416-1" aria-hidden="true" tabindex="-1"></a>XSptsPheno <span class="sc">%&gt;%</span></span>
 <span id="cb416-2"><a href="statistics-and-modeling.html#cb416-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(NDVI, <span class="at">fill=</span>phenology)) <span class="sc">+</span></span>
 <span id="cb416-3"><a href="statistics-and-modeling.html#cb416-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha=</span><span class="fl">0.2</span>)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-167"></span>
-<img src="EnvDataSci_files/figure-html/unnamed-chunk-167-1.png" alt="NDVI by phenology" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-178"></span>
+<img src="EnvDataSci_files/figure-html/unnamed-chunk-178-1.png" alt="NDVI by phenology" width="672" />
 <p class="caption">
 Figure 7.1: NDVI by phenology
 </p>
@@ -560,8 +560,8 @@ test:</p>
 <div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="statistics-and-modeling.html#cb431-1" aria-hidden="true" tabindex="-1"></a>tidy_eucoak <span class="sc">%&gt;%</span></span>
 <span id="cb431-2"><a href="statistics-and-modeling.html#cb431-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">log</span>(runoff_L),<span class="at">fill=</span>tree)) <span class="sc">+</span></span>
 <span id="cb431-3"><a href="statistics-and-modeling.html#cb431-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha=</span><span class="fl">0.2</span>)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-172"></span>
-<img src="EnvDataSci_files/figure-html/unnamed-chunk-172-1.png" alt="Runoff under Eucalyptus and Oak in Bay Area sites" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-183"></span>
+<img src="EnvDataSci_files/figure-html/unnamed-chunk-183-1.png" alt="Runoff under Eucalyptus and Oak in Bay Area sites" width="672" />
 <p class="caption">
 Figure 7.2: Runoff under Eucalyptus and Oak in Bay Area sites
 </p>
@@ -569,8 +569,8 @@ Figure 7.2: Runoff under Eucalyptus and Oak in Bay Area sites
 <p>However, some of this may result from major variations among sites, which is apparent in this boxplot:</p>
 <div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="statistics-and-modeling.html#cb432-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> tidy_eucoak) <span class="sc">+</span></span>
 <span id="cb432-2"><a href="statistics-and-modeling.html#cb432-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>site, <span class="at">y=</span>runoff_L, <span class="at">color=</span>tree))</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-173"></span>
-<img src="EnvDataSci_files/figure-html/unnamed-chunk-173-1.png" alt="runoff at various sites contrasting euc and oak" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-184"></span>
+<img src="EnvDataSci_files/figure-html/unnamed-chunk-184-1.png" alt="runoff at various sites contrasting euc and oak" width="672" />
 <p class="caption">
 Figure 7.3: runoff at various sites contrasting euc and oak
 </p>
@@ -580,7 +580,7 @@ Figure 7.3: runoff at various sites contrasting euc and oak
 <span id="cb433-2"><a href="statistics-and-modeling.html#cb433-2" aria-hidden="true" tabindex="-1"></a>tilden <span class="sc">%&gt;%</span></span>
 <span id="cb433-3"><a href="statistics-and-modeling.html#cb433-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">log</span>(runoff_L),<span class="at">fill=</span>tree)) <span class="sc">+</span></span>
 <span id="cb433-4"><a href="statistics-and-modeling.html#cb433-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha=</span><span class="fl">0.2</span>)</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-174-1.png" width="672" /></p>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-185-1.png" width="672" /></p>
 <div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="statistics-and-modeling.html#cb434-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(tilden<span class="sc">$</span>runoff_L[tilden<span class="sc">$</span>tree <span class="sc">==</span> <span class="st">&quot;euc&quot;</span>])</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
@@ -610,22 +610,30 @@ Figure 7.3: runoff at various sites contrasting euc and oak
 <div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="statistics-and-modeling.html#cb440-1" aria-hidden="true" tabindex="-1"></a>csvPath <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;eucoaksediment.csv&quot;</span>, <span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>
 <span id="cb440-2"><a href="statistics-and-modeling.html#cb440-2" aria-hidden="true" tabindex="-1"></a>eucoaksed <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(csvPath)</span>
 <span id="cb440-3"><a href="statistics-and-modeling.html#cb440-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(eucoaksed)</span></code></pre></div>
-<pre><code>##       id                site              trtype              slope        bulkDensity        litter         Jan08rain    
-##  Length:14          Length:14          Length:14          Min.   : 9.00   Min.   :0.960   Min.   : 25.00   Min.   :228.1  
-##  Class :character   Class :character   Class :character   1st Qu.:12.00   1st Qu.:1.060   1st Qu.: 51.25   1st Qu.:290.8  
-##  Mode  :character   Mode  :character   Mode  :character   Median :21.00   Median :1.125   Median : 77.00   Median :301.1  
-##                                                           Mean   :20.04   Mean   :1.156   Mean   : 76.64   Mean   :298.5  
-##                                                           3rd Qu.:25.00   3rd Qu.:1.245   3rd Qu.: 95.75   3rd Qu.:317.0  
-##                                                           Max.   :32.00   Max.   :1.490   Max.   :135.00   Max.   :328.5  
-##                                                                                                                           
-##  mean_runoff_ratio med_runoff_ratio  std_runoff_ratio     fines_g         litter_g        total_g       fineTotalRatio   fineRainRatio  
-##  Min.   :0.00450   Min.   :0.00000   Min.   :0.01070   Min.   : 7.50   Min.   :14.00   Min.   : 23.50   Min.   :0.1300   Min.   :0.025  
-##  1st Qu.:0.02285   1st Qu.:0.01105   1st Qu.:0.01642   1st Qu.:13.30   1st Qu.:18.80   1st Qu.: 35.00   1st Qu.:0.2700   1st Qu.:0.044  
-##  Median :0.04835   Median :0.04950   Median :0.02740   Median :18.10   Median :40.40   Median : 60.50   Median :0.3900   Median :0.064  
-##  Mean   :0.06679   Mean   :0.06179   Mean   :0.04355   Mean   :27.77   Mean   :41.32   Mean   : 69.12   Mean   :0.3715   Mean   :0.097  
-##  3rd Qu.:0.12172   3rd Qu.:0.09492   3rd Qu.:0.05735   3rd Qu.:45.00   3rd Qu.:57.50   3rd Qu.: 95.50   3rd Qu.:0.4900   3rd Qu.:0.141  
-##  Max.   :0.16480   Max.   :0.16430   Max.   :0.11480   Max.   :66.70   Max.   :97.80   Max.   :125.90   Max.   :0.5500   Max.   :0.293  
-##                                                        NA&#39;s   :1       NA&#39;s   :1       NA&#39;s   :1        NA&#39;s   :1        NA&#39;s   :1</code></pre>
+<pre><code>##       id                site              trtype              slope        bulkDensity        litter      
+##  Length:14          Length:14          Length:14          Min.   : 9.00   Min.   :0.960   Min.   : 25.00  
+##  Class :character   Class :character   Class :character   1st Qu.:12.00   1st Qu.:1.060   1st Qu.: 51.25  
+##  Mode  :character   Mode  :character   Mode  :character   Median :21.00   Median :1.125   Median : 77.00  
+##                                                           Mean   :20.04   Mean   :1.156   Mean   : 76.64  
+##                                                           3rd Qu.:25.00   3rd Qu.:1.245   3rd Qu.: 95.75  
+##                                                           Max.   :32.00   Max.   :1.490   Max.   :135.00  
+##                                                                                                           
+##    Jan08rain     mean_runoff_ratio med_runoff_ratio  std_runoff_ratio     fines_g         litter_g    
+##  Min.   :228.1   Min.   :0.00450   Min.   :0.00000   Min.   :0.01070   Min.   : 7.50   Min.   :14.00  
+##  1st Qu.:290.8   1st Qu.:0.02285   1st Qu.:0.01105   1st Qu.:0.01642   1st Qu.:13.30   1st Qu.:18.80  
+##  Median :301.1   Median :0.04835   Median :0.04950   Median :0.02740   Median :18.10   Median :40.40  
+##  Mean   :298.5   Mean   :0.06679   Mean   :0.06179   Mean   :0.04355   Mean   :27.77   Mean   :41.32  
+##  3rd Qu.:317.0   3rd Qu.:0.12172   3rd Qu.:0.09492   3rd Qu.:0.05735   3rd Qu.:45.00   3rd Qu.:57.50  
+##  Max.   :328.5   Max.   :0.16480   Max.   :0.16430   Max.   :0.11480   Max.   :66.70   Max.   :97.80  
+##                                                                        NA&#39;s   :1       NA&#39;s   :1      
+##     total_g       fineTotalRatio   fineRainRatio  
+##  Min.   : 23.50   Min.   :0.1300   Min.   :0.025  
+##  1st Qu.: 35.00   1st Qu.:0.2700   1st Qu.:0.044  
+##  Median : 60.50   Median :0.3900   Median :0.064  
+##  Mean   : 69.12   Mean   :0.3715   Mean   :0.097  
+##  3rd Qu.: 95.50   3rd Qu.:0.4900   3rd Qu.:0.141  
+##  Max.   :125.90   Max.   :0.5500   Max.   :0.293  
+##  NA&#39;s   :1        NA&#39;s   :1        NA&#39;s   :1</code></pre>
 <div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="statistics-and-modeling.html#cb442-1" aria-hidden="true" tabindex="-1"></a>eucoaksed <span class="sc">%&gt;%</span></span>
 <span id="cb442-2"><a href="statistics-and-modeling.html#cb442-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(trtype) <span class="sc">%&gt;%</span></span>
 <span id="cb442-3"><a href="statistics-and-modeling.html#cb442-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">meanfines =</span> <span class="fu">mean</span>(fines_g, <span class="at">na.rm=</span>T), <span class="at">sdfines =</span> <span class="fu">sd</span>(fines_g, <span class="at">na.rm=</span>T),</span>
@@ -642,12 +650,12 @@ Figure 7.3: runoff at various sites contrasting euc and oak
 <span id="cb444-5"><a href="statistics-and-modeling.html#cb444-5" aria-hidden="true" tabindex="-1"></a>eucoakLong <span class="sc">%&gt;%</span></span>
 <span id="cb444-6"><a href="statistics-and-modeling.html#cb444-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(trtype, sed_g, <span class="at">col=</span>sed_type)) <span class="sc">+</span> </span>
 <span id="cb444-7"><a href="statistics-and-modeling.html#cb444-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-177-1.png" width="672" /></p>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-188-1.png" width="672" /></p>
 <div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="statistics-and-modeling.html#cb445-1" aria-hidden="true" tabindex="-1"></a>eucoakLong <span class="sc">%&gt;%</span></span>
 <span id="cb445-2"><a href="statistics-and-modeling.html#cb445-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(sed_g, <span class="at">col=</span>sed_type)) <span class="sc">+</span> </span>
 <span id="cb445-3"><a href="statistics-and-modeling.html#cb445-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span></span>
 <span id="cb445-4"><a href="statistics-and-modeling.html#cb445-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(trtype <span class="sc">~</span> .)</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-177-2.png" width="672" /></p>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-188-2.png" width="672" /></p>
 <div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb446-1"><a href="statistics-and-modeling.html#cb446-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(eucoaksed<span class="sc">$</span>fines_g[eucoaksed<span class="sc">$</span>trtype <span class="sc">==</span> <span class="st">&quot;euc&quot;</span>])</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
@@ -718,7 +726,7 @@ total sediment yield not significantly different.</p>
 <p>Here’s an easier method from the psych package [<strong><code>sierra</code></strong>]</p>
 <div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb458-1"><a href="statistics-and-modeling.html#cb458-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)</span>
 <span id="cb458-2"><a href="statistics-and-modeling.html#cb458-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs.panels</span>(sierraFeb <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(LATITUDE, LONGITUDE, ELEVATION, PRECIPITATION, TEMPERATURE))</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-178-1.png" width="672" /></p>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-189-1.png" width="672" /></p>
 </div>
 </div>
 <div id="modeling-in-r" class="section level2" number="7.4">
@@ -753,7 +761,7 @@ see ?family to see those supported, including binomial, gaussian, poisson, etc.<
 ## Multiple R-squared:  0.8757, Adjusted R-squared:  0.8736 
 ## F-statistic: 422.6 on 1 and 60 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Probably the most important statistic is the p value for the predictor variable ELEVATION, which in this case is very small &lt;2e-16.</p>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-180-1.png" width="672" /></p>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-191-1.png" width="672" /></p>
 <pre><code>## 
 ## Call:
 ## lm(formula = TEMPERATURE ~ ELEVATION, data = sierraFeb)
@@ -816,7 +824,7 @@ varies by bankfull discharge in a relationship that looks something like:</p>
 ##                     Max.   :100000   Max.   :0.009500</code></pre>
 <div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb470-1"><a href="statistics-and-modeling.html#cb470-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(streams, <span class="fu">aes</span>(Q, S, <span class="at">color=</span>strtype)) <span class="sc">+</span></span>
 <span id="cb470-2"><a href="statistics-and-modeling.html#cb470-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-182-1.png" width="672" /></p>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-193-1.png" width="672" /></p>
 <div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="statistics-and-modeling.html#cb471-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales) <span class="co"># needed for the trans_format function below</span></span>
 <span id="cb471-2"><a href="statistics-and-modeling.html#cb471-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(streams, <span class="fu">aes</span>(Q, S, <span class="at">color=</span>strtype)) <span class="sc">+</span></span>
 <span id="cb471-3"><a href="statistics-and-modeling.html#cb471-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
@@ -824,7 +832,7 @@ varies by bankfull discharge in a relationship that looks something like:</p>
 <span id="cb471-5"><a href="statistics-and-modeling.html#cb471-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">trans_format</span>(<span class="st">&quot;log10&quot;</span>, <span class="fu">math_format</span>(<span class="dv">10</span><span class="sc">^</span>.x))) <span class="sc">+</span></span>
 <span id="cb471-6"><a href="statistics-and-modeling.html#cb471-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">trans=</span><span class="fu">log10_trans</span>(),</span>
 <span id="cb471-7"><a href="statistics-and-modeling.html#cb471-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">trans_format</span>(<span class="st">&quot;log10&quot;</span>, <span class="fu">math_format</span>(<span class="dv">10</span><span class="sc">^</span>.x)))</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-182-2.png" width="672" /></p>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-193-2.png" width="672" /></p>
 <div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb472-1"><a href="statistics-and-modeling.html#cb472-1" aria-hidden="true" tabindex="-1"></a>ancova <span class="ot">=</span> <span class="fu">lm</span>(<span class="fu">log10</span>(S)<span class="sc">~</span>strtype<span class="sc">*</span><span class="fu">log10</span>(Q), <span class="at">data=</span>streams)</span>
 <span id="cb472-2"><a href="statistics-and-modeling.html#cb472-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ancova)</span></code></pre></div>
 <pre><code>## 
@@ -964,7 +972,7 @@ spatial patterns are generally highly relevant. We might ask:</p>
 <li>What is the effect of scale?</li>
 <li>Relationships among variables – do they vary spatially?</li>
 </ul>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-183-1.png" width="672" /></p>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-194-1.png" width="672" /></p>
 <div id="spatial-autocorrelation" class="section level3" number="7.5.1">
 <h3><span class="header-section-number">7.5.1</span> Spatial Autocorrelation</h3>
 <p>[Need to add a Moran’s I section here]</p>
@@ -1004,7 +1012,7 @@ spatial patterns are generally highly relevant. We might ask:</p>
 <span id="cb485-30"><a href="statistics-and-modeling.html#cb485-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Residuals&quot;</span>, <span class="at">subtitle=</span>eqn) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.8</span>, <span class="fl">0.85</span>)) <span class="sc">+</span> </span>
 <span id="cb485-31"><a href="statistics-and-modeling.html#cb485-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="fl">0.4</span>, <span class="st">&#39;cm&#39;</span>), </span>
 <span id="cb485-32"><a href="statistics-and-modeling.html#cb485-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">8</span>))</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-184-1.png" width="672" /></p>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-195-1.png" width="672" /></p>
 
 </div>
 </div>
