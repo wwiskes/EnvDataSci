@@ -13,12 +13,14 @@ knitr::opts_chunk$set(echo = TRUE)
 In this document, we'll explore the very basics of Shiny Web Apps, with complete code that
 can be used to create the app.R script from which it's run. Shiny apps can be created in RStudio as a *Shiny Web Application* project type. 
 
-## A simple Shiny app created as an Inline Application
+## Shiny Apps (created inline for viewing here)
 
-This R Markdown document is made interactive using Shiny, and employs an Inline Application with the complete Shiny app code included. 
+This R Markdown document is made interactive using Shiny, and employs a inline applications
+with the complete Shiny app code included, so we can explore various input and output methods. All code shown can also be used to create a Shiny web app by saving it as `app.R` in an RStudio Shiny app project.
 
-The code shown can also be used to create a Shiny web app by saving it as `app.R` in an RStudio Shiny app project.
-It illustrates the basic elements of a Shiny app:
+### A simple Shiny app
+
+The following simple Shiny app illustrates the basic elements:
 
 - Optionally some code at the top to set things up, such as loading packages and setting up data.
 - The **ui** section, which determines what the user will see, such as input widgets (like `numericInput`) and an area to plot things in, in this case `plotOutput`. In order to fit well on the page, the `fluidPage` function is used to hold it in; we could have also used `inputPanel` as we did earlier, but the result is not as well laid out.
@@ -50,6 +52,8 @@ the Run App button.
 app.  Have a look at the code and use Run App to see what it does.
 - Then replace the app.R code with the above even simpler code, and check it out.
 
+## Shiny app I/O methods
+
 One thing to note about how the Shiny web app (or inline or embedded app) works as opposed
 to just using the Shiny I/O methods we looked at earlier is the way the ui and server communicate
 about the plot creation: We didn't use `plotOutput` in the I/O methods; we just used 
@@ -74,7 +78,7 @@ And there are others.  For instance, as we'll see in the next document:
 - `renderLeaflet(  )` works with `leafletOutput()`
 
 
-**`renderDataTable()` and `dataTableOutput()`**
+### Data Tables:  `renderDataTable()` and `dataTableOutput()`
 
 ```{r DataTable, warning=F, message=F}
 library(shiny); library(tidyverse)
@@ -88,28 +92,48 @@ shinyApp(ui=ui,server=server)
 ```
 
 
-**`renderPrint()` and `verbatimTextOutput()`-- mono-spaced font like a character variable**
+### Text as Character:  `renderPrint()` and `verbatimTextOutput()`
+
+These functions produce a mono-spaced-font output like a character variable.
 
 ```{r PrintOut, warning=F, message=F}
 library(shiny); library(tidyverse)
 ui <- fluidPage(
     textInput(inputId="monotxt", label="Enter text:", value="Some text"),
-    verbatimTextOutput(outputId = "prn"))
+    verbatimTextOutput(outputId = "txt"))
 server <- function(input, output) {
-    output$prn <- renderPrint(print(input$monotxt))}
+    output$txt <- renderPrint(print(input$monotxt))}
 shinyApp(ui=ui,server=server)
 ```
 
-**`renderText()` and `textOutput()` -- formatted text output**
+
+### Formatted text: `renderText()` and `textOutput()`
+
 ```{r TextOut, warning=F, message=F}
 library(shiny); library(tidyverse)
 ui <- fluidPage(
     textInput(inputId="text", label="Enter text:", value="Some text"),
-    textOutput(outputId = "txt"))
+    textOutput(outputId = "prn"))
 server <- function(input, output) {
-    output$txt <- renderText(print(input$text))}
+    output$prn <- renderText(print(input$text))}
 shinyApp(ui=ui,server=server)
 ```
+
+### Plots: `renderPlot()` and `plotOutput()`
+
+```{r PlotOut, warning=F, message=F}
+library(shiny); library(tidyverse)
+ui <- fluidPage(
+    sliderInput(inputId="i", "input", min=1, max=30, value = 15),
+    textInput(inputId="title", label="Enter title:", value="Tukey boxplot"),
+    plotOutput(outputId = "Tukey"))
+server <- function(input, output) {
+    output$Tukey <- renderPlot(boxplot(rnorm(input$i),main=input$title))}
+shinyApp(ui=ui,server=server)
+```
+
+
+## Learn more:
 
 You should explore these resources to learn more about creating useful Shiny web apps:
 
