@@ -1,9 +1,11 @@
 # Spatial Data and Maps
 
-We'll explore the basics of simple features (sf) for building spatial datasets, then some common mapping methods, probably:
+We'll explore the basics of simple features (sf) for building spatial datasets, then some common mapping methods:
 
 - ggplot2
 - tmap
+- leaflet
+- the base plot system occasionally
 
 ## Spatial Data 
 
@@ -366,7 +368,7 @@ tm_shape(hillsh,bbox=bounds)+
 
 *Note: "-Greys" needed to avoid negative image, since "Greys" go from light to dark, and to match reflectance as with b&w photography, they need to go from dark to light.*
 
-### Interactive Maps
+## Interactive Maps
 
 The word "static" in "static maps" isn't something you would have heard in a cartography class 30 years ago, since essentially *all* maps then were static. Very important in designing maps is considering your audience, and one characteristic of the audience of those maps of yore were that they were printed and thus fixed on paper.  A lot of cartographic design relates to that property:  
 

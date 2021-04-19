@@ -4,25 +4,27 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3 Data Abstraction | EnvDataSci.utf8</title>
-  <meta name="description" content="" />
+  <title>3 Data Abstraction | Introduction to Environmental Data Science</title>
+  <meta name="description" content="Background, concepts and exercises for using R for environmental data science. The focus is on applying the R language and various libraries for data abstraction, transformation, data analysis, spatial data/mapping, statistical modeling, and time series, applied to environmental research." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3 Data Abstraction | EnvDataSci.utf8" />
+  <meta property="og:title" content="3 Data Abstraction | Introduction to Environmental Data Science" />
   <meta property="og:type" content="book" />
   
   
-  
-  
+  <meta property="og:description" content="Background, concepts and exercises for using R for environmental data science. The focus is on applying the R language and various libraries for data abstraction, transformation, data analysis, spatial data/mapping, statistical modeling, and time series, applied to environmental research." />
+  <meta name="github-repo" content="iGISc/EnvDataSci" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3 Data Abstraction | EnvDataSci.utf8" />
+  <meta name="twitter:title" content="3 Data Abstraction | Introduction to Environmental Data Science" />
   
-  
+  <meta name="twitter:description" content="Background, concepts and exercises for using R for environmental data science. The focus is on applying the R language and various libraries for data abstraction, transformation, data analysis, spatial data/mapping, statistical modeling, and time series, applied to environmental research." />
   
 
+<meta name="author" content="Jerry Davis" />
 
 
+<meta name="date" content="2021-04-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -255,11 +257,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="6.3.1" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#rasters-in-ggplot2"><i class="fa fa-check"></i><b>6.3.1</b> Rasters in ggplot2</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#tmap"><i class="fa fa-check"></i><b>6.4</b> tmap</a>
-<ul>
-<li class="chapter" data-level="6.4.1" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#interactive-maps"><i class="fa fa-check"></i><b>6.4.1</b> Interactive Maps</a></li>
-</ul></li>
-<li class="chapter" data-level="6.5" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#exercises-3"><i class="fa fa-check"></i><b>6.5</b> Exercises</a></li>
+<li class="chapter" data-level="6.4" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#tmap"><i class="fa fa-check"></i><b>6.4</b> tmap</a></li>
+<li class="chapter" data-level="6.5" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#interactive-maps"><i class="fa fa-check"></i><b>6.5</b> Interactive Maps</a></li>
+<li class="chapter" data-level="6.6" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#exercises-3"><i class="fa fa-check"></i><b>6.6</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html"><i class="fa fa-check"></i><b>7</b> Statistics and Modeling</a>
 <ul>
@@ -329,7 +329,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Environmental Data Science</a>
           </h1>
         </div>
 
@@ -403,18 +403,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb186-3"><a href="data-abstraction.html#cb186-3" aria-hidden="true" tabindex="-1"></a>ab <span class="ot">&lt;-</span> <span class="fu">tibble</span>(a,b)</span>
 <span id="cb186-4"><a href="data-abstraction.html#cb186-4" aria-hidden="true" tabindex="-1"></a>ab</span></code></pre></div>
 <pre><code>## # A tibble: 10 x 2
-##          a      b
-##      &lt;dbl&gt;  &lt;dbl&gt;
-##  1  1.23   0.264 
-##  2 -1.40   0.592 
-##  3 -0.976  0.999 
-##  4  0.244  0.250 
-##  5  0.254  0.662 
-##  6  0.792  0.0751
-##  7 -1.08   0.168 
-##  8 -0.0998 0.234 
-##  9 -0.284  0.581 
-## 10 -1.46   0.908</code></pre>
+##         a      b
+##     &lt;dbl&gt;  &lt;dbl&gt;
+##  1  1.05  0.902 
+##  2 -0.467 0.727 
+##  3 -0.817 0.755 
+##  4  0.719 0.0337
+##  5  1.40  0.347 
+##  6  1.74  0.116 
+##  7 -0.668 0.538 
+##  8  0.424 0.0276
+##  9 -0.597 0.0523
+## 10 -0.604 0.396</code></pre>
 <div id="read_csv-vs.-read.csv" class="section level3" number="3.3.1">
 <h3><span class="header-section-number">3.3.1</span> <code>read_csv</code> vs. <code>read.csv</code></h3>
 <p>You might be tempted to use read.csv from base R</p>
@@ -438,35 +438,43 @@ problematic field names like <code>MLY-TAVG-NORMAL</code> become <code>MLY.TAVG
 <h2><span class="header-section-number">3.4</span> Statistical summary of variables</h2>
 <p>A simple statistical summary is very easy to do [<strong><code>eucoak</code></strong>]:</p>
 <div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="data-abstraction.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(eucoakrainfallrunoffTDR)</span></code></pre></div>
-<pre><code>##      site               site #          date              month              rain_mm         rain_oak    
-##  Length:90          Min.   :1.000   Length:90          Length:90          Min.   : 1.00   Min.   : 1.00  
-##  Class :character   1st Qu.:2.000   Class :character   Class :character   1st Qu.:16.00   1st Qu.:16.00  
-##  Mode  :character   Median :4.000   Mode  :character   Mode  :character   Median :28.50   Median :30.50  
-##                     Mean   :4.422                                         Mean   :37.99   Mean   :35.08  
-##                     3rd Qu.:6.000                                         3rd Qu.:63.25   3rd Qu.:50.50  
-##                     Max.   :8.000                                         Max.   :99.00   Max.   :98.00  
-##                                                                           NA&#39;s   :18      NA&#39;s   :2      
-##     rain_euc      runoffL_oak      runoffL_euc      slope_oak       slope_euc       aspect_oak   
-##  Min.   : 1.00   Min.   : 0.000   Min.   : 0.00   Min.   : 9.00   Min.   : 9.00   Min.   :100.0  
-##  1st Qu.:14.75   1st Qu.: 0.000   1st Qu.: 0.07   1st Qu.:12.00   1st Qu.:12.00   1st Qu.:143.0  
-##  Median :30.00   Median : 0.450   Median : 1.20   Median :24.50   Median :23.00   Median :189.0  
-##  Mean   :34.60   Mean   : 2.032   Mean   : 2.45   Mean   :21.62   Mean   :19.34   Mean   :181.9  
-##  3rd Qu.:50.00   3rd Qu.: 2.800   3rd Qu.: 3.30   3rd Qu.:30.50   3rd Qu.:25.00   3rd Qu.:220.0  
-##  Max.   :96.00   Max.   :14.000   Max.   :16.00   Max.   :32.00   Max.   :31.00   Max.   :264.0  
-##  NA&#39;s   :2       NA&#39;s   :5        NA&#39;s   :3                                                      
-##    aspect_euc    surface_tension_oak surface_tension_euc runoff_rainfall_ratio_oak runoff_rainfall_ratio_euc
-##  Min.   :106.0   Min.   :37.40       Min.   :28.51       Min.   :0.00000           Min.   :0.000000         
-##  1st Qu.:175.0   1st Qu.:72.75       1st Qu.:32.79       1st Qu.:0.00000           1st Qu.:0.003027         
-##  Median :196.5   Median :72.75       Median :37.40       Median :0.02046           Median :0.047619         
-##  Mean   :191.2   Mean   :68.35       Mean   :43.11       Mean   :0.05357           Mean   :0.065902         
-##  3rd Qu.:224.0   3rd Qu.:72.75       3rd Qu.:56.41       3rd Qu.:0.08485           3rd Qu.:0.083603         
-##  Max.   :296.0   Max.   :72.75       Max.   :72.75       Max.   :0.42000           Max.   :0.335652         
-##                  NA&#39;s   :22          NA&#39;s   :22          NA&#39;s   :5                 NA&#39;s   :3</code></pre>
+<pre><code>##      site               site #          date              month              rain_mm     
+##  Length:90          Min.   :1.000   Length:90          Length:90          Min.   : 1.00  
+##  Class :character   1st Qu.:2.000   Class :character   Class :character   1st Qu.:16.00  
+##  Mode  :character   Median :4.000   Mode  :character   Mode  :character   Median :28.50  
+##                     Mean   :4.422                                         Mean   :37.99  
+##                     3rd Qu.:6.000                                         3rd Qu.:63.25  
+##                     Max.   :8.000                                         Max.   :99.00  
+##                                                                           NA&#39;s   :18     
+##     rain_oak        rain_euc      runoffL_oak      runoffL_euc      slope_oak    
+##  Min.   : 1.00   Min.   : 1.00   Min.   : 0.000   Min.   : 0.00   Min.   : 9.00  
+##  1st Qu.:16.00   1st Qu.:14.75   1st Qu.: 0.000   1st Qu.: 0.07   1st Qu.:12.00  
+##  Median :30.50   Median :30.00   Median : 0.450   Median : 1.20   Median :24.50  
+##  Mean   :35.08   Mean   :34.60   Mean   : 2.032   Mean   : 2.45   Mean   :21.62  
+##  3rd Qu.:50.50   3rd Qu.:50.00   3rd Qu.: 2.800   3rd Qu.: 3.30   3rd Qu.:30.50  
+##  Max.   :98.00   Max.   :96.00   Max.   :14.000   Max.   :16.00   Max.   :32.00  
+##  NA&#39;s   :2       NA&#39;s   :2       NA&#39;s   :5        NA&#39;s   :3                      
+##    slope_euc       aspect_oak      aspect_euc    surface_tension_oak surface_tension_euc
+##  Min.   : 9.00   Min.   :100.0   Min.   :106.0   Min.   :37.40       Min.   :28.51      
+##  1st Qu.:12.00   1st Qu.:143.0   1st Qu.:175.0   1st Qu.:72.75       1st Qu.:32.79      
+##  Median :23.00   Median :189.0   Median :196.5   Median :72.75       Median :37.40      
+##  Mean   :19.34   Mean   :181.9   Mean   :191.2   Mean   :68.35       Mean   :43.11      
+##  3rd Qu.:25.00   3rd Qu.:220.0   3rd Qu.:224.0   3rd Qu.:72.75       3rd Qu.:56.41      
+##  Max.   :31.00   Max.   :264.0   Max.   :296.0   Max.   :72.75       Max.   :72.75      
+##                                                  NA&#39;s   :22          NA&#39;s   :22         
+##  runoff_rainfall_ratio_oak runoff_rainfall_ratio_euc
+##  Min.   :0.00000           Min.   :0.000000         
+##  1st Qu.:0.00000           1st Qu.:0.003027         
+##  Median :0.02046           Median :0.047619         
+##  Mean   :0.05357           Mean   :0.065902         
+##  3rd Qu.:0.08485           3rd Qu.:0.083603         
+##  Max.   :0.42000           Max.   :0.335652         
+##  NA&#39;s   :5                 NA&#39;s   :3</code></pre>
 </div>
 <div id="visualizing-data-with-a-tukey-box-plot" class="section level2" number="3.5">
 <h2><span class="header-section-number">3.5</span> Visualizing data with a Tukey box plot</h2>
 <div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="data-abstraction.html#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> eucoakrainfallrunoffTDR) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>site, <span class="at">y=</span>runoffL_euc))</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-71-1.png" width="672" /></p>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
 </div>
 <div id="database-operations-with-dplyr" class="section level2" number="3.6">
 <h2><span class="header-section-number">3.6</span> Database operations with <code>dplyr</code></h2>
@@ -813,37 +821,32 @@ of " “, so <code>str_c</code> is just <code>paste</code> with a default”" se
 demonstrate that it’s pretty easy to use, and does a good job of making your
 job easier.</li>
 </ul>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="data-abstraction.html#cb256-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code></pre></div>
-<pre><code>## 
-## Attaching package: &#39;lubridate&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     date, intersect, setdiff, union</code></pre>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="data-abstraction.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dmy</span>(<span class="st">&quot;20 September 2020&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="data-abstraction.html#cb256-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb256-2"><a href="data-abstraction.html#cb256-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dmy</span>(<span class="st">&quot;20 September 2020&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;2020-09-20&quot;</code></pre>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="data-abstraction.html#cb261-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dmy_hm</span>(<span class="st">&quot;20 September 2020 10:45&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="data-abstraction.html#cb258-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dmy_hm</span>(<span class="st">&quot;20 September 2020 10:45&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;2020-09-20 10:45:00 UTC&quot;</code></pre>
-<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="data-abstraction.html#cb263-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mdy_hms</span>(<span class="st">&quot;September 20, 2020 10:48&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="data-abstraction.html#cb260-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mdy_hms</span>(<span class="st">&quot;September 20, 2020 10:48&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;2020-09-20 20:10:48 UTC&quot;</code></pre>
-<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="data-abstraction.html#cb265-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mdy_hm</span>(<span class="st">&quot;9/20/20 10:50&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="data-abstraction.html#cb262-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mdy_hm</span>(<span class="st">&quot;9/20/20 10:50&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;2020-09-20 10:50:00 UTC&quot;</code></pre>
-<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="data-abstraction.html#cb267-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mdy</span>(<span class="st">&quot;9.20.20&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="data-abstraction.html#cb264-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mdy</span>(<span class="st">&quot;9.20.20&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;2020-09-20&quot;</code></pre>
-<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="data-abstraction.html#cb269-1" aria-hidden="true" tabindex="-1"></a>start704 <span class="ot">&lt;-</span> <span class="fu">dmy_hm</span>(<span class="st">&quot;24 August 2020 16:00&quot;</span>)</span>
-<span id="cb269-2"><a href="data-abstraction.html#cb269-2" aria-hidden="true" tabindex="-1"></a>end704 <span class="ot">&lt;-</span> <span class="fu">mdy_hm</span>(<span class="st">&quot;12/18/2020 4:45 pm&quot;</span>)</span>
-<span id="cb269-3"><a href="data-abstraction.html#cb269-3" aria-hidden="true" tabindex="-1"></a><span class="fu">year</span>(start704)</span></code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="data-abstraction.html#cb266-1" aria-hidden="true" tabindex="-1"></a>start704 <span class="ot">&lt;-</span> <span class="fu">dmy_hm</span>(<span class="st">&quot;24 August 2020 16:00&quot;</span>)</span>
+<span id="cb266-2"><a href="data-abstraction.html#cb266-2" aria-hidden="true" tabindex="-1"></a>end704 <span class="ot">&lt;-</span> <span class="fu">mdy_hm</span>(<span class="st">&quot;12/18/2020 4:45 pm&quot;</span>)</span>
+<span id="cb266-3"><a href="data-abstraction.html#cb266-3" aria-hidden="true" tabindex="-1"></a><span class="fu">year</span>(start704)</span></code></pre></div>
 <pre><code>## [1] 2020</code></pre>
-<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="data-abstraction.html#cb271-1" aria-hidden="true" tabindex="-1"></a><span class="fu">month</span>(start704)</span></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="data-abstraction.html#cb268-1" aria-hidden="true" tabindex="-1"></a><span class="fu">month</span>(start704)</span></code></pre></div>
 <pre><code>## [1] 8</code></pre>
-<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="data-abstraction.html#cb273-1" aria-hidden="true" tabindex="-1"></a><span class="fu">day</span>(end704)</span></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="data-abstraction.html#cb270-1" aria-hidden="true" tabindex="-1"></a><span class="fu">day</span>(end704)</span></code></pre></div>
 <pre><code>## [1] 18</code></pre>
-<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="data-abstraction.html#cb275-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hour</span>(end704)</span></code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="data-abstraction.html#cb272-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hour</span>(end704)</span></code></pre></div>
 <pre><code>## [1] 16</code></pre>
-<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="data-abstraction.html#cb277-1" aria-hidden="true" tabindex="-1"></a>end704<span class="sc">-</span>start704</span></code></pre></div>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="data-abstraction.html#cb274-1" aria-hidden="true" tabindex="-1"></a>end704<span class="sc">-</span>start704</span></code></pre></div>
 <pre><code>## Time difference of 116.0312 days</code></pre>
-<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="data-abstraction.html#cb279-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_date</span>(end704)</span></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="data-abstraction.html#cb276-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_date</span>(end704)</span></code></pre></div>
 <pre><code>## [1] &quot;2020-12-18&quot;</code></pre>
-<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="data-abstraction.html#cb281-1" aria-hidden="true" tabindex="-1"></a>hms<span class="sc">::</span><span class="fu">as_hms</span>(end704)</span></code></pre></div>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="data-abstraction.html#cb278-1" aria-hidden="true" tabindex="-1"></a>hms<span class="sc">::</span><span class="fu">as_hms</span>(end704)</span></code></pre></div>
 <pre><code>## 16:45:00</code></pre>
 <p>Note the use of :: after the package
 Sometimes you need to specify the package and function name this way, for instance if more than one package has a function of the same name.<br />
