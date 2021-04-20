@@ -148,8 +148,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prerequisites</a>
 <ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#packages-to-install"><i class="fa fa-check"></i><b>0.1</b> Packages to install</a></li>
-<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#data"><i class="fa fa-check"></i><b>0.2</b> Data</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#packages-to-install"><i class="fa fa-check"></i>Packages to install</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#data"><i class="fa fa-check"></i>Data</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>1</b> Introduction to R</a>
 <ul>
@@ -309,13 +309,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8" data-path="communication.html"><a href="communication.html"><i class="fa fa-check"></i><b>8</b> Communication</a></li>
 <li class="chapter" data-level="" data-path="appendix-building-a-data-package-for-github.html"><a href="appendix-building-a-data-package-for-github.html"><i class="fa fa-check"></i>Appendix: Building a Data Package for GitHub</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="appendix-building-a-data-package-for-github.html"><a href="appendix-building-a-data-package-for-github.html#rda-files"><i class="fa fa-check"></i><b>8.1</b> <code>rda</code> files</a>
+<li><a href="appendix-building-a-data-package-for-github.html#rda-files"><code>rda</code> files</a>
 <ul>
-<li class="chapter" data-level="8.1.1" data-path="appendix-building-a-data-package-for-github.html"><a href="appendix-building-a-data-package-for-github.html#usethisuse_data"><i class="fa fa-check"></i><b>8.1.1</b> <code>usethis::use_data()</code></a></li>
-<li class="chapter" data-level="8.1.2" data-path="appendix-building-a-data-package-for-github.html"><a href="appendix-building-a-data-package-for-github.html#usethiscreate_package"><i class="fa fa-check"></i><b>8.1.2</b> <code>usethis::create_package()</code></a></li>
-<li class="chapter" data-level="8.1.3" data-path="appendix-building-a-data-package-for-github.html"><a href="appendix-building-a-data-package-for-github.html#devtoolsdocument"><i class="fa fa-check"></i><b>8.1.3</b> <code>devtools::document()</code></a></li>
+<li><a href="appendix-building-a-data-package-for-github.html#usethisuse_data"><code>usethis::use_data()</code></a></li>
+<li><a href="appendix-building-a-data-package-for-github.html#usethiscreate_package"><code>usethis::create_package()</code></a></li>
+<li><a href="appendix-building-a-data-package-for-github.html#devtoolsdocument"><code>devtools::document()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="appendix-building-a-data-package-for-github.html"><a href="appendix-building-a-data-package-for-github.html#raw-data"><i class="fa fa-check"></i><b>8.2</b> Raw data</a></li>
+<li class="chapter" data-level="" data-path="appendix-building-a-data-package-for-github.html"><a href="appendix-building-a-data-package-for-github.html#raw-data"><i class="fa fa-check"></i>Raw data</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -555,20 +555,20 @@ We’ll read this type of data in from spreadsheets or even more commonly from c
 text files that spreadsheet programs like Excel commonly read in just like their native format.</p>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="introduction-to-r.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(iGIScData)</span>
 <span id="cb66-2"><a href="introduction-to-r.html#cb66-2" aria-hidden="true" tabindex="-1"></a>sierraFeb</span></code></pre></div>
-<pre><code>## # A tibble: 82 x 7
-##    STATION_NAME                    COUNTY  ELEVATION LATITUDE LONGITUDE PRECIPITATION TEMPERATURE
-##    &lt;chr&gt;                           &lt;chr&gt;       &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;
-##  1 GROVELAND 2, CA US              Tuolum~     853.      37.8     -120.         176.          6.1
-##  2 CANYON DAM, CA US               Plumas     1390.      40.2     -121.         164.          1.4
-##  3 KERN RIVER PH 3, CA US          Kern        824.      35.8     -118.          67.1         8.9
-##  4 DONNER MEMORIAL ST PARK, CA US  Nevada     1810.      39.3     -120.         167.         -0.9
-##  5 BOWMAN DAM, CA US               Nevada     1641.      39.5     -121.         277.          2.9
-##  6 BRUSH CREEK RANGER STATION, CA~ Butte      1085.      39.7     -121.         296.         NA  
-##  7 GRANT GROVE, CA US              Tulare     2012.      36.7     -119.         186.          1.7
-##  8 LEE VINING, CA US               Mono       2072.      38.0     -119.          71.9         0.4
-##  9 OROVILLE MUNICIPAL AIRPORT, CA~ Butte        57.9     39.5     -122.         138.         10.3
-## 10 LEMON COVE, CA US               Tulare      156.      36.4     -119.          62.7        11.3
-## # ... with 72 more rows</code></pre>
+<pre><code>## # A tibble: 62 x 9
+##    STATION_NAME     COUNTY ELEVATION LATITUDE LONGITUDE PRECIPITATION TEMPERATURE  resid predict
+##    &lt;chr&gt;            &lt;fct&gt;      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+##  1 GROVELAND 2, CA~ Tuolu~     853.      37.8     -120.         176.          6.1 -0.574   6.67 
+##  2 CANYON DAM, CA ~ Plumas    1390.      40.2     -121.         164.          1.4 -2.00    3.40 
+##  3 KERN RIVER PH 3~ Kern       824.      35.8     -118.          67.1         8.9  2.05    6.85 
+##  4 DONNER MEMORIAL~ Nevada    1810.      39.3     -120.         167.         -0.9 -1.74    0.840
+##  5 BOWMAN DAM, CA ~ Nevada    1641.      39.5     -121.         277.          2.9  1.03    1.87 
+##  6 GRANT GROVE, CA~ Tulare    2012.      36.7     -119.         186.          1.7  2.09   -0.394
+##  7 LEE VINING, CA ~ Mono      2072.      38.0     -119.          71.9         0.4  1.16   -0.760
+##  8 OROVILLE MUNICI~ Butte       57.9     39.5     -122.         138.         10.3 -1.23   11.5  
+##  9 LEMON COVE, CA ~ Tulare     156.      36.4     -119.          62.7        11.3  0.373  10.9  
+## 10 CALAVERAS BIG T~ Calav~    1431       38.3     -120.         254           2.7 -0.450   3.15 
+## # ... with 52 more rows</code></pre>
 </div>
 <div id="data-structures-in-r" class="section level2" number="1.6">
 <h2><span class="header-section-number">1.6</span> Data Structures in R</h2>
@@ -832,12 +832,12 @@ Figure 1.5: Temperature~Elevation
 <span id="cb156-2"><a href="introduction-to-r.html#cb156-2" aria-hidden="true" tabindex="-1"></a>grain_char <span class="ot">&lt;-</span> <span class="fu">sample</span>(grain_order, <span class="dv">36</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb156-3"><a href="introduction-to-r.html#cb156-3" aria-hidden="true" tabindex="-1"></a>grain_fact <span class="ot">&lt;-</span> <span class="fu">factor</span>(grain_char, <span class="at">levels =</span> grain_order)</span>
 <span id="cb156-4"><a href="introduction-to-r.html#cb156-4" aria-hidden="true" tabindex="-1"></a>grain_char</span></code></pre></div>
-<pre><code>##  [1] &quot;silt&quot; &quot;silt&quot; &quot;sand&quot; &quot;clay&quot; &quot;sand&quot; &quot;silt&quot; &quot;silt&quot; &quot;sand&quot; &quot;clay&quot; &quot;sand&quot; &quot;silt&quot; &quot;clay&quot; &quot;silt&quot;
-## [14] &quot;clay&quot; &quot;clay&quot; &quot;sand&quot; &quot;sand&quot; &quot;silt&quot; &quot;clay&quot; &quot;clay&quot; &quot;sand&quot; &quot;clay&quot; &quot;silt&quot; &quot;silt&quot; &quot;clay&quot; &quot;sand&quot;
-## [27] &quot;silt&quot; &quot;silt&quot; &quot;sand&quot; &quot;clay&quot; &quot;clay&quot; &quot;clay&quot; &quot;sand&quot; &quot;clay&quot; &quot;clay&quot; &quot;silt&quot;</code></pre>
+<pre><code>##  [1] &quot;sand&quot; &quot;sand&quot; &quot;silt&quot; &quot;sand&quot; &quot;silt&quot; &quot;silt&quot; &quot;sand&quot; &quot;silt&quot; &quot;clay&quot; &quot;clay&quot; &quot;clay&quot; &quot;clay&quot; &quot;clay&quot;
+## [14] &quot;sand&quot; &quot;sand&quot; &quot;silt&quot; &quot;sand&quot; &quot;clay&quot; &quot;silt&quot; &quot;silt&quot; &quot;clay&quot; &quot;silt&quot; &quot;clay&quot; &quot;silt&quot; &quot;clay&quot; &quot;silt&quot;
+## [27] &quot;silt&quot; &quot;silt&quot; &quot;sand&quot; &quot;sand&quot; &quot;sand&quot; &quot;clay&quot; &quot;silt&quot; &quot;silt&quot; &quot;silt&quot; &quot;silt&quot;</code></pre>
 <div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="introduction-to-r.html#cb158-1" aria-hidden="true" tabindex="-1"></a>grain_fact</span></code></pre></div>
-<pre><code>##  [1] silt silt sand clay sand silt silt sand clay sand silt clay silt clay clay sand sand silt
-## [19] clay clay sand clay silt silt clay sand silt silt sand clay clay clay sand clay clay silt
+<pre><code>##  [1] sand sand silt sand silt silt sand silt clay clay clay clay clay sand sand silt sand clay
+## [19] silt silt clay silt clay silt clay silt silt silt sand sand sand clay silt silt silt silt
 ## Levels: clay silt sand</code></pre>
 <p>To make a categorical variable a factor:</p>
 <div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="introduction-to-r.html#cb160-1" aria-hidden="true" tabindex="-1"></a>fruit <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;apples&quot;</span>, <span class="st">&quot;oranges&quot;</span>, <span class="st">&quot;bananas&quot;</span>, <span class="st">&quot;oranges&quot;</span>)</span>
@@ -850,7 +850,7 @@ Figure 1.5: Temperature~Elevation
 <p><strong>Factor example</strong></p>
 <div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="introduction-to-r.html#cb162-1" aria-hidden="true" tabindex="-1"></a>sierraFeb<span class="sc">$</span>COUNTY <span class="ot">&lt;-</span> <span class="fu">factor</span>(sierraFeb<span class="sc">$</span>COUNTY)</span>
 <span id="cb162-2"><a href="introduction-to-r.html#cb162-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(sierraFeb<span class="sc">$</span>COUNTY)</span></code></pre></div>
-<pre><code>##  Factor w/ 21 levels &quot;Amador&quot;,&quot;Butte&quot;,..: 20 14 7 12 12 2 19 11 2 19 ...</code></pre>
+<pre><code>##  Factor w/ 20 levels &quot;Amador&quot;,&quot;Butte&quot;,..: 19 14 7 12 12 18 11 2 18 3 ...</code></pre>
 </div>
 </div>
 </div>

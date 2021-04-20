@@ -16,7 +16,7 @@ description: "Background, concepts and exercises for using R for environmental d
 
 This book is intended to work in concert with a series of lectures and discussions among the participants in Geog 604/704 Environmental Data Science at San Francisco State University.  Data packages will be created on GitHub.
 
-## Packages to install
+## Packages to install {-}
 
 Participants need to have R and RStudio installed, and at least the following packages:
 
@@ -45,7 +45,7 @@ library(tidyverse)
 
 which you *will* want to include in your script.
  
-## Data
+## Data {-}
 
 We'll be using data from various sources, including data on CRAN like the code packages 
 above which you install the same way -- so use `install.packages("palmerpenguins")`. 

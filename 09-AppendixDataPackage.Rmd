@@ -8,11 +8,11 @@ For our package, `iGIScData`, we provided data in two ways:
 
 - raw data as CSVs, shapefiles and TIFFs.
 
-## `rda` files
+## `rda` files {-}
 
 These files need to be prepared from data in R and go in the data folder. The process is made very easy by using `usethis::use_data()` package: 
 
-### `usethis::use_data()`
+### `usethis::use_data()` {-}
 
 `usethis::use_data()` is used to add data as rda files to the `data` folder. These data can be data frames, simple features, rasters, and I'm sure other things. 
 
@@ -23,11 +23,11 @@ sierraFeb <- read_csv("data-raw/sierraFeb.csv")
 usethis::use_data(sierraFeb)
 ```
 
-### `usethis::create_package()`
+### `usethis::create_package()` {-}
 
 This creates the package and uses roxygen to document it. I think you just need to run this once, then the `devtools::document()` does the rest, and can be run again to update it. 
 
-### `devtools::document()`
+### `devtools::document()` {-}
 
 This creates documentation on the data sets, using the file `R/data.R`, which will need to have lines of code similar to the following to document each data set. Note that the name of the data set goes last, in quotes. The formatting of the field names and descriptions is a bit tricky and doesn't follow normal R rules. As a result, sometimes my field names don't exactly match the actual field names. Maybe I'll get around to changing the original field names with `rename`. Note that the organization is important, with the title of the data first, a blank line, then a description, etc.:
 ```
@@ -53,7 +53,7 @@ Once these are on GitHub, a user can simply install the package with
 
 But we also wanted to provide raw CSVs, shapefiles and rasters, in order to demonstrate how to read those. 
 
-## Raw data
+## Raw data {-}
 
 Raw data (e.g. CSVs, shapefiles, and rasters) are simply stored in the `inst/extdata` folder. Just create those folders and put the files there. Make sure to include all the files (like the multiple files that go with a shapefile). Then, to access the data once the data package is installed, the user just needs to use the `system.file()` function to provide the path and then use that with the appropriate read function; e.g. for a CSV, something like:
 

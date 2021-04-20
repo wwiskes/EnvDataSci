@@ -35,8 +35,6 @@ fig:unnamed-chunk-169
 fig:unnamed-chunk-174
 fig:unnamed-chunk-175
 fig:unnamed-chunk-194
-packages-to-install
-data
 introduction-to-r
 variables
 functions
@@ -156,8 +154,3 @@ ensemble-average
 julian-dates
 learning-more-about-time-series-in-r
 communication
-rda-files
-usethisuse_data
-usethiscreate_package
-devtoolsdocument
-raw-data
