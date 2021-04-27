@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 Shiny lets you include interactive controls letting the user manipulating your R analysis.
 
 Since Shiny requires a host to run the R code on, we can't create it as part of 
-a chapter in the book. But we can look at it in this RMarkdown document, which can run
+a chapter in the book. But we can look at it in this R Markdown document, which can run
 RMarkdown using the 'shiny' runtime method in RStudio.  We'll explore Shiny interactive input widgets and
 output functions, then look at using these to build a Shiny app which can be 
 run on your computer or hosted on the web.

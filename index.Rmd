@@ -12,13 +12,99 @@ github-repo: iGISc/EnvDataSci
 description: "Background, concepts and exercises for using R for environmental data science.  The focus is on applying the R language and various libraries for data abstraction, transformation, data analysis, spatial data/mapping, statistical modeling, and time series, applied to environmental research."
 ---
 
-# Prerequisites {-#chapter00.chapter_section .intro_section}
+# Introduction {#chapter00.chapter_section .intro_section}
 
-This book is intended to work in concert with a series of lectures and discussions among the participants in Geog 604/704 Environmental Data Science at San Francisco State University.  Data packages will be created on GitHub.
+Data science is *an inter-disciplinary field that uses scientific methods, processes, algorithms and systems to extract knowledge and insights from many structural and unstructured data* (Wikipedia). 
+Environmental data science is data science applied to environmental analysis problems. In general data science can be seen as being the intersection of math & statistics, computer science/IT, and some research domain, and in this case it's environmental:
 
-## Packages to install {-}
+<img src="img/EnvDataSci.png">
 
-Participants need to have R and RStudio installed, and at least the following packages:
+## Tools for Environmental Data Science
+
+Tools needed for environmental research can include many things since environmental *data* can include many things, including environmental measurements in time and space domains.
+
+- Data analysis and transformation methods
+   - importing and other methods to create rectangular data frames 
+   - reorganization and creation of fields
+   - filtering observations
+   - data joins
+   - stratified statistical summarization
+   - reorganizing data, including pivots
+- Modeling
+   - physical models 
+   - statistical modeling
+   - models based on machine learning algorithms
+- Visualization
+   - graphics
+- Spatial analysis & maps
+   - vector and raster spatial analysis, e.g.
+      - spatial joins
+      - distance analysis
+      - overlay analysis 
+   - spatial statistics
+   - static and interactive maps
+- Time series
+   - analyzing and visualizing long-term data records (e.g. for climate change)
+   - analyzing and visualizing high-frequency data from loggers
+   
+## Big Data, Data Mining, and Exploratory Data Analysis 
+
+**Big data**: *data having a size or complexity too big to be processed effectively by traditional software*
+
+- data with many cases or dimensions (including imagery)
+- used in business informatics
+- challenges of capturing, storing, sharing, visualization, querying...
+    - related to the great growth in data recently
+
+**Data Mining**: *discovering patterns in large data sets*
+
+- databases collected by government agencies
+- imagery data from satellite, aerial (including drone) sensors
+- time-series data from long-term data records or high-frequency data loggers
+- methods may involve machine learning / artificial intelligence / computer vision
+
+**Exploratory data analysis**: *procedures for analyzing data, techniques for interpreting the results of such procedures, ways of structuring data to make its analysis easier*
+
+- summarization
+- restructuring
+- visualization
+       
+### Exploratory Data Analysis
+   
+Just as *exploration* is a part of what *National Geographic* has long covered, it's
+an important part of geography and environmental science that grew out of it.  
+<img src="img/CaveExploring.png">
+
+**Exploratory Data Analysis** is exploration applied to data, and has grown as an
+alternative approach to traditional statistical analysis. This basic approach perhaps
+dates back to the work of Thomas Bayes in the 18th century, but John Tukey in 1961 may 
+have best articulated the basic goals of this approach in defining the "data analysis" methods he was promoting as "Procedures for analyzing data, techniques for interpreting the results of such procedures, ways of planning the gathering of data to make its analysis easier, more precise or more accurate, and all the machinery and results of (mathematical) statistics which apply to analyzing data."  
+
+Some years later (1977), Tukey followed up with *Exploratory Data Analysis*.
+<img src="img/Tukey1977.png">
+
+- EDA is an approach to analyzing data via summaries and graphics.  The key word is *exploratory*.
+   - In contrast to *confirmatory* statistics
+- Objectives:
+   - suggest hypotheses
+   - assess assumptions on which inference will be based
+   - select appropriate statistical tools
+   - guide further data collection
+- Led to the development of S, then R
+   - Built on clear design and extensive, clear graphics, one key to exploring data
+   - S Developed at Bell Labs by John Chambers, 1976
+<img src="img/ChambersGraphicalMethodsForDataAnalysis.png">
+   - R is a language and environment for statistical computing and graphics. It is a GNU project which is similar to the S language and environment which was developed at Bell Laboratories (formerly AT&T, now Lucent Technologies) by John Chambers and colleagues.
+
+<img src="img/R.png">
+
+## Software and data we'll need
+
+First, we're going to use the R language.  It's not the only way to do data analysis, 
+and probably Python is the leading data science overall, but R is clearly the leading such 
+language for academic research.
+
+For a start, you'll need to have R and RStudio installed, and at least the following packages:
 
 - tidyverse (to include ggplot2, dplyr, tidyr, stringr, etc.)
     - ggplot2
@@ -29,6 +115,8 @@ Participants need to have R and RStudio installed, and at least the following pa
 - sf
 - raster
 - tmap
+
+There will be others we'll meet along the way.
 
 To install these packages, the following code will work:
 
@@ -45,7 +133,7 @@ library(tidyverse)
 
 which you *will* want to include in your script.
  
-## Data {-}
+### Data
 
 We'll be using data from various sources, including data on CRAN like the code packages 
 above which you install the same way -- so use `install.packages("palmerpenguins")`. 

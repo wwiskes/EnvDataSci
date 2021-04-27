@@ -1,5 +1,5 @@
 ---
-title: "Embedded Shiny Apps"
+title: "Embedded Shiny App in Data Package"
 author: "Jerry Davis"
 date: "4/17/2021"
 output: html_document
@@ -10,15 +10,10 @@ runtime: shiny
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Shiny input widgets and outputs can be built into a Shiny app that can
-be hosted on the web. We can see what these look like as embedded or inline
-Shiny apps.  
-
-To learn more about Shiny apps, see [Interactive Documents](http://rmarkdown.rstudio.com/authoring_shiny.html).
-
-## Embedded Application
-
-Here's an entire Shiny application embedded within our R Markdown document using the `shinyAppDir` function:
+A Shiny App project folder can also be stored in the `extdata` folder (or probably
+another folder) of a data package. Here's the same `sierra` app accesssed this way:
+We'll use the `system.file` to find the path to the folder where the app is stored and
+provide it to `shinyAppDir`:
 
 ```{r sierra}
 library(iGIScData)
@@ -30,7 +25,8 @@ shinyAppDir(
 )
 ```
 
-
+[I'm not sure if this is useful, but maybe it means you just need to provide
+this simple code to provide access to a chapter about Shiny apps?]
 
 
 

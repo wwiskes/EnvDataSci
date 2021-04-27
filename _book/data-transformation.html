@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4 Data Transformation | Introduction to Environmental Data Science</title>
+  <title>5 Data Transformation | Introduction to Environmental Data Science</title>
   <meta name="description" content="Background, concepts and exercises for using R for environmental data science. The focus is on applying the R language and various libraries for data abstraction, transformation, data analysis, spatial data/mapping, statistical modeling, and time series, applied to environmental research." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4 Data Transformation | Introduction to Environmental Data Science" />
+  <meta property="og:title" content="5 Data Transformation | Introduction to Environmental Data Science" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="iGISc/EnvDataSci" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4 Data Transformation | Introduction to Environmental Data Science" />
+  <meta name="twitter:title" content="5 Data Transformation | Introduction to Environmental Data Science" />
   
   <meta name="twitter:description" content="Background, concepts and exercises for using R for environmental data science. The focus is on applying the R language and various libraries for data abstraction, transformation, data analysis, spatial data/mapping, statistical modeling, and time series, applied to environmental research." />
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Jerry Davis" />
 
 
-<meta name="date" content="2021-04-19" />
+<meta name="date" content="2021-04-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -146,167 +146,174 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Environmental Data Science</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prerequisites</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#packages-to-install"><i class="fa fa-check"></i>Packages to install</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#data"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#tools-for-environmental-data-science"><i class="fa fa-check"></i><b>1.1</b> Tools for Environmental Data Science</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#big-data-data-mining-and-exploratory-data-analysis"><i class="fa fa-check"></i><b>1.2</b> Big Data, Data Mining, and Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>1.2.1</b> Exploratory Data Analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>1</b> Introduction to R</a>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#software-and-data-well-need"><i class="fa fa-check"></i><b>1.3</b> Software and data we’ll need</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#variables"><i class="fa fa-check"></i><b>1.1</b> Variables</a></li>
-<li class="chapter" data-level="1.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#functions"><i class="fa fa-check"></i><b>1.2</b> Functions</a></li>
-<li class="chapter" data-level="1.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#expressions-and-statements"><i class="fa fa-check"></i><b>1.3</b> Expressions and Statements</a></li>
-<li class="chapter" data-level="1.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-types"><i class="fa fa-check"></i><b>1.4</b> Data Types</a>
-<ul>
-<li class="chapter" data-level="1.4.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#integers"><i class="fa fa-check"></i><b>1.4.1</b> Integers</a></li>
-</ul></li>
-<li class="chapter" data-level="1.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#rectangular-data"><i class="fa fa-check"></i><b>1.5</b> Rectangular data</a></li>
-<li class="chapter" data-level="1.6" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-structures-in-r"><i class="fa fa-check"></i><b>1.6</b> Data Structures in R</a>
-<ul>
-<li class="chapter" data-level="1.6.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#vectors"><i class="fa fa-check"></i><b>1.6.1</b> Vectors</a></li>
-<li class="chapter" data-level="1.6.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#lists"><i class="fa fa-check"></i><b>1.6.2</b> Lists</a></li>
-<li class="chapter" data-level="1.6.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#matrices"><i class="fa fa-check"></i><b>1.6.3</b> Matrices</a></li>
-<li class="chapter" data-level="1.6.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-frames"><i class="fa fa-check"></i><b>1.6.4</b> Data frames</a></li>
-<li class="chapter" data-level="1.6.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#factors"><i class="fa fa-check"></i><b>1.6.5</b> Factors</a></li>
-</ul></li>
-<li class="chapter" data-level="1.7" data-path="introduction-to-r.html"><a href="introduction-to-r.html#programming-scripts-in-rstudio"><i class="fa fa-check"></i><b>1.7</b> Programming scripts in RStudio</a>
-<ul>
-<li class="chapter" data-level="1.7.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#subsetting-with-logic"><i class="fa fa-check"></i><b>1.7.1</b> Subsetting with logic</a></li>
-<li class="chapter" data-level="1.7.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#apply-functions"><i class="fa fa-check"></i><b>1.7.2</b> Apply functions</a></li>
-</ul></li>
-<li class="chapter" data-level="1.8" data-path="introduction-to-r.html"><a href="introduction-to-r.html#exercises"><i class="fa fa-check"></i><b>1.8</b> Exercises</a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="data-abstraction.html"><a href="data-abstraction.html"><i class="fa fa-check"></i><b>2</b> Data Abstraction</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="data-abstraction.html"><a href="data-abstraction.html#background-exploratory-data-analysis"><i class="fa fa-check"></i><b>2.1</b> Background: Exploratory Data Analysis</a></li>
-<li class="chapter" data-level="2.2" data-path="data-abstraction.html"><a href="data-abstraction.html#the-tidyverse-and-what-well-explore-in-this-chapter"><i class="fa fa-check"></i><b>2.2</b> The Tidyverse and what we’ll explore in this chapter</a></li>
-<li class="chapter" data-level="2.3" data-path="data-abstraction.html"><a href="data-abstraction.html#tibbles"><i class="fa fa-check"></i><b>2.3</b> Tibbles</a>
-<ul>
-<li class="chapter" data-level="2.3.1" data-path="data-abstraction.html"><a href="data-abstraction.html#read_csv-vs.-read.csv"><i class="fa fa-check"></i><b>2.3.1</b> <code>read_csv</code> vs. <code>read.csv</code></a></li>
-</ul></li>
-<li class="chapter" data-level="2.4" data-path="data-abstraction.html"><a href="data-abstraction.html#statistical-summary-of-variables"><i class="fa fa-check"></i><b>2.4</b> Statistical summary of variables</a></li>
-<li class="chapter" data-level="2.5" data-path="data-abstraction.html"><a href="data-abstraction.html#visualizing-data-with-a-tukey-box-plot"><i class="fa fa-check"></i><b>2.5</b> Visualizing data with a Tukey box plot</a></li>
-<li class="chapter" data-level="2.6" data-path="data-abstraction.html"><a href="data-abstraction.html#database-operations-with-dplyr"><i class="fa fa-check"></i><b>2.6</b> Database operations with <code>dplyr</code></a>
-<ul>
-<li class="chapter" data-level="2.6.1" data-path="data-abstraction.html"><a href="data-abstraction.html#select-mutate-and-the-pipe"><i class="fa fa-check"></i><b>2.6.1</b> Select, mutate, and the pipe</a></li>
-<li class="chapter" data-level="2.6.2" data-path="data-abstraction.html"><a href="data-abstraction.html#filter"><i class="fa fa-check"></i><b>2.6.2</b> filter</a></li>
-<li class="chapter" data-level="2.6.3" data-path="data-abstraction.html"><a href="data-abstraction.html#writing-a-data-frame-to-a-csv"><i class="fa fa-check"></i><b>2.6.3</b> Writing a data frame to a csv</a></li>
-<li class="chapter" data-level="2.6.4" data-path="data-abstraction.html"><a href="data-abstraction.html#summarize-by-group"><i class="fa fa-check"></i><b>2.6.4</b> Summarize by group</a></li>
-<li class="chapter" data-level="2.6.5" data-path="data-abstraction.html"><a href="data-abstraction.html#count"><i class="fa fa-check"></i><b>2.6.5</b> Count</a></li>
-<li class="chapter" data-level="2.6.6" data-path="data-abstraction.html"><a href="data-abstraction.html#sorting-after-summarizing"><i class="fa fa-check"></i><b>2.6.6</b> Sorting after summarizing</a></li>
-</ul></li>
-<li class="chapter" data-level="2.7" data-path="data-abstraction.html"><a href="data-abstraction.html#the-dot-operator"><i class="fa fa-check"></i><b>2.7</b> The dot operator</a></li>
-<li class="chapter" data-level="2.8" data-path="data-abstraction.html"><a href="data-abstraction.html#exercises-1"><i class="fa fa-check"></i><b>2.8</b> Exercises</a></li>
-<li class="chapter" data-level="2.9" data-path="data-abstraction.html"><a href="data-abstraction.html#string-abstraction"><i class="fa fa-check"></i><b>2.9</b> String Abstraction</a>
-<ul>
-<li class="chapter" data-level="2.9.1" data-path="data-abstraction.html"><a href="data-abstraction.html#detecting-matches"><i class="fa fa-check"></i><b>2.9.1</b> Detecting matches</a></li>
-<li class="chapter" data-level="2.9.2" data-path="data-abstraction.html"><a href="data-abstraction.html#subsetting-strings"><i class="fa fa-check"></i><b>2.9.2</b> Subsetting Strings</a></li>
-<li class="chapter" data-level="2.9.3" data-path="data-abstraction.html"><a href="data-abstraction.html#string-length"><i class="fa fa-check"></i><b>2.9.3</b> String Length</a></li>
-<li class="chapter" data-level="2.9.4" data-path="data-abstraction.html"><a href="data-abstraction.html#replacing-substrings-with-other-text-mutating-strings"><i class="fa fa-check"></i><b>2.9.4</b> Replacing substrings with other text (“mutating” strings)</a></li>
-<li class="chapter" data-level="2.9.5" data-path="data-abstraction.html"><a href="data-abstraction.html#concatenating-and-splitting"><i class="fa fa-check"></i><b>2.9.5</b> Concatenating and splitting</a></li>
-</ul></li>
-<li class="chapter" data-level="2.10" data-path="data-abstraction.html"><a href="data-abstraction.html#dates-and-times-with-lubridate"><i class="fa fa-check"></i><b>2.10</b> Dates and times with <code>lubridate</code></a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>3</b> Visualization</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="visualization.html"><a href="visualization.html#ggplot2"><i class="fa fa-check"></i><b>3.1</b> ggplot2</a></li>
-<li class="chapter" data-level="3.2" data-path="visualization.html"><a href="visualization.html#plotting-one-variable"><i class="fa fa-check"></i><b>3.2</b> Plotting one variable</a>
-<ul>
-<li class="chapter" data-level="3.2.1" data-path="visualization.html"><a href="visualization.html#histogram"><i class="fa fa-check"></i><b>3.2.1</b> Histogram</a></li>
-<li class="chapter" data-level="3.2.2" data-path="visualization.html"><a href="visualization.html#density-plot"><i class="fa fa-check"></i><b>3.2.2</b> Density Plot</a></li>
-<li class="chapter" data-level="3.2.3" data-path="visualization.html"><a href="visualization.html#boxplot"><i class="fa fa-check"></i><b>3.2.3</b> boxplot</a></li>
-</ul></li>
-<li class="chapter" data-level="3.3" data-path="visualization.html"><a href="visualization.html#plotting-two-variables"><i class="fa fa-check"></i><b>3.3</b> Plotting two variables</a>
-<ul>
-<li class="chapter" data-level="3.3.1" data-path="visualization.html"><a href="visualization.html#two-continuous-variables"><i class="fa fa-check"></i><b>3.3.1</b> Two continuous variables</a></li>
-<li class="chapter" data-level="3.3.2" data-path="visualization.html"><a href="visualization.html#two-variables-one-discrete"><i class="fa fa-check"></i><b>3.3.2</b> Two variables, one discrete</a></li>
-</ul></li>
-<li class="chapter" data-level="3.4" data-path="visualization.html"><a href="visualization.html#color-systems"><i class="fa fa-check"></i><b>3.4</b> Color systems</a>
-<ul>
-<li class="chapter" data-level="3.4.1" data-path="visualization.html"><a href="visualization.html#color-from-variable-in-aesthetics"><i class="fa fa-check"></i><b>3.4.1</b> Color from variable, in aesthetics</a></li>
-<li class="chapter" data-level="3.4.2" data-path="visualization.html"><a href="visualization.html#trend-line"><i class="fa fa-check"></i><b>3.4.2</b> Trend line</a></li>
-<li class="chapter" data-level="3.4.3" data-path="visualization.html"><a href="visualization.html#general-symbology"><i class="fa fa-check"></i><b>3.4.3</b> General symbology</a></li>
-</ul></li>
-<li class="chapter" data-level="3.5" data-path="visualization.html"><a href="visualization.html#titles-and-subtitles"><i class="fa fa-check"></i><b>3.5</b> Titles and subtitles</a></li>
-<li class="chapter" data-level="3.6" data-path="visualization.html"><a href="visualization.html#pairs-plot"><i class="fa fa-check"></i><b>3.6</b> Pairs Plot</a></li>
-<li class="chapter" data-level="3.7" data-path="visualization.html"><a href="visualization.html#exercises-2"><i class="fa fa-check"></i><b>3.7</b> Exercises</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>4</b> Data Transformation</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="data-transformation.html"><a href="data-transformation.html#data-joins"><i class="fa fa-check"></i><b>4.1</b> Data joins</a></li>
-<li class="chapter" data-level="4.2" data-path="data-transformation.html"><a href="data-transformation.html#set-operations"><i class="fa fa-check"></i><b>4.2</b> Set Operations</a></li>
-<li class="chapter" data-level="4.3" data-path="data-transformation.html"><a href="data-transformation.html#binding-rows-and-columns"><i class="fa fa-check"></i><b>4.3</b> Binding Rows and Columns</a></li>
-<li class="chapter" data-level="4.4" data-path="data-transformation.html"><a href="data-transformation.html#pivotting-data-frames"><i class="fa fa-check"></i><b>4.4</b> Pivotting data frames</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html"><i class="fa fa-check"></i><b>5</b> Spatial Data and Maps</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#spatial-data"><i class="fa fa-check"></i><b>5.1</b> Spatial Data</a>
-<ul>
-<li class="chapter" data-level="5.1.1" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#examples-of-simple-geometry-building-in-sf"><i class="fa fa-check"></i><b>5.1.1</b> Examples of simple geometry building in sf</a></li>
-<li class="chapter" data-level="5.1.2" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#building-a-mappable-sfc-from-scratch"><i class="fa fa-check"></i><b>5.1.2</b> Building a mappable sfc from scratch</a></li>
-<li class="chapter" data-level="5.1.3" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#creating-features-from-shapefiles-or-tables"><i class="fa fa-check"></i><b>5.1.3</b> Creating features from shapefiles or tables</a></li>
-<li class="chapter" data-level="5.1.4" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#coordinate-referencing-system"><i class="fa fa-check"></i><b>5.1.4</b> Coordinate Referencing System</a></li>
-<li class="chapter" data-level="5.1.5" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#spatial-join-st_join"><i class="fa fa-check"></i><b>5.1.5</b> Spatial join <code>st_join</code></a></li>
-<li class="chapter" data-level="5.1.6" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#plotting-maps-in-the-base-plot-system"><i class="fa fa-check"></i><b>5.1.6</b> Plotting maps in the base plot system</a></li>
-</ul></li>
-<li class="chapter" data-level="5.2" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#raster-gis-in-r"><i class="fa fa-check"></i><b>5.2</b> Raster GIS in R</a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#raster-from-scratch"><i class="fa fa-check"></i><b>5.2.1</b> Raster from scratch</a></li>
-</ul></li>
-<li class="chapter" data-level="5.3" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#ggplot2-for-maps"><i class="fa fa-check"></i><b>5.3</b> ggplot2 for maps</a>
-<ul>
-<li class="chapter" data-level="5.3.1" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#rasters-in-ggplot2"><i class="fa fa-check"></i><b>5.3.1</b> Rasters in ggplot2</a></li>
-</ul></li>
-<li class="chapter" data-level="5.4" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#tmap"><i class="fa fa-check"></i><b>5.4</b> tmap</a></li>
-<li class="chapter" data-level="5.5" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#interactive-maps"><i class="fa fa-check"></i><b>5.5</b> Interactive Maps</a></li>
-<li class="chapter" data-level="5.6" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#exercises-3"><i class="fa fa-check"></i><b>5.6</b> Exercises</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html"><i class="fa fa-check"></i><b>6</b> Statistics and Modeling</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#goals-of-statistical-analysis"><i class="fa fa-check"></i><b>6.1</b> Goals of statistical analysis</a></li>
-<li class="chapter" data-level="6.2" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#summary-statistics"><i class="fa fa-check"></i><b>6.2</b> Summary Statistics</a>
-<ul>
-<li class="chapter" data-level="6.2.1" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#summarize-by-group-stratifying-a-summary"><i class="fa fa-check"></i><b>6.2.1</b> Summarize by group: <em>stratifying a summary</em></a></li>
-<li class="chapter" data-level="6.2.2" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#boxplot-for-visualizing-distributions-by-group"><i class="fa fa-check"></i><b>6.2.2</b> Boxplot for visualizing distributions by group</a></li>
-<li class="chapter" data-level="6.2.3" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#generating-pseudorandom-numbers"><i class="fa fa-check"></i><b>6.2.3</b> Generating pseudorandom numbers</a></li>
-</ul></li>
-<li class="chapter" data-level="6.3" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#statistical-tests"><i class="fa fa-check"></i><b>6.3</b> Statistical tests</a>
-<ul>
-<li class="chapter" data-level="6.3.1" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#comparing-samples-and-groupings"><i class="fa fa-check"></i><b>6.3.1</b> Comparing samples and groupings</a></li>
-<li class="chapter" data-level="6.3.2" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#correlation"><i class="fa fa-check"></i><b>6.3.2</b> Correlation</a></li>
-</ul></li>
-<li class="chapter" data-level="6.4" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#modeling-in-r"><i class="fa fa-check"></i><b>6.4</b> Modeling in R</a>
-<ul>
-<li class="chapter" data-level="6.4.1" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#analysis-of-covariance"><i class="fa fa-check"></i><b>6.4.1</b> Analysis of Covariance</a></li>
-<li class="chapter" data-level="6.4.2" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#generalized-linear-model-glm"><i class="fa fa-check"></i><b>6.4.2</b> Generalized Linear Model (GLM)</a></li>
-</ul></li>
-<li class="chapter" data-level="6.5" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#spatial-statistical-analysis"><i class="fa fa-check"></i><b>6.5</b> Spatial Statistical Analysis</a>
-<ul>
-<li class="chapter" data-level="6.5.1" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#spatial-autocorrelation"><i class="fa fa-check"></i><b>6.5.1</b> Spatial Autocorrelation</a></li>
-<li class="chapter" data-level="6.5.2" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#mapping-residuals"><i class="fa fa-check"></i><b>6.5.2</b> Mapping Residuals</a></li>
+<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#data"><i class="fa fa-check"></i><b>1.3.1</b> Data</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>7</b> Time Series</a>
+<li class="chapter" data-level="2" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>2</b> Introduction to R</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="time-series.html"><a href="time-series.html#creation-of-time-series-ts-data"><i class="fa fa-check"></i><b>7.1</b> Creation of time series (ts) data</a>
+<li class="chapter" data-level="2.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#variables"><i class="fa fa-check"></i><b>2.1</b> Variables</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#functions"><i class="fa fa-check"></i><b>2.2</b> Functions</a></li>
+<li class="chapter" data-level="2.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#expressions-and-statements"><i class="fa fa-check"></i><b>2.3</b> Expressions and Statements</a></li>
+<li class="chapter" data-level="2.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-types"><i class="fa fa-check"></i><b>2.4</b> Data Types</a>
 <ul>
-<li class="chapter" data-level="7.1.1" data-path="time-series.html"><a href="time-series.html#frequency-setting"><i class="fa fa-check"></i><b>7.1.1</b> frequency setting</a></li>
-<li class="chapter" data-level="7.1.2" data-path="time-series.html"><a href="time-series.html#data-logger-data-from-marble-mountains-resurgence"><i class="fa fa-check"></i><b>7.1.2</b> Data logger data from Marble Mountains resurgence</a></li>
+<li class="chapter" data-level="2.4.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#integers"><i class="fa fa-check"></i><b>2.4.1</b> Integers</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="time-series.html"><a href="time-series.html#data-smoothing-methods"><i class="fa fa-check"></i><b>7.2</b> Data smoothing methods</a>
+<li class="chapter" data-level="2.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#rectangular-data"><i class="fa fa-check"></i><b>2.5</b> Rectangular data</a></li>
+<li class="chapter" data-level="2.6" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-structures-in-r"><i class="fa fa-check"></i><b>2.6</b> Data Structures in R</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="time-series.html"><a href="time-series.html#moving-average-ma"><i class="fa fa-check"></i><b>7.2.1</b> moving average (ma)</a></li>
-<li class="chapter" data-level="7.2.2" data-path="time-series.html"><a href="time-series.html#loess-local-regression-smoothing"><i class="fa fa-check"></i><b>7.2.2</b> loess (local regression) smoothing</a></li>
+<li class="chapter" data-level="2.6.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#vectors"><i class="fa fa-check"></i><b>2.6.1</b> Vectors</a></li>
+<li class="chapter" data-level="2.6.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#lists"><i class="fa fa-check"></i><b>2.6.2</b> Lists</a></li>
+<li class="chapter" data-level="2.6.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#matrices"><i class="fa fa-check"></i><b>2.6.3</b> Matrices</a></li>
+<li class="chapter" data-level="2.6.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-frames"><i class="fa fa-check"></i><b>2.6.4</b> Data frames</a></li>
+<li class="chapter" data-level="2.6.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#factors"><i class="fa fa-check"></i><b>2.6.5</b> Factors</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="time-series.html"><a href="time-series.html#decomposing-time-series"><i class="fa fa-check"></i><b>7.3</b> Decomposing time series</a>
+<li class="chapter" data-level="2.7" data-path="introduction-to-r.html"><a href="introduction-to-r.html#programming-scripts-in-rstudio"><i class="fa fa-check"></i><b>2.7</b> Programming scripts in RStudio</a>
 <ul>
-<li class="chapter" data-level="7.3.1" data-path="time-series.html"><a href="time-series.html#lag-regression"><i class="fa fa-check"></i><b>7.3.1</b> lag regression</a></li>
-<li class="chapter" data-level="7.3.2" data-path="time-series.html"><a href="time-series.html#ensemble-average"><i class="fa fa-check"></i><b>7.3.2</b> Ensemble Average</a></li>
-<li class="chapter" data-level="7.3.3" data-path="time-series.html"><a href="time-series.html#julian-dates"><i class="fa fa-check"></i><b>7.3.3</b> Julian Dates</a></li>
+<li class="chapter" data-level="2.7.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#subsetting-with-logic"><i class="fa fa-check"></i><b>2.7.1</b> Subsetting with logic</a></li>
+<li class="chapter" data-level="2.7.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#apply-functions"><i class="fa fa-check"></i><b>2.7.2</b> Apply functions</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="time-series.html"><a href="time-series.html#learning-more-about-time-series-in-r"><i class="fa fa-check"></i><b>7.4</b> Learning more about time series in R</a></li>
+<li class="chapter" data-level="2.8" data-path="introduction-to-r.html"><a href="introduction-to-r.html#exercises"><i class="fa fa-check"></i><b>2.8</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="communication.html"><a href="communication.html"><i class="fa fa-check"></i><b>8</b> Communication</a></li>
+<li class="chapter" data-level="3" data-path="data-abstraction.html"><a href="data-abstraction.html"><i class="fa fa-check"></i><b>3</b> Data Abstraction</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-abstraction.html"><a href="data-abstraction.html#background-exploratory-data-analysis"><i class="fa fa-check"></i><b>3.1</b> Background: Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="3.2" data-path="data-abstraction.html"><a href="data-abstraction.html#the-tidyverse-and-what-well-explore-in-this-chapter"><i class="fa fa-check"></i><b>3.2</b> The Tidyverse and what we’ll explore in this chapter</a></li>
+<li class="chapter" data-level="3.3" data-path="data-abstraction.html"><a href="data-abstraction.html#tibbles"><i class="fa fa-check"></i><b>3.3</b> Tibbles</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="data-abstraction.html"><a href="data-abstraction.html#read_csv-vs.-read.csv"><i class="fa fa-check"></i><b>3.3.1</b> <code>read_csv</code> vs. <code>read.csv</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="data-abstraction.html"><a href="data-abstraction.html#statistical-summary-of-variables"><i class="fa fa-check"></i><b>3.4</b> Statistical summary of variables</a></li>
+<li class="chapter" data-level="3.5" data-path="data-abstraction.html"><a href="data-abstraction.html#visualizing-data-with-a-tukey-box-plot"><i class="fa fa-check"></i><b>3.5</b> Visualizing data with a Tukey box plot</a></li>
+<li class="chapter" data-level="3.6" data-path="data-abstraction.html"><a href="data-abstraction.html#database-operations-with-dplyr"><i class="fa fa-check"></i><b>3.6</b> Database operations with <code>dplyr</code></a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="data-abstraction.html"><a href="data-abstraction.html#select-mutate-and-the-pipe"><i class="fa fa-check"></i><b>3.6.1</b> Select, mutate, and the pipe</a></li>
+<li class="chapter" data-level="3.6.2" data-path="data-abstraction.html"><a href="data-abstraction.html#filter"><i class="fa fa-check"></i><b>3.6.2</b> filter</a></li>
+<li class="chapter" data-level="3.6.3" data-path="data-abstraction.html"><a href="data-abstraction.html#writing-a-data-frame-to-a-csv"><i class="fa fa-check"></i><b>3.6.3</b> Writing a data frame to a csv</a></li>
+<li class="chapter" data-level="3.6.4" data-path="data-abstraction.html"><a href="data-abstraction.html#summarize-by-group"><i class="fa fa-check"></i><b>3.6.4</b> Summarize by group</a></li>
+<li class="chapter" data-level="3.6.5" data-path="data-abstraction.html"><a href="data-abstraction.html#count"><i class="fa fa-check"></i><b>3.6.5</b> Count</a></li>
+<li class="chapter" data-level="3.6.6" data-path="data-abstraction.html"><a href="data-abstraction.html#sorting-after-summarizing"><i class="fa fa-check"></i><b>3.6.6</b> Sorting after summarizing</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="data-abstraction.html"><a href="data-abstraction.html#the-dot-operator"><i class="fa fa-check"></i><b>3.7</b> The dot operator</a></li>
+<li class="chapter" data-level="3.8" data-path="data-abstraction.html"><a href="data-abstraction.html#exercises-1"><i class="fa fa-check"></i><b>3.8</b> Exercises</a></li>
+<li class="chapter" data-level="3.9" data-path="data-abstraction.html"><a href="data-abstraction.html#string-abstraction"><i class="fa fa-check"></i><b>3.9</b> String Abstraction</a>
+<ul>
+<li class="chapter" data-level="3.9.1" data-path="data-abstraction.html"><a href="data-abstraction.html#detecting-matches"><i class="fa fa-check"></i><b>3.9.1</b> Detecting matches</a></li>
+<li class="chapter" data-level="3.9.2" data-path="data-abstraction.html"><a href="data-abstraction.html#subsetting-strings"><i class="fa fa-check"></i><b>3.9.2</b> Subsetting Strings</a></li>
+<li class="chapter" data-level="3.9.3" data-path="data-abstraction.html"><a href="data-abstraction.html#string-length"><i class="fa fa-check"></i><b>3.9.3</b> String Length</a></li>
+<li class="chapter" data-level="3.9.4" data-path="data-abstraction.html"><a href="data-abstraction.html#replacing-substrings-with-other-text-mutating-strings"><i class="fa fa-check"></i><b>3.9.4</b> Replacing substrings with other text (“mutating” strings)</a></li>
+<li class="chapter" data-level="3.9.5" data-path="data-abstraction.html"><a href="data-abstraction.html#concatenating-and-splitting"><i class="fa fa-check"></i><b>3.9.5</b> Concatenating and splitting</a></li>
+</ul></li>
+<li class="chapter" data-level="3.10" data-path="data-abstraction.html"><a href="data-abstraction.html#dates-and-times-with-lubridate"><i class="fa fa-check"></i><b>3.10</b> Dates and times with <code>lubridate</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>4</b> Visualization</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="visualization.html"><a href="visualization.html#ggplot2"><i class="fa fa-check"></i><b>4.1</b> ggplot2</a></li>
+<li class="chapter" data-level="4.2" data-path="visualization.html"><a href="visualization.html#plotting-one-variable"><i class="fa fa-check"></i><b>4.2</b> Plotting one variable</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="visualization.html"><a href="visualization.html#histogram"><i class="fa fa-check"></i><b>4.2.1</b> Histogram</a></li>
+<li class="chapter" data-level="4.2.2" data-path="visualization.html"><a href="visualization.html#density-plot"><i class="fa fa-check"></i><b>4.2.2</b> Density Plot</a></li>
+<li class="chapter" data-level="4.2.3" data-path="visualization.html"><a href="visualization.html#boxplot"><i class="fa fa-check"></i><b>4.2.3</b> boxplot</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="visualization.html"><a href="visualization.html#plotting-two-variables"><i class="fa fa-check"></i><b>4.3</b> Plotting two variables</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="visualization.html"><a href="visualization.html#two-continuous-variables"><i class="fa fa-check"></i><b>4.3.1</b> Two continuous variables</a></li>
+<li class="chapter" data-level="4.3.2" data-path="visualization.html"><a href="visualization.html#two-variables-one-discrete"><i class="fa fa-check"></i><b>4.3.2</b> Two variables, one discrete</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="visualization.html"><a href="visualization.html#color-systems"><i class="fa fa-check"></i><b>4.4</b> Color systems</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="visualization.html"><a href="visualization.html#color-from-variable-in-aesthetics"><i class="fa fa-check"></i><b>4.4.1</b> Color from variable, in aesthetics</a></li>
+<li class="chapter" data-level="4.4.2" data-path="visualization.html"><a href="visualization.html#trend-line"><i class="fa fa-check"></i><b>4.4.2</b> Trend line</a></li>
+<li class="chapter" data-level="4.4.3" data-path="visualization.html"><a href="visualization.html#general-symbology"><i class="fa fa-check"></i><b>4.4.3</b> General symbology</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="visualization.html"><a href="visualization.html#titles-and-subtitles"><i class="fa fa-check"></i><b>4.5</b> Titles and subtitles</a></li>
+<li class="chapter" data-level="4.6" data-path="visualization.html"><a href="visualization.html#pairs-plot"><i class="fa fa-check"></i><b>4.6</b> Pairs Plot</a></li>
+<li class="chapter" data-level="4.7" data-path="visualization.html"><a href="visualization.html#exercises-2"><i class="fa fa-check"></i><b>4.7</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>5</b> Data Transformation</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="data-transformation.html"><a href="data-transformation.html#data-joins"><i class="fa fa-check"></i><b>5.1</b> Data joins</a></li>
+<li class="chapter" data-level="5.2" data-path="data-transformation.html"><a href="data-transformation.html#set-operations"><i class="fa fa-check"></i><b>5.2</b> Set Operations</a></li>
+<li class="chapter" data-level="5.3" data-path="data-transformation.html"><a href="data-transformation.html#binding-rows-and-columns"><i class="fa fa-check"></i><b>5.3</b> Binding Rows and Columns</a></li>
+<li class="chapter" data-level="5.4" data-path="data-transformation.html"><a href="data-transformation.html#pivotting-data-frames"><i class="fa fa-check"></i><b>5.4</b> Pivotting data frames</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html"><i class="fa fa-check"></i><b>6</b> Spatial Data and Maps</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#spatial-data"><i class="fa fa-check"></i><b>6.1</b> Spatial Data</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#examples-of-simple-geometry-building-in-sf"><i class="fa fa-check"></i><b>6.1.1</b> Examples of simple geometry building in sf</a></li>
+<li class="chapter" data-level="6.1.2" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#building-a-mappable-sfc-from-scratch"><i class="fa fa-check"></i><b>6.1.2</b> Building a mappable sfc from scratch</a></li>
+<li class="chapter" data-level="6.1.3" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#creating-features-from-shapefiles-or-tables"><i class="fa fa-check"></i><b>6.1.3</b> Creating features from shapefiles or tables</a></li>
+<li class="chapter" data-level="6.1.4" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#coordinate-referencing-system"><i class="fa fa-check"></i><b>6.1.4</b> Coordinate Referencing System</a></li>
+<li class="chapter" data-level="6.1.5" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#spatial-join-st_join"><i class="fa fa-check"></i><b>6.1.5</b> Spatial join <code>st_join</code></a></li>
+<li class="chapter" data-level="6.1.6" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#plotting-maps-in-the-base-plot-system"><i class="fa fa-check"></i><b>6.1.6</b> Plotting maps in the base plot system</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#raster-gis-in-r"><i class="fa fa-check"></i><b>6.2</b> Raster GIS in R</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#raster-from-scratch"><i class="fa fa-check"></i><b>6.2.1</b> Raster from scratch</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#ggplot2-for-maps"><i class="fa fa-check"></i><b>6.3</b> ggplot2 for maps</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#rasters-in-ggplot2"><i class="fa fa-check"></i><b>6.3.1</b> Rasters in ggplot2</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#tmap"><i class="fa fa-check"></i><b>6.4</b> tmap</a></li>
+<li class="chapter" data-level="6.5" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#interactive-maps"><i class="fa fa-check"></i><b>6.5</b> Interactive Maps</a></li>
+<li class="chapter" data-level="6.6" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#exercises-3"><i class="fa fa-check"></i><b>6.6</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html"><i class="fa fa-check"></i><b>7</b> Statistics and Modeling</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#goals-of-statistical-analysis"><i class="fa fa-check"></i><b>7.1</b> Goals of statistical analysis</a></li>
+<li class="chapter" data-level="7.2" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#summary-statistics"><i class="fa fa-check"></i><b>7.2</b> Summary Statistics</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#summarize-by-group-stratifying-a-summary"><i class="fa fa-check"></i><b>7.2.1</b> Summarize by group: <em>stratifying a summary</em></a></li>
+<li class="chapter" data-level="7.2.2" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#boxplot-for-visualizing-distributions-by-group"><i class="fa fa-check"></i><b>7.2.2</b> Boxplot for visualizing distributions by group</a></li>
+<li class="chapter" data-level="7.2.3" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#generating-pseudorandom-numbers"><i class="fa fa-check"></i><b>7.2.3</b> Generating pseudorandom numbers</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#statistical-tests"><i class="fa fa-check"></i><b>7.3</b> Statistical tests</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#comparing-samples-and-groupings"><i class="fa fa-check"></i><b>7.3.1</b> Comparing samples and groupings</a></li>
+<li class="chapter" data-level="7.3.2" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#correlation"><i class="fa fa-check"></i><b>7.3.2</b> Correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#modeling-in-r"><i class="fa fa-check"></i><b>7.4</b> Modeling in R</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#analysis-of-covariance"><i class="fa fa-check"></i><b>7.4.1</b> Analysis of Covariance</a></li>
+<li class="chapter" data-level="7.4.2" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#generalized-linear-model-glm"><i class="fa fa-check"></i><b>7.4.2</b> Generalized Linear Model (GLM)</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#spatial-statistical-analysis"><i class="fa fa-check"></i><b>7.5</b> Spatial Statistical Analysis</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#spatial-autocorrelation"><i class="fa fa-check"></i><b>7.5.1</b> Spatial Autocorrelation</a></li>
+<li class="chapter" data-level="7.5.2" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#mapping-residuals"><i class="fa fa-check"></i><b>7.5.2</b> Mapping Residuals</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>8</b> Time Series</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="time-series.html"><a href="time-series.html#creation-of-time-series-ts-data"><i class="fa fa-check"></i><b>8.1</b> Creation of time series (ts) data</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="time-series.html"><a href="time-series.html#frequency-setting"><i class="fa fa-check"></i><b>8.1.1</b> frequency setting</a></li>
+<li class="chapter" data-level="8.1.2" data-path="time-series.html"><a href="time-series.html#data-logger-data-from-marble-mountains-resurgence"><i class="fa fa-check"></i><b>8.1.2</b> Data logger data from Marble Mountains resurgence</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="time-series.html"><a href="time-series.html#data-smoothing-methods"><i class="fa fa-check"></i><b>8.2</b> Data smoothing methods</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="time-series.html"><a href="time-series.html#moving-average-ma"><i class="fa fa-check"></i><b>8.2.1</b> moving average (ma)</a></li>
+<li class="chapter" data-level="8.2.2" data-path="time-series.html"><a href="time-series.html#loess-local-regression-smoothing"><i class="fa fa-check"></i><b>8.2.2</b> loess (local regression) smoothing</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="time-series.html"><a href="time-series.html#decomposing-time-series"><i class="fa fa-check"></i><b>8.3</b> Decomposing time series</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="time-series.html"><a href="time-series.html#lag-regression"><i class="fa fa-check"></i><b>8.3.1</b> lag regression</a></li>
+<li class="chapter" data-level="8.3.2" data-path="time-series.html"><a href="time-series.html#ensemble-average"><i class="fa fa-check"></i><b>8.3.2</b> Ensemble Average</a></li>
+<li class="chapter" data-level="8.3.3" data-path="time-series.html"><a href="time-series.html#julian-dates"><i class="fa fa-check"></i><b>8.3.3</b> Julian Dates</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="time-series.html"><a href="time-series.html#learning-more-about-time-series-in-r"><i class="fa fa-check"></i><b>8.4</b> Learning more about time series in R</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="communication.html"><a href="communication.html"><i class="fa fa-check"></i><b>9</b> Communication</a></li>
 <li class="chapter" data-level="" data-path="appendix-building-a-data-package-for-github.html"><a href="appendix-building-a-data-package-for-github.html"><i class="fa fa-check"></i>Appendix: Building a Data Package for GitHub</a>
 <ul>
 <li><a href="appendix-building-a-data-package-for-github.html#rda-files"><code>rda</code> files</a>
@@ -337,8 +344,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="data-transformation" class="section level1" number="4">
-<h1><span class="header-section-number">4</span> Data Transformation</h1>
+<div id="data-transformation" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Data Transformation</h1>
 <p>The goal of this section is to continue where we started in the earlier chapter on data abstraction with <strong><code>dplyr</code></strong> to look at more transformational functions, and <strong><code>tidyr</code></strong> adds other tools like pivot tables.</p>
 <ul>
 <li><strong><code>dplyr</code></strong> tools:
@@ -355,8 +362,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The term “data wrangling” has been used for what we’re doing with these tools, and the
 relevant cheat sheet is actually called “Data Wrangling”
 <a href="https://rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">https://rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf</a></p>
-<div id="data-joins" class="section level2" number="4.1">
-<h2><span class="header-section-number">4.1</span> Data joins</h2>
+<div id="data-joins" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Data joins</h2>
 <p>To bring in variables from another data frame based on a common join field.
 There are multiple types of joins. Probably the most common is <strong><code>left_join</code></strong> since it starts
 from the data frame (or sf) you want to continue working with and bring in data
@@ -416,8 +423,8 @@ it doesn’t required removing the NAs:</p>
 <div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="data-transformation.html#cb319-1" aria-hidden="true" tabindex="-1"></a>sierraAlso <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(sierraStations, CA_ClimateNormals, <span class="at">by=</span><span class="st">&quot;STATION&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb319-2"><a href="data-transformation.html#cb319-2" aria-hidden="true" tabindex="-1"></a>   dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>STATION_NA)</span></code></pre></div>
 </div>
-<div id="set-operations" class="section level2" number="4.2">
-<h2><span class="header-section-number">4.2</span> Set Operations</h2>
+<div id="set-operations" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Set Operations</h2>
 <p>Set operations compare two data frames (or vectors) to handle observations or rows that
 are the same for each, or not the same. The three set methods are:</p>
 <ul>
@@ -431,20 +438,19 @@ are the same for each, or not the same. The three set methods are:</p>
 <span id="cb320-3"><a href="data-transformation.html#cb320-3" aria-hidden="true" tabindex="-1"></a>squares</span></code></pre></div>
 <pre><code>##  [1]   1   4   9  16  25  36  49  64  81 100</code></pre>
 <div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="data-transformation.html#cb322-1" aria-hidden="true" tabindex="-1"></a>evens</span></code></pre></div>
-<pre><code>##  [1]   0   2   4   6   8  10  12  14  16  18  20  22  24  26  28  30  32  34  36  38  40  42  44
-## [24]  46  48  50  52  54  56  58  60  62  64  66  68  70  72  74  76  78  80  82  84  86  88  90
-## [47]  92  94  96  98 100</code></pre>
+<pre><code>##  [1]   0   2   4   6   8  10  12  14  16  18  20  22  24  26  28  30  32  34  36  38  40  42  44  46  48  50  52
+## [28]  54  56  58  60  62  64  66  68  70  72  74  76  78  80  82  84  86  88  90  92  94  96  98 100</code></pre>
 <div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="data-transformation.html#cb324-1" aria-hidden="true" tabindex="-1"></a><span class="fu">intersect</span>(squares,evens)</span></code></pre></div>
 <pre><code>## [1]   4  16  36  64 100</code></pre>
 <div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="data-transformation.html#cb326-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(<span class="fu">union</span>(squares,evens))</span></code></pre></div>
-<pre><code>##  [1]   0   1   2   4   6   8   9  10  12  14  16  18  20  22  24  25  26  28  30  32  34  36  38
-## [24]  40  42  44  46  48  49  50  52  54  56  58  60  62  64  66  68  70  72  74  76  78  80  81
-## [47]  82  84  86  88  90  92  94  96  98 100</code></pre>
+<pre><code>##  [1]   0   1   2   4   6   8   9  10  12  14  16  18  20  22  24  25  26  28  30  32  34  36  38  40  42  44  46
+## [28]  48  49  50  52  54  56  58  60  62  64  66  68  70  72  74  76  78  80  81  82  84  86  88  90  92  94  96
+## [55]  98 100</code></pre>
 <div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="data-transformation.html#cb328-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(<span class="fu">setdiff</span>(squares,evens))</span></code></pre></div>
 <pre><code>## [1]  1  9 25 49 81</code></pre>
 </div>
-<div id="binding-rows-and-columns" class="section level2" number="4.3">
-<h2><span class="header-section-number">4.3</span> Binding Rows and Columns</h2>
+<div id="binding-rows-and-columns" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Binding Rows and Columns</h2>
 <p>These <code>dplyr</code> functions are similar to <code>cbind</code> and <code>rbind</code> in base R, but always
 creates data frames. For instance, <code>cbind</code> usually creates matrices, and make all vectors
 the same class. Note that in <code>bind_cols</code>, the order of data in rows must be the same.</p>
@@ -472,18 +478,17 @@ which would require manipulating them into factors:</p>
 <span id="cb332-5"><a href="data-transformation.html#cb332-5" aria-hidden="true" tabindex="-1"></a>                          state.x77))</span>
 <span id="cb332-6"><a href="data-transformation.html#cb332-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(states)</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 12
-##   abb   name  region division Population Income Illiteracy `Life Exp` Murder `HS Grad` Frost
-##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;
-## 1 AL    Alab~ 2      4        3615       3624   2.1        69.05      15.1   41.3      20   
-## 2 AK    Alas~ 4      9        365        6315   1.5        69.31      11.3   66.7      152  
-## 3 AZ    Ariz~ 4      8        2212       4530   1.8        70.55      7.8    58.1      15   
-## 4 AR    Arka~ 2      5        2110       3378   1.9        70.66      10.1   39.9      65   
-## 5 CA    Cali~ 4      9        21198      5114   1.1        71.71      10.3   62.6      20   
-## 6 CO    Colo~ 4      8        2541       4884   0.7        72.06      6.8    63.9      166  
-## # ... with 1 more variable: Area &lt;chr&gt;</code></pre>
+##   abb   name       region division Population Income Illiteracy `Life Exp` Murder `HS Grad` Frost Area  
+##   &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; 
+## 1 AL    Alabama    2      4        3615       3624   2.1        69.05      15.1   41.3      20    50708 
+## 2 AK    Alaska     4      9        365        6315   1.5        69.31      11.3   66.7      152   566432
+## 3 AZ    Arizona    4      8        2212       4530   1.8        70.55      7.8    58.1      15    113417
+## 4 AR    Arkansas   2      5        2110       3378   1.9        70.66      10.1   39.9      65    51945 
+## 5 CA    California 4      9        21198      5114   1.1        71.71      10.3   62.6      20    156361
+## 6 CO    Colorado   4      8        2541       4884   0.7        72.06      6.8    63.9      166   103766</code></pre>
 </div>
-<div id="pivotting-data-frames" class="section level2" number="4.4">
-<h2><span class="header-section-number">4.4</span> Pivotting data frames</h2>
+<div id="pivotting-data-frames" class="section level2" number="5.4">
+<h2><span class="header-section-number">5.4</span> Pivotting data frames</h2>
 <p>Pivot tables are a popular tool in Excel, allowing you to transform your data to be more
 useful in a particular analysis. A common need to pivot is 2+ variables with the same data where the variable name should be a factor. <code>Tidyr</code> has <strong><code>pivot_wider</code></strong> and <strong><code>pivot_longer</code></strong>.</p>
 <ul>
@@ -537,7 +542,7 @@ from the <code>iGIScData</code> data package [<strong><code>NDVI</code></strong>
 <span id="cb339-4"><a href="data-transformation.html#cb339-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> phenology), <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
 <span id="cb339-5"><a href="data-transformation.html#cb339-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(elevation, NDVI, </span>
 <span id="cb339-6"><a href="data-transformation.html#cb339-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> phenology), <span class="at">method=</span><span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-125-1.png" width="672" /></p>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-129-1.png" width="672" /></p>
 <p>Pivots turn out to be commonly useful. Runoff graphing from the Eucalyptus/Oak study also benefitted
 from a pivot_longer [<strong><code>eucoak</code></strong>]:</p>
 <div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="data-transformation.html#cb340-1" aria-hidden="true" tabindex="-1"></a>eucoakrainfallrunoffTDR <span class="sc">%&gt;%</span></span>
@@ -546,7 +551,7 @@ from a pivot_longer [<strong><code>eucoak</code></strong>]:</p>
 <span id="cb340-4"><a href="data-transformation.html#cb340-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tree =</span> <span class="fu">str_sub</span>(tree, <span class="fu">str_length</span>(tree)<span class="sc">-</span><span class="dv">2</span>, <span class="fu">str_length</span>(tree))) <span class="sc">%&gt;%</span></span>
 <span id="cb340-5"><a href="data-transformation.html#cb340-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(site, runoffL)) <span class="sc">+</span></span>
 <span id="cb340-6"><a href="data-transformation.html#cb340-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_grid</span>(tree <span class="sc">~</span> .)</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-126-1.png" width="672" /></p>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-130-1.png" width="672" /></p>
 <p><strong>Combining a pivot with bind_rows to create a runoff/rainfall scatterplot colored by tree</strong></p>
 <div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="data-transformation.html#cb341-1" aria-hidden="true" tabindex="-1"></a>runoffPivot <span class="ot">&lt;-</span> eucoakrainfallrunoffTDR <span class="sc">%&gt;%</span></span>
 <span id="cb341-2"><a href="data-transformation.html#cb341-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">&quot;runoffL&quot;</span>),</span>
@@ -577,7 +582,7 @@ from a pivot_longer [<strong><code>eucoak</code></strong>]:</p>
 <span id="cb341-27"><a href="data-transformation.html#cb341-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> rain_mm, <span class="at">y=</span> runoffL, <span class="at">color =</span> tree), </span>
 <span id="cb341-28"><a href="data-transformation.html#cb341-28" aria-hidden="true" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="sc">+</span></span>
 <span id="cb341-29"><a href="data-transformation.html#cb341-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;seagreen4&quot;</span>, <span class="st">&quot;orange3&quot;</span>))</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-127-1.png" width="672" /></p>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-131-1.png" width="672" /></p>
 <p><strong>Using pivot_wider with traffic stop data (from Claudia Engel (2021) <em>Data Wrangling</em>)</strong></p>
 <div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="data-transformation.html#cb342-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
 <span id="cb342-2"><a href="data-transformation.html#cb342-2" aria-hidden="true" tabindex="-1"></a>csvPath <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;MS_trafficstops_bw_age.csv&quot;</span>, <span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>

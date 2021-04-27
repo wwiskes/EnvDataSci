@@ -371,54 +371,83 @@ sierraFeb %>%
 
 1. Create a bar graph of the counts of the species in the **`penguins`** data frame.  What can you say about what it shows?
 
+```{r include=F}
+library(tidyverse); library(palmerpenguins)
+ggplot(penguins, aes(species)) + geom_bar()
+plot(penguins$species)
+```
+
+
 2. Use bind_cols in dplyr to create a tibble from built-in vectors state.abb and state.region, then use ggplot with geom_bar to create a bar graph of the four regions. [**`generic_methods`**]
+
+```{r include=F}
+library(tidyverse)
+regions <- bind_cols(state.abb, state.region)
+ggplot(regions, aes(state.region)) + geom_bar()
+```
+
 
 3. Convert the built-in time series `treering` into a tibble `tr`using the `tibble()` functions with the single variable assigned as `treering = treering`, then create a histogram, using that tibble and variable for the `data` and `x` settings needed. Attach a screen capture of the histogram. 
 
-```{r include=FALSE}
+```{r include=F}
 library(tidyverse)
 tr <- tibble(treering = treering)
 str(tr)
 ggplot(data=tr, aes(x=treering)) + geom_histogram()
 ```
 
-4. Start by clearing your environment with the broom icon in the Environment tab, then we'll create two tibbles: Create a new tibble `st` using `bind_cols` with `Name=state.name`, `Abb=state.abb`, `Region=state.region`, and `as_tibble(state.x77)`. *Note that this works since all of the parts are sorted by state.* Then use the save button in the Environment tab to save `st` as "Q4.RData", and attach that for your answer.
+4. Start by clearing your environment with the broom icon in the Environment tab, then we'll create two tibbles: Create a new tibble `st` using `bind_cols` with `Name=state.name`, `Abb=state.abb`, `Region=state.region`, and `as_tibble(state.x77)`. *Note that this works since all of the parts are sorted by state.* Then use `summary(st)` and copy and paste its results for your answer.
 
 ```{r include=F}
-#st <- as_tibble(state.x77)
+st <- as_tibble(state.x77)
+library(tidyverse)
 st <- bind_cols(Name=state.name, Abb=state.abb, Region=state.region, as_tibble(state.x77))
-st
+summary(st)
 ```
 
 5. From `st`, create a density plot from the variable `Frost` (number of days with frost for that state).  Attach that plot, and answer: approximately what is the modal value?
 
-```{r include=FALSE}
+```{r include=F}
 #st <- as_tibble(state.x77)
 ggplot(data=st, aes(x=Frost)) + geom_density()
 ```
 
 6. From `st` create a a boxplot of `Area` by `Region`.  Which region has the highest and which has the lowest median Area?  Do the same for `Frost`.
 
-```{r include=FALSE}
+```{r include=F}
 ggplot(data=st, aes(x=Region, y=Area)) + geom_boxplot()
 ggplot(data=st, aes(x=Region, y=Frost)) + geom_boxplot()
 ```
 
 7. From st, compare murder rate (y=Murder) to Frost (x) in a scatter plot, colored by Region.
 
-```{r include=FALSE}
+```{r include=F}
 st %>%
-  ggplot(aes(x=Frost, y=Murder)) + geom_point(aes(col=Region)) + geom_smooth(method="lm")
-print(st$Name[which.max(st$Murder)])
+  ggplot(aes(x=Frost, y=Murder)) + geom_point(aes(col=Region))
+#print(st$Name[which.max(st$Murder)])
 ```
 
 8. Add a trend line (smooth) with method="lm" to your scatterplot, not colored by Region (but keep the points colored by Region). What can you say about what this graph is showing you?
 
+```{r include=F}
+st %>%
+  ggplot(aes(x=Frost, y=Murder)) + geom_point(aes(col=Region)) + geom_smooth(method="lm")
+cor.test(st$Frost, st$Murder)
+#print(st$Name[which.max(st$Murder)])
+```
+
 9. Add a title to your graph.
+
+
+```{r include=F}
+st %>%
+  ggplot(aes(x=Frost, y=Murder)) + geom_point(aes(col=Region)) + geom_smooth(method="lm") +
+  labs(title="Frost and Murder Rate")
+```
 
 10. Change your scatterplot to place labels using the Abb variable (still colored by Region) using `geom_label(aes(label=Abb, col=Region))`. Any observations about outliers?
 
-```{r include=FALSE}
+```{r include=F}
 st %>%
   ggplot(aes(x=Frost, y=Murder)) + geom_label(aes(label=Abb, col=Region)) + geom_smooth(method="lm")
 

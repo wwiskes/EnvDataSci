@@ -4,6 +4,8 @@ library(tidyverse)
 
 # Introduction to R
 
+<img src="img/R.png" align="right">
+
 We're assuming you're either new to R or need a refresher.
 
 We'll start with some basic R operations entered directly in the console in RStudio.
