@@ -5,6 +5,6 @@ account: igisc
 server: bookdown.org
 hostUrl: https://bookdown.org/__api__
 appId: 7432
-bundleId: 40359
+bundleId: 40376
 url: https://bookdown.org/igisc/EnvDataSci/
-when: 1619625821.27087
+when: 1619642290.93359

@@ -24,7 +24,7 @@
 <meta name="author" content="Jerry Davis" />
 
 
-<meta name="date" content="2021-04-26" />
+<meta name="date" content="2021-04-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,6 @@
   
 <link rel="prev" href="spatial-data-and-maps.html"/>
 <link rel="next" href="time-series.html"/>
-<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,9 +50,8 @@
 
 
 
-<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
 <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
@@ -66,18 +64,18 @@
 
 
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -97,7 +95,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -146,55 +144,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Environmental Data Science</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
-<ul>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#tools-for-environmental-data-science"><i class="fa fa-check"></i><b>1.1</b> Tools for Environmental Data Science</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#big-data-data-mining-and-exploratory-data-analysis"><i class="fa fa-check"></i><b>1.2</b> Big Data, Data Mining, and Exploratory Data Analysis</a>
-<ul>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#big-data-data-mining-and-exploratory-data-analysis"><i class="fa fa-check"></i><b>1.2</b> Big Data, Data Mining, and Exploratory Data Analysis</a><ul>
 <li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>1.2.1</b> Exploratory Data Analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#software-and-data-well-need"><i class="fa fa-check"></i><b>1.3</b> Software and data we’ll need</a>
-<ul>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#software-and-data-well-need"><i class="fa fa-check"></i><b>1.3</b> Software and data we’ll need</a><ul>
 <li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#data"><i class="fa fa-check"></i><b>1.3.1</b> Data</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>2</b> Introduction to R</a>
-<ul>
+<li class="chapter" data-level="2" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>2</b> Introduction to R</a><ul>
 <li class="chapter" data-level="2.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#variables"><i class="fa fa-check"></i><b>2.1</b> Variables</a></li>
 <li class="chapter" data-level="2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#functions"><i class="fa fa-check"></i><b>2.2</b> Functions</a></li>
 <li class="chapter" data-level="2.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#expressions-and-statements"><i class="fa fa-check"></i><b>2.3</b> Expressions and Statements</a></li>
-<li class="chapter" data-level="2.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-types"><i class="fa fa-check"></i><b>2.4</b> Data Types</a>
-<ul>
+<li class="chapter" data-level="2.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-types"><i class="fa fa-check"></i><b>2.4</b> Data Types</a><ul>
 <li class="chapter" data-level="2.4.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#integers"><i class="fa fa-check"></i><b>2.4.1</b> Integers</a></li>
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#rectangular-data"><i class="fa fa-check"></i><b>2.5</b> Rectangular data</a></li>
-<li class="chapter" data-level="2.6" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-structures-in-r"><i class="fa fa-check"></i><b>2.6</b> Data Structures in R</a>
-<ul>
+<li class="chapter" data-level="2.6" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-structures-in-r"><i class="fa fa-check"></i><b>2.6</b> Data Structures in R</a><ul>
 <li class="chapter" data-level="2.6.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#vectors"><i class="fa fa-check"></i><b>2.6.1</b> Vectors</a></li>
 <li class="chapter" data-level="2.6.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#lists"><i class="fa fa-check"></i><b>2.6.2</b> Lists</a></li>
 <li class="chapter" data-level="2.6.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#matrices"><i class="fa fa-check"></i><b>2.6.3</b> Matrices</a></li>
 <li class="chapter" data-level="2.6.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-frames"><i class="fa fa-check"></i><b>2.6.4</b> Data frames</a></li>
 <li class="chapter" data-level="2.6.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#factors"><i class="fa fa-check"></i><b>2.6.5</b> Factors</a></li>
 </ul></li>
-<li class="chapter" data-level="2.7" data-path="introduction-to-r.html"><a href="introduction-to-r.html#programming-scripts-in-rstudio"><i class="fa fa-check"></i><b>2.7</b> Programming scripts in RStudio</a>
-<ul>
+<li class="chapter" data-level="2.7" data-path="introduction-to-r.html"><a href="introduction-to-r.html#programming-scripts-in-rstudio"><i class="fa fa-check"></i><b>2.7</b> Programming scripts in RStudio</a><ul>
 <li class="chapter" data-level="2.7.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#subsetting-with-logic"><i class="fa fa-check"></i><b>2.7.1</b> Subsetting with logic</a></li>
 <li class="chapter" data-level="2.7.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#apply-functions"><i class="fa fa-check"></i><b>2.7.2</b> Apply functions</a></li>
 </ul></li>
 <li class="chapter" data-level="2.8" data-path="introduction-to-r.html"><a href="introduction-to-r.html#exercises"><i class="fa fa-check"></i><b>2.8</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="data-abstraction.html"><a href="data-abstraction.html"><i class="fa fa-check"></i><b>3</b> Data Abstraction</a>
-<ul>
+<li class="chapter" data-level="3" data-path="data-abstraction.html"><a href="data-abstraction.html"><i class="fa fa-check"></i><b>3</b> Data Abstraction</a><ul>
 <li class="chapter" data-level="3.1" data-path="data-abstraction.html"><a href="data-abstraction.html#background-exploratory-data-analysis"><i class="fa fa-check"></i><b>3.1</b> Background: Exploratory Data Analysis</a></li>
 <li class="chapter" data-level="3.2" data-path="data-abstraction.html"><a href="data-abstraction.html#the-tidyverse-and-what-well-explore-in-this-chapter"><i class="fa fa-check"></i><b>3.2</b> The Tidyverse and what we’ll explore in this chapter</a></li>
-<li class="chapter" data-level="3.3" data-path="data-abstraction.html"><a href="data-abstraction.html#tibbles"><i class="fa fa-check"></i><b>3.3</b> Tibbles</a>
-<ul>
+<li class="chapter" data-level="3.3" data-path="data-abstraction.html"><a href="data-abstraction.html#tibbles"><i class="fa fa-check"></i><b>3.3</b> Tibbles</a><ul>
 <li class="chapter" data-level="3.3.1" data-path="data-abstraction.html"><a href="data-abstraction.html#read_csv-vs.-read.csv"><i class="fa fa-check"></i><b>3.3.1</b> <code>read_csv</code> vs. <code>read.csv</code></a></li>
 </ul></li>
 <li class="chapter" data-level="3.4" data-path="data-abstraction.html"><a href="data-abstraction.html#statistical-summary-of-variables"><i class="fa fa-check"></i><b>3.4</b> Statistical summary of variables</a></li>
 <li class="chapter" data-level="3.5" data-path="data-abstraction.html"><a href="data-abstraction.html#visualizing-data-with-a-tukey-box-plot"><i class="fa fa-check"></i><b>3.5</b> Visualizing data with a Tukey box plot</a></li>
-<li class="chapter" data-level="3.6" data-path="data-abstraction.html"><a href="data-abstraction.html#database-operations-with-dplyr"><i class="fa fa-check"></i><b>3.6</b> Database operations with <code>dplyr</code></a>
-<ul>
+<li class="chapter" data-level="3.6" data-path="data-abstraction.html"><a href="data-abstraction.html#database-operations-with-dplyr"><i class="fa fa-check"></i><b>3.6</b> Database operations with <code>dplyr</code></a><ul>
 <li class="chapter" data-level="3.6.1" data-path="data-abstraction.html"><a href="data-abstraction.html#select-mutate-and-the-pipe"><i class="fa fa-check"></i><b>3.6.1</b> Select, mutate, and the pipe</a></li>
 <li class="chapter" data-level="3.6.2" data-path="data-abstraction.html"><a href="data-abstraction.html#filter"><i class="fa fa-check"></i><b>3.6.2</b> filter</a></li>
 <li class="chapter" data-level="3.6.3" data-path="data-abstraction.html"><a href="data-abstraction.html#writing-a-data-frame-to-a-csv"><i class="fa fa-check"></i><b>3.6.3</b> Writing a data frame to a csv</a></li>
@@ -204,8 +192,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.7" data-path="data-abstraction.html"><a href="data-abstraction.html#the-dot-operator"><i class="fa fa-check"></i><b>3.7</b> The dot operator</a></li>
 <li class="chapter" data-level="3.8" data-path="data-abstraction.html"><a href="data-abstraction.html#exercises-1"><i class="fa fa-check"></i><b>3.8</b> Exercises</a></li>
-<li class="chapter" data-level="3.9" data-path="data-abstraction.html"><a href="data-abstraction.html#string-abstraction"><i class="fa fa-check"></i><b>3.9</b> String Abstraction</a>
-<ul>
+<li class="chapter" data-level="3.9" data-path="data-abstraction.html"><a href="data-abstraction.html#string-abstraction"><i class="fa fa-check"></i><b>3.9</b> String Abstraction</a><ul>
 <li class="chapter" data-level="3.9.1" data-path="data-abstraction.html"><a href="data-abstraction.html#detecting-matches"><i class="fa fa-check"></i><b>3.9.1</b> Detecting matches</a></li>
 <li class="chapter" data-level="3.9.2" data-path="data-abstraction.html"><a href="data-abstraction.html#subsetting-strings"><i class="fa fa-check"></i><b>3.9.2</b> Subsetting Strings</a></li>
 <li class="chapter" data-level="3.9.3" data-path="data-abstraction.html"><a href="data-abstraction.html#string-length"><i class="fa fa-check"></i><b>3.9.3</b> String Length</a></li>
@@ -214,22 +201,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.10" data-path="data-abstraction.html"><a href="data-abstraction.html#dates-and-times-with-lubridate"><i class="fa fa-check"></i><b>3.10</b> Dates and times with <code>lubridate</code></a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>4</b> Visualization</a>
-<ul>
+<li class="chapter" data-level="4" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>4</b> Visualization</a><ul>
 <li class="chapter" data-level="4.1" data-path="visualization.html"><a href="visualization.html#ggplot2"><i class="fa fa-check"></i><b>4.1</b> ggplot2</a></li>
-<li class="chapter" data-level="4.2" data-path="visualization.html"><a href="visualization.html#plotting-one-variable"><i class="fa fa-check"></i><b>4.2</b> Plotting one variable</a>
-<ul>
+<li class="chapter" data-level="4.2" data-path="visualization.html"><a href="visualization.html#plotting-one-variable"><i class="fa fa-check"></i><b>4.2</b> Plotting one variable</a><ul>
 <li class="chapter" data-level="4.2.1" data-path="visualization.html"><a href="visualization.html#histogram"><i class="fa fa-check"></i><b>4.2.1</b> Histogram</a></li>
 <li class="chapter" data-level="4.2.2" data-path="visualization.html"><a href="visualization.html#density-plot"><i class="fa fa-check"></i><b>4.2.2</b> Density Plot</a></li>
 <li class="chapter" data-level="4.2.3" data-path="visualization.html"><a href="visualization.html#boxplot"><i class="fa fa-check"></i><b>4.2.3</b> boxplot</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="visualization.html"><a href="visualization.html#plotting-two-variables"><i class="fa fa-check"></i><b>4.3</b> Plotting two variables</a>
-<ul>
+<li class="chapter" data-level="4.3" data-path="visualization.html"><a href="visualization.html#plotting-two-variables"><i class="fa fa-check"></i><b>4.3</b> Plotting two variables</a><ul>
 <li class="chapter" data-level="4.3.1" data-path="visualization.html"><a href="visualization.html#two-continuous-variables"><i class="fa fa-check"></i><b>4.3.1</b> Two continuous variables</a></li>
 <li class="chapter" data-level="4.3.2" data-path="visualization.html"><a href="visualization.html#two-variables-one-discrete"><i class="fa fa-check"></i><b>4.3.2</b> Two variables, one discrete</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="visualization.html"><a href="visualization.html#color-systems"><i class="fa fa-check"></i><b>4.4</b> Color systems</a>
-<ul>
+<li class="chapter" data-level="4.4" data-path="visualization.html"><a href="visualization.html#color-systems"><i class="fa fa-check"></i><b>4.4</b> Color systems</a><ul>
 <li class="chapter" data-level="4.4.1" data-path="visualization.html"><a href="visualization.html#color-from-variable-in-aesthetics"><i class="fa fa-check"></i><b>4.4.1</b> Color from variable, in aesthetics</a></li>
 <li class="chapter" data-level="4.4.2" data-path="visualization.html"><a href="visualization.html#trend-line"><i class="fa fa-check"></i><b>4.4.2</b> Trend line</a></li>
 <li class="chapter" data-level="4.4.3" data-path="visualization.html"><a href="visualization.html#general-symbology"><i class="fa fa-check"></i><b>4.4.3</b> General symbology</a></li>
@@ -238,17 +221,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.6" data-path="visualization.html"><a href="visualization.html#pairs-plot"><i class="fa fa-check"></i><b>4.6</b> Pairs Plot</a></li>
 <li class="chapter" data-level="4.7" data-path="visualization.html"><a href="visualization.html#exercises-2"><i class="fa fa-check"></i><b>4.7</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>5</b> Data Transformation</a>
-<ul>
+<li class="chapter" data-level="5" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>5</b> Data Transformation</a><ul>
 <li class="chapter" data-level="5.1" data-path="data-transformation.html"><a href="data-transformation.html#data-joins"><i class="fa fa-check"></i><b>5.1</b> Data joins</a></li>
 <li class="chapter" data-level="5.2" data-path="data-transformation.html"><a href="data-transformation.html#set-operations"><i class="fa fa-check"></i><b>5.2</b> Set Operations</a></li>
 <li class="chapter" data-level="5.3" data-path="data-transformation.html"><a href="data-transformation.html#binding-rows-and-columns"><i class="fa fa-check"></i><b>5.3</b> Binding Rows and Columns</a></li>
 <li class="chapter" data-level="5.4" data-path="data-transformation.html"><a href="data-transformation.html#pivotting-data-frames"><i class="fa fa-check"></i><b>5.4</b> Pivotting data frames</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html"><i class="fa fa-check"></i><b>6</b> Spatial Data and Maps</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#spatial-data"><i class="fa fa-check"></i><b>6.1</b> Spatial Data</a>
-<ul>
+<li class="chapter" data-level="6" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html"><i class="fa fa-check"></i><b>6</b> Spatial Data and Maps</a><ul>
+<li class="chapter" data-level="6.1" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#spatial-data"><i class="fa fa-check"></i><b>6.1</b> Spatial Data</a><ul>
 <li class="chapter" data-level="6.1.1" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#examples-of-simple-geometry-building-in-sf"><i class="fa fa-check"></i><b>6.1.1</b> Examples of simple geometry building in sf</a></li>
 <li class="chapter" data-level="6.1.2" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#building-a-mappable-sfc-from-scratch"><i class="fa fa-check"></i><b>6.1.2</b> Building a mappable sfc from scratch</a></li>
 <li class="chapter" data-level="6.1.3" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#creating-features-from-shapefiles-or-tables"><i class="fa fa-check"></i><b>6.1.3</b> Creating features from shapefiles or tables</a></li>
@@ -256,57 +236,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1.5" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#spatial-join-st_join"><i class="fa fa-check"></i><b>6.1.5</b> Spatial join <code>st_join</code></a></li>
 <li class="chapter" data-level="6.1.6" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#plotting-maps-in-the-base-plot-system"><i class="fa fa-check"></i><b>6.1.6</b> Plotting maps in the base plot system</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#raster-gis-in-r"><i class="fa fa-check"></i><b>6.2</b> Raster GIS in R</a>
-<ul>
+<li class="chapter" data-level="6.2" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#raster-gis-in-r"><i class="fa fa-check"></i><b>6.2</b> Raster GIS in R</a><ul>
 <li class="chapter" data-level="6.2.1" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#raster-from-scratch"><i class="fa fa-check"></i><b>6.2.1</b> Raster from scratch</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#ggplot2-for-maps"><i class="fa fa-check"></i><b>6.3</b> ggplot2 for maps</a>
-<ul>
+<li class="chapter" data-level="6.3" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#ggplot2-for-maps"><i class="fa fa-check"></i><b>6.3</b> ggplot2 for maps</a><ul>
 <li class="chapter" data-level="6.3.1" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#rasters-in-ggplot2"><i class="fa fa-check"></i><b>6.3.1</b> Rasters in ggplot2</a></li>
 </ul></li>
 <li class="chapter" data-level="6.4" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#tmap"><i class="fa fa-check"></i><b>6.4</b> tmap</a></li>
 <li class="chapter" data-level="6.5" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#interactive-maps"><i class="fa fa-check"></i><b>6.5</b> Interactive Maps</a></li>
 <li class="chapter" data-level="6.6" data-path="spatial-data-and-maps.html"><a href="spatial-data-and-maps.html#exercises-3"><i class="fa fa-check"></i><b>6.6</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html"><i class="fa fa-check"></i><b>7</b> Statistics and Modeling</a>
-<ul>
+<li class="chapter" data-level="7" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html"><i class="fa fa-check"></i><b>7</b> Statistics and Modeling</a><ul>
 <li class="chapter" data-level="7.1" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#goals-of-statistical-analysis"><i class="fa fa-check"></i><b>7.1</b> Goals of statistical analysis</a></li>
-<li class="chapter" data-level="7.2" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#summary-statistics"><i class="fa fa-check"></i><b>7.2</b> Summary Statistics</a>
-<ul>
+<li class="chapter" data-level="7.2" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#summary-statistics"><i class="fa fa-check"></i><b>7.2</b> Summary Statistics</a><ul>
 <li class="chapter" data-level="7.2.1" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#summarize-by-group-stratifying-a-summary"><i class="fa fa-check"></i><b>7.2.1</b> Summarize by group: <em>stratifying a summary</em></a></li>
 <li class="chapter" data-level="7.2.2" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#boxplot-for-visualizing-distributions-by-group"><i class="fa fa-check"></i><b>7.2.2</b> Boxplot for visualizing distributions by group</a></li>
 <li class="chapter" data-level="7.2.3" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#generating-pseudorandom-numbers"><i class="fa fa-check"></i><b>7.2.3</b> Generating pseudorandom numbers</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#statistical-tests"><i class="fa fa-check"></i><b>7.3</b> Statistical tests</a>
-<ul>
+<li class="chapter" data-level="7.3" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#statistical-tests"><i class="fa fa-check"></i><b>7.3</b> Statistical tests</a><ul>
 <li class="chapter" data-level="7.3.1" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#comparing-samples-and-groupings"><i class="fa fa-check"></i><b>7.3.1</b> Comparing samples and groupings</a></li>
 <li class="chapter" data-level="7.3.2" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#correlation"><i class="fa fa-check"></i><b>7.3.2</b> Correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#modeling-in-r"><i class="fa fa-check"></i><b>7.4</b> Modeling in R</a>
-<ul>
+<li class="chapter" data-level="7.4" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#modeling-in-r"><i class="fa fa-check"></i><b>7.4</b> Modeling in R</a><ul>
 <li class="chapter" data-level="7.4.1" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#analysis-of-covariance"><i class="fa fa-check"></i><b>7.4.1</b> Analysis of Covariance</a></li>
 <li class="chapter" data-level="7.4.2" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#generalized-linear-model-glm"><i class="fa fa-check"></i><b>7.4.2</b> Generalized Linear Model (GLM)</a></li>
 </ul></li>
-<li class="chapter" data-level="7.5" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#spatial-statistical-analysis"><i class="fa fa-check"></i><b>7.5</b> Spatial Statistical Analysis</a>
-<ul>
+<li class="chapter" data-level="7.5" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#spatial-statistical-analysis"><i class="fa fa-check"></i><b>7.5</b> Spatial Statistical Analysis</a><ul>
 <li class="chapter" data-level="7.5.1" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#spatial-autocorrelation"><i class="fa fa-check"></i><b>7.5.1</b> Spatial Autocorrelation</a></li>
 <li class="chapter" data-level="7.5.2" data-path="statistics-and-modeling.html"><a href="statistics-and-modeling.html#mapping-residuals"><i class="fa fa-check"></i><b>7.5.2</b> Mapping Residuals</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>8</b> Time Series</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="time-series.html"><a href="time-series.html#creation-of-time-series-ts-data"><i class="fa fa-check"></i><b>8.1</b> Creation of time series (ts) data</a>
-<ul>
+<li class="chapter" data-level="8" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>8</b> Time Series</a><ul>
+<li class="chapter" data-level="8.1" data-path="time-series.html"><a href="time-series.html#creation-of-time-series-ts-data"><i class="fa fa-check"></i><b>8.1</b> Creation of time series (ts) data</a><ul>
 <li class="chapter" data-level="8.1.1" data-path="time-series.html"><a href="time-series.html#frequency-setting"><i class="fa fa-check"></i><b>8.1.1</b> frequency setting</a></li>
 <li class="chapter" data-level="8.1.2" data-path="time-series.html"><a href="time-series.html#data-logger-data-from-marble-mountains-resurgence"><i class="fa fa-check"></i><b>8.1.2</b> Data logger data from Marble Mountains resurgence</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="time-series.html"><a href="time-series.html#data-smoothing-methods"><i class="fa fa-check"></i><b>8.2</b> Data smoothing methods</a>
-<ul>
+<li class="chapter" data-level="8.2" data-path="time-series.html"><a href="time-series.html#data-smoothing-methods"><i class="fa fa-check"></i><b>8.2</b> Data smoothing methods</a><ul>
 <li class="chapter" data-level="8.2.1" data-path="time-series.html"><a href="time-series.html#moving-average-ma"><i class="fa fa-check"></i><b>8.2.1</b> moving average (ma)</a></li>
 <li class="chapter" data-level="8.2.2" data-path="time-series.html"><a href="time-series.html#loess-local-regression-smoothing"><i class="fa fa-check"></i><b>8.2.2</b> loess (local regression) smoothing</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="time-series.html"><a href="time-series.html#decomposing-time-series"><i class="fa fa-check"></i><b>8.3</b> Decomposing time series</a>
-<ul>
+<li class="chapter" data-level="8.3" data-path="time-series.html"><a href="time-series.html#decomposing-time-series"><i class="fa fa-check"></i><b>8.3</b> Decomposing time series</a><ul>
 <li class="chapter" data-level="8.3.1" data-path="time-series.html"><a href="time-series.html#lag-regression"><i class="fa fa-check"></i><b>8.3.1</b> lag regression</a></li>
 <li class="chapter" data-level="8.3.2" data-path="time-series.html"><a href="time-series.html#ensemble-average"><i class="fa fa-check"></i><b>8.3.2</b> Ensemble Average</a></li>
 <li class="chapter" data-level="8.3.3" data-path="time-series.html"><a href="time-series.html#julian-dates"><i class="fa fa-check"></i><b>8.3.3</b> Julian Dates</a></li>
@@ -314,10 +283,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.4" data-path="time-series.html"><a href="time-series.html#learning-more-about-time-series-in-r"><i class="fa fa-check"></i><b>8.4</b> Learning more about time series in R</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="communication.html"><a href="communication.html"><i class="fa fa-check"></i><b>9</b> Communication</a></li>
-<li class="chapter" data-level="" data-path="appendix-building-a-data-package-for-github.html"><a href="appendix-building-a-data-package-for-github.html"><i class="fa fa-check"></i>Appendix: Building a Data Package for GitHub</a>
-<ul>
-<li><a href="appendix-building-a-data-package-for-github.html#rda-files"><code>rda</code> files</a>
-<ul>
+<li class="chapter" data-level="" data-path="appendix-building-a-data-package-for-github.html"><a href="appendix-building-a-data-package-for-github.html"><i class="fa fa-check"></i>Appendix: Building a Data Package for GitHub</a><ul>
+<li><a href="appendix-building-a-data-package-for-github.html#rda-files"><code>rda</code> files</a><ul>
 <li><a href="appendix-building-a-data-package-for-github.html#usethisuse_data"><code>usethis::use_data()</code></a></li>
 <li><a href="appendix-building-a-data-package-for-github.html#usethiscreate_package"><code>usethis::create_package()</code></a></li>
 <li><a href="appendix-building-a-data-package-for-github.html#devtoolsdocument"><code>devtools::document()</code></a></li>
@@ -344,10 +311,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="statistics-and-modeling" class="section level1" number="7">
+<div id="statistics-and-modeling" class="section level1">
 <h1><span class="header-section-number">7</span> Statistics and Modeling</h1>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-167-1.png" width="672" /></p>
-<div id="goals-of-statistical-analysis" class="section level2" number="7.1">
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-174-1.png" width="672" /></p>
+<div id="goals-of-statistical-analysis" class="section level2">
 <h2><span class="header-section-number">7.1</span> Goals of statistical analysis</h2>
 <p>To frame how we might approach statistical analysis and modeling, there are
 various goals that are commonly involved:</p>
@@ -409,11 +376,11 @@ various goals that are commonly involved:</p>
 on the subject that employ the R language. This chapter is a short review of some of
 these methods and how they apply to environmental data science.</p>
 </div>
-<div id="summary-statistics" class="section level2" number="7.2">
+<div id="summary-statistics" class="section level2">
 <h2><span class="header-section-number">7.2</span> Summary Statistics</h2>
 <p>Summary statistics such as mean, standard deviation, variance, minimum, maximum, and range are derived in quite a few
 R functions, commonly as a parameter or a sub-function (see <code>mutate</code>). A an overall simple statistical summary is very easy to do in base R:</p>
-<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb404-1"><a href="statistics-and-modeling.html#cb404-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(tidy_eucoak)</span></code></pre></div>
+<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="statistics-and-modeling.html#cb370-1"></a><span class="kw">summary</span>(tidy_eucoak)</span></code></pre></div>
 <pre><code>##      site               site #          tree                Date               month              rain_mm     
 ##  Length:180         Min.   :1.000   Length:180         Min.   :2006-11-08   Length:180         Min.   : 1.00  
 ##  Class :character   1st Qu.:2.000   Class :character   1st Qu.:2006-12-07   Class :character   1st Qu.:16.00  
@@ -430,18 +397,18 @@ R functions, commonly as a parameter or a sub-function (see <code>mutate</code>)
 ##  3rd Qu.:50.00   3rd Qu.:27.00   3rd Qu.:221.8   3rd Qu.: 3.200   3rd Qu.:72.75   3rd Qu.:0.08474      
 ##  Max.   :98.00   Max.   :32.00   Max.   :296.0   Max.   :16.000   Max.   :72.75   Max.   :0.42000      
 ##  NA&#39;s   :4                                       NA&#39;s   :8        NA&#39;s   :44      NA&#39;s   :8</code></pre>
-<div id="summarize-by-group-stratifying-a-summary" class="section level3" number="7.2.1">
+<div id="summarize-by-group-stratifying-a-summary" class="section level3">
 <h3><span class="header-section-number">7.2.1</span> Summarize by group: <em>stratifying a summary</em></h3>
-<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb406-1"><a href="statistics-and-modeling.html#cb406-1" aria-hidden="true" tabindex="-1"></a>eucoakrainfallrunoffTDR <span class="sc">%&gt;%</span></span>
-<span id="cb406-2"><a href="statistics-and-modeling.html#cb406-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(site) <span class="sc">%&gt;%</span></span>
-<span id="cb406-3"><a href="statistics-and-modeling.html#cb406-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb406-4"><a href="statistics-and-modeling.html#cb406-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">rain =</span> <span class="fu">mean</span>(rain_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb406-5"><a href="statistics-and-modeling.html#cb406-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">rainSD =</span> <span class="fu">sd</span>(rain_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb406-6"><a href="statistics-and-modeling.html#cb406-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">runoffL_oak =</span> <span class="fu">mean</span>(runoffL_oak, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb406-7"><a href="statistics-and-modeling.html#cb406-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">runoffL_euc =</span> <span class="fu">mean</span>(runoffL_euc, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb406-8"><a href="statistics-and-modeling.html#cb406-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">runoffL_oakMax =</span> <span class="fu">max</span>(runoffL_oak, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb406-9"><a href="statistics-and-modeling.html#cb406-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">runoffL_eucMax =</span> <span class="fu">max</span>(runoffL_oak, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb406-10"><a href="statistics-and-modeling.html#cb406-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="statistics-and-modeling.html#cb372-1"></a>eucoakrainfallrunoffTDR <span class="op">%&gt;%</span></span>
+<span id="cb372-2"><a href="statistics-and-modeling.html#cb372-2"></a><span class="st">  </span><span class="kw">group_by</span>(site) <span class="op">%&gt;%</span></span>
+<span id="cb372-3"><a href="statistics-and-modeling.html#cb372-3"></a><span class="st">  </span><span class="kw">summarize</span>(</span>
+<span id="cb372-4"><a href="statistics-and-modeling.html#cb372-4"></a>    <span class="dt">rain =</span> <span class="kw">mean</span>(rain_mm, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</span>
+<span id="cb372-5"><a href="statistics-and-modeling.html#cb372-5"></a>    <span class="dt">rainSD =</span> <span class="kw">sd</span>(rain_mm, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</span>
+<span id="cb372-6"><a href="statistics-and-modeling.html#cb372-6"></a>    <span class="dt">runoffL_oak =</span> <span class="kw">mean</span>(runoffL_oak, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</span>
+<span id="cb372-7"><a href="statistics-and-modeling.html#cb372-7"></a>    <span class="dt">runoffL_euc =</span> <span class="kw">mean</span>(runoffL_euc, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</span>
+<span id="cb372-8"><a href="statistics-and-modeling.html#cb372-8"></a>    <span class="dt">runoffL_oakMax =</span> <span class="kw">max</span>(runoffL_oak, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</span>
+<span id="cb372-9"><a href="statistics-and-modeling.html#cb372-9"></a>    <span class="dt">runoffL_eucMax =</span> <span class="kw">max</span>(runoffL_oak, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</span>
+<span id="cb372-10"><a href="statistics-and-modeling.html#cb372-10"></a>  )</span></code></pre></div>
 <pre><code>## # A tibble: 8 x 7
 ##   site   rain rainSD runoffL_oak runoffL_euc runoffL_oakMax runoffL_eucMax
 ##   &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;
@@ -454,17 +421,17 @@ R functions, commonly as a parameter or a sub-function (see <code>mutate</code>)
 ## 7 TP3    32.1   28.4      0.381        0.815         0.381          0.381 
 ## 8 TP4    32.5   28.2      0.231        2.83          0.231          0.231</code></pre>
 </div>
-<div id="boxplot-for-visualizing-distributions-by-group" class="section level3" number="7.2.2">
+<div id="boxplot-for-visualizing-distributions-by-group" class="section level3">
 <h3><span class="header-section-number">7.2.2</span> Boxplot for visualizing distributions by group</h3>
 <p>A Tukey boxplot is a good way to visualize distributions by group. In this soil CO_2
 study of the Marble Mountains, some sites had much greater variance, and some sites
 tended to be low vs high:</p>
-<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="statistics-and-modeling.html#cb408-1" aria-hidden="true" tabindex="-1"></a>soilCO2_97<span class="sc">$</span>SITE <span class="ot">&lt;-</span> <span class="fu">factor</span>(soilCO2_97<span class="sc">$</span>SITE)</span>
-<span id="cb408-2"><a href="statistics-and-modeling.html#cb408-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> soilCO2_97, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> SITE, <span class="at">y =</span> <span class="st">`</span><span class="at">CO2%</span><span class="st">`</span>)) <span class="sc">+</span></span>
-<span id="cb408-3"><a href="statistics-and-modeling.html#cb408-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-170-1.png" width="672" /></p>
+<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="statistics-and-modeling.html#cb374-1"></a>soilCO2_<span class="dv">97</span><span class="op">$</span>SITE &lt;-<span class="st"> </span><span class="kw">factor</span>(soilCO2_<span class="dv">97</span><span class="op">$</span>SITE)</span>
+<span id="cb374-2"><a href="statistics-and-modeling.html#cb374-2"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> soilCO2_<span class="dv">97</span>, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> SITE, <span class="dt">y =</span> <span class="st">`</span><span class="dt">CO2%</span><span class="st">`</span>)) <span class="op">+</span></span>
+<span id="cb374-3"><a href="statistics-and-modeling.html#cb374-3"></a><span class="st">  </span><span class="kw">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-177-1.png" width="672" /></p>
 </div>
-<div id="generating-pseudorandom-numbers" class="section level3" number="7.2.3">
+<div id="generating-pseudorandom-numbers" class="section level3">
 <h3><span class="header-section-number">7.2.3</span> Generating pseudorandom numbers</h3>
 <p>Functions commonly used in R books for quickly creating a lot of numbers to display are those
 that generate pseudorandom numbers. These are also useful in statistical methods that
@@ -475,41 +442,41 @@ need a lot of these, such as in Monte Carlo simulation. The two most commonly us
 <code>mean=0</code> and <code>sd=0</code>.</li>
 </ul>
 <p>To see both in action as x and y:</p>
-<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="statistics-and-modeling.html#cb409-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(<span class="fu">runif</span>(<span class="at">n=</span><span class="dv">1000</span>, <span class="at">min=</span><span class="dv">10</span>, <span class="at">max=</span><span class="dv">20</span>))</span>
-<span id="cb409-2"><a href="statistics-and-modeling.html#cb409-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(x) <span class="ot">&lt;-</span> <span class="st">&#39;x&#39;</span></span>
-<span id="cb409-3"><a href="statistics-and-modeling.html#cb409-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(x, <span class="fu">aes</span>(<span class="at">x=</span>x)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-171-1.png" width="672" /></p>
-<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="statistics-and-modeling.html#cb410-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(<span class="fu">rnorm</span>(<span class="at">n=</span><span class="dv">1000</span>, <span class="at">mean=</span><span class="dv">100</span>, <span class="at">sd=</span><span class="dv">10</span>))</span>
-<span id="cb410-2"><a href="statistics-and-modeling.html#cb410-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(y) <span class="ot">&lt;-</span> <span class="st">&#39;y&#39;</span></span>
-<span id="cb410-3"><a href="statistics-and-modeling.html#cb410-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(y, <span class="fu">aes</span>(<span class="at">x=</span>y)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-171-2.png" width="672" /></p>
-<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="statistics-and-modeling.html#cb411-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(y, <span class="fu">aes</span>(<span class="at">x=</span>y)) <span class="sc">+</span> <span class="fu">geom_density</span>()</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-171-3.png" width="672" /></p>
-<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="statistics-and-modeling.html#cb412-1" aria-hidden="true" tabindex="-1"></a>xy <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(x,y)</span>
-<span id="cb412-2"><a href="statistics-and-modeling.html#cb412-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(xy, <span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span>y)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-171-4.png" width="672" /></p>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="statistics-and-modeling.html#cb375-1"></a>x &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">runif</span>(<span class="dt">n=</span><span class="dv">1000</span>, <span class="dt">min=</span><span class="dv">10</span>, <span class="dt">max=</span><span class="dv">20</span>))</span>
+<span id="cb375-2"><a href="statistics-and-modeling.html#cb375-2"></a><span class="kw">names</span>(x) &lt;-<span class="st"> &#39;x&#39;</span></span>
+<span id="cb375-3"><a href="statistics-and-modeling.html#cb375-3"></a><span class="kw">ggplot</span>(x, <span class="kw">aes</span>(<span class="dt">x=</span>x)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-178-1.png" width="672" /></p>
+<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="statistics-and-modeling.html#cb376-1"></a>y &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">1000</span>, <span class="dt">mean=</span><span class="dv">100</span>, <span class="dt">sd=</span><span class="dv">10</span>))</span>
+<span id="cb376-2"><a href="statistics-and-modeling.html#cb376-2"></a><span class="kw">names</span>(y) &lt;-<span class="st"> &#39;y&#39;</span></span>
+<span id="cb376-3"><a href="statistics-and-modeling.html#cb376-3"></a><span class="kw">ggplot</span>(y, <span class="kw">aes</span>(<span class="dt">x=</span>y)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-178-2.png" width="672" /></p>
+<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="statistics-and-modeling.html#cb377-1"></a><span class="kw">ggplot</span>(y, <span class="kw">aes</span>(<span class="dt">x=</span>y)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>()</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-178-3.png" width="672" /></p>
+<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="statistics-and-modeling.html#cb378-1"></a>xy &lt;-<span class="st"> </span><span class="kw">bind_cols</span>(x,y)</span>
+<span id="cb378-2"><a href="statistics-and-modeling.html#cb378-2"></a><span class="kw">ggplot</span>(xy, <span class="kw">aes</span>(<span class="dt">x=</span>x,<span class="dt">y=</span>y)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-178-4.png" width="672" /></p>
 </div>
 </div>
-<div id="statistical-tests" class="section level2" number="7.3">
+<div id="statistical-tests" class="section level2">
 <h2><span class="header-section-number">7.3</span> Statistical tests</h2>
 <p>Tests that compare our data to other data or look at relationships among variables are important statistical
 methods, and you should refer to statistical references to best understand how to apply
 the appropriate methods for your research.</p>
-<div id="comparing-samples-and-groupings" class="section level3" number="7.3.1">
+<div id="comparing-samples-and-groupings" class="section level3">
 <h3><span class="header-section-number">7.3.1</span> Comparing samples and groupings</h3>
 <p>A common need in environmental research is to compare samples of a phenomenon or compare samples with an assumed standard population. The simplest application of this is the t-test, which can only involve comparing two samples or one sample with a population. Analysis of Variance extends this to allow for more than two groups, and can be seen as a linear model where the categorical grouping (as a factor in R) is one of the variables.</p>
-<div id="t.test-and-a-non-parametric-alternative-the-kruskal-wallis-rank-sum-test" class="section level4" number="7.3.1.1">
+<div id="t.test-and-a-non-parametric-alternative-the-kruskal-wallis-rank-sum-test" class="section level4">
 <h4><span class="header-section-number">7.3.1.1</span> t.test and a non-parametric alternative, the Kruskal-Wallis Rank Sum test</h4>
-<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="statistics-and-modeling.html#cb413-1" aria-hidden="true" tabindex="-1"></a>XSptsPheno <span class="sc">%&gt;%</span></span>
-<span id="cb413-2"><a href="statistics-and-modeling.html#cb413-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(NDVI, <span class="at">fill=</span>phenology)) <span class="sc">+</span></span>
-<span id="cb413-3"><a href="statistics-and-modeling.html#cb413-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha=</span><span class="fl">0.2</span>)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-173"></span>
-<img src="EnvDataSci_files/figure-html/unnamed-chunk-173-1.png" alt="NDVI by phenology" width="672" />
+<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="statistics-and-modeling.html#cb379-1"></a>XSptsPheno <span class="op">%&gt;%</span></span>
+<span id="cb379-2"><a href="statistics-and-modeling.html#cb379-2"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(NDVI, <span class="dt">fill=</span>phenology)) <span class="op">+</span></span>
+<span id="cb379-3"><a href="statistics-and-modeling.html#cb379-3"></a><span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">alpha=</span><span class="fl">0.2</span>)</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-180"></span>
+<img src="EnvDataSci_files/figure-html/unnamed-chunk-180-1.png" alt="NDVI by phenology" width="672" />
 <p class="caption">
 Figure 7.1: NDVI by phenology
 </p>
 </div>
-<div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="statistics-and-modeling.html#cb414-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(NDVI<span class="sc">~</span>phenology, <span class="at">data=</span>XSptsPheno) </span></code></pre></div>
+<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="statistics-and-modeling.html#cb380-1"></a><span class="kw">t.test</span>(NDVI<span class="op">~</span>phenology, <span class="dt">data=</span>XSptsPheno) </span></code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
 ## 
@@ -523,33 +490,33 @@ Figure 7.1: NDVI by phenology
 ##               0.5901186               0.3661588</code></pre>
 <p>While these data sets appear reasonably normal, the Shapiro-Wilk test (which uses a null hypothesis of normal)
 has a p value &lt; 0.05 for the senescent group, so the data can’t be assumed to be normal.</p>
-<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="statistics-and-modeling.html#cb416-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(XSptsPheno<span class="sc">$</span>NDVI[XSptsPheno<span class="sc">$</span>phenology<span class="sc">==</span><span class="st">&quot;growing&quot;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="statistics-and-modeling.html#cb382-1"></a><span class="kw">shapiro.test</span>(XSptsPheno<span class="op">$</span>NDVI[XSptsPheno<span class="op">$</span>phenology<span class="op">==</span><span class="st">&quot;growing&quot;</span>])</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  XSptsPheno$NDVI[XSptsPheno$phenology == &quot;growing&quot;]
 ## W = 0.93608, p-value = 0.07918</code></pre>
-<div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="statistics-and-modeling.html#cb418-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(XSptsPheno<span class="sc">$</span>NDVI[XSptsPheno<span class="sc">$</span>phenology<span class="sc">==</span><span class="st">&quot;senescent&quot;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="statistics-and-modeling.html#cb384-1"></a><span class="kw">shapiro.test</span>(XSptsPheno<span class="op">$</span>NDVI[XSptsPheno<span class="op">$</span>phenology<span class="op">==</span><span class="st">&quot;senescent&quot;</span>])</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  XSptsPheno$NDVI[XSptsPheno$phenology == &quot;senescent&quot;]
 ## W = 0.88728, p-value = 0.004925</code></pre>
 <p>Therefore we should use a non-parametric alternative such as the Kruskal-Wallis Rank Sum test:</p>
-<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb420-1"><a href="statistics-and-modeling.html#cb420-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kruskal.test</span>(NDVI<span class="sc">~</span>phenology, <span class="at">data=</span>XSptsPheno)</span></code></pre></div>
+<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="statistics-and-modeling.html#cb386-1"></a><span class="kw">kruskal.test</span>(NDVI<span class="op">~</span>phenology, <span class="dt">data=</span>XSptsPheno)</span></code></pre></div>
 <pre><code>## 
 ##  Kruskal-Wallis rank sum test
 ## 
 ## data:  NDVI by phenology
 ## Kruskal-Wallis chi-squared = 19.164, df = 1, p-value = 1.199e-05</code></pre>
 <p>[<strong><code>eucoak</code></strong>] For the question “Is the runoff under Eucalyptus canopy significantly different from that under oaks?” we’ll then start by test for normality of each of the two samples (euc and oak)</p>
-<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="statistics-and-modeling.html#cb422-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(tidy_eucoak<span class="sc">$</span>runoff_L[tidy_eucoak<span class="sc">$</span>tree <span class="sc">==</span> <span class="st">&quot;euc&quot;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="statistics-and-modeling.html#cb388-1"></a><span class="kw">shapiro.test</span>(tidy_eucoak<span class="op">$</span>runoff_L[tidy_eucoak<span class="op">$</span>tree <span class="op">==</span><span class="st"> &quot;euc&quot;</span>])</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  tidy_eucoak$runoff_L[tidy_eucoak$tree == &quot;euc&quot;]
 ## W = 0.74241, p-value = 4.724e-11</code></pre>
-<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb424-1"><a href="statistics-and-modeling.html#cb424-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(tidy_eucoak<span class="sc">$</span>runoff_L[tidy_eucoak<span class="sc">$</span>tree <span class="sc">==</span> <span class="st">&quot;oak&quot;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="statistics-and-modeling.html#cb390-1"></a><span class="kw">shapiro.test</span>(tidy_eucoak<span class="op">$</span>runoff_L[tidy_eucoak<span class="op">$</span>tree <span class="op">==</span><span class="st"> &quot;oak&quot;</span>])</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
@@ -557,51 +524,51 @@ has a p value &lt; 0.05 for the senescent group, so the data can’t be assumed 
 ## W = 0.71744, p-value = 1.698e-11</code></pre>
 <p>which shows clearly that both samples are non-normal. So we might apply the non-parametric Kruskal-Wallis
 test:</p>
-<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="statistics-and-modeling.html#cb426-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kruskal.test</span>(runoff_L<span class="sc">~</span>tree, <span class="at">data=</span>tidy_eucoak)</span></code></pre></div>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="statistics-and-modeling.html#cb392-1"></a><span class="kw">kruskal.test</span>(runoff_L<span class="op">~</span>tree, <span class="dt">data=</span>tidy_eucoak)</span></code></pre></div>
 <pre><code>## 
 ##  Kruskal-Wallis rank sum test
 ## 
 ## data:  runoff_L by tree
 ## Kruskal-Wallis chi-squared = 2.2991, df = 1, p-value = 0.1294</code></pre>
 <p>and no significant difference can be seen. If we look at the data graphically, this makes sense:</p>
-<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="statistics-and-modeling.html#cb428-1" aria-hidden="true" tabindex="-1"></a>tidy_eucoak <span class="sc">%&gt;%</span></span>
-<span id="cb428-2"><a href="statistics-and-modeling.html#cb428-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">log</span>(runoff_L),<span class="at">fill=</span>tree)) <span class="sc">+</span></span>
-<span id="cb428-3"><a href="statistics-and-modeling.html#cb428-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha=</span><span class="fl">0.2</span>)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-178"></span>
-<img src="EnvDataSci_files/figure-html/unnamed-chunk-178-1.png" alt="Runoff under Eucalyptus and Oak in Bay Area sites" width="672" />
+<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="statistics-and-modeling.html#cb394-1"></a>tidy_eucoak <span class="op">%&gt;%</span></span>
+<span id="cb394-2"><a href="statistics-and-modeling.html#cb394-2"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">log</span>(runoff_L),<span class="dt">fill=</span>tree)) <span class="op">+</span></span>
+<span id="cb394-3"><a href="statistics-and-modeling.html#cb394-3"></a><span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">alpha=</span><span class="fl">0.2</span>)</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-185"></span>
+<img src="EnvDataSci_files/figure-html/unnamed-chunk-185-1.png" alt="Runoff under Eucalyptus and Oak in Bay Area sites" width="672" />
 <p class="caption">
 Figure 7.2: Runoff under Eucalyptus and Oak in Bay Area sites
 </p>
 </div>
 <p>However, some of this may result from major variations among sites, which is apparent in this boxplot:</p>
-<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="statistics-and-modeling.html#cb429-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> tidy_eucoak) <span class="sc">+</span></span>
-<span id="cb429-2"><a href="statistics-and-modeling.html#cb429-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>site, <span class="at">y=</span>runoff_L, <span class="at">color=</span>tree))</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-179"></span>
-<img src="EnvDataSci_files/figure-html/unnamed-chunk-179-1.png" alt="runoff at various sites contrasting euc and oak" width="672" />
+<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="statistics-and-modeling.html#cb395-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> tidy_eucoak) <span class="op">+</span></span>
+<span id="cb395-2"><a href="statistics-and-modeling.html#cb395-2"></a><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>site, <span class="dt">y=</span>runoff_L, <span class="dt">color=</span>tree))</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-186"></span>
+<img src="EnvDataSci_files/figure-html/unnamed-chunk-186-1.png" alt="runoff at various sites contrasting euc and oak" width="672" />
 <p class="caption">
 Figure 7.3: runoff at various sites contrasting euc and oak
 </p>
 </div>
 <p>We might restrict our analysis to Tilden Park sites in the East Bay.</p>
-<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="statistics-and-modeling.html#cb430-1" aria-hidden="true" tabindex="-1"></a>tilden <span class="ot">&lt;-</span> tidy_eucoak <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">str_detect</span>(tidy_eucoak<span class="sc">$</span>site,<span class="st">&quot;TP&quot;</span>))</span>
-<span id="cb430-2"><a href="statistics-and-modeling.html#cb430-2" aria-hidden="true" tabindex="-1"></a>tilden <span class="sc">%&gt;%</span></span>
-<span id="cb430-3"><a href="statistics-and-modeling.html#cb430-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">log</span>(runoff_L),<span class="at">fill=</span>tree)) <span class="sc">+</span></span>
-<span id="cb430-4"><a href="statistics-and-modeling.html#cb430-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha=</span><span class="fl">0.2</span>)</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-180-1.png" width="672" /></p>
-<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="statistics-and-modeling.html#cb431-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(tilden<span class="sc">$</span>runoff_L[tilden<span class="sc">$</span>tree <span class="sc">==</span> <span class="st">&quot;euc&quot;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="statistics-and-modeling.html#cb396-1"></a>tilden &lt;-<span class="st"> </span>tidy_eucoak <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(<span class="kw">str_detect</span>(tidy_eucoak<span class="op">$</span>site,<span class="st">&quot;TP&quot;</span>))</span>
+<span id="cb396-2"><a href="statistics-and-modeling.html#cb396-2"></a>tilden <span class="op">%&gt;%</span></span>
+<span id="cb396-3"><a href="statistics-and-modeling.html#cb396-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">log</span>(runoff_L),<span class="dt">fill=</span>tree)) <span class="op">+</span></span>
+<span id="cb396-4"><a href="statistics-and-modeling.html#cb396-4"></a><span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">alpha=</span><span class="fl">0.2</span>)</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-187-1.png" width="672" /></p>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="statistics-and-modeling.html#cb397-1"></a><span class="kw">shapiro.test</span>(tilden<span class="op">$</span>runoff_L[tilden<span class="op">$</span>tree <span class="op">==</span><span class="st"> &quot;euc&quot;</span>])</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  tilden$runoff_L[tilden$tree == &quot;euc&quot;]
 ## W = 0.73933, p-value = 1.764e-07</code></pre>
-<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="statistics-and-modeling.html#cb433-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(tilden<span class="sc">$</span>runoff_L[tilden<span class="sc">$</span>tree <span class="sc">==</span> <span class="st">&quot;oak&quot;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="statistics-and-modeling.html#cb399-1"></a><span class="kw">shapiro.test</span>(tilden<span class="op">$</span>runoff_L[tilden<span class="op">$</span>tree <span class="op">==</span><span class="st"> &quot;oak&quot;</span>])</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  tilden$runoff_L[tilden$tree == &quot;oak&quot;]
 ## W = 0.59535, p-value = 8.529e-10</code></pre>
 <p>So once again, as is common with small sample sets, we need a non-parametric test.</p>
-<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="statistics-and-modeling.html#cb435-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kruskal.test</span>(runoff_L<span class="sc">~</span>tree, <span class="at">data=</span>tilden)</span></code></pre></div>
+<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="statistics-and-modeling.html#cb401-1"></a><span class="kw">kruskal.test</span>(runoff_L<span class="op">~</span>tree, <span class="dt">data=</span>tilden)</span></code></pre></div>
 <pre><code>## 
 ##  Kruskal-Wallis rank sum test
 ## 
@@ -614,9 +581,9 @@ Figure 7.3: runoff at various sites contrasting euc and oak
 <li>Is there a difference between eucs and oaks in terms of fine sediment yield?</li>
 <li>Is there a difference between eucs and oaks in terms of total sediment yield? (includes litter)</li>
 </ul>
-<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="statistics-and-modeling.html#cb437-1" aria-hidden="true" tabindex="-1"></a>csvPath <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;eucoaksediment.csv&quot;</span>, <span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>
-<span id="cb437-2"><a href="statistics-and-modeling.html#cb437-2" aria-hidden="true" tabindex="-1"></a>eucoaksed <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(csvPath)</span>
-<span id="cb437-3"><a href="statistics-and-modeling.html#cb437-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(eucoaksed)</span></code></pre></div>
+<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="statistics-and-modeling.html#cb403-1"></a>csvPath &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;eucoaksediment.csv&quot;</span>, <span class="dt">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>
+<span id="cb403-2"><a href="statistics-and-modeling.html#cb403-2"></a>eucoaksed &lt;-<span class="st"> </span><span class="kw">read_csv</span>(csvPath)</span>
+<span id="cb403-3"><a href="statistics-and-modeling.html#cb403-3"></a><span class="kw">summary</span>(eucoaksed)</span></code></pre></div>
 <pre><code>##       id                site              trtype              slope        bulkDensity        litter      
 ##  Length:14          Length:14          Length:14          Min.   : 9.00   Min.   :0.960   Min.   : 25.00  
 ##  Class :character   Class :character   Class :character   1st Qu.:12.00   1st Qu.:1.060   1st Qu.: 51.25  
@@ -641,41 +608,41 @@ Figure 7.3: runoff at various sites contrasting euc and oak
 ##  3rd Qu.: 95.50   3rd Qu.:0.4900   3rd Qu.:0.141  
 ##  Max.   :125.90   Max.   :0.5500   Max.   :0.293  
 ##  NA&#39;s   :1        NA&#39;s   :1        NA&#39;s   :1</code></pre>
-<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="statistics-and-modeling.html#cb439-1" aria-hidden="true" tabindex="-1"></a>eucoaksed <span class="sc">%&gt;%</span></span>
-<span id="cb439-2"><a href="statistics-and-modeling.html#cb439-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(trtype) <span class="sc">%&gt;%</span></span>
-<span id="cb439-3"><a href="statistics-and-modeling.html#cb439-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">meanfines =</span> <span class="fu">mean</span>(fines_g, <span class="at">na.rm=</span>T), <span class="at">sdfines =</span> <span class="fu">sd</span>(fines_g, <span class="at">na.rm=</span>T),</span>
-<span id="cb439-4"><a href="statistics-and-modeling.html#cb439-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">meantotal =</span> <span class="fu">mean</span>(total_g, <span class="at">na.rm=</span>T), <span class="at">sdtotal =</span> <span class="fu">sd</span>(total_g, <span class="at">na.rm=</span>T))</span></code></pre></div>
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="statistics-and-modeling.html#cb405-1"></a>eucoaksed <span class="op">%&gt;%</span></span>
+<span id="cb405-2"><a href="statistics-and-modeling.html#cb405-2"></a><span class="st">  </span><span class="kw">group_by</span>(trtype) <span class="op">%&gt;%</span></span>
+<span id="cb405-3"><a href="statistics-and-modeling.html#cb405-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">meanfines =</span> <span class="kw">mean</span>(fines_g, <span class="dt">na.rm=</span>T), <span class="dt">sdfines =</span> <span class="kw">sd</span>(fines_g, <span class="dt">na.rm=</span>T),</span>
+<span id="cb405-4"><a href="statistics-and-modeling.html#cb405-4"></a>            <span class="dt">meantotal =</span> <span class="kw">mean</span>(total_g, <span class="dt">na.rm=</span>T), <span class="dt">sdtotal =</span> <span class="kw">sd</span>(total_g, <span class="dt">na.rm=</span>T))</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 5
 ##   trtype meanfines sdfines meantotal sdtotal
 ##   &lt;chr&gt;      &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
 ## 1 euc         14.2    3.50      48.6    35.0
 ## 2 oak         39.4   20.4       86.7    26.2</code></pre>
-<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb441-1"><a href="statistics-and-modeling.html#cb441-1" aria-hidden="true" tabindex="-1"></a>eucoakLong <span class="ot">&lt;-</span> eucoaksed <span class="sc">%&gt;%</span> </span>
-<span id="cb441-2"><a href="statistics-and-modeling.html#cb441-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">col=</span><span class="fu">c</span>(fines_g,litter_g), </span>
-<span id="cb441-3"><a href="statistics-and-modeling.html#cb441-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;sed_type&quot;</span>, </span>
-<span id="cb441-4"><a href="statistics-and-modeling.html#cb441-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;sed_g&quot;</span>)</span>
-<span id="cb441-5"><a href="statistics-and-modeling.html#cb441-5" aria-hidden="true" tabindex="-1"></a>eucoakLong <span class="sc">%&gt;%</span></span>
-<span id="cb441-6"><a href="statistics-and-modeling.html#cb441-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(trtype, sed_g, <span class="at">col=</span>sed_type)) <span class="sc">+</span> </span>
-<span id="cb441-7"><a href="statistics-and-modeling.html#cb441-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-183-1.png" width="672" /></p>
-<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="statistics-and-modeling.html#cb442-1" aria-hidden="true" tabindex="-1"></a>eucoakLong <span class="sc">%&gt;%</span></span>
-<span id="cb442-2"><a href="statistics-and-modeling.html#cb442-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(sed_g, <span class="at">col=</span>sed_type)) <span class="sc">+</span> </span>
-<span id="cb442-3"><a href="statistics-and-modeling.html#cb442-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span></span>
-<span id="cb442-4"><a href="statistics-and-modeling.html#cb442-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(trtype <span class="sc">~</span> .)</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-183-2.png" width="672" /></p>
-<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb443-1"><a href="statistics-and-modeling.html#cb443-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(eucoaksed<span class="sc">$</span>fines_g[eucoaksed<span class="sc">$</span>trtype <span class="sc">==</span> <span class="st">&quot;euc&quot;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="statistics-and-modeling.html#cb407-1"></a>eucoakLong &lt;-<span class="st"> </span>eucoaksed <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb407-2"><a href="statistics-and-modeling.html#cb407-2"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">col=</span><span class="kw">c</span>(fines_g,litter_g), </span>
+<span id="cb407-3"><a href="statistics-and-modeling.html#cb407-3"></a>               <span class="dt">names_to =</span> <span class="st">&quot;sed_type&quot;</span>, </span>
+<span id="cb407-4"><a href="statistics-and-modeling.html#cb407-4"></a>               <span class="dt">values_to =</span> <span class="st">&quot;sed_g&quot;</span>)</span>
+<span id="cb407-5"><a href="statistics-and-modeling.html#cb407-5"></a>eucoakLong <span class="op">%&gt;%</span></span>
+<span id="cb407-6"><a href="statistics-and-modeling.html#cb407-6"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(trtype, sed_g, <span class="dt">col=</span>sed_type)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb407-7"><a href="statistics-and-modeling.html#cb407-7"></a><span class="st">  </span><span class="kw">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-190-1.png" width="672" /></p>
+<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="statistics-and-modeling.html#cb408-1"></a>eucoakLong <span class="op">%&gt;%</span></span>
+<span id="cb408-2"><a href="statistics-and-modeling.html#cb408-2"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(sed_g, <span class="dt">col=</span>sed_type)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb408-3"><a href="statistics-and-modeling.html#cb408-3"></a><span class="st">  </span><span class="kw">geom_density</span>() <span class="op">+</span></span>
+<span id="cb408-4"><a href="statistics-and-modeling.html#cb408-4"></a><span class="st">  </span><span class="kw">facet_grid</span>(trtype <span class="op">~</span><span class="st"> </span>.)</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-190-2.png" width="672" /></p>
+<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="statistics-and-modeling.html#cb409-1"></a><span class="kw">shapiro.test</span>(eucoaksed<span class="op">$</span>fines_g[eucoaksed<span class="op">$</span>trtype <span class="op">==</span><span class="st"> &quot;euc&quot;</span>])</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  eucoaksed$fines_g[eucoaksed$trtype == &quot;euc&quot;]
 ## W = 0.9374, p-value = 0.6383</code></pre>
-<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="statistics-and-modeling.html#cb445-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(eucoaksed<span class="sc">$</span>fines_g[eucoaksed<span class="sc">$</span>trtype <span class="sc">==</span> <span class="st">&quot;oak&quot;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="statistics-and-modeling.html#cb411-1"></a><span class="kw">shapiro.test</span>(eucoaksed<span class="op">$</span>fines_g[eucoaksed<span class="op">$</span>trtype <span class="op">==</span><span class="st"> &quot;oak&quot;</span>])</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  eucoaksed$fines_g[eucoaksed$trtype == &quot;oak&quot;]
 ## W = 0.96659, p-value = 0.8729</code></pre>
-<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="statistics-and-modeling.html#cb447-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(fines_g<span class="sc">~</span>trtype, <span class="at">data=</span>eucoaksed) </span></code></pre></div>
+<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="statistics-and-modeling.html#cb413-1"></a><span class="kw">t.test</span>(fines_g<span class="op">~</span>trtype, <span class="dt">data=</span>eucoaksed) </span></code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
 ## 
@@ -687,19 +654,19 @@ Figure 7.3: runoff at various sites contrasting euc and oak
 ## sample estimates:
 ## mean in group euc mean in group oak 
 ##          14.21667          39.38571</code></pre>
-<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb449-1"><a href="statistics-and-modeling.html#cb449-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(eucoaksed<span class="sc">$</span>total_g[eucoaksed<span class="sc">$</span>trtype <span class="sc">==</span> <span class="st">&quot;euc&quot;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="statistics-and-modeling.html#cb415-1"></a><span class="kw">shapiro.test</span>(eucoaksed<span class="op">$</span>total_g[eucoaksed<span class="op">$</span>trtype <span class="op">==</span><span class="st"> &quot;euc&quot;</span>])</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  eucoaksed$total_g[eucoaksed$trtype == &quot;euc&quot;]
 ## W = 0.76405, p-value = 0.02725</code></pre>
-<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb451-1"><a href="statistics-and-modeling.html#cb451-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(eucoaksed<span class="sc">$</span>total_g[eucoaksed<span class="sc">$</span>trtype <span class="sc">==</span> <span class="st">&quot;oak&quot;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="statistics-and-modeling.html#cb417-1"></a><span class="kw">shapiro.test</span>(eucoaksed<span class="op">$</span>total_g[eucoaksed<span class="op">$</span>trtype <span class="op">==</span><span class="st"> &quot;oak&quot;</span>])</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  eucoaksed$total_g[eucoaksed$trtype == &quot;oak&quot;]
 ## W = 0.94988, p-value = 0.7286</code></pre>
-<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb453-1"><a href="statistics-and-modeling.html#cb453-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kruskal.test</span>(total_g<span class="sc">~</span>trtype, <span class="at">data=</span>eucoaksed) </span></code></pre></div>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="statistics-and-modeling.html#cb419-1"></a><span class="kw">kruskal.test</span>(total_g<span class="op">~</span>trtype, <span class="dt">data=</span>eucoaksed) </span></code></pre></div>
 <pre><code>## 
 ##  Kruskal-Wallis rank sum test
 ## 
@@ -712,7 +679,7 @@ the conclusion that oaks in this study produced more soil erosion, largely becau
 the Eucalyptus stands generate so much litter cover, and that litter also made the
 total sediment yield not significantly different.</p>
 </div>
-<div id="analysis-of-variance" class="section level4" number="7.3.1.2">
+<div id="analysis-of-variance" class="section level4">
 <h4><span class="header-section-number">7.3.1.2</span> Analysis of Variance</h4>
 <p>Purpose is to compare groups based upon continuous variables. Can be thought of as an extension of a t test where you have more than two groups, or as a linear model where one variable is a factor.</p>
 <ul>
@@ -725,18 +692,18 @@ total sediment yield not significantly different.</p>
 <img src="img/HelenHighwaterSpring.png" align = "right"></p>
 </div>
 </div>
-<div id="correlation" class="section level3" number="7.3.2">
+<div id="correlation" class="section level3">
 <h3><span class="header-section-number">7.3.2</span> Correlation</h3>
 <p>r = Pearson’s product-moment correlation – negative or positive</p>
 <p>r<sup>2</sup> = amount of variance in one variable “explained” by the other – always positive.</p>
 <p>Can show with a pairs plot: <code>pairs(dataframe)</code>, but is tricky</p>
 <p>Here’s an easier method from the psych package [<strong><code>sierra</code></strong>]</p>
-<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb455-1"><a href="statistics-and-modeling.html#cb455-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)</span>
-<span id="cb455-2"><a href="statistics-and-modeling.html#cb455-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs.panels</span>(sierraFeb <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(LATITUDE, LONGITUDE, ELEVATION, PRECIPITATION, TEMPERATURE))</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-184-1.png" width="672" /></p>
+<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="statistics-and-modeling.html#cb421-1"></a><span class="kw">library</span>(psych)</span>
+<span id="cb421-2"><a href="statistics-and-modeling.html#cb421-2"></a><span class="kw">pairs.panels</span>(sierraFeb <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">select</span>(LATITUDE, LONGITUDE, ELEVATION, PRECIPITATION, TEMPERATURE))</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-191-1.png" width="672" /></p>
 </div>
 </div>
-<div id="modeling-in-r" class="section level2" number="7.4">
+<div id="modeling-in-r" class="section level2">
 <h2><span class="header-section-number">7.4</span> Modeling in R</h2>
 <ul>
 <li><code>lm(y ~ x)</code> linear regression</li>
@@ -747,8 +714,8 @@ see ?family to see those supported, including binomial, gaussian, poisson, etc.<
 <li>gam(y ~ x) generalized additive models</li>
 <li>tree(y ~ x) or rpart(y ~ x) regression/classification trees</li>
 </ul>
-<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb456-1"><a href="statistics-and-modeling.html#cb456-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(TEMPERATURE <span class="sc">~</span> ELEVATION, <span class="at">data =</span> sierraFeb)</span>
-<span id="cb456-2"><a href="statistics-and-modeling.html#cb456-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code></pre></div>
+<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="statistics-and-modeling.html#cb422-1"></a>model1 &lt;-<span class="st"> </span><span class="kw">lm</span>(TEMPERATURE <span class="op">~</span><span class="st"> </span>ELEVATION, <span class="dt">data =</span> sierraFeb)</span>
+<span id="cb422-2"><a href="statistics-and-modeling.html#cb422-2"></a><span class="kw">summary</span>(model1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = TEMPERATURE ~ ELEVATION, data = sierraFeb)
@@ -768,7 +735,7 @@ see ?family to see those supported, including binomial, gaussian, poisson, etc.<
 ## Multiple R-squared:  0.8757, Adjusted R-squared:  0.8736 
 ## F-statistic: 422.6 on 1 and 60 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Probably the most important statistic is the p value for the predictor variable ELEVATION, which in this case is very small &lt;2e-16.</p>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-186-1.png" width="672" /></p>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-193-1.png" width="672" /></p>
 <pre><code>## 
 ## Call:
 ## lm(formula = TEMPERATURE ~ ELEVATION, data = sierraFeb)
@@ -777,17 +744,17 @@ see ?family to see those supported, including binomial, gaussian, poisson, etc.<
 ## (Intercept)    ELEVATION  
 ##   11.881380    -0.006102</code></pre>
 <p><strong>Making Predictions</strong></p>
-<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb459-1"><a href="statistics-and-modeling.html#cb459-1" aria-hidden="true" tabindex="-1"></a>eqn</span></code></pre></div>
+<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="statistics-and-modeling.html#cb425-1"></a>eqn</span></code></pre></div>
 <pre><code>## [1] &quot;temperature = 11.88 + -0.006*elevation + e&quot;</code></pre>
-<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb461-1"><a href="statistics-and-modeling.html#cb461-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> model1<span class="sc">$</span>coefficients[<span class="dv">1</span>]</span>
-<span id="cb461-2"><a href="statistics-and-modeling.html#cb461-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> model1<span class="sc">$</span>coefficients[<span class="dv">2</span>]</span>
-<span id="cb461-3"><a href="statistics-and-modeling.html#cb461-3" aria-hidden="true" tabindex="-1"></a>elevations <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">500</span>, <span class="dv">1000</span>, <span class="dv">1500</span>, <span class="dv">2000</span>)</span>
-<span id="cb461-4"><a href="statistics-and-modeling.html#cb461-4" aria-hidden="true" tabindex="-1"></a>elevations</span></code></pre></div>
+<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="statistics-and-modeling.html#cb427-1"></a>a &lt;-<span class="st"> </span>model1<span class="op">$</span>coefficients[<span class="dv">1</span>]</span>
+<span id="cb427-2"><a href="statistics-and-modeling.html#cb427-2"></a>b &lt;-<span class="st"> </span>model1<span class="op">$</span>coefficients[<span class="dv">2</span>]</span>
+<span id="cb427-3"><a href="statistics-and-modeling.html#cb427-3"></a>elevations &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">500</span>, <span class="dv">1000</span>, <span class="dv">1500</span>, <span class="dv">2000</span>)</span>
+<span id="cb427-4"><a href="statistics-and-modeling.html#cb427-4"></a>elevations</span></code></pre></div>
 <pre><code>## [1]  500 1000 1500 2000</code></pre>
-<div class="sourceCode" id="cb463"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb463-1"><a href="statistics-and-modeling.html#cb463-1" aria-hidden="true" tabindex="-1"></a>tempEstimate <span class="ot">&lt;-</span> a <span class="sc">+</span> b <span class="sc">*</span> elevations</span>
-<span id="cb463-2"><a href="statistics-and-modeling.html#cb463-2" aria-hidden="true" tabindex="-1"></a>tempEstimate</span></code></pre></div>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="statistics-and-modeling.html#cb429-1"></a>tempEstimate &lt;-<span class="st"> </span>a <span class="op">+</span><span class="st"> </span>b <span class="op">*</span><span class="st"> </span>elevations</span>
+<span id="cb429-2"><a href="statistics-and-modeling.html#cb429-2"></a>tempEstimate</span></code></pre></div>
 <pre><code>## [1]  8.8304692  5.7795580  2.7286468 -0.3222645</code></pre>
-<div id="analysis-of-covariance" class="section level3" number="7.4.1">
+<div id="analysis-of-covariance" class="section level3">
 <h3><span class="header-section-number">7.4.1</span> Analysis of Covariance</h3>
 <p>Same purpose as Analysis of Variance, but also takes into account the influence of other variables called covariates. In a way, combines a linear model with an analysis of variance.</p>
 <p><em>“Are water samples from streams draining sandstone, limestone, and shale different based on pH, while taking into account elevation?”</em></p>
@@ -817,11 +784,11 @@ varies by bankfull discharge in a relationship that looks something like:</p>
 <p><code>log10(S) ~ strtype * log10(Q)</code> … interaction between covariate and factor</p>
 <p><code>log10(S) ~ strtype + log10(Q)</code> … no interaction, parallel slopes</p>
 <p>If models are not significantly different, remove interaction term due to parsimony, and satisfies this ANCOVA requirement.</p>
-<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb465-1"><a href="statistics-and-modeling.html#cb465-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb465-2"><a href="statistics-and-modeling.html#cb465-2" aria-hidden="true" tabindex="-1"></a>csvPath <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;streams.csv&quot;</span>, <span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>
-<span id="cb465-3"><a href="statistics-and-modeling.html#cb465-3" aria-hidden="true" tabindex="-1"></a>streams <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(csvPath)</span>
-<span id="cb465-4"><a href="statistics-and-modeling.html#cb465-4" aria-hidden="true" tabindex="-1"></a>streams<span class="sc">$</span>strtype <span class="ot">&lt;-</span> <span class="fu">factor</span>(streams<span class="sc">$</span>type, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Anastomosing&quot;</span>,<span class="st">&quot;Braided&quot;</span>,<span class="st">&quot;Meandering&quot;</span>))</span>
-<span id="cb465-5"><a href="statistics-and-modeling.html#cb465-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(streams)</span></code></pre></div>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="statistics-and-modeling.html#cb431-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb431-2"><a href="statistics-and-modeling.html#cb431-2"></a>csvPath &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;streams.csv&quot;</span>, <span class="dt">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>
+<span id="cb431-3"><a href="statistics-and-modeling.html#cb431-3"></a>streams &lt;-<span class="st"> </span><span class="kw">read_csv</span>(csvPath)</span>
+<span id="cb431-4"><a href="statistics-and-modeling.html#cb431-4"></a>streams<span class="op">$</span>strtype &lt;-<span class="st"> </span><span class="kw">factor</span>(streams<span class="op">$</span>type, <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Anastomosing&quot;</span>,<span class="st">&quot;Braided&quot;</span>,<span class="st">&quot;Meandering&quot;</span>))</span>
+<span id="cb431-5"><a href="statistics-and-modeling.html#cb431-5"></a><span class="kw">summary</span>(streams)</span></code></pre></div>
 <pre><code>##      type                 Q                S                    strtype  
 ##  Length:41          Min.   :     6   Min.   :0.000011   Anastomosing: 8  
 ##  Class :character   1st Qu.:    15   1st Qu.:0.000100   Braided     :12  
@@ -829,19 +796,19 @@ varies by bankfull discharge in a relationship that looks something like:</p>
 ##                     Mean   :  4159   Mean   :0.001737                    
 ##                     3rd Qu.:   550   3rd Qu.:0.002800                    
 ##                     Max.   :100000   Max.   :0.009500</code></pre>
-<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="statistics-and-modeling.html#cb467-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(streams, <span class="fu">aes</span>(Q, S, <span class="at">color=</span>strtype)) <span class="sc">+</span></span>
-<span id="cb467-2"><a href="statistics-and-modeling.html#cb467-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-188-1.png" width="672" /></p>
-<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb468-1"><a href="statistics-and-modeling.html#cb468-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales) <span class="co"># needed for the trans_format function below</span></span>
-<span id="cb468-2"><a href="statistics-and-modeling.html#cb468-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(streams, <span class="fu">aes</span>(Q, S, <span class="at">color=</span>strtype)) <span class="sc">+</span></span>
-<span id="cb468-3"><a href="statistics-and-modeling.html#cb468-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
-<span id="cb468-4"><a href="statistics-and-modeling.html#cb468-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">trans=</span><span class="fu">log10_trans</span>(),</span>
-<span id="cb468-5"><a href="statistics-and-modeling.html#cb468-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">trans_format</span>(<span class="st">&quot;log10&quot;</span>, <span class="fu">math_format</span>(<span class="dv">10</span><span class="sc">^</span>.x))) <span class="sc">+</span></span>
-<span id="cb468-6"><a href="statistics-and-modeling.html#cb468-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">trans=</span><span class="fu">log10_trans</span>(),</span>
-<span id="cb468-7"><a href="statistics-and-modeling.html#cb468-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">trans_format</span>(<span class="st">&quot;log10&quot;</span>, <span class="fu">math_format</span>(<span class="dv">10</span><span class="sc">^</span>.x)))</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-188-2.png" width="672" /></p>
-<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="statistics-and-modeling.html#cb469-1" aria-hidden="true" tabindex="-1"></a>ancova <span class="ot">=</span> <span class="fu">lm</span>(<span class="fu">log10</span>(S)<span class="sc">~</span>strtype<span class="sc">*</span><span class="fu">log10</span>(Q), <span class="at">data=</span>streams)</span>
-<span id="cb469-2"><a href="statistics-and-modeling.html#cb469-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ancova)</span></code></pre></div>
+<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="statistics-and-modeling.html#cb433-1"></a><span class="kw">ggplot</span>(streams, <span class="kw">aes</span>(Q, S, <span class="dt">color=</span>strtype)) <span class="op">+</span></span>
+<span id="cb433-2"><a href="statistics-and-modeling.html#cb433-2"></a><span class="st">  </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-195-1.png" width="672" /></p>
+<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="statistics-and-modeling.html#cb434-1"></a><span class="kw">library</span>(scales) <span class="co"># needed for the trans_format function below</span></span>
+<span id="cb434-2"><a href="statistics-and-modeling.html#cb434-2"></a><span class="kw">ggplot</span>(streams, <span class="kw">aes</span>(Q, S, <span class="dt">color=</span>strtype)) <span class="op">+</span></span>
+<span id="cb434-3"><a href="statistics-and-modeling.html#cb434-3"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb434-4"><a href="statistics-and-modeling.html#cb434-4"></a><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">trans=</span><span class="kw">log10_trans</span>(),</span>
+<span id="cb434-5"><a href="statistics-and-modeling.html#cb434-5"></a>                     <span class="dt">labels =</span> <span class="kw">trans_format</span>(<span class="st">&quot;log10&quot;</span>, <span class="kw">math_format</span>(<span class="dv">10</span><span class="op">^</span>.x))) <span class="op">+</span></span>
+<span id="cb434-6"><a href="statistics-and-modeling.html#cb434-6"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">trans=</span><span class="kw">log10_trans</span>(),</span>
+<span id="cb434-7"><a href="statistics-and-modeling.html#cb434-7"></a>                     <span class="dt">labels =</span> <span class="kw">trans_format</span>(<span class="st">&quot;log10&quot;</span>, <span class="kw">math_format</span>(<span class="dv">10</span><span class="op">^</span>.x)))</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-195-2.png" width="672" /></p>
+<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="statistics-and-modeling.html#cb435-1"></a>ancova =<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log10</span>(S)<span class="op">~</span>strtype<span class="op">*</span><span class="kw">log10</span>(Q), <span class="dt">data=</span>streams)</span>
+<span id="cb435-2"><a href="statistics-and-modeling.html#cb435-2"></a><span class="kw">summary</span>(ancova)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log10(S) ~ strtype * log10(Q), data = streams)
@@ -864,7 +831,7 @@ varies by bankfull discharge in a relationship that looks something like:</p>
 ## Residual standard error: 0.2656 on 35 degrees of freedom
 ## Multiple R-squared:  0.9154, Adjusted R-squared:  0.9033 
 ## F-statistic: 75.73 on 5 and 35 DF,  p-value: &lt; 2.2e-16</code></pre>
-<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="statistics-and-modeling.html#cb471-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ancova)</span></code></pre></div>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="statistics-and-modeling.html#cb437-1"></a><span class="kw">anova</span>(ancova)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Response: log10(S)
@@ -875,9 +842,9 @@ varies by bankfull discharge in a relationship that looks something like:</p>
 ## Residuals        35  2.4688  0.0705                       
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb473-1"><a href="statistics-and-modeling.html#cb473-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now an additive model, which does not have that interaction</span></span>
-<span id="cb473-2"><a href="statistics-and-modeling.html#cb473-2" aria-hidden="true" tabindex="-1"></a>ancova2 <span class="ot">=</span> <span class="fu">lm</span>(<span class="fu">log10</span>(S)<span class="sc">~</span>strtype<span class="sc">+</span><span class="fu">log10</span>(Q), <span class="at">data=</span>streams)</span>
-<span id="cb473-3"><a href="statistics-and-modeling.html#cb473-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ancova2)</span></code></pre></div>
+<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="statistics-and-modeling.html#cb439-1"></a><span class="co"># Now an additive model, which does not have that interaction</span></span>
+<span id="cb439-2"><a href="statistics-and-modeling.html#cb439-2"></a>ancova2 =<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log10</span>(S)<span class="op">~</span>strtype<span class="op">+</span><span class="kw">log10</span>(Q), <span class="dt">data=</span>streams)</span>
+<span id="cb439-3"><a href="statistics-and-modeling.html#cb439-3"></a><span class="kw">anova</span>(ancova2)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Response: log10(S)
@@ -887,7 +854,7 @@ varies by bankfull discharge in a relationship that looks something like:</p>
 ## Residuals 37  2.5199  0.0681                      
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="statistics-and-modeling.html#cb475-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ancova,ancova2)   </span></code></pre></div>
+<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb441-1"><a href="statistics-and-modeling.html#cb441-1"></a><span class="kw">anova</span>(ancova,ancova2)   </span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Model 1: log10(S) ~ strtype * log10(Q)
@@ -895,11 +862,11 @@ varies by bankfull discharge in a relationship that looks something like:</p>
 ##   Res.Df    RSS Df Sum of Sq      F Pr(&gt;F)
 ## 1     35 2.4688                           
 ## 2     37 2.5199 -2 -0.051051 0.3619 0.6989</code></pre>
-<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb477-1"><a href="statistics-and-modeling.html#cb477-1" aria-hidden="true" tabindex="-1"></a>   <span class="co"># not significantly different, so model simplification is justified</span></span>
-<span id="cb477-2"><a href="statistics-and-modeling.html#cb477-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb477-3"><a href="statistics-and-modeling.html#cb477-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Now we remove the strtype term</span></span>
-<span id="cb477-4"><a href="statistics-and-modeling.html#cb477-4" aria-hidden="true" tabindex="-1"></a>ancova3 <span class="ot">=</span> <span class="fu">update</span>(ancova2, <span class="sc">~</span> . <span class="sc">-</span> strtype)  </span>
-<span id="cb477-5"><a href="statistics-and-modeling.html#cb477-5" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ancova2,ancova3)  </span></code></pre></div>
+<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb443-1"><a href="statistics-and-modeling.html#cb443-1"></a>   <span class="co"># not significantly different, so model simplification is justified</span></span>
+<span id="cb443-2"><a href="statistics-and-modeling.html#cb443-2"></a></span>
+<span id="cb443-3"><a href="statistics-and-modeling.html#cb443-3"></a><span class="co"># Now we remove the strtype term</span></span>
+<span id="cb443-4"><a href="statistics-and-modeling.html#cb443-4"></a>ancova3 =<span class="st"> </span><span class="kw">update</span>(ancova2, <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>strtype)  </span>
+<span id="cb443-5"><a href="statistics-and-modeling.html#cb443-5"></a><span class="kw">anova</span>(ancova2,ancova3)  </span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Model 1: log10(S) ~ strtype + log10(Q)
@@ -909,9 +876,9 @@ varies by bankfull discharge in a relationship that looks something like:</p>
 ## 2     39 25.5099 -2    -22.99 168.78 &lt; 2.2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb479-1"><a href="statistics-and-modeling.html#cb479-1" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Goes too far.  Removing the strtype creates a significantly different model</span></span>
-<span id="cb479-2"><a href="statistics-and-modeling.html#cb479-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb479-3"><a href="statistics-and-modeling.html#cb479-3" aria-hidden="true" tabindex="-1"></a><span class="fu">step</span>(ancova)</span></code></pre></div>
+<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="statistics-and-modeling.html#cb445-1"></a>   <span class="co"># Goes too far.  Removing the strtype creates a significantly different model</span></span>
+<span id="cb445-2"><a href="statistics-and-modeling.html#cb445-2"></a></span>
+<span id="cb445-3"><a href="statistics-and-modeling.html#cb445-3"></a><span class="kw">step</span>(ancova)</span></code></pre></div>
 <pre><code>## Start:  AIC=-103.2
 ## log10(S) ~ strtype * log10(Q)
 ## 
@@ -952,7 +919,7 @@ varies by bankfull discharge in a relationship that looks something like:</p>
 <li>Displays the Analysis of Variance table from the linear model</li>
 </ul>
 </div>
-<div id="generalized-linear-model-glm" class="section level3" number="7.4.2">
+<div id="generalized-linear-model-glm" class="section level3">
 <h3><span class="header-section-number">7.4.2</span> Generalized Linear Model (GLM)</h3>
 <p>The glm in R allows you to work with various types of data using various distributions, described as families such as:</p>
 <ul>
@@ -968,7 +935,7 @@ varies by bankfull discharge in a relationship that looks something like:</p>
 <p><a href="https://towardsdatascience.com/the-poisson-distribution-and-poisson-process-explained-4e2cb17d459">https://towardsdatascience.com/the-poisson-distribution-and-poisson-process-explained-4e2cb17d459</a></p>
 </div>
 </div>
-<div id="spatial-statistical-analysis" class="section level2" number="7.5">
+<div id="spatial-statistical-analysis" class="section level2">
 <h2><span class="header-section-number">7.5</span> Spatial Statistical Analysis</h2>
 <p>Spatial statistical analysis brings in the spatial dimension to a statistical analysis,
 ranging from visual analysis of patterns to specialized spatial statistical methods.
@@ -979,47 +946,47 @@ spatial patterns are generally highly relevant. We might ask:</p>
 <li>What is the effect of scale?</li>
 <li>Relationships among variables – do they vary spatially?</li>
 </ul>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-189-1.png" width="672" /></p>
-<div id="spatial-autocorrelation" class="section level3" number="7.5.1">
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-196-1.png" width="672" /></p>
+<div id="spatial-autocorrelation" class="section level3">
 <h3><span class="header-section-number">7.5.1</span> Spatial Autocorrelation</h3>
 <p>[Need to add a Moran’s I section here]</p>
 </div>
-<div id="mapping-residuals" class="section level3" number="7.5.2">
+<div id="mapping-residuals" class="section level3">
 <h3><span class="header-section-number">7.5.2</span> Mapping Residuals</h3>
 <p>If the <em>residuals</em> from regression are spatially autocorrelated, look for patterns in the residuals to find other explanatory variables.</p>
-<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb482-1"><a href="statistics-and-modeling.html#cb482-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb482-2"><a href="statistics-and-modeling.html#cb482-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(iGIScData)</span>
-<span id="cb482-3"><a href="statistics-and-modeling.html#cb482-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf); <span class="fu">library</span>(raster)</span>
-<span id="cb482-4"><a href="statistics-and-modeling.html#cb482-4" aria-hidden="true" tabindex="-1"></a>rasPath <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;ca_hillsh_WGS84.tif&quot;</span>, <span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>
-<span id="cb482-5"><a href="statistics-and-modeling.html#cb482-5" aria-hidden="true" tabindex="-1"></a>hillsh <span class="ot">&lt;-</span> <span class="fu">raster</span>(rasPath)</span>
-<span id="cb482-6"><a href="statistics-and-modeling.html#cb482-6" aria-hidden="true" tabindex="-1"></a>hillshpts <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">rasterToPoints</span>(hillsh))</span>
-<span id="cb482-7"><a href="statistics-and-modeling.html#cb482-7" aria-hidden="true" tabindex="-1"></a>CAbasemap <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb482-8"><a href="statistics-and-modeling.html#cb482-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_raster</span>(<span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span>y, <span class="at">fill=</span>ca_hillsh_WGS84), hillshpts) <span class="sc">+</span> <span class="fu">guides</span>(<span class="at">fill=</span>F) <span class="sc">+</span></span>
-<span id="cb482-9"><a href="statistics-and-modeling.html#cb482-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>CA_counties, <span class="at">fill=</span><span class="cn">NA</span>) <span class="sc">+</span></span>
-<span id="cb482-10"><a href="statistics-and-modeling.html#cb482-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">&quot;#606060&quot;</span>, <span class="at">high =</span> <span class="st">&quot;#FFFFFF&quot;</span>) <span class="sc">+</span></span>
-<span id="cb482-11"><a href="statistics-and-modeling.html#cb482-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&#39;&#39;</span>, <span class="at">y=</span><span class="st">&#39;&#39;</span>)</span>
-<span id="cb482-12"><a href="statistics-and-modeling.html#cb482-12" aria-hidden="true" tabindex="-1"></a>sierra <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(<span class="fu">filter</span>(sierraFeb, <span class="sc">!</span><span class="fu">is.na</span>(TEMPERATURE)), <span class="at">coords=</span><span class="fu">c</span>(<span class="st">&quot;LONGITUDE&quot;</span>, <span class="st">&quot;LATITUDE&quot;</span>), <span class="at">crs=</span><span class="dv">4326</span>)</span>
-<span id="cb482-13"><a href="statistics-and-modeling.html#cb482-13" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(TEMPERATURE <span class="sc">~</span> ELEVATION, <span class="at">data =</span> sierra)</span>
-<span id="cb482-14"><a href="statistics-and-modeling.html#cb482-14" aria-hidden="true" tabindex="-1"></a>cc <span class="ot">&lt;-</span> model1<span class="sc">$</span>coefficients</span>
-<span id="cb482-15"><a href="statistics-and-modeling.html#cb482-15" aria-hidden="true" tabindex="-1"></a>sierra<span class="sc">$</span>resid <span class="ot">&lt;-</span> <span class="fu">resid</span>(model1)</span>
-<span id="cb482-16"><a href="statistics-and-modeling.html#cb482-16" aria-hidden="true" tabindex="-1"></a>sierra<span class="sc">$</span>predict <span class="ot">&lt;-</span> <span class="fu">predict</span>(model1) </span>
-<span id="cb482-17"><a href="statistics-and-modeling.html#cb482-17" aria-hidden="true" tabindex="-1"></a>eqn <span class="ot">=</span> <span class="fu">paste</span>(<span class="st">&quot;temperature =&quot;</span>, <span class="fu">paste</span>(<span class="fu">round</span>(cc[<span class="dv">1</span>],<span class="dv">2</span>), <span class="fu">paste</span>(<span class="fu">round</span>(cc[<span class="sc">-</span><span class="dv">1</span>], <span class="at">digits=</span><span class="dv">3</span>), <span class="at">sep=</span><span class="st">&quot;*&quot;</span>, <span class="at">collapse=</span><span class="st">&quot; + &quot;</span>, <span class="fu">paste</span>(<span class="st">&quot;elevation&quot;</span>)), <span class="at">sep=</span><span class="st">&quot; + &quot;</span>), <span class="st">&quot;+ e&quot;</span>)</span>
-<span id="cb482-18"><a href="statistics-and-modeling.html#cb482-18" aria-hidden="true" tabindex="-1"></a>ct <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;CA_places.shp&quot;</span>,<span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>))</span>
-<span id="cb482-19"><a href="statistics-and-modeling.html#cb482-19" aria-hidden="true" tabindex="-1"></a>ct<span class="sc">$</span>AREANAME_pad <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="fu">str_replace_all</span>(ct<span class="sc">$</span>AREANAME, <span class="st">&#39;[A-Za-z]&#39;</span>,<span class="st">&#39; &#39;</span>), ct<span class="sc">$</span>AREANAME)</span>
-<span id="cb482-20"><a href="statistics-and-modeling.html#cb482-20" aria-hidden="true" tabindex="-1"></a>bounds <span class="ot">&lt;-</span> <span class="fu">st_bbox</span>(sierra)</span>
-<span id="cb482-21"><a href="statistics-and-modeling.html#cb482-21" aria-hidden="true" tabindex="-1"></a>sierrabasemap <span class="ot">&lt;-</span> CAbasemap <span class="sc">+</span> </span>
-<span id="cb482-22"><a href="statistics-and-modeling.html#cb482-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>ct) <span class="sc">+</span></span>
-<span id="cb482-23"><a href="statistics-and-modeling.html#cb482-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf_text</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label=</span>AREANAME_pad), <span class="at">data=</span>ct, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">nudge_x =</span> <span class="fl">0.1</span>, <span class="at">nudge_y =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb482-24"><a href="statistics-and-modeling.html#cb482-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">xlim =</span> <span class="fu">c</span>(bounds[<span class="dv">1</span>], bounds[<span class="dv">3</span>]), <span class="at">ylim =</span> <span class="fu">c</span>(bounds[<span class="dv">2</span>],bounds[<span class="dv">4</span>]))</span>
-<span id="cb482-25"><a href="statistics-and-modeling.html#cb482-25" aria-hidden="true" tabindex="-1"></a>sierrabasemap <span class="sc">+</span></span>
-<span id="cb482-26"><a href="statistics-and-modeling.html#cb482-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">color =</span> resid), <span class="at">alpha=</span><span class="fl">0.7</span>, <span class="at">data=</span>sierra, <span class="at">size=</span><span class="fl">2.5</span>) <span class="sc">+</span></span>
-<span id="cb482-27"><a href="statistics-and-modeling.html#cb482-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_gradient2</span>(<span class="at">low=</span><span class="st">&quot;blue&quot;</span>, <span class="at">mid=</span><span class="st">&quot;ivory2&quot;</span>, <span class="at">high=</span><span class="st">&quot;red&quot;</span>, </span>
-<span id="cb482-28"><a href="statistics-and-modeling.html#cb482-28" aria-hidden="true" tabindex="-1"></a>                        <span class="at">midpoint=</span><span class="fu">mean</span>(sierra<span class="sc">$</span>resid)) <span class="sc">+</span></span>
-<span id="cb482-29"><a href="statistics-and-modeling.html#cb482-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">xlim =</span> <span class="fu">c</span>(bounds[<span class="dv">1</span>], bounds[<span class="dv">3</span>]), <span class="at">ylim =</span> <span class="fu">c</span>(bounds[<span class="dv">2</span>],bounds[<span class="dv">4</span>]))  <span class="sc">+</span></span>
-<span id="cb482-30"><a href="statistics-and-modeling.html#cb482-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Residuals&quot;</span>, <span class="at">subtitle=</span>eqn) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.8</span>, <span class="fl">0.85</span>)) <span class="sc">+</span> </span>
-<span id="cb482-31"><a href="statistics-and-modeling.html#cb482-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="fl">0.4</span>, <span class="st">&#39;cm&#39;</span>), </span>
-<span id="cb482-32"><a href="statistics-and-modeling.html#cb482-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">8</span>))</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-190-1.png" width="672" /></p>
+<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb448-1"><a href="statistics-and-modeling.html#cb448-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb448-2"><a href="statistics-and-modeling.html#cb448-2"></a><span class="kw">library</span>(iGIScData)</span>
+<span id="cb448-3"><a href="statistics-and-modeling.html#cb448-3"></a><span class="kw">library</span>(sf); <span class="kw">library</span>(raster)</span>
+<span id="cb448-4"><a href="statistics-and-modeling.html#cb448-4"></a>rasPath &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;ca_hillsh_WGS84.tif&quot;</span>, <span class="dt">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>
+<span id="cb448-5"><a href="statistics-and-modeling.html#cb448-5"></a>hillsh &lt;-<span class="st"> </span><span class="kw">raster</span>(rasPath)</span>
+<span id="cb448-6"><a href="statistics-and-modeling.html#cb448-6"></a>hillshpts &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">rasterToPoints</span>(hillsh))</span>
+<span id="cb448-7"><a href="statistics-and-modeling.html#cb448-7"></a>CAbasemap &lt;-<span class="st"> </span><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb448-8"><a href="statistics-and-modeling.html#cb448-8"></a><span class="st">  </span><span class="kw">geom_raster</span>(<span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span>y, <span class="dt">fill=</span>ca_hillsh_WGS84), hillshpts) <span class="op">+</span><span class="st"> </span><span class="kw">guides</span>(<span class="dt">fill=</span>F) <span class="op">+</span></span>
+<span id="cb448-9"><a href="statistics-and-modeling.html#cb448-9"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data=</span>CA_counties, <span class="dt">fill=</span><span class="ot">NA</span>) <span class="op">+</span></span>
+<span id="cb448-10"><a href="statistics-and-modeling.html#cb448-10"></a><span class="st">  </span><span class="kw">scale_fill_gradient</span>(<span class="dt">low =</span> <span class="st">&quot;#606060&quot;</span>, <span class="dt">high =</span> <span class="st">&quot;#FFFFFF&quot;</span>) <span class="op">+</span></span>
+<span id="cb448-11"><a href="statistics-and-modeling.html#cb448-11"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&#39;&#39;</span>, <span class="dt">y=</span><span class="st">&#39;&#39;</span>)</span>
+<span id="cb448-12"><a href="statistics-and-modeling.html#cb448-12"></a>sierra &lt;-<span class="st"> </span><span class="kw">st_as_sf</span>(<span class="kw">filter</span>(sierraFeb, <span class="op">!</span><span class="kw">is.na</span>(TEMPERATURE)), <span class="dt">coords=</span><span class="kw">c</span>(<span class="st">&quot;LONGITUDE&quot;</span>, <span class="st">&quot;LATITUDE&quot;</span>), <span class="dt">crs=</span><span class="dv">4326</span>)</span>
+<span id="cb448-13"><a href="statistics-and-modeling.html#cb448-13"></a>model1 &lt;-<span class="st"> </span><span class="kw">lm</span>(TEMPERATURE <span class="op">~</span><span class="st"> </span>ELEVATION, <span class="dt">data =</span> sierra)</span>
+<span id="cb448-14"><a href="statistics-and-modeling.html#cb448-14"></a>cc &lt;-<span class="st"> </span>model1<span class="op">$</span>coefficients</span>
+<span id="cb448-15"><a href="statistics-and-modeling.html#cb448-15"></a>sierra<span class="op">$</span>resid &lt;-<span class="st"> </span><span class="kw">resid</span>(model1)</span>
+<span id="cb448-16"><a href="statistics-and-modeling.html#cb448-16"></a>sierra<span class="op">$</span>predict &lt;-<span class="st"> </span><span class="kw">predict</span>(model1) </span>
+<span id="cb448-17"><a href="statistics-and-modeling.html#cb448-17"></a>eqn =<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;temperature =&quot;</span>, <span class="kw">paste</span>(<span class="kw">round</span>(cc[<span class="dv">1</span>],<span class="dv">2</span>), <span class="kw">paste</span>(<span class="kw">round</span>(cc[<span class="op">-</span><span class="dv">1</span>], <span class="dt">digits=</span><span class="dv">3</span>), <span class="dt">sep=</span><span class="st">&quot;*&quot;</span>, <span class="dt">collapse=</span><span class="st">&quot; + &quot;</span>, <span class="kw">paste</span>(<span class="st">&quot;elevation&quot;</span>)), <span class="dt">sep=</span><span class="st">&quot; + &quot;</span>), <span class="st">&quot;+ e&quot;</span>)</span>
+<span id="cb448-18"><a href="statistics-and-modeling.html#cb448-18"></a>ct &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;CA_places.shp&quot;</span>,<span class="dt">package=</span><span class="st">&quot;iGIScData&quot;</span>))</span>
+<span id="cb448-19"><a href="statistics-and-modeling.html#cb448-19"></a>ct<span class="op">$</span>AREANAME_pad &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="kw">str_replace_all</span>(ct<span class="op">$</span>AREANAME, <span class="st">&#39;[A-Za-z]&#39;</span>,<span class="st">&#39; &#39;</span>), ct<span class="op">$</span>AREANAME)</span>
+<span id="cb448-20"><a href="statistics-and-modeling.html#cb448-20"></a>bounds &lt;-<span class="st"> </span><span class="kw">st_bbox</span>(sierra)</span>
+<span id="cb448-21"><a href="statistics-and-modeling.html#cb448-21"></a>sierrabasemap &lt;-<span class="st"> </span>CAbasemap <span class="op">+</span><span class="st"> </span></span>
+<span id="cb448-22"><a href="statistics-and-modeling.html#cb448-22"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data=</span>ct) <span class="op">+</span></span>
+<span id="cb448-23"><a href="statistics-and-modeling.html#cb448-23"></a><span class="st">  </span><span class="kw">geom_sf_text</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">label=</span>AREANAME_pad), <span class="dt">data=</span>ct, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">nudge_x =</span> <span class="fl">0.1</span>, <span class="dt">nudge_y =</span> <span class="fl">0.1</span>) <span class="op">+</span></span>
+<span id="cb448-24"><a href="statistics-and-modeling.html#cb448-24"></a><span class="st">  </span><span class="kw">coord_sf</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(bounds[<span class="dv">1</span>], bounds[<span class="dv">3</span>]), <span class="dt">ylim =</span> <span class="kw">c</span>(bounds[<span class="dv">2</span>],bounds[<span class="dv">4</span>]))</span>
+<span id="cb448-25"><a href="statistics-and-modeling.html#cb448-25"></a>sierrabasemap <span class="op">+</span></span>
+<span id="cb448-26"><a href="statistics-and-modeling.html#cb448-26"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">color =</span> resid), <span class="dt">alpha=</span><span class="fl">0.7</span>, <span class="dt">data=</span>sierra, <span class="dt">size=</span><span class="fl">2.5</span>) <span class="op">+</span></span>
+<span id="cb448-27"><a href="statistics-and-modeling.html#cb448-27"></a><span class="st">  </span><span class="kw">scale_color_gradient2</span>(<span class="dt">low=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">mid=</span><span class="st">&quot;ivory2&quot;</span>, <span class="dt">high=</span><span class="st">&quot;red&quot;</span>, </span>
+<span id="cb448-28"><a href="statistics-and-modeling.html#cb448-28"></a>                        <span class="dt">midpoint=</span><span class="kw">mean</span>(sierra<span class="op">$</span>resid)) <span class="op">+</span></span>
+<span id="cb448-29"><a href="statistics-and-modeling.html#cb448-29"></a><span class="st">  </span><span class="kw">coord_sf</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(bounds[<span class="dv">1</span>], bounds[<span class="dv">3</span>]), <span class="dt">ylim =</span> <span class="kw">c</span>(bounds[<span class="dv">2</span>],bounds[<span class="dv">4</span>]))  <span class="op">+</span></span>
+<span id="cb448-30"><a href="statistics-and-modeling.html#cb448-30"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Residuals&quot;</span>, <span class="dt">subtitle=</span>eqn) <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="kw">c</span>(<span class="fl">0.8</span>, <span class="fl">0.85</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb448-31"><a href="statistics-and-modeling.html#cb448-31"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.key.size =</span> <span class="kw">unit</span>(<span class="fl">0.4</span>, <span class="st">&#39;cm&#39;</span>), </span>
+<span id="cb448-32"><a href="statistics-and-modeling.html#cb448-32"></a>        <span class="dt">legend.title =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">8</span>))</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-197-1.png" width="672" /></p>
 
 </div>
 </div>
