@@ -12,10 +12,14 @@ github-repo: iGISc/EnvDataSci
 description: "Background, concepts and exercises for using R for environmental data science.  The focus is on applying the R language and various libraries for data abstraction, transformation, data analysis, spatial data/mapping, statistical modeling, and time series, applied to environmental research."
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
 # Introduction {#chapter00.chapter_section .intro_section}
 
 Data science is *an inter-disciplinary field that uses scientific methods, processes, algorithms and systems to extract knowledge and insights from many structural and unstructured data* (Wikipedia). 
-Environmental data science is data science applied to environmental analysis problems. In general data science can be seen as being the intersection of math & statistics, computer science/IT, and some research domain, and in this case it's environmental:
+*Environmental* data science is data science applied to environmental analysis problems. In general data science can be seen as being the intersection of math & statistics, computer science/IT, and some research domain, and in this case it's environmental:
 
 <img src="img/EnvDataSci.png">
 
@@ -163,6 +167,14 @@ To see what's in it, you'll see the various datasets listed in:
 ```
 data(package="iGIScData")
 ```
+
+For instance, the following is a map of California counties using the CA_counties sf (simple features) data:
+
+```{r}
+library(tidyverse); library(iGIScData); library(sf)
+ggplot(data=CA_counties) + geom_sf()
+```
+
 
 Those package datasets can be used directly as sf data (if the sf library is installed) or data frames (all tibbles).  Raw data can also be read from the `extdata` folder that is installed on your computer when you install the package, using code such as:
 

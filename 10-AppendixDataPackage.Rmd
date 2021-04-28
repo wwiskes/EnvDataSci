@@ -1,3 +1,7 @@
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
 # Appendix:  Building a Data Package for GitHub {-}
 
 These are just some notes on building data packages, based mostly on Chapter 14 "External Packages" of <a href="https://r-pkgs.org/">r-pkgs.org</a>, which also covers code packages. 

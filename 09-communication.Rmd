@@ -1,3 +1,7 @@
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
 # Communication
 
 Communication of research is central to environmental data science, and while this

@@ -1,4 +1,8 @@
 ```{r include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+```{r include=FALSE}
 library(tidyverse)
 ```
 
@@ -367,7 +371,7 @@ b <- matrix(1:12, ncol=1)  # 1 column matrix is allowed
 ### Data frames
 A data frame is a database with fields (as vectors) with records (rows), so is very important for data analysis and GIS.  They're kind of like a spreadsheet with rules (first row is field names, fields all one type). So even though they're more complex than a list, we use them so frequently they become quite familiar [whereas I continue to find lists confusing, especially when discovering them as what a particular function returns.]
 
-```{r warning=FALSE}
+```{r}
 library(palmerpenguins)
 head(penguins)
 ```

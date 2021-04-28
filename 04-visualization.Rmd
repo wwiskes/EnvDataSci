@@ -1,3 +1,7 @@
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
 # Visualization
 
 In this section we'll explore visualization methods in R. Visualization has been a key element of R since its inception, since visualization is central to the exploratory philosophy of the language. The base *plot* system generally does a good job in coming up with the most likely graphical output based on the data you provide. 

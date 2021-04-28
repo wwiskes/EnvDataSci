@@ -1,3 +1,7 @@
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
 # Data Transformation
 
 The goal of this section is to continue where we started in the earlier chapter on data abstraction with **`dplyr`** to look at more transformational functions, and **`tidyr`** adds other tools like pivot tables.

@@ -1,3 +1,7 @@
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
 # Data Abstraction
 
 At this point, we've learned the basics of working with the R language. From here we'll want to explore how to analyze data, both statistically and spatially. One part of this is abstracting information from existing data sets by selecting variables and observations and summarizing their statistics. 
