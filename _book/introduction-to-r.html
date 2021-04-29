@@ -803,12 +803,12 @@ Figure 2.5: Temperature~Elevation
 <span id="cb152-2"><a href="introduction-to-r.html#cb152-2"></a>grain_char &lt;-<span class="st"> </span><span class="kw">sample</span>(grain_order, <span class="dv">36</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</span>
 <span id="cb152-3"><a href="introduction-to-r.html#cb152-3"></a>grain_fact &lt;-<span class="st"> </span><span class="kw">factor</span>(grain_char, <span class="dt">levels =</span> grain_order)</span>
 <span id="cb152-4"><a href="introduction-to-r.html#cb152-4"></a>grain_char</span></code></pre></div>
-<pre><code>##  [1] &quot;sand&quot; &quot;clay&quot; &quot;silt&quot; &quot;sand&quot; &quot;sand&quot; &quot;clay&quot; &quot;clay&quot; &quot;silt&quot; &quot;clay&quot; &quot;clay&quot; &quot;sand&quot; &quot;silt&quot; &quot;silt&quot; &quot;sand&quot; &quot;clay&quot;
-## [16] &quot;clay&quot; &quot;sand&quot; &quot;sand&quot; &quot;silt&quot; &quot;silt&quot; &quot;clay&quot; &quot;sand&quot; &quot;clay&quot; &quot;silt&quot; &quot;clay&quot; &quot;silt&quot; &quot;silt&quot; &quot;clay&quot; &quot;sand&quot; &quot;silt&quot;
-## [31] &quot;silt&quot; &quot;clay&quot; &quot;sand&quot; &quot;silt&quot; &quot;silt&quot; &quot;clay&quot;</code></pre>
+<pre><code>##  [1] &quot;clay&quot; &quot;silt&quot; &quot;sand&quot; &quot;sand&quot; &quot;sand&quot; &quot;sand&quot; &quot;clay&quot; &quot;sand&quot; &quot;clay&quot; &quot;sand&quot; &quot;clay&quot; &quot;silt&quot; &quot;clay&quot; &quot;clay&quot; &quot;sand&quot;
+## [16] &quot;silt&quot; &quot;clay&quot; &quot;silt&quot; &quot;sand&quot; &quot;sand&quot; &quot;sand&quot; &quot;clay&quot; &quot;sand&quot; &quot;silt&quot; &quot;sand&quot; &quot;silt&quot; &quot;sand&quot; &quot;sand&quot; &quot;silt&quot; &quot;silt&quot;
+## [31] &quot;clay&quot; &quot;clay&quot; &quot;silt&quot; &quot;clay&quot; &quot;sand&quot; &quot;clay&quot;</code></pre>
 <div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="introduction-to-r.html#cb154-1"></a>grain_fact</span></code></pre></div>
-<pre><code>##  [1] sand clay silt sand sand clay clay silt clay clay sand silt silt sand clay clay sand sand silt silt clay sand
-## [23] clay silt clay silt silt clay sand silt silt clay sand silt silt clay
+<pre><code>##  [1] clay silt sand sand sand sand clay sand clay sand clay silt clay clay sand silt clay silt sand sand sand clay
+## [23] sand silt sand silt sand sand silt silt clay clay silt clay sand clay
 ## Levels: clay silt sand</code></pre>
 <p>To make a categorical variable a factor:</p>
 <div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="introduction-to-r.html#cb156-1"></a>fruit &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;apples&quot;</span>, <span class="st">&quot;oranges&quot;</span>, <span class="st">&quot;bananas&quot;</span>, <span class="st">&quot;oranges&quot;</span>)</span>
