@@ -11,4 +11,3 @@ This is a book based on R Markdown and **bookdown** (https://github.com/rstudio/
   8. Modeling in R
   9. Time Series Visualization & Analysis
  10. Communication & Special Topics
-Appendix
