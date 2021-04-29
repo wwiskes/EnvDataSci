@@ -130,7 +130,7 @@ tmap
 interactive-maps
 leaflet
 exercises-3
-statistics-and-modeling
+statistical-summaries-and-tests
 goals-of-statistical-analysis
 summary-statistics
 summarize-by-group-stratifying-a-summary
@@ -142,12 +142,13 @@ t.test-and-a-non-parametric-alternative-the-kruskal-wallis-rank-sum-test
 analysis-of-variance
 correlation
 modeling-in-r
+some-common-models
 analysis-of-covariance
 generalized-linear-model-glm
 spatial-statistical-analysis
 spatial-autocorrelation
 mapping-residuals
-time-series
+time-series-visualization-analysis
 creation-of-time-series-ts-data
 frequency-setting
 data-logger-data-from-marble-mountains-resurgence

@@ -2,7 +2,9 @@
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
 
-# Statistics and Modeling
+# (PART) Statistics & Modeling {-}
+
+# Statistical Summaries and Tests
 
 ```{r echo=F, message=F}
 library(iGIScData)
@@ -292,7 +294,9 @@ library(psych)
 pairs.panels(sierraFeb %>% dplyr::select(LATITUDE, LONGITUDE, ELEVATION, PRECIPITATION, TEMPERATURE))
 ```
 
-## Modeling in R
+# Modeling in R
+
+## Some common models
 
 - `lm(y ~ x)`	linear regression
 - `lm(y ~ x1 + x2 + x3)`	multiple regression

@@ -2,7 +2,9 @@
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
 
-# Time Series
+# (PART) Time Series {-}
+
+# Time Series Visualization & Analysis
 
 ```{r}
 plot(stl(co2, s.window = "periodic")) # co2 is already a time series

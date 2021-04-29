@@ -6,6 +6,8 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 library(tidyverse)
 ```
 
+# (PART) R for Exploratory Data Analysis {-} 
+
 # Introduction to R
 
 <img src="img/R.png" align="right">

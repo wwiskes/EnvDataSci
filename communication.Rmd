@@ -2,6 +2,8 @@
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
 
+# (PART) Communication & Special Topics {-} 
+
 # Communication
 
 Communication of research is central to environmental data science, and while this

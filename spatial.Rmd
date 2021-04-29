@@ -2,6 +2,8 @@
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
 
+# (PART) Spatial {-}
+
 # Spatial Data and Maps
 
 We'll explore the basics of simple features (sf) for building spatial datasets, then some common mapping methods:
