@@ -5,26 +5,26 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Introduction to Environmental Data Science</title>
-  <meta name="description" content="Background, concepts and exercises for using R for environmental data science. The focus is on applying the R language and various libraries for data abstraction, transformation, data analysis, spatial data/mapping, statistical modeling, and time series, applied to environmental research. Applies exploratory data analysis methods and tidyverse approaches in R, and includes chapters presenting research projects using these methods, with associated data and code packages." />
+  <meta name="description" content="Background, concepts and exercises for using R for environmental data science. The focus is on applying the R language and various libraries for data abstraction, transformation, data analysis, spatial data/mapping, statistical modeling, and time series, applied to environmental research. Applies exploratory data analysis methods and tidyverse approaches in R, and includes contributed chapters presenting research applications, with associated data and code packages." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Introduction to Environmental Data Science" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="Background, concepts and exercises for using R for environmental data science. The focus is on applying the R language and various libraries for data abstraction, transformation, data analysis, spatial data/mapping, statistical modeling, and time series, applied to environmental research. Applies exploratory data analysis methods and tidyverse approaches in R, and includes chapters presenting research projects using these methods, with associated data and code packages." />
+  <meta property="og:description" content="Background, concepts and exercises for using R for environmental data science. The focus is on applying the R language and various libraries for data abstraction, transformation, data analysis, spatial data/mapping, statistical modeling, and time series, applied to environmental research. Applies exploratory data analysis methods and tidyverse approaches in R, and includes contributed chapters presenting research applications, with associated data and code packages." />
   <meta name="github-repo" content="iGISc/EnvDataSci" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Introduction to Environmental Data Science" />
   
-  <meta name="twitter:description" content="Background, concepts and exercises for using R for environmental data science. The focus is on applying the R language and various libraries for data abstraction, transformation, data analysis, spatial data/mapping, statistical modeling, and time series, applied to environmental research. Applies exploratory data analysis methods and tidyverse approaches in R, and includes chapters presenting research projects using these methods, with associated data and code packages." />
+  <meta name="twitter:description" content="Background, concepts and exercises for using R for environmental data science. The focus is on applying the R language and various libraries for data abstraction, transformation, data analysis, spatial data/mapping, statistical modeling, and time series, applied to environmental research. Applies exploratory data analysis methods and tidyverse approaches in R, and includes contributed chapters presenting research applications, with associated data and code packages." />
   
 
 <meta name="author" content="Jerry Davis, SFSU Institute for Geographic Information Science" />
 
 
-<meta name="date" content="2021-04-29" />
+<meta name="date" content="2021-04-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -355,7 +355,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Introduction to Environmental Data Science</h1>
 <p class="author"><em>Jerry Davis, SFSU Institute for Geographic Information Science</em></p>
-<p class="date"><em>2021-04-29</em></p>
+<p class="date"><em>2021-04-30</em></p>
 </div>
 <div id="chapter00.chapter_section" class="section level1 intro_section" number="1">
 <h1><span class="header-section-number">1</span> Introduction</h1>
@@ -493,11 +493,9 @@ generally <em>don’t reinstall the packages again with the unless you actually 
 above which you install the same way – so use <code>install.packages("palmerpenguins")</code>.</p>
 <p>We’ve also created a repository on GitHub that includes data we’ve developed in the iGISc at SFSU, and you’ll need to install that package a slightly different way.</p>
 <p><img src="img/logoIGISc200200.png" align=right></p>
-<p>GitHub packages require a bit more work on
-the user’s part since we need to first install <code>remotes</code> then use that to install the GitHub data package:</p>
+<p>GitHub packages require a bit more work on the user’s part since we need to first install <code>remotes</code><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, then use that to install the GitHub data package:</p>
 <pre><code>install.packages(&quot;remotes&quot;)
 remotes::install_github(&quot;iGISc/iGIScData&quot;)</code></pre>
-<p>Note: you can also use <code>devtools</code> instead of <code>remotes</code> if you have that installed. They do the same thing; <code>remotes</code> is a subset of <code>devtools</code>. If you see a message about Rtools, you can ignore it since that is only needed for building tools from C++ and things like that.</p>
 <p>Then you can access it just like other built-in data by including:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="index.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(iGIScData)</span></code></pre></div>
 <p>To see what’s in it, you’ll see the various datasets listed in:</p>
@@ -517,6 +515,12 @@ TRI87 &lt;- read_csv(csvPath)</code></pre>
 
 
 
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>Note: you can also use <code>devtools</code> instead of <code>remotes</code> if you have that installed. They do the same thing; <code>remotes</code> is a subset of <code>devtools</code>. If you see a message about Rtools, you can ignore it since that is only needed for building tools from C++ and things like that.<a href="index.html#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
             </section>
 
           </div>

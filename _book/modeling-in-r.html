@@ -5,26 +5,26 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8 Modeling in R | Introduction to Environmental Data Science</title>
-  <meta name="description" content="Background, concepts and exercises for using R for environmental data science. The focus is on applying the R language and various libraries for data abstraction, transformation, data analysis, spatial data/mapping, statistical modeling, and time series, applied to environmental research. Applies exploratory data analysis methods and tidyverse approaches in R, and includes chapters presenting research projects using these methods, with associated data and code packages." />
+  <meta name="description" content="Background, concepts and exercises for using R for environmental data science. The focus is on applying the R language and various libraries for data abstraction, transformation, data analysis, spatial data/mapping, statistical modeling, and time series, applied to environmental research. Applies exploratory data analysis methods and tidyverse approaches in R, and includes contributed chapters presenting research applications, with associated data and code packages." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8 Modeling in R | Introduction to Environmental Data Science" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="Background, concepts and exercises for using R for environmental data science. The focus is on applying the R language and various libraries for data abstraction, transformation, data analysis, spatial data/mapping, statistical modeling, and time series, applied to environmental research. Applies exploratory data analysis methods and tidyverse approaches in R, and includes chapters presenting research projects using these methods, with associated data and code packages." />
+  <meta property="og:description" content="Background, concepts and exercises for using R for environmental data science. The focus is on applying the R language and various libraries for data abstraction, transformation, data analysis, spatial data/mapping, statistical modeling, and time series, applied to environmental research. Applies exploratory data analysis methods and tidyverse approaches in R, and includes contributed chapters presenting research applications, with associated data and code packages." />
   <meta name="github-repo" content="iGISc/EnvDataSci" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="8 Modeling in R | Introduction to Environmental Data Science" />
   
-  <meta name="twitter:description" content="Background, concepts and exercises for using R for environmental data science. The focus is on applying the R language and various libraries for data abstraction, transformation, data analysis, spatial data/mapping, statistical modeling, and time series, applied to environmental research. Applies exploratory data analysis methods and tidyverse approaches in R, and includes chapters presenting research projects using these methods, with associated data and code packages." />
+  <meta name="twitter:description" content="Background, concepts and exercises for using R for environmental data science. The focus is on applying the R language and various libraries for data abstraction, transformation, data analysis, spatial data/mapping, statistical modeling, and time series, applied to environmental research. Applies exploratory data analysis methods and tidyverse approaches in R, and includes contributed chapters presenting research applications, with associated data and code packages." />
   
 
 <meta name="author" content="Jerry Davis, SFSU Institute for Geographic Information Science" />
 
 
-<meta name="date" content="2021-04-29" />
+<meta name="date" content="2021-04-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -440,13 +440,20 @@ varies by bankfull discharge in a relationship that looks something like:</p>
 <span id="cb431-3"><a href="modeling-in-r.html#cb431-3" aria-hidden="true" tabindex="-1"></a>streams <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(csvPath)</span>
 <span id="cb431-4"><a href="modeling-in-r.html#cb431-4" aria-hidden="true" tabindex="-1"></a>streams<span class="sc">$</span>strtype <span class="ot">&lt;-</span> <span class="fu">factor</span>(streams<span class="sc">$</span>type, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Anastomosing&quot;</span>,<span class="st">&quot;Braided&quot;</span>,<span class="st">&quot;Meandering&quot;</span>))</span>
 <span id="cb431-5"><a href="modeling-in-r.html#cb431-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(streams)</span></code></pre></div>
-<pre><code>##      type                 Q                S                    strtype  
-##  Length:41          Min.   :     6   Min.   :0.000011   Anastomosing: 8  
-##  Class :character   1st Qu.:    15   1st Qu.:0.000100   Braided     :12  
-##  Mode  :character   Median :    40   Median :0.000700   Meandering  :21  
-##                     Mean   :  4159   Mean   :0.001737                    
-##                     3rd Qu.:   550   3rd Qu.:0.002800                    
-##                     Max.   :100000   Max.   :0.009500</code></pre>
+<pre><code>##      type                 Q                S           
+##  Length:41          Min.   :     6   Min.   :0.000011  
+##  Class :character   1st Qu.:    15   1st Qu.:0.000100  
+##  Mode  :character   Median :    40   Median :0.000700  
+##                     Mean   :  4159   Mean   :0.001737  
+##                     3rd Qu.:   550   3rd Qu.:0.002800  
+##                     Max.   :100000   Max.   :0.009500  
+##          strtype  
+##  Anastomosing: 8  
+##  Braided     :12  
+##  Meandering  :21  
+##                   
+##                   
+## </code></pre>
 <div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="modeling-in-r.html#cb433-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(streams, <span class="fu">aes</span>(Q, S, <span class="at">color=</span>strtype)) <span class="sc">+</span></span>
 <span id="cb433-2"><a href="modeling-in-r.html#cb433-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 <p><img src="EnvDataSci_files/figure-html/unnamed-chunk-195-1.png" width="672" /></p>
@@ -549,8 +556,10 @@ varies by bankfull discharge in a relationship that looks something like:</p>
 ## lm(formula = log10(S) ~ strtype + log10(Q), data = streams)
 ## 
 ## Coefficients:
-##       (Intercept)     strtypeBraided  strtypeMeandering           log10(Q)  
-##           -3.9583             2.1453             1.7294            -0.4109</code></pre>
+##       (Intercept)     strtypeBraided  strtypeMeandering  
+##           -3.9583             2.1453             1.7294  
+##          log10(Q)  
+##           -0.4109</code></pre>
 <p><strong>Part of general linear model (lm)</strong></p>
 <p>ANOVA &amp; ANCOVA are applications of a general linear model.</p>
 <ul>

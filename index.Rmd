@@ -3,7 +3,9 @@ title: "Introduction to Environmental Data Science"
 author: "Jerry Davis, SFSU Institute for Geographic Information Science"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
-output: bookdown::gitbook
+output: 
+  bookdown::gitbook:
+     cover-image: "img/eaRth_border.png"     
 documentclass: book
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
@@ -146,15 +148,14 @@ We've also created a repository on GitHub that includes data we've developed in 
 
 <img src="img/logoIGISc200200.png" align=right>
 
-GitHub packages require a bit more work on 
-the user's part since we need to first install `remotes` then use that to install the GitHub data package:
+GitHub packages require a bit more work on the user's part since we need to first install `remotes`^[Note: you can also use `devtools` instead of `remotes` if you have that installed. They do the same thing; `remotes` is a subset of `devtools`. If you see a message about Rtools, you can ignore it since that is only needed for building tools from C++ and things like that.], then use that to install the GitHub data package:
 
 ```
 install.packages("remotes")
 remotes::install_github("iGISc/iGIScData")
 ```
 
-Note: you can also use `devtools` instead of `remotes` if you have that installed. They do the same thing; `remotes` is a subset of `devtools`. If you see a message about Rtools, you can ignore it since that is only needed for building tools from C++ and things like that.
+
 
 Then you can access it just like other built-in data by including:
 

@@ -5,26 +5,26 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3 Data Abstraction | Introduction to Environmental Data Science</title>
-  <meta name="description" content="Background, concepts and exercises for using R for environmental data science. The focus is on applying the R language and various libraries for data abstraction, transformation, data analysis, spatial data/mapping, statistical modeling, and time series, applied to environmental research. Applies exploratory data analysis methods and tidyverse approaches in R, and includes chapters presenting research projects using these methods, with associated data and code packages." />
+  <meta name="description" content="Background, concepts and exercises for using R for environmental data science. The focus is on applying the R language and various libraries for data abstraction, transformation, data analysis, spatial data/mapping, statistical modeling, and time series, applied to environmental research. Applies exploratory data analysis methods and tidyverse approaches in R, and includes contributed chapters presenting research applications, with associated data and code packages." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3 Data Abstraction | Introduction to Environmental Data Science" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="Background, concepts and exercises for using R for environmental data science. The focus is on applying the R language and various libraries for data abstraction, transformation, data analysis, spatial data/mapping, statistical modeling, and time series, applied to environmental research. Applies exploratory data analysis methods and tidyverse approaches in R, and includes chapters presenting research projects using these methods, with associated data and code packages." />
+  <meta property="og:description" content="Background, concepts and exercises for using R for environmental data science. The focus is on applying the R language and various libraries for data abstraction, transformation, data analysis, spatial data/mapping, statistical modeling, and time series, applied to environmental research. Applies exploratory data analysis methods and tidyverse approaches in R, and includes contributed chapters presenting research applications, with associated data and code packages." />
   <meta name="github-repo" content="iGISc/EnvDataSci" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="3 Data Abstraction | Introduction to Environmental Data Science" />
   
-  <meta name="twitter:description" content="Background, concepts and exercises for using R for environmental data science. The focus is on applying the R language and various libraries for data abstraction, transformation, data analysis, spatial data/mapping, statistical modeling, and time series, applied to environmental research. Applies exploratory data analysis methods and tidyverse approaches in R, and includes chapters presenting research projects using these methods, with associated data and code packages." />
+  <meta name="twitter:description" content="Background, concepts and exercises for using R for environmental data science. The focus is on applying the R language and various libraries for data abstraction, transformation, data analysis, spatial data/mapping, statistical modeling, and time series, applied to environmental research. Applies exploratory data analysis methods and tidyverse approaches in R, and includes contributed chapters presenting research applications, with associated data and code packages." />
   
 
 <meta name="author" content="Jerry Davis, SFSU Institute for Geographic Information Science" />
 
 
-<meta name="date" content="2021-04-29" />
+<meta name="date" content="2021-04-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -418,18 +418,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb182-3"><a href="data-abstraction.html#cb182-3" aria-hidden="true" tabindex="-1"></a>ab <span class="ot">&lt;-</span> <span class="fu">tibble</span>(a,b)</span>
 <span id="cb182-4"><a href="data-abstraction.html#cb182-4" aria-hidden="true" tabindex="-1"></a>ab</span></code></pre></div>
 <pre><code>## # A tibble: 10 x 2
-##         a     b
-##     &lt;dbl&gt; &lt;dbl&gt;
-##  1 -1.06  0.702
-##  2 -0.643 0.616
-##  3 -1.79  0.328
-##  4  0.522 0.132
-##  5  1.37  0.549
-##  6  1.44  0.982
-##  7  0.265 0.238
-##  8 -2.29  0.381
-##  9  1.84  0.950
-## 10  0.580 0.956</code></pre>
+##         a      b
+##     &lt;dbl&gt;  &lt;dbl&gt;
+##  1 -0.467 0.337 
+##  2 -1.82  0.769 
+##  3 -0.259 0.925 
+##  4 -0.121 0.328 
+##  5  2.70  0.0159
+##  6 -0.378 0.804 
+##  7 -0.692 0.757 
+##  8 -0.194 0.340 
+##  9 -0.346 0.878 
+## 10  0.349 0.0900</code></pre>
 <div id="read_csv-vs.-read.csv" class="section level3" number="3.3.1">
 <h3><span class="header-section-number">3.3.1</span> <code>read_csv</code> vs. <code>read.csv</code></h3>
 <p>You might be tempted to use read.csv from base R</p>
@@ -453,30 +453,54 @@ problematic field names like <code>MLY-TAVG-NORMAL</code> become <code>MLY.TAVG
 <h2><span class="header-section-number">3.4</span> Statistical summary of variables</h2>
 <p>A simple statistical summary is very easy to do [<strong><code>eucoak</code></strong>]:</p>
 <div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="data-abstraction.html#cb184-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(eucoakrainfallrunoffTDR)</span></code></pre></div>
-<pre><code>##      site               site #          date              month              rain_mm         rain_oak    
-##  Length:90          Min.   :1.000   Length:90          Length:90          Min.   : 1.00   Min.   : 1.00  
-##  Class :character   1st Qu.:2.000   Class :character   Class :character   1st Qu.:16.00   1st Qu.:16.00  
-##  Mode  :character   Median :4.000   Mode  :character   Mode  :character   Median :28.50   Median :30.50  
-##                     Mean   :4.422                                         Mean   :37.99   Mean   :35.08  
-##                     3rd Qu.:6.000                                         3rd Qu.:63.25   3rd Qu.:50.50  
-##                     Max.   :8.000                                         Max.   :99.00   Max.   :98.00  
-##                                                                           NA&#39;s   :18      NA&#39;s   :2      
-##     rain_euc      runoffL_oak      runoffL_euc      slope_oak       slope_euc       aspect_oak      aspect_euc   
-##  Min.   : 1.00   Min.   : 0.000   Min.   : 0.00   Min.   : 9.00   Min.   : 9.00   Min.   :100.0   Min.   :106.0  
-##  1st Qu.:14.75   1st Qu.: 0.000   1st Qu.: 0.07   1st Qu.:12.00   1st Qu.:12.00   1st Qu.:143.0   1st Qu.:175.0  
-##  Median :30.00   Median : 0.450   Median : 1.20   Median :24.50   Median :23.00   Median :189.0   Median :196.5  
-##  Mean   :34.60   Mean   : 2.032   Mean   : 2.45   Mean   :21.62   Mean   :19.34   Mean   :181.9   Mean   :191.2  
-##  3rd Qu.:50.00   3rd Qu.: 2.800   3rd Qu.: 3.30   3rd Qu.:30.50   3rd Qu.:25.00   3rd Qu.:220.0   3rd Qu.:224.0  
-##  Max.   :96.00   Max.   :14.000   Max.   :16.00   Max.   :32.00   Max.   :31.00   Max.   :264.0   Max.   :296.0  
-##  NA&#39;s   :2       NA&#39;s   :5        NA&#39;s   :3                                                                      
-##  surface_tension_oak surface_tension_euc runoff_rainfall_ratio_oak runoff_rainfall_ratio_euc
-##  Min.   :37.40       Min.   :28.51       Min.   :0.00000           Min.   :0.000000         
-##  1st Qu.:72.75       1st Qu.:32.79       1st Qu.:0.00000           1st Qu.:0.003027         
-##  Median :72.75       Median :37.40       Median :0.02046           Median :0.047619         
-##  Mean   :68.35       Mean   :43.11       Mean   :0.05357           Mean   :0.065902         
-##  3rd Qu.:72.75       3rd Qu.:56.41       3rd Qu.:0.08485           3rd Qu.:0.083603         
-##  Max.   :72.75       Max.   :72.75       Max.   :0.42000           Max.   :0.335652         
-##  NA&#39;s   :22          NA&#39;s   :22          NA&#39;s   :5                 NA&#39;s   :3</code></pre>
+<pre><code>##      site               site #          date          
+##  Length:90          Min.   :1.000   Length:90         
+##  Class :character   1st Qu.:2.000   Class :character  
+##  Mode  :character   Median :4.000   Mode  :character  
+##                     Mean   :4.422                     
+##                     3rd Qu.:6.000                     
+##                     Max.   :8.000                     
+##                                                       
+##     month              rain_mm         rain_oak        rain_euc    
+##  Length:90          Min.   : 1.00   Min.   : 1.00   Min.   : 1.00  
+##  Class :character   1st Qu.:16.00   1st Qu.:16.00   1st Qu.:14.75  
+##  Mode  :character   Median :28.50   Median :30.50   Median :30.00  
+##                     Mean   :37.99   Mean   :35.08   Mean   :34.60  
+##                     3rd Qu.:63.25   3rd Qu.:50.50   3rd Qu.:50.00  
+##                     Max.   :99.00   Max.   :98.00   Max.   :96.00  
+##                     NA&#39;s   :18      NA&#39;s   :2       NA&#39;s   :2      
+##   runoffL_oak      runoffL_euc      slope_oak       slope_euc    
+##  Min.   : 0.000   Min.   : 0.00   Min.   : 9.00   Min.   : 9.00  
+##  1st Qu.: 0.000   1st Qu.: 0.07   1st Qu.:12.00   1st Qu.:12.00  
+##  Median : 0.450   Median : 1.20   Median :24.50   Median :23.00  
+##  Mean   : 2.032   Mean   : 2.45   Mean   :21.62   Mean   :19.34  
+##  3rd Qu.: 2.800   3rd Qu.: 3.30   3rd Qu.:30.50   3rd Qu.:25.00  
+##  Max.   :14.000   Max.   :16.00   Max.   :32.00   Max.   :31.00  
+##  NA&#39;s   :5        NA&#39;s   :3                                      
+##    aspect_oak      aspect_euc    surface_tension_oak
+##  Min.   :100.0   Min.   :106.0   Min.   :37.40      
+##  1st Qu.:143.0   1st Qu.:175.0   1st Qu.:72.75      
+##  Median :189.0   Median :196.5   Median :72.75      
+##  Mean   :181.9   Mean   :191.2   Mean   :68.35      
+##  3rd Qu.:220.0   3rd Qu.:224.0   3rd Qu.:72.75      
+##  Max.   :264.0   Max.   :296.0   Max.   :72.75      
+##                                  NA&#39;s   :22         
+##  surface_tension_euc runoff_rainfall_ratio_oak
+##  Min.   :28.51       Min.   :0.00000          
+##  1st Qu.:32.79       1st Qu.:0.00000          
+##  Median :37.40       Median :0.02046          
+##  Mean   :43.11       Mean   :0.05357          
+##  3rd Qu.:56.41       3rd Qu.:0.08485          
+##  Max.   :72.75       Max.   :0.42000          
+##  NA&#39;s   :22          NA&#39;s   :5                
+##  runoff_rainfall_ratio_euc
+##  Min.   :0.000000         
+##  1st Qu.:0.003027         
+##  Median :0.047619         
+##  Mean   :0.065902         
+##  3rd Qu.:0.083603         
+##  Max.   :0.335652         
+##  NA&#39;s   :3</code></pre>
 </div>
 <div id="visualizing-data-with-a-tukey-box-plot" class="section level2" number="3.5">
 <h2><span class="header-section-number">3.5</span> Visualizing data with a Tukey box plot</h2>
@@ -504,19 +528,20 @@ The following methods are quickly discovered to be essential as part of explorin
 <span id="cb187-5"><a href="data-abstraction.html#cb187-5" aria-hidden="true" tabindex="-1"></a>         runoffL_oak, runoffL_euc, slope_oak, slope_euc)</span>
 <span id="cb187-6"><a href="data-abstraction.html#cb187-6" aria-hidden="true" tabindex="-1"></a>runoff</span></code></pre></div>
 <pre><code>## # A tibble: 90 x 8
-##    site  Date       rain_mm rain_subcanopy runoffL_oak runoffL_euc slope_oak slope_euc
-##    &lt;chr&gt; &lt;date&gt;       &lt;dbl&gt;          &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-##  1 AB1   2006-11-08      29           29          4.79        6.7         32        31
-##  2 AB1   2006-11-12      22           18.5        3.2         4.3         32        31
-##  3 AB1   2006-11-29      85           65          9.7        16           32        31
-##  4 AB1   2006-12-12      82           87.5       14          14.2         32        31
-##  5 AB1   2006-12-28      43           54          9.75        4.33        32        31
-##  6 AB1   2007-01-29       7           54          1.4         0           32        31
-##  7 AB1   2007-02-09      56           44         10.1         0           32        31
-##  8 AB1   2007-02-13      63           42.5        3.90        1.40        32        31
-##  9 AB1   2007-02-28      NA           56          4.75        8.65        32        31
-## 10 AB1   2007-03-22      NA            2         NA           0.11        32        31
-## # ... with 80 more rows</code></pre>
+##    site  Date       rain_mm rain_subcanopy runoffL_oak runoffL_euc
+##    &lt;chr&gt; &lt;date&gt;       &lt;dbl&gt;          &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
+##  1 AB1   2006-11-08      29           29          4.79        6.7 
+##  2 AB1   2006-11-12      22           18.5        3.2         4.3 
+##  3 AB1   2006-11-29      85           65          9.7        16   
+##  4 AB1   2006-12-12      82           87.5       14          14.2 
+##  5 AB1   2006-12-28      43           54          9.75        4.33
+##  6 AB1   2007-01-29       7           54          1.4         0   
+##  7 AB1   2007-02-09      56           44         10.1         0   
+##  8 AB1   2007-02-13      63           42.5        3.90        1.40
+##  9 AB1   2007-02-28      NA           56          4.75        8.65
+## 10 AB1   2007-03-22      NA            2         NA           0.11
+## # ... with 80 more rows, and 2 more variables: slope_oak &lt;dbl&gt;,
+## #   slope_euc &lt;dbl&gt;</code></pre>
 <p><em>Note: to just rename a variable, use <code>rename</code> instead of <code>mutate</code>. It will stay in position.</em></p>
 <p><strong>Helper functions for <code>select()</code></strong></p>
 <p>In the <code>select()</code> example above, we listed all of the variables, but there are a variety
@@ -540,19 +565,20 @@ of helper functions for using logic to specify which variables to select:</p>
 <span id="cb189-2"><a href="data-abstraction.html#cb189-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Date <span class="sc">&gt;=</span> <span class="fu">as.Date</span>(<span class="st">&quot;01/01/2007&quot;</span>, <span class="st">&quot;%m/%d/%Y&quot;</span>))</span>
 <span id="cb189-3"><a href="data-abstraction.html#cb189-3" aria-hidden="true" tabindex="-1"></a>runoff2007</span></code></pre></div>
 <pre><code>## # A tibble: 51 x 8
-##    site  Date       rain_mm rain_subcanopy runoffL_oak runoffL_euc slope_oak slope_euc
-##    &lt;chr&gt; &lt;date&gt;       &lt;dbl&gt;          &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-##  1 AB1   2007-01-29       7           54          1.4         0           32        31
-##  2 AB1   2007-02-09      56           44         10.1         0           32        31
-##  3 AB1   2007-02-13      63           42.5        3.90        1.40        32        31
-##  4 AB1   2007-02-28      NA           56          4.75        8.65        32        31
-##  5 AB1   2007-03-22      NA            2         NA           0.11        32        31
-##  6 AB1   2007-04-23      NA           33.5        6.94        9.20        32        31
-##  7 AB1   2007-05-05      NA           31          6.34        7.43        32        31
-##  8 AB2   2007-01-29       4            3.5        1.26        0.05        24        25
-##  9 AB2   2007-02-09      37           41.5        6.3         3.3         24        25
-## 10 AB2   2007-02-13      43           49.5        6.78        1.14        24        25
-## # ... with 41 more rows</code></pre>
+##    site  Date       rain_mm rain_subcanopy runoffL_oak runoffL_euc
+##    &lt;chr&gt; &lt;date&gt;       &lt;dbl&gt;          &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
+##  1 AB1   2007-01-29       7           54          1.4         0   
+##  2 AB1   2007-02-09      56           44         10.1         0   
+##  3 AB1   2007-02-13      63           42.5        3.90        1.40
+##  4 AB1   2007-02-28      NA           56          4.75        8.65
+##  5 AB1   2007-03-22      NA            2         NA           0.11
+##  6 AB1   2007-04-23      NA           33.5        6.94        9.20
+##  7 AB1   2007-05-05      NA           31          6.34        7.43
+##  8 AB2   2007-01-29       4            3.5        1.26        0.05
+##  9 AB2   2007-02-09      37           41.5        6.3         3.3 
+## 10 AB2   2007-02-13      43           49.5        6.78        1.14
+## # ... with 41 more rows, and 2 more variables: slope_oak &lt;dbl&gt;,
+## #   slope_euc &lt;dbl&gt;</code></pre>
 <p><strong>Filtering out NA with <code>!is.na</code></strong></p>
 <p>Here’s an important one. There are many times you need to avoid NAs.<br />
 We commonly see summary statistics using <code>na.rm = TRUE</code> in order to <em>ignore</em> NAs when calculating a statistic like <code>mean</code>.</p>
@@ -815,7 +841,8 @@ of " “, so <code>str_c</code> is just <code>paste</code> with a default”" se
 ## 5 6001400500 60014005     83650
 ## 6 6001400600 60014006     61597</code></pre>
 <div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="data-abstraction.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(join_id)</span></code></pre></div>
-<pre><code>## [1] &quot;060014001&quot; &quot;060014002&quot; &quot;060014003&quot; &quot;060014004&quot; &quot;060014005&quot; &quot;060014006&quot;</code></pre>
+<pre><code>## [1] &quot;060014001&quot; &quot;060014002&quot; &quot;060014003&quot; &quot;060014004&quot; &quot;060014005&quot;
+## [6] &quot;060014006&quot;</code></pre>
 </div>
 </div>
 <div id="dates-and-times-with-lubridate" class="section level2" number="3.10">
