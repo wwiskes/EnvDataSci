@@ -21,10 +21,9 @@
   <meta name="twitter:description" content="Background, concepts and exercises for using R for environmental data science. The focus is on applying the R language and various libraries for data abstraction, transformation, data analysis, spatial data/mapping, statistical modeling, and time series, applied to environmental research. Applies exploratory data analysis methods and tidyverse approaches in R, and includes contributed chapters presenting research applications, with associated data and code packages." />
   
 
-<meta name="author" content="Jerry Davis, SFSU Institute for Geographic Information Science" />
 
 
-<meta name="date" content="2021-04-30" />
+<meta name="date" content="2021-05-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -622,21 +621,20 @@ We’ll read this type of data in from spreadsheets or even more commonly from c
 text files that spreadsheet programs like Excel commonly read in just like their native format.</p>
 <div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="introduction-to-r.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(iGIScData)</span>
 <span id="cb67-2"><a href="introduction-to-r.html#cb67-2" aria-hidden="true" tabindex="-1"></a>sierraFeb</span></code></pre></div>
-<pre><code>## # A tibble: 62 x 9
+<pre><code>## # A tibble: 82 x 7
 ##    STATION_NAME COUNTY ELEVATION LATITUDE LONGITUDE PRECIPITATION
-##    &lt;chr&gt;        &lt;fct&gt;      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
+##    &lt;chr&gt;        &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
 ##  1 GROVELAND 2~ Tuolu~     853.      37.8     -120.         176. 
 ##  2 CANYON DAM,~ Plumas    1390.      40.2     -121.         164. 
 ##  3 KERN RIVER ~ Kern       824.      35.8     -118.          67.1
 ##  4 DONNER MEMO~ Nevada    1810.      39.3     -120.         167. 
 ##  5 BOWMAN DAM,~ Nevada    1641.      39.5     -121.         277. 
-##  6 GRANT GROVE~ Tulare    2012.      36.7     -119.         186. 
-##  7 LEE VINING,~ Mono      2072.      38.0     -119.          71.9
-##  8 OROVILLE MU~ Butte       57.9     39.5     -122.         138. 
-##  9 LEMON COVE,~ Tulare     156.      36.4     -119.          62.7
-## 10 CALAVERAS B~ Calav~    1431       38.3     -120.         254  
-## # ... with 52 more rows, and 3 more variables: TEMPERATURE &lt;dbl&gt;,
-## #   resid &lt;dbl&gt;, predict &lt;dbl&gt;</code></pre>
+##  6 BRUSH CREEK~ Butte     1085.      39.7     -121.         296. 
+##  7 GRANT GROVE~ Tulare    2012.      36.7     -119.         186. 
+##  8 LEE VINING,~ Mono      2072.      38.0     -119.          71.9
+##  9 OROVILLE MU~ Butte       57.9     39.5     -122.         138. 
+## 10 LEMON COVE,~ Tulare     156.      36.4     -119.          62.7
+## # ... with 72 more rows, and 1 more variable: TEMPERATURE &lt;dbl&gt;</code></pre>
 </div>
 <div id="data-structures-in-r" class="section level2" number="2.6">
 <h2><span class="header-section-number">2.6</span> Data Structures in R</h2>
@@ -901,14 +899,14 @@ Figure 2.5: Temperature~Elevation
 <span id="cb152-2"><a href="introduction-to-r.html#cb152-2" aria-hidden="true" tabindex="-1"></a>grain_char <span class="ot">&lt;-</span> <span class="fu">sample</span>(grain_order, <span class="dv">36</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb152-3"><a href="introduction-to-r.html#cb152-3" aria-hidden="true" tabindex="-1"></a>grain_fact <span class="ot">&lt;-</span> <span class="fu">factor</span>(grain_char, <span class="at">levels =</span> grain_order)</span>
 <span id="cb152-4"><a href="introduction-to-r.html#cb152-4" aria-hidden="true" tabindex="-1"></a>grain_char</span></code></pre></div>
-<pre><code>##  [1] &quot;clay&quot; &quot;clay&quot; &quot;clay&quot; &quot;sand&quot; &quot;silt&quot; &quot;clay&quot; &quot;clay&quot; &quot;sand&quot; &quot;sand&quot;
-## [10] &quot;clay&quot; &quot;clay&quot; &quot;silt&quot; &quot;silt&quot; &quot;clay&quot; &quot;clay&quot; &quot;silt&quot; &quot;sand&quot; &quot;silt&quot;
-## [19] &quot;sand&quot; &quot;clay&quot; &quot;clay&quot; &quot;silt&quot; &quot;clay&quot; &quot;clay&quot; &quot;sand&quot; &quot;sand&quot; &quot;sand&quot;
-## [28] &quot;clay&quot; &quot;silt&quot; &quot;silt&quot; &quot;clay&quot; &quot;sand&quot; &quot;clay&quot; &quot;silt&quot; &quot;sand&quot; &quot;silt&quot;</code></pre>
+<pre><code>##  [1] &quot;sand&quot; &quot;clay&quot; &quot;sand&quot; &quot;sand&quot; &quot;sand&quot; &quot;sand&quot; &quot;clay&quot; &quot;sand&quot; &quot;clay&quot;
+## [10] &quot;silt&quot; &quot;silt&quot; &quot;clay&quot; &quot;sand&quot; &quot;clay&quot; &quot;silt&quot; &quot;silt&quot; &quot;silt&quot; &quot;clay&quot;
+## [19] &quot;clay&quot; &quot;silt&quot; &quot;silt&quot; &quot;clay&quot; &quot;sand&quot; &quot;sand&quot; &quot;silt&quot; &quot;sand&quot; &quot;clay&quot;
+## [28] &quot;sand&quot; &quot;sand&quot; &quot;silt&quot; &quot;sand&quot; &quot;silt&quot; &quot;clay&quot; &quot;silt&quot; &quot;clay&quot; &quot;sand&quot;</code></pre>
 <div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="introduction-to-r.html#cb154-1" aria-hidden="true" tabindex="-1"></a>grain_fact</span></code></pre></div>
-<pre><code>##  [1] clay clay clay sand silt clay clay sand sand clay clay silt silt
-## [14] clay clay silt sand silt sand clay clay silt clay clay sand sand
-## [27] sand clay silt silt clay sand clay silt sand silt
+<pre><code>##  [1] sand clay sand sand sand sand clay sand clay silt silt clay sand
+## [14] clay silt silt silt clay clay silt silt clay sand sand silt sand
+## [27] clay sand sand silt sand silt clay silt clay sand
 ## Levels: clay silt sand</code></pre>
 <p>To make a categorical variable a factor:</p>
 <div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="introduction-to-r.html#cb156-1" aria-hidden="true" tabindex="-1"></a>fruit <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;apples&quot;</span>, <span class="st">&quot;oranges&quot;</span>, <span class="st">&quot;bananas&quot;</span>, <span class="st">&quot;oranges&quot;</span>)</span>
@@ -921,7 +919,7 @@ Figure 2.5: Temperature~Elevation
 <p><strong>Factor example</strong></p>
 <div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="introduction-to-r.html#cb158-1" aria-hidden="true" tabindex="-1"></a>sierraFeb<span class="sc">$</span>COUNTY <span class="ot">&lt;-</span> <span class="fu">factor</span>(sierraFeb<span class="sc">$</span>COUNTY)</span>
 <span id="cb158-2"><a href="introduction-to-r.html#cb158-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(sierraFeb<span class="sc">$</span>COUNTY)</span></code></pre></div>
-<pre><code>##  Factor w/ 20 levels &quot;Amador&quot;,&quot;Butte&quot;,..: 19 14 7 12 12 18 11 2 18 3 ...</code></pre>
+<pre><code>##  Factor w/ 21 levels &quot;Amador&quot;,&quot;Butte&quot;,..: 20 14 7 12 12 2 19 11 2 19 ...</code></pre>
 </div>
 </div>
 </div>

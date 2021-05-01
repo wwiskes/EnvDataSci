@@ -1,15 +1,20 @@
 --- 
 title: "Introduction to Environmental Data Science"
-author: "Jerry Davis, SFSU Institute for Geographic Information Science"
+author:
+- name: Jerry Davis, SFSU Institute for Geographic Information
+- name: Anna Studwell, SFSU Institute for Geographic Information Science (cover illustration)
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: 
   bookdown::gitbook:
-     cover-image: "img/eaRth_border.png"     
+     cover-image: "img/eaRth_anna.png"
+  bookdown::epub_book:
+     cover-image: "img/eaRth_anna.png"
 documentclass: book
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
+thanks: Cover illustration by Anna Studwell
 github-repo: iGISc/EnvDataSci
 description: "Background, concepts and exercises for using R for environmental data science.  The focus is on applying the R language and various libraries for data abstraction, transformation, data analysis, spatial data/mapping, statistical modeling, and time series, applied to environmental research. Applies exploratory data analysis methods and tidyverse approaches in R, and includes contributed chapters presenting research applications, with associated data and code packages."
 ---

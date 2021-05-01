@@ -21,10 +21,9 @@
   <meta name="twitter:description" content="Background, concepts and exercises for using R for environmental data science. The focus is on applying the R language and various libraries for data abstraction, transformation, data analysis, spatial data/mapping, statistical modeling, and time series, applied to environmental research. Applies exploratory data analysis methods and tidyverse approaches in R, and includes contributed chapters presenting research applications, with associated data and code packages." />
   
 
-<meta name="author" content="Jerry Davis, SFSU Institute for Geographic Information Science" />
 
 
-<meta name="date" content="2021-04-30" />
+<meta name="date" content="2021-05-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -418,18 +417,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb182-3"><a href="data-abstraction.html#cb182-3" aria-hidden="true" tabindex="-1"></a>ab <span class="ot">&lt;-</span> <span class="fu">tibble</span>(a,b)</span>
 <span id="cb182-4"><a href="data-abstraction.html#cb182-4" aria-hidden="true" tabindex="-1"></a>ab</span></code></pre></div>
 <pre><code>## # A tibble: 10 x 2
-##         a      b
-##     &lt;dbl&gt;  &lt;dbl&gt;
-##  1 -0.467 0.337 
-##  2 -1.82  0.769 
-##  3 -0.259 0.925 
-##  4 -0.121 0.328 
-##  5  2.70  0.0159
-##  6 -0.378 0.804 
-##  7 -0.692 0.757 
-##  8 -0.194 0.340 
-##  9 -0.346 0.878 
-## 10  0.349 0.0900</code></pre>
+##           a     b
+##       &lt;dbl&gt; &lt;dbl&gt;
+##  1  0.642   0.427
+##  2  0.473   0.750
+##  3  0.227   0.299
+##  4  0.204   0.918
+##  5 -0.602   0.867
+##  6  2.12    0.857
+##  7 -0.954   0.266
+##  8 -0.157   0.262
+##  9  0.00361 0.816
+## 10  1.40    0.166</code></pre>
 <div id="read_csv-vs.-read.csv" class="section level3" number="3.3.1">
 <h3><span class="header-section-number">3.3.1</span> <code>read_csv</code> vs. <code>read.csv</code></h3>
 <p>You might be tempted to use read.csv from base R</p>
