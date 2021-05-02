@@ -7,7 +7,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 # Time Series Visualization & Analysis
 
 ```{r}
-plot(stl(co2, s.window = "periodic")) # co2 is already a time series
+plot(stl(co2, s.window = "periodic"))
 ```
 
 
@@ -15,12 +15,14 @@ Time series data are widely used in the financial sector for obvious reasons, an
 these methods can be very useful environmental data science especially in studies
 such as looking at long-term climate change variables such as the Mauna Loa CO~2~
 data above, or at the much finer temporal scale, environmental data from data loggers such as eddy covariance
-flux towers.
+flux towers [@blackburn2021carbon]
 
-<img src="img/RCVfluxTower1.png">
-<img src="img/LoneyGraph.png">
-<img src="img/RCVfluxTower2.png">
-
+```{r fig.align = 'left', out.width = "75%", fig.cap = "Red Clover Valley eddy covariance flux tower", echo=F}
+knitr::include_graphics(here::here("img", "RCVfluxTower2.png"))
+```
+```{r fig.align = 'left', out.width = "75%", fig.cap = "Loney Meadow eddy covariance flux results", echo=F}
+knitr::include_graphics(here::here("img", "LoneyGraph.png"))
+```
 
 ## Creation of time series (ts) data
 
@@ -83,12 +85,18 @@ plot(GHG)
 For a study of chemical water quality and hydrology of a karst system in the Marble Mountains of California, 
 a spring *resurgence* was instrumented to measure water level, temperature, and specific conductance (a surrogate for total dissolved solids) over a 4-year period [@marbles].
 
-<img src="img/resurgenceInstallation.png">
-<img src="img/resurgenceProfile.png">
-<img src="img/instrumentationPicture.png">
-<img src="img/instrumentationLower.png">
-<img src="img/instrumentationDiagram.png">
-<img src="img/stillingWell.png">
+```{r out.width = "75%", echo=F}
+knitr::include_graphics(here::here("img", "resurgenceStageRecorder.png"))
+```
+
+```{r fig.cap = "Marble Mountains resurgence data logger design", echo=F}
+knitr::include_graphics(here::here("img", "ResurgenceDataLogger.png"))
+```
+
+```{r out.width = "50%", echo=F}
+knitr::include_graphics(here::here("img", "instrumentationPicture.png"))
+knitr::include_graphics(here::here("img", "instrumentationLower.png"))
+```
 
 ```{r message=F, warning=F}
 library(tidyverse); library(lubridate)
@@ -116,7 +124,7 @@ ma(ts(SFtempC,frequency=12),order=3)
 
 **moving average of CO2 data**
 
-Difference shows time-local fluctuations, a component of the data
+Difference shows time-local fluctuations, a component of the data, from [@irizarry2019introduction].
 
 ```{r message=F, warning=F}
 library(dslabs)

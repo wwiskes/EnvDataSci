@@ -23,7 +23,7 @@
 
 
 
-<meta name="date" content="2021-05-01" />
+<meta name="date" content="2021-05-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -356,13 +356,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1 class="title">Introduction to Environmental Data Science</h1>
 <p class="author"><em>Jerry Davis, SFSU Institute for Geographic Information</em></p>
 <p class="author"><em>Anna Studwell, SFSU Institute for Geographic Information Science (cover illustration)</em></p>
-<p class="date"><em>2021-05-01</em></p>
+<p class="date"><em>2021-05-02</em></p>
 </div>
 <div id="chapter00.chapter_section" class="section level1 intro_section" number="1">
 <h1><span class="header-section-number">1</span> Introduction</h1>
-<p>Data science is <em>an inter-disciplinary field that uses scientific methods, processes, algorithms and systems to extract knowledge and insights from many structural and unstructured data</em> (Wikipedia).
-<em>Environmental</em> data science is data science applied to environmental science research. In general data science can be seen as being the intersection of math &amp; statistics, computer science/IT, and some research domain, and in this case it’s environmental:</p>
-<p><img src="img/EnvDataSci.png"></p>
+<div class="figure">
+<img src="img/eaRth_anna296.png" alt="" />
+<p class="caption">Cover art by Anna Studwell</p>
+</div>
+<p>Data science is <em>an inter-disciplinary field that uses scientific methods, processes, algorithms and systems to extract knowledge and insights from many structural and unstructured data</em> (Wikipedia). A data science approach is especially suitable for applications involving large and complex data sets that challenge conventional methods, and environmental data is a prime example, with rapidly growing collections from automated sensors in space and time domains.</p>
+<p><em>Environmental</em> data science is data science applied to environmental science research. In general data science can be seen as being the intersection of math &amp; statistics, computer science/IT, and some research domain, and in this case it’s environmental:</p>
+<p><img src="img/EnvDataSci50pct.png"></p>
 <div id="tools-for-environmental-data-science" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Tools for Environmental Data Science</h2>
 <p>Tools needed for environmental research can include many things since environmental <em>data</em> can include many things, including environmental measurements in time and space domains.</p>
@@ -498,11 +502,13 @@ remotes::install_github(&quot;iGISc/iGIScData&quot;)</code></pre>
 <p>For instance, the following is a map of California counties using the CA_counties sf (simple features) data:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="index.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse); <span class="fu">library</span>(iGIScData); <span class="fu">library</span>(sf)</span>
 <span id="cb6-2"><a href="index.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>CA_counties) <span class="sc">+</span> <span class="fu">geom_sf</span>()</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p>Those package datasets can be used directly as sf data (if the sf library is installed) or data frames (all tibbles). Raw data can also be read from the <code>extdata</code> folder that is installed on your computer when you install the package, using code such as:</p>
 <pre><code>csvPath &lt;- system.file(&quot;extdata&quot;,&quot;TRI_1987_BaySites.csv&quot;, package=&quot;iGIScData&quot;)
 TRI87 &lt;- read_csv(csvPath)</code></pre>
-<p>or something similar for shapefiles.</p>
+<p>or something similar for shapefiles, such as:</p>
+<pre><code>shpPath &lt;- system.file(&quot;extdata&quot;,&quot;trails.shp&quot;, package=&quot;iGIScData&quot;)
+trails &lt;- st_read(shpPath)</code></pre>
 
 </div>
 </div>
