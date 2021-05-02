@@ -11,7 +11,7 @@ Some useful methods for data abstraction can be found in the various packages of
 ## Background: Exploratory Data Analysis
 
 In 1961, John Tukey proposed a new approach to data analysis, defining it as "Procedures for analyzing data, techniques for interpreting the results of such procedures, ways of planning the gathering of data to make its analysis easier, more precise or more accurate, and all the machinery and results of (mathematical) statistics which apply to analyzing data."  
-<img src="img/Tukey1961.png" width="161" height="230" style="horizontal-align:right">He followed this up in 1977 with *Exploratory Data Analysis*. 
+<img src="img/Tukey1977.png" width="161" height="230" style="horizontal-align:right">He followed this up in 1977 with *Exploratory Data Analysis*. 
 
 Exploratory data analysis (EDA) in part as an approach to analyzing data via summaries, tables and graphics.  The key word is *exploratory*, in contrast with *confirmatory* statistics. Both are important, but ignoring exploration is ignoring enlightenment.
 
@@ -58,7 +58,7 @@ How created
     - `read_csv` creates a tibble (in general, underscores are used in the Tidyverse)
     - `read.csv` creates a regular data frame
 
-[**`air_quality` project**]
+[**`air_quality` project**] [@TRI]
  
 ```{r message=F}
 library(tidyverse) # includes readr, ggplot2, and dplyr which we'll use in this chapter
@@ -95,7 +95,7 @@ Recommendation:  Use `read_csv` and `write_csv`.
 
 ## Statistical summary of variables
 
-A simple statistical summary is very easy to do [**`eucoak`**]:
+A simple statistical summary is very easy to do, and we'll use **`eucoak`** data in the `iGIScData` from a study of comparative runoff and erosion under Eucalyptus and oak canopies [@eucoak]:
 
 ```{r}
 summary(eucoakrainfallrunoffTDR)
@@ -196,7 +196,7 @@ eucoakSiteAvg
 ```
 
 
-**Summarizing by group with TRI data [`air_quality` project]**
+**Summarizing by group with TRI data [`air_quality` project]** [@TRI]
 
 ```{r, message=FALSE, warning=F}
 csvPath <- system.file("extdata","TRI_2017_CA.csv", package="iGIScData")
@@ -231,7 +231,7 @@ tidy_eucoak %>%
 
 ### Sorting after summarizing
 
-Using the marine debris data from NOAA Marine Debris Program's *Marine Debris Monitoring and Assessment Project* [in a **new `litter` project**]
+Using the marine debris data from the *Marine Debris Monitoring and Assessment Project* [@marineDebris] [in a **new `litter` project**]
 ```{r message=F, warning=F}
 shorelineLatLong <- ConcentrationReport %>%
   group_by(`Shoreline Name`) %>%
@@ -272,7 +272,7 @@ head(stackrate)
 
 3. Use the summary function to investigate the variables in either the data.frame or tibble you just created. What type of field and what values are assigned to BIA_CODE?
 
-4. Create a boxplot of `body_mass_g` by `species` from the `penguins` data frame in the palmerpenguins package [in a **`penguins` project**]. Access the data with data(package = 'palmerpenguins'), and also remember `library(ggplot2)` or `library(tidyverse)`.
+4. Create a boxplot of `body_mass_g` by `species` from the `penguins` data frame in the palmerpenguins package [in a **`penguins` project**] [@palmer]. Access the data with data(package = 'palmerpenguins'), and also remember `library(ggplot2)` or `library(tidyverse)`.
 
 ```{r include=FALSE}
 library(tidyverse)
@@ -305,6 +305,7 @@ FemaleChinstraps
 7. Now, summarize by `species` groups to create mean and standard deviation variables from `bill_length_mm`, `bill_depth_mm`, `flipper_length_mm`, and `body_mass_g`. Preface the variable names with either `avg.` or `sd.` Include `na.rm=T` with all statistics function calls.
 
 ```{r include=FALSE}
+library(palmerpenguins); library(tidyverse)
 penguins %>%
   group_by(species, sex) %>%
   summarize(avg.bill_length_mm = mean(bill_length_mm, na.rm=T),

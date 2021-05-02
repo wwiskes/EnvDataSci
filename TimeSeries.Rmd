@@ -81,7 +81,7 @@ plot(GHG)
 [**`Marbles`**]
 
 For a study of chemical water quality and hydrology of a karst system in the Marble Mountains of California, 
-a spring *resurgence* was instrumented to measure water level, temperature, and specific conductance (a surrogate for total dissolved solids) over a 4-year period.
+a spring *resurgence* was instrumented to measure water level, temperature, and specific conductance (a surrogate for total dissolved solids) over a 4-year period [@marbles].
 
 <img src="img/resurgenceInstallation.png">
 <img src="img/resurgenceProfile.png">

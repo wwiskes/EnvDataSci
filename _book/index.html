@@ -331,6 +331,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="appendix-building-a-data-package-for-github.html"><a href="appendix-building-a-data-package-for-github.html#raw-data"><i class="fa fa-check"></i>Raw data</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -360,7 +361,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="chapter00.chapter_section" class="section level1 intro_section" number="1">
 <h1><span class="header-section-number">1</span> Introduction</h1>
 <p>Data science is <em>an inter-disciplinary field that uses scientific methods, processes, algorithms and systems to extract knowledge and insights from many structural and unstructured data</em> (Wikipedia).
-<em>Environmental</em> data science is data science applied to environmental analysis problems. In general data science can be seen as being the intersection of math &amp; statistics, computer science/IT, and some research domain, and in this case it’s environmental:</p>
+<em>Environmental</em> data science is data science applied to environmental science research. In general data science can be seen as being the intersection of math &amp; statistics, computer science/IT, and some research domain, and in this case it’s environmental:</p>
 <p><img src="img/EnvDataSci.png"></p>
 <div id="tools-for-environmental-data-science" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Tools for Environmental Data Science</h2>
@@ -372,7 +373,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>reorganization and creation of fields</li>
 <li>filtering observations</li>
 <li>data joins</li>
-<li>stratified statistical summarization</li>
+<li>stratified statistical summaries</li>
 <li>reorganizing data, including pivots</li>
 </ul></li>
 <li>Modeling
@@ -409,10 +410,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>data with many cases or dimensions (including imagery)</li>
 <li>used in business informatics</li>
-<li>challenges of capturing, storing, sharing, visualization, querying…
-<ul>
-<li>related to the great growth in data recently</li>
-</ul></li>
+<li>many applications in environmental science due to the great expansion of automated environmental data capture in space and time domains</li>
+<li>big data challenges exist across the spectrum of the environmental research process, from data capture, storage, sharing, visualization, querying…</li>
 </ul>
 <p><strong>Data Mining</strong>: <em>discovering patterns in large data sets</em></p>
 <ul>
@@ -423,20 +422,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p><strong>Exploratory data analysis</strong>: <em>procedures for analyzing data, techniques for interpreting the results of such procedures, ways of structuring data to make its analysis easier</em></p>
 <ul>
-<li>summarization</li>
+<li>summarizing</li>
 <li>restructuring</li>
 <li>visualization</li>
 </ul>
 <div id="exploratory-data-analysis" class="section level3" number="1.2.1">
 <h3><span class="header-section-number">1.2.1</span> Exploratory Data Analysis</h3>
-<p>Just as <em>exploration</em> is a part of what <em>National Geographic</em> has long covered, it’s
-an important part of geography and environmental science that grew out of it.<br />
+<p>Just as <em>exploration</em> is a part of what <em>National Geographic</em> has long covered, it’s an important part of geographic and environmental science research.<br />
 <img src="img/CaveExploring.png"></p>
-<p><strong>Exploratory Data Analysis</strong> is exploration applied to data, and has grown as an
-alternative approach to traditional statistical analysis. This basic approach perhaps
-dates back to the work of Thomas Bayes in the 18th century, but John Tukey in 1961 may
-have best articulated the basic goals of this approach in defining the “data analysis” methods he was promoting as “Procedures for analyzing data, techniques for interpreting the results of such procedures, ways of planning the gathering of data to make its analysis easier, more precise or more accurate, and all the machinery and results of (mathematical) statistics which apply to analyzing data.”</p>
-<p>Some years later (1977), Tukey followed up with <em>Exploratory Data Analysis</em>.
+<p><strong>Exploratory Data Analysis</strong> is exploration applied to data, and has grown as an alternative approach to traditional statistical analysis. This basic approach perhaps dates back to the work of Thomas Bayes in the 18th century, but <span class="citation"><a href="references.html#ref-tukey1961" role="doc-biblioref">Tukey</a> (<a href="references.html#ref-tukey1961" role="doc-biblioref">1961</a>)</span> may have best articulated the basic goals of this approach in defining the “data analysis” methods he was promoting: “Procedures for analyzing data, techniques for interpreting the results of such procedures, ways of planning the gathering of data to make its analysis easier, more precise or more accurate, and all the machinery and results of (mathematical) statistics which apply to analyzing data.”</p>
+<p>Some years later <span class="citation"><a href="references.html#ref-tukey1977" role="doc-biblioref">Tukey</a> (<a href="references.html#ref-tukey1977" role="doc-biblioref">1977</a>)</span> followed up with <em>Exploratory Data Analysis</em>
 <img src="img/Tukey1977.png"></p>
 <ul>
 <li>EDA is an approach to analyzing data via summaries and graphics. The key word is <em>exploratory</em>.
@@ -465,7 +460,7 @@ have best articulated the basic goals of this approach in defining the “data a
 <h2><span class="header-section-number">1.3</span> Software and data we’ll need</h2>
 <p>First, we’re going to use the R language. It’s not the only way to do data analysis,
 and probably Python is the leading data science overall, but R is clearly the leading such
-language for academic research.</p>
+language for academic research, especially in the environmental sciences.</p>
 <p>For a start, you’ll need to have R and RStudio installed, and at least the following packages:</p>
 <ul>
 <li>tidyverse (to include ggplot2, dplyr, tidyr, stringr, etc.)

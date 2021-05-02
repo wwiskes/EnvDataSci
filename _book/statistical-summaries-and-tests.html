@@ -331,6 +331,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="appendix-building-a-data-package-for-github.html"><a href="appendix-building-a-data-package-for-github.html#raw-data"><i class="fa fa-check"></i>Raw data</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -421,30 +422,22 @@ these methods and how they apply to environmental data science.</p>
 <p>Summary statistics such as mean, standard deviation, variance, minimum, maximum, and range are derived in quite a few
 R functions, commonly as a parameter or a sub-function (see <code>mutate</code>). A an overall simple statistical summary is very easy to do in base R:</p>
 <div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="statistical-summaries-and-tests.html#cb370-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(tidy_eucoak)</span></code></pre></div>
-<pre><code>##      site               site #          tree                Date               month          
-##  Length:180         Min.   :1.000   Length:180         Min.   :2006-11-08   Length:180        
-##  Class :character   1st Qu.:2.000   Class :character   1st Qu.:2006-12-07   Class :character  
-##  Mode  :character   Median :4.000   Mode  :character   Median :2007-01-30   Mode  :character  
-##                     Mean   :4.422                      Mean   :2007-01-29                     
-##                     3rd Qu.:6.000                      3rd Qu.:2007-03-22                     
-##                     Max.   :8.000                      Max.   :2007-05-07                     
-##                                                                                               
-##     rain_mm      rain_subcanopy      slope           aspect         runoff_L     
-##  Min.   : 1.00   Min.   : 1.00   Min.   : 9.00   Min.   :100.0   Min.   : 0.000  
-##  1st Qu.:16.00   1st Qu.:16.00   1st Qu.:12.00   1st Qu.:143.0   1st Qu.: 0.000  
-##  Median :28.50   Median :30.00   Median :24.00   Median :196.0   Median : 0.825  
-##  Mean   :37.99   Mean   :34.84   Mean   :20.48   Mean   :186.6   Mean   : 2.244  
-##  3rd Qu.:63.25   3rd Qu.:50.00   3rd Qu.:27.00   3rd Qu.:221.8   3rd Qu.: 3.200  
-##  Max.   :99.00   Max.   :98.00   Max.   :32.00   Max.   :296.0   Max.   :16.000  
-##  NA&#39;s   :36      NA&#39;s   :4                                       NA&#39;s   :8       
-##  surface_tension runoff_rainfall_ratio
-##  Min.   :28.51   Min.   :0.00000      
-##  1st Qu.:37.40   1st Qu.:0.00000      
-##  Median :62.60   Median :0.03347      
-##  Mean   :55.73   Mean   :0.05981      
-##  3rd Qu.:72.75   3rd Qu.:0.08474      
-##  Max.   :72.75   Max.   :0.42000      
-##  NA&#39;s   :44      NA&#39;s   :8</code></pre>
+<pre><code>##      site               site #          tree                Date               month              rain_mm      rain_subcanopy 
+##  Length:180         Min.   :1.000   Length:180         Min.   :2006-11-08   Length:180         Min.   : 1.00   Min.   : 1.00  
+##  Class :character   1st Qu.:2.000   Class :character   1st Qu.:2006-12-07   Class :character   1st Qu.:16.00   1st Qu.:16.00  
+##  Mode  :character   Median :4.000   Mode  :character   Median :2007-01-30   Mode  :character   Median :28.50   Median :30.00  
+##                     Mean   :4.422                      Mean   :2007-01-29                      Mean   :37.99   Mean   :34.84  
+##                     3rd Qu.:6.000                      3rd Qu.:2007-03-22                      3rd Qu.:63.25   3rd Qu.:50.00  
+##                     Max.   :8.000                      Max.   :2007-05-07                      Max.   :99.00   Max.   :98.00  
+##                                                                                                NA&#39;s   :36      NA&#39;s   :4      
+##      slope           aspect         runoff_L      surface_tension runoff_rainfall_ratio
+##  Min.   : 9.00   Min.   :100.0   Min.   : 0.000   Min.   :28.51   Min.   :0.00000      
+##  1st Qu.:12.00   1st Qu.:143.0   1st Qu.: 0.000   1st Qu.:37.40   1st Qu.:0.00000      
+##  Median :24.00   Median :196.0   Median : 0.825   Median :62.60   Median :0.03347      
+##  Mean   :20.48   Mean   :186.6   Mean   : 2.244   Mean   :55.73   Mean   :0.05981      
+##  3rd Qu.:27.00   3rd Qu.:221.8   3rd Qu.: 3.200   3rd Qu.:72.75   3rd Qu.:0.08474      
+##  Max.   :32.00   Max.   :296.0   Max.   :16.000   Max.   :72.75   Max.   :0.42000      
+##                                  NA&#39;s   :8        NA&#39;s   :44      NA&#39;s   :8</code></pre>
 <div id="summarize-by-group-stratifying-a-summary" class="section level3" number="7.2.1">
 <h3><span class="header-section-number">7.2.1</span> Summarize by group: <em>stratifying a summary</em></h3>
 <div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="statistical-summaries-and-tests.html#cb372-1" aria-hidden="true" tabindex="-1"></a>eucoakrainfallrunoffTDR <span class="sc">%&gt;%</span></span>
@@ -471,13 +464,15 @@ R functions, commonly as a parameter or a sub-function (see <code>mutate</code>)
 </div>
 <div id="boxplot-for-visualizing-distributions-by-group" class="section level3" number="7.2.2">
 <h3><span class="header-section-number">7.2.2</span> Boxplot for visualizing distributions by group</h3>
-<p>A Tukey boxplot is a good way to visualize distributions by group. In this soil CO_2
+<p>A Tukey boxplot is a good way to visualize distributions by group. In this soil CO<sub>2</sub>
 study of the Marble Mountains, some sites had much greater variance, and some sites
 tended to be low vs high:</p>
 <div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="statistical-summaries-and-tests.html#cb374-1" aria-hidden="true" tabindex="-1"></a>soilCO2_97<span class="sc">$</span>SITE <span class="ot">&lt;-</span> <span class="fu">factor</span>(soilCO2_97<span class="sc">$</span>SITE)</span>
 <span id="cb374-2"><a href="statistical-summaries-and-tests.html#cb374-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> soilCO2_97, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> SITE, <span class="at">y =</span> <span class="st">`</span><span class="at">CO2%</span><span class="st">`</span>)) <span class="sc">+</span></span>
 <span id="cb374-3"><a href="statistical-summaries-and-tests.html#cb374-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
 <p><img src="EnvDataSci_files/figure-html/unnamed-chunk-177-1.png" width="672" /></p>
+<p><img src="img/marblesCO2map.png">
+<img src="img/marblesCO2ortho.png"></p>
 </div>
 <div id="generating-pseudorandom-numbers" class="section level3" number="7.2.3">
 <h3><span class="header-section-number">7.2.3</span> Generating pseudorandom numbers</h3>
@@ -623,7 +618,7 @@ Figure 7.3: runoff at various sites contrasting euc and oak
 ## data:  runoff_L by tree
 ## Kruskal-Wallis chi-squared = 14.527, df = 1, p-value = 0.0001382</code></pre>
 <p><strong>Analysis process from exploration to testing</strong></p>
-<p>[<strong><code>eucoak</code></strong>] In the year runoff was studied, there were no runoff events sufficient to mobilize sediments. The next year, January had a big event, so we collected sediments and processed them in the lab.</p>
+<p>[<strong><code>eucoak</code></strong>] In the year runoff was studied, there were no runoff events sufficient to mobilize sediments. The next year, January had a big event, so we collected sediments and processed them in the lab. <span class="citation">(<a href="references.html#ref-eucoak" role="doc-biblioref">Thompson, Davis, and Oliphant 2016</a>)</span></p>
 <p>Questions:</p>
 <ul>
 <li>Is there a difference between eucs and oaks in terms of fine sediment yield?</li>
@@ -632,30 +627,22 @@ Figure 7.3: runoff at various sites contrasting euc and oak
 <div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="statistical-summaries-and-tests.html#cb403-1" aria-hidden="true" tabindex="-1"></a>csvPath <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;eucoaksediment.csv&quot;</span>, <span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>
 <span id="cb403-2"><a href="statistical-summaries-and-tests.html#cb403-2" aria-hidden="true" tabindex="-1"></a>eucoaksed <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(csvPath)</span>
 <span id="cb403-3"><a href="statistical-summaries-and-tests.html#cb403-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(eucoaksed)</span></code></pre></div>
-<pre><code>##       id                site              trtype              slope        bulkDensity   
-##  Length:14          Length:14          Length:14          Min.   : 9.00   Min.   :0.960  
-##  Class :character   Class :character   Class :character   1st Qu.:12.00   1st Qu.:1.060  
-##  Mode  :character   Mode  :character   Mode  :character   Median :21.00   Median :1.125  
-##                                                           Mean   :20.04   Mean   :1.156  
-##                                                           3rd Qu.:25.00   3rd Qu.:1.245  
-##                                                           Max.   :32.00   Max.   :1.490  
-##                                                                                          
-##      litter         Jan08rain     mean_runoff_ratio med_runoff_ratio  std_runoff_ratio 
-##  Min.   : 25.00   Min.   :228.1   Min.   :0.00450   Min.   :0.00000   Min.   :0.01070  
-##  1st Qu.: 51.25   1st Qu.:290.8   1st Qu.:0.02285   1st Qu.:0.01105   1st Qu.:0.01642  
-##  Median : 77.00   Median :301.1   Median :0.04835   Median :0.04950   Median :0.02740  
-##  Mean   : 76.64   Mean   :298.5   Mean   :0.06679   Mean   :0.06179   Mean   :0.04355  
-##  3rd Qu.: 95.75   3rd Qu.:317.0   3rd Qu.:0.12172   3rd Qu.:0.09492   3rd Qu.:0.05735  
-##  Max.   :135.00   Max.   :328.5   Max.   :0.16480   Max.   :0.16430   Max.   :0.11480  
-##                                                                                        
-##     fines_g         litter_g        total_g       fineTotalRatio   fineRainRatio  
-##  Min.   : 7.50   Min.   :14.00   Min.   : 23.50   Min.   :0.1300   Min.   :0.025  
-##  1st Qu.:13.30   1st Qu.:18.80   1st Qu.: 35.00   1st Qu.:0.2700   1st Qu.:0.044  
-##  Median :18.10   Median :40.40   Median : 60.50   Median :0.3900   Median :0.064  
-##  Mean   :27.77   Mean   :41.32   Mean   : 69.12   Mean   :0.3715   Mean   :0.097  
-##  3rd Qu.:45.00   3rd Qu.:57.50   3rd Qu.: 95.50   3rd Qu.:0.4900   3rd Qu.:0.141  
-##  Max.   :66.70   Max.   :97.80   Max.   :125.90   Max.   :0.5500   Max.   :0.293  
-##  NA&#39;s   :1       NA&#39;s   :1       NA&#39;s   :1        NA&#39;s   :1        NA&#39;s   :1</code></pre>
+<pre><code>##       id                site              trtype              slope        bulkDensity        litter         Jan08rain     mean_runoff_ratio
+##  Length:14          Length:14          Length:14          Min.   : 9.00   Min.   :0.960   Min.   : 25.00   Min.   :228.1   Min.   :0.00450  
+##  Class :character   Class :character   Class :character   1st Qu.:12.00   1st Qu.:1.060   1st Qu.: 51.25   1st Qu.:290.8   1st Qu.:0.02285  
+##  Mode  :character   Mode  :character   Mode  :character   Median :21.00   Median :1.125   Median : 77.00   Median :301.1   Median :0.04835  
+##                                                           Mean   :20.04   Mean   :1.156   Mean   : 76.64   Mean   :298.5   Mean   :0.06679  
+##                                                           3rd Qu.:25.00   3rd Qu.:1.245   3rd Qu.: 95.75   3rd Qu.:317.0   3rd Qu.:0.12172  
+##                                                           Max.   :32.00   Max.   :1.490   Max.   :135.00   Max.   :328.5   Max.   :0.16480  
+##                                                                                                                                             
+##  med_runoff_ratio  std_runoff_ratio     fines_g         litter_g        total_g       fineTotalRatio   fineRainRatio  
+##  Min.   :0.00000   Min.   :0.01070   Min.   : 7.50   Min.   :14.00   Min.   : 23.50   Min.   :0.1300   Min.   :0.025  
+##  1st Qu.:0.01105   1st Qu.:0.01642   1st Qu.:13.30   1st Qu.:18.80   1st Qu.: 35.00   1st Qu.:0.2700   1st Qu.:0.044  
+##  Median :0.04950   Median :0.02740   Median :18.10   Median :40.40   Median : 60.50   Median :0.3900   Median :0.064  
+##  Mean   :0.06179   Mean   :0.04355   Mean   :27.77   Mean   :41.32   Mean   : 69.12   Mean   :0.3715   Mean   :0.097  
+##  3rd Qu.:0.09492   3rd Qu.:0.05735   3rd Qu.:45.00   3rd Qu.:57.50   3rd Qu.: 95.50   3rd Qu.:0.4900   3rd Qu.:0.141  
+##  Max.   :0.16430   Max.   :0.11480   Max.   :66.70   Max.   :97.80   Max.   :125.90   Max.   :0.5500   Max.   :0.293  
+##                                      NA&#39;s   :1       NA&#39;s   :1       NA&#39;s   :1        NA&#39;s   :1        NA&#39;s   :1</code></pre>
 <div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="statistical-summaries-and-tests.html#cb405-1" aria-hidden="true" tabindex="-1"></a>eucoaksed <span class="sc">%&gt;%</span></span>
 <span id="cb405-2"><a href="statistical-summaries-and-tests.html#cb405-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(trtype) <span class="sc">%&gt;%</span></span>
 <span id="cb405-3"><a href="statistical-summaries-and-tests.html#cb405-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">meanfines =</span> <span class="fu">mean</span>(fines_g, <span class="at">na.rm=</span>T), <span class="at">sdfines =</span> <span class="fu">sd</span>(fines_g, <span class="at">na.rm=</span>T),</span>

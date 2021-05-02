@@ -331,6 +331,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="appendix-building-a-data-package-for-github.html"><a href="appendix-building-a-data-package-for-github.html#raw-data"><i class="fa fa-check"></i>Raw data</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -368,6 +369,7 @@ Figure 4.1: Flipper length by species
 Figure 4.2: Flipper length by species
 </p>
 </div>
+<p>Antarctic peninsula penguin data is from <span class="citation"><a href="references.html#ref-palmer" role="doc-biblioref">Horst, Hill, and Gorman</a> (<a href="references.html#ref-palmer" role="doc-biblioref">2020</a>)</span>.</p>
 <div id="ggplot2" class="section level2" number="4.1">
 <h2><span class="header-section-number">4.1</span> ggplot2</h2>
 <p>We’ll mostly focus however on gpplot2, based on the <em>Grammar of Graphics</em> because it provides considerable control over your graphics while remaining fairly easily readable, as long as you buy into its grammar.</p>
@@ -395,23 +397,17 @@ Figure 4.2: Flipper length by species
 </ul></li>
 </ul>
 <p>[<strong>Create a new <code>NDVI</code> project</strong>]</p>
+<p>We’ll look at a study of Normalized Difference Vegetation Index from a transect across a montane meadow in the northern Sierra Nevada, derived from multispectral drone imagery <span class="citation">(<a href="references.html#ref-NDVI" role="doc-biblioref">Davis et al. 2020</a>)</span>.</p>
 <div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="visualization.html#cb278-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(iGIScData)</span>
 <span id="cb278-2"><a href="visualization.html#cb278-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb278-3"><a href="visualization.html#cb278-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(XSptsNDVI)</span></code></pre></div>
-<pre><code>##     DistNtoS       elevation     vegetation          geometry        
-##  Min.   :  0.0   Min.   :1510   Length:29          Length:29         
-##  1st Qu.: 37.0   1st Qu.:1510   Class :character   Class :character  
-##  Median :175.0   Median :1511   Mode  :character   Mode  :character  
-##  Mean   :164.7   Mean   :1511                                        
-##  3rd Qu.:275.5   3rd Qu.:1511                                        
-##  Max.   :298.8   Max.   :1511                                        
-##   NDVIgrowing     NDVIsenescent   
-##  Min.   :0.3255   Min.   :0.1402  
-##  1st Qu.:0.5052   1st Qu.:0.2418  
-##  Median :0.6169   Median :0.2817  
-##  Mean   :0.5901   Mean   :0.3662  
-##  3rd Qu.:0.6768   3rd Qu.:0.5407  
-##  Max.   :0.7683   Max.   :0.7578</code></pre>
+<pre><code>##     DistNtoS       elevation     vegetation          geometry          NDVIgrowing     NDVIsenescent   
+##  Min.   :  0.0   Min.   :1510   Length:29          Length:29          Min.   :0.3255   Min.   :0.1402  
+##  1st Qu.: 37.0   1st Qu.:1510   Class :character   Class :character   1st Qu.:0.5052   1st Qu.:0.2418  
+##  Median :175.0   Median :1511   Mode  :character   Mode  :character   Median :0.6169   Median :0.2817  
+##  Mean   :164.7   Mean   :1511                                         Mean   :0.5901   Mean   :0.3662  
+##  3rd Qu.:275.5   3rd Qu.:1511                                         3rd Qu.:0.6768   3rd Qu.:0.5407  
+##  Max.   :298.8   Max.   :1511                                         Max.   :0.7683   Max.   :0.7578</code></pre>
 <div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="visualization.html#cb280-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(XSptsNDVI, <span class="fu">aes</span>(vegetation)) <span class="sc">+</span> </span>
 <span id="cb280-2"><a href="visualization.html#cb280-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div>
 <p><img src="EnvDataSci_files/figure-html/unnamed-chunk-90-1.png" width="672" /></p>
@@ -507,7 +503,9 @@ Figure 4.9: Runoff at Bay Area Sites, colored as Eucalyptus and Oak
 </p>
 </div>
 <p><strong>Visualizing soil CO_2_ data with a Tukey box plot</strong></p>
-<p>[<strong><code>soilCO2</code></strong>]</p>
+<p>[<strong><code>soilCO2</code></strong>] In a study of soil CO_2_ in the Marble Mountains of California, we
+sampled extracted soil air in a 11-point transect across Marble Valley in 1997. <span class="citation">(<a href="references.html#ref-marblesCO2" role="doc-biblioref">Davis, Kiefer, and Amato 2001</a>)</span></p>
+<p><img src="img/marbleGap.png"></p>
 <div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="visualization.html#cb290-1" aria-hidden="true" tabindex="-1"></a>soilCO2 <span class="ot">&lt;-</span> soilCO2_97</span>
 <span id="cb290-2"><a href="visualization.html#cb290-2" aria-hidden="true" tabindex="-1"></a>soilCO2<span class="sc">$</span>SITE <span class="ot">&lt;-</span> <span class="fu">factor</span>(soilCO2<span class="sc">$</span>SITE)  <span class="co"># in order to make the numeric field a factor</span></span>
 <span id="cb290-3"><a href="visualization.html#cb290-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> soilCO2, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> SITE, <span class="at">y =</span> <span class="st">`</span><span class="at">CO2%</span><span class="st">`</span>)) <span class="sc">+</span></span>
@@ -703,7 +701,7 @@ Figure 4.19: EPA Toxic Release Inventory, as a big data set needing symbology cl
 Figure 4.20: NDVI symbolized by vegetation in two seasons
 </p>
 </div>
-<p>[<strong><code>eucoak</code></strong>]</p>
+<p>[<strong><code>eucoak</code></strong>] <span class="citation">(<a href="references.html#ref-eucoak" role="doc-biblioref">Thompson, Davis, and Oliphant 2016</a>)</span></p>
 <div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="visualization.html#cb302-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> tidy_eucoak) <span class="sc">+</span></span>
 <span id="cb302-2"><a href="visualization.html#cb302-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> rain_mm, <span class="at">y =</span> runoff_L, <span class="at">color =</span> tree)) <span class="sc">+</span></span>
 <span id="cb302-3"><a href="visualization.html#cb302-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> rain_mm, <span class="at">y=</span> runoff_L, <span class="at">color =</span> tree), </span>
@@ -767,7 +765,7 @@ Figure 4.24: Pairs plot for Sierra Nevada stations variables
 <div id="exercises-2" class="section level2" number="4.7">
 <h2><span class="header-section-number">4.7</span> Exercises</h2>
 <ol style="list-style-type: decimal">
-<li><p>Create a bar graph of the counts of the species in the <strong><code>penguins</code></strong> data frame. What can you say about what it shows?</p></li>
+<li><p>Create a bar graph of the counts of the species in the <strong><code>penguins</code></strong> data frame <span class="citation">(<a href="references.html#ref-palmer" role="doc-biblioref">Horst, Hill, and Gorman 2020</a>)</span>. What can you say about what it shows?</p></li>
 <li><p>Use bind_cols in dplyr to create a tibble from built-in vectors state.abb and state.region, then use ggplot with geom_bar to create a bar graph of the four regions. [<strong><code>generic_methods</code></strong>]</p></li>
 <li><p>Convert the built-in time series <code>treering</code> into a tibble <code>tr</code>using the <code>tibble()</code> functions with the single variable assigned as <code>treering = treering</code>, then create a histogram, using that tibble and variable for the <code>data</code> and <code>x</code> settings needed. Attach a screen capture of the histogram.</p></li>
 <li><p>Start by clearing your environment with the broom icon in the Environment tab, then we’ll create two tibbles: Create a new tibble <code>st</code> using <code>bind_cols</code> with <code>Name=state.name</code>, <code>Abb=state.abb</code>, <code>Region=state.region</code>, and <code>as_tibble(state.x77)</code>. <em>Note that this works since all of the parts are sorted by state.</em> Then use <code>summary(st)</code> and copy and paste its results for your answer.</p></li>

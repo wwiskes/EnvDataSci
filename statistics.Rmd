@@ -97,8 +97,8 @@ eucoakrainfallrunoffTDR %>%
 
 ### Boxplot for visualizing distributions by group
 
-A Tukey boxplot is a good way to visualize distributions by group. In this soil CO_2
-study of the Marble Mountains, some sites had much greater variance, and some sites
+A Tukey boxplot is a good way to visualize distributions by group. In this soil CO~2~
+study of the Marble Mountains [@marblesCO2], some sites had much greater variance, and some sites
 tended to be low vs high:
 
 ```{r message=F, warning=F}
@@ -106,6 +106,10 @@ soilCO2_97$SITE <- factor(soilCO2_97$SITE)
 ggplot(data = soilCO2_97, mapping = aes(x = SITE, y = `CO2%`)) +
   geom_boxplot()
 ```
+
+<img src="img/marblesCO2map.png">
+<img src="img/marblesCO2ortho.png">
+
 
 ### Generating pseudorandom numbers
 
@@ -226,7 +230,7 @@ kruskal.test(runoff_L~tree, data=tilden)
 
 **Analysis process from exploration to testing**
 
-[**`eucoak`**] In the year runoff was studied, there were no runoff events sufficient to mobilize sediments.  The next year, January had a big event, so we collected sediments and processed them in the lab.
+[**`eucoak`**] In the year runoff was studied, there were no runoff events sufficient to mobilize sediments.  The next year, January had a big event, so we collected sediments and processed them in the lab.  [@eucoak]
 
 Questions:  
 

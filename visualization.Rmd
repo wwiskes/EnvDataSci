@@ -16,6 +16,8 @@ plot(penguins$body_mass_g, penguins$flipper_length_mm)
 plot(penguins$species, penguins$flipper_length_mm)
 ```
 
+Antarctic peninsula penguin data is from @palmer.
+
 ## ggplot2
 
 We'll mostly focus however on gpplot2, based on the *Grammar of Graphics* because it provides considerable control over your graphics while remaining fairly easily readable, as long as you buy into its grammar.
@@ -41,6 +43,8 @@ The ggplot2 system provides plots of single and multiple variables, using variou
     - bar
 
 [**Create a new `NDVI` project**]
+
+We'll look at a study of Normalized Difference Vegetation Index from a transect across a montane meadow in the northern Sierra Nevada, derived from multispectral drone imagery [@NDVI].
 
 ```{r message=F}
 library(iGIScData)
@@ -164,7 +168,10 @@ ggplot(data = tidy_eucoak) +
 
 **Visualizing soil CO_2_ data with a Tukey box plot**
 
-[**`soilCO2`**]
+[**`soilCO2`**] In a study of soil CO_2_ in the Marble Mountains of California, we 
+sampled extracted soil air in a 11-point transect across Marble Valley in 1997.  [@marblesCO2]
+
+<img src="img/marbleGap.png">
 
 ```{r warning=FALSE, fig.cap = "Visualizing soil CO_2_ data with a Tukey box plot"}
 soilCO2 <- soilCO2_97
@@ -173,6 +180,8 @@ ggplot(data = soilCO2, mapping = aes(x = SITE, y = `CO2%`)) +
   geom_boxplot()
 
 ```
+
+
 
 ## Plotting two variables
 ### Two continuous variables
@@ -322,7 +331,7 @@ XSptsPheno %>%
                  color = phenology), method="lm") 
 ```
 
-[**`eucoak`**]
+[**`eucoak`**] [@eucoak]
 
 ```{r warning=FALSE, fig.cap="Eucalyptus and Oak: rainfall and runoff"}
 ggplot(data = tidy_eucoak) +
@@ -373,7 +382,7 @@ sierraFeb %>%
 
 ## Exercises
 
-1. Create a bar graph of the counts of the species in the **`penguins`** data frame.  What can you say about what it shows?
+1. Create a bar graph of the counts of the species in the **`penguins`** data frame [@palmer].  What can you say about what it shows?
 
 ```{r include=F}
 library(tidyverse); library(palmerpenguins)

@@ -26,7 +26,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 # Introduction {#chapter00.chapter_section .intro_section}
 
 Data science is *an inter-disciplinary field that uses scientific methods, processes, algorithms and systems to extract knowledge and insights from many structural and unstructured data* (Wikipedia). 
-*Environmental* data science is data science applied to environmental analysis problems. In general data science can be seen as being the intersection of math & statistics, computer science/IT, and some research domain, and in this case it's environmental:
+*Environmental* data science is data science applied to environmental science research. In general data science can be seen as being the intersection of math & statistics, computer science/IT, and some research domain, and in this case it's environmental:
 
 <img src="img/EnvDataSci.png">
 
@@ -39,7 +39,7 @@ Tools needed for environmental research can include many things since environmen
    - reorganization and creation of fields
    - filtering observations
    - data joins
-   - stratified statistical summarization
+   - stratified statistical summaries
    - reorganizing data, including pivots
 - Modeling
    - physical models 
@@ -64,8 +64,8 @@ Tools needed for environmental research can include many things since environmen
 
 - data with many cases or dimensions (including imagery)
 - used in business informatics
-- challenges of capturing, storing, sharing, visualization, querying...
-    - related to the great growth in data recently
+- many applications in environmental science due to the great expansion of automated environmental data capture in space and time domains
+- big data challenges exist across the spectrum of the environmental research process, from data capture, storage, sharing, visualization, querying...
 
 **Data Mining**: *discovering patterns in large data sets*
 
@@ -76,22 +76,18 @@ Tools needed for environmental research can include many things since environmen
 
 **Exploratory data analysis**: *procedures for analyzing data, techniques for interpreting the results of such procedures, ways of structuring data to make its analysis easier*
 
-- summarization
+- summarizing
 - restructuring
 - visualization
        
 ### Exploratory Data Analysis
    
-Just as *exploration* is a part of what *National Geographic* has long covered, it's
-an important part of geography and environmental science that grew out of it.  
+Just as *exploration* is a part of what *National Geographic* has long covered, it's an important part of geographic and environmental science research.  
 <img src="img/CaveExploring.png">
 
-**Exploratory Data Analysis** is exploration applied to data, and has grown as an
-alternative approach to traditional statistical analysis. This basic approach perhaps
-dates back to the work of Thomas Bayes in the 18th century, but John Tukey in 1961 may 
-have best articulated the basic goals of this approach in defining the "data analysis" methods he was promoting as "Procedures for analyzing data, techniques for interpreting the results of such procedures, ways of planning the gathering of data to make its analysis easier, more precise or more accurate, and all the machinery and results of (mathematical) statistics which apply to analyzing data."  
+**Exploratory Data Analysis** is exploration applied to data, and has grown as an alternative approach to traditional statistical analysis. This basic approach perhaps dates back to the work of Thomas Bayes in the 18th century, but @tukey1961 may have best articulated the basic goals of this approach in defining the "data analysis" methods he was promoting: "Procedures for analyzing data, techniques for interpreting the results of such procedures, ways of planning the gathering of data to make its analysis easier, more precise or more accurate, and all the machinery and results of (mathematical) statistics which apply to analyzing data."  
 
-Some years later (1977), Tukey followed up with *Exploratory Data Analysis*.
+Some years later @tukey1977 followed up with *Exploratory Data Analysis* 
 <img src="img/Tukey1977.png">
 
 - EDA is an approach to analyzing data via summaries and graphics.  The key word is *exploratory*.
@@ -113,7 +109,7 @@ Some years later (1977), Tukey followed up with *Exploratory Data Analysis*.
 
 First, we're going to use the R language.  It's not the only way to do data analysis, 
 and probably Python is the leading data science overall, but R is clearly the leading such 
-language for academic research.
+language for academic research, especially in the environmental sciences.
 
 For a start, you'll need to have R and RStudio installed, and at least the following packages:
 

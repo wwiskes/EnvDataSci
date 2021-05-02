@@ -331,6 +331,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="appendix-building-a-data-package-for-github.html"><a href="appendix-building-a-data-package-for-github.html#raw-data"><i class="fa fa-check"></i>Raw data</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -447,108 +448,57 @@ paste(&quot;My name is&quot;, aname)</code></pre>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="introduction-to-r.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">cos</span>(pi))</span></code></pre></div>
 <pre><code>## [1] -1</code></pre>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="introduction-to-r.html#cb36-1" aria-hidden="true" tabindex="-1"></a>state.x77</span></code></pre></div>
-<pre><code>##                Population Income Illiteracy Life Exp Murder HS Grad
-## Alabama              3615   3624        2.1    69.05   15.1    41.3
-## Alaska                365   6315        1.5    69.31   11.3    66.7
-## Arizona              2212   4530        1.8    70.55    7.8    58.1
-## Arkansas             2110   3378        1.9    70.66   10.1    39.9
-## California          21198   5114        1.1    71.71   10.3    62.6
-## Colorado             2541   4884        0.7    72.06    6.8    63.9
-## Connecticut          3100   5348        1.1    72.48    3.1    56.0
-## Delaware              579   4809        0.9    70.06    6.2    54.6
-## Florida              8277   4815        1.3    70.66   10.7    52.6
-## Georgia              4931   4091        2.0    68.54   13.9    40.6
-## Hawaii                868   4963        1.9    73.60    6.2    61.9
-## Idaho                 813   4119        0.6    71.87    5.3    59.5
-## Illinois            11197   5107        0.9    70.14   10.3    52.6
-## Indiana              5313   4458        0.7    70.88    7.1    52.9
-## Iowa                 2861   4628        0.5    72.56    2.3    59.0
-## Kansas               2280   4669        0.6    72.58    4.5    59.9
-## Kentucky             3387   3712        1.6    70.10   10.6    38.5
-## Louisiana            3806   3545        2.8    68.76   13.2    42.2
-## Maine                1058   3694        0.7    70.39    2.7    54.7
-## Maryland             4122   5299        0.9    70.22    8.5    52.3
-## Massachusetts        5814   4755        1.1    71.83    3.3    58.5
-## Michigan             9111   4751        0.9    70.63   11.1    52.8
-## Minnesota            3921   4675        0.6    72.96    2.3    57.6
-## Mississippi          2341   3098        2.4    68.09   12.5    41.0
-## Missouri             4767   4254        0.8    70.69    9.3    48.8
-## Montana               746   4347        0.6    70.56    5.0    59.2
-## Nebraska             1544   4508        0.6    72.60    2.9    59.3
-## Nevada                590   5149        0.5    69.03   11.5    65.2
-## New Hampshire         812   4281        0.7    71.23    3.3    57.6
-## New Jersey           7333   5237        1.1    70.93    5.2    52.5
-## New Mexico           1144   3601        2.2    70.32    9.7    55.2
-## New York            18076   4903        1.4    70.55   10.9    52.7
-## North Carolina       5441   3875        1.8    69.21   11.1    38.5
-## North Dakota          637   5087        0.8    72.78    1.4    50.3
-## Ohio                10735   4561        0.8    70.82    7.4    53.2
-## Oklahoma             2715   3983        1.1    71.42    6.4    51.6
-## Oregon               2284   4660        0.6    72.13    4.2    60.0
-## Pennsylvania        11860   4449        1.0    70.43    6.1    50.2
-## Rhode Island          931   4558        1.3    71.90    2.4    46.4
-## South Carolina       2816   3635        2.3    67.96   11.6    37.8
-## South Dakota          681   4167        0.5    72.08    1.7    53.3
-## Tennessee            4173   3821        1.7    70.11   11.0    41.8
-## Texas               12237   4188        2.2    70.90   12.2    47.4
-## Utah                 1203   4022        0.6    72.90    4.5    67.3
-## Vermont               472   3907        0.6    71.64    5.5    57.1
-## Virginia             4981   4701        1.4    70.08    9.5    47.8
-## Washington           3559   4864        0.6    71.72    4.3    63.5
-## West Virginia        1799   3617        1.4    69.48    6.7    41.6
-## Wisconsin            4589   4468        0.7    72.48    3.0    54.5
-## Wyoming               376   4566        0.6    70.29    6.9    62.9
-##                Frost   Area
-## Alabama           20  50708
-## Alaska           152 566432
-## Arizona           15 113417
-## Arkansas          65  51945
-## California        20 156361
-## Colorado         166 103766
-## Connecticut      139   4862
-## Delaware         103   1982
-## Florida           11  54090
-## Georgia           60  58073
-## Hawaii             0   6425
-## Idaho            126  82677
-## Illinois         127  55748
-## Indiana          122  36097
-## Iowa             140  55941
-## Kansas           114  81787
-## Kentucky          95  39650
-## Louisiana         12  44930
-## Maine            161  30920
-## Maryland         101   9891
-## Massachusetts    103   7826
-## Michigan         125  56817
-## Minnesota        160  79289
-## Mississippi       50  47296
-## Missouri         108  68995
-## Montana          155 145587
-## Nebraska         139  76483
-## Nevada           188 109889
-## New Hampshire    174   9027
-## New Jersey       115   7521
-## New Mexico       120 121412
-## New York          82  47831
-## North Carolina    80  48798
-## North Dakota     186  69273
-## Ohio             124  40975
-## Oklahoma          82  68782
-## Oregon            44  96184
-## Pennsylvania     126  44966
-## Rhode Island     127   1049
-## South Carolina    65  30225
-## South Dakota     172  75955
-## Tennessee         70  41328
-## Texas             35 262134
-## Utah             137  82096
-## Vermont          168   9267
-## Virginia          85  39780
-## Washington        32  66570
-## West Virginia    100  24070
-## Wisconsin        149  54464
-## Wyoming          173  97203</code></pre>
+<pre><code>##                Population Income Illiteracy Life Exp Murder HS Grad Frost   Area
+## Alabama              3615   3624        2.1    69.05   15.1    41.3    20  50708
+## Alaska                365   6315        1.5    69.31   11.3    66.7   152 566432
+## Arizona              2212   4530        1.8    70.55    7.8    58.1    15 113417
+## Arkansas             2110   3378        1.9    70.66   10.1    39.9    65  51945
+## California          21198   5114        1.1    71.71   10.3    62.6    20 156361
+## Colorado             2541   4884        0.7    72.06    6.8    63.9   166 103766
+## Connecticut          3100   5348        1.1    72.48    3.1    56.0   139   4862
+## Delaware              579   4809        0.9    70.06    6.2    54.6   103   1982
+## Florida              8277   4815        1.3    70.66   10.7    52.6    11  54090
+## Georgia              4931   4091        2.0    68.54   13.9    40.6    60  58073
+## Hawaii                868   4963        1.9    73.60    6.2    61.9     0   6425
+## Idaho                 813   4119        0.6    71.87    5.3    59.5   126  82677
+## Illinois            11197   5107        0.9    70.14   10.3    52.6   127  55748
+## Indiana              5313   4458        0.7    70.88    7.1    52.9   122  36097
+## Iowa                 2861   4628        0.5    72.56    2.3    59.0   140  55941
+## Kansas               2280   4669        0.6    72.58    4.5    59.9   114  81787
+## Kentucky             3387   3712        1.6    70.10   10.6    38.5    95  39650
+## Louisiana            3806   3545        2.8    68.76   13.2    42.2    12  44930
+## Maine                1058   3694        0.7    70.39    2.7    54.7   161  30920
+## Maryland             4122   5299        0.9    70.22    8.5    52.3   101   9891
+## Massachusetts        5814   4755        1.1    71.83    3.3    58.5   103   7826
+## Michigan             9111   4751        0.9    70.63   11.1    52.8   125  56817
+## Minnesota            3921   4675        0.6    72.96    2.3    57.6   160  79289
+## Mississippi          2341   3098        2.4    68.09   12.5    41.0    50  47296
+## Missouri             4767   4254        0.8    70.69    9.3    48.8   108  68995
+## Montana               746   4347        0.6    70.56    5.0    59.2   155 145587
+## Nebraska             1544   4508        0.6    72.60    2.9    59.3   139  76483
+## Nevada                590   5149        0.5    69.03   11.5    65.2   188 109889
+## New Hampshire         812   4281        0.7    71.23    3.3    57.6   174   9027
+## New Jersey           7333   5237        1.1    70.93    5.2    52.5   115   7521
+## New Mexico           1144   3601        2.2    70.32    9.7    55.2   120 121412
+## New York            18076   4903        1.4    70.55   10.9    52.7    82  47831
+## North Carolina       5441   3875        1.8    69.21   11.1    38.5    80  48798
+## North Dakota          637   5087        0.8    72.78    1.4    50.3   186  69273
+## Ohio                10735   4561        0.8    70.82    7.4    53.2   124  40975
+## Oklahoma             2715   3983        1.1    71.42    6.4    51.6    82  68782
+## Oregon               2284   4660        0.6    72.13    4.2    60.0    44  96184
+## Pennsylvania        11860   4449        1.0    70.43    6.1    50.2   126  44966
+## Rhode Island          931   4558        1.3    71.90    2.4    46.4   127   1049
+## South Carolina       2816   3635        2.3    67.96   11.6    37.8    65  30225
+## South Dakota          681   4167        0.5    72.08    1.7    53.3   172  75955
+## Tennessee            4173   3821        1.7    70.11   11.0    41.8    70  41328
+## Texas               12237   4188        2.2    70.90   12.2    47.4    35 262134
+## Utah                 1203   4022        0.6    72.90    4.5    67.3   137  82096
+## Vermont               472   3907        0.6    71.64    5.5    57.1   168   9267
+## Virginia             4981   4701        1.4    70.08    9.5    47.8    85  39780
+## Washington           3559   4864        0.6    71.72    4.3    63.5    32  66570
+## West Virginia        1799   3617        1.4    69.48    6.7    41.6   100  24070
+## Wisconsin            4589   4468        0.7    72.48    3.0    54.5   149  54464
+## Wyoming               376   4566        0.6    70.29    6.9    62.9   173  97203</code></pre>
 <p>A <em>statement</em> in R does something. It represents a directive we’re assigning to the computer, or
 maybe the environment we’re running on the computer (like RStudio, which then runs R). A simple
 <code>print()</code> <em>statement</em> seems a lot like what we just did when we entered an expression in the console, but recognize that it <em>does something</em>:</p>
@@ -621,20 +571,20 @@ We’ll read this type of data in from spreadsheets or even more commonly from c
 text files that spreadsheet programs like Excel commonly read in just like their native format.</p>
 <div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="introduction-to-r.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(iGIScData)</span>
 <span id="cb67-2"><a href="introduction-to-r.html#cb67-2" aria-hidden="true" tabindex="-1"></a>sierraFeb</span></code></pre></div>
-<pre><code>## # A tibble: 82 x 7
-##    STATION_NAME COUNTY ELEVATION LATITUDE LONGITUDE PRECIPITATION
-##    &lt;chr&gt;        &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
-##  1 GROVELAND 2~ Tuolu~     853.      37.8     -120.         176. 
-##  2 CANYON DAM,~ Plumas    1390.      40.2     -121.         164. 
-##  3 KERN RIVER ~ Kern       824.      35.8     -118.          67.1
-##  4 DONNER MEMO~ Nevada    1810.      39.3     -120.         167. 
-##  5 BOWMAN DAM,~ Nevada    1641.      39.5     -121.         277. 
-##  6 BRUSH CREEK~ Butte     1085.      39.7     -121.         296. 
-##  7 GRANT GROVE~ Tulare    2012.      36.7     -119.         186. 
-##  8 LEE VINING,~ Mono      2072.      38.0     -119.          71.9
-##  9 OROVILLE MU~ Butte       57.9     39.5     -122.         138. 
-## 10 LEMON COVE,~ Tulare     156.      36.4     -119.          62.7
-## # ... with 72 more rows, and 1 more variable: TEMPERATURE &lt;dbl&gt;</code></pre>
+<pre><code>## # A tibble: 62 x 9
+##    STATION_NAME                      COUNTY    ELEVATION LATITUDE LONGITUDE PRECIPITATION TEMPERATURE  resid predict
+##    &lt;chr&gt;                             &lt;fct&gt;         &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+##  1 GROVELAND 2, CA US                Tuolumne      853.      37.8     -120.         176.          6.1 -0.574   6.67 
+##  2 CANYON DAM, CA US                 Plumas       1390.      40.2     -121.         164.          1.4 -2.00    3.40 
+##  3 KERN RIVER PH 3, CA US            Kern          824.      35.8     -118.          67.1         8.9  2.05    6.85 
+##  4 DONNER MEMORIAL ST PARK, CA US    Nevada       1810.      39.3     -120.         167.         -0.9 -1.74    0.840
+##  5 BOWMAN DAM, CA US                 Nevada       1641.      39.5     -121.         277.          2.9  1.03    1.87 
+##  6 GRANT GROVE, CA US                Tulare       2012.      36.7     -119.         186.          1.7  2.09   -0.394
+##  7 LEE VINING, CA US                 Mono         2072.      38.0     -119.          71.9         0.4  1.16   -0.760
+##  8 OROVILLE MUNICIPAL AIRPORT, CA US Butte          57.9     39.5     -122.         138.         10.3 -1.23   11.5  
+##  9 LEMON COVE, CA US                 Tulare        156.      36.4     -119.          62.7        11.3  0.373  10.9  
+## 10 CALAVERAS BIG TREES, CA US        Calaveras    1431       38.3     -120.         254           2.7 -0.450   3.15 
+## # ... with 52 more rows</code></pre>
 </div>
 <div id="data-structures-in-r" class="section level2" number="2.6">
 <h2><span class="header-section-number">2.6</span> Data Structures in R</h2>
@@ -711,8 +661,7 @@ c(1,2,3,4,5,6,7,8,9,10)</code></pre>
 <div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="introduction-to-r.html#cb102-1" aria-hidden="true" tabindex="-1"></a>elev <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">52</span>,<span class="dv">394</span>,<span class="dv">510</span>,<span class="dv">564</span>,<span class="dv">725</span>,<span class="dv">848</span>,<span class="dv">1042</span>,<span class="dv">1225</span>,<span class="dv">1486</span>,<span class="dv">1775</span>,<span class="dv">1899</span>,<span class="dv">2551</span>)</span>
 <span id="cb102-2"><a href="introduction-to-r.html#cb102-2" aria-hidden="true" tabindex="-1"></a>elevft <span class="ot">&lt;-</span> elev <span class="sc">/</span> <span class="fl">0.3048</span></span>
 <span id="cb102-3"><a href="introduction-to-r.html#cb102-3" aria-hidden="true" tabindex="-1"></a>elevft</span></code></pre></div>
-<pre><code>##  [1]  170.6037 1292.6509 1673.2283 1850.3937 2378.6089 2782.1522
-##  [7] 3418.6352 4019.0289 4875.3281 5823.4908 6230.3150 8369.4226</code></pre>
+<pre><code>##  [1]  170.6037 1292.6509 1673.2283 1850.3937 2378.6089 2782.1522 3418.6352 4019.0289 4875.3281 5823.4908 6230.3150 8369.4226</code></pre>
 <p>Another example, with 2 vectors:</p>
 <div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="introduction-to-r.html#cb104-1" aria-hidden="true" tabindex="-1"></a>temp03 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">13.1</span>,<span class="fl">11.4</span>,<span class="fl">9.4</span>,<span class="fl">10.9</span>,<span class="fl">8.9</span>,<span class="fl">8.4</span>,<span class="fl">6.7</span>,<span class="fl">7.6</span>,<span class="fl">2.8</span>,<span class="fl">1.6</span>,<span class="fl">1.2</span>,<span class="sc">-</span><span class="fl">2.1</span>)</span>
 <span id="cb104-2"><a href="introduction-to-r.html#cb104-2" aria-hidden="true" tabindex="-1"></a>temp02 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">10.7</span>,<span class="fl">9.7</span>,<span class="fl">7.7</span>,<span class="fl">9.2</span>,<span class="fl">7.3</span>,<span class="fl">6.7</span>,<span class="fl">4.0</span>,<span class="fl">5.0</span>,<span class="fl">0.9</span>,<span class="sc">-</span><span class="fl">1.1</span>,<span class="sc">-</span><span class="fl">0.8</span>,<span class="sc">-</span><span class="fl">4.4</span>)</span>
@@ -818,15 +767,14 @@ The following are equivalent:</p>
 <div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="introduction-to-r.html#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span>
 <span id="cb133-2"><a href="introduction-to-r.html#cb133-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(penguins)</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 8
-##   species island bill_length_mm bill_depth_mm flipper_length_~
-##   &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;
-## 1 Adelie  Torge~           39.1          18.7              181
-## 2 Adelie  Torge~           39.5          17.4              186
-## 3 Adelie  Torge~           40.3          18                195
-## 4 Adelie  Torge~           NA            NA                 NA
-## 5 Adelie  Torge~           36.7          19.3              193
-## 6 Adelie  Torge~           39.3          20.6              190
-## # ... with 3 more variables: body_mass_g &lt;int&gt;, sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
+##   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex     year
+##   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt; &lt;fct&gt;  &lt;int&gt;
+## 1 Adelie  Torgersen           39.1          18.7               181        3750 male    2007
+## 2 Adelie  Torgersen           39.5          17.4               186        3800 female  2007
+## 3 Adelie  Torgersen           40.3          18                 195        3250 female  2007
+## 4 Adelie  Torgersen           NA            NA                  NA          NA &lt;NA&gt;    2007
+## 5 Adelie  Torgersen           36.7          19.3               193        3450 female  2007
+## 6 Adelie  Torgersen           39.3          20.6               190        3650 male    2007</code></pre>
 <p><strong>Creating a data frame out of a matrix</strong></p>
 <div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="introduction-to-r.html#cb135-1" aria-hidden="true" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(sierradata)</span>
 <span id="cb135-2"><a href="introduction-to-r.html#cb135-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">data =</span> mydata, <span class="at">x =</span> elev, <span class="at">y =</span> temp)</span></code></pre></div>
@@ -844,31 +792,26 @@ Figure 2.5: Temperature~Elevation
 <span id="cb136-3"><a href="introduction-to-r.html#cb136-3" aria-hidden="true" tabindex="-1"></a>TRI87 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(csvPath)</span>
 <span id="cb136-4"><a href="introduction-to-r.html#cb136-4" aria-hidden="true" tabindex="-1"></a>TRI87</span></code></pre></div>
 <pre><code>## # A tibble: 335 x 9
-##    TRI_FACILITY_ID count FACILITY_NAME COUNTY air_releases fugitive_air
-##    &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;         &lt;dbl&gt;        &lt;dbl&gt;
-##  1 91002FRMND585BR     2 FORUM IND     SAN M~         1423         1423
-##  2 92052ZPMNF2970C     1 ZEP MFG CO    SANTA~          337          337
-##  3 93117TLDYN3165P     2 TELEDYNE MEC  SANTA~        12600        12600
-##  4 94002GTWSG477HA     2 MORGAN ADVAN~ SAN M~        18700        18700
-##  5 94002SMPRD120SE     2 SEM PRODS INC SAN M~         1500          500
-##  6 94025HBLNN151CO     2 HEUBLEIN INC  SAN M~          500            0
-##  7 94025RYCHM300CO    10 TE CONNECTIV~ SAN M~       144871        47562
-##  8 94025SNFRD990OB     1 SANFORD META~ SAN M~         9675         9675
-##  9 94026BYPCK3575H     2 BAY PACKAGIN~ SAN M~        80000        32000
-## 10 94026CDRSY3475E     2 CDR SYS CORP  SAN M~       126800            0
-## # ... with 325 more rows, and 3 more variables: stack_air &lt;dbl&gt;,
-## #   LATITUDE &lt;dbl&gt;, LONGITUDE &lt;dbl&gt;</code></pre>
+##    TRI_FACILITY_ID count FACILITY_NAME                                 COUNTY      air_releases fugitive_air stack_air LATITUDE LONGITUDE
+##    &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;                                         &lt;chr&gt;              &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+##  1 91002FRMND585BR     2 FORUM IND                                     SAN MATEO           1423         1423         0     37.5     -122.
+##  2 92052ZPMNF2970C     1 ZEP MFG CO                                    SANTA CLARA          337          337         0     37.4     -122.
+##  3 93117TLDYN3165P     2 TELEDYNE MEC                                  SANTA CLARA        12600        12600         0     37.4     -122.
+##  4 94002GTWSG477HA     2 MORGAN ADVANCED CERAMICS BELMONT WESGO METALS SAN MATEO          18700        18700         0     37.5     -122.
+##  5 94002SMPRD120SE     2 SEM PRODS INC                                 SAN MATEO           1500          500      1000     37.5     -122.
+##  6 94025HBLNN151CO     2 HEUBLEIN INC                                  SAN MATEO            500            0       500     37.5     -122.
+##  7 94025RYCHM300CO    10 TE CONNECTIVITY CORP                          SAN MATEO         144871        47562     97309     37.5     -122.
+##  8 94025SNFRD990OB     1 SANFORD METAL PROCESSING CO                   SAN MATEO           9675         9675         0     37.5     -122.
+##  9 94026BYPCK3575H     2 BAY PACKAGING &amp; CONVERTING CO INC             SAN MATEO          80000        32000     48000     37.5     -122.
+## 10 94026CDRSY3475E     2 CDR SYS CORP                                  SAN MATEO         126800            0    126800     37.5     -122.
+## # ... with 325 more rows</code></pre>
 <p><strong>Sort, Index, &amp; Max/Min</strong></p>
 <div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="introduction-to-r.html#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">sort</span>(TRI87<span class="sc">$</span>air_releases))</span></code></pre></div>
 <pre><code>## [1]  2  5  5  7  9 10</code></pre>
 <div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="introduction-to-r.html#cb140-1" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">order</span>(TRI87<span class="sc">$</span>air_releases)</span>
 <span id="cb140-2"><a href="introduction-to-r.html#cb140-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(TRI87<span class="sc">$</span>FACILITY_NAME[index])   <span class="co"># displays facilities in order of their air releases</span></span></code></pre></div>
-<pre><code>## [1] &quot;AIR PRODUCTS MANUFACTURING CORP&quot;         
-## [2] &quot;UNITED FIBERS&quot;                           
-## [3] &quot;CLOROX MANUFACTURING CO&quot;                 
-## [4] &quot;ICI AMERICAS INC WESTERN RESEARCH CENTER&quot;
-## [5] &quot;UNION CARBIDE CORP&quot;                      
-## [6] &quot;SCOTTS-SIERRA HORTICULTURAL PRODS CO INC&quot;</code></pre>
+<pre><code>## [1] &quot;AIR PRODUCTS MANUFACTURING CORP&quot;          &quot;UNITED FIBERS&quot;                            &quot;CLOROX MANUFACTURING CO&quot;                 
+## [4] &quot;ICI AMERICAS INC WESTERN RESEARCH CENTER&quot; &quot;UNION CARBIDE CORP&quot;                       &quot;SCOTTS-SIERRA HORTICULTURAL PRODS CO INC&quot;</code></pre>
 <div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="introduction-to-r.html#cb142-1" aria-hidden="true" tabindex="-1"></a>i_max <span class="ot">&lt;-</span> <span class="fu">which.max</span>(TRI87<span class="sc">$</span>air_releases)</span>
 <span id="cb142-2"><a href="introduction-to-r.html#cb142-2" aria-hidden="true" tabindex="-1"></a>TRI87<span class="sc">$</span>FACILITY_NAME[i_max]   <span class="co"># was NUMMI at the time</span></span></code></pre></div>
 <pre><code>## [1] &quot;TESLA INC&quot;</code></pre>
@@ -899,14 +842,11 @@ Figure 2.5: Temperature~Elevation
 <span id="cb152-2"><a href="introduction-to-r.html#cb152-2" aria-hidden="true" tabindex="-1"></a>grain_char <span class="ot">&lt;-</span> <span class="fu">sample</span>(grain_order, <span class="dv">36</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb152-3"><a href="introduction-to-r.html#cb152-3" aria-hidden="true" tabindex="-1"></a>grain_fact <span class="ot">&lt;-</span> <span class="fu">factor</span>(grain_char, <span class="at">levels =</span> grain_order)</span>
 <span id="cb152-4"><a href="introduction-to-r.html#cb152-4" aria-hidden="true" tabindex="-1"></a>grain_char</span></code></pre></div>
-<pre><code>##  [1] &quot;sand&quot; &quot;clay&quot; &quot;sand&quot; &quot;sand&quot; &quot;sand&quot; &quot;sand&quot; &quot;clay&quot; &quot;sand&quot; &quot;clay&quot;
-## [10] &quot;silt&quot; &quot;silt&quot; &quot;clay&quot; &quot;sand&quot; &quot;clay&quot; &quot;silt&quot; &quot;silt&quot; &quot;silt&quot; &quot;clay&quot;
-## [19] &quot;clay&quot; &quot;silt&quot; &quot;silt&quot; &quot;clay&quot; &quot;sand&quot; &quot;sand&quot; &quot;silt&quot; &quot;sand&quot; &quot;clay&quot;
-## [28] &quot;sand&quot; &quot;sand&quot; &quot;silt&quot; &quot;sand&quot; &quot;silt&quot; &quot;clay&quot; &quot;silt&quot; &quot;clay&quot; &quot;sand&quot;</code></pre>
+<pre><code>##  [1] &quot;sand&quot; &quot;silt&quot; &quot;clay&quot; &quot;silt&quot; &quot;silt&quot; &quot;silt&quot; &quot;silt&quot; &quot;clay&quot; &quot;silt&quot; &quot;sand&quot; &quot;silt&quot; &quot;silt&quot; &quot;silt&quot; &quot;sand&quot; &quot;sand&quot; &quot;sand&quot; &quot;silt&quot; &quot;clay&quot; &quot;sand&quot;
+## [20] &quot;clay&quot; &quot;silt&quot; &quot;clay&quot; &quot;silt&quot; &quot;sand&quot; &quot;clay&quot; &quot;sand&quot; &quot;silt&quot; &quot;silt&quot; &quot;sand&quot; &quot;silt&quot; &quot;clay&quot; &quot;clay&quot; &quot;clay&quot; &quot;clay&quot; &quot;sand&quot; &quot;silt&quot;</code></pre>
 <div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="introduction-to-r.html#cb154-1" aria-hidden="true" tabindex="-1"></a>grain_fact</span></code></pre></div>
-<pre><code>##  [1] sand clay sand sand sand sand clay sand clay silt silt clay sand
-## [14] clay silt silt silt clay clay silt silt clay sand sand silt sand
-## [27] clay sand sand silt sand silt clay silt clay sand
+<pre><code>##  [1] sand silt clay silt silt silt silt clay silt sand silt silt silt sand sand sand silt clay sand clay silt clay silt sand clay sand silt
+## [28] silt sand silt clay clay clay clay sand silt
 ## Levels: clay silt sand</code></pre>
 <p>To make a categorical variable a factor:</p>
 <div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="introduction-to-r.html#cb156-1" aria-hidden="true" tabindex="-1"></a>fruit <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;apples&quot;</span>, <span class="st">&quot;oranges&quot;</span>, <span class="st">&quot;bananas&quot;</span>, <span class="st">&quot;oranges&quot;</span>)</span>
@@ -919,7 +859,7 @@ Figure 2.5: Temperature~Elevation
 <p><strong>Factor example</strong></p>
 <div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="introduction-to-r.html#cb158-1" aria-hidden="true" tabindex="-1"></a>sierraFeb<span class="sc">$</span>COUNTY <span class="ot">&lt;-</span> <span class="fu">factor</span>(sierraFeb<span class="sc">$</span>COUNTY)</span>
 <span id="cb158-2"><a href="introduction-to-r.html#cb158-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(sierraFeb<span class="sc">$</span>COUNTY)</span></code></pre></div>
-<pre><code>##  Factor w/ 21 levels &quot;Amador&quot;,&quot;Butte&quot;,..: 20 14 7 12 12 2 19 11 2 19 ...</code></pre>
+<pre><code>##  Factor w/ 20 levels &quot;Amador&quot;,&quot;Butte&quot;,..: 19 14 7 12 12 18 11 2 18 3 ...</code></pre>
 </div>
 </div>
 </div>
@@ -969,24 +909,18 @@ Irizarry, Rafael (2020) <em>Introduction to Data Science</em> section 2.13.1.</p
 <span id="cb164-2"><a href="introduction-to-r.html#cb164-2" aria-hidden="true" tabindex="-1"></a>TRI87 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/TRI_1987_BaySites.csv&quot;</span>)</span>
 <span id="cb164-3"><a href="introduction-to-r.html#cb164-3" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="fu">which</span>(TRI87<span class="sc">$</span>air_releases <span class="sc">&gt;</span> <span class="fl">1e6</span>)</span>
 <span id="cb164-4"><a href="introduction-to-r.html#cb164-4" aria-hidden="true" tabindex="-1"></a>TRI87<span class="sc">$</span>FACILITY_NAME[i]</span></code></pre></div>
-<pre><code>## [1] &quot;VALERO REFINING CO-CALI FORNIA BENICIA REFINERY&quot;
-## [2] &quot;TESLA INC&quot;                                      
-## [3] &quot;TESORO REFINING &amp; MARKETING CO LLC&quot;             
-## [4] &quot;HGST INC&quot;</code></pre>
+<pre><code>## [1] &quot;VALERO REFINING CO-CALI FORNIA BENICIA REFINERY&quot; &quot;TESLA INC&quot;                                      
+## [3] &quot;TESORO REFINING &amp; MARKETING CO LLC&quot;              &quot;HGST INC&quot;</code></pre>
 <p><strong>%in%</strong></p>
 <div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="introduction-to-r.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
 <span id="cb166-2"><a href="introduction-to-r.html#cb166-2" aria-hidden="true" tabindex="-1"></a>csvPath <span class="ot">=</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;TRI_1987_BaySites.csv&quot;</span>, <span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>
 <span id="cb166-3"><a href="introduction-to-r.html#cb166-3" aria-hidden="true" tabindex="-1"></a>TRI87 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(csvPath)</span>
 <span id="cb166-4"><a href="introduction-to-r.html#cb166-4" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> TRI87<span class="sc">$</span>COUNTY <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;NAPA&quot;</span>,<span class="st">&quot;SONOMA&quot;</span>)</span>
 <span id="cb166-5"><a href="introduction-to-r.html#cb166-5" aria-hidden="true" tabindex="-1"></a>TRI87<span class="sc">$</span>FACILITY_NAME[i]</span></code></pre></div>
-<pre><code>## [1] &quot;SAWYER OF NAPA&quot;                               
-## [2] &quot;BERINGER VINEYARDS&quot;                           
-## [3] &quot;CAL-WOOD DOOR INC&quot;                            
-## [4] &quot;SOLA OPTICAL USA INC&quot;                         
-## [5] &quot;KEYSIGHT TECHNOLOGIES INC&quot;                    
-## [6] &quot;SANTA ROSA STAINLESS STEEL&quot;                   
-## [7] &quot;OPTICAL COATING LABORATORY INC&quot;               
-## [8] &quot;MGM BRAKES&quot;                                   
+<pre><code>## [1] &quot;SAWYER OF NAPA&quot;                                &quot;BERINGER VINEYARDS&quot;                           
+## [3] &quot;CAL-WOOD DOOR INC&quot;                             &quot;SOLA OPTICAL USA INC&quot;                         
+## [5] &quot;KEYSIGHT TECHNOLOGIES INC&quot;                     &quot;SANTA ROSA STAINLESS STEEL&quot;                   
+## [7] &quot;OPTICAL COATING LABORATORY INC&quot;                &quot;MGM BRAKES&quot;                                   
 ## [9] &quot;SEBASTIANI VINEYARDS INC, SONOMA CASK CELLARS&quot;</code></pre>
 </div>
 <div id="apply-functions" class="section level3" number="2.7.2">
@@ -1017,8 +951,7 @@ Irizarry, Rafael (2020) <em>Introduction to Data Science</em> section 2.13.1.</p
 <li>all elements of a vector – unary functions only</li>
 </ul>
 <div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="introduction-to-r.html#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, sqrt)</span></code></pre></div>
-<pre><code>##  [1] 1.000000 1.414214 1.732051 2.000000 2.236068 2.449490 2.645751
-##  [8] 2.828427 3.000000 3.162278 3.316625 3.464102</code></pre>
+<pre><code>##  [1] 1.000000 1.414214 1.732051 2.000000 2.236068 2.449490 2.645751 2.828427 3.000000 3.162278 3.316625 3.464102</code></pre>
 <ul>
 <li>or all variables of a data frame (not a matrix), where it works much like a column-based apply (since variables are columns) but more easily interpreted without the need of specifying columns with 2:</li>
 </ul>

@@ -287,7 +287,7 @@ ggplot(CA_counties) + geom_sf(aes(fill=MED_AGE)) +
 ```
 
 
-**Map in ggplot2, zoomed into two counties [`air_quality`]:**
+**Map in ggplot2, zoomed into two counties [`air_quality`]:** [@TRI]
 
 ```{r warning=FALSE}
 library(tidyverse); library(sf); library(iGIScData)
