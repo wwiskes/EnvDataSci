@@ -300,7 +300,9 @@ pairs.panels(sierraFeb %>% dplyr::select(LATITUDE, LONGITUDE, ELEVATION, PRECIPI
 
 # Modeling in R
 
-## Some common models
+*under construction*
+
+## Some common statistical models
 
 - `lm(y ~ x)`	linear regression
 - `lm(y ~ x1 + x2 + x3)`	multiple regression
@@ -441,7 +443,7 @@ ANOVA & ANCOVA are applications of a general linear model.
 
 - Displays the Analysis of Variance table from the linear model
 
-### Generalized Linear Model (GLM)
+## Generalized Linear Model (GLM)
 
 The glm in R allows you to work with various types of data using various distributions, described as families such as:
 
@@ -454,6 +456,10 @@ The glm in R allows you to work with various types of data using various distrib
 Great explanation of poisson distribution using meteor showers at:
 
 <a href="https://towardsdatascience.com/the-poisson-distribution-and-poisson-process-explained-4e2cb17d459">https://towardsdatascience.com/the-poisson-distribution-and-poisson-process-explained-4e2cb17d459</a>
+
+## Models Employing Machine Learning
+
+*under construction, to include neural network model of environmental data*
 
 ## Spatial Statistical Analysis
 

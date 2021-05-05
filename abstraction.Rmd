@@ -128,7 +128,8 @@ runoff <- eucoakrainfallrunoffTDR %>%
          rain_subcanopy = (rain_oak + rain_euc)/2) %>%
   dplyr::select(site, Date, rain_mm, rain_subcanopy, 
          runoffL_oak, runoffL_euc, slope_oak, slope_euc)
-runoff
+library(DT)
+DT::datatable(runoff,options=list(scrollX=T))
 ```
 
 *Note: to just rename a variable, use `rename` instead of `mutate`. It will stay in position.*
@@ -157,7 +158,7 @@ of helper functions for using logic to specify which variables to select:
 ```{r}
 runoff2007 <- runoff %>%
   filter(Date >= as.Date("01/01/2007", "%m/%d/%Y"))
-runoff2007
+DT::datatable(runoff2007,options=list(scrollX=T))
 ```
  **Filtering out NA with `!is.na`**
  

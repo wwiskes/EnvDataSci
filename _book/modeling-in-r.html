@@ -23,7 +23,7 @@
 
 
 
-<meta name="date" content="2021-05-02" />
+<meta name="date" content="2021-05-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -53,6 +53,13 @@
 <link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.18/datatables.js"></script>
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
 <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
@@ -287,15 +294,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="8" data-path="modeling-in-r.html"><a href="modeling-in-r.html"><i class="fa fa-check"></i><b>8</b> Modeling in R</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="modeling-in-r.html"><a href="modeling-in-r.html#some-common-models"><i class="fa fa-check"></i><b>8.1</b> Some common models</a>
+<li class="chapter" data-level="8.1" data-path="modeling-in-r.html"><a href="modeling-in-r.html#some-common-statistical-models"><i class="fa fa-check"></i><b>8.1</b> Some common statistical models</a>
 <ul>
 <li class="chapter" data-level="8.1.1" data-path="modeling-in-r.html"><a href="modeling-in-r.html#analysis-of-covariance"><i class="fa fa-check"></i><b>8.1.1</b> Analysis of Covariance</a></li>
-<li class="chapter" data-level="8.1.2" data-path="modeling-in-r.html"><a href="modeling-in-r.html#generalized-linear-model-glm"><i class="fa fa-check"></i><b>8.1.2</b> Generalized Linear Model (GLM)</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="modeling-in-r.html"><a href="modeling-in-r.html#spatial-statistical-analysis"><i class="fa fa-check"></i><b>8.2</b> Spatial Statistical Analysis</a>
+<li class="chapter" data-level="8.2" data-path="modeling-in-r.html"><a href="modeling-in-r.html#generalized-linear-model-glm"><i class="fa fa-check"></i><b>8.2</b> Generalized Linear Model (GLM)</a></li>
+<li class="chapter" data-level="8.3" data-path="modeling-in-r.html"><a href="modeling-in-r.html#models-employing-machine-learning"><i class="fa fa-check"></i><b>8.3</b> Models Employing Machine Learning</a></li>
+<li class="chapter" data-level="8.4" data-path="modeling-in-r.html"><a href="modeling-in-r.html#spatial-statistical-analysis"><i class="fa fa-check"></i><b>8.4</b> Spatial Statistical Analysis</a>
 <ul>
-<li class="chapter" data-level="8.2.1" data-path="modeling-in-r.html"><a href="modeling-in-r.html#spatial-autocorrelation"><i class="fa fa-check"></i><b>8.2.1</b> Spatial Autocorrelation</a></li>
-<li class="chapter" data-level="8.2.2" data-path="modeling-in-r.html"><a href="modeling-in-r.html#mapping-residuals"><i class="fa fa-check"></i><b>8.2.2</b> Mapping Residuals</a></li>
+<li class="chapter" data-level="8.4.1" data-path="modeling-in-r.html"><a href="modeling-in-r.html#spatial-autocorrelation"><i class="fa fa-check"></i><b>8.4.1</b> Spatial Autocorrelation</a></li>
+<li class="chapter" data-level="8.4.2" data-path="modeling-in-r.html"><a href="modeling-in-r.html#mapping-residuals"><i class="fa fa-check"></i><b>8.4.2</b> Mapping Residuals</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>IV Time Series</b></span></li>
@@ -354,8 +362,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="modeling-in-r" class="section level1" number="8">
 <h1><span class="header-section-number">8</span> Modeling in R</h1>
-<div id="some-common-models" class="section level2" number="8.1">
-<h2><span class="header-section-number">8.1</span> Some common models</h2>
+<p><em>under construction</em></p>
+<div id="some-common-statistical-models" class="section level2" number="8.1">
+<h2><span class="header-section-number">8.1</span> Some common statistical models</h2>
 <ul>
 <li><code>lm(y ~ x)</code> linear regression</li>
 <li><code>lm(y ~ x1 + x2 + x3)</code> multiple regression</li>
@@ -365,8 +374,8 @@ see ?family to see those supported, including binomial, gaussian, poisson, etc.<
 <li>gam(y ~ x) generalized additive models</li>
 <li>tree(y ~ x) or rpart(y ~ x) regression/classification trees</li>
 </ul>
-<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="modeling-in-r.html#cb423-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(TEMPERATURE <span class="sc">~</span> ELEVATION, <span class="at">data =</span> sierraFeb)</span>
-<span id="cb423-2"><a href="modeling-in-r.html#cb423-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code></pre></div>
+<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb420-1"><a href="modeling-in-r.html#cb420-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(TEMPERATURE <span class="sc">~</span> ELEVATION, <span class="at">data =</span> sierraFeb)</span>
+<span id="cb420-2"><a href="modeling-in-r.html#cb420-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = TEMPERATURE ~ ELEVATION, data = sierraFeb)
@@ -386,7 +395,7 @@ see ?family to see those supported, including binomial, gaussian, poisson, etc.<
 ## Multiple R-squared:  0.8757, Adjusted R-squared:  0.8736 
 ## F-statistic: 422.6 on 1 and 60 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Probably the most important statistic is the p value for the predictor variable ELEVATION, which in this case is very small &lt;2e-16.</p>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-207-1.png" width="672" /></p>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-192-1.png" width="672" /></p>
 <pre><code>## 
 ## Call:
 ## lm(formula = TEMPERATURE ~ ELEVATION, data = sierraFeb)
@@ -395,15 +404,15 @@ see ?family to see those supported, including binomial, gaussian, poisson, etc.<
 ## (Intercept)    ELEVATION  
 ##   11.881380    -0.006102</code></pre>
 <p><strong>Making Predictions</strong></p>
-<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="modeling-in-r.html#cb426-1" aria-hidden="true" tabindex="-1"></a>eqn</span></code></pre></div>
+<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="modeling-in-r.html#cb423-1" aria-hidden="true" tabindex="-1"></a>eqn</span></code></pre></div>
 <pre><code>## [1] &quot;temperature = 11.88 + -0.006*elevation + e&quot;</code></pre>
-<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="modeling-in-r.html#cb428-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> model1<span class="sc">$</span>coefficients[<span class="dv">1</span>]</span>
-<span id="cb428-2"><a href="modeling-in-r.html#cb428-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> model1<span class="sc">$</span>coefficients[<span class="dv">2</span>]</span>
-<span id="cb428-3"><a href="modeling-in-r.html#cb428-3" aria-hidden="true" tabindex="-1"></a>elevations <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">500</span>, <span class="dv">1000</span>, <span class="dv">1500</span>, <span class="dv">2000</span>)</span>
-<span id="cb428-4"><a href="modeling-in-r.html#cb428-4" aria-hidden="true" tabindex="-1"></a>elevations</span></code></pre></div>
+<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="modeling-in-r.html#cb425-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> model1<span class="sc">$</span>coefficients[<span class="dv">1</span>]</span>
+<span id="cb425-2"><a href="modeling-in-r.html#cb425-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> model1<span class="sc">$</span>coefficients[<span class="dv">2</span>]</span>
+<span id="cb425-3"><a href="modeling-in-r.html#cb425-3" aria-hidden="true" tabindex="-1"></a>elevations <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">500</span>, <span class="dv">1000</span>, <span class="dv">1500</span>, <span class="dv">2000</span>)</span>
+<span id="cb425-4"><a href="modeling-in-r.html#cb425-4" aria-hidden="true" tabindex="-1"></a>elevations</span></code></pre></div>
 <pre><code>## [1]  500 1000 1500 2000</code></pre>
-<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="modeling-in-r.html#cb430-1" aria-hidden="true" tabindex="-1"></a>tempEstimate <span class="ot">&lt;-</span> a <span class="sc">+</span> b <span class="sc">*</span> elevations</span>
-<span id="cb430-2"><a href="modeling-in-r.html#cb430-2" aria-hidden="true" tabindex="-1"></a>tempEstimate</span></code></pre></div>
+<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="modeling-in-r.html#cb427-1" aria-hidden="true" tabindex="-1"></a>tempEstimate <span class="ot">&lt;-</span> a <span class="sc">+</span> b <span class="sc">*</span> elevations</span>
+<span id="cb427-2"><a href="modeling-in-r.html#cb427-2" aria-hidden="true" tabindex="-1"></a>tempEstimate</span></code></pre></div>
 <pre><code>## [1]  8.8304692  5.7795580  2.7286468 -0.3222645</code></pre>
 <div id="analysis-of-covariance" class="section level3" number="8.1.1">
 <h3><span class="header-section-number">8.1.1</span> Analysis of Covariance</h3>
@@ -435,11 +444,11 @@ varies by bankfull discharge in a relationship that looks something like:</p>
 <p><code>log10(S) ~ strtype * log10(Q)</code> … interaction between covariate and factor</p>
 <p><code>log10(S) ~ strtype + log10(Q)</code> … no interaction, parallel slopes</p>
 <p>If models are not significantly different, remove interaction term due to parsimony, and satisfies this ANCOVA requirement.</p>
-<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="modeling-in-r.html#cb432-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb432-2"><a href="modeling-in-r.html#cb432-2" aria-hidden="true" tabindex="-1"></a>csvPath <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;streams.csv&quot;</span>, <span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>
-<span id="cb432-3"><a href="modeling-in-r.html#cb432-3" aria-hidden="true" tabindex="-1"></a>streams <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(csvPath)</span>
-<span id="cb432-4"><a href="modeling-in-r.html#cb432-4" aria-hidden="true" tabindex="-1"></a>streams<span class="sc">$</span>strtype <span class="ot">&lt;-</span> <span class="fu">factor</span>(streams<span class="sc">$</span>type, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Anastomosing&quot;</span>,<span class="st">&quot;Braided&quot;</span>,<span class="st">&quot;Meandering&quot;</span>))</span>
-<span id="cb432-5"><a href="modeling-in-r.html#cb432-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(streams)</span></code></pre></div>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="modeling-in-r.html#cb429-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb429-2"><a href="modeling-in-r.html#cb429-2" aria-hidden="true" tabindex="-1"></a>csvPath <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;streams.csv&quot;</span>, <span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>
+<span id="cb429-3"><a href="modeling-in-r.html#cb429-3" aria-hidden="true" tabindex="-1"></a>streams <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(csvPath)</span>
+<span id="cb429-4"><a href="modeling-in-r.html#cb429-4" aria-hidden="true" tabindex="-1"></a>streams<span class="sc">$</span>strtype <span class="ot">&lt;-</span> <span class="fu">factor</span>(streams<span class="sc">$</span>type, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Anastomosing&quot;</span>,<span class="st">&quot;Braided&quot;</span>,<span class="st">&quot;Meandering&quot;</span>))</span>
+<span id="cb429-5"><a href="modeling-in-r.html#cb429-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(streams)</span></code></pre></div>
 <pre><code>##      type                 Q                S                    strtype  
 ##  Length:41          Min.   :     6   Min.   :0.000011   Anastomosing: 8  
 ##  Class :character   1st Qu.:    15   1st Qu.:0.000100   Braided     :12  
@@ -447,19 +456,19 @@ varies by bankfull discharge in a relationship that looks something like:</p>
 ##                     Mean   :  4159   Mean   :0.001737                    
 ##                     3rd Qu.:   550   3rd Qu.:0.002800                    
 ##                     Max.   :100000   Max.   :0.009500</code></pre>
-<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="modeling-in-r.html#cb434-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(streams, <span class="fu">aes</span>(Q, S, <span class="at">color=</span>strtype)) <span class="sc">+</span></span>
-<span id="cb434-2"><a href="modeling-in-r.html#cb434-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-209-1.png" width="672" /></p>
-<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="modeling-in-r.html#cb435-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales) <span class="co"># needed for the trans_format function below</span></span>
-<span id="cb435-2"><a href="modeling-in-r.html#cb435-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(streams, <span class="fu">aes</span>(Q, S, <span class="at">color=</span>strtype)) <span class="sc">+</span></span>
-<span id="cb435-3"><a href="modeling-in-r.html#cb435-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
-<span id="cb435-4"><a href="modeling-in-r.html#cb435-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">trans=</span><span class="fu">log10_trans</span>(),</span>
-<span id="cb435-5"><a href="modeling-in-r.html#cb435-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">trans_format</span>(<span class="st">&quot;log10&quot;</span>, <span class="fu">math_format</span>(<span class="dv">10</span><span class="sc">^</span>.x))) <span class="sc">+</span></span>
-<span id="cb435-6"><a href="modeling-in-r.html#cb435-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">trans=</span><span class="fu">log10_trans</span>(),</span>
-<span id="cb435-7"><a href="modeling-in-r.html#cb435-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">trans_format</span>(<span class="st">&quot;log10&quot;</span>, <span class="fu">math_format</span>(<span class="dv">10</span><span class="sc">^</span>.x)))</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-209-2.png" width="672" /></p>
-<div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb436-1"><a href="modeling-in-r.html#cb436-1" aria-hidden="true" tabindex="-1"></a>ancova <span class="ot">=</span> <span class="fu">lm</span>(<span class="fu">log10</span>(S)<span class="sc">~</span>strtype<span class="sc">*</span><span class="fu">log10</span>(Q), <span class="at">data=</span>streams)</span>
-<span id="cb436-2"><a href="modeling-in-r.html#cb436-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ancova)</span></code></pre></div>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="modeling-in-r.html#cb431-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(streams, <span class="fu">aes</span>(Q, S, <span class="at">color=</span>strtype)) <span class="sc">+</span></span>
+<span id="cb431-2"><a href="modeling-in-r.html#cb431-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-194-1.png" width="672" /></p>
+<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="modeling-in-r.html#cb432-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales) <span class="co"># needed for the trans_format function below</span></span>
+<span id="cb432-2"><a href="modeling-in-r.html#cb432-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(streams, <span class="fu">aes</span>(Q, S, <span class="at">color=</span>strtype)) <span class="sc">+</span></span>
+<span id="cb432-3"><a href="modeling-in-r.html#cb432-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb432-4"><a href="modeling-in-r.html#cb432-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">trans=</span><span class="fu">log10_trans</span>(),</span>
+<span id="cb432-5"><a href="modeling-in-r.html#cb432-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">trans_format</span>(<span class="st">&quot;log10&quot;</span>, <span class="fu">math_format</span>(<span class="dv">10</span><span class="sc">^</span>.x))) <span class="sc">+</span></span>
+<span id="cb432-6"><a href="modeling-in-r.html#cb432-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">trans=</span><span class="fu">log10_trans</span>(),</span>
+<span id="cb432-7"><a href="modeling-in-r.html#cb432-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">trans_format</span>(<span class="st">&quot;log10&quot;</span>, <span class="fu">math_format</span>(<span class="dv">10</span><span class="sc">^</span>.x)))</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-194-2.png" width="672" /></p>
+<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="modeling-in-r.html#cb433-1" aria-hidden="true" tabindex="-1"></a>ancova <span class="ot">=</span> <span class="fu">lm</span>(<span class="fu">log10</span>(S)<span class="sc">~</span>strtype<span class="sc">*</span><span class="fu">log10</span>(Q), <span class="at">data=</span>streams)</span>
+<span id="cb433-2"><a href="modeling-in-r.html#cb433-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ancova)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log10(S) ~ strtype * log10(Q), data = streams)
@@ -482,7 +491,7 @@ varies by bankfull discharge in a relationship that looks something like:</p>
 ## Residual standard error: 0.2656 on 35 degrees of freedom
 ## Multiple R-squared:  0.9154, Adjusted R-squared:  0.9033 
 ## F-statistic: 75.73 on 5 and 35 DF,  p-value: &lt; 2.2e-16</code></pre>
-<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb438-1"><a href="modeling-in-r.html#cb438-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ancova)</span></code></pre></div>
+<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="modeling-in-r.html#cb435-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ancova)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Response: log10(S)
@@ -493,9 +502,9 @@ varies by bankfull discharge in a relationship that looks something like:</p>
 ## Residuals        35  2.4688  0.0705                       
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="modeling-in-r.html#cb440-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now an additive model, which does not have that interaction</span></span>
-<span id="cb440-2"><a href="modeling-in-r.html#cb440-2" aria-hidden="true" tabindex="-1"></a>ancova2 <span class="ot">=</span> <span class="fu">lm</span>(<span class="fu">log10</span>(S)<span class="sc">~</span>strtype<span class="sc">+</span><span class="fu">log10</span>(Q), <span class="at">data=</span>streams)</span>
-<span id="cb440-3"><a href="modeling-in-r.html#cb440-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ancova2)</span></code></pre></div>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="modeling-in-r.html#cb437-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now an additive model, which does not have that interaction</span></span>
+<span id="cb437-2"><a href="modeling-in-r.html#cb437-2" aria-hidden="true" tabindex="-1"></a>ancova2 <span class="ot">=</span> <span class="fu">lm</span>(<span class="fu">log10</span>(S)<span class="sc">~</span>strtype<span class="sc">+</span><span class="fu">log10</span>(Q), <span class="at">data=</span>streams)</span>
+<span id="cb437-3"><a href="modeling-in-r.html#cb437-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ancova2)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Response: log10(S)
@@ -505,7 +514,7 @@ varies by bankfull discharge in a relationship that looks something like:</p>
 ## Residuals 37  2.5199  0.0681                      
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="modeling-in-r.html#cb442-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ancova,ancova2)   </span></code></pre></div>
+<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="modeling-in-r.html#cb439-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ancova,ancova2)   </span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Model 1: log10(S) ~ strtype * log10(Q)
@@ -513,11 +522,11 @@ varies by bankfull discharge in a relationship that looks something like:</p>
 ##   Res.Df    RSS Df Sum of Sq      F Pr(&gt;F)
 ## 1     35 2.4688                           
 ## 2     37 2.5199 -2 -0.051051 0.3619 0.6989</code></pre>
-<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb444-1"><a href="modeling-in-r.html#cb444-1" aria-hidden="true" tabindex="-1"></a>   <span class="co"># not significantly different, so model simplification is justified</span></span>
-<span id="cb444-2"><a href="modeling-in-r.html#cb444-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb444-3"><a href="modeling-in-r.html#cb444-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Now we remove the strtype term</span></span>
-<span id="cb444-4"><a href="modeling-in-r.html#cb444-4" aria-hidden="true" tabindex="-1"></a>ancova3 <span class="ot">=</span> <span class="fu">update</span>(ancova2, <span class="sc">~</span> . <span class="sc">-</span> strtype)  </span>
-<span id="cb444-5"><a href="modeling-in-r.html#cb444-5" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ancova2,ancova3)  </span></code></pre></div>
+<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb441-1"><a href="modeling-in-r.html#cb441-1" aria-hidden="true" tabindex="-1"></a>   <span class="co"># not significantly different, so model simplification is justified</span></span>
+<span id="cb441-2"><a href="modeling-in-r.html#cb441-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb441-3"><a href="modeling-in-r.html#cb441-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Now we remove the strtype term</span></span>
+<span id="cb441-4"><a href="modeling-in-r.html#cb441-4" aria-hidden="true" tabindex="-1"></a>ancova3 <span class="ot">=</span> <span class="fu">update</span>(ancova2, <span class="sc">~</span> . <span class="sc">-</span> strtype)  </span>
+<span id="cb441-5"><a href="modeling-in-r.html#cb441-5" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ancova2,ancova3)  </span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Model 1: log10(S) ~ strtype + log10(Q)
@@ -527,9 +536,9 @@ varies by bankfull discharge in a relationship that looks something like:</p>
 ## 2     39 25.5099 -2    -22.99 168.78 &lt; 2.2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb446-1"><a href="modeling-in-r.html#cb446-1" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Goes too far.  Removing the strtype creates a significantly different model</span></span>
-<span id="cb446-2"><a href="modeling-in-r.html#cb446-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb446-3"><a href="modeling-in-r.html#cb446-3" aria-hidden="true" tabindex="-1"></a><span class="fu">step</span>(ancova)</span></code></pre></div>
+<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb443-1"><a href="modeling-in-r.html#cb443-1" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Goes too far.  Removing the strtype creates a significantly different model</span></span>
+<span id="cb443-2"><a href="modeling-in-r.html#cb443-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb443-3"><a href="modeling-in-r.html#cb443-3" aria-hidden="true" tabindex="-1"></a><span class="fu">step</span>(ancova)</span></code></pre></div>
 <pre><code>## Start:  AIC=-103.2
 ## log10(S) ~ strtype * log10(Q)
 ## 
@@ -570,8 +579,9 @@ varies by bankfull discharge in a relationship that looks something like:</p>
 <li>Displays the Analysis of Variance table from the linear model</li>
 </ul>
 </div>
-<div id="generalized-linear-model-glm" class="section level3" number="8.1.2">
-<h3><span class="header-section-number">8.1.2</span> Generalized Linear Model (GLM)</h3>
+</div>
+<div id="generalized-linear-model-glm" class="section level2" number="8.2">
+<h2><span class="header-section-number">8.2</span> Generalized Linear Model (GLM)</h2>
 <p>The glm in R allows you to work with various types of data using various distributions, described as families such as:</p>
 <ul>
 <li>gaussian : normal distribution – what is used with lm</li>
@@ -585,9 +595,12 @@ varies by bankfull discharge in a relationship that looks something like:</p>
 <p>Great explanation of poisson distribution using meteor showers at:</p>
 <p><a href="https://towardsdatascience.com/the-poisson-distribution-and-poisson-process-explained-4e2cb17d459">https://towardsdatascience.com/the-poisson-distribution-and-poisson-process-explained-4e2cb17d459</a></p>
 </div>
+<div id="models-employing-machine-learning" class="section level2" number="8.3">
+<h2><span class="header-section-number">8.3</span> Models Employing Machine Learning</h2>
+<p><em>under construction, to include neural network model of environmental data</em></p>
 </div>
-<div id="spatial-statistical-analysis" class="section level2" number="8.2">
-<h2><span class="header-section-number">8.2</span> Spatial Statistical Analysis</h2>
+<div id="spatial-statistical-analysis" class="section level2" number="8.4">
+<h2><span class="header-section-number">8.4</span> Spatial Statistical Analysis</h2>
 <p>Spatial statistical analysis brings in the spatial dimension to a statistical analysis,
 ranging from visual analysis of patterns to specialized spatial statistical methods.
 There are many applications for these methods in environmental research, since
@@ -597,47 +610,47 @@ spatial patterns are generally highly relevant. We might ask:</p>
 <li>What is the effect of scale?</li>
 <li>Relationships among variables – do they vary spatially?</li>
 </ul>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-210-1.png" width="672" /></p>
-<div id="spatial-autocorrelation" class="section level3" number="8.2.1">
-<h3><span class="header-section-number">8.2.1</span> Spatial Autocorrelation</h3>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-195-1.png" width="672" /></p>
+<div id="spatial-autocorrelation" class="section level3" number="8.4.1">
+<h3><span class="header-section-number">8.4.1</span> Spatial Autocorrelation</h3>
 <p>[Need to add a Moran’s I section here]</p>
 </div>
-<div id="mapping-residuals" class="section level3" number="8.2.2">
-<h3><span class="header-section-number">8.2.2</span> Mapping Residuals</h3>
+<div id="mapping-residuals" class="section level3" number="8.4.2">
+<h3><span class="header-section-number">8.4.2</span> Mapping Residuals</h3>
 <p>If the <em>residuals</em> from regression are spatially autocorrelated, look for patterns in the residuals to find other explanatory variables.</p>
-<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb449-1"><a href="modeling-in-r.html#cb449-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb449-2"><a href="modeling-in-r.html#cb449-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(iGIScData)</span>
-<span id="cb449-3"><a href="modeling-in-r.html#cb449-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf); <span class="fu">library</span>(raster)</span>
-<span id="cb449-4"><a href="modeling-in-r.html#cb449-4" aria-hidden="true" tabindex="-1"></a>rasPath <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;ca_hillsh_WGS84.tif&quot;</span>, <span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>
-<span id="cb449-5"><a href="modeling-in-r.html#cb449-5" aria-hidden="true" tabindex="-1"></a>hillsh <span class="ot">&lt;-</span> <span class="fu">raster</span>(rasPath)</span>
-<span id="cb449-6"><a href="modeling-in-r.html#cb449-6" aria-hidden="true" tabindex="-1"></a>hillshpts <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">rasterToPoints</span>(hillsh))</span>
-<span id="cb449-7"><a href="modeling-in-r.html#cb449-7" aria-hidden="true" tabindex="-1"></a>CAbasemap <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb449-8"><a href="modeling-in-r.html#cb449-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_raster</span>(<span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span>y, <span class="at">fill=</span>ca_hillsh_WGS84), hillshpts) <span class="sc">+</span> <span class="fu">guides</span>(<span class="at">fill=</span>F) <span class="sc">+</span></span>
-<span id="cb449-9"><a href="modeling-in-r.html#cb449-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>CA_counties, <span class="at">fill=</span><span class="cn">NA</span>) <span class="sc">+</span></span>
-<span id="cb449-10"><a href="modeling-in-r.html#cb449-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">&quot;#606060&quot;</span>, <span class="at">high =</span> <span class="st">&quot;#FFFFFF&quot;</span>) <span class="sc">+</span></span>
-<span id="cb449-11"><a href="modeling-in-r.html#cb449-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&#39;&#39;</span>, <span class="at">y=</span><span class="st">&#39;&#39;</span>)</span>
-<span id="cb449-12"><a href="modeling-in-r.html#cb449-12" aria-hidden="true" tabindex="-1"></a>sierra <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(<span class="fu">filter</span>(sierraFeb, <span class="sc">!</span><span class="fu">is.na</span>(TEMPERATURE)), <span class="at">coords=</span><span class="fu">c</span>(<span class="st">&quot;LONGITUDE&quot;</span>, <span class="st">&quot;LATITUDE&quot;</span>), <span class="at">crs=</span><span class="dv">4326</span>)</span>
-<span id="cb449-13"><a href="modeling-in-r.html#cb449-13" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(TEMPERATURE <span class="sc">~</span> ELEVATION, <span class="at">data =</span> sierra)</span>
-<span id="cb449-14"><a href="modeling-in-r.html#cb449-14" aria-hidden="true" tabindex="-1"></a>cc <span class="ot">&lt;-</span> model1<span class="sc">$</span>coefficients</span>
-<span id="cb449-15"><a href="modeling-in-r.html#cb449-15" aria-hidden="true" tabindex="-1"></a>sierra<span class="sc">$</span>resid <span class="ot">&lt;-</span> <span class="fu">resid</span>(model1)</span>
-<span id="cb449-16"><a href="modeling-in-r.html#cb449-16" aria-hidden="true" tabindex="-1"></a>sierra<span class="sc">$</span>predict <span class="ot">&lt;-</span> <span class="fu">predict</span>(model1) </span>
-<span id="cb449-17"><a href="modeling-in-r.html#cb449-17" aria-hidden="true" tabindex="-1"></a>eqn <span class="ot">=</span> <span class="fu">paste</span>(<span class="st">&quot;temperature =&quot;</span>, <span class="fu">paste</span>(<span class="fu">round</span>(cc[<span class="dv">1</span>],<span class="dv">2</span>), <span class="fu">paste</span>(<span class="fu">round</span>(cc[<span class="sc">-</span><span class="dv">1</span>], <span class="at">digits=</span><span class="dv">3</span>), <span class="at">sep=</span><span class="st">&quot;*&quot;</span>, <span class="at">collapse=</span><span class="st">&quot; + &quot;</span>, <span class="fu">paste</span>(<span class="st">&quot;elevation&quot;</span>)), <span class="at">sep=</span><span class="st">&quot; + &quot;</span>), <span class="st">&quot;+ e&quot;</span>)</span>
-<span id="cb449-18"><a href="modeling-in-r.html#cb449-18" aria-hidden="true" tabindex="-1"></a>ct <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;CA_places.shp&quot;</span>,<span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>))</span>
-<span id="cb449-19"><a href="modeling-in-r.html#cb449-19" aria-hidden="true" tabindex="-1"></a>ct<span class="sc">$</span>AREANAME_pad <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="fu">str_replace_all</span>(ct<span class="sc">$</span>AREANAME, <span class="st">&#39;[A-Za-z]&#39;</span>,<span class="st">&#39; &#39;</span>), ct<span class="sc">$</span>AREANAME)</span>
-<span id="cb449-20"><a href="modeling-in-r.html#cb449-20" aria-hidden="true" tabindex="-1"></a>bounds <span class="ot">&lt;-</span> <span class="fu">st_bbox</span>(sierra)</span>
-<span id="cb449-21"><a href="modeling-in-r.html#cb449-21" aria-hidden="true" tabindex="-1"></a>sierrabasemap <span class="ot">&lt;-</span> CAbasemap <span class="sc">+</span> </span>
-<span id="cb449-22"><a href="modeling-in-r.html#cb449-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>ct) <span class="sc">+</span></span>
-<span id="cb449-23"><a href="modeling-in-r.html#cb449-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf_text</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label=</span>AREANAME_pad), <span class="at">data=</span>ct, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">nudge_x =</span> <span class="fl">0.1</span>, <span class="at">nudge_y =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb449-24"><a href="modeling-in-r.html#cb449-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">xlim =</span> <span class="fu">c</span>(bounds[<span class="dv">1</span>], bounds[<span class="dv">3</span>]), <span class="at">ylim =</span> <span class="fu">c</span>(bounds[<span class="dv">2</span>],bounds[<span class="dv">4</span>]))</span>
-<span id="cb449-25"><a href="modeling-in-r.html#cb449-25" aria-hidden="true" tabindex="-1"></a>sierrabasemap <span class="sc">+</span></span>
-<span id="cb449-26"><a href="modeling-in-r.html#cb449-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">color =</span> resid), <span class="at">alpha=</span><span class="fl">0.7</span>, <span class="at">data=</span>sierra, <span class="at">size=</span><span class="fl">2.5</span>) <span class="sc">+</span></span>
-<span id="cb449-27"><a href="modeling-in-r.html#cb449-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_gradient2</span>(<span class="at">low=</span><span class="st">&quot;blue&quot;</span>, <span class="at">mid=</span><span class="st">&quot;ivory2&quot;</span>, <span class="at">high=</span><span class="st">&quot;red&quot;</span>, </span>
-<span id="cb449-28"><a href="modeling-in-r.html#cb449-28" aria-hidden="true" tabindex="-1"></a>                        <span class="at">midpoint=</span><span class="fu">mean</span>(sierra<span class="sc">$</span>resid)) <span class="sc">+</span></span>
-<span id="cb449-29"><a href="modeling-in-r.html#cb449-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">xlim =</span> <span class="fu">c</span>(bounds[<span class="dv">1</span>], bounds[<span class="dv">3</span>]), <span class="at">ylim =</span> <span class="fu">c</span>(bounds[<span class="dv">2</span>],bounds[<span class="dv">4</span>]))  <span class="sc">+</span></span>
-<span id="cb449-30"><a href="modeling-in-r.html#cb449-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Residuals&quot;</span>, <span class="at">subtitle=</span>eqn) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.8</span>, <span class="fl">0.85</span>)) <span class="sc">+</span> </span>
-<span id="cb449-31"><a href="modeling-in-r.html#cb449-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="fl">0.4</span>, <span class="st">&#39;cm&#39;</span>), </span>
-<span id="cb449-32"><a href="modeling-in-r.html#cb449-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">8</span>))</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-211-1.png" width="672" /></p>
+<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb446-1"><a href="modeling-in-r.html#cb446-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb446-2"><a href="modeling-in-r.html#cb446-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(iGIScData)</span>
+<span id="cb446-3"><a href="modeling-in-r.html#cb446-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf); <span class="fu">library</span>(raster)</span>
+<span id="cb446-4"><a href="modeling-in-r.html#cb446-4" aria-hidden="true" tabindex="-1"></a>rasPath <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;ca_hillsh_WGS84.tif&quot;</span>, <span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>)</span>
+<span id="cb446-5"><a href="modeling-in-r.html#cb446-5" aria-hidden="true" tabindex="-1"></a>hillsh <span class="ot">&lt;-</span> <span class="fu">raster</span>(rasPath)</span>
+<span id="cb446-6"><a href="modeling-in-r.html#cb446-6" aria-hidden="true" tabindex="-1"></a>hillshpts <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">rasterToPoints</span>(hillsh))</span>
+<span id="cb446-7"><a href="modeling-in-r.html#cb446-7" aria-hidden="true" tabindex="-1"></a>CAbasemap <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb446-8"><a href="modeling-in-r.html#cb446-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_raster</span>(<span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span>y, <span class="at">fill=</span>ca_hillsh_WGS84), hillshpts) <span class="sc">+</span> <span class="fu">guides</span>(<span class="at">fill=</span>F) <span class="sc">+</span></span>
+<span id="cb446-9"><a href="modeling-in-r.html#cb446-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>CA_counties, <span class="at">fill=</span><span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb446-10"><a href="modeling-in-r.html#cb446-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">&quot;#606060&quot;</span>, <span class="at">high =</span> <span class="st">&quot;#FFFFFF&quot;</span>) <span class="sc">+</span></span>
+<span id="cb446-11"><a href="modeling-in-r.html#cb446-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&#39;&#39;</span>, <span class="at">y=</span><span class="st">&#39;&#39;</span>)</span>
+<span id="cb446-12"><a href="modeling-in-r.html#cb446-12" aria-hidden="true" tabindex="-1"></a>sierra <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(<span class="fu">filter</span>(sierraFeb, <span class="sc">!</span><span class="fu">is.na</span>(TEMPERATURE)), <span class="at">coords=</span><span class="fu">c</span>(<span class="st">&quot;LONGITUDE&quot;</span>, <span class="st">&quot;LATITUDE&quot;</span>), <span class="at">crs=</span><span class="dv">4326</span>)</span>
+<span id="cb446-13"><a href="modeling-in-r.html#cb446-13" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(TEMPERATURE <span class="sc">~</span> ELEVATION, <span class="at">data =</span> sierra)</span>
+<span id="cb446-14"><a href="modeling-in-r.html#cb446-14" aria-hidden="true" tabindex="-1"></a>cc <span class="ot">&lt;-</span> model1<span class="sc">$</span>coefficients</span>
+<span id="cb446-15"><a href="modeling-in-r.html#cb446-15" aria-hidden="true" tabindex="-1"></a>sierra<span class="sc">$</span>resid <span class="ot">&lt;-</span> <span class="fu">resid</span>(model1)</span>
+<span id="cb446-16"><a href="modeling-in-r.html#cb446-16" aria-hidden="true" tabindex="-1"></a>sierra<span class="sc">$</span>predict <span class="ot">&lt;-</span> <span class="fu">predict</span>(model1) </span>
+<span id="cb446-17"><a href="modeling-in-r.html#cb446-17" aria-hidden="true" tabindex="-1"></a>eqn <span class="ot">=</span> <span class="fu">paste</span>(<span class="st">&quot;temperature =&quot;</span>, <span class="fu">paste</span>(<span class="fu">round</span>(cc[<span class="dv">1</span>],<span class="dv">2</span>), <span class="fu">paste</span>(<span class="fu">round</span>(cc[<span class="sc">-</span><span class="dv">1</span>], <span class="at">digits=</span><span class="dv">3</span>), <span class="at">sep=</span><span class="st">&quot;*&quot;</span>, <span class="at">collapse=</span><span class="st">&quot; + &quot;</span>, <span class="fu">paste</span>(<span class="st">&quot;elevation&quot;</span>)), <span class="at">sep=</span><span class="st">&quot; + &quot;</span>), <span class="st">&quot;+ e&quot;</span>)</span>
+<span id="cb446-18"><a href="modeling-in-r.html#cb446-18" aria-hidden="true" tabindex="-1"></a>ct <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;CA_places.shp&quot;</span>,<span class="at">package=</span><span class="st">&quot;iGIScData&quot;</span>))</span>
+<span id="cb446-19"><a href="modeling-in-r.html#cb446-19" aria-hidden="true" tabindex="-1"></a>ct<span class="sc">$</span>AREANAME_pad <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="fu">str_replace_all</span>(ct<span class="sc">$</span>AREANAME, <span class="st">&#39;[A-Za-z]&#39;</span>,<span class="st">&#39; &#39;</span>), ct<span class="sc">$</span>AREANAME)</span>
+<span id="cb446-20"><a href="modeling-in-r.html#cb446-20" aria-hidden="true" tabindex="-1"></a>bounds <span class="ot">&lt;-</span> <span class="fu">st_bbox</span>(sierra)</span>
+<span id="cb446-21"><a href="modeling-in-r.html#cb446-21" aria-hidden="true" tabindex="-1"></a>sierrabasemap <span class="ot">&lt;-</span> CAbasemap <span class="sc">+</span> </span>
+<span id="cb446-22"><a href="modeling-in-r.html#cb446-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>ct) <span class="sc">+</span></span>
+<span id="cb446-23"><a href="modeling-in-r.html#cb446-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf_text</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label=</span>AREANAME_pad), <span class="at">data=</span>ct, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">nudge_x =</span> <span class="fl">0.1</span>, <span class="at">nudge_y =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb446-24"><a href="modeling-in-r.html#cb446-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">xlim =</span> <span class="fu">c</span>(bounds[<span class="dv">1</span>], bounds[<span class="dv">3</span>]), <span class="at">ylim =</span> <span class="fu">c</span>(bounds[<span class="dv">2</span>],bounds[<span class="dv">4</span>]))</span>
+<span id="cb446-25"><a href="modeling-in-r.html#cb446-25" aria-hidden="true" tabindex="-1"></a>sierrabasemap <span class="sc">+</span></span>
+<span id="cb446-26"><a href="modeling-in-r.html#cb446-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">color =</span> resid), <span class="at">alpha=</span><span class="fl">0.7</span>, <span class="at">data=</span>sierra, <span class="at">size=</span><span class="fl">2.5</span>) <span class="sc">+</span></span>
+<span id="cb446-27"><a href="modeling-in-r.html#cb446-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_gradient2</span>(<span class="at">low=</span><span class="st">&quot;blue&quot;</span>, <span class="at">mid=</span><span class="st">&quot;ivory2&quot;</span>, <span class="at">high=</span><span class="st">&quot;red&quot;</span>, </span>
+<span id="cb446-28"><a href="modeling-in-r.html#cb446-28" aria-hidden="true" tabindex="-1"></a>                        <span class="at">midpoint=</span><span class="fu">mean</span>(sierra<span class="sc">$</span>resid)) <span class="sc">+</span></span>
+<span id="cb446-29"><a href="modeling-in-r.html#cb446-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">xlim =</span> <span class="fu">c</span>(bounds[<span class="dv">1</span>], bounds[<span class="dv">3</span>]), <span class="at">ylim =</span> <span class="fu">c</span>(bounds[<span class="dv">2</span>],bounds[<span class="dv">4</span>]))  <span class="sc">+</span></span>
+<span id="cb446-30"><a href="modeling-in-r.html#cb446-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Residuals&quot;</span>, <span class="at">subtitle=</span>eqn) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.8</span>, <span class="fl">0.85</span>)) <span class="sc">+</span> </span>
+<span id="cb446-31"><a href="modeling-in-r.html#cb446-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="fl">0.4</span>, <span class="st">&#39;cm&#39;</span>), </span>
+<span id="cb446-32"><a href="modeling-in-r.html#cb446-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">8</span>))</span></code></pre></div>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-196-1.png" width="672" /></p>
 
 </div>
 </div>

@@ -407,6 +407,11 @@ tm_basemap(leaflet::providers$Esri.NatGeoWorldMap) +
 
 ```
 
+[**`landslides`**]
+
+slideCentroids.shp crs = 26910
+
+
 #### Leaflet
 
 Now that we've seen an app that used it, let's look briefly at Leaflet itself, and we'll see that even the Leaflet package in R actually uses JavaScript...

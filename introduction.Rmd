@@ -115,7 +115,7 @@ An expression can be entered in the console to display its current value, and th
 ```{r}
 cos(pi)
 print(cos(pi))
-state.x77
+Nile
 ```
 
 A *statement* in R does something. It represents a directive we're assigning to the computer, or
@@ -197,11 +197,7 @@ Surprisingly, the values returned by integer division or the remainder are not s
 A common data format used in most types of research is *rectangular* data such as in a spreadsheet,
 with rows and columns, where rows might be *observations* and columns might be *variables*.
 We'll read this type of data in from spreadsheets or even more commonly from comma-separated-variable (CSV)
-text files that spreadsheet programs like Excel commonly read in just like their native format.
-```{r include=FALSE}
-## sierraFeb <- read_csv("data/sierraFeb.csv")
-## Don't need this anymore, as long as the iGIScData is installed from GitHub
-```
+
 ```{r}
 library(iGIScData)
 sierraFeb
@@ -371,15 +367,21 @@ b <- matrix(1:12, ncol=1)  # 1 column matrix is allowed
 
 ```
 ### Data frames
-A data frame is a database with fields (as vectors) with records (rows), so is very important for data analysis and GIS.  They're kind of like a spreadsheet with rules (first row is field names, fields all one type). So even though they're more complex than a list, we use them so frequently they become quite familiar [whereas I continue to find lists confusing, especially when discovering them as what a particular function returns.]
+A data frame is a database with fields (as vectors) with records (rows), so is very important for data analysis and GIS.  They're kind of like a spreadsheet with rules (first row is field names, fields all one type). So even though they're more complex than a list, we use them so frequently they become quite familiar. We'll use a couple of alternative table display methods, though as we've seen we can also display them by entering the data frame name, or use head().
 
 ```{r}
 library(palmerpenguins)
-head(penguins)
+knitr::kable(
+  head(penguins, 10), booktabs = TRUE,
+  caption = 'first 10 rows of the palmerpenguins data'
+)
 ```
+This `palmerpenguins` data frame is from @palmer.
+
 **Creating a data frame out of a matrix**
 ```{r fig.cap="Temperature~Elevation", warning=F}
 mydata <- as.data.frame(sierradata)
+DT::datatable(mydata)
 plot(data = mydata, x = elev, y = temp)
 ```
 
@@ -393,7 +395,7 @@ Reading a csv in `readr` (part of the tidyverse that we'll be looking at in the 
 library(readr)
 csvPath <- system.file("extdata","TRI_1987_BaySites.csv", package="iGIScData")
 TRI87 <- read_csv(csvPath)
-TRI87
+DT::datatable(TRI87, options=list(scrollX=T))
 ```
 
 **Sort, Index, & Max/Min**
@@ -493,7 +495,7 @@ We're still talking about high-level (*scripting*), not low-level programming, s
 **RStudio projects** are going to be the way we'll want to work for the rest of this book, so each time we start looking at a new data set, or even create one from scratch, you need to create a project to 
 go with it, using File/New Project and specify in a new directory (unless you already have data in an existing one), and specifying a location. Most likely the default location to place it in will work but you can change that.
 
-In this book, we'll be making a lot of use of data provided for you from various data packages such as built-in data, `palmerpenguins` or `iGIScData`, but they correspond to specific research projects, such as Sierra Climate to which several data frames and spatial data apply. *You should create a* **`sierra`** *project for those problems* and return to it every time it applies. We'll try to include a reminder about using a particular project.
+In this book, we'll be making a lot of use of data provided for you from various data packages such as built-in data, `palmerpenguins` [@palmer], or `iGIScData`, but they correspond to specific research projects, such as Sierra Climate to which several data frames and spatial data apply. *You should create a* **`sierra`** *project for those problems* and return to it every time it applies. We'll try to include a reminder about using a particular project.
 
 In that project, you'll build a series of scripts, many of which you'll re-use to develop new methods. When you're working on your own project with your own data, which you should store in a **`data`** folder inside the project folder.  *All paths are local, and the default working directory is the project folder, so you can specify* **`"data/mydata.csv"`** *as the path* to a csv of that name.
 
@@ -502,7 +504,7 @@ In that project, you'll build a series of scripts, many of which you'll re-use t
 ### Subsetting with logic
 
 We'll use a package that includes data from 
-Irizarry, Rafael (2020) *Introduction to Data Science* section 2.13.1.
+ *Introduction to Data Science* [@irizarry2019introduction] section 2.13.1.
 
 Identify all states with murder rates ≤ that of Italy. [Start by creating a **new `murders` project**.]
 

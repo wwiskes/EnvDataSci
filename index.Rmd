@@ -1,7 +1,8 @@
 --- 
 title: "Introduction to Environmental Data Science"
 author:
-- name: Jerry Davis, SFSU Institute for Geographic Information
+- name: Jerry Davis, SFSU Institute for Geographic Information Science
+contributor:
 - name: Anna Studwell, SFSU Institute for Geographic Information Science (cover illustration)
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site

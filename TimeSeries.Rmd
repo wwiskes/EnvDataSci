@@ -15,21 +15,24 @@ Time series data are widely used in the financial sector for obvious reasons, an
 these methods can be very useful environmental data science especially in studies
 such as looking at long-term climate change variables such as the Mauna Loa CO~2~
 data above, or at the much finer temporal scale, environmental data from data loggers such as eddy covariance
-flux towers [@blackburn2021carbon]
+flux towers.
 
-```{r fig.align = 'left', out.width = "75%", fig.cap = "Red Clover Valley eddy covariance flux tower", echo=F}
+```{r fig.align = 'left', out.width = "75%", fig.cap = "Red Clover Valley eddy covariance flux tower installation", echo=F}
 knitr::include_graphics(here::here("img", "RCVfluxTower2.png"))
 ```
-```{r fig.align = 'left', out.width = "75%", fig.cap = "Loney Meadow eddy covariance flux results", echo=F}
+```{r fig.align = 'left', out.width = "75%", fig.cap = "Loney Meadow net ecosystem exchange (NEE) results", echo=F}
 knitr::include_graphics(here::here("img", "LoneyGraph.png"))
 ```
+
+[@blackburn2021carbon]
 
 ## Creation of time series (ts) data
 
 A time series (ts) is created with the ts() function.
 
-- the time unit can be anything – not actually saved with the ts
+- the time unit can be anything
 - observations must be a regularly spaced series
+- time values are not normally included as a field in the ts
 
 ```{r message=F, warning=F}
 library(tidyverse)
@@ -70,6 +73,8 @@ GHG <- ts(GHGwide, frequency=0.05, start=20)
 plot(GHG)
 
 ```
+
+-- greenhouse gas data from @irizarry2019introduction
 
 **start and end parameters**
 
@@ -198,7 +203,7 @@ plot(stl(co2, s.window="periodic"))
 
 [**`Marbles`**]
 
-In the Marble Mountains karst resurgence study, water level water level has an annual seasonality
+In the Marble Mountains karst resurgence study [@marbles], water level water level has an annual seasonality
 that might be best understand by decomposition.
 
 
@@ -215,7 +220,7 @@ plot(fit)
 
 ### lag regression
 
-[**`SolarRad_Temp`**]
+We'll explore solar radiation and temperature data for Bugac, Hungary, and Manaus, Brazil, maintained by the European Fluxes Database [@icos].  (Create a **`SolarRad_Temp`** project for this.)
 
 ```{r warning=F, message=F}
 library(readxl)
