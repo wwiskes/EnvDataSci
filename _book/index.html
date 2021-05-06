@@ -371,6 +371,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <img src="img/eaRth_anna296.png" alt="" />
 <p class="caption">Cover art by Anna Studwell</p>
 </div>
+<p><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <p>Data science is <em>an inter-disciplinary field that uses scientific methods, processes, algorithms and systems to extract knowledge and insights from many structural and unstructured data</em> (Wikipedia). A data science approach is especially suitable for applications involving large and complex data sets that challenge conventional methods, and environmental data is a prime example, with rapidly growing collections from automated sensors in space and time domains.</p>
 <p><em>Environmental</em> data science is data science applied to environmental science research. In general data science can be seen as being the intersection of math &amp; statistics, computer science/IT, and some research domain, and in this case it’s environmental:</p>
 <p><img src="img/EnvDataSci50pct.png"></p>
@@ -499,7 +500,7 @@ generally <em>don’t reinstall the packages again with the unless you actually 
 above which you install the same way – so use <code>install.packages("palmerpenguins")</code>.</p>
 <p>We’ve also created a repository on GitHub that includes data we’ve developed in the iGISc at SFSU, and you’ll need to install that package a slightly different way.</p>
 <p><img src="img/logoIGISc200200.png" align=right></p>
-<p>GitHub packages require a bit more work on the user’s part since we need to first install <code>remotes</code><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, then use that to install the GitHub data package:</p>
+<p>GitHub packages require a bit more work on the user’s part since we need to first install <code>remotes</code><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>, then use that to install the GitHub data package:</p>
 <pre><code>install.packages(&quot;remotes&quot;)
 remotes::install_github(&quot;iGISc/iGIScData&quot;)</code></pre>
 <p>Then you can access it just like other built-in data by including:</p>
@@ -509,7 +510,7 @@ remotes::install_github(&quot;iGISc/iGIScData&quot;)</code></pre>
 <p>For instance, the following is a map of California counties using the CA_counties sf (simple features) data:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="index.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse); <span class="fu">library</span>(iGIScData); <span class="fu">library</span>(sf)</span>
 <span id="cb6-2"><a href="index.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>CA_counties) <span class="sc">+</span> <span class="fu">geom_sf</span>()</span></code></pre></div>
-<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-68-1.png" width="672" /></p>
+<p><img src="EnvDataSci_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>Those package datasets can be used directly as sf data (if the sf library is installed) or data frames (all tibbles). Raw data can also be read from the <code>extdata</code> folder that is installed on your computer when you install the package, using code such as:</p>
 <pre><code>csvPath &lt;- system.file(&quot;extdata&quot;,&quot;TRI_1987_BaySites.csv&quot;, package=&quot;iGIScData&quot;)
 TRI87 &lt;- read_csv(csvPath)</code></pre>
@@ -526,7 +527,8 @@ trails &lt;- st_read(shpPath)</code></pre>
 <div class="footnotes">
 <hr />
 <ol start="1">
-<li id="fn1"><p>Note: you can also use <code>devtools</code> instead of <code>remotes</code> if you have that installed. They do the same thing; <code>remotes</code> is a subset of <code>devtools</code>. If you see a message about Rtools, you can ignore it since that is only needed for building tools from C++ and things like that.<a href="index.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p><em>“Dandelion fluff – Ephemeral stalk sheds seeds to the universe”</em><a href="index.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>Note: you can also use <code>devtools</code> instead of <code>remotes</code> if you have that installed. They do the same thing; <code>remotes</code> is a subset of <code>devtools</code>. If you see a message about Rtools, you can ignore it since that is only needed for building tools from C++ and things like that.<a href="index.html#fnref2" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

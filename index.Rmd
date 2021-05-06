@@ -26,7 +26,9 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 # Introduction {#chapter00.chapter_section .intro_section}
 
-![Cover art by Anna Studwell](img/eaRth_anna296.png   ) 
+![Cover art by Anna Studwell](img/eaRth_anna296.png)
+
+^[*"Dandelion fluff -- Ephemeral stalk sheds seeds to the universe"*]
 
 Data science is *an inter-disciplinary field that uses scientific methods, processes, algorithms and systems to extract knowledge and insights from many structural and unstructured data* (Wikipedia). A data science approach is especially suitable for applications involving large and complex data sets that challenge conventional methods, and environmental data is a prime example, with rapidly growing collections from automated sensors in space and time domains. 
 

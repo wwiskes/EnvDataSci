@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 A Shiny App project folder can also be stored in the `extdata` folder (or probably
-another folder) of a data package. Here's the same `sierra` app accesssed this way:
+another folder) of a data package. Here's the same `sierra` app accessed this way:
 We'll use the `system.file` to find the path to the folder where the app is stored and
 provide it to `shinyAppDir`:
 

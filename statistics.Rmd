@@ -73,7 +73,7 @@ these methods and how they apply to environmental data science.
 ## Summary Statistics
 
 Summary statistics such as mean, standard deviation, variance, minimum, maximum, and range are derived in quite a few
-R functions, commonly as a parameter or a sub-function (see `mutate`). A an overall simple statistical summary is very easy to do in base R:
+R functions, commonly as a parameter or a sub-function (see `mutate`). An overall simple statistical summary is very easy to do in base R:
 
 ```{r message=F}
 summary(tidy_eucoak)
@@ -278,7 +278,7 @@ Purpose is to compare groups based upon continuous variables. Can be thought of 
 - Response variable is a continuous variable
 - Explanatory variable is the grouping -- categorical (a factor in R)
 
-*"Are water samples from streams draining sandstone, limestone, and shale different based on solutes as total hardness?"*
+*"Are water samples from streams draining sandstone, limestone, and shale different based on solutes measured as total hardness?"*
 <img src="img/PigeonMtWaterSample.png" align = "left">
 <img src="img/CaveCoveSink.png" align = "center">
 <img src="img/HelenHighwaterSpring.png" align = "right">
@@ -302,19 +302,34 @@ minVal <- min(wChem2map$TH); maxVal <- max(wChem2map$TH)
 tm_basemap(leaflet::providers$Esri.WorldTopoMap) + 
   tm_shape(wChem2map) + tm_symbols(col="siteType", size="TH", scale=2) +
   tm_layout(title=paste("Total Hardness ",as.character(minVal),"-",as.character(maxVal)," mg/L", sep=""))
+summary(aov(TH~siteType, data = wChemData))
 tm_basemap(leaflet::providers$Esri.WorldTopoMap) + 
-  tm_shape(wChem2map) + tm_symbols(col="Lithology", size="TH", scale=2) +
-  tm_layout(title=paste("Total Hardness ",as.character(minVal),"-",as.character(maxVal)," mg/L", sep=""))
-wChemData %>%
-  ggplot(aes(x=Elevation, y=TH, col=Lithology)) + 
-  geom_point() + 
-  geom_smooth(method= "lm")
+  tm_shape(wChem2map) + tm_symbols(col="Lithology", size="TH", scale=2)
+summary(aov(TH~Lithology, data = wChemData))
 wChemData %>%
   ggplot(aes(x=TH, fill=siteType)) +
   geom_histogram() +
   facet_grid(Lithology ~ .)
-summary(aov(TH~Lithology, data = wChemData))
 ```
+
+Some observations from the above:
+
+- There's pretty clearly a difference between surface waters (trunk and tributary) and cave dripwaters (from stalactites) in terms of solutes. Analysis of variance simply confirms the obvious.
+- There's also pretty clearly a difference among lithologies on the basis solutes, not surprising since limestone is much more soluble than sandstones. Similarly, analysis of variance confirms the obvious.
+- The data may not be sufficiently normally distributed, and limestone hardness values are bimodal (largely due to the inaccessibility of waters in the trunk cave passages travelling 2 km through the Bangor limestone ^[We tried very hard to get into that cave that must extend from upper Cave Cove then under Farmer Cove to a spring in Wolf Cove -- we have die traces to prove it]), though analysis of variance is less sensitive to this than a t test.
+- While shale creates springs, shale strata are very thin, with most of them in the "mix" category, or form the boundary between the two major limestone formations. Tributary streams appear to cross the shale in caves that were inaccessible for sampling. We visually confirmed this in one cave, but this exploration required some challenging rappel work to access, so we were not able to sample.
+<img src = "img/CaveExploringVertical.png">
+- The geologic structure here is essentially flat, with sandstones on the plateau surface and the most massive limestones -- the Bangor and Monteagle limestones -- all below 400 m elevation.
+<img src="img/UpperSinkingCoveGeology.png">
+
+- So elevation could work similarly to geology.
+```{r}
+wChemData %>%
+  ggplot(aes(x=Elevation, y=TH, col=Lithology)) + 
+  geom_point() + 
+  geom_smooth(method= "lm")
+```
+
 
 ### Correlation
 
@@ -390,8 +405,6 @@ tempEstimate
 Same purpose as Analysis of Variance, but also takes into account the influence of other variables called covariates. In a way, combines a linear model with an analysis of variance.
 
 *"Are water samples from streams draining sandstone, limestone,  and shale different based on pH, while taking into account elevation?"*
-
-<img src="img/UpperSinkingCoveGeology.png">
 
 Response variable is modeled from the factor (ANOVA) plus the covariate (regression)
 
