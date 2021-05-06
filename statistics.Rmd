@@ -278,10 +278,43 @@ Purpose is to compare groups based upon continuous variables. Can be thought of 
 - Response variable is a continuous variable
 - Explanatory variable is the grouping -- categorical (a factor in R)
 
-*"Are water samples from streams draining sandstone, limestone, and shale different based on pH?"*
+*"Are water samples from streams draining sandstone, limestone, and shale different based on solutes as total hardness?"*
 <img src="img/PigeonMtWaterSample.png" align = "left">
 <img src="img/CaveCoveSink.png" align = "center">
 <img src="img/HelenHighwaterSpring.png" align = "right">
+
+```{r}
+library(sf); library(tidyverse); library(readxl); library(tmap)
+wChemData <- read_excel(system.file("extdata","SinkingCoveWaterChem.xlsx", package="iGIScData")) %>%
+  mutate(siteLoc = str_sub(Site,start=1L, end=1L))
+wChemTrunk <- wChemData %>% filter(siteLoc == "T") %>% mutate(siteType = "trunk")
+wChemDrip <- wChemData %>% filter(siteLoc %in% c("D","S")) %>% mutate(siteType = "dripwater")
+wChemTrib <- wChemData %>% filter(siteLoc %in% c("B", "F", "K", "W")) %>% mutate(siteType = "tributary")
+wChemData <- bind_rows(wChemTrunk, wChemDrip, wChemTrib)
+sites <- read_csv(system.file("extdata", "SinkingCoveSites.csv", package="iGIScData"))
+wChem <- wChemData %>%
+  left_join(sites, by = c("Site" = "site")) %>%
+  st_as_sf(coords = c("longitude", "latitude"), crs = 4326)
+tmap_mode("view")
+bounds <- st_bbox()
+wChem2map <- filter(wChem, Month == 8)
+minVal <- min(wChem2map$TH); maxVal <- max(wChem2map$TH)
+tm_basemap(leaflet::providers$Esri.WorldTopoMap) + 
+  tm_shape(wChem2map) + tm_symbols(col="siteType", size="TH", scale=2) +
+  tm_layout(title=paste("Total Hardness ",as.character(minVal),"-",as.character(maxVal)," mg/L", sep=""))
+tm_basemap(leaflet::providers$Esri.WorldTopoMap) + 
+  tm_shape(wChem2map) + tm_symbols(col="Lithology", size="TH", scale=2) +
+  tm_layout(title=paste("Total Hardness ",as.character(minVal),"-",as.character(maxVal)," mg/L", sep=""))
+wChemData %>%
+  ggplot(aes(x=Elevation, y=TH, col=Lithology)) + 
+  geom_point() + 
+  geom_smooth(method= "lm")
+wChemData %>%
+  ggplot(aes(x=TH, fill=siteType)) +
+  geom_histogram() +
+  facet_grid(Lithology ~ .)
+summary(aov(TH~Lithology, data = wChemData))
+```
 
 ### Correlation
 
