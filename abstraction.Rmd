@@ -6,7 +6,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 At this point, we've learned the basics of working with the R language. From here we'll want to explore how to analyze data, both statistically and spatially. One part of this is abstracting information from existing data sets by selecting variables and observations and summarizing their statistics. 
 
-Some useful methods for data abstraction can be found in the various packages of "the tidyverse" which can be included all at once with the **`tidyverse`** package. We'll start **`dplyr`**, which includes an array of data manipulation tools, including `select` for selecting variables, `filter` for subsetting  observations, **`summarize`** for reducing variables to summary statistics, typically stratified by groups, and **`mutate`** for creating new variables from mathematical expressions from existing variables. Some dplyr tools such as data joins we'll look at later in the data transformation chapter. 
+Some useful methods for data abstraction can be found in the various packages of "the tidyverse" [@wickham2017tidyverse] which can be included all at once with the **`tidyverse`** package. We'll start **`dplyr`**, which includes an array of data manipulation tools, including **`select`** for selecting variables, **`filter`** for subsetting  observations, **`summarize`** for reducing variables to summary statistics, typically stratified by groups, and **`mutate`** for creating new variables from mathematical expressions from existing variables. Some dplyr tools such as data joins we'll look at later in the data transformation chapter. 
 
 ## Background: Exploratory Data Analysis
 
@@ -95,7 +95,7 @@ Recommendation:  Use `read_csv` and `write_csv`.
 
 ## Statistical summary of variables
 
-A simple statistical summary is very easy to do, and we'll use **`eucoak`** data in the `iGIScData` from a study of comparative runoff and erosion under Eucalyptus and oak canopies [@eucoak]:
+A simple statistical summary is very easy to do, and we'll use **`eucoak`** data in the `iGIScData` package from a study of comparative runoff and erosion under Eucalyptus and oak canopies [@eucoak]:
 
 ```{r}
 summary(eucoakrainfallrunoffTDR)
@@ -148,8 +148,6 @@ of helper functions for using logic to specify which variables to select:
 - `one_of(myList)` for when you have a group of variable names
 - range of variable: e.g. runoffL_oak:slope_euc could have followed rain_subcanopy above
 - all but (-): preface a variable or a set of variabe names with - to select all others
-
-
  
 ### filter
  

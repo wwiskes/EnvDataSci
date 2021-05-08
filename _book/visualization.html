@@ -23,7 +23,7 @@
 
 
 
-<meta name="date" content="2021-05-06" />
+<meta name="date" content="2021-05-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -405,7 +405,7 @@ Figure 4.2: Flipper length by species
 </ul></li>
 </ul>
 <p>[<strong>Create a new <code>NDVI</code> project</strong>]</p>
-<p>We’ll look at a study of Normalized Difference Vegetation Index from a transect across a montane meadow in the northern Sierra Nevada, derived from multispectral drone imagery <span class="citation">(<a href="references.html#ref-NDVI" role="doc-biblioref">Davis et al. 2020</a>)</span>.</p>
+<p>We’ll look at a study of Normalized Difference Vegetation Index from a transect across a montane meadow in the northern Sierra Nevada, derived from multispectral drone imagery <span class="citation">(<a href="references.html#ref-NDVI" role="doc-biblioref">J. D. Davis et al. 2020</a>)</span>.</p>
 <div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="visualization.html#cb276-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(iGIScData)</span>
 <span id="cb276-2"><a href="visualization.html#cb276-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb276-3"><a href="visualization.html#cb276-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(XSptsNDVI)</span></code></pre></div>
@@ -512,7 +512,7 @@ Figure 4.9: Runoff at Bay Area Sites, colored as Eucalyptus and Oak
 </div>
 <p><strong>Visualizing soil CO_2_ data with a Tukey box plot</strong></p>
 <p>[<strong><code>soilCO2</code></strong>] In a study of soil CO_2_ in the Marble Mountains of California, we
-sampled extracted soil air in a 11-point transect across Marble Valley in 1997. <span class="citation">(<a href="references.html#ref-marblesCO2" role="doc-biblioref">Davis, Kiefer, and Amato 2001</a>)</span></p>
+sampled extracted soil air in a 11-point transect across Marble Valley in 1997. <span class="citation">(<a href="references.html#ref-marblesCO2" role="doc-biblioref">J. D. Davis, Kiefer, and Amato 2001</a>)</span></p>
 <p><img src="img/marbleGap.png"></p>
 <div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="visualization.html#cb288-1" aria-hidden="true" tabindex="-1"></a>soilCO2 <span class="ot">&lt;-</span> soilCO2_97</span>
 <span id="cb288-2"><a href="visualization.html#cb288-2" aria-hidden="true" tabindex="-1"></a>soilCO2<span class="sc">$</span>SITE <span class="ot">&lt;-</span> <span class="fu">factor</span>(soilCO2<span class="sc">$</span>SITE)  <span class="co"># in order to make the numeric field a factor</span></span>

@@ -278,7 +278,12 @@ Purpose is to compare groups based upon continuous variables. Can be thought of 
 - Response variable is a continuous variable
 - Explanatory variable is the grouping -- categorical (a factor in R)
 
+From a study of a karst system in Tennessee [@davis1993geomorphology]:
+
 *"Are water samples from streams draining sandstone, limestone, and shale different based on solutes measured as total hardness?"*
+
+
+
 <img src="img/PigeonMtWaterSample.png" align = "left">
 <img src="img/CaveCoveSink.png" align = "center">
 <img src="img/HelenHighwaterSpring.png" align = "right">
@@ -312,7 +317,7 @@ wChemData %>%
   facet_grid(Lithology ~ .)
 ```
 
-Some observations from the above:
+Some observations and caveats from the above:
 
 - There's pretty clearly a difference between surface waters (trunk and tributary) and cave dripwaters (from stalactites) in terms of solutes. Analysis of variance simply confirms the obvious.
 - There's also pretty clearly a difference among lithologies on the basis solutes, not surprising since limestone is much more soluble than sandstones. Similarly, analysis of variance confirms the obvious.
@@ -322,7 +327,7 @@ Some observations from the above:
 - The geologic structure here is essentially flat, with sandstones on the plateau surface and the most massive limestones -- the Bangor and Monteagle limestones -- all below 400 m elevation.
 <img src="img/UpperSinkingCoveGeology.png">
 
-- So elevation could work similarly to geology.
+- While the rapid increase in solutes happens when Cave Cove Creek starts draining through the much more soluble limestone until reaches saturation, the distance traveled by the water (reflected by a drop in elevation) can be seen:
 ```{r}
 wChemData %>%
   ggplot(aes(x=Elevation, y=TH, col=Lithology)) + 

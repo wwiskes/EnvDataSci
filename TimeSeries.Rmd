@@ -129,7 +129,7 @@ ma(ts(SFtempC,frequency=12),order=3)
 
 **moving average of CO2 data**
 
-Difference shows time-local fluctuations, a component of the data, from [@irizarry2019introduction].
+Difference shows time-local fluctuations, a component of the data, from @irizarry2019introduction.
 
 ```{r message=F, warning=F}
 library(dslabs)
