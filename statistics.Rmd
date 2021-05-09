@@ -290,13 +290,13 @@ From a study of a karst system in Tennessee [@davis1993geomorphology]:
 
 ```{r}
 library(sf); library(tidyverse); library(readxl); library(tmap)
-wChemData <- read_excel(system.file("extdata","SinkingCoveWaterChem.xlsx", package="iGIScData")) %>%
+wChemData <- read_excel(system.file("extdata/SinkingCove","SinkingCoveWaterChem.xlsx", package="iGIScData")) %>%
   mutate(siteLoc = str_sub(Site,start=1L, end=1L))
 wChemTrunk <- wChemData %>% filter(siteLoc == "T") %>% mutate(siteType = "trunk")
 wChemDrip <- wChemData %>% filter(siteLoc %in% c("D","S")) %>% mutate(siteType = "dripwater")
-wChemTrib <- wChemData %>% filter(siteLoc %in% c("B", "F", "K", "W")) %>% mutate(siteType = "tributary")
+wChemTrib <- wChemData %>% filter(siteLoc %in% c("B", "F", "K", "W", "P")) %>% mutate(siteType = "tributary")
 wChemData <- bind_rows(wChemTrunk, wChemDrip, wChemTrib)
-sites <- read_csv(system.file("extdata", "SinkingCoveSites.csv", package="iGIScData"))
+sites <- read_csv(system.file("extdata/SinkingCove", "SinkingCoveSites.csv", package="iGIScData"))
 wChem <- wChemData %>%
   left_join(sites, by = c("Site" = "site")) %>%
   st_as_sf(coords = c("longitude", "latitude"), crs = 4326)
@@ -317,10 +317,33 @@ wChemData %>%
   facet_grid(Lithology ~ .)
 ```
 
+```{r}
+library(raster)
+tmap_mode("plot")
+rasPath <- system.file("extdata/SinkingCove","HillshadeSinkingCove.tif",package="iGIScData")
+hillsh <- raster(rasPath)
+bounds <- st_bbox(wChem)
+xrange <- bounds$xmax - bounds$xmin
+yrange <- bounds$ymax - bounds$ymin
+xMIN <- as.numeric(bounds$xmin - xrange/10)
+xMAX <- as.numeric(bounds$xmax + xrange/10)
+yMIN <- as.numeric(bounds$ymin - yrange/10)
+yMAX <- as.numeric(bounds$ymax + yrange/10)
+#st_bbox(c(xmin = 16.1, xmax = 16.6, ymax = 48.6, ymin = 47.9), crs = st_crs(4326))
+newbounds <- st_bbox(c(xmin=xMIN, xmax=xMAX, ymin=yMIN, ymax=yMAX), crs= st_crs(4326))
+tm_shape(hillsh,bbox=newbounds) +
+  tm_raster(palette="-Greys",legend.show=F,n=20, alpha=0.5) + tm_shape(wChem) + 
+  tm_symbols(size="TH", col="Lithology", scale=2, shape="siteType") +
+  tm_legend() +
+  tm_layout(legend.position = c("left", "bottom")) +
+  tm_graticules(lines=F)
+```
+
+
 Some observations and caveats from the above:
 
 - There's pretty clearly a difference between surface waters (trunk and tributary) and cave dripwaters (from stalactites) in terms of solutes. Analysis of variance simply confirms the obvious.
-- There's also pretty clearly a difference among lithologies on the basis solutes, not surprising since limestone is much more soluble than sandstones. Similarly, analysis of variance confirms the obvious.
+- There's also pretty clearly a difference among lithologies on the basis of solutes, not surprising since limestone is much more soluble than sandstones. Similarly, analysis of variance confirms the obvious.
 - The data may not be sufficiently normally distributed, and limestone hardness values are bimodal (largely due to the inaccessibility of waters in the trunk cave passages travelling 2 km through the Bangor limestone ^[We tried very hard to get into that cave that must extend from upper Cave Cove then under Farmer Cove to a spring in Wolf Cove -- we have die traces to prove it]), though analysis of variance is less sensitive to this than a t test.
 - While shale creates springs, shale strata are very thin, with most of them in the "mix" category, or form the boundary between the two major limestone formations. Tributary streams appear to cross the shale in caves that were inaccessible for sampling. We visually confirmed this in one cave, but this exploration required some challenging rappel work to access, so we were not able to sample.
 <img src = "img/CaveExploringVertical.png">

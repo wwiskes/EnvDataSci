@@ -374,6 +374,47 @@ tm_shape(hillsh,bbox=bounds)+
 
 *Note: "-Greys" needed to avoid negative image, since "Greys" go from light to dark, and to match reflectance as with b&w photography, they need to go from dark to light.*
 
+**`SinkingCoveKarst`**
+
+From a hydrologic and geochemical study of a fluviokarstic valley system in Tennessee [@davis1993geomorphology]:
+
+<img src="img/CaveCoveCaveEntrance.png">
+<img src="img/SinkingCoveCave.png">
+<img src="img/SinkingCoveCaveSteephead.png">
+
+```{r}
+library(sf); library(tidyverse); library(readxl); library(tmap)
+wChemData <- read_excel(system.file("extdata/SinkingCove","SinkingCoveWaterChem.xlsx", package="iGIScData")) %>%
+  mutate(siteLoc = str_sub(Site,start=1L, end=1L))
+wChemTrunk <- wChemData %>% filter(siteLoc == "T") %>% mutate(siteType = "trunk")
+wChemDrip <- wChemData %>% filter(siteLoc %in% c("D","S")) %>% mutate(siteType = "dripwater")
+wChemTrib <- wChemData %>% filter(siteLoc %in% c("B", "F", "K", "W", "P")) %>% mutate(siteType = "tributary")
+wChemData <- bind_rows(wChemTrunk, wChemDrip, wChemTrib)
+sites <- read_csv(system.file("extdata/SinkingCove", "SinkingCoveSites.csv", package="iGIScData"))
+wChem <- wChemData %>%
+  left_join(sites, by = c("Site" = "site")) %>%
+  st_as_sf(coords = c("longitude", "latitude"), crs = 4326)
+library(raster)
+tmap_mode("plot")
+rasPath <- system.file("extdata/SinkingCove","HillshadeSinkingCove.tif",package="iGIScData")
+hillsh <- raster(rasPath)
+bounds <- st_bbox(wChem)
+xrange <- bounds$xmax - bounds$xmin
+yrange <- bounds$ymax - bounds$ymin
+xMIN <- as.numeric(bounds$xmin - xrange/10)
+xMAX <- as.numeric(bounds$xmax + xrange/10)
+yMIN <- as.numeric(bounds$ymin - yrange/10)
+yMAX <- as.numeric(bounds$ymax + yrange/10)
+#st_bbox(c(xmin = 16.1, xmax = 16.6, ymax = 48.6, ymin = 47.9), crs = st_crs(4326))
+newbounds <- st_bbox(c(xmin=xMIN, xmax=xMAX, ymin=yMIN, ymax=yMAX), crs= st_crs(4326))
+tm_shape(hillsh,bbox=newbounds) +
+  tm_raster(palette="-Greys",legend.show=F,n=20, alpha=0.5) + tm_shape(wChem) + 
+  tm_symbols(size="TH", col="Lithology", scale=2, shape="siteType") +
+  tm_legend() +
+  tm_layout(legend.position = c("left", "bottom")) +
+  tm_graticules(lines=F)
+```
+
 ## Interactive Maps
 
 The word "static" in "static maps" isn't something you would have heard in a cartography class 30 years ago, since essentially *all* maps then were static. Very important in designing maps is considering your audience, and one characteristic of the audience of those maps of yore were that they were printed and thus fixed on paper.  A lot of cartographic design relates to that property:  
@@ -384,12 +425,31 @@ The word "static" in "static maps" isn't something you would have heard in a car
 
 Interactive maps change the game in having tools for changing scale, and *always* being "printed" on a computer or device where the color of the background isn't necessarily white. We are increasingly used to using interactive maps on our phones or other devices, and often get frustrated not being able to zoom into a static map.
 
-A widely used interactive mapping system is Leaflet, but we're going to use tmap to access Leaflet behind the scenes and allow us to create maps with one set of commands.  The key parameter needed is tmap_mode which must be set to "view" to create an interactive map. [**`air_quality`**]
+A widely used interactive mapping system is Leaflet, but we're going to use tmap to access Leaflet behind the scenes and allow us to create maps with one set of commands.  The key parameter needed is tmap_mode which must be set to "view" to create an interactive map. 
+
+[**`SinkingCoveKarst`**]
+
+With an interactive map, we do have the advantage of a good choice of base maps and the ability to resize and explore the map, but symbology is more limited, mostly just color and size, with only one variable in a legend. 
+
+```{r}
+tmap_mode("view")
+bounds <- st_bbox()
+wChem2map <- filter(wChem, Month == 8)
+minVal <- min(wChem2map$TH); maxVal <- max(wChem2map$TH)
+tm_basemap(leaflet::providers$Esri.WorldTopoMap) + 
+  tm_shape(wChem2map) + tm_symbols(col="siteType", size="TH", scale=2) +
+  tm_layout(title=paste("Total Hardness ",as.character(minVal),"-",as.character(maxVal)," mg/L", sep=""))
+tm_basemap(leaflet::providers$Esri.WorldTopoMap) + 
+  tm_shape(wChem2map) + tm_symbols(col="Lithology", size="TH", scale=2)
+```
+
+[**`air_quality`**]
 
 ```{r}
 tmap_mode("view")
 tm_shape(BayAreaTracts) + tm_fill(col = "MED_AGE", alpha = 0.5)
 ```
+
 
 [**`sierra`**]
 ```{r}
