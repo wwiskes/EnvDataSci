@@ -6,12 +6,12 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 At this point, we've learned the basics of working with the R language. From here we'll want to explore how to analyze data, both statistically and spatially. One part of this is abstracting information from existing data sets by selecting variables and observations and summarizing their statistics. 
 
-Some useful methods for data abstraction can be found in the various packages of "the tidyverse" [@wickham2017tidyverse] which can be included all at once with the **`tidyverse`** package. We'll start **`dplyr`**, which includes an array of data manipulation tools, including **`select`** for selecting variables, **`filter`** for subsetting  observations, **`summarize`** for reducing variables to summary statistics, typically stratified by groups, and **`mutate`** for creating new variables from mathematical expressions from existing variables. Some dplyr tools such as data joins we'll look at later in the data transformation chapter. 
+Some useful methods for data abstraction can be found in the various packages of "The Tidyverse" [@wickham2017tidyverse] which can be included all at once with the **`tidyverse`** package. We'll start with **`dplyr`**, which includes an array of data manipulation tools, including **`select`** for selecting variables, **`filter`** for subsetting  observations, **`summarize`** for reducing variables to summary statistics, typically stratified by groups, and **`mutate`** for creating new variables from mathematical expressions from existing variables. Some dplyr tools such as data joins we'll look at later in the data transformation chapter. 
 
 ## Background: Exploratory Data Analysis
 
 In 1961, John Tukey proposed a new approach to data analysis, defining it as "Procedures for analyzing data, techniques for interpreting the results of such procedures, ways of planning the gathering of data to make its analysis easier, more precise or more accurate, and all the machinery and results of (mathematical) statistics which apply to analyzing data."  
-<img src="img/Tukey1977.png" width="161" height="230" style="horizontal-align:right">He followed this up in 1977 with *Exploratory Data Analysis*. 
+<img src="img/Tukey1977.png" width="161" height="230" style="horizontal-align:right">He followed this up much later in 1977 with *Exploratory Data Analysis*. 
 
 Exploratory data analysis (EDA) in part as an approach to analyzing data via summaries, tables and graphics.  The key word is *exploratory*, in contrast with *confirmatory* statistics. Both are important, but ignoring exploration is ignoring enlightenment.
 
@@ -99,6 +99,18 @@ A simple statistical summary is very easy to do, and we'll use **`eucoak`** data
 
 ```{r}
 summary(eucoakrainfallrunoffTDR)
+```
+
+In this study, we looked at the amount of runoff and erosion captured in Gerlach troughs on paired eucalyptus and oak sites in the San Francisco Bay Area.
+
+<img src="img/eucoak.png">
+
+```{r echo=F}
+library(tidyverse); library(sf); library(leaflet)
+sites <- read_csv(system.file("extdata","eucoakSites.csv", package="iGIScData"))
+leaflet(data = sites) %>%
+  addTiles() %>%
+  addMarkers(~long, ~lat, popup = ~Site, label = ~Site)
 ```
 
 ## Visualizing data with a Tukey box plot

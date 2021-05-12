@@ -173,6 +173,17 @@ sampled extracted soil air in a 11-point transect across Marble Valley in 1997. 
 
 <img src="img/marbleGap.png">
 
+```{r echo=F}
+library(tidyverse); library(sf); library(leaflet)
+CO2sites <- read_csv(system.file("extdata","soilCO2_sites97_gcs.csv", package="iGIScData"))
+leaflet(data = CO2sites) %>%
+  #addTiles() %>%
+  addProviderTiles(providers$Esri.WorldImagery) %>%
+  addMarkers(~long, ~lat, label = ~desc)
+  #addMarkers(~long, ~lat, popup = ~desc, label = ~desc)
+```
+
+
 ```{r warning=FALSE, fig.cap = "Visualizing soil CO_2_ data with a Tukey box plot"}
 soilCO2 <- soilCO2_97
 soilCO2$SITE <- factor(soilCO2$SITE)  # in order to make the numeric field a factor

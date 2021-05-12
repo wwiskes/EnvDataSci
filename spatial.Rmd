@@ -209,7 +209,20 @@ some better options in ggplot2 and tmap.
 
 ## Raster GIS in R
 
-Simple Features are feature-based, so based on the name I guess it's not surprising that sf doesn't have support for rasters. But we can use the raster package for that. 
+Simple *Features* are feature-based, of course, so it's not surprising that sf doesn't have support for rasters. So we'll want to use the raster package.
+
+We can start by building one from scratch:
+
+```{r}
+library(raster)
+new_ras <- raster(nrows = 10, ncols = 10, 
+                      xmn = 0, xmx = 100, ymn = 0, ymx = 100,
+                      vals = 1:100)
+plot(new_ras)
+
+```
+
+
 
 **A bit of raster reading and map algebra with Marble Mountains elevation data [`marbles`]**
 
@@ -229,15 +242,38 @@ plot(slopeclass)
 plot(aspect)
 ```
 
-### Raster from scratch
+**Sinking Cove, Tennessee** is a karst valley system carved into the Cumberland Plateau, a nice place to see the use of a hillshade raster created from a digital elevation model using raster functions for slope, aspect, and hillshade:  
 
 ```{r}
-new_raster2 <- raster(nrows = 6, ncols = 6, res = 0.5,
-                      xmn = -1.5, xmx = 1.5, ymn = -1.5, ymx = 1.5,
-                      vals = 1:36)
-plot(new_raster2)
-
+library(sf); library(tidyverse); library(tmap)
+library(raster)
+tmap_mode("plot")
+DEMpath <- system.file("extdata/SinkingCove","DEM_SinkingCoveUTM.tif",package="iGIScData")
+DEM <- raster(DEMpath)
+slope <- terrain(DEM, opt='slope')
+aspect <- terrain(DEM, opt='aspect')
+hillsh <- hillShade(slope, aspect, 40, 330)
+#
+# Need to crop a bit since grid north != true north 
+bbox0 <- st_bbox(DEM)
+xrange <- bbox0$xmax - bbox0$xmin
+yrange <- bbox0$ymax - bbox0$ymin
+bbox1 <- bbox0
+crop <- 0.05
+bbox1[1] <- bbox0[1] + crop * xrange # xmin
+bbox1[3] <- bbox0[3] - crop * xrange # xmax
+bbox1[2] <- bbox0[2] + crop * yrange # ymin
+bbox1[4] <- bbox0[4] - crop * yrange # ymax
+bboxPoly <- bbox1 %>% st_as_sfc() # makes a polygon
+#
+tm_shape(hillsh, bbox=bboxPoly) +
+  tm_raster(palette="-Greys",legend.show=F,n=20) +
+  tm_shape(DEM) +
+  tm_raster(palette=terrain.colors(24), alpha=0.5) +
+  tm_graticules(lines=F)
 ```
+
+*See ?raster to learn more about the rich array of raster GIS operations.*
 
 
 ## ggplot2 for maps
@@ -332,7 +368,7 @@ ggplot() +
 ## tmap
 
 Basic building block is tm_shape(data) followed by various layer elements such as tm_fill()
-shape can be features or raster
+shape can be features or raster.
 See Geocomputation with R Chapter 8 "Making Maps with R" for more information.
 https://geocompr.robinlovelace.net/adv-map.html
 
@@ -374,7 +410,7 @@ tm_shape(hillsh,bbox=bounds)+
 
 *Note: "-Greys" needed to avoid negative image, since "Greys" go from light to dark, and to match reflectance as with b&w photography, they need to go from dark to light.*
 
-**`SinkingCoveKarst`**
+**`UpperSinkingCoveKarst`**
 
 From a hydrologic and geochemical study of a fluviokarstic valley system in Tennessee [@davis1993geomorphology]:
 
@@ -396,8 +432,11 @@ wChem <- wChemData %>%
   st_as_sf(coords = c("longitude", "latitude"), crs = 4326)
 library(raster)
 tmap_mode("plot")
-rasPath <- system.file("extdata/SinkingCove","HillshadeSinkingCove.tif",package="iGIScData")
-hillsh <- raster(rasPath)
+DEMpath <- system.file("extdata/SinkingCove","DEM_SinkingCoveUTM.tif",package="iGIScData")
+DEM <- raster(DEMpath)
+slope <- terrain(DEM, opt='slope')
+aspect <- terrain(DEM, opt='aspect')
+hillsh <- hillShade(slope, aspect, 40, 330)
 bounds <- st_bbox(wChem)
 xrange <- bounds$xmax - bounds$xmin
 yrange <- bounds$ymax - bounds$ymin
@@ -408,9 +447,10 @@ yMAX <- as.numeric(bounds$ymax + yrange/10)
 #st_bbox(c(xmin = 16.1, xmax = 16.6, ymax = 48.6, ymin = 47.9), crs = st_crs(4326))
 newbounds <- st_bbox(c(xmin=xMIN, xmax=xMAX, ymin=yMIN, ymax=yMAX), crs= st_crs(4326))
 tm_shape(hillsh,bbox=newbounds) +
-  tm_raster(palette="-Greys",legend.show=F,n=20, alpha=0.5) + tm_shape(wChem) + 
-  tm_symbols(size="TH", col="Lithology", scale=2, shape="siteType") +
-  tm_legend() +
+  tm_raster(palette="-Greys",legend.show=F,n=20) +
+  tm_shape(DEM) + tm_raster(palette=terrain.colors(24), alpha=0.5,legend.show=F) +
+  tm_shape(wChem) + tm_symbols(size="TH", col="Lithology", scale=2, shape="siteType") +
+  #tm_legend(legend.outside = T) +
   tm_layout(legend.position = c("left", "bottom")) +
   tm_graticules(lines=F)
 ```
@@ -427,7 +467,7 @@ Interactive maps change the game in having tools for changing scale, and *always
 
 A widely used interactive mapping system is Leaflet, but we're going to use tmap to access Leaflet behind the scenes and allow us to create maps with one set of commands.  The key parameter needed is tmap_mode which must be set to "view" to create an interactive map. 
 
-[**`SinkingCoveKarst`**]
+[**`UpperSinkingCoveKarst`**]
 
 With an interactive map, we do have the advantage of a good choice of base maps and the ability to resize and explore the map, but symbology is more limited, mostly just color and size, with only one variable in a legend. 
 

@@ -282,8 +282,6 @@ From a study of a karst system in Tennessee [@davis1993geomorphology]:
 
 *"Are water samples from streams draining sandstone, limestone, and shale different based on solutes measured as total hardness?"*
 
-
-
 <img src="img/PigeonMtWaterSample.png" align = "left">
 <img src="img/CaveCoveSink.png" align = "center">
 <img src="img/HelenHighwaterSpring.png" align = "right">
@@ -300,28 +298,13 @@ sites <- read_csv(system.file("extdata/SinkingCove", "SinkingCoveSites.csv", pac
 wChem <- wChemData %>%
   left_join(sites, by = c("Site" = "site")) %>%
   st_as_sf(coords = c("longitude", "latitude"), crs = 4326)
-tmap_mode("view")
-bounds <- st_bbox()
-wChem2map <- filter(wChem, Month == 8)
-minVal <- min(wChem2map$TH); maxVal <- max(wChem2map$TH)
-tm_basemap(leaflet::providers$Esri.WorldTopoMap) + 
-  tm_shape(wChem2map) + tm_symbols(col="siteType", size="TH", scale=2) +
-  tm_layout(title=paste("Total Hardness ",as.character(minVal),"-",as.character(maxVal)," mg/L", sep=""))
-summary(aov(TH~siteType, data = wChemData))
-tm_basemap(leaflet::providers$Esri.WorldTopoMap) + 
-  tm_shape(wChem2map) + tm_symbols(col="Lithology", size="TH", scale=2)
-summary(aov(TH~Lithology, data = wChemData))
-wChemData %>%
-  ggplot(aes(x=TH, fill=siteType)) +
-  geom_histogram() +
-  facet_grid(Lithology ~ .)
-```
-
-```{r}
 library(raster)
 tmap_mode("plot")
-rasPath <- system.file("extdata/SinkingCove","HillshadeSinkingCove.tif",package="iGIScData")
-hillsh <- raster(rasPath)
+DEMpath <- system.file("extdata/SinkingCove","DEM_SinkingCoveUTM.tif",package="iGIScData")
+DEM <- raster(DEMpath)
+slope <- terrain(DEM, opt='slope')
+aspect <- terrain(DEM, opt='aspect')
+hillsh <- hillShade(slope, aspect, 40, 330)
 bounds <- st_bbox(wChem)
 xrange <- bounds$xmax - bounds$xmin
 yrange <- bounds$ymax - bounds$ymin
@@ -337,6 +320,13 @@ tm_shape(hillsh,bbox=newbounds) +
   tm_legend() +
   tm_layout(legend.position = c("left", "bottom")) +
   tm_graticules(lines=F)
+summary(aov(TH~siteType, data = wChemData))
+summary(aov(TH~Lithology, data = wChemData))
+wChemData %>%
+  ggplot(aes(x=TH, fill=siteType)) +
+  geom_histogram() +
+  facet_grid(Lithology ~ .)
+
 ```
 
 

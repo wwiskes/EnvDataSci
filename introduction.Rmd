@@ -62,7 +62,7 @@ paste("My name is", my_name, "-- Prepare to die.")
 ```
 ## Functions
 Once you have variables or other objects to work with, most of your work 
-involves *functions* such as the well-known math functions
+involves **functions** such as well-known math functions
 ```
 log10(100)
 log(exp(5))
@@ -95,7 +95,7 @@ We'll need to talk about expressions and statements.
 
 The concepts of expressions and statements are very important to understand in any programming language.
 
-An *expression* in R (or any programming language) has a *value* just like a variable has a value.
+An **expression** in R (or any programming language) has a *value* just like a variable has a value.
 An expression will commonly combine variables and functions to be *evaluated* to derive the value
 of the expression. Here are some examples of expressions:
 ```
@@ -118,7 +118,7 @@ print(cos(pi))
 Nile
 ```
 
-A *statement* in R does something. It represents a directive we're assigning to the computer, or
+A **statement** in R *does something*. It represents a directive we're assigning to the computer, or
 maybe the environment we're running on the computer (like RStudio, which then runs R). A simple
 `print()` *statement* seems a lot like what we just did when we entered an expression in the console, but recognize that it *does something*:
 
@@ -138,7 +138,7 @@ Many (perhaps most) statements don't actually display anything. For instance:
 ```{r}
 x <- 5
 ```
-doesn't display anything, but it does assign the value 5 to the variable x, so it simply *does something*. It's an *assignment statement* and uses that special assignment operator `<-` .  Most languages just use `=` which the designers of R didn't want to use, to avoid confusing it with the equal sign meaning "is equal to". 
+doesn't display anything, but it does assign the value 5 to the variable x, so it simply *does something*. It's an **assignment statement** and uses that special assignment operator `<-` .  Most languages just use `=` which the designers of R didn't want to use, to avoid confusing it with the equal sign meaning "is equal to". 
 
 *An assignment statement assigns an expression to a variable.* If that variable already exists, it is reused with the new value. For instance it's completely legit (and commonly done in coding) to update the variable in an assignment statement.  This is very common when using a counter variable:
 ```
@@ -194,8 +194,8 @@ Integer remainder from division (the modulus, using a `%%` to represent the modu
 Surprisingly, the values returned by integer division or the remainder are not stored as integers.  R seems to prefer floating point...
 
 ## Rectangular data
-A common data format used in most types of research is *rectangular* data such as in a spreadsheet,
-with rows and columns, where rows might be *observations* and columns might be *variables*.
+A common data format used in most types of research is **rectangular** data such as in a spreadsheet,
+with rows and columns, where rows might be **observations** and columns might be **variables**.
 We'll read this type of data in from spreadsheets or even more commonly from comma-separated-variable (CSV)
 
 ```{r}
@@ -208,7 +208,7 @@ We'll also look at factors and dates/times later on.
 
 ### Vectors
 A vector is an ordered collection of numbers, strings, vectors, data frames, etc.
-What we mostly refer to as vectors are formally called *atomic vectors* which requires
+What we mostly refer to as vectors are formally called **atomic vectors** which requires
 that they be *homogeneous* sets of whatever type we're referring to, such as a vector of numbers, 
 or a vector of strings, or a vector of dates/times.
 
