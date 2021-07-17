@@ -370,11 +370,12 @@ b <- matrix(1:12, ncol=1)  # 1 column matrix is allowed
 A data frame is a database with fields (as vectors) with records (rows), so is very important for data analysis and GIS.  They're kind of like a spreadsheet with rules (first row is field names, fields all one type). So even though they're more complex than a list, we use them so frequently they become quite familiar. We'll use a couple of alternative table display methods, though as we've seen we can also display them by entering the data frame name, or use head().
 
 ```{r}
-library(palmerpenguins)
+library(palmerpenguins); library(kableExtra)
 knitr::kable(
   head(penguins, 10), booktabs = TRUE,
   caption = 'first 10 rows of the palmerpenguins data'
-)
+) %>%
+  kable_styling("striped")
 ```
 This `palmerpenguins` data frame is from @palmer.
 

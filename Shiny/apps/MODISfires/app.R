@@ -6,14 +6,14 @@ library(lubridate)
 pal <- colorNumeric(c("orange", "firebrick4"),domain=300:550)
 
 ui <- fluidPage(
-    titlePanel("MODIS fire detections from temperature anomalies"), 
+    titlePanel("MODIS fire detections from temperature anomalies"),
     leafletOutput("view"),
     sliderInput(inputId = "end_jday",
                 label = "ending Julian day",
                 value = yday(now()), min = 1, max = 365, step = 1),
     sliderInput(inputId = "numdays",
                 label = "number of days",
-                value = 3, min = 1, max = 14, step = 1),
+                value = 1, min = 1, max = 14, step = 1),
     sliderInput(inputId = "year",
                 label = "year",
                 value = year(now()), min = 2009, max = year(now()), step = 1, sep = ""),
@@ -30,7 +30,7 @@ server <- function(input, output, session) {
         if(yrst == as.character(year(now())) | !file.exists(MODISfile)) {
             download.file(shpPath, str_c(getwd(),"/",shpZip))
             unzip(shpZip) }
-        fires <<- st_read(MODISfile)       
+        fires <<- st_read(MODISfile)
         leaflet() %>%
             addProviderTiles(providers$Esri.WorldTopoMap) %>%
             fitBounds(-123,37,-120,39)
@@ -43,7 +43,7 @@ server <- function(input, output, session) {
         leafletProxy("view", data = fireFilt) %>%
             clearMarkers() %>%
             addCircleMarkers(
-                radius = ~(TEMP-250)/50,  # scales 300-500 from 1:5 
+                radius = ~(TEMP-250)/50,  # scales 300-500 from 1:5
                 color = ~pal(TEMP),
                 stroke = FALSE, fillOpacity = 0.8) %>%
             clearControls() %>%   # clears the legend
