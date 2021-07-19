@@ -366,6 +366,12 @@ ggplot() +
   geom_sf(data = trails)
 ```
 
+### Heat maps and surface interpolations
+
+by William Wiskes 
+
+In this chapter we will be using ggplot2 to compare the results of heatmaps to surface interpolations. Often when handling point data we want to derive a surface from them to understand how these points relate to eachother. However, heatmaps and surface interpolations look at data in completely different ways. This chapter will walk you through how to process data in these ways and why you would choose one type of surface over another.
+
 ## tmap
 
 Basic building block is tm_shape(data) followed by various layer elements such as tm_fill()
